@@ -3,14 +3,14 @@ package model;
 /**
  * This interface models a timer that tracks the elapsed time
  */
-public interface Timer {
+public interface GameTimer {
 	/**
 	 * Start the timer counter
 	 * 
 	 * @param seconds
 	 * 				
 	 */
-	void start(final int seconds);
+	void start();
 	
 	/**
 	 * @return 
