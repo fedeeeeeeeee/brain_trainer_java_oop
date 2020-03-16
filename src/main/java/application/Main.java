@@ -13,6 +13,7 @@ public final class Main extends Application {
 
     @Override
     public void start(final Stage stage) throws Exception {
+    	
         final Parent root = FXMLLoader.load(ClassLoader.getSystemResource("layouts/MainMenu.fxml"));
         final Scene scene = new Scene(root);
         // Stage configuration
