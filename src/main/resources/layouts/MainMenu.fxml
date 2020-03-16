@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.controllers.MainMenuController">
+   <children>
+      <Pane minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="300.0">
+         <children>
+            <Button fx:id="trainingBtn" layoutX="95.0" layoutY="125.0" mnemonicParsing="false" prefHeight="48.0" prefWidth="117.0" text="Daily Training" textAlignment="CENTER">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Button>
+            <Button layoutX="95.0" layoutY="125.0" mnemonicParsing="false" onMouseClicked="#showStatistics" prefHeight="48.0" prefWidth="117.0" text="Statistics">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Button>
+            <Button layoutX="239.0" layoutY="459.0" mnemonicParsing="false" onContextMenuRequested="#goBack" text="Back" />
+            <Button layoutX="95.0" layoutY="68.0" mnemonicParsing="false" onMouseClicked="#startTraining" prefHeight="48.0" prefWidth="117.0" text="Daily Training">
+               <font>
+                  <Font size="15.0" />
+               </font></Button>
+         </children>
+      </Pane>
+   </children>
+</AnchorPane>

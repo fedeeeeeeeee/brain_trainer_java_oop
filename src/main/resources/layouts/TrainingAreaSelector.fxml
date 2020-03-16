@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Pane layoutX="14.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="300.0">
+         <children>
+            <Button id="memoryBtn" layoutX="98.0" layoutY="69.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="103.0" text="Memory">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Button>
+            <Button id="visualSkillBtn" layoutX="96.0" layoutY="112.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="103.0" text="Visual Skill" />
+            <Button id="attantionBtn" layoutX="94.0" layoutY="156.0" mnemonicParsing="false" prefHeight="28.0" prefWidth="103.0" text="Attention">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Button>
+            <Button id="brainSpeedBtn" layoutX="95.0" layoutY="200.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="103.0" text="Brain Speed" />
+            <Button id="reasoningBtn" layoutX="95.0" layoutY="243.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="103.0" text="Reasoning" />
+            <Button id="exitBtn" layoutX="221.0" layoutY="454.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="60.0" text="Exit">
+               <font>
+                  <Font size="14.0" />
+               </font></Button>
+            <Button layoutX="7.0" layoutY="454.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="54.0" text="Back">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Button>
+         </children>
+      </Pane>
+   </children>
+</AnchorPane>

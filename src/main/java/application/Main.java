@@ -11,15 +11,12 @@ import javafx.stage.Stage;
  */
 public final class Main extends Application {
 
-    private static final int SCENE_WIDTH = 500;
-    private static final int SCENE_HEIGHT = 300;
-
     @Override
     public void start(final Stage stage) throws Exception {
-        final Parent root = FXMLLoader.load(ClassLoader.getSystemResource("layouts/main.fxml"));
-        final Scene scene = new Scene(root, SCENE_WIDTH, SCENE_HEIGHT);
+        final Parent root = FXMLLoader.load(ClassLoader.getSystemResource("layouts/MainMenu.fxml"));
+        final Scene scene = new Scene(root);
         // Stage configuration
-        stage.setTitle("JavaFX - Complete Example");
+        stage.setTitle("Brain Trainer");
         stage.setScene(scene);
         stage.show();
     }

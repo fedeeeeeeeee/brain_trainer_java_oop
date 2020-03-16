@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.AnchorPane?>
+
+
+<AnchorPane xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8" fx:controller="view.controllers.GameController">
+   <children>
+      <Pane prefHeight="500.0" prefWidth="300.0">
+         <children>
+            <Button layoutX="95.0" layoutY="101.0" mnemonicParsing="false" prefHeight="59.0" prefWidth="121.0" text=" getNameGame" />
+            <AnchorPane layoutX="10.0" layoutY="10.0">
+	<!-- TODO Add Nodes -->
+</AnchorPane>
+            <AnchorPane layoutX="20.0" layoutY="20.0">
+	<!-- TODO Add Nodes -->
+</AnchorPane>
+         </children>
+      </Pane>
+   </children>
+</AnchorPane>
