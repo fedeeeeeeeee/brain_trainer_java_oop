@@ -1,5 +1,5 @@
 package view.controllers;
-// CONTROLLARE IMPORT ENUM AREA
+import static view.controllers.TrainingArea.*;
 
 /**
  * Enumeration for all the implemented minigames.
@@ -10,27 +10,27 @@ public enum MiniGame {
 	/**
 	 * 
 	 */
-	ONE_WAY(TrainingArea.BRAIN_SPEED, "One Way"),
+	ONE_WAY(BRAIN_SPEED, "One Way"),
 	
 	/**
 	 * 
 	 */
-	PERILIOUS_PATH(TrainingArea.MEMORY, "Perlious Path"),
+	PERILIOUS_PATH(MEMORY, "Perilious Path"),
 	
 	/**
 	 * 
 	 */
-	COLOR_GAMA(TrainingArea.VISUAL_SKILL, "Color Gama"),
+	COLOR_GAMA(VISUAL_SKILL, "Color Gama"),
 	
 	/**
 	 * 
 	 */
-	TRUE_COLOR(TrainingArea.ATTENTION, "True Color"),
+	TRUE_COLOR(ATTENTION, "True Color"),
 	
 	/**
 	 * 
 	 */
-	SIZE_COUNT(TrainingArea.REASONING, "Size Count");
+	SIZE_COUNT(REASONING, "Size Count");
 	
 	
 	private final TrainingArea area;

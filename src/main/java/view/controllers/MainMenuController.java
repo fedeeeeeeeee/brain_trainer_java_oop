@@ -14,7 +14,6 @@ import javafx.stage.Stage;
 import view.SceneFactory;
 import view.SceneFactoryImpl;
 import view.View;
-import view.ViewImpl;
 
 public class MainMenuController {
 	 	private SceneFactory factory = new SceneFactoryImpl();
@@ -23,7 +22,7 @@ public class MainMenuController {
 		private Button trainingBtn;
 		
 		@FXML
-		private Button progressBtn;
+		private Button statisticsBtn;
 	
 		@FXML
 		public void startTraining() throws IOException {
@@ -38,7 +37,7 @@ public class MainMenuController {
 	       
 		@FXML
 		public void showStatistics() throws IOException {
-			Stage stage = (Stage) progressBtn.getScene().getWindow();
+			Stage stage = (Stage) statisticsBtn.getScene().getWindow();
 			stage.setScene(factory.createScene("Statistics"));
 		}
 		

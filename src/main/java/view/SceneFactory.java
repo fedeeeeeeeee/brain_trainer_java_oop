@@ -1,4 +1,5 @@
 package view;
+import java.util.List;
 
 import java.io.IOException;
 
@@ -8,11 +9,7 @@ public interface SceneFactory {
 	
 	Scene createScene(String viewName) throws IOException;
 	
+	void createComboBox(String selectedArea);
 	
-//	Scene createMainMenu();
-//	
-//	Scene MiniGameSelector();
-//	
-//	Scene TrainingAreaSelector();
-	
+	List<String> getGameList();	
 }
