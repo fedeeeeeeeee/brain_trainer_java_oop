@@ -18,7 +18,7 @@ public class AgentTimer extends Thread {
 	 * 
 	 * @param seconds
 	 */
-	public void setStartTime(final int seconds) {
+	public void setTime(final int seconds) {
 		this.timer = new GameTimerImpl(seconds, this.miniGameController);
 	}
 	
@@ -38,7 +38,7 @@ public class AgentTimer extends Thread {
 				this.timer.decrement();
 				super.sleep(1000);
 			} catch (InterruptedException e) {
-				e.printStackTrace();
+				//e.printStackTrace();
 			}
 		}
 		
