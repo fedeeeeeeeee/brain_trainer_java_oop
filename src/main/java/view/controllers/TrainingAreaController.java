@@ -29,6 +29,7 @@ public class TrainingAreaController {
 		System.out.println(btn.getText());
 		
 		factory.createComboBox(btn.getText());
+		
 		Stage stage = (Stage) btn.getScene().getWindow();
 		stage.setScene(factory.createScene("MiniGameSelector"));
 	}

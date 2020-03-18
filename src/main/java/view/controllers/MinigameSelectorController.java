@@ -2,6 +2,8 @@ package view.controllers;
 
 import java.io.IOException;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
@@ -18,9 +20,17 @@ public class MinigameSelectorController {
 	@FXML
 	Button backBtn;
 	
-//	@FXML
-//	ComboBox gameComboBox; 
+	@FXML
+	ComboBox<String> gameComboBox; 
 
+	@FXML
+	public void initializeCombo() {
+		if(this.gameComboBox.getItems().isEmpty()) {
+			ObservableList<String> observable = FXCollections.observableArrayList(factory.getGameList());
+			gameComboBox.getItems().addAll(observable);
+		}
+	}
+	
 	@FXML
 	public void goBack() throws IOException {	
 		Stage stage = (Stage) backBtn.getScene().getWindow();
