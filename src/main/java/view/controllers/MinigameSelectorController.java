@@ -7,12 +7,8 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
-import javafx.stage.Stage;
-import view.SceneFactory;
-import view.SceneFactoryImpl;
 
-public class MinigameSelectorController {
-	private SceneFactory factory = new SceneFactoryImpl();
+public class MinigameSelectorController extends SceneController {
 	
 	@FXML
 	Button homeBtn;
@@ -26,20 +22,18 @@ public class MinigameSelectorController {
 	@FXML
 	public void initializeCombo() {
 		if(this.gameComboBox.getItems().isEmpty()) {
-			ObservableList<String> observable = FXCollections.observableArrayList(factory.getGameList());
+			ObservableList<String> observable = FXCollections.observableArrayList(this.getGameList());
 			gameComboBox.getItems().addAll(observable);
 		}
 	}
 	
 	@FXML
 	public void goBack() throws IOException {	
-		Stage stage = (Stage) backBtn.getScene().getWindow();
-		stage.setScene(factory.createScene("TrainingAreaSelector"));
+		switchScene(this.backBtn, "TrainingAreaSelector");
 	}
 	
 	@FXML
 	public void backHome() throws IOException {
-		Stage stage = (Stage) homeBtn.getScene().getWindow();
-		stage.setScene(factory.createScene("MainMenu"));
+		switchScene(this.homeBtn, "MainMenu");
 	}
 }

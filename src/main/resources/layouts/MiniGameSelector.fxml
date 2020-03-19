@@ -8,7 +8,7 @@
 
 <AnchorPane xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.controllers.MinigameSelectorController">
    <children>
-      <Pane prefHeight="500.0" prefWidth="300.0">
+      <Pane onMouseEntered="#initializeCombo" prefHeight="500.0" prefWidth="300.0">
          <children>
             <RadioButton layoutX="94.0" layoutY="130.0" mnemonicParsing="false" text="EASY">
                <font>
@@ -30,7 +30,7 @@
                   <Font size="17.0" />
                </font>
             </Button>
-            <ComboBox fx:id="gameComboBox" editable="true" layoutX="75.0" layoutY="69.0" onMouseClicked="#initializeCombo" prefWidth="150.0" visibleRowCount="5" />
+            <ComboBox fx:id="gameComboBox" editable="true" layoutX="75.0" layoutY="69.0" prefWidth="150.0" visibleRowCount="5" />
             <Button fx:id="backBtn" layoutX="30.0" layoutY="435.0" mnemonicParsing="false" onMouseClicked="#goBack" text="&lt;" />
             <Button fx:id="homeBtn" layoutX="212.0" layoutY="435.0" mnemonicParsing="false" onMouseClicked="#backHome" text="Home" />
          </children>
