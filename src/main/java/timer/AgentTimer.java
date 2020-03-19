@@ -30,7 +30,7 @@ public class AgentTimer extends Thread {
 		this.timeFinish = true;
 	}
 	
-	//questo metodo è da chiamare con "Thred".start()
+	//questo metodo Ã¨ da chiamare con "Thred".start()
 	@Override
 	public void run() {
 		while (!this.timeFinish) {
