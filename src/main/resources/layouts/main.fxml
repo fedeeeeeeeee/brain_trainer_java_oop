@@ -1,21 +1,18 @@
-<?xml version="1.0" encoding ="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<VBox 
-	xmlns="http://javafx.com/javafx" 
-	xmlns:fx="http://javafx.com/fxml"
-	fx:controller="controllers.UIController">
+<VBox prefHeight="301.0" prefWidth="325.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.UIController">
 
   <children>
-    <Button fx:id="btn"
-    	alignment="CENTER"
-    	text="Say Hello!"
-    	onMouseClicked="#btnOnClickHandler" />
+    <Button fx:id="btn" alignment="CENTER" onMouseClicked="#btnOnClickHandler" text="Say Hello!" />
     
-    <Label fx:id="lbl"
-    	alignment="CENTER_LEFT"
-    	text="Label Text Here!" />
+    <Label fx:id="lbl" alignment="CENTER_LEFT" prefHeight="234.0" prefWidth="320.0" text="Label Text Here!">
+         <font>
+            <Font size="42.0" />
+         </font></Label>
   </children>
-</VBox >
+</VBox>
