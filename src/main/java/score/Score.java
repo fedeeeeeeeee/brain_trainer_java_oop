@@ -1,5 +1,10 @@
 package score;
 
+/**
+ * 
+ * This interface models the score obtained at the end of the game 
+ * 
+ */
 public interface Score {
 	
 	/**
