@@ -16,4 +16,11 @@ public interface Score {
 	 * @param point
 	 */
 	void updateScore(int point);
+	
+	/**
+	 * get total point of the minigame
+	 * 
+	 * @return the final score 
+	 */
+	int getFinalScore();
 }
