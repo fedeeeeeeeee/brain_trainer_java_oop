@@ -15,14 +15,14 @@ public class PointImpl implements Point {
 	private boolean isFinish;
 
 	public PointImpl(DifficultyLevel difficulty, int basePoint) {
+		this.checkDifficultyNotNull(difficulty);
 		this.difficulty = difficulty;
 		this.basePoint = basePoint;	
 		this.score = new ScoreImpl();
 		this.isFinish = false;
 		this.initializeIncrement();
 	}
-	
-	
+
 	private void initializeIncrement() {
 		switch(this.difficulty) {
 		case EASY: 
@@ -35,7 +35,6 @@ public class PointImpl implements Point {
 			this.increment = HARDPOINT;
 			break;
 		}
-		
 	}
 
 	private void check(boolean b) {
@@ -44,19 +43,22 @@ public class PointImpl implements Point {
 		}		
 	}
 	
+	private void checkDifficultyNotNull(DifficultyLevel difficulty) {
+		if (difficulty.equals(null)) {
+			throw new NullPointerException();
+		}
+	}
+	
 	@Override
 	public void addPoint() {
 		this.check(this.isFinish);
 		this.score.updateScore(this.basePoint + this.increment);
 	}
-
-
-
+	
 	@Override
 	public int getScore() {
 		this.check(this.isFinish);
 		this.isFinish = true;
 		return this.score.getFinalScore();
 	}
-
 }
