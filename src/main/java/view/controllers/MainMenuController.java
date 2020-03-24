@@ -12,19 +12,22 @@ public class MainMenuController extends SceneController {
 		
 		@FXML
 		private Button statisticsBtn;
+		
+		@FXML
+		private Button backBtn;
 	
 		@FXML
 		public void startTraining() throws IOException {
-			switchScene(this.trainingBtn, "TrainingAreaSelector");
+			this.switchScene(this.trainingBtn, "TrainingAreaSelector");
 		}
 	       
 		@FXML
 		public void showStatistics() throws IOException {
-			switchScene(this.statisticsBtn, "Statistics");
+			this.switchScene(this.statisticsBtn, "Statistics");
 		}
 		
 		@FXML
 		public void goBack() throws IOException {
-			//TODO
+			this.switchScene(this.backBtn, "Login");
 		}	   
 }

@@ -8,7 +8,7 @@
 
 <AnchorPane xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.controllers.MainMenuController">
    <children>
-      <Pane minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="300.0">
+      <Pane minHeight="-Infinity" minWidth="-Infinity" onMouseClicked="#goBack" prefHeight="500.0" prefWidth="300.0">
          <children>
             <Button fx:id="trainingBtn" layoutX="95.0" layoutY="125.0" mnemonicParsing="false" prefHeight="48.0" prefWidth="117.0" text="Daily Training" textAlignment="CENTER">
                <font>
@@ -20,7 +20,7 @@
                   <Font size="16.0" />
                </font>
             </Button>
-            <Button layoutX="239.0" layoutY="459.0" mnemonicParsing="false" onContextMenuRequested="#goBack" text="Back" />
+            <Button fx:id="backBtn" layoutX="14.0" layoutY="459.0" mnemonicParsing="false" onMouseClicked="#goBack" text="Back" />
             <Button layoutX="95.0" layoutY="68.0" mnemonicParsing="false" onMouseClicked="#startTraining" prefHeight="48.0" prefWidth="117.0" text="Daily Training">
                <font>
                   <Font size="15.0" />

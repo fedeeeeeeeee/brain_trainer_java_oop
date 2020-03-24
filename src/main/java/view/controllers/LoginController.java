@@ -1,5 +1,7 @@
 package view.controllers;
 
+import java.io.BufferedWriter;
+import java.io.FileWriter;
 import java.io.IOException;
 
 import javafx.event.ActionEvent;
@@ -23,7 +25,6 @@ public class LoginController extends SceneController{
 	private Button start;
 
 	//al posto di "user" ci sarà un playerImpl che prende dal file e mi fa la getName()
-	
 	@FXML
 	public void showMainMenu() throws IOException {
 		if(txtPlayer.getText().equals("user") && txtPassword.getText().contentEquals("pass")) {

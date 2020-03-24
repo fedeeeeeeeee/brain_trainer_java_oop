@@ -18,8 +18,6 @@ public class TrainingAreaController extends SceneController {
 
 	@FXML
 	public void goBack() throws IOException {
-//		Stage stage = (Stage) backBtn.getScene().getWindow();
-//		stage.setScene(factory.createScene("MainMenu"));
 		switchScene(this.backBtn, "MainMenu");
 	}
 }
