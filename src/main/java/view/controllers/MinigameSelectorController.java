@@ -8,6 +8,10 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 
+/** 
+ * Controller for the minigame selector and game start scene.
+ * 
+ */
 public class MinigameSelectorController extends SceneController {
 	
 	@FXML
@@ -19,21 +23,25 @@ public class MinigameSelectorController extends SceneController {
 	@FXML
 	ComboBox<String> gameComboBox; 
 
+	
 	@FXML
-	public void initializeCombo() {
+	private void initializeCombo() {
 		if(this.gameComboBox.getItems().isEmpty()) {
 			ObservableList<String> observable = FXCollections.observableArrayList(this.getGameList());
 			gameComboBox.getItems().addAll(observable);
 		}
 	}
 	
+	
 	@FXML
-	public void goBack() throws IOException {	
+	private void goBack() throws IOException {	
 		switchScene(this.backBtn, "TrainingAreaSelector");
 	}
 	
+	
 	@FXML
-	public void backHome() throws IOException {
+	private void backHome() throws IOException {
 		switchScene(this.homeBtn, "MainMenu");
 	}
+	
 }

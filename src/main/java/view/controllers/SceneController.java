@@ -11,13 +11,27 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.stage.Stage;
 
-// è meglio fare un'interfaccia?
+
+/** 
+ * This represent the generic Class for the JavaFx Scene controller. 
+ *
+ */
 public class SceneController {
+	
 	   private static final String PATH = "/layouts/";
 	   private static final String PATH_END = ".fxml";
 	   private static List<String> gameList = new ArrayList<>();
 
 	   
+	   /** 
+	    * Update the current view  
+	    * 
+	    * @param button 
+	    * 			reference to the pressed button
+	    * @param nextFileName
+	    * 			name of the next file to show
+	    * 
+	    */
 	   public void switchScene(Button button, String nextFileName) throws IOException {
 		   final String path = PATH + nextFileName + PATH_END;
 		   FXMLLoader loader = new FXMLLoader(getClass().getResource(path));
@@ -30,6 +44,7 @@ public class SceneController {
 		   }
 	   }
 	   
+	   
 	   private void populateList(String selectedArea) {
 		   SceneController.gameList = Arrays.asList(MiniGame.values()).stream()
                                  .filter(e-> e.getTrainingArea().getName().equals(selectedArea))
@@ -37,7 +52,13 @@ public class SceneController {
                                  .collect(Collectors.toList());
 	   }
 	   
+	   
+	   /** 
+	    * @return the minigames List of the selected area
+	    * 
+	    */
 	   public List<String> getGameList() {
 		   return SceneController.gameList;
 	   }
+	   
 }

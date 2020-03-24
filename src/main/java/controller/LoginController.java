@@ -1,16 +1,21 @@
-package view.controllers;
+package controller;
 
-import java.io.BufferedWriter;
-import java.io.FileWriter;
 import java.io.IOException;
 
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
+import view.controllers.SceneController;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 
-public class LoginController extends SceneController{
+/**
+ * The controller for the login scene.
+ *
+ */
+
+// TODO
+// NON DEVE ESTENDERE SCENE CONTROLLER -> SEPARARE I CONCETTI
+public class LoginController extends SceneController {
 
 	@FXML
 	private Label lblStatus;
@@ -24,9 +29,10 @@ public class LoginController extends SceneController{
 	@FXML
 	private Button start;
 
+	
 	//al posto di "user" ci sarà un playerImpl che prende dal file e mi fa la getName()
 	@FXML
-	public void showMainMenu() throws IOException {
+	private void showMainMenu() throws IOException {
 		if(txtPlayer.getText().equals("user") && txtPassword.getText().contentEquals("pass")) {
 			this.switchScene(this.start, "MainMenu");
 		} else {

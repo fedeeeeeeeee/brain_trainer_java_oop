@@ -8,22 +8,17 @@
 
 <AnchorPane xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.controllers.MainMenuController">
    <children>
-      <Pane minHeight="-Infinity" minWidth="-Infinity" onMouseClicked="#goBack" prefHeight="500.0" prefWidth="300.0">
+      <Pane minHeight="-Infinity" minWidth="-Infinity" prefHeight="580.0" prefWidth="500.0">
          <children>
-            <Button fx:id="trainingBtn" layoutX="95.0" layoutY="125.0" mnemonicParsing="false" prefHeight="48.0" prefWidth="117.0" text="Daily Training" textAlignment="CENTER">
+            <Button fx:id="statisticsBtn" layoutX="169.0" layoutY="266.0" mnemonicParsing="false" onMouseClicked="#showStatistics" prefHeight="57.0" prefWidth="163.0" text="Statistics">
                <font>
-                  <Font size="16.0" />
+                  <Font size="18.0" />
                </font>
             </Button>
-            <Button fx:id="statisticsBtn" layoutX="95.0" layoutY="125.0" mnemonicParsing="false" onMouseClicked="#showStatistics" prefHeight="48.0" prefWidth="117.0" text="Statistics">
+            <Button fx:id="backBtn" layoutX="45.0" layoutY="495.0" mnemonicParsing="false" onMouseClicked="#goBack" prefHeight="48.0" prefWidth="67.0" text="Back" />
+            <Button fx:id="trainingBtn" layoutX="169.0" layoutY="168.0" mnemonicParsing="false" onMouseClicked="#startTraining" prefHeight="57.0" prefWidth="163.0" text="Daily Training">
                <font>
-                  <Font size="16.0" />
-               </font>
-            </Button>
-            <Button fx:id="backBtn" layoutX="14.0" layoutY="459.0" mnemonicParsing="false" onMouseClicked="#goBack" text="Back" />
-            <Button layoutX="95.0" layoutY="68.0" mnemonicParsing="false" onMouseClicked="#startTraining" prefHeight="48.0" prefWidth="117.0" text="Daily Training">
-               <font>
-                  <Font size="15.0" />
+                  <Font size="18.0" />
                </font></Button>
          </children>
       </Pane>
