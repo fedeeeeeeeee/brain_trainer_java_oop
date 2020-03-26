@@ -27,5 +27,5 @@ public interface Score {
 	 * 
 	 * @return the final score 
 	 */
-	int getFinalScore();
+	int getValue();
 }

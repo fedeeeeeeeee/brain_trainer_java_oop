@@ -17,5 +17,5 @@ public interface Point {
 	 * 
 	 * @return score 
 	 */
-	int getScore();
+	Score getScore();
 }

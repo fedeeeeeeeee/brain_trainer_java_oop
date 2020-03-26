@@ -12,38 +12,38 @@ class ScoreTest {
 	
 	@Test
     public void testEasyBasicBehaviour() {
-        this.point = new PointImpl(DifficultyLevel.EASY, 5);
+        this.point = new PointImpl(DifficultyLevel.EASY, 5); //(0+5)*2
         this.point.addPoint(); //10
 		this.point.addPoint(); //20
 		this.point.addPoint(); //30
 		this.point.addPoint(); //40
 		this.point.addPoint(); //50
 		this.point.addPoint(); //60
-		assertEquals(60, this.point.getScore());
+		assertEquals(60, this.point.getScore().getValue());
 	}
 	
 	@Test
     public void testNormalBasicBehaviour() {
-        this.point = new PointImpl(DifficultyLevel.NORMAL, 10);
-        this.point.addPoint(); //20
-		this.point.addPoint(); //40
-		this.point.addPoint(); //60
-		this.point.addPoint(); //80
-		this.point.addPoint(); //100
-		this.point.addPoint(); //120
-		assertEquals(120, this.point.getScore());
+        this.point = new PointImpl(DifficultyLevel.NORMAL, 10); // (1+10)*2
+        this.point.addPoint(); //22
+		this.point.addPoint(); //44
+		this.point.addPoint(); //66
+		this.point.addPoint(); //88
+		this.point.addPoint(); //110
+		this.point.addPoint(); //132
+		assertEquals(132, this.point.getScore().getValue());
 	}
 	
 	@Test
     public void testHardBasicBehaviour() {
-        this.point = new PointImpl(DifficultyLevel.HARD, 15);
-        this.point.addPoint(); //30
-		this.point.addPoint(); //60
-		this.point.addPoint(); //90
-		this.point.addPoint(); //120
-		this.point.addPoint(); //150
-		this.point.addPoint(); //180
-		assertEquals(180, this.point.getScore());
+        this.point = new PointImpl(DifficultyLevel.HARD, 15); // (2+15)*2
+        this.point.addPoint(); //34
+		this.point.addPoint(); //68
+		this.point.addPoint(); //102
+		this.point.addPoint(); //136
+		this.point.addPoint(); //170
+		this.point.addPoint(); //204
+		assertEquals(204, this.point.getScore().getValue());
 	}
 	
 	@Test
@@ -52,9 +52,9 @@ class ScoreTest {
 			this.point = new PointImpl(DifficultyLevel.EASY, 5);
 			this.point.addPoint(); //10
 			this.point.addPoint(); //20
-			assertEquals(this.point.getScore(), 20);
+			assertEquals(20, this.point.getScore().getValue());
 			this.point.addPoint(); //IllegalStateException
-			assertEquals(this.point.getScore(), 20);
+			assertEquals(20, this.point.getScore().getValue());
 		    fail("Expected an IllegalStateException to be thrown");
 		  } catch (IllegalStateException illegalStateException) { }
 	}

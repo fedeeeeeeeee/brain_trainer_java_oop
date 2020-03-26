@@ -21,7 +21,7 @@ public class ScoreImpl implements Score {
 	}
 
 	@Override
-	public int getFinalScore() {
+	public int getValue() {
 		return this.totalPoint;
 	}
 }

@@ -4,9 +4,7 @@ import model.DifficultyLevel;
 
 public class PointImpl implements Point {
 	
-	private static final int EASYPOINT = 5;
-	private static final int NORMALPOINT = 10;
-	private static final int HARDPOINT = 15;
+	private static final int MULTIPLICATIVE_INCREMENT = 2;
 	
 	private final DifficultyLevel difficulty;
 	private final int basePoint;
@@ -24,17 +22,7 @@ public class PointImpl implements Point {
 	}
 
 	private void initializeIncrement() {
-		switch(this.difficulty) {
-		case EASY: 
-			this.increment = EASYPOINT;
-			break;
-		case NORMAL: 
-			this.increment = NORMALPOINT;
-			break;
-		case HARD: 
-			this.increment = HARDPOINT;
-			break;
-		}
+		this.increment = (this.difficulty.ordinal()+this.basePoint)*MULTIPLICATIVE_INCREMENT;
 	}
 
 	private void check(boolean b) {
@@ -52,13 +40,13 @@ public class PointImpl implements Point {
 	@Override
 	public void addPoint() {
 		this.check(this.isFinish);
-		this.score.updateScore(this.basePoint + this.increment);
+		this.score.updateScore(this.increment);
 	}
 	
 	@Override
-	public int getScore() {
+	public Score getScore() {
 		this.check(this.isFinish);
 		this.isFinish = true;
-		return this.score.getFinalScore();
+		return this.score;
 	}
 }
