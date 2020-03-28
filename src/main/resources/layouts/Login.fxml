@@ -1,35 +1,80 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.*?>
+<?import javafx.geometry.*?>
 <?import javafx.scene.shape.*?>
 <?import javafx.scene.image.*?>
 <?import javafx.scene.text.*?>
 <?import javafx.scene.control.*?>
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
-<?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.LoginController">
+<VBox alignment="TOP_CENTER" prefHeight="500.0" prefWidth="580.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.LoginController">
    <children>
-      <Pane layoutY="-1.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="300.0">
+      <GridPane GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="2" GridPane.vgrow="ALWAYS" VBox.vgrow="ALWAYS">
+        <columnConstraints>
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+        </columnConstraints>
+        <rowConstraints>
+            <RowConstraints maxHeight="131.0" minHeight="10.0" prefHeight="58.0" vgrow="SOMETIMES" />
+          <RowConstraints maxHeight="404.0" minHeight="10.0" prefHeight="206.0" vgrow="SOMETIMES" />
+          <RowConstraints maxHeight="225.0" minHeight="10.0" prefHeight="140.0" vgrow="SOMETIMES" />
+          <RowConstraints maxHeight="115.0" minHeight="10.0" prefHeight="96.0" vgrow="SOMETIMES" />
+        </rowConstraints>
+        
          <children>
-            <Label layoutX="84.0" layoutY="36.0" text="Brain Trainer ">
+            <GridPane GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="2" GridPane.vgrow="ALWAYS" VBox.vgrow="ALWAYS">
+              <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+              </columnConstraints>
+              <rowConstraints>
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+              </rowConstraints>
+               <children>
+                  <Label contentDisplay="CENTER" text="Select Player" GridPane.halignment="RIGHT">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                     <GridPane.margin>
+                        <Insets right="30.0" />
+                     </GridPane.margin></Label>
+                  <ComboBox prefHeight="27.0" prefWidth="160.0" GridPane.columnIndex="1" />
+                  <Label nodeOrientation="LEFT_TO_RIGHT" text="New Player" GridPane.halignment="RIGHT" GridPane.rowIndex="1">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                     <GridPane.margin>
+                        <Insets right="30.0" />
+                     </GridPane.margin></Label>
+                  <PasswordField fx:id="txtPassword" maxWidth="-Infinity" prefHeight="27.0" prefWidth="160.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                  <Label text="Password" GridPane.halignment="RIGHT" GridPane.rowIndex="2">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                     <GridPane.margin>
+                        <Insets right="30.0" />
+                     </GridPane.margin></Label>
+                  <TextField fx:id="txtPlayer" maxWidth="-Infinity" prefHeight="27.0" prefWidth="160.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+               </children>
+            </GridPane>
+            <Label contentDisplay="TEXT_ONLY" text="Brain Trainer" textOverrun="CENTER_ELLIPSIS" GridPane.halignment="CENTER">
                <font>
-                  <Font size="25.0" />
-               </font>
-            </Label>
-            <ImageView fitHeight="233.0" fitWidth="253.0" layoutX="25.0" layoutY="73.0" pickOnBounds="true" preserveRatio="true">
+                  <Font size="35.0" />
+               </font></Label>
+            <ImageView fitHeight="209.0" fitWidth="314.0" nodeOrientation="INHERIT" pickOnBounds="true" preserveRatio="true" GridPane.halignment="CENTER" GridPane.hgrow="SOMETIMES" GridPane.rowIndex="1" GridPane.vgrow="SOMETIMES">
                <image>
                   <Image url="@../images/brain_training.png" />
-               </image></ImageView>
-            <ComboBox layoutX="95.0" layoutY="312.0" prefHeight="27.0" prefWidth="160.0" />
-            <Label layoutX="15.0" layoutY="317.0" prefHeight="17.0" prefWidth="75.0" text="Select Player" />
-            <Label layoutX="15.0" layoutY="357.0" prefHeight="17.0" prefWidth="67.0" text="New Player" />
-            <TextField fx:id="txtPlayer" layoutX="95.0" layoutY="352.0" prefHeight="27.0" prefWidth="160.0" />
-            <Button fx:id="start" layoutX="122.0" layoutY="442.0" mnemonicParsing="false" onMouseClicked="#showMainMenu" prefHeight="27.0" prefWidth="61.0" text="Start" />
-            <Label layoutX="22.0" layoutY="398.0" prefHeight="17.0" prefWidth="61.0" text="Password" />
-            <PasswordField fx:id="txtPassword" layoutX="95.0" layoutY="393.0" prefHeight="27.0" prefWidth="160.0" />
-            <Label fx:id="lblStatus" layoutX="26.0" layoutY="448.0" prefHeight="17.0" prefWidth="61.0" text="Status" />
+               </image>
+            </ImageView>
+            <Button fx:id="start" mnemonicParsing="false" onMouseClicked="#showMainMenu" text="Start" GridPane.halignment="CENTER" GridPane.rowIndex="3">
+               <font>
+                  <Font size="15.0" />
+               </font></Button>
          </children>
-      </Pane>
+      </GridPane>
    </children>
-</AnchorPane>
+</VBox>
