@@ -26,7 +26,7 @@ public final class Main extends Application {
         stage.setScene(scene);
         stage.show();
     }
-
+// modifica
     /**
      * 
      * @param args unused
