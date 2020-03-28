@@ -1,22 +1,22 @@
-package score;
+package model.score;
 
 import model.DifficultyLevel;
 
-public class PointImpl implements Point {
+public class ScoreModelImpl implements ScoreModel {
 	
 	private static final int MULTIPLICATIVE_INCREMENT = 2;
 	
 	private final DifficultyLevel difficulty;
 	private final int basePoint;
 	private int increment;
-	private final Score score;
+	private int score;
 	private boolean isFinish;
 
-	public PointImpl(DifficultyLevel difficulty, int basePoint) {
+	public ScoreModelImpl(DifficultyLevel difficulty, int basePoint) {
 		this.checkDifficultyNotNull(difficulty);
 		this.difficulty = difficulty;
 		this.basePoint = basePoint;	
-		this.score = new ScoreImpl();
+		this.score = 0;
 		this.isFinish = false;
 		this.initializeIncrement();
 	}
@@ -40,11 +40,11 @@ public class PointImpl implements Point {
 	@Override
 	public void addPoint() {
 		this.check(this.isFinish);
-		this.score.updateScore(this.increment);
+		this.score = this.score + this.increment;
 	}
 	
 	@Override
-	public Score getScore() {
+	public int getScore() {
 		this.check(this.isFinish);
 		this.isFinish = true;
 		return this.score;

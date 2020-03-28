@@ -1,11 +1,11 @@
-package score;
+package model.score;
 
 /**
  * This interface models points achieved by right answers
  * 
  *
  */
-public interface Point {
+public interface ScoreModel {
 	
 	/**
 	 * add points when the user gave the right answer 
@@ -17,5 +17,5 @@ public interface Point {
 	 * 
 	 * @return score 
 	 */
-	Score getScore();
+	int getScore();
 }
