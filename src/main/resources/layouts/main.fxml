@@ -5,12 +5,18 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<VBox prefHeight="301.0" prefWidth="325.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.UIController">
+<VBox prefHeight="301.0" prefWidth="325.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ExampleMiniGameController">
 
   <children>
     <Button fx:id="btn" alignment="CENTER" onMouseClicked="#btnOnClickHandler" text="Say Hello!" />
+      <Label fx:id="score" prefHeight="49.0" prefWidth="162.0" text="Label">
+         <font>
+            <Font size="22.0" />
+         </font>
+      </Label>
+      <Button fx:id="addPoint" mnemonicParsing="false" onMouseClicked="#addPointOnClickHandler" prefHeight="63.0" prefWidth="117.0" text="addPoint" />
     
-    <Label fx:id="lbl" alignment="CENTER_LEFT" prefHeight="234.0" prefWidth="320.0" text="Label Text Here!">
+    <Label fx:id="lbl" alignment="CENTER_LEFT" prefHeight="134.0" prefWidth="246.0" text="Label Text Here!">
          <font>
             <Font size="42.0" />
          </font></Label>
