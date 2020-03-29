@@ -34,6 +34,6 @@ public class MainMenuController extends SceneController {
 		
 		@FXML
 		private void goBack() throws IOException {
-			this.switchScene(this.backBtn, "Login");
+			switchScene(this.backBtn, "Login");
 		}	   
 }

@@ -18,11 +18,12 @@ public final class Main extends Application {
     	//attenzione mettere layouts/Login.fxml
         final Parent root = FXMLLoader.load(ClassLoader.getSystemResource("layouts/Login.fxml"));
         final Scene scene = new Scene(root);
-          
+        
+        
         // Stage configuration
-        stage.setTitle("Brain Trainer");
         stage.setWidth((Screen.getPrimary().getVisualBounds().getWidth()/2 - 100)); 
-        stage.setHeight((Screen.getPrimary().getVisualBounds().getHeight() - 100));  
+        stage.setHeight((Screen.getPrimary().getVisualBounds().getHeight() - 100));    
+        stage.setTitle("Brain Trainer");
         stage.setScene(scene);
         stage.show();
     }

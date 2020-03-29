@@ -14,34 +14,34 @@ import javafx.scene.control.ComboBox;
  */
 public class MinigameSelectorController extends SceneController {
 	
-	@FXML
-	Button homeBtn;
-	
-	@FXML
-	Button backBtn;
-	
-	@FXML
-	ComboBox<String> gameComboBox; 
-
-	
-	@FXML
-	private void initializeCombo() {
-		if(this.gameComboBox.getItems().isEmpty()) {
-			ObservableList<String> observable = FXCollections.observableArrayList(this.getGameList());
-			gameComboBox.getItems().addAll(observable);
+		@FXML
+		Button homeBtn;
+		
+		@FXML
+		Button backBtn;
+		
+		@FXML
+		ComboBox<String> gameComboBox; 
+		
+		
+		@FXML
+		private void initializeCombo() {
+			if(this.gameComboBox.getItems().isEmpty()) {
+				ObservableList<String> observable = FXCollections.observableArrayList(this.getGameList());
+				gameComboBox.getItems().addAll(observable);
+			}
 		}
-	}
-	
-	
-	@FXML
-	private void goBack() throws IOException {	
-		switchScene(this.backBtn, "TrainingAreaSelector");
-	}
-	
-	
-	@FXML
-	private void backHome() throws IOException {
-		switchScene(this.homeBtn, "MainMenu");
-	}
-	
+		
+		
+		@FXML
+		private void goBack() throws IOException {	
+			switchScene(this.backBtn, "TrainingAreaSelector");
+		}
+		
+		
+		@FXML
+		private void backHome() throws IOException {
+			switchScene(this.homeBtn, "MainMenu");
+		}
+
 }

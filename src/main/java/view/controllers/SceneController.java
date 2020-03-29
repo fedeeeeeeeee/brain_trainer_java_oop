@@ -18,11 +18,11 @@ import javafx.stage.Stage;
  */
 public class SceneController {
 	
-	   private static final String PATH = "/layouts/";
-	   private static final String PATH_END = ".fxml";
-	   private static List<String> gameList = new ArrayList<>();
-
-	   
+		private static final String PATH = "/layouts/";
+	    private static final String PATH_END = ".fxml";
+	    private static List<String> gameList = new ArrayList<>();
+	
+		   
 	   /** 
 	    * Update the current view  
 	    * 
@@ -47,9 +47,9 @@ public class SceneController {
 	   
 	   private void populateList(String selectedArea) {
 		   SceneController.gameList = Arrays.asList(MiniGame.values()).stream()
-                                 .filter(e-> e.getTrainingArea().getName().equals(selectedArea))
-                                 .map(e-> e.toString())
-                                 .collect(Collectors.toList());
+	                             .filter(e-> e.getTrainingArea().getName().equals(selectedArea))
+	                             .map(e-> e.toString())
+	                             .collect(Collectors.toList());
 	   }
 	   
 	   
@@ -60,5 +60,5 @@ public class SceneController {
 	   public List<String> getGameList() {
 		   return SceneController.gameList;
 	   }
-	   
+   
 }
