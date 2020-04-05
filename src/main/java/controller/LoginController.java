@@ -31,7 +31,6 @@ public class LoginController extends SceneController {
 
 	// motivazione password: se in futuro il gioco dovessere andare online si avrebbe un livello di protezione
 	
-	//al posto di "user" ci sarà un playerImpl che prende dal file e mi fa la getName()
 	@FXML
 	private void showMainMenu() throws IOException {
 		if(txtPlayer.getText().equals("user") && txtPassword.getText().contentEquals("pass")) {

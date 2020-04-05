@@ -8,7 +8,7 @@ import javafx.stage.Screen;
 import javafx.stage.Stage;
 
 /**
- * This class represents the Main class of the JavaFX-based application.
+ * This class represent the Main class of the JavaFX-based application.
  * 
  */
 public final class Main extends Application {
