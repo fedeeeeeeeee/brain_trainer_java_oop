@@ -29,6 +29,7 @@ public class LoginController extends SceneController {
 	@FXML
 	private Button start;
 
+	// motivazione password: se in futuro il gioco dovessere andare online si avrebbe un livello di protezione
 	
 	//al posto di "user" ci sarà un playerImpl che prende dal file e mi fa la getName()
 	@FXML
