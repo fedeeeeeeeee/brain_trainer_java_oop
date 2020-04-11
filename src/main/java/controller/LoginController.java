@@ -4,6 +4,7 @@ import java.io.IOException;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
+import view.ViewScene;
 import view.controllers.SceneController;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -34,7 +35,7 @@ public class LoginController extends SceneController {
 	@FXML
 	private void showMainMenu() throws IOException {
 		if(txtPlayer.getText().equals("user") && txtPassword.getText().contentEquals("pass")) {
-			this.switchScene(this.start, "MainMenu");
+			this.getView().switchScene(ViewScene.MAIN_MENU);
 		} else {
 			lblStatus.setText("Failed");
 		}	
