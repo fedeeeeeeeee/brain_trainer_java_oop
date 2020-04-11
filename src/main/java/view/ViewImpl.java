@@ -28,7 +28,7 @@ public class ViewImpl extends Application implements View {
 		 Platform.runLater(() -> {
 	            if (this.stage.getScene() == null) {
 	                this.stage.setScene(new Scene(this.currentSceneController.getRoot()));
-	                this.stage.setMaximized(true);
+//	                this.stage.setMaximized(true);
 	            } else {
 	                this.stage.getScene().setRoot(this.currentSceneController.getRoot());
 	            }
@@ -74,6 +74,5 @@ public class ViewImpl extends Application implements View {
          this.stage.setTitle("Brain Trainer");
          this.stage.show();
          this.controller.initializeView(this);
-     } 
-	 
+     }
 }

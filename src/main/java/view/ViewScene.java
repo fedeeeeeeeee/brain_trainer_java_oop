@@ -1,7 +1,5 @@
 package view;
 
-import java.io.File;
-
 public enum ViewScene {
 	
 
@@ -17,9 +15,8 @@ public enum ViewScene {
 	
 //	HOW_TO_PLAY("");
 	
-
-	private static final String PATH = System.getProperty("layouts") + File.separator;
-	private static final String EXTENSION = ".fxml";
+	private static final String PATH = "/layouts/";
+	private static final String PATH_END = ".fxml";
 	private String fileName;
 	
 	private ViewScene(String fileName) {
@@ -27,7 +24,7 @@ public enum ViewScene {
 	}
 	
 	public String getFilePath() {
-		return PATH + fileName + EXTENSION;
+		return PATH + fileName + PATH_END;
 	}
 
 }
