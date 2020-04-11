@@ -1,6 +1,7 @@
 package view;
 
 import controller.Controller;
+import controller.ControllerImpl;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.scene.Scene;
@@ -15,6 +16,11 @@ public class ViewImpl extends Application implements View {
 	 private SceneControllerFactory factory;
 	 private Stage stage;
 	 private String selectedArea;
+	 
+	 public ViewImpl() {
+		 this.controller = new ControllerImpl();
+		 this.factory = new SceneControllerFactoryImpl();
+	 }
 	 
 	 private void initializeSceneController() {
 		 this.currentSceneController.setView(this);
@@ -60,16 +66,14 @@ public class ViewImpl extends Application implements View {
 	}
 	
 	 @Override
-     public void start(final Stage stage) throws Exception {
-//       final Parent root = FXMLLoader.load(ClassLoader.getSystemResource("layouts/Login.fxml"));
-//       final Scene scene = new Scene(root);
-         this.stage = stage;
+     public void start(final Stage stage) throws Exception { 
+		 this.stage = stage;
          // Stage configuration
          this.stage.setWidth((Screen.getPrimary().getVisualBounds().getWidth()/2 - 100)); 
          this.stage.setHeight((Screen.getPrimary().getVisualBounds().getHeight() - 100));    
          this.stage.setTitle("Brain Trainer");
-//       stage.setScene(scene);
-         stage.show();
+         this.stage.show();
+         this.controller.initializeView(this);
      } 
 	 
 }
