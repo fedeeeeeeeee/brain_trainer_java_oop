@@ -10,7 +10,7 @@ import com.fasterxml.jackson.databind.SerializationFeature;
 
 public class LoginModel {
 	
-	private static final String PATH = System.getProperty("user.home") + File.separator + ".provaprogetto";
+	private static final String PATH = System.getProperty("user.home") + File.separator + ".brainTrainer";
 	private static final File brainTrainer = new File(PATH);
 	private File userFile;
 	
@@ -21,7 +21,6 @@ public class LoginModel {
 				 this.userFile = file;
 				 return true;
 			 }
-			 System.out.println(file);
 		 }
 		 return false;
 	}
@@ -31,17 +30,14 @@ public class LoginModel {
 		ObjectMapper mapper = new ObjectMapper();
 		 
 		try {
-			if(mapper.readValue(userFile,UserPlayer.class ).getPassword().equals(player.getPassword())) {
+			if(mapper.readValue(userFile,UserPlayerImpl.class ).getPassword().equals(player.getPassword())) {
 				 return true;
 			 }
 		} catch (JsonParseException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (JsonMappingException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
@@ -75,8 +71,10 @@ public class LoginModel {
 	
 	
 	/**
-	 * Register the newUser
+	 * Register the newUser and create the file related
 	 * @param player
+	 * @return 
+	 * 			false if the username is already taken true otherwise
 	 */
 	public boolean registerPlayer(UserPlayer player) {
 		ObjectMapper mapper = new ObjectMapper();
@@ -90,12 +88,13 @@ public class LoginModel {
         	return false;
         }else {
         	this.userFile = new File(PATH + File.separator + userFileName);
-        	try {
+        	
+			try {
 				mapper.writeValue(userFile, player);
 			} catch (IOException e) {
-				// TODO Auto-generated catch block
-			e.printStackTrace();
+				e.printStackTrace();
 			}
+			 
         	return true;
         }		
 	}

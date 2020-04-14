@@ -36,6 +36,8 @@ public class ViewImpl extends Application implements View {
 	@Override
 	public void switchScene(ViewScene scene) {
 		this.currentSceneController = this.sceneLoader.loadScene(scene.getFilePath());
+		if (this.currentSceneController == null) {
+		}
 		
 		this.currentSceneController.setView(this);
 		this.currentSceneController.setController(this.controller);

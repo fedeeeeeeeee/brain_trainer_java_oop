@@ -19,15 +19,18 @@ public class LoginController {
 	 * 			true otherwise
 	 */
 	public boolean isLoggedIn(UserPlayer player) {
-		return model.logInUser(player);
+		return this.model.logInUser(player);
 	}
 	
 	/**
-	 * Register the new player
+	 * Check if the player is correctly registered
 	 * @param player
+	 * @return
+	 * 			false if the username is already taken
+	 * 			true otherwise
 	 */
-	public void registerPlayer(UserPlayer player) {
-		
+	public boolean isPlayerRegistered(UserPlayer player) {
+		return this.model.registerPlayer(player);
 	}
 
 }

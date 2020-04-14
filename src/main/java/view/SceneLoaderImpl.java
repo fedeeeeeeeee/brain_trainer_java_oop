@@ -15,6 +15,7 @@ public class SceneLoaderImpl implements SceneLoader {
 	    	 final Parent root = loader.load(this.getClass().getResourceAsStream(filePath));
 	         final SceneController controller = loader.<SceneController>getController();
 	         controller.setRoot(root);
+	        
 	         return controller;
 	     } catch (IOException e) {
 	    	 e.printStackTrace();
