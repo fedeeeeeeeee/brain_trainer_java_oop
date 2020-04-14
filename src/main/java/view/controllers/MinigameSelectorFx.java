@@ -14,7 +14,7 @@ import view.ViewScene;
  * Controller for the minigame selector and game start scene.
  * 
  */
-public class MinigameSelectorController extends SceneController {
+public class MinigameSelectorFx extends SceneController {
 	
 		@FXML
 		Button homeBtn;

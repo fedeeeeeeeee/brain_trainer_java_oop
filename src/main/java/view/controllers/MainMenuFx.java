@@ -10,7 +10,7 @@ import view.ViewScene;
  * The controller for the main menu scene.
  *
  */
-public class MainMenuController extends SceneController {
+public class MainMenuFx extends SceneController {
 	 	
 		@FXML
 		private Button trainingBtn;

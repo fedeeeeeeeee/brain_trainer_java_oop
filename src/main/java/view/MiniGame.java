@@ -1,5 +1,5 @@
-package view.controllers;
-import static view.controllers.TrainingArea.*;
+package view;
+import static view.TrainingArea.*;
 
 
 /**

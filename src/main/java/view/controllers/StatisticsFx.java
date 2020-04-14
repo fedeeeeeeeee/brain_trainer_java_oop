@@ -10,7 +10,7 @@ import view.ViewScene;
  * The controller for Statistics scene.
  *
  */
-public class StatisticsController extends SceneController {
+public class StatisticsFx extends SceneController {
 	
 	@FXML
 	private Button backBtn;

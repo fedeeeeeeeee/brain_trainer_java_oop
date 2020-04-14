@@ -7,6 +7,7 @@ import java.util.Arrays;
 
 import controller.Controller;
 import javafx.scene.Parent;
+import view.MiniGame;
 import view.View;
 
 

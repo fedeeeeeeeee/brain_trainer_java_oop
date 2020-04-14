@@ -1,4 +1,4 @@
-package view.controllers;
+package view;
 
 public enum TrainingArea {
 

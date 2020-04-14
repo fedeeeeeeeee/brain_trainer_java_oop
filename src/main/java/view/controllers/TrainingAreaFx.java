@@ -10,7 +10,7 @@ import view.ViewScene;
  * Controller for the Training Area selector.
  * 
  */
-public class TrainingAreaController extends SceneController {
+public class TrainingAreaFx extends SceneController {
 
 	@FXML
 	private Button backBtn;
