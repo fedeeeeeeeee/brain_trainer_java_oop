@@ -27,7 +27,10 @@ public class LoginFx extends SceneController {
 	private TextField txtPassword;
 
 	@FXML
-	private Button start;
+	private Button loginBtn;
+	
+	@FXML
+	private Button signUpBtn;
 
 	// motivazione password: se in futuro il gioco dovessere andare online si avrebbe un livello di protezione
 	
@@ -38,6 +41,11 @@ public class LoginFx extends SceneController {
 		} else {
 			lblStatus.setText("Failed");
 		}	
+	}
+	
+	@FXML
+	private void signUpPlayer() {
+		//TODO
 	}
 
 }

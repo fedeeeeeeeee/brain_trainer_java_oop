@@ -35,15 +35,7 @@
                 <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
               </rowConstraints>
                <children>
-                  <Label contentDisplay="CENTER" text="Select Player" GridPane.halignment="RIGHT">
-                     <font>
-                        <Font size="18.0" />
-                     </font>
-                     <GridPane.margin>
-                        <Insets right="30.0" />
-                     </GridPane.margin></Label>
-                  <ComboBox prefHeight="27.0" prefWidth="160.0" GridPane.columnIndex="1" />
-                  <Label nodeOrientation="LEFT_TO_RIGHT" text="New Player" GridPane.halignment="RIGHT" GridPane.rowIndex="1">
+                  <Label nodeOrientation="LEFT_TO_RIGHT" text="Player" GridPane.halignment="RIGHT" GridPane.rowIndex="1">
                      <font>
                         <Font size="18.0" />
                      </font>
@@ -65,7 +57,7 @@
                <font>
                   <Font size="35.0" />
                </font></Label>
-            <Button fx:id="start" mnemonicParsing="false" onMouseClicked="#showMainMenu" text="Start" GridPane.halignment="CENTER" GridPane.rowIndex="3">
+            <Button fx:id="start" mnemonicParsing="false" onMouseClicked="#showMainMenu" text="Login" GridPane.halignment="CENTER" GridPane.rowIndex="3">
                <font>
                   <Font size="15.0" />
                </font>
@@ -77,6 +69,7 @@
                   <Image url="@../images/brain_training.png" />
                </image>
             </ImageView>
+            <Button fx:id="signUpBtn" mnemonicParsing="false" onMouseClicked="#signUpPlayer" text="Sign Up" GridPane.rowIndex="3" />
 
          </children>
       </GridPane>
