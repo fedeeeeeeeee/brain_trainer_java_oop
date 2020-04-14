@@ -36,15 +36,22 @@ public class LoginFx extends SceneController {
 	private Button signUpBtn;
 	
 	private LoginController loginController = new LoginController();
-
-	// motivazione password: se in futuro il gioco dovessere andare online si avrebbe un livello di protezione
+	
+	private boolean checkArgs() {
+		return !this.txtPassword.getText().isBlank() && !this.txtPlayer.getText().isBlank();
+	}
 	
 	private UserPlayer initPlayer() {
-		UserPlayer player = new UserPlayerImpl();
-		player.setUsername(this.txtPlayer.getText());
-		player.setPassword(this.txtPassword.getText());
+		if(this.checkArgs()) {
+			UserPlayer player = new UserPlayerImpl();
+			player.setUsername(this.txtPlayer.getText());
+			player.setPassword(this.txtPassword.getText());
+			
+			return player;
+		}else {
+			throw new NullPointerException();
+		}
 		
-		return player;
 	}
 	
 	private void switchToMenu() {
@@ -62,7 +69,6 @@ public class LoginFx extends SceneController {
 			this.setUserPlayer(player);
 	}
 		this.switchToMenu();
-		//--> è un problema di switchScene :( !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! <--
 	}
 	
 	@FXML
