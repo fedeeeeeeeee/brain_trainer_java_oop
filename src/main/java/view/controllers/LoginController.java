@@ -1,11 +1,10 @@
-package controller;
+package view.controllers;
 
 import java.io.IOException;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
 import view.ViewScene;
-import view.controllers.SceneController;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 

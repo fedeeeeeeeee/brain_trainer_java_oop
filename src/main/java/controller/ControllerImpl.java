@@ -1,6 +1,7 @@
 package controller;
 
 import model.Model;
+import model.ModelImpl;
 import model.UserPlayer;
 import view.View;
 import view.ViewScene;
@@ -9,6 +10,10 @@ public class ControllerImpl implements Controller {
 	
 	private View view;
 	private Model model;
+	
+	public ControllerImpl() {
+		this.model = new ModelImpl();
+	}
 	
 	
 	@Override
@@ -19,7 +24,7 @@ public class ControllerImpl implements Controller {
 
 	@Override
 	public void initializePlayer(UserPlayer player) {
-
+		this.model.setUserPlayer(player);
 	}
 	
 }
