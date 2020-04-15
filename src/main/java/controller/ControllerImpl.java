@@ -26,5 +26,19 @@ public class ControllerImpl implements Controller {
 	public void initializePlayer(UserPlayer player) {
 		this.model.setUserPlayer(player);
 	}
+
+
+	@Override
+	public void setArea(String area) {
+		this.model.setArea(area);
+		
+	}
+
+
+	@Override
+	public String getArea() {
+		return this.model.getArea();
+	}
+	
 	
 }

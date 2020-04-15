@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.effect.*?>
 <?import javafx.scene.text.*?>
 <?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
@@ -25,26 +26,26 @@
           <RowConstraints maxHeight="140.0" minHeight="35.0" prefHeight="40.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <Button id="memoryBtn" alignment="CENTER" mnemonicParsing="false" onMouseClicked="#areaClicked" prefWidth="150.0" text="Memory" GridPane.halignment="CENTER">
+            <Button id="area" fx:id="memoryBtn" alignment="CENTER" mnemonicParsing="false" onMouseClicked="#areaClicked" prefWidth="150.0" text="Memory" GridPane.halignment="CENTER">
                <font>
                   <Font size="20.0" />
                </font>
         </Button>
-            <Button id="visualSkillBtn" alignment="CENTER" mnemonicParsing="false" onMouseClicked="#areaClicked" prefWidth="150.0" text="Visual Skill" GridPane.halignment="CENTER" GridPane.rowIndex="2">
+            <Button id="aree" fx:id="visualSkillBtn" alignment="CENTER" mnemonicParsing="false" onMouseClicked="#areaClicked" prefWidth="150.0" text="Visual Skill" GridPane.halignment="CENTER" GridPane.rowIndex="2">
                    <font>
                   <Font size="20.0" />
                </font>
          </Button>
-          <Button id="attentionBtn" alignment="CENTER" mnemonicParsing="false" onMouseClicked="#areaClicked" prefWidth="150.0" text="Attention" GridPane.halignment="CENTER" GridPane.rowIndex="1">
+          <Button id="area" fx:id="attentionBtn" alignment="CENTER" mnemonicParsing="false" onMouseClicked="#areaClicked" prefWidth="150.0" text="Attention" GridPane.halignment="CENTER" GridPane.rowIndex="1">
                    <font>
                   <Font size="20.0" />
                </font>
             </Button>
-              <Button id="brainSpeedBtn" alignment="CENTER" mnemonicParsing="false" onMouseClicked="#areaClicked" prefWidth="150.0" text="Brain Speed" GridPane.halignment="CENTER" GridPane.rowIndex="3">
+              <Button id="brainSpeedBtn" fx:id="brainSpeedBtn" alignment="CENTER" mnemonicParsing="false" onMouseClicked="#areaClicked" prefWidth="150.0" text="Brain Speed" GridPane.halignment="CENTER" GridPane.rowIndex="3">
                      <font>
                   <Font size="20.0" />
                </font></Button>
-                          <Button id="reasoningBtn" layoutX="95.0" layoutY="243.0" mnemonicParsing="false" onMouseClicked="#areaClicked" prefWidth="150.0" text="Reasoning" GridPane.halignment="CENTER" GridPane.rowIndex="4">
+                          <Button id="reasoningBtn" fx:id="reasoningBtn" layoutX="95.0" layoutY="243.0" mnemonicParsing="false" onMouseClicked="#areaClicked" prefWidth="150.0" text="Reasoning" GridPane.halignment="CENTER" GridPane.rowIndex="4">
                    <font>
                   <Font size="20.0" />
                </font></Button>

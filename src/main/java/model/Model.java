@@ -9,4 +9,8 @@ public interface Model {
 	 */
 	void setUserPlayer(UserPlayer player);
 
+	void setArea(String area);
+	
+	String getArea();
+	
 }
