@@ -26,7 +26,7 @@
             <RowConstraints vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-           <Button mnemonicParsing="false" prefHeight="50.0" prefWidth="120.0" text="PLAY" GridPane.halignment="CENTER" GridPane.rowIndex="5">
+           <Button mnemonicParsing="false" onMouseClicked="#startMiniGame" prefHeight="50.0" prefWidth="120.0" text="PLAY" GridPane.halignment="CENTER" GridPane.rowIndex="5">
                <font>
                   <Font size="20.0" />
                </font>
@@ -35,18 +35,21 @@
                      <font>
                         <Font size="20.0" />
                      </font>
+               <toggleGroup>
+                  <ToggleGroup fx:id="difficulty" />
+               </toggleGroup>
                   </RadioButton>
-                  <RadioButton mnemonicParsing="false" prefWidth="120.0" text="HARD" GridPane.halignment="CENTER" GridPane.rowIndex="4" GridPane.valignment="BASELINE">
+                  <RadioButton mnemonicParsing="false" prefWidth="120.0" text="HARD" toggleGroup="$difficulty" GridPane.halignment="CENTER" GridPane.rowIndex="4" GridPane.valignment="BASELINE">
                      <font>
                         <Font size="20.0" />
                      </font>
                   </RadioButton>
-                  <RadioButton mnemonicParsing="false" prefWidth="120.0" text="NORMAL" GridPane.halignment="CENTER" GridPane.rowIndex="3">
+                  <RadioButton mnemonicParsing="false" prefWidth="120.0" text="NORMAL" toggleGroup="$difficulty" GridPane.halignment="CENTER" GridPane.rowIndex="3">
                      <font>
                         <Font size="20.0" />
                      </font>
                   </RadioButton>
-            <ComboBox fx:id="gameComboBox" editable="true" onMouseClicked="#initializeCombo" prefHeight="30.0" prefWidth="210.0" visibleRowCount="5" GridPane.halignment="CENTER" GridPane.rowIndex="1">
+            <ComboBox fx:id="gameComboBox" onMouseClicked="#initializeCombo" prefHeight="30.0" prefWidth="210.0" visibleRowCount="5" GridPane.halignment="CENTER" GridPane.rowIndex="1">
                <GridPane.margin>
                   <Insets />
                </GridPane.margin></ComboBox>

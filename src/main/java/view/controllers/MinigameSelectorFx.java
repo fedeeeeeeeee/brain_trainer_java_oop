@@ -7,6 +7,8 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.RadioButton;
+import javafx.scene.control.ToggleGroup;
 import javafx.util.Callback;
 import view.ViewScene;
 
@@ -16,6 +18,9 @@ import view.ViewScene;
  */
 public class MinigameSelectorFx extends SceneController {
 	
+		@FXML
+		ToggleGroup difficulty;
+		
 		@FXML
 		Button homeBtn;
 		
@@ -34,6 +39,15 @@ public class MinigameSelectorFx extends SceneController {
 			}
 		}
 
+		@FXML
+		private void startMiniGame() {
+			RadioButton selectedRadioButton = (RadioButton) difficulty.getSelectedToggle();
+			String difficulty = selectedRadioButton.getText();
+			if( !difficulty.isEmpty()) { 
+				//fa partire il gioco 
+			}
+		}
+		
 
 		@FXML
 		private void goBack() throws IOException {	
@@ -46,4 +60,5 @@ public class MinigameSelectorFx extends SceneController {
 			this.getView().switchScene(ViewScene.MAIN_MENU);
 		}
 
+		
 }
