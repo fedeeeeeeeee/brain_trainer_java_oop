@@ -7,7 +7,10 @@ import view.TrainingArea;
 import view.View;
 import view.ViewScene;
 
-
+/**
+ * The implementation of the {@link Controller}
+ * 
+ */
 public class ControllerImpl implements Controller {
 	
 	private View view;

@@ -8,7 +8,11 @@ import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 
-public class LoginModel {
+/**
+ * The implementation of the {@link LoginModel} interface
+ * 
+ */
+public class LoginModelImpl implements LoginModel {
 	
 	private static final String PATH = System.getProperty("user.home") + File.separator + ".brainTrainer";
 	private static final File brainTrainer = new File(PATH);
@@ -49,26 +53,15 @@ public class LoginModel {
         }
 	}
 	
-	/**
-	 * Find the user file in the project directory
-	 * @param player
-	 * @return 
-	 * 			false if the user isn't already registered true otherwise
-	 */
-	public boolean logInUser(UserPlayer player) {
+	@Override
+	public boolean loginUser(UserPlayer player) {
 		 String userFileName = player.getUsername()+ ".txt"; 
 		 if(this.checkIfUserExist(player, userFileName)) {
 			 return this.checkPassword(player);
 		 } return false;
 	}
 	
-	
-	/**
-	 * Register the new user and create the related file 
-	 * @param player
-	 * @return 
-	 * 			false if the username is already taken true otherwise
-	 */
+	@Override
 	public boolean registerPlayer(UserPlayer player) {
 		ObjectMapper mapper = new ObjectMapper();
 		mapper.configure(SerializationFeature.INDENT_OUTPUT, true);

@@ -2,14 +2,17 @@ package view;
 
 import view.controllers.SceneController;
 
+/**
+ *  Interface for loading the next scene
+ *
+ */
 public interface SceneLoader {
 	
 	/**
-	 * Load the fxml file of the next scene
 	 * 
 	 * @param filePath 
 	 * 			the file path of the next scene
-	 * @return
+	 * @return the {@link SceneController} related to the next scene 
 	 */
 	SceneController loadScene(String filePath);
 

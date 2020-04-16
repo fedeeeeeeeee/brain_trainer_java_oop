@@ -8,7 +8,10 @@ import javafx.stage.Screen;
 import javafx.stage.Stage;
 import view.controllers.SceneController;
 
-
+/**
+ * The implementation of the {@link View}
+ *
+ */
 public class ViewImpl extends Application implements View {
 	
 	 private Controller controller;
@@ -34,8 +37,7 @@ public class ViewImpl extends Application implements View {
 	@Override
 	public void switchScene(ViewScene scene) {
 		this.currentSceneController = this.sceneLoader.loadScene(scene.getFilePath());
-//		non si sa
-		//if (this.currentSceneController == null) {
+//		if (this.currentSceneController == null) {
 //		}
 		
 		this.currentSceneController.setView(this);

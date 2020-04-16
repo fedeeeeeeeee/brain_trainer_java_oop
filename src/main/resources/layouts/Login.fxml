@@ -84,7 +84,7 @@
                         <Font size="18.0" />
                      </font>
                   </Button>
-                  <Button fx:id="loginBtn" mnemonicParsing="false" onMouseClicked="#showMainMenu" prefWidth="90.0" text="Login" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.valignment="CENTER">
+                  <Button fx:id="loginBtn" mnemonicParsing="false" onMouseClicked="#loginPlayer" prefWidth="90.0" text="Login" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.valignment="CENTER">
                      <font>
                         <Font size="18.0" />
                      </font>

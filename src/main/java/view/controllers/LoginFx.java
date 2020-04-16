@@ -45,13 +45,11 @@ public class LoginFx extends SceneController {
 		if(this.checkArgs()) {
 			UserPlayer player = new UserPlayerImpl();
 			player.setUsername(this.txtPlayer.getText());
-			player.setPassword(this.txtPassword.getText());
-			
+			player.setPassword(this.txtPassword.getText());		
 			return player;
-		}else {
+		} else {
 			throw new NullPointerException();
-		}
-		
+		}	
 	}
 	
 	private void switchToMenu() {
@@ -63,21 +61,19 @@ public class LoginFx extends SceneController {
 	}
 	
 	@FXML
-	private void showMainMenu() throws IOException {
+	private void loginPlayer() throws IOException {
 		UserPlayer player = this.initPlayer();
 		if(this.loginController.isLoggedIn(player)) {
 			this.setUserPlayer(player);
-	}
-		this.switchToMenu();
+		} this.switchToMenu();
 	}
 	
 	@FXML
 	private void signUpPlayer() {
 		UserPlayer player = this.initPlayer();
-		if(this.loginController.isPlayerRegistered(player)) {
+		if(this.loginController.isRegistered(player)) {
 			this.setUserPlayer(player);
-		}
-		this.switchToMenu();
+		} this.switchToMenu();
 	}
 
 }

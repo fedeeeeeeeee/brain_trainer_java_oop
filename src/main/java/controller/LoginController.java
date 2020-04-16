@@ -1,14 +1,19 @@
 package controller;
 
-import model.LoginModel;
+import model.LoginModelImpl;
 import model.UserPlayer;
 
+/**
+ * Login controller class. Handles the logic for login access 
+ * 
+ *
+ */
 public class LoginController {
 	
-	private LoginModel model;
+	private LoginModelImpl model;
 	
 	public LoginController() {
-		this.model = new LoginModel();
+		this.model = new LoginModelImpl();
 	}
 	
 	/**
@@ -19,7 +24,7 @@ public class LoginController {
 	 * 			true otherwise
 	 */
 	public boolean isLoggedIn(UserPlayer player) {
-		return this.model.logInUser(player);
+		return this.model.loginUser(player);
 	}
 	
 	/**
@@ -29,7 +34,7 @@ public class LoginController {
 	 * 			false if the username is already taken
 	 * 			true otherwise
 	 */
-	public boolean isPlayerRegistered(UserPlayer player) {
+	public boolean isRegistered(UserPlayer player) {
 		return this.model.registerPlayer(player);
 	}
 
