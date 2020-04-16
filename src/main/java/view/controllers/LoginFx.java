@@ -8,7 +8,11 @@ import javafx.scene.control.TextField;
 import model.UserPlayer;
 import model.UserPlayerImpl;
 import view.ViewScene;
+import javafx.scene.Parent;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 
 /**
@@ -21,7 +25,7 @@ import javafx.scene.control.Label;
 public class LoginFx extends SceneController {
 
 	@FXML
-	private Label lblStatus;
+	private Label errorLbl;
 	
 	@FXML
 	private TextField txtPlayer;
@@ -37,19 +41,23 @@ public class LoginFx extends SceneController {
 	
 	private LoginController loginController = new LoginController();
 	
-	private boolean checkArgs() {
-		return !this.txtPassword.getText().isBlank() && !this.txtPlayer.getText().isBlank();
+	private boolean checkEmptyFields() {
+		return this.txtPassword.getText().isBlank() || this.txtPlayer.getText().isBlank();
 	}
 	
-	private UserPlayer initPlayer() {
-		if(this.checkArgs()) {
-			UserPlayer player = new UserPlayerImpl();
-			player.setUsername(this.txtPlayer.getText());
-			player.setPassword(this.txtPassword.getText());		
-			return player;
-		} else {
-			throw new NullPointerException();
-		}	
+	private UserPlayer initPlayer() { 
+		 try {
+			 if(!this.checkEmptyFields()) {
+				UserPlayer player = new UserPlayerImpl();
+				player.setUsername(this.txtPlayer.getText());
+				player.setPassword(this.txtPassword.getText());		
+				return player;
+			 } else {
+				 this.errorLbl.setText("* Fields cannot be empty!");
+			   } 	
+	     } catch (Exception e) {
+	    	 e.printStackTrace();
+	     } return null;
 	}
 	
 	private void switchToMenu() {
@@ -65,7 +73,10 @@ public class LoginFx extends SceneController {
 		UserPlayer player = this.initPlayer();
 		if(this.loginController.isLoggedIn(player)) {
 			this.setUserPlayer(player);
-		} this.switchToMenu();
+			this.switchToMenu();
+		} else {
+			this.errorLbl.setText("* Incorrect password or non-existent user!");
+		}
 	}
 	
 	@FXML
@@ -73,7 +84,11 @@ public class LoginFx extends SceneController {
 		UserPlayer player = this.initPlayer();
 		if(this.loginController.isRegistered(player)) {
 			this.setUserPlayer(player);
-		} this.switchToMenu();
+			this.switchToMenu();
+		} else {
+			Alert alert = new Alert(AlertType.ERROR, "Username already exists!", ButtonType.OK);
+			alert.showAndWait();
+		}
 	}
 
 }

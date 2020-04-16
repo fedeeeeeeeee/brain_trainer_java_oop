@@ -28,7 +28,7 @@ public class LoginModelImpl implements LoginModel {
 		 } return false;
 	}
 	
-	private boolean checkPassword (UserPlayer player) {
+	private boolean checkPassword(UserPlayer player) {
 		ObjectMapper mapper = new ObjectMapper();	 
 		try {
 			if(mapper.readValue(userFile,UserPlayerImpl.class ).getPassword().equals(player.getPassword())) {
@@ -65,11 +65,9 @@ public class LoginModelImpl implements LoginModel {
 	public boolean registerPlayer(UserPlayer player) {
 		ObjectMapper mapper = new ObjectMapper();
 		mapper.configure(SerializationFeature.INDENT_OUTPUT, true);
-		
 		this.initializeDirectory();
 		
         String userFileName = player.getUsername()+ ".txt";
-		
         if(this.checkIfUserExist(player, userFileName)) {
         	return false;
         } else {
