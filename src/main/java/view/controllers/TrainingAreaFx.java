@@ -16,28 +16,11 @@ public class TrainingAreaFx extends SceneController {
 	private Button backBtn;
 	
 	@FXML
-	private Button memoryBtn;
-	
-	@FXML
-	private Button attentionBtn;
-	
-	@FXML
-	private Button visualSkillBtn;
-	
-	@FXML
-	private Button brainSpeedBtn;
-	
-	@FXML
-	private Button reasoningBtn;
-	
-	
-	@FXML
 	private void areaClicked(MouseEvent event) throws IOException {
 		this.getController().setArea(((Button)event.getSource()).getText());
 		this.getView().switchScene(ViewScene.GAME_SELECTOR);
 	}
 
-	
 	@FXML
 	private void goBack() throws IOException {
 		this.getView().switchScene(ViewScene.MAIN_MENU);
