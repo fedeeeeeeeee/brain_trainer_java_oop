@@ -12,7 +12,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 
 /**
- * The controller for the login scene.
+ * The fx controller for the login scene.
  *
  */
 

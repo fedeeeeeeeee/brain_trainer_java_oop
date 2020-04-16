@@ -21,14 +21,11 @@ public class LoginModel {
 				 this.userFile = file;
 				 return true;
 			 }
-		 }
-		 return false;
+		 } return false;
 	}
 	
 	private boolean checkPassword (UserPlayer player) {
-		
-		ObjectMapper mapper = new ObjectMapper();
-		 
+		ObjectMapper mapper = new ObjectMapper();	 
 		try {
 			if(mapper.readValue(userFile,UserPlayerImpl.class ).getPassword().equals(player.getPassword())) {
 				 return true;
@@ -39,9 +36,7 @@ public class LoginModel {
 			e.printStackTrace();
 		} catch (IOException e) {
 			e.printStackTrace();
-		}
-		
-		return false;
+		} return false;
 	}
 	
 	private void initializeDirectory() {
@@ -55,23 +50,21 @@ public class LoginModel {
 	}
 	
 	/**
-	 * Find the User
+	 * Find the user file in the project directory
 	 * @param player
 	 * @return 
-	 * 			false if the user isn't already register true otherwise
+	 * 			false if the user isn't already registered true otherwise
 	 */
 	public boolean logInUser(UserPlayer player) {
-		 String userFileName = player.getUsername()+ ".txt";
-		 
+		 String userFileName = player.getUsername()+ ".txt"; 
 		 if(this.checkIfUserExist(player, userFileName)) {
 			 return this.checkPassword(player);
-		 }
-		 return false;
+		 } return false;
 	}
 	
 	
 	/**
-	 * Register the newUser and create the file related
+	 * Register the new user and create the related file 
 	 * @param player
 	 * @return 
 	 * 			false if the username is already taken true otherwise
@@ -86,16 +79,13 @@ public class LoginModel {
 		
         if(this.checkIfUserExist(player, userFileName)) {
         	return false;
-        }else {
-        	this.userFile = new File(PATH + File.separator + userFileName);
-        	
-			try {
-				mapper.writeValue(userFile, player);
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-			 
-        	return true;
+        } else {
+        	 this.userFile = new File(PATH + File.separator + userFileName);    	
+			 try {
+				 mapper.writeValue(userFile, player);
+			 } catch (IOException e) {
+				 e.printStackTrace();
+			 } return true;
         }		
 	}
 

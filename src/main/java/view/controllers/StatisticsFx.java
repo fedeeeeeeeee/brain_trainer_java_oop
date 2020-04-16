@@ -7,7 +7,7 @@ import javafx.scene.control.Button;
 import view.ViewScene;
 
 /** 
- * The controller for Statistics scene.
+ * The fx controller for Statistics scene.
  *
  */
 public class StatisticsFx extends SceneController {

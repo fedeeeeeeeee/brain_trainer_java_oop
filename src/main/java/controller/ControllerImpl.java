@@ -7,10 +7,12 @@ import view.TrainingArea;
 import view.View;
 import view.ViewScene;
 
+
 public class ControllerImpl implements Controller {
 	
 	private View view;
 	private Model model;
+	
 	
 	public ControllerImpl() {
 		this.model = new ModelImpl();
@@ -23,12 +25,13 @@ public class ControllerImpl implements Controller {
 		this.view.switchScene(ViewScene.LOGIN);
 	}
 
+	
 	@Override
 	public void initializePlayer(UserPlayer player) {
 		this.model.setUserPlayer(player);
 	}
 
-
+ 
 	@Override
 	public void setArea(TrainingArea area) {
 		this.model.setArea(area);
@@ -40,6 +43,5 @@ public class ControllerImpl implements Controller {
 	public TrainingArea getArea() {
 		return this.model.getArea();
 	}
-	
 	
 }

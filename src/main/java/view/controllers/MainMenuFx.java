@@ -7,7 +7,7 @@ import javafx.scene.control.Button;
 import view.ViewScene;
 
 /** 
- * The controller for the main menu scene.
+ * The fx controller for the main menu scene.
  *
  */
 public class MainMenuFx extends SceneController {

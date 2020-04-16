@@ -1,6 +1,8 @@
 package view.controllers;
 
 import java.io.IOException;
+import java.util.Arrays;
+import java.util.stream.Collectors;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -10,10 +12,11 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.ToggleGroup;
 import javafx.util.Callback;
+import view.MiniGame;
 import view.ViewScene;
 
 /** 
- * Controller for the minigame selector and game start scene.
+ * The fx controller for the minigame selector and game start scene.
  * 
  */
 public class MinigameSelectorFx extends SceneController {
