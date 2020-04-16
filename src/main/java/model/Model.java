@@ -1,5 +1,7 @@
 package model;
 
+import view.TrainingArea;
+
 public interface Model {
 	
 	/**
@@ -9,8 +11,8 @@ public interface Model {
 	 */
 	void setUserPlayer(UserPlayer player);
 
-	void setArea(String area);
+	void setArea(TrainingArea area);
 	
-	String getArea();
+	TrainingArea getArea();
 	
 }

@@ -1,6 +1,7 @@
 package controller;
 
 import model.UserPlayer;
+import view.TrainingArea;
 import view.View;
 
 public interface Controller {
@@ -9,7 +10,7 @@ public interface Controller {
 	
 	void initializePlayer(UserPlayer player);
 	
-	void setArea(String area);
+	void setArea(TrainingArea area);
 	
-	String getArea();
+	TrainingArea getArea();
 }

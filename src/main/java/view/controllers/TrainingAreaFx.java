@@ -4,7 +4,11 @@ import java.io.IOException;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.input.MouseEvent;
+import view.TrainingArea;
 import view.ViewScene;
+
+import java.util.Arrays;
+
 
 /**
  * Controller for the Training Area selector.
@@ -17,7 +21,12 @@ public class TrainingAreaFx extends SceneController {
 	
 	@FXML
 	private void areaClicked(MouseEvent event) throws IOException {
-		this.getController().setArea(((Button)event.getSource()).getText());
+		String selectedArea = ((Button)event.getSource()).getText();
+		TrainingArea area = Arrays.asList((TrainingArea.values())).stream()
+																  .filter(e-> e.getName().equals(selectedArea))
+																  .findAny()
+																  .get();
+		this.getController().setArea(area);
 		this.getView().switchScene(ViewScene.GAME_SELECTOR);
 	}
 

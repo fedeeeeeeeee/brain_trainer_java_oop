@@ -3,6 +3,7 @@ package controller;
 import model.Model;
 import model.ModelImpl;
 import model.UserPlayer;
+import view.TrainingArea;
 import view.View;
 import view.ViewScene;
 
@@ -29,14 +30,14 @@ public class ControllerImpl implements Controller {
 
 
 	@Override
-	public void setArea(String area) {
+	public void setArea(TrainingArea area) {
 		this.model.setArea(area);
 		
 	}
 
 
 	@Override
-	public String getArea() {
+	public TrainingArea getArea() {
 		return this.model.getArea();
 	}
 	
