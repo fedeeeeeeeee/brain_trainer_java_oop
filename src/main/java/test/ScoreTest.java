@@ -12,7 +12,7 @@ class ScoreTest {
 	private ScoreModel point;
 	
 	@Test
-    public void testEasyBasicBehaviour() {
+    public void testEasyBasicBehavior() {
         this.point = new ScoreModelImpl(DifficultyLevel.EASY, 5); //(0+5)*2
         this.point.addPoint(); //10
 		this.point.addPoint(); //20
@@ -24,7 +24,7 @@ class ScoreTest {
 	}
 	
 	@Test
-    public void testNormalBasicBehaviour() {
+    public void testNormalBasicBehavior() {
         this.point = new ScoreModelImpl(DifficultyLevel.NORMAL, 10); // (1+10)*2
         this.point.addPoint(); //22
 		this.point.addPoint(); //44
@@ -36,7 +36,7 @@ class ScoreTest {
 	}
 	
 	@Test
-    public void testHardBasicBehaviour() {
+    public void testHardBasicBehavior() {
         this.point = new ScoreModelImpl(DifficultyLevel.HARD, 15); // (2+15)*2
         this.point.addPoint(); //34
 		this.point.addPoint(); //68
@@ -48,7 +48,7 @@ class ScoreTest {
 	}
 	
 	@Test
-	public void testCheckFinishBehaviour() throws IllegalStateException {
+	public void testCheckFinishBehavior() throws IllegalStateException {
 		try {
 			this.point = new ScoreModelImpl(DifficultyLevel.EASY, 5);
 			this.point.addPoint(); //10
@@ -61,7 +61,7 @@ class ScoreTest {
 	}
 	
 	@Test
-	public void testCheckNullBehaviour() throws NullPointerException {
+	public void testCheckNullBehavior() throws NullPointerException {
 		try {
 			this.point = new ScoreModelImpl(null, 5);
 		    fail("Expected an NullPointerException to be thrown");
