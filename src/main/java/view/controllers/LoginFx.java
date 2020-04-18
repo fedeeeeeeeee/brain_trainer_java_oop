@@ -11,6 +11,7 @@ import view.ViewScene;
 import javafx.scene.Parent;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
+import javafx.scene.layout.VBox;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
@@ -24,6 +25,8 @@ import javafx.scene.control.Label;
 // NON DEVE ESTENDERE SCENE CONTROLLER -> SEPARARE I CONCETTI
 public class LoginFx extends SceneController {
 
+	@FXML
+	private VBox box;
 	@FXML
 	private Label errorLbl;
 	
@@ -39,6 +42,14 @@ public class LoginFx extends SceneController {
 	@FXML
 	private Button signUpBtn;
 	
+
+//  @FXML
+//  private void autoresizeImage() {
+////      this.image.fitWidthProperty().bind(box.widthProperty());
+////      this.image.fitHeightProperty().bind(box.heightProperty());
+//      this.box.setVgrow(getRoot(), Priority.ALWAYS);
+//  }
+  
 	private LoginController loginController = new LoginController();
 	
 	private boolean checkEmptyFields() {
@@ -46,18 +57,10 @@ public class LoginFx extends SceneController {
 	}
 	
 	private UserPlayer initPlayer() { 
-		 try {
-			 if(!this.checkEmptyFields()) {
 				UserPlayer player = new UserPlayerImpl();
 				player.setUsername(this.txtPlayer.getText());
 				player.setPassword(this.txtPassword.getText());		
 				return player;
-			 } else {
-				 this.errorLbl.setText("* Fields cannot be empty!");
-			   } 	
-	     } catch (Exception e) {
-	    	 e.printStackTrace();
-	     } return null;
 	}
 	
 	private void switchToMenu() {
@@ -70,6 +73,7 @@ public class LoginFx extends SceneController {
 	
 	@FXML
 	private void loginPlayer() throws IOException {
+		if(!this.checkEmptyFields()) {
 		UserPlayer player = this.initPlayer();
 		if(this.loginController.isLoggedIn(player)) {
 			this.setUserPlayer(player);
@@ -77,10 +81,14 @@ public class LoginFx extends SceneController {
 		} else {
 			this.errorLbl.setText("* Incorrect password or non-existent user!");
 		}
+		 } else {
+	            this.errorLbl.setText(MessageError.EMPTY_FIELD.toString());
+	         } 
 	}
 	
 	@FXML
 	private void signUpPlayer() {
+		 if(!this.checkEmptyFields()) {
 		UserPlayer player = this.initPlayer();
 		if(this.loginController.isRegistered(player)) {
 			this.setUserPlayer(player);
@@ -89,6 +97,26 @@ public class LoginFx extends SceneController {
 			Alert alert = new Alert(AlertType.ERROR, "Username already exists!", ButtonType.OK);
 			alert.showAndWait();
 		}
-	}
+		 } else {
+	            this.errorLbl.setText(MessageError.EMPTY_FIELD.toString());    
+	        } 
+	    }
 
+	// MEGLIO DELLE COSTANTI O VA BENE LA ENUM ???
+	private enum MessageError {
+        EMPTY_FIELD("Fields cannot be empty!"),
+        EXISTING_USERNAME("Username already exists!"),
+        INCORRECT_ENTRY("Incorrect password or non-existent user!");
+                
+        private String message;
+        
+        private MessageError(String message) {
+            this.message = message;
+        }
+        
+        public String toString() {
+            return "*" + this.message;
+        }
+            
+    }
 }
