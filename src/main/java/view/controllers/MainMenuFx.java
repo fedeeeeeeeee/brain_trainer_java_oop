@@ -19,6 +19,9 @@ public class MainMenuFx extends SceneController {
 		private Button statisticsBtn;
 		
 		@FXML
+		private Button howToPlayBtn;
+		
+		@FXML
 		private void startTraining() throws IOException {
 			this.getView().switchScene(ViewScene.TRAINING_AREA);
 		}
@@ -27,5 +30,10 @@ public class MainMenuFx extends SceneController {
 		@FXML
 		private void showStatistics() throws IOException {
 			this.getView().switchScene(ViewScene.STATISTICS);
+		}
+		
+		@FXML
+		private void showInfo() throws IOException {
+			this.getView().switchScene(ViewScene.HOW_TO_PLAY);
 		}
 }

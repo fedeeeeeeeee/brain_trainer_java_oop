@@ -15,9 +15,9 @@ public enum ViewScene {
 	
 	STATISTICS("Statistics"),
 	
-	GAME_SELECTOR("MiniGameSelector");
+	GAME_SELECTOR("MiniGameSelector"),
 	
-	//HOW_TO_PLAY("");
+	HOW_TO_PLAY("HowToPlay");
 	
 	private static final String PATH = "/layouts/";
 	private static final String PATH_END = ".fxml";

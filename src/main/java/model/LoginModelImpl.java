@@ -48,7 +48,7 @@ public class LoginModelImpl implements LoginModel {
             try {
                 brainTrainer.mkdir();
             } catch (SecurityException se) {
-                System.out.println("Error. While create directory");
+                System.out.println("Error in creating directory");
             }
         }
 	}

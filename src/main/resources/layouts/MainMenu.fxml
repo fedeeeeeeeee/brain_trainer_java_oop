@@ -18,22 +18,32 @@
           <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
         </columnConstraints>
           <rowConstraints>
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
           <RowConstraints vgrow="SOMETIMES" />
           <RowConstraints valignment="CENTER" vgrow="SOMETIMES" />
           <RowConstraints vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <Button fx:id="statisticsBtn" alignment="CENTER" mnemonicParsing="false" onMouseClicked="#showStatistics" prefHeight="70.0" prefWidth="220.0" text="Statistics" GridPane.halignment="CENTER" GridPane.rowIndex="1">
+            <Button fx:id="statisticsBtn" alignment="CENTER" mnemonicParsing="false" onMouseClicked="#showStatistics" prefHeight="70.0" prefWidth="220.0" text="Statistics" GridPane.halignment="CENTER" GridPane.rowIndex="2">
                <font>
                   <Font size="20.0" />
                </font>
         </Button>
-            <Button fx:id="trainingBtn" alignment="CENTER" mnemonicParsing="false" onMouseClicked="#startTraining" prefHeight="70.0" prefWidth="220.0" text="Daily Training" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+            <Button fx:id="trainingBtn" alignment="CENTER" mnemonicParsing="false" onMouseClicked="#startTraining" prefHeight="70.0" prefWidth="220.0" text="Daily Training" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
                     <font>
                   <Font size="20.0" />
                </font>
          </Button>
+         <Button fx:id="howToPlayBtn" alignment="CENTER" mnemonicParsing="false" onMouseClicked="#showInfo" prefHeight="70.0" prefWidth="220.0" text="How To Play" GridPane.halignment="CENTER" GridPane.rowIndex="3">
+               <font>
+                  <Font size="20.0" />
+               </font>
+        </Button>
          </children>
+         <VBox.margin>
+            <Insets />
+         </VBox.margin>
       </GridPane>
    </children>
 </VBox>
