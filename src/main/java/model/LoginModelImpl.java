@@ -9,41 +9,42 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 
 /**
- * The implementation of the {@link LoginModel} interface
+ * The implementation of the {@link LoginModel} interface.
  * 
  */
 public class LoginModelImpl implements LoginModel {
-	
-	private static final String PATH = System.getProperty("user.home") + File.separator + ".brainTrainer";
-	private static final File brainTrainer = new File(PATH);
-	private File userFile;
-	
-	
-	private boolean checkIfUserExist(UserPlayer player, String userFileName) {		
-		 for(File file : brainTrainer.listFiles()) {
-			 if(userFileName.equals(file.getName())) {
-				 this.userFile = file;
-				 return true;
-			 }
-		 } return false;
-	}
-	
-	private boolean checkPassword(UserPlayer player) {
-		ObjectMapper mapper = new ObjectMapper();	 
-		try {
-			if(mapper.readValue(userFile,UserPlayerImpl.class ).getPassword().equals(player.getPassword())) {
-				 return true;
-			 }
-		} catch (JsonParseException e) {
-			e.printStackTrace();
-		} catch (JsonMappingException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
-		} return false;
-	}
-	
-	private void initializeDirectory() {
+
+    private static final String PATH = System.getProperty("user.home") + File.separator + ".brainTrainer";
+    private final File brainTrainer = new File(PATH);
+    private File userFile;
+
+    private boolean checkIfUserExist(final UserPlayer player, final String userFileName) {
+        for (File file : brainTrainer.listFiles()) {
+            if (userFileName.equals(file.getName())) {
+                this.userFile = file;
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private boolean checkPassword(final UserPlayer player) {
+        ObjectMapper mapper = new ObjectMapper();
+        try {
+            if (mapper.readValue(userFile, UserPlayerImpl.class).getPassword().equals(player.getPassword())) {
+                return true;
+            }
+        } catch (JsonParseException e) {
+            e.printStackTrace();
+        } catch (JsonMappingException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
+    private void initializeDirectory() {
         if (!brainTrainer.exists()) {
             try {
                 brainTrainer.mkdir();
@@ -51,33 +52,35 @@ public class LoginModelImpl implements LoginModel {
                 System.out.println("Error in creating directory");
             }
         }
-	}
-	
-	@Override
-	public boolean loginUser(UserPlayer player) {
-		 String userFileName = player.getUsername()+ ".txt"; 
-		 if(this.checkIfUserExist(player, userFileName)) {
-			 return this.checkPassword(player);
-		 } return false;
-	}
-	
-	@Override
-	public boolean registerPlayer(UserPlayer player) {
-		ObjectMapper mapper = new ObjectMapper();
-		mapper.configure(SerializationFeature.INDENT_OUTPUT, true);
-		this.initializeDirectory();
-		
-        String userFileName = player.getUsername()+ ".txt";
-        if(this.checkIfUserExist(player, userFileName)) {
-        	return false;
+    }
+
+    @Override
+    public boolean loginUser(final UserPlayer player) {
+        String userFileName = player.getUsername() + ".txt";
+        if (this.checkIfUserExist(player, userFileName)) {
+            return this.checkPassword(player);
+        }
+        return false;
+    }
+
+    @Override
+    public boolean registerPlayer(final UserPlayer player) {
+        ObjectMapper mapper = new ObjectMapper();
+        mapper.configure(SerializationFeature.INDENT_OUTPUT, true);
+        this.initializeDirectory();
+
+        String userFileName = player.getUsername() + ".txt";
+        if (this.checkIfUserExist(player, userFileName)) {
+            return false;
         } else {
-        	 this.userFile = new File(PATH + File.separator + userFileName);    	
-			 try {
-				 mapper.writeValue(userFile, player);
-			 } catch (IOException e) {
-				 e.printStackTrace();
-			 } return true;
-        }		
-	}
+            this.userFile = new File(PATH + File.separator + userFileName);
+            try {
+                mapper.writeValue(userFile, player);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            return true;
+        }
+    }
 
 }

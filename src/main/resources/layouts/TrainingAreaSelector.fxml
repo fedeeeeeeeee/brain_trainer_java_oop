@@ -12,62 +12,88 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="580.0" prefWidth="500.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.controllers.TrainingAreaFx">
-   <children>
-      <GridPane prefHeight="520.0" prefWidth="500.0" VBox.vgrow="ALWAYS">
-      <columnConstraints>
-          <ColumnConstraints hgrow="SOMETIMES" />
-        </columnConstraints>
-          <rowConstraints>
-          <RowConstraints vgrow="SOMETIMES" />
-          <RowConstraints valignment="CENTER" vgrow="SOMETIMES" />
-          <RowConstraints vgrow="SOMETIMES" />
-          <RowConstraints valignment="CENTER" vgrow="SOMETIMES" />
-          <RowConstraints maxHeight="140.0" minHeight="35.0" prefHeight="40.0" vgrow="SOMETIMES" />
-        </rowConstraints>
-         <children>
-            <Button id="area" fx:id="memoryBtn" alignment="CENTER" mnemonicParsing="false" onMouseClicked="#areaClicked" prefWidth="150.0" text="Memory" GridPane.halignment="CENTER">
-               <font>
-                  <Font size="20.0" />
-               </font>
-        </Button>
-            <Button id="aree" fx:id="visualSkillBtn" alignment="CENTER" mnemonicParsing="false" onMouseClicked="#areaClicked" prefWidth="150.0" text="Visual Skill" GridPane.halignment="CENTER" GridPane.rowIndex="2">
-                   <font>
-                  <Font size="20.0" />
-               </font>
-         </Button>
-          <Button id="area" fx:id="attentionBtn" alignment="CENTER" mnemonicParsing="false" onMouseClicked="#areaClicked" prefWidth="150.0" text="Attention" GridPane.halignment="CENTER" GridPane.rowIndex="1">
-                   <font>
-                  <Font size="20.0" />
-               </font>
-            </Button>
-              <Button id="brainSpeedBtn" fx:id="brainSpeedBtn" alignment="CENTER" mnemonicParsing="false" onMouseClicked="#areaClicked" prefWidth="150.0" text="Brain Speed" GridPane.halignment="CENTER" GridPane.rowIndex="3">
-                     <font>
-                  <Font size="20.0" />
-               </font></Button>
-                          <Button id="reasoningBtn" fx:id="reasoningBtn" layoutX="95.0" layoutY="243.0" mnemonicParsing="false" onMouseClicked="#areaClicked" prefWidth="150.0" text="Reasoning" GridPane.halignment="CENTER" GridPane.rowIndex="4">
-                   <font>
-                  <Font size="20.0" />
-               </font></Button>
-         </children>
-      </GridPane>
-      <GridPane prefHeight="110.0">
-        <columnConstraints>
-          <ColumnConstraints hgrow="SOMETIMES" />
-        </columnConstraints>
-        <rowConstraints>
-          <RowConstraints vgrow="SOMETIMES" />
-        </rowConstraints>
-         <children>
-            <Button fx:id="backBtn" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onMouseClicked="#goBack" prefHeight="35.0" prefWidth="65.0" text="Back" GridPane.halignment="LEFT" GridPane.valignment="BOTTOM">
-                  <font>
-                  <Font size="18.0" />
-               </font>
-               
-               <GridPane.margin>
-                  <Insets bottom="20.0" left="30.0" />
-               </GridPane.margin></Button>
-         </children>
-      </GridPane>
-   </children>
+<VBox maxHeight="-Infinity" maxWidth="-Infinity"
+	minHeight="-Infinity" minWidth="-Infinity" prefHeight="580.0"
+	prefWidth="500.0" xmlns="http://javafx.com/javafx/8"
+	xmlns:fx="http://javafx.com/fxml/1"
+	fx:controller="view.controllers.TrainingAreaFx">
+	<children>
+		<GridPane prefHeight="520.0" prefWidth="500.0"
+			VBox.vgrow="ALWAYS">
+			<columnConstraints>
+				<ColumnConstraints hgrow="SOMETIMES" />
+			</columnConstraints>
+			<rowConstraints>
+				<RowConstraints vgrow="SOMETIMES" />
+				<RowConstraints valignment="CENTER" vgrow="SOMETIMES" />
+				<RowConstraints vgrow="SOMETIMES" />
+				<RowConstraints valignment="CENTER" vgrow="SOMETIMES" />
+				<RowConstraints maxHeight="140.0" minHeight="35.0"
+					prefHeight="40.0" vgrow="SOMETIMES" />
+			</rowConstraints>
+			<children>
+				<Button id="area" fx:id="memoryBtn" alignment="CENTER"
+					mnemonicParsing="false" onMouseClicked="#areaClicked"
+					prefWidth="150.0" text="Memory" GridPane.halignment="CENTER">
+					<font>
+						<Font size="20.0" />
+					</font>
+				</Button>
+				<Button id="aree" fx:id="visualSkillBtn" alignment="CENTER"
+					mnemonicParsing="false" onMouseClicked="#areaClicked"
+					prefWidth="150.0" text="Visual Skill" GridPane.halignment="CENTER"
+					GridPane.rowIndex="2">
+					<font>
+						<Font size="20.0" />
+					</font>
+				</Button>
+				<Button id="area" fx:id="attentionBtn" alignment="CENTER"
+					mnemonicParsing="false" onMouseClicked="#areaClicked"
+					prefWidth="150.0" text="Attention" GridPane.halignment="CENTER"
+					GridPane.rowIndex="1">
+					<font>
+						<Font size="20.0" />
+					</font>
+				</Button>
+				<Button id="brainSpeedBtn" fx:id="brainSpeedBtn"
+					alignment="CENTER" mnemonicParsing="false"
+					onMouseClicked="#areaClicked" prefWidth="150.0" text="Brain Speed"
+					GridPane.halignment="CENTER" GridPane.rowIndex="3">
+					<font>
+						<Font size="20.0" />
+					</font>
+				</Button>
+				<Button id="reasoningBtn" fx:id="reasoningBtn" layoutX="95.0"
+					layoutY="243.0" mnemonicParsing="false"
+					onMouseClicked="#areaClicked" prefWidth="150.0" text="Reasoning"
+					GridPane.halignment="CENTER" GridPane.rowIndex="4">
+					<font>
+						<Font size="20.0" />
+					</font>
+				</Button>
+			</children>
+		</GridPane>
+		<GridPane prefHeight="110.0">
+			<columnConstraints>
+				<ColumnConstraints hgrow="SOMETIMES" />
+			</columnConstraints>
+			<rowConstraints>
+				<RowConstraints vgrow="SOMETIMES" />
+			</rowConstraints>
+			<children>
+				<Button fx:id="backBtn" alignment="CENTER"
+					contentDisplay="CENTER" mnemonicParsing="false"
+					onMouseClicked="#goBack" prefHeight="35.0" prefWidth="65.0"
+					text="Back" GridPane.halignment="LEFT" GridPane.valignment="BOTTOM">
+					<font>
+						<Font size="18.0" />
+					</font>
+
+					<GridPane.margin>
+						<Insets bottom="20.0" left="30.0" />
+					</GridPane.margin>
+				</Button>
+			</children>
+		</GridPane>
+	</children>
 </VBox>

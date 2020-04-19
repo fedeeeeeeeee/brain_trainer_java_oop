@@ -9,13 +9,16 @@ import view.ViewImpl;
  */
 public final class Main {
 
+    private Main() {
+
+    }
+
     /**
      * 
-     * @param args unused
+     * @param args unused.
      */
     public static void main(final String[] args) {
-    	 Application.launch(ViewImpl.class);
+        Application.launch(ViewImpl.class);
     }
 
 }
-

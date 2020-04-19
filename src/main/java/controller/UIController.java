@@ -23,9 +23,8 @@ public final class UIController {
      */
     @FXML
     public void btnOnClickHandler() {
-        final ImmutableList<String> elements = ImmutableList.of(
-            "Hello, JavaFX version ", System.getProperty("javafx.version"),
-            " is running on Java ", System.getProperty("java.version"));
+        final ImmutableList<String> elements = ImmutableList.of("Hello, JavaFX version ",
+                System.getProperty("javafx.version"), " is running on Java ", System.getProperty("java.version"));
         lbl.setText(elements.stream().collect(Collectors.joining("")));
     }
 }
