@@ -1,10 +1,10 @@
+
 package test;
 
 import org.junit.jupiter.api.Test;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import model.ScoreManagement;
 import model.ScoreManagementImpl;
@@ -36,13 +36,13 @@ public class ScoreManagementTest {
         this.scoreManagement.updateScore(31);
         assertEquals(25, this.scoreManagement.getAverage());
         assertEquals(42, this.scoreManagement.getBest());
-        Map<String, List<Integer>> miniGameHistory = new HashMap<>();
-        Date date = new Date();
-        DateFormat dateFormat = DateFormat.getDateInstance(DateFormat.SHORT, Locale.ITALY);
-        String s = dateFormat.format(date);
+        final Map<String, List<Integer>> miniGameHistory = new HashMap<>();
+        final Date date = new Date();
+        final DateFormat dateFormat = DateFormat.getDateInstance(DateFormat.SHORT, Locale.ITALY);
+        final String s = dateFormat.format(date);
         miniGameHistory.put(s, Arrays.asList(24, 42, 23, 31));
         assertTrue(this.scoreManagement.getMiniGameHistory().get(s).containsAll(miniGameHistory.get(s)));
-        System.out.println(s);
-        System.out.println(this.scoreManagement.getMiniGameHistory());
+//        System.out.println(s);
+//        System.out.println(this.scoreManagement.getMiniGameHistory());
     }
 }

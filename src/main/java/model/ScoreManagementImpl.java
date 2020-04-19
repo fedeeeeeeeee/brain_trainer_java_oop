@@ -1,3 +1,4 @@
+
 package model;
 
 import java.text.DateFormat;
@@ -41,11 +42,11 @@ public class ScoreManagementImpl implements ScoreManagement {
     }
 
     private void updateAverage(final int score) {
-        this.average = (this.average == 0) ? score : (int) (((1 - ALPHA) * this.average) + (ALPHA * score));
+        this.average = this.average == 0 ? score : (int) ((1 - ALPHA) * this.average + ALPHA * score);
     }
 
     private void addScore(final int score) {
-        String date = this.createDate();
+        final String date = this.createDate();
 
         if (!this.miniGameHistory.containsKey(date)) {
             this.miniGameHistory.put(date, new LinkedList<>());

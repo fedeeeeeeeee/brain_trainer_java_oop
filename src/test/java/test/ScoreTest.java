@@ -1,11 +1,14 @@
+
 package test;
 
 import model.DifficultyLevel;
 import model.score.ScoreModel;
 import model.score.ScoreModelImpl;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.fail;
+
 import org.junit.jupiter.api.Test;
-import static org.junit.Assert.*;
 
 class ScoreTest {
 	
@@ -57,14 +60,6 @@ class ScoreTest {
 			this.point.addPoint(); //IllegalStateException
 			assertEquals(20, this.point.getScore());
 		    fail("Expected an IllegalStateException to be thrown");
-		  } catch (IllegalStateException illegalStateException) { }
-	}
-	
-	@Test
-	public void testCheckNullBehavior() throws NullPointerException {
-		try {
-			this.point = new ScoreModelImpl(null, 5);
-		    fail("Expected an NullPointerException to be thrown");
-		  } catch (NullPointerException NullPointerException) { }
+		} catch (IllegalStateException illegalStateException) { }
 	}
 }

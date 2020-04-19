@@ -1,29 +1,36 @@
+
 package timer;
 
-import view.controllers.MiniGameController;
+import minigames.MiniGameController;
 
+/**
+ * 
+ * This class implements {@link GameTimer}.
+ *
+ */
 public class GameTimerImpl implements GameTimer {
 
-	private int seconds;
-	private MiniGameController miniGameController;
-	
-	public GameTimerImpl(final int seconds, final MiniGameController miniGameController) {
-		this.seconds = seconds;
-		this.miniGameController = miniGameController;
-	}
+    private int seconds;
+    private MiniGameController miniGameController;
 
+    /**
+     * Constructor of GameTimerImpl.
+     * 
+     * @param seconds
+     * @param miniGameController
+     */
+    public GameTimerImpl(final int seconds, final MiniGameController miniGameController) {
+        this.seconds = seconds;
+        this.miniGameController = miniGameController;
+    }
 
-	private void  notifyChange (final EventTimer eventTimer) {
-		this.miniGameController.updateTimerView(eventTimer);
-	}
+    private void notifyChange(final EventTimer eventTimer) {
+        this.miniGameController.updateTimerView(eventTimer);
+    }
 
-	@Override
-	public void decrement() {
-		this.seconds = this.seconds - 1;
-		this.notifyChange(new EventTimerImpl(this.seconds));
-		
-	}
-	
-	
-
+    @Override
+    public final void decrement() {
+        this.seconds = this.seconds - 1;
+        this.notifyChange(new EventTimerImpl(this.seconds));
+    }
 }
