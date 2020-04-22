@@ -77,7 +77,7 @@ public class LoginFx extends SceneController {
 				this.setUserPlayer(player);
 				this.switchToMenu();
 			} else {
-				this.errorLbl.setText("* Incorrect password or non-existent user!");
+				this.errorLbl.setText(MessageError.INCORRECT_ENTRY.toString());
 			}
 		} else {
 			this.errorLbl.setText(MessageError.EMPTY_FIELD.toString());
@@ -92,7 +92,7 @@ public class LoginFx extends SceneController {
 				this.setUserPlayer(player);
 				this.switchToMenu();
 			} else {
-				final Alert alert = new Alert(AlertType.ERROR, "Username already exists!", ButtonType.OK);
+				final Alert alert = new Alert(AlertType.ERROR, MessageError.EXISTING_USERNAME.toString(), ButtonType.OK);
 				alert.showAndWait();
 			}
 		} else {

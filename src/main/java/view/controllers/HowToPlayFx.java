@@ -23,35 +23,30 @@ public class HowToPlayFx extends SceneController {
 
 	@FXML
 	private void showGameInfo() throws IOException { //NOPMD
-		infoTxt.clear();
-		try {
-			final Scanner s = new Scanner(new File("src/main/resources/info/MiniGameInfo.txt")); //NOPMD
-			
-			while (s.hasNext()) {
-				infoTxt.appendText(s.nextLine() + "\n");
-			}
-			s.close();
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
-		}
+		this.scanner("MiniGameInfo");
 	}
 
 	@FXML
 	private void showIntroduction() throws IOException { //NOPMD
-		infoTxt.clear();
-		try {
-			final Scanner s = new Scanner(new File("src/main/resources/info/Introduction.txt")); //NOPMD
-			while (s.hasNext()) {
-				infoTxt.appendText(s.nextLine() + "\n");
-			}
-			s.close();
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
-		}
+		this.scanner("Introduction");
 	}
 
 	@FXML
 	private void goBack() throws IOException { //NOPMD
 		this.getView().switchScene(ViewScene.MAIN_MENU);
+	}
+	
+	private void scanner(String fileTxt) {
+		infoTxt.clear();
+		String filePath = "src/main/resources/info/" + fileTxt + ".txt";
+		try {
+			final Scanner s = new Scanner(new File(filePath)); //NOPMD
+			while (s.hasNext()) {
+				infoTxt.appendText(s.nextLine() + "\n");
+			}
+			s.close();
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		}
 	}
 }
