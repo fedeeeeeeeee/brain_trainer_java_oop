@@ -12,9 +12,8 @@ import view.ViewScene;
  * 
  */
 public class ControllerImpl implements Controller {
-
-    private View view;
-    private Model model;
+   
+	private final Model model;
 
     public ControllerImpl() {
         this.model = new ModelImpl();
@@ -22,8 +21,8 @@ public class ControllerImpl implements Controller {
 
     @Override
     public void initializeView(final View view) {
-        this.view = view;
-        this.view.switchScene(ViewScene.LOGIN);
+        final View v = view;
+        v.switchScene(ViewScene.LOGIN);
     }
 
     @Override

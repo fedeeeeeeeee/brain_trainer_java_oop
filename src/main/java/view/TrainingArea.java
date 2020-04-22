@@ -2,48 +2,48 @@ package view;
 
 public enum TrainingArea {
 
-    /**
-     * Attention training area.
-     * 
-     */
-    ATTENTION("Attention"),
+	/**
+	 * Attention training area.
+	 * 
+	 */
+	ATTENTION("Attention"),
 
-    /**
-     * Brain speed training area.
-     * 
-     */
-    BRAIN_SPEED("Brain Speed"),
+	/**
+	 * Brain speed training area.
+	 * 
+	 */
+	BRAIN_SPEED("Brain Speed"),
 
-    /**
-     * Memory training area.
-     * 
-     */
-    MEMORY("Memory"),
+	/**
+	 * Memory training area.
+	 * 
+	 */
+	MEMORY("Memory"),
 
-    /**
-     * Reasoning training area.
-     * 
-     */
-    REASONING("Reasoning"),
+	/**
+	 * Reasoning training area.
+	 * 
+	 */
+	REASONING("Reasoning"),
 
-    /**
-     * Visual skill training area.
-     * 
-     */
-    VISUAL_SKILL("Visual Skill");
+	/**
+	 * Visual skill training area.
+	 * 
+	 */
+	VISUAL_SKILL("Visual Skill");
 
-    private String name;
+	private String name;
 
-    private TrainingArea(final String name) {
-        this.name = name;
-    }
+	TrainingArea(final String name) {
+		this.name = name;
+	}
 
-    /**
-     * 
-     * @return the name of the area
-     */
-    public String getName() {
-        return this.name;
-    }
+	/**
+	 * 
+	 * @return the name of the area
+	 */
+	public String getName() {
+		return this.name;
+	}
 
 }

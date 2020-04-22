@@ -2,12 +2,9 @@ package view.controllers;
 
 import java.util.List;
 import java.util.ArrayList;
-import java.util.stream.Collectors;
-import java.util.Arrays;
 
 import controller.Controller;
 import javafx.scene.Parent;
-import view.MiniGame;
 import view.View;
 
 
@@ -15,7 +12,7 @@ import view.View;
  *  Represent the generic Class for the JavaFx Scene controller. 
  *
  */
-public abstract class SceneController {
+public abstract class SceneController { //NOPMD
 	
 	private View view;
 	private Controller controller;
@@ -37,7 +34,7 @@ public abstract class SceneController {
 	 * @param view 
 	 * 				The view component
 	 */
-	public void setView(View view) {
+	public void setView(final View view) {
 		this.view = view;
 	}
 	
@@ -56,7 +53,7 @@ public abstract class SceneController {
 	 * @param controller 
 	 * 					
 	 */
-	public void setController(Controller controller) {
+	public void setController(final Controller controller) {
 		this.controller = controller;
 	}
 	
@@ -75,7 +72,7 @@ public abstract class SceneController {
      * @param root
      *            Set the Parent Root.
      */
-	public void setRoot(Parent root) {
+	public void setRoot(final Parent root) {
 		this.root = root;
 	}   
 	   

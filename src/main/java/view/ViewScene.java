@@ -6,52 +6,52 @@ package view;
  */
 public enum ViewScene {
 
-    /**
-     * The login and sign up scene.
-     * 
-     */
-    LOGIN("Login"),
+	/**
+	 * The login and sign up scene.
+	 * 
+	 */
+	LOGIN("Login"),
 
-    /**
-     * The main menu scene.
-     * 
-     */
-    MAIN_MENU("MainMenu"),
+	/**
+	 * The main menu scene.
+	 * 
+	 */
+	MAIN_MENU("MainMenu"),
 
-    /**
-     * The scene to select the training area.
-     * 
-     */
-    TRAINING_AREA("TrainingAreaSelector"),
+	/**
+	 * The scene to select the training area.
+	 * 
+	 */
+	TRAINING_AREA("TrainingAreaSelector"),
 
-    /**
-     * 
-     * 
-     */
-    STATISTICS("Statistics"),
+	/**
+	 * 
+	 * 
+	 */
+	STATISTICS("Statistics"),
 
-    /**
-     * The scene to select the minigame.
-     * 
-     */
-    GAME_SELECTOR("MiniGameSelector"),
+	/**
+	 * The scene to select the minigame.
+	 * 
+	 */
+	GAME_SELECTOR("MiniGameSelector"),
 
-    /**
-     * The scene to learn how to play.
-     * 
-     */
-    HOW_TO_PLAY("HowToPlay");
+	/**
+	 * The scene to learn how to play.
+	 * 
+	 */
+	HOW_TO_PLAY("HowToPlay");
 
-    private static final String PATH = "/layouts/";
-    private static final String PATH_END = ".fxml";
-    private String fileName;
+	private static final String PATH = "/layouts/";
+	private static final String PATH_END = ".fxml";
+	private String fileName;
 
-    private ViewScene(final String fileName) {
-        this.fileName = fileName;
-    }
+	ViewScene(final String fileName) {
+		this.fileName = fileName;
+	}
 
-    public String getFilePath() {
-        return PATH + fileName + PATH_END;
-    }
+	public String getFilePath() {
+		return PATH + fileName + PATH_END;
+	}
 
 }

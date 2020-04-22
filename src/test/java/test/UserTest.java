@@ -8,14 +8,13 @@ import model.UserPlayerImpl;
 
 public class UserTest {
 
-    private User player;
-
     @Test
     public void testUser() {
-        this.player = new UserPlayerImpl();
-        this.player.setUsername("user");
-        this.player.setPassword("pass");
-        assertEquals("user", this.player.getUsername());
-        assertEquals("pass", this.player.getPassword());
+    	
+    	User player = new UserPlayerImpl();
+    	player.setUsername("user");
+        player.setPassword("pass");
+        assertEquals("user", player.getUsername());
+        assertEquals("pass", player.getPassword());
     }
 }

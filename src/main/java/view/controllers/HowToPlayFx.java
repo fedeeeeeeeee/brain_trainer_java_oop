@@ -10,8 +10,8 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
 import view.ViewScene;
 
-public class HowToPlayFx extends SceneController{
-	
+public class HowToPlayFx extends SceneController {
+
 	@FXML
 	private Button backBtn;
 	@FXML
@@ -20,36 +20,38 @@ public class HowToPlayFx extends SceneController{
 	private TextArea infoTxt;
 	@FXML
 	private Button brnTrnInfoBtn;
-	
+
 	@FXML
-	private void showGameInfo() throws IOException {
+	private void showGameInfo() throws IOException { //NOPMD
 		infoTxt.clear();
-		     try {
-		        Scanner s = new Scanner(new File("src/main/resources/info/MiniGameInfo.txt"));
-		        while (s.hasNext()) {
-		        	infoTxt.appendText(s.nextLine()+"\n");
-		        }
-		    } catch (FileNotFoundException e) {
-		    	 e.printStackTrace();
-		    }
+		try {
+			final Scanner s = new Scanner(new File("src/main/resources/info/MiniGameInfo.txt")); //NOPMD
+			
+			while (s.hasNext()) {
+				infoTxt.appendText(s.nextLine() + "\n");
+			}
+			s.close();
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		}
 	}
-	
+
 	@FXML
-	private void showIntroduction() throws IOException {
+	private void showIntroduction() throws IOException { //NOPMD
 		infoTxt.clear();
-		     try {
-		        Scanner s = new Scanner(new File("src/main/resources/info/Introduction.txt"));
-		        while (s.hasNext()) {
-		        	infoTxt.appendText(s.nextLine()+"\n");
-		        }
-		    } catch (FileNotFoundException e) {
-		    	 e.printStackTrace();
-		    }
+		try {
+			final Scanner s = new Scanner(new File("src/main/resources/info/Introduction.txt")); //NOPMD
+			while (s.hasNext()) {
+				infoTxt.appendText(s.nextLine() + "\n");
+			}
+			s.close();
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		}
 	}
+
 	@FXML
-	private void goBack() throws IOException {
+	private void goBack() throws IOException { //NOPMD
 		this.getView().switchScene(ViewScene.MAIN_MENU);
-	}	
+	}
 }
-/*
- */

@@ -8,7 +8,6 @@ import javafx.scene.control.TextField;
 import model.UserPlayer;
 import model.UserPlayerImpl;
 import view.ViewScene;
-import javafx.scene.Parent;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.layout.VBox;
@@ -29,19 +28,18 @@ public class LoginFx extends SceneController {
 	private VBox box;
 	@FXML
 	private Label errorLbl;
-	
+
 	@FXML
 	private TextField txtPlayer;
-	
+
 	@FXML
 	private TextField txtPassword;
 
 	@FXML
 	private Button loginBtn;
-	
+
 	@FXML
 	private Button signUpBtn;
-	
 
 //  @FXML
 //  private void autoresizeImage() {
@@ -49,74 +47,74 @@ public class LoginFx extends SceneController {
 ////      this.image.fitHeightProperty().bind(box.heightProperty());
 //      this.box.setVgrow(getRoot(), Priority.ALWAYS);
 //  }
-  
-	private LoginController loginController = new LoginController();
-	
+
+	private final LoginController loginController = new LoginController();
+
 	private boolean checkEmptyFields() {
 		return this.txtPassword.getText().isBlank() || this.txtPlayer.getText().isBlank();
 	}
-	
-	private UserPlayer initPlayer() { 
-				UserPlayer player = new UserPlayerImpl();
-				player.setUsername(this.txtPlayer.getText());
-				player.setPassword(this.txtPassword.getText());		
-				return player;
+
+	private UserPlayer initPlayer() {
+		final UserPlayer player = new UserPlayerImpl();
+		player.setUsername(this.txtPlayer.getText());
+		player.setPassword(this.txtPassword.getText());
+		return player;
 	}
-	
+
 	private void switchToMenu() {
 		this.getView().switchScene(ViewScene.MAIN_MENU);
 	}
-	
-	private void setUserPlayer(UserPlayer player) {
+
+	private void setUserPlayer(final UserPlayer player) {
 		this.getController().initializePlayer(player);
 	}
-	
-	@FXML
-	private void loginPlayer() throws IOException {
-		if(!this.checkEmptyFields()) {
-		UserPlayer player = this.initPlayer();
-		if(this.loginController.isLoggedIn(player)) {
-			this.setUserPlayer(player);
-			this.switchToMenu();
-		} else {
-			this.errorLbl.setText("* Incorrect password or non-existent user!");
-		}
-		 } else {
-	            this.errorLbl.setText(MessageError.EMPTY_FIELD.toString());
-	         } 
-	}
-	
-	@FXML
-	private void signUpPlayer() {
-		 if(!this.checkEmptyFields()) {
-		UserPlayer player = this.initPlayer();
-		if(this.loginController.isRegistered(player)) {
-			this.setUserPlayer(player);
-			this.switchToMenu();
-		} else {
-			Alert alert = new Alert(AlertType.ERROR, "Username already exists!", ButtonType.OK);
-			alert.showAndWait();
-		}
-		 } else {
-	            this.errorLbl.setText(MessageError.EMPTY_FIELD.toString());    
-	        } 
-	    }
 
-	// MEGLIO DELLE COSTANTI O VA BENE LA ENUM ???
+	@FXML
+	private void loginPlayer() throws IOException { //NOPMD
+		if (!this.checkEmptyFields()) {
+			final UserPlayer player = this.initPlayer();
+			if (this.loginController.isLoggedIn(player)) {
+				this.setUserPlayer(player);
+				this.switchToMenu();
+			} else {
+				this.errorLbl.setText("* Incorrect password or non-existent user!");
+			}
+		} else {
+			this.errorLbl.setText(MessageError.EMPTY_FIELD.toString());
+		}
+	}
+
+	@FXML
+	private void signUpPlayer() { //NOPMD
+		if (!this.checkEmptyFields()) {
+			final UserPlayer player = this.initPlayer();
+			if (this.loginController.isRegistered(player)) {
+				this.setUserPlayer(player);
+				this.switchToMenu();
+			} else {
+				final Alert alert = new Alert(AlertType.ERROR, "Username already exists!", ButtonType.OK);
+				alert.showAndWait();
+			}
+		} else {
+			this.errorLbl.setText(MessageError.EMPTY_FIELD.toString());
+		}
+	}
+
 	private enum MessageError {
-        EMPTY_FIELD("Fields cannot be empty!"),
-        EXISTING_USERNAME("Username already exists!"),
-        INCORRECT_ENTRY("Incorrect password or non-existent user!");
-                
-        private String message;
-        
-        private MessageError(String message) {
-            this.message = message;
-        }
-        
-        public String toString() {
-            return "*" + this.message;
-        }
-            
-    }
+		EMPTY_FIELD("Fields cannot be empty!"), 
+		EXISTING_USERNAME("Username already exists!"),
+		INCORRECT_ENTRY("Incorrect password or non-existent user!");
+
+		private String message;
+
+		MessageError(final String message) {
+			this.message = message;
+		}
+
+		@Override
+		public String toString() {
+			return "*" + this.message;
+		}
+
+	}
 }

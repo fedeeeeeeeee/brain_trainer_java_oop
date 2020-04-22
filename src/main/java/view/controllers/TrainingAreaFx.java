@@ -8,9 +8,7 @@ import view.MiniGame;
 import view.TrainingArea;
 import view.ViewScene;
 
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 import java.util.stream.Collectors;
 
 
@@ -25,9 +23,9 @@ public class TrainingAreaFx extends SceneController {
 	
 	
 	@FXML
-	private void areaClicked(MouseEvent event) throws IOException {
-		String selectedArea = ((Button)event.getSource()).getText();
-		TrainingArea area = Arrays.asList((TrainingArea.values())).stream()
+	private void areaClicked(MouseEvent event) throws IOException { //NOPMD
+		final String selectedArea = ((Button)event.getSource()).getText();
+		final TrainingArea area = Arrays.asList(TrainingArea.values()).stream()
 																  .filter(e-> e.getName().equals(selectedArea))
 																  .findAny()
 																  .get();
@@ -38,11 +36,11 @@ public class TrainingAreaFx extends SceneController {
 
 	
 	@FXML
-	private void goBack() throws IOException {
+	private void goBack() throws IOException { //NOPMD
 		this.getView().switchScene(ViewScene.MAIN_MENU);
 	}
 	
-	private void populateList(String selectedArea) {
+	private void populateList(final String selectedArea) {
 	     this.getGameList().clear();
 	     this.getGameList().addAll(Arrays.asList(MiniGame.values()).stream()
 							                              .filter(e-> e.getTrainingArea().getName().equals(selectedArea))

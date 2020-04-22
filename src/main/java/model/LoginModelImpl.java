@@ -3,8 +3,6 @@ package model;
 import java.io.File;
 import java.io.IOException;
 
-import com.fasterxml.jackson.core.JsonParseException;
-import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 
@@ -18,15 +16,17 @@ public class LoginModelImpl implements LoginModel {
     private final File brainTrainer = new File(PATH);
     private File userFile;
 
-    private boolean checkIfUserExist(final UserPlayer player, final String userFileName) {
-        for (File file : brainTrainer.listFiles()) {
-            if (userFileName.equals(file.getName())) {
-                this.userFile = file;
-                return true;
-            }
-        }
-        return false;
-    }
+	private boolean checkIfUserExist(final String userFileName) {
+		if (this.brainTrainer.listFiles() != null) {
+			for (final File file : brainTrainer.listFiles()) {
+				if (userFileName.equals(file.getName())) {
+					this.userFile = file;
+					return true;
+				}
+			}
+		}
+		return false;
+	}
 
     private boolean checkPassword(final UserPlayer player) {
         ObjectMapper mapper = new ObjectMapper();
@@ -34,10 +34,6 @@ public class LoginModelImpl implements LoginModel {
             if (mapper.readValue(userFile, UserPlayerImpl.class).getPassword().equals(player.getPassword())) {
                 return true;
             }
-        } catch (JsonParseException e) {
-            e.printStackTrace();
-        } catch (JsonMappingException e) {
-            e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -57,7 +53,7 @@ public class LoginModelImpl implements LoginModel {
     @Override
     public boolean loginUser(final UserPlayer player) {
         String userFileName = player.getUsername() + ".txt";
-        if (this.checkIfUserExist(player, userFileName)) {
+        if (this.checkIfUserExist(userFileName)) {
             return this.checkPassword(player);
         }
         return false;
@@ -70,7 +66,7 @@ public class LoginModelImpl implements LoginModel {
         this.initializeDirectory();
 
         String userFileName = player.getUsername() + ".txt";
-        if (this.checkIfUserExist(player, userFileName)) {
+        if (this.checkIfUserExist(userFileName)) {
             return false;
         } else {
             this.userFile = new File(PATH + File.separator + userFileName);

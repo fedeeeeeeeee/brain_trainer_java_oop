@@ -22,30 +22,30 @@ import view.ViewScene;
 public class MinigameSelectorFx extends SceneController {
 	
 		@FXML
-		ToggleGroup difficulty;
+		private ToggleGroup difficulty;
 		
 		@FXML
-		Button homeBtn;
+		private Button homeBtn;
 		
 		@FXML
-		Button backBtn;
+		private Button backBtn;
 		
 		@FXML
-		ComboBox<String> gameComboBox; 
+		private ComboBox<String> gameComboBox; 
 		
 		
 		@FXML
-		private void initializeCombo() {
+		private void initializeCombo() { //NOPMD
 			if(this.gameComboBox.getItems().isEmpty()) {
-				ObservableList<String> observable = FXCollections.observableArrayList(this.getGameList());
+				final ObservableList<String> observable = FXCollections.observableArrayList(this.getGameList());
 				gameComboBox.getItems().addAll(observable);
 			}
 		}
 
 		@FXML
-		private void startMiniGame() {
-			RadioButton selectedRadioButton = (RadioButton) difficulty.getSelectedToggle();
-			String difficulty = selectedRadioButton.getText();
+		private void startMiniGame() { //NOPMD
+			final RadioButton selectedRadioButton = (RadioButton) difficulty.getSelectedToggle();
+			final String difficulty = selectedRadioButton.getText();
 			if( !difficulty.isEmpty()) { 
 				//fa partire il gioco 
 			}
@@ -53,13 +53,13 @@ public class MinigameSelectorFx extends SceneController {
 		
 
 		@FXML
-		private void goBack() throws IOException {	
+		private void goBack() throws IOException { //NOPMD
 			this.getView().switchScene(ViewScene.TRAINING_AREA);
 		}
 		
 		
 		@FXML
-		private void backHome() throws IOException {
+		private void backHome() throws IOException { //NOPMD
 			this.getView().switchScene(ViewScene.MAIN_MENU);
 		}
 

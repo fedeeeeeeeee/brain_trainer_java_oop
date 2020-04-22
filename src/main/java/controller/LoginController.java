@@ -10,7 +10,7 @@ import model.UserPlayer;
  */
 public class LoginController {
 
-    private LoginModelImpl model;
+    private final LoginModelImpl model;
 
     public LoginController() {
         this.model = new LoginModelImpl();
