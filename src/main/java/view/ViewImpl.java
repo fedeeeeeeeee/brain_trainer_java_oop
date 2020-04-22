@@ -47,6 +47,7 @@ public class ViewImpl extends Application implements View {
 		this.stage.setWidth(Screen.getPrimary().getVisualBounds().getWidth() / 2 - 100);
 		this.stage.setHeight(Screen.getPrimary().getVisualBounds().getHeight() - 100);
 		this.stage.setTitle("Brain Trainer");
+		this.stage.setResizable(true);
 		this.stage.show();
 		this.controller.initializeView(this);
 	}
