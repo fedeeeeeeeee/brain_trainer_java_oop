@@ -51,11 +51,6 @@ public abstract class AbstractMiniGameController implements MiniGameController {
     @Override
     public final void updateTimerView(final EventTimer eventTimer) {
         Platform.runLater(() -> this.timerLbl.setText(Integer.toString(eventTimer.getValue())));
-        if (eventTimer.getValue() == 0) {
-            Platform.runLater(() -> {
-//                System.out.println("Exit Game");
-                 System.exit(0);
-            });
-        }
     }
+
 }

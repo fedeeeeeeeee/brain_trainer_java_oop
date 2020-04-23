@@ -8,7 +8,7 @@ import timer.GameTimer;
 
 public class ExampleMiniGameController extends AbstractMiniGameController {
 
-    private static final int SECONDS = 30;
+    private static final int SECONDS = 10;
     private boolean pause;
 
     @FXML
@@ -37,4 +37,10 @@ public class ExampleMiniGameController extends AbstractMiniGameController {
             this.pause = false;
         }
     }
+
+    @Override
+    public void timeFinsh() {
+        //System.exit(0);
+    }
+
 }

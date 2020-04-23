@@ -30,8 +30,13 @@ public class GameTimer extends TimerTask {
         this.stop = false;
     }
 
-    private void notifyChange(final EventTimer eventTimer) {
-        this.miniGameController.updateTimerView(eventTimer);
+    private void notifyChange() throws OverTimeException {
+        if (this.seconds >= 0) {
+            this.miniGameController.updateTimerView(new EventTimerImpl(this.seconds));
+        } else {
+            this.cancel();
+            throw new OverTimeException();
+        }
     }
 
     /**
@@ -53,9 +58,13 @@ public class GameTimer extends TimerTask {
      */
     @Override
     public void run() {
-       if (this.seconds > 0 && !this.stop) {
+       if (!this.stop) {
            this.seconds =  this.time.timeFlow(this.seconds);
-           this.notifyChange(new EventTimerImpl(this.seconds));
+           try {
+            this.notifyChange();
+        } catch (OverTimeException e) {
+           this.miniGameController.timeFinsh();
+        }
        }
     }
 }

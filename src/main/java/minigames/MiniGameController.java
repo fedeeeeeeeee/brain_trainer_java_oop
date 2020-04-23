@@ -11,4 +11,9 @@ public interface MiniGameController {
 	 * @param eventTimer
 	 */
 	void updateTimerView(EventTimer eventTimer);
+	
+	/**
+	 * Indicates that the time available is finished.
+	 */
+	void timeFinsh();
 }
