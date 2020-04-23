@@ -19,9 +19,6 @@ public abstract class AbstractMiniGameController implements MiniGameController {
     @FXML
     private Label timerLbl;
 
-    @FXML
-    private Label score;
-
     private Timer timer;
     private GameTimer gameTimer;
 
