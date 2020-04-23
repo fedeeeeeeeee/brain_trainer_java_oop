@@ -39,6 +39,15 @@ public abstract class AbstractMiniGameController implements MiniGameController {
         this.timer.schedule(this.gameTimer, 0, 1000);
     }
 
+    /**
+     * @return 
+     *        the field gameTimer
+     * 
+     */
+    protected GameTimer getGameTimer() {
+        return this.gameTimer;
+    }
+
     @Override
     public final void updateTimerView(final EventTimer eventTimer) {
         Platform.runLater(() -> this.timerLbl.setText(Integer.toString(eventTimer.getValue())));
