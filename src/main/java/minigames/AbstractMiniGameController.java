@@ -1,13 +1,14 @@
 
 package minigames;
 
+import java.util.Timer;
+
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
-import model.DifficultyLevel;
-import model.score.ScoreModel;
-import model.score.ScoreModelImpl;
 import timer.EventTimer;
+import timer.GameTimer;
+import timer.GameTimer;
 
 /**
  * This abstract class implements the common aspect of MiniGameControllers.
@@ -21,15 +22,21 @@ public abstract class AbstractMiniGameController implements MiniGameController {
     @FXML
     private Label score;
 
-    private final ScoreModel scoreModel;
+    private Timer timer;
+    private GameTimer gameTimer;
 
-    public AbstractMiniGameController(final DifficultyLevel difficulty, final int basePoint) {
-        this.scoreModel = new ScoreModelImpl(difficulty, basePoint);
-
+    public AbstractMiniGameController() {
+        this.timer = new Timer();
     }
 
-    public final ScoreModel getScoreModel() {
-        return this.scoreModel;
+    /**
+     * Sets the field gameTimer.
+     * 
+     * @param gameTimer
+     */
+    protected void setGameTimer(final GameTimer gameTimer) {
+        this.gameTimer = gameTimer;
+        this.timer.schedule(this.gameTimer, 0, 1000);
     }
 
     @Override
@@ -38,8 +45,7 @@ public abstract class AbstractMiniGameController implements MiniGameController {
         if (eventTimer.getValue() == 0) {
             Platform.runLater(() -> {
 //                System.out.println("Exit Game");
-                this.score.setText(Integer.toString(this.scoreModel.getScore()));
-                // System.exit(0);
+                 System.exit(0);
             });
         }
     }
