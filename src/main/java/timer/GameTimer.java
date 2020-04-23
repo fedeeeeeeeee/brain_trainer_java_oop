@@ -5,10 +5,14 @@ package timer;
  * This interface models a timer that tracks the elapsed time.
  */
 public interface GameTimer {
+    /**
+     * Pause the timer flow.
+     */
+    void pause();
 
     /**
-     * Decrement the seconds of the timer.
+     *  Restart the timer previously paused.
      */
-    void decrement();
+    void restart();
 
 }
