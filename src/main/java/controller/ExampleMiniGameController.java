@@ -9,6 +9,7 @@ import timer.GameTimer;
 public class ExampleMiniGameController extends AbstractMiniGameController {
 
     private static final int SECONDS = 30;
+    private boolean pause;
 
     @FXML
     private Button btn;
@@ -18,6 +19,7 @@ public class ExampleMiniGameController extends AbstractMiniGameController {
 
     public ExampleMiniGameController() {
         //this.setGameTimer();
+        this.pause = false;
     }
 
     @FXML
@@ -27,6 +29,12 @@ public class ExampleMiniGameController extends AbstractMiniGameController {
 
     @FXML
     private void addPointOnClickHandler() throws InterruptedException {
-        //this.controllerMinigame.addPoint();
+        if (!this.pause) {
+            this.getGameTimer().pause();
+            this.pause = true;
+        } else {
+            this.getGameTimer().restart();
+            this.pause = false;
+        }
     }
 }

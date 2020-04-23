@@ -15,6 +15,7 @@ public class GameTimer extends TimerTask {
     private int seconds;
     private MiniGameController miniGameController;
     private TimeFlow time;
+    private boolean stop;
 
     /**
      * Constructor of GameTimerImpl.
@@ -26,6 +27,7 @@ public class GameTimer extends TimerTask {
         this.seconds = seconds;
         this.miniGameController = miniGameController;
         this.time = (s -> s - 1);
+        this.stop = false;
     }
 
     private void notifyChange(final EventTimer eventTimer) {
@@ -36,14 +38,14 @@ public class GameTimer extends TimerTask {
      * Pause the timer flow.
      */
     public void pause() {
-        // TODO Auto-generated method stub
+        this.stop = true;
     }
 
     /**
      *  Restart the timer previously paused.
      */
     public void restart() {
-        // TODO Auto-generated method stub
+        this.stop = false;
     }
 
     /**
@@ -51,7 +53,7 @@ public class GameTimer extends TimerTask {
      */
     @Override
     public void run() {
-       if (this.seconds > 0) {
+       if (this.seconds > 0 && !this.stop) {
            this.seconds =  this.time.timeFlow(this.seconds);
            this.notifyChange(new EventTimerImpl(this.seconds));
        }
