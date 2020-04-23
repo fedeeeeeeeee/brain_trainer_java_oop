@@ -1,6 +1,8 @@
 
 package timer;
 
+import java.util.TimerTask;
+
 import minigames.MiniGameController;
 
 /**
@@ -8,7 +10,7 @@ import minigames.MiniGameController;
  * This class implements {@link GameTimer}.
  *
  */
-public class GameTimerImpl implements GameTimer {
+public class GameTimerImpl extends TimerTask implements GameTimer {
 
     private int seconds;
     private MiniGameController miniGameController;
@@ -29,8 +31,17 @@ public class GameTimerImpl implements GameTimer {
     }
 
     @Override
-    public final void decrement() {
-        this.seconds = this.seconds - 1;
-        this.notifyChange(new EventTimerImpl(this.seconds));
+    public void pause() {
+        // TODO Auto-generated method stub
+    }
+
+    @Override
+    public void restart() {
+        // TODO Auto-generated method stub
+    }
+
+    @Override
+    public void run() {
+        // TODO Auto-generated method stub
     }
 }
