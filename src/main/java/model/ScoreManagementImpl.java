@@ -15,7 +15,11 @@ import java.util.Map;
  */
 public class ScoreManagementImpl implements ScoreManagement {
 
+    /**
+     * The weigh of the new score gained.
+     */
     private static final double ALPHA = 0.125;
+
     private Map<String, List<Integer>> miniGameHistory;
     private int average;
     private int best;
@@ -30,8 +34,8 @@ public class ScoreManagementImpl implements ScoreManagement {
     }
 
     private String createDate() {
-        Date date = new Date();
-        DateFormat dateFormat = DateFormat.getDateInstance(DateFormat.SHORT, Locale.ITALY);
+        final Date date = new Date();
+        final DateFormat dateFormat = DateFormat.getDateInstance(DateFormat.SHORT, Locale.ITALY);
         return dateFormat.format(date);
     }
 
@@ -54,40 +58,62 @@ public class ScoreManagementImpl implements ScoreManagement {
         this.miniGameHistory.get(date).add(score);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
-    public final Map<String, List<Integer>> getMiniGameHistory() {
+    public Map<String, List<Integer>> getMiniGameHistory() {
         return this.miniGameHistory;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
-    public final void setMiniGameHistory(final Map<String, List<Integer>> miniGameHistory) {
+    public void setMiniGameHistory(final Map<String, List<Integer>> miniGameHistory) {
         this.miniGameHistory = miniGameHistory;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
-    public final int getAverage() {
+    public int getAverage() {
         return this.average;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
-    public final void setAverage(final int average) {
+    public void setAverage(final int average) {
         this.average = average;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
-    public final int getBest() {
+    public int getBest() {
         return this.best;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
-    public final void setBest(final int best) {
+    public void setBest(final int best) {
         this.best = best;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
-    public final void updateScore(final int score) {
+    public void updateScore(final int score) {
         this.addScore(score);
         this.checkBest(score);
         this.updateAverage(score);
     }
 }
+

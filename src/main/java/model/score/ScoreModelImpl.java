@@ -10,6 +10,9 @@ import model.DifficultyLevel;
  */
 public class ScoreModelImpl implements ScoreModel {
 
+    /**
+     * Multiplicative constant for the increment of the base point.
+     */
     private static final int MULTIPLICATIVE_INCREMENT = 2;
 
     private final DifficultyLevel difficulty;
@@ -44,14 +47,20 @@ public class ScoreModelImpl implements ScoreModel {
         }
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
-    public final void addPoint() {
+    public void addPoint() {
         this.check(this.isFinish);
         this.score = this.score + this.increment;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
-    public final int getScore() {
+    public int getScore() {
         this.check(this.isFinish);
         this.isFinish = true;
         return this.score;
