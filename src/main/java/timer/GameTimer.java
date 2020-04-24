@@ -7,13 +7,13 @@ import minigames.MiniGameController;
 
 /**
  * 
- * This class implements {@link GameTimer}.
+ * This class represents the timer of minigames.
  *
  */
 public class GameTimer extends TimerTask {
 
     private int seconds;
-    private MiniGameController miniGameController;
+    private final MiniGameController controller;
     private final TimeFlow time;
     private boolean stop;
 
@@ -21,18 +21,18 @@ public class GameTimer extends TimerTask {
      * Constructor of GameTimerImpl.
      * 
      * @param seconds
-     * @param miniGameController
+     * @param controller
      */
-    public GameTimer(final int seconds, final MiniGameController miniGameController) {
+    public GameTimer(final int seconds, final MiniGameController controller) {
         this.seconds = seconds;
-        this.miniGameController = miniGameController;
+        this.controller = controller;
         this.time = s -> s - 1;
         this.stop = false;
     }
 
     private void notifyChange() throws OverTimeException {
         if (this.seconds >= 0) {
-            this.miniGameController.updateTimerView(new EventTimerImpl(this.seconds));
+            this.controller.updateTimerView(new EventTimerImpl(this.seconds));
         } else {
             this.cancel();
             throw new OverTimeException();
@@ -63,7 +63,7 @@ public class GameTimer extends TimerTask {
            try {
             this.notifyChange();
         } catch (OverTimeException e) {
-           this.miniGameController.timeFinsh();
+           this.controller.timeFinsh();
         }
        }
     }

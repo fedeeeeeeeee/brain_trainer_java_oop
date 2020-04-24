@@ -10,7 +10,7 @@ import timer.EventTimer;
 import timer.GameTimer;
 
 /**
- * This abstract class implements the common aspect of MiniGameControllers.
+ * This abstract class implements the common aspect of {@link MiniGameController}.
  *
  */
 public abstract class AbstractMiniGameController implements MiniGameController {

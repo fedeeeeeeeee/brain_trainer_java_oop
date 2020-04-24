@@ -9,8 +9,9 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 
+
 /**
- * The implementation of ScoreManagement interface.
+ * This class implements {@link ScoreManagment}.
  *
  */
 public class ScoreManagementImpl implements ScoreManagement {
