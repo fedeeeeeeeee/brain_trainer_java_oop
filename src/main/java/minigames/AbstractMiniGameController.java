@@ -8,7 +8,6 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import timer.EventTimer;
 import timer.GameTimer;
-import timer.GameTimer;
 
 /**
  * This abstract class implements the common aspect of MiniGameControllers.
@@ -22,6 +21,9 @@ public abstract class AbstractMiniGameController implements MiniGameController {
     private Timer timer;
     private GameTimer gameTimer;
 
+    /**
+     * Simple constructor of AbstractMiniGameController.
+     */
     public AbstractMiniGameController() {
         this.timer = new Timer();
     }

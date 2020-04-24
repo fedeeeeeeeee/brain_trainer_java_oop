@@ -1,11 +1,26 @@
 
 package utility;
 
+/**
+ * 
+ * Class that implements a Pair composed by 
+ * two generic Objects.
+ *
+ * @param <X>
+ * @param <Y>
+ */
 public class Pair<X, Y> {
 
     private final X x;
     private final Y y;
 
+    /**
+     * Simple constructor of Pair.
+     * @param x
+     *      first element
+     * @param y
+     *      second element
+     */
     public Pair(final X x, final Y y) {
         super();
         this.x = x;

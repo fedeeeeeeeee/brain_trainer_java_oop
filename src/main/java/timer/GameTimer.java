@@ -14,7 +14,7 @@ public class GameTimer extends TimerTask {
 
     private int seconds;
     private MiniGameController miniGameController;
-    private TimeFlow time;
+    private final TimeFlow time;
     private boolean stop;
 
     /**
@@ -26,7 +26,7 @@ public class GameTimer extends TimerTask {
     public GameTimer(final int seconds, final MiniGameController miniGameController) {
         this.seconds = seconds;
         this.miniGameController = miniGameController;
-        this.time = (s -> s - 1);
+        this.time = s -> s - 1;
         this.stop = false;
     }
 

@@ -7,6 +7,14 @@ package timer;
  */
 @FunctionalInterface
 public interface TimeFlow {
+
+    /**
+     * Calculate the time flow.
+     * 
+     * @param seconds
+     * @return
+     *          the seconds results
+     */
     int timeFlow(int seconds);
 
 }
