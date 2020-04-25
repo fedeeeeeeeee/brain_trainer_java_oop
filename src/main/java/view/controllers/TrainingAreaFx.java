@@ -4,7 +4,6 @@ import java.io.IOException;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.input.MouseEvent;
-import view.MiniGame;
 import view.TrainingArea;
 import view.ViewScene;
 
@@ -42,10 +41,10 @@ public class TrainingAreaFx extends SceneController {
 	
 	private void populateList(final String selectedArea) {
 	     this.getGameList().clear();
-	     this.getGameList().addAll(Arrays.asList(MiniGame.values()).stream()
+	    /* this.getGameList().addAll(Arrays.asList(MiniGame.values()).stream()
 							                              .filter(e-> e.getTrainingArea().getName().equals(selectedArea))
 							                              .map(e-> e.toString())
-							                              .collect(Collectors.toList()));
+							                              .collect(Collectors.toList()));*/
 	} 
 	
 }
