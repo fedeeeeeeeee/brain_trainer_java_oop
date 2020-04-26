@@ -2,6 +2,7 @@
 package timer;
 
 import java.util.TimerTask;
+import java.util.function.Function;
 
 import minigames.MiniGameController;
 
@@ -14,7 +15,7 @@ public class GameTimer extends TimerTask {
 
     private int seconds;
     private final MiniGameController controller;
-    private final TimeFlow time;
+    private final Function<Integer, Integer> timeFlow;
     private boolean stop;
 
     /**
@@ -26,7 +27,7 @@ public class GameTimer extends TimerTask {
     public GameTimer(final int seconds, final MiniGameController controller) {
         this.seconds = seconds;
         this.controller = controller;
-        this.time = s -> s - 1;
+        this.timeFlow = s -> s - 1;
         this.stop = false;
     }
 
@@ -58,13 +59,13 @@ public class GameTimer extends TimerTask {
      */
     @Override
     public void run() {
-       if (!this.stop) {
-           this.seconds =  this.time.timeFlow(this.seconds);
-           try {
-            this.notifyChange();
-        } catch (OverTimeException e) {
-           this.controller.timeFinsh();
+        if (!this.stop) {
+            this.seconds = this.timeFlow.apply(this.seconds);
+            try {
+                this.notifyChange();
+            } catch (OverTimeException e) {
+                this.controller.timeFinsh();
+            }
         }
-       }
     }
 }
