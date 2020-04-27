@@ -11,7 +11,7 @@ import view.View;
  * Represent the generic Class for the JavaFx Scene controller.
  *
  */
-public abstract class SceneController { // NOPMD
+public abstract class AbstractSceneController implements FxController { // NOPMD
 
     private View view;
     private Controller controller;
@@ -20,51 +20,45 @@ public abstract class SceneController { // NOPMD
 
     /**
      * 
-     * @return {@link View}
+     * {@inheritDoc}
      */
+    @Override
     public View getView() {
         return this.view;
     }
 
     /**
-     * Setter for {@link View} component.
      * 
-     * @param view The view component
+     * {@inheritDoc}
      */
-    public void setView(final View view) {
-        this.view = view;
-    }
-
-    /**
-     * 
-     * @return {@link Controller}
-     */
+    @Override
     public Controller getController() {
         return this.controller;
     }
 
     /**
-     * Setter for the {@link Controller}.
      * 
-     * @param controller
-     * 
+     * {@inheritDoc}
      */
-    public void setController(final Controller controller) {
+    public void initialize(final View view, final Controller controller) {
+        this.view = view;
         this.controller = controller;
     }
 
     /**
      * 
-     * @return The Root of the Scene.
+     * {@inheritDoc}
      */
+    @Override
     public Parent getRoot() {
         return this.root;
     }
 
     /**
      * 
-     * @param root Set the Parent Root.
+     * {@inheritDoc}
      */
+    @Override
     public void setRoot(final Parent root) {
         this.root = root;
     }
@@ -73,8 +67,8 @@ public abstract class SceneController { // NOPMD
      * @return the minigames List associated with the selected area
      * 
      */
-    public List<String> getGameList() {
-        return SceneController.gameList;
+    protected List<String> getGameList() {
+        return AbstractSceneController.gameList;
     }
 
 }

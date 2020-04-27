@@ -15,7 +15,7 @@ import view.ViewScene;
  * The fx controller for the minigame selector and game start scene.
  * 
  */
-public class MinigameSelectorFx extends SceneController {
+public class MinigameSelectorFx extends AbstractSceneController {
 
     @FXML
     private ToggleGroup difficulty;

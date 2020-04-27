@@ -13,7 +13,7 @@ import java.util.Arrays;
  * The fx controller for the Training Area selector.
  * 
  */
-public class TrainingAreaFx extends SceneController {
+public class TrainingAreaFx extends AbstractSceneController {
 
     @FXML
     private Button backBtn;

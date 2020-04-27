@@ -10,7 +10,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
 import view.ViewScene;
 
-public class HowToPlayFx extends SceneController {
+public class HowToPlayFx extends AbstractSceneController {
 
     @FXML
     private Button backBtn;

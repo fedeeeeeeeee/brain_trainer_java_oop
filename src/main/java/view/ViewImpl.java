@@ -6,7 +6,7 @@ import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
-import view.controllers.SceneController;
+import view.controllers.FxController;
 
 /**
  * The implementation of the {@link View}.
@@ -15,7 +15,7 @@ import view.controllers.SceneController;
 public class ViewImpl extends Application implements View {
 
     private final Controller controller;
-    private SceneController currentSceneController;
+    private FxController currentSceneController;
     private final SceneLoader sceneLoader;
     private Stage stage;
 
@@ -39,10 +39,7 @@ public class ViewImpl extends Application implements View {
     @Override
     public void switchScene(final ViewScene scene) {
         this.currentSceneController = this.sceneLoader.loadScene(scene.getFilePath());
-        /* cambia in INIT*/
-        
-        this.currentSceneController.setView(this);
-        this.currentSceneController.setController(this.controller);
+        this.currentSceneController.initialize(this, this.controller);
         this.initializeSceneController();
     }
 

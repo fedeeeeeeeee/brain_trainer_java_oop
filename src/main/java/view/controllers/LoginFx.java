@@ -22,7 +22,7 @@ import javafx.scene.control.Label;
 
 // TODO
 // NON DEVE ESTENDERE SCENE CONTROLLER -> SEPARARE I CONCETTI
-public class LoginFx extends SceneController {
+public class LoginFx extends AbstractSceneController {
 
     @FXML
     private VBox box;
