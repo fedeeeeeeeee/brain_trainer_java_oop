@@ -14,6 +14,9 @@ import view.controllers.FxController;
  */
 public class ViewImpl extends Application implements View {
 
+    private static final double WIDTH = Screen.getPrimary().getBounds().getWidth() / 2;
+    private static final double HEIGHT = Screen.getPrimary().getBounds().getHeight() / 1.2;
+
     private final Controller controller;
     private FxController currentSceneController;
     private final SceneLoader sceneLoader;
@@ -49,8 +52,8 @@ public class ViewImpl extends Application implements View {
     @Override
     public void start(final Stage stage) throws Exception {
         this.stage = stage;
-        this.stage.setWidth(Screen.getPrimary().getVisualBounds().getWidth() / 2 - 100);
-        this.stage.setHeight(Screen.getPrimary().getVisualBounds().getHeight() - 100);
+        stage.setWidth(WIDTH);
+        stage.setHeight(HEIGHT);
         this.stage.setTitle("Brain Trainer");
         this.stage.setResizable(true);
         this.stage.show();
