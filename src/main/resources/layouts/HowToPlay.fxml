@@ -13,11 +13,14 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox minHeight="-Infinity" prefHeight="580.0" prefWidth="500.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.controllers.HowToPlayFx">
+<VBox minHeight="-Infinity" prefHeight="580.0" prefWidth="500.0"
+	xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1"
+	fx:controller="view.controllers.HowToPlayFx">
 	<children>
 		<GridPane VBox.vgrow="SOMETIMES">
 			<columnConstraints>
-				<ColumnConstraints hgrow="SOMETIMES" minWidth="50.0" />
+				<ColumnConstraints hgrow="SOMETIMES"
+					minWidth="50.0" />
 			</columnConstraints>
 			<rowConstraints>
 				<RowConstraints vgrow="SOMETIMES" />
@@ -25,7 +28,10 @@
 				<RowConstraints vgrow="SOMETIMES" />
 			</rowConstraints>
 			<children>
-				<Button fx:id="backBtn" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onMouseClicked="#goBack" prefHeight="35.0" prefWidth="65.0" text="Back" GridPane.rowIndex="2">
+				<Button fx:id="backBtn" alignment="CENTER"
+					contentDisplay="CENTER" mnemonicParsing="false"
+					onMouseClicked="#goBack" prefHeight="35.0" prefWidth="65.0"
+					text="Back" GridPane.rowIndex="2">
 					<font>
 						<Font size="18.0" />
 					</font>
@@ -33,38 +39,51 @@
 						<Insets bottom="20.0" left="20.0" top="20.0" />
 					</GridPane.margin>
 				</Button>
-				<TextArea fx:id="infoTxt" editable="false" prefHeight="452.0" prefWidth="500.0" wrapText="true" GridPane.rowIndex="1">
+				<TextArea fx:id="infoTxt" editable="false"
+					prefHeight="452.0" prefWidth="500.0" wrapText="true"
+					GridPane.rowIndex="1">
 					<font>
 						<Font size="16.0" />
 					</font>
 				</TextArea>
-            <GridPane>
-              <columnConstraints>
-                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-              </columnConstraints>
-              <rowConstraints>
-                <RowConstraints vgrow="SOMETIMES" />
-              </rowConstraints>
-               <children>
-      				<Button fx:id="brnTrnInfoBtn" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onMouseClicked="#showIntroduction" text="Brain Trainer Info" GridPane.halignment="LEFT" GridPane.hgrow="ALWAYS" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
-      					<font>
-      						<Font size="18.0" />
-      					</font>
-      					<GridPane.margin>
-      						<Insets left="20.0" />
-      					</GridPane.margin>
-      				</Button>
-      				<Button fx:id="gameInfoBtn" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onMouseClicked="#showGameInfo" text="Minigame info" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.hgrow="ALWAYS" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
-      					<font>
-      						<Font size="18.0" />
-      					</font>
-      					<GridPane.margin>
-      						<Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
-      					</GridPane.margin>
-      				</Button>
-               </children>
-            </GridPane>
+				<GridPane>
+					<columnConstraints>
+						<ColumnConstraints hgrow="SOMETIMES"
+							minWidth="10.0" prefWidth="100.0" />
+						<ColumnConstraints hgrow="SOMETIMES"
+							minWidth="10.0" prefWidth="100.0" />
+					</columnConstraints>
+					<rowConstraints>
+						<RowConstraints vgrow="SOMETIMES" />
+					</rowConstraints>
+					<children>
+						<Button fx:id="brnTrnInfoBtn" alignment="CENTER"
+							contentDisplay="CENTER" mnemonicParsing="false"
+							onMouseClicked="#showIntroduction" text="Brain Trainer Info"
+							GridPane.halignment="LEFT" GridPane.hgrow="ALWAYS"
+							GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
+							<font>
+								<Font size="18.0" />
+							</font>
+							<GridPane.margin>
+								<Insets left="20.0" />
+							</GridPane.margin>
+						</Button>
+						<Button fx:id="gameInfoBtn" alignment="CENTER"
+							contentDisplay="CENTER" mnemonicParsing="false"
+							onMouseClicked="#showGameInfo" text="Minigame info"
+							GridPane.columnIndex="1" GridPane.halignment="RIGHT"
+							GridPane.hgrow="ALWAYS" GridPane.valignment="CENTER"
+							GridPane.vgrow="ALWAYS">
+							<font>
+								<Font size="18.0" />
+							</font>
+							<GridPane.margin>
+								<Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+							</GridPane.margin>
+						</Button>
+					</children>
+				</GridPane>
 			</children>
 		</GridPane>
 	</children>

@@ -12,30 +12,42 @@ import view.ViewScene;
  * 
  */
 public class ControllerImpl implements Controller {
-   
-	private final Model model;
+
+    private final Model model;
 
     public ControllerImpl() {
         this.model = new ModelImpl();
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void initializeView(final View view) {
         final View v = view;
         v.switchScene(ViewScene.LOGIN);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void initializePlayer(final UserPlayer player) {
         this.model.setUserPlayer(player);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void setArea(final TrainingArea area) {
         this.model.setArea(area);
 
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public TrainingArea getArea() {
         return this.model.getArea();

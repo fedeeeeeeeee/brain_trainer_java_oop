@@ -19,7 +19,8 @@ public class LoginController {
     /**
      * Check if the player is logged.
      * 
-     * @param player
+     * @param player 
+     *              the player to check
      * @return false if the user isn't already logged or the password isn't correct
      *         true otherwise.
      */
@@ -30,7 +31,8 @@ public class LoginController {
     /**
      * Check if the player is correctly registered.
      * 
-     * @param player
+     * @param player 
+     *              the player to check
      * @return false if the username is already taken true otherwise.
      */
     public boolean isRegistered(final UserPlayer player) {

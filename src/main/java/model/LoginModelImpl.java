@@ -16,17 +16,17 @@ public class LoginModelImpl implements LoginModel {
     private final File brainTrainer = new File(PATH);
     private File userFile;
 
-	private boolean checkIfUserExist(final String userFileName) {
-		if (this.brainTrainer.listFiles() != null) {
-			for (final File file : brainTrainer.listFiles()) {
-				if (userFileName.equals(file.getName())) {
-					this.userFile = file;
-					return true;
-				}
-			}
-		}
-		return false;
-	}
+    private boolean checkIfUserExist(final String userFileName) {
+        if (this.brainTrainer.listFiles() != null) {
+            for (final File file : brainTrainer.listFiles()) {
+                if (userFileName.equals(file.getName())) {
+                    this.userFile = file;
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
 
     private boolean checkPassword(final UserPlayer player) {
         ObjectMapper mapper = new ObjectMapper();
@@ -50,6 +50,9 @@ public class LoginModelImpl implements LoginModel {
         }
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public boolean loginUser(final UserPlayer player) {
         String userFileName = player.getUsername() + ".txt";
@@ -59,13 +62,16 @@ public class LoginModelImpl implements LoginModel {
         return false;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public boolean registerPlayer(final UserPlayer player) {
         ObjectMapper mapper = new ObjectMapper();
         mapper.configure(SerializationFeature.INDENT_OUTPUT, true);
         this.initializeDirectory();
-
         String userFileName = player.getUsername() + ".txt";
+
         if (this.checkIfUserExist(userFileName)) {
             return false;
         } else {
