@@ -24,7 +24,7 @@ public class TrainingAreaFx extends AbstractSceneController {
         final TrainingArea area = Arrays.asList(TrainingArea.values()).stream()
                 .filter(e -> e.getName().equals(selectedArea)).findAny().get();
         this.getController().setArea(area);
-        populateList(selectedArea);
+        populateList(area);
         this.getView().switchScene(ViewScene.GAME_SELECTOR);
     }
 
@@ -33,10 +33,9 @@ public class TrainingAreaFx extends AbstractSceneController {
         this.getView().switchScene(ViewScene.MAIN_MENU);
     }
 
-    private void populateList(final String selectedArea) {
+    private void populateList(final TrainingArea selectedArea) {
         this.getGameList().clear();
-        this.getGameList().addAll(Arrays.asList(TrainingArea.values()).stream()
-                .filter(e -> e.getName().equals(selectedArea)).map(TrainingArea::getMiniGameList).findAny().get());
+        this.getGameList().addAll(selectedArea.getMiniGameList());    
     }
 
 }

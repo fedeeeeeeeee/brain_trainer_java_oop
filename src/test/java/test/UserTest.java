@@ -11,7 +11,7 @@ public class UserTest {
     @Test
     public void testUser() {
     	
-    	User player = new UserPlayerImpl();
+    	final User player = new UserPlayerImpl();
     	player.setUsername("user");
         player.setPassword("pass");
         assertEquals("user", player.getUsername());

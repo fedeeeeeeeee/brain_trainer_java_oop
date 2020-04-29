@@ -29,7 +29,7 @@ public class LoginModelImpl implements LoginModel {
     }
 
     private boolean checkPassword(final UserPlayer player) {
-        ObjectMapper mapper = new ObjectMapper();
+        final ObjectMapper mapper = new ObjectMapper();
         try {
             if (mapper.readValue(userFile, UserPlayerImpl.class).getPassword().equals(player.getPassword())) {
                 return true;
@@ -55,7 +55,7 @@ public class LoginModelImpl implements LoginModel {
      */
     @Override
     public boolean loginUser(final UserPlayer player) {
-        String userFileName = player.getUsername() + ".txt";
+        final String userFileName = player.getUsername() + ".txt";
         if (this.checkIfUserExist(userFileName)) {
             return this.checkPassword(player);
         }
@@ -67,10 +67,10 @@ public class LoginModelImpl implements LoginModel {
      */
     @Override
     public boolean registerPlayer(final UserPlayer player) {
-        ObjectMapper mapper = new ObjectMapper();
+        final ObjectMapper mapper = new ObjectMapper();
         mapper.configure(SerializationFeature.INDENT_OUTPUT, true);
         this.initializeDirectory();
-        String userFileName = player.getUsername() + ".txt";
+        final String userFileName = player.getUsername() + ".txt";
 
         if (this.checkIfUserExist(userFileName)) {
             return false;

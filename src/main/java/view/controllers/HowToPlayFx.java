@@ -14,10 +14,13 @@ public class HowToPlayFx extends AbstractSceneController {
 
     @FXML
     private Button backBtn;
+    
     @FXML
     private Button gameInfoBtn;
+    
     @FXML
     private TextArea infoTxt;
+    
     @FXML
     private Button brnTrnInfoBtn;
 
@@ -38,7 +41,7 @@ public class HowToPlayFx extends AbstractSceneController {
 
     private void scanner(final String fileTxt) {
         infoTxt.clear();
-        String filePath = "src/main/resources/info/" + fileTxt + ".txt";
+        final String filePath = "src/main/resources/info/" + fileTxt + ".txt";
         try {
             final Scanner s = new Scanner(new File(filePath)); // NOPMD
             while (s.hasNext()) {

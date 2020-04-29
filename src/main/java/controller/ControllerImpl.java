@@ -42,7 +42,6 @@ public class ControllerImpl implements Controller {
     @Override
     public void setArea(final TrainingArea area) {
         this.model.setArea(area);
-
     }
 
     /**

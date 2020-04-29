@@ -40,6 +40,7 @@ public abstract class AbstractSceneController implements FxController { // NOPMD
      * 
      * {@inheritDoc}
      */
+    @Override
     public void initialize(final View view, final Controller controller) {
         this.view = view;
         this.controller = controller;
