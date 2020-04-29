@@ -59,7 +59,7 @@
 						<Insets />
 					</GridPane.margin>
 				</GridPane>
-				<Label contentDisplay="TEXT_ONLY" prefHeight="20.0" prefWidth="186.0" text="Brain Trainer" textOverrun="CENTER_ELLIPSIS" GridPane.halignment="CENTER">
+				<Label contentDisplay="TEXT_ONLY" text="Brain Trainer" textOverrun="CENTER_ELLIPSIS" GridPane.halignment="CENTER">
 					<font>
 						<Font size="35.0" />
 					</font>
