@@ -24,6 +24,10 @@ val javaFXModules = listOf(
 val supportedPlatforms = listOf("linux", "mac", "win")
 
 dependencies {
+    implementation("com.fasterxml.jackson.core:jackson-databind:2.11.0.rc1")
+    implementation("com.fasterxml.jackson.core:jackson-core:2.11.0.rc1")
+    implementation("com.fasterxml.jackson.core:jackson-annotations:2.11.0.rc1")
+    
     // Example library: Guava. Add what you need (and remove Guava if you don't use it)
     implementation("com.google.guava:guava:28.1-jre")
     // JavaFX: comment out if you do not need them
@@ -32,6 +36,8 @@ dependencies {
             implementation("org.openjfx:javafx-$module:13:$platform")
         }
     }
+    
+    
     // JUnit API and testing engine
     testImplementation("org.junit.jupiter:junit-jupiter-api:5.5.2")
     testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:5.5.2")
@@ -43,5 +49,5 @@ tasks.withType<Test> {
 }
 
 application {
-    mainClassName = "application.Launcher"
+    mainClassName = "application.Main"
 }

@@ -1,0 +1,15 @@
+PERILOUS PATH
+At each level, you have to memorize the position of the mines having 5 seconds of time. The goal of the game is to find one of the possible paths from start to finish avoiding the mines, by clicking buttons.
+ 
+TRUE COLOR
+At each level, you have to click the "yes" button if the meaning of the first button corresponds to the color of one button (or more, depending on the difficulty level) below.
+ 
+ONE WAY
+Starting from an initial position, you have to calculate the path, following the arrows shown in the buttons above. Once the final position is found, click on the corresponding button to win and start the next level.
+ 
+SIZE COUNT
+At each level, you have to choose the operation that gives the greatest result or the "same" button if the results are equals.
+ 
+COLOR GAMA
+At each level you have to find the only color suggested by the question which can be the lightest or the darkest among those presented
+

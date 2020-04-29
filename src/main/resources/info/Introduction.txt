@@ -1,0 +1,5 @@
+Welcome to Brain Trainer!
+In this game, you can see your progress or you can start your daily brain training.
+After starting the training, you will be able to select a training area and then one minigame and one of the following difficulty level: Easy, Normal, Hard.
+Keep training all day to improve your skills.
+Enjoy!
