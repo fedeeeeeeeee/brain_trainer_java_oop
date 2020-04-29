@@ -6,10 +6,9 @@ import view.TrainingArea;
  * The implementation of the {@link Model}.
  * 
  */
-public class ModelImpl implements Model {
+public class ModelImpl implements Model { //NOPMD
 
     private UserPlayer player;
-
     private TrainingArea selectedArea;
 
     /**

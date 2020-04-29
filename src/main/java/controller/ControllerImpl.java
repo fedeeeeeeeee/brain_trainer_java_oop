@@ -12,9 +12,12 @@ import view.ViewScene;
  * 
  */
 public class ControllerImpl implements Controller {
-
+	
     private final Model model;
 
+    /**
+     * Simple constructor of {@link Controller}.
+     */
     public ControllerImpl() {
         this.model = new ModelImpl();
     }
@@ -24,8 +27,7 @@ public class ControllerImpl implements Controller {
      */
     @Override
     public void initializeView(final View view) {
-        final View v = view;
-        v.switchScene(ViewScene.LOGIN);
+        view.switchScene(ViewScene.LOGIN);
     }
 
     /**

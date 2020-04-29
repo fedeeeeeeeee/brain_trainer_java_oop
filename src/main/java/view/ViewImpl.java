@@ -13,7 +13,7 @@ import view.controllers.FxController;
  *
  */
 public class ViewImpl extends Application implements View {
-
+	
     private static final double WIDTH = Screen.getPrimary().getBounds().getWidth() / 2;
     private static final double HEIGHT = Screen.getPrimary().getBounds().getHeight() / 1.2;
 
@@ -22,6 +22,9 @@ public class ViewImpl extends Application implements View {
     private final SceneLoader sceneLoader;
     private Stage stage;
 
+    /**
+     * Simple constructor of {@link View}.
+     */
     public ViewImpl() {
         this.controller = new ControllerImpl();
         this.sceneLoader = new SceneLoaderImpl();
@@ -41,7 +44,7 @@ public class ViewImpl extends Application implements View {
      */
     @Override
     public void switchScene(final ViewScene scene) {
-        this.currentSceneController = this.sceneLoader.loadScene(scene.getFilePath());
+        this.currentSceneController = this.sceneLoader.loadScene(scene.getFilePath()).get();
         this.currentSceneController.initialize(this, this.controller);
         this.initializeSceneController();
     }

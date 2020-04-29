@@ -6,6 +6,10 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import model.User;
 import model.UserPlayerImpl;
 
+/**
+ * Class to test if {@link UserPlayer} works correctly.
+ *
+ */
 public class UserTest {
 
     @Test

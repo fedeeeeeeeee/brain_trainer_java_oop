@@ -1,6 +1,11 @@
 package model;
 
+/**
+ * The implementation of the {@link UserPlayer}.
+ *
+ */
 public class UserPlayerImpl implements UserPlayer {
+	
     private String username;
     private String password;
 

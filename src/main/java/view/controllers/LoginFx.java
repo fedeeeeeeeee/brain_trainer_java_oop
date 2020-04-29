@@ -19,9 +19,6 @@ import javafx.scene.control.Label;
  * The fx controller for the login scene.
  *
  */
-
-// TODO
-// NON DEVE ESTENDERE SCENE CONTROLLER -> SEPARARE I CONCETTI
 public class LoginFx extends AbstractSceneController {
 
     @FXML

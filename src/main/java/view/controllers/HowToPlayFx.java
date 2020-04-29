@@ -10,6 +10,10 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
 import view.ViewScene;
 
+/**
+ * The fx controller for the howToPlay scene.
+ *
+ */
 public class HowToPlayFx extends AbstractSceneController {
 
     @FXML
@@ -43,7 +47,7 @@ public class HowToPlayFx extends AbstractSceneController {
         infoTxt.clear();
         final String filePath = "src/main/resources/info/" + fileTxt + ".txt";
         try {
-            final Scanner s = new Scanner(new File(filePath)); // NOPMD
+            final Scanner s = new Scanner(new File(filePath));
             while (s.hasNext()) {
                 infoTxt.appendText(s.nextLine() + "\n");
             }

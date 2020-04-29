@@ -2,6 +2,10 @@ package model;
 
 import view.TrainingArea;
 
+/**
+ * 
+ *  The model interface of the whole game.
+ */
 public interface Model {
 
     /**

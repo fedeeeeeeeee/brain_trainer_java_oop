@@ -3,6 +3,10 @@ package view;
 import java.util.Arrays;
 import java.util.List;
 
+/**
+ *  Enumeration for all the training area with the correspondent list of minigames.
+ *
+ */
 public enum TrainingArea {
 
     /**
@@ -51,6 +55,10 @@ public enum TrainingArea {
         return this.name;
     }
 
+    /**
+     * 
+     * @return the minigame list
+     */
     public List<String> getMiniGameList() {
         return this.miniGames;
     }

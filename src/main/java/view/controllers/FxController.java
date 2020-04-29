@@ -4,6 +4,11 @@ import controller.Controller;
 import javafx.scene.Parent;
 import view.View;
 
+/**
+ * 
+ * the Interface of controller fx
+ *
+ */
 public interface FxController {
 
     /**

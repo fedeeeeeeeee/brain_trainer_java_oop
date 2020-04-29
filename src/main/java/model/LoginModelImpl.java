@@ -45,7 +45,7 @@ public class LoginModelImpl implements LoginModel {
             try {
                 brainTrainer.mkdir();
             } catch (SecurityException se) {
-                System.out.println("Error in creating directory");
+            	se.printStackTrace();
             }
         }
     }
@@ -72,9 +72,7 @@ public class LoginModelImpl implements LoginModel {
         this.initializeDirectory();
         final String userFileName = player.getUsername() + ".txt";
 
-        if (this.checkIfUserExist(userFileName)) {
-            return false;
-        } else {
+        if (!this.checkIfUserExist(userFileName)) {
             this.userFile = new File(PATH + File.separator + userFileName);
             try {
                 mapper.writeValue(userFile, player);
@@ -83,6 +81,7 @@ public class LoginModelImpl implements LoginModel {
             }
             return true;
         }
+        return false;
     }
 
 }

@@ -1,5 +1,6 @@
 package controller;
 
+import model.LoginModel;
 import model.LoginModelImpl;
 import model.UserPlayer;
 
@@ -10,8 +11,11 @@ import model.UserPlayer;
  */
 public class LoginController {
 
-    private final LoginModelImpl model;
+    private final LoginModel model;
 
+    /**
+     * LoginController constructor.
+     */
     public LoginController() {
         this.model = new LoginModelImpl();
     }
