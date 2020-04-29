@@ -1,54 +1,62 @@
 
 package minigames;
 
+import java.util.Timer;
+
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
-import model.DifficultyLevel;
-import model.score.ScoreModel;
-import model.score.ScoreModelImpl;
-import timer.AgentTimer;
+import javafx.scene.control.ProgressBar;
 import timer.EventTimer;
+import timer.GameTimer;
 
 /**
- * This abstract class implements the common aspect of MiniGameControllers.
+ * This abstract class implements the common aspect of {@link MiniGameController}.
  *
  */
 public abstract class AbstractMiniGameController implements MiniGameController {
 
     @FXML
-    private Label lbl;
+    private Label timerLbl;
 
     @FXML
-    private Label score;
+    private ProgressBar progressBar;
 
-    private final AgentTimer agentTimer;
-    private final ScoreModel scoreModel;
+    private Timer timer;
+    private GameTimer gameTimer;
 
-    public AbstractMiniGameController(final DifficultyLevel difficulty, final int basePoint) {
-        this.agentTimer = new AgentTimer(this);
-        this.scoreModel = new ScoreModelImpl(difficulty, basePoint);
-
+    /**
+     * Simple constructor of AbstractMiniGameController.
+     */
+    public AbstractMiniGameController() {
+        this.timer = new Timer();
     }
 
-    public final AgentTimer getAgentTimer() {
-        return this.agentTimer;
+    /**
+     * Sets the field gameTimer.
+     * 
+     * @param gameTimer
+     */
+    protected void setGameTimer(final GameTimer gameTimer) {
+        this.gameTimer = gameTimer;
+        this.timer.schedule(this.gameTimer, 0, 1000);
     }
 
-    public final ScoreModel getScoreModel() {
-        return this.scoreModel;
+    /**
+     * @return 
+     *        the field gameTimer
+     * 
+     */
+    protected GameTimer getGameTimer() {
+        return this.gameTimer;
     }
 
     @Override
-    public final void updateTimerView(final EventTimer eventTimer) {
-        Platform.runLater(() -> this.lbl.setText(Integer.toString(eventTimer.getValue())));
-        if (eventTimer.getValue() == 0) {
-            Platform.runLater(() -> {
-//                System.out.println("Exit Game");
-                this.agentTimer.stopTimer();
-                this.score.setText(Integer.toString(this.scoreModel.getScore()));
-                // System.exit(0);
-            });
-        }
+    public void updateTimerView(final EventTimer eventTimer) {
+        Platform.runLater(() -> {
+            this.timerLbl.setText(Integer.toString(eventTimer.getValue()));
+            this.progressBar.setProgress((double) eventTimer.getValue() / this.gameTimer.getInitialSeconds());
+        });
     }
+
 }
