@@ -13,6 +13,7 @@ import minigames.MiniGameController;
  */
 public class GameTimer extends TimerTask {
 
+    private int initialSeconds;
     private int seconds;
     private final MiniGameController controller;
     private final Function<Integer, Integer> timeFlow;
@@ -25,6 +26,7 @@ public class GameTimer extends TimerTask {
      * @param controller
      */
     public GameTimer(final int seconds, final MiniGameController controller) {
+        this.initialSeconds = seconds;
         this.seconds = seconds;
         this.controller = controller;
         this.timeFlow = s -> s - 1;
@@ -38,6 +40,16 @@ public class GameTimer extends TimerTask {
             this.cancel();
             throw new OverTimeException();
         }
+    }
+
+    /**
+     * Get initial seconds.
+     * 
+     * @return
+     *             seconds
+     */
+    public int getInitialSeconds() {
+        return this.initialSeconds;
     }
 
     /**

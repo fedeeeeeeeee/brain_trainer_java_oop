@@ -6,6 +6,7 @@ import java.util.Timer;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
+import javafx.scene.control.ProgressBar;
 import timer.EventTimer;
 import timer.GameTimer;
 
@@ -17,6 +18,9 @@ public abstract class AbstractMiniGameController implements MiniGameController {
 
     @FXML
     private Label timerLbl;
+
+    @FXML
+    private ProgressBar progressBar;
 
     private Timer timer;
     private GameTimer gameTimer;
@@ -48,8 +52,11 @@ public abstract class AbstractMiniGameController implements MiniGameController {
     }
 
     @Override
-    public final void updateTimerView(final EventTimer eventTimer) {
-        Platform.runLater(() -> this.timerLbl.setText(Integer.toString(eventTimer.getValue())));
+    public void updateTimerView(final EventTimer eventTimer) {
+        Platform.runLater(() -> {
+            this.timerLbl.setText(Integer.toString(eventTimer.getValue()));
+            this.progressBar.setProgress((double) eventTimer.getValue() / this.gameTimer.getInitialSeconds());
+        });
     }
 
 }
