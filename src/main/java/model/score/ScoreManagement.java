@@ -1,5 +1,5 @@
 
-package model;
+package model.score;
 
 import java.util.List;
 import java.util.Map;

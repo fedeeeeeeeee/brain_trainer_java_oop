@@ -3,11 +3,12 @@ package test;
 
 import org.junit.jupiter.api.Test;
 
+import model.score.ScoreManagement;
+import model.score.ScoreManagementImpl;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import model.ScoreManagement;
-import model.ScoreManagementImpl;
 import java.text.DateFormat;
 import java.util.Arrays;
 import java.util.Date;

@@ -1,5 +1,5 @@
 
-package model;
+package model.score;
 
 import java.text.DateFormat;
 import java.util.Date;
