@@ -1,5 +1,6 @@
 package controller;
 
+import model.DifficultyLevel;
 import model.UserPlayer;
 import view.TrainingArea;
 import view.View;
@@ -34,7 +35,30 @@ public interface Controller {
     /**
      * Getter for the selected training area.
      * 
-     * @return area the selected {@link TrainingArea}.
+     * @return the selected {@link TrainingArea}.
      */
     TrainingArea getArea();
+    
+    /**
+     *  Set the selected minigame and difficultyLevel.
+     *  
+     *  @param minigame the selected minigame
+     *  
+     *  @param difficultyLevel the selected {@link DifficultyLevel}.
+     */
+    void setMiniGame(String minigame, DifficultyLevel difficultyLevel);
+    
+    /**
+     * Getter for the selected minigame.
+     * 
+     * @return the selected minigame
+     */
+    String getMiniGame();
+    
+    /**
+     * Getter for the selected difficultyLevel.
+     * 
+     * @return the selected {@link DifficultyLevel}.
+     */
+    DifficultyLevel getDifficultyLevel();
 }

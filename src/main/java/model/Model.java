@@ -29,4 +29,27 @@ public interface Model {
      */
     TrainingArea getArea();
 
+    /**
+     *  Set the selected minigame and difficultyLevel.
+     *  
+     *  @param minigame the selected minigame
+     *  
+     *  @param difficultyLevel the selected {@link DifficultyLevel}.
+     */
+    void setMiniGame(String minigame, DifficultyLevel difficultyLevel);
+    
+    
+    /**
+     * Getter for the selected minigame.
+     * 
+     * @return the selected minigame
+     */
+    String getMiniGame();
+
+    /**
+     * Getter for the selected difficultyLevel.
+     * 
+     * @return the selected {@link DifficultyLevel}.
+     */
+    DifficultyLevel getDifficultyLevel();
 }

@@ -6,6 +6,8 @@ import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
+import minigames.FxMiniGameController;
+import model.DifficultyLevel;
 import view.controllers.FxController;
 
 /**
@@ -19,6 +21,7 @@ public class ViewImpl extends Application implements View {
 
     private final Controller controller;
     private FxController currentSceneController;
+    private FxMiniGameController currentMiniGameController;
     private final SceneLoader sceneLoader;
     private Stage stage;
 
@@ -30,13 +33,14 @@ public class ViewImpl extends Application implements View {
         this.sceneLoader = new SceneLoaderImpl();
     }
 
-    private void initializeSceneController() {
+    private void initializeSceneController(FxController currentController) {
+        currentController.initialize(this, this.controller);
         if (this.stage.getScene() == null) {
-            this.stage.setScene(new Scene(this.currentSceneController.getRoot()));
+            this.stage.setScene(new Scene(currentController.getRoot()));
         } else {
-            this.stage.getScene().setRoot(this.currentSceneController.getRoot());
+            this.stage.getScene().setRoot(currentController.getRoot());
         }
-        this.currentSceneController.getRoot().requestFocus();
+        currentController.getRoot().requestFocus();
     }
 
     /**
@@ -44,11 +48,18 @@ public class ViewImpl extends Application implements View {
      */
     @Override
     public void switchScene(final ViewScene scene) {
-        this.currentSceneController = this.sceneLoader.loadScene(scene.getFilePath()).get();
-        this.currentSceneController.initialize(this, this.controller);
-        this.initializeSceneController();
+        this.currentSceneController = (FxController)this.sceneLoader.loadScene(scene.getFilePath()).get();
+        this.initializeSceneController(this.currentSceneController);
     }
 
+    @Override
+	public void viewMinigame(String minigame, DifficultyLevel difficulty) {
+    	// crea package minigames.area.minigameNAME.(view,model,controller,view.controller)
+		this.currentMiniGameController = (FxMiniGameController) this.sceneLoader.loadScene("/layouts/"+ minigame + ".fxml").get();
+		this.initializeSceneController(currentMiniGameController);
+		this.currentMiniGameController.initializeMiniGame(minigame, difficulty);
+	}
+    
     /**
      * {@inheritDoc}
      */
@@ -62,4 +73,5 @@ public class ViewImpl extends Application implements View {
         this.stage.show();
         this.controller.initializeView(this);
     }
+
 }

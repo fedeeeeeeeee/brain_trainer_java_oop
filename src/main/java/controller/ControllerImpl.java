@@ -1,5 +1,6 @@
 package controller;
 
+import model.DifficultyLevel;
 import model.Model;
 import model.ModelImpl;
 import model.UserPlayer;
@@ -12,46 +13,70 @@ import view.ViewScene;
  * 
  */
 public class ControllerImpl implements Controller {
-	
-    private final Model model;
 
-    /**
-     * Simple constructor of {@link Controller}.
-     */
-    public ControllerImpl() {
-        this.model = new ModelImpl();
-    }
+	private final Model model;
 
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public void initializeView(final View view) {
-        view.switchScene(ViewScene.LOGIN);
-    }
+	/**
+	 * Simple constructor of {@link Controller}.
+	 */
+	public ControllerImpl() {
+		this.model = new ModelImpl();
+	}
 
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public void initializePlayer(final UserPlayer player) {
-        this.model.setUserPlayer(player);
-    }
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public void initializeView(final View view) {
+		view.switchScene(ViewScene.LOGIN);
+	}
 
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public void setArea(final TrainingArea area) {
-        this.model.setArea(area);
-    }
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public void initializePlayer(final UserPlayer player) {
+		this.model.setUserPlayer(player);
+	}
 
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public TrainingArea getArea() {
-        return this.model.getArea();
-    }
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public void setArea(final TrainingArea area) {
+		this.model.setArea(area);
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public TrainingArea getArea() {
+		return this.model.getArea();
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public void setMiniGame(String minigame, DifficultyLevel difficultyLevel) {
+		this.model.setMiniGame(minigame, difficultyLevel);
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public String getMiniGame() {
+		return this.model.getMiniGame();
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public DifficultyLevel getDifficultyLevel() {
+		return this.model.getDifficultyLevel();
+	}
 
 }
