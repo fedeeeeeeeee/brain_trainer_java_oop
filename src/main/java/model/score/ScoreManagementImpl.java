@@ -26,7 +26,7 @@ public class ScoreManagementImpl implements ScoreManagement {
     private int best;
 
     /**
-     * Constructor for a score management.
+     * Constructor for {@link ScoreManagement}.
      */
     public ScoreManagementImpl() {
         this.miniGameHistory = new HashMap<>();
