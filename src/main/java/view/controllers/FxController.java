@@ -6,7 +6,7 @@ import view.View;
 
 /**
  * 
- * the Interface of controller fx
+ * The Interface of controller fx.
  *
  */
 public interface FxController {
