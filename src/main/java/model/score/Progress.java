@@ -5,28 +5,35 @@ import java.util.Map;
 
 import view.TrainingArea;
 
+/**
+ * 
+ * This interface represents the user's progress.
+ *
+ */
 public interface Progress {
 
     /**
-     * The user's progress.
+     * The user's progress in the history.
      * 
      * @return
      *          the score associated at each minigame to every area
      */
-    Map<TrainingArea, Map<String, ScoreManagementImpl>> getHistoryScore();
-    
+    Map<TrainingArea, Map<String, ScoreManagement>> getHistoryScore();
+
     /**
+     * The user's average progress for each area.
      * 
      * @return
-     *          
+     *         the average of the scores at each area
      */
     Map<TrainingArea, Integer> getAverageTrainingAreaScore();
-    
+
     /**
+     * Add the score of the minigame obtained.
      * 
-     * @param area
-     * @param miniGame
-     * @param score
+     * @param area      the training area
+     * @param miniGame  the minigame played
+     * @param score     the score gained
      */
     void addMiniGameScore(TrainingArea area, String miniGame, int score);
 }
