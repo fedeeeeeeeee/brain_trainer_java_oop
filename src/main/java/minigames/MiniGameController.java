@@ -1,8 +1,6 @@
 
 package minigames;
 
-import timer.EventTimer;
-
 /**
  * 
  * This interface represents the common parts of
@@ -14,9 +12,9 @@ public interface MiniGameController {
     /**
      * Update the seconds of the timer on the view.
      * 
-     * @param eventTimer
+     * @param second
      */
-    void updateTimerView(EventTimer eventTimer);
+    void updateTimerView(int second);
 
     /**
      * Indicates that the time available is finished.

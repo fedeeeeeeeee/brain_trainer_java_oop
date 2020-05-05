@@ -35,7 +35,7 @@ public class GameTimer extends TimerTask {
 
     private void notifyChange() throws OverTimeException {
         if (this.seconds >= 0) {
-            this.controller.updateTimerView(new EventTimerImpl(this.seconds));
+            this.controller.updateTimerView(this.seconds);
         } else {
             this.cancel();
             throw new OverTimeException();
