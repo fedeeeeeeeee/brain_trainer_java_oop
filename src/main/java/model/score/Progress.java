@@ -2,6 +2,7 @@
 package model.score;
 
 import java.util.Map;
+import java.util.Optional;
 
 import view.TrainingArea;
 
@@ -26,7 +27,7 @@ public interface Progress {
      * @return
      *         the average of the scores at each area
      */
-    Map<TrainingArea, Integer> getAverageTrainingAreaScore();
+    Map<TrainingArea, Optional<Integer>> getAverageTrainingAreaScore();
 
     /**
      * Add the score of the minigame obtained.
