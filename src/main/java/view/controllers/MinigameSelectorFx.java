@@ -46,9 +46,10 @@ public class MinigameSelectorFx extends AbstractSceneController {
 		final String difficultyTxt = selectedRadioButton.getText();
 		DifficultyLevel difficulty = Arrays.asList(DifficultyLevel.values()).stream()
 										.filter(e -> e.name().equals(difficultyTxt)).findAny().get();
+		
 		if (!difficultyTxt.isEmpty() && !this.gameComboBox.getValue().isEmpty()) {
 			this.getController().setMiniGame(gameComboBox.getValue(), difficulty);
-			this.getView().viewMinigame(gameComboBox.getValue(), difficulty);
+			this.getView().viewMinigame("/layouts/" + gameComboBox.getValue().replace(" ", "")+".fxml");
 		}
 	}
 

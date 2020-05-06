@@ -1,4 +1,4 @@
-
+ 
 package minigames;
 
 import java.util.Timer;
@@ -8,13 +8,14 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.ProgressBar;
 import timer.GameTimer;
+import view.controllers.AbstractSceneController;
 
 /**
  * This abstract class implements the common aspect of {@link MiniGameController}.
  *
  */
-public abstract class AbstractMiniGameController implements MiniGameController {
-
+public abstract class AbstractMiniGameController extends AbstractSceneController implements MiniGameController {
+	
     @FXML
     private Label timerLbl;
 
@@ -60,5 +61,7 @@ public abstract class AbstractMiniGameController implements MiniGameController {
             this.progressBar.setProgress((double) second / this.gameTimer.getInitialSeconds());
         });
     }
+    
+    abstract void initGame();
 
 }

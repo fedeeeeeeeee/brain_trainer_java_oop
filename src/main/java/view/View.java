@@ -1,7 +1,5 @@
 package view;
 
-import model.DifficultyLevel;
-
 /**
  * The interface for the visual representation of the application.
  *
@@ -14,5 +12,5 @@ public interface View {
      */
     void switchScene(ViewScene scene);
     
-    void viewMinigame(String minigame, DifficultyLevel difficulty);
+    void viewMinigame(String minigame);
 }
