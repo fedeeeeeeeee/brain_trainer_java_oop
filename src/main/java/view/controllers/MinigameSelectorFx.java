@@ -50,10 +50,9 @@ public class MinigameSelectorFx extends AbstractSceneController {
             DifficultyLevel difficulty = Arrays.asList(DifficultyLevel.values()).stream()
                     .filter(e -> e.name().equals(selectedRadioButton.getText())).findAny().get();
             this.getController().setMiniGame(gameComboBox.getValue(), difficulty);
-            // crea package minigame
-            this.getView().switchScene("/layouts/" + gameComboBox.getValue().replace(" ", "") + ".fxml");
+            this.getView().switchScene("/layouts/minigames/" + gameComboBox.getValue().replace(" ", "") + ".fxml");
         } else {
-            this.errorLbl.setText("Please, select all fields to start playing!");
+            this.errorLbl.setText("* Please, select all fields to start playing!");
         }
     }
 
