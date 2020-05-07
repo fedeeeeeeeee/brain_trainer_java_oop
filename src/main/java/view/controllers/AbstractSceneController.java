@@ -13,10 +13,10 @@ import view.View;
  */
 public abstract class AbstractSceneController implements FxController { // NOPMD
 
-    private View view;
-    private Controller controller;
-    private Parent root;
     private static List<String> gameList = new ArrayList<>();
+    private static Controller controller;
+    private View view;
+    private Parent root;
 
     /**
      * 

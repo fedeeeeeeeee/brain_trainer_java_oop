@@ -8,9 +8,8 @@ public interface View {
 
     /**
      * 
-     * @param scene the next {@link ViewScene} to show.
+     * @param path the next {@link ViewScene} to show.
      */
-    void switchScene(ViewScene scene);
-    
-    void viewMinigame(String minigame);
+    void switchScene(String path);
+
 }

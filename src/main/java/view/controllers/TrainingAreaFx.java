@@ -25,12 +25,12 @@ public class TrainingAreaFx extends AbstractSceneController {
                 .filter(e -> e.getName().equals(selectedArea)).findAny().get();
         this.getController().setArea(area);
         populateList(area);
-        this.getView().switchScene(ViewScene.GAME_SELECTOR);
+        this.getView().switchScene(ViewScene.GAME_SELECTOR.getFilePath());
     }
 
     @FXML
     private void goBack() throws IOException { // NOPMD
-        this.getView().switchScene(ViewScene.MAIN_MENU);
+        this.getView().switchScene(ViewScene.MAIN_MENU.getFilePath());
     }
 
     private void populateList(final TrainingArea selectedArea) {

@@ -19,6 +19,6 @@ public class StatisticsFx extends AbstractSceneController {
 
     @FXML
     private void goBack() throws IOException { // NOPMD
-        this.getView().switchScene(ViewScene.MAIN_MENU);
+        this.getView().switchScene(ViewScene.MAIN_MENU.getFilePath());
     }
 }

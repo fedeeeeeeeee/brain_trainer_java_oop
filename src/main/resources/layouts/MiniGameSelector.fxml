@@ -11,14 +11,9 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox maxHeight="-Infinity" maxWidth="-Infinity"
-	minHeight="-Infinity" minWidth="-Infinity" prefHeight="580.0"
-	prefWidth="500.0" xmlns="http://javafx.com/javafx/8"
-	xmlns:fx="http://javafx.com/fxml/1"
-	fx:controller="view.controllers.MinigameSelectorFx">
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="580.0" prefWidth="500.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.controllers.MinigameSelectorFx">
 	<children>
-		<GridPane prefHeight="487.0" prefWidth="500.0"
-			GridPane.hgrow="ALWAYS" GridPane.vgrow="ALWAYS" VBox.vgrow="ALWAYS">
+		<GridPane prefHeight="487.0" prefWidth="500.0" GridPane.hgrow="ALWAYS" GridPane.vgrow="ALWAYS" VBox.vgrow="ALWAYS">
 			<columnConstraints>
 				<ColumnConstraints hgrow="SOMETIMES" />
 			</columnConstraints>
@@ -31,16 +26,12 @@
 				<RowConstraints vgrow="SOMETIMES" />
 			</rowConstraints>
 			<children>
-				<Button mnemonicParsing="false"
-					onMouseClicked="#startMiniGame" prefHeight="50.0" prefWidth="120.0"
-					text="PLAY" GridPane.halignment="CENTER" GridPane.rowIndex="5">
+				<Button mnemonicParsing="false" onMouseClicked="#startMiniGame" prefHeight="50.0" prefWidth="120.0" text="PLAY" GridPane.halignment="CENTER" GridPane.rowIndex="5">
 					<font>
 						<Font size="20.0" />
 					</font>
 				</Button>
-				<RadioButton mnemonicParsing="false" prefWidth="120.0"
-					text="EASY" GridPane.halignment="CENTER" GridPane.rowIndex="2"
-					GridPane.valignment="BOTTOM">
+				<RadioButton mnemonicParsing="false" prefWidth="120.0" text="EASY" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="BOTTOM">
 					<font>
 						<Font size="20.0" />
 					</font>
@@ -48,32 +39,29 @@
 						<ToggleGroup fx:id="difficulty" />
 					</toggleGroup>
 				</RadioButton>
-				<RadioButton mnemonicParsing="false" prefWidth="120.0"
-					text="HARD" toggleGroup="$difficulty" GridPane.halignment="CENTER"
-					GridPane.rowIndex="4" GridPane.valignment="BASELINE">
+				<RadioButton mnemonicParsing="false" prefWidth="120.0" text="HARD" toggleGroup="$difficulty" GridPane.halignment="CENTER" GridPane.rowIndex="4" GridPane.valignment="BASELINE">
 					<font>
 						<Font size="20.0" />
 					</font>
 				</RadioButton>
-				<RadioButton mnemonicParsing="false" prefWidth="120.0"
-					text="NORMAL" toggleGroup="$difficulty"
-					GridPane.halignment="CENTER" GridPane.rowIndex="3">
+				<RadioButton mnemonicParsing="false" prefWidth="120.0" text="NORMAL" toggleGroup="$difficulty" GridPane.halignment="CENTER" GridPane.rowIndex="3">
 					<font>
 						<Font size="20.0" />
 					</font>
 				</RadioButton>
-				<ComboBox fx:id="gameComboBox"
-					onMouseClicked="#initializeCombo" prefHeight="30.0"
-					prefWidth="210.0" visibleRowCount="5" GridPane.halignment="CENTER"
-					GridPane.rowIndex="1">
+				<ComboBox fx:id="gameComboBox" onMouseClicked="#initializeCombo" prefHeight="30.0" prefWidth="210.0" visibleRowCount="5" GridPane.halignment="CENTER" GridPane.rowIndex="1">
 					<GridPane.margin>
 						<Insets />
 					</GridPane.margin>
 				</ComboBox>
+            <Label fx:id="errorLbl" textFill="#dd0000" GridPane.halignment="CENTER" GridPane.rowIndex="4" GridPane.valignment="BOTTOM">
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </Label>
 			</children>
 		</GridPane>
-		<GridPane prefHeight="80.0" prefWidth="500.0"
-			GridPane.hgrow="ALWAYS" GridPane.vgrow="ALWAYS" VBox.vgrow="ALWAYS">
+		<GridPane prefHeight="80.0" prefWidth="500.0" GridPane.hgrow="ALWAYS" GridPane.vgrow="ALWAYS" VBox.vgrow="ALWAYS">
 			<columnConstraints>
 				<ColumnConstraints hgrow="SOMETIMES" />
 				<ColumnConstraints hgrow="SOMETIMES" />
@@ -82,10 +70,7 @@
 				<RowConstraints vgrow="SOMETIMES" />
 			</rowConstraints>
 			<children>
-				<Button fx:id="homeBtn" alignment="CENTER_RIGHT"
-					contentDisplay="CENTER" mnemonicParsing="false"
-					onMouseClicked="#backHome" text="Home" GridPane.columnIndex="1"
-					GridPane.halignment="RIGHT" GridPane.valignment="BOTTOM">
+				<Button fx:id="homeBtn" alignment="CENTER_RIGHT" contentDisplay="CENTER" mnemonicParsing="false" onMouseClicked="#backHome" text="Home" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.valignment="BOTTOM">
 					<font>
 						<Font size="18.0" />
 					</font>
@@ -93,9 +78,7 @@
 						<Insets bottom="20.0" right="30.0" />
 					</GridPane.margin>
 				</Button>
-				<Button fx:id="backBtn" contentDisplay="CENTER"
-					mnemonicParsing="false" onMouseClicked="#goBack" text="Back"
-					GridPane.halignment="LEFT" GridPane.valignment="BOTTOM">
+				<Button fx:id="backBtn" contentDisplay="CENTER" mnemonicParsing="false" onMouseClicked="#goBack" text="Back" GridPane.halignment="LEFT" GridPane.valignment="BOTTOM">
 					<font>
 						<Font size="18.0" />
 					</font>

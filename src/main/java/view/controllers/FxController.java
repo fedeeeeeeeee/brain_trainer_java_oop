@@ -42,5 +42,5 @@ public interface FxController {
      * @param root Set the Parent Root.
      */
     void setRoot(Parent root);
-
+    
 }

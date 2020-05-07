@@ -1,4 +1,4 @@
- 
+
 package minigames;
 
 import java.util.Timer;
@@ -11,11 +11,12 @@ import timer.GameTimer;
 import view.controllers.AbstractSceneController;
 
 /**
- * This abstract class implements the common aspect of {@link MiniGameController}.
+ * This abstract class implements the common aspect of
+ * {@link MiniGameController}.
  *
  */
 public abstract class AbstractMiniGameController extends AbstractSceneController implements MiniGameController {
-	
+    
     @FXML
     private Label timerLbl;
 
@@ -43,8 +44,7 @@ public abstract class AbstractMiniGameController extends AbstractSceneController
     }
 
     /**
-     * @return 
-     *        the field gameTimer
+     * @return the field gameTimer
      * 
      */
     protected GameTimer getGameTimer() {
@@ -52,7 +52,7 @@ public abstract class AbstractMiniGameController extends AbstractSceneController
     }
 
     /**
-     *  {@inheritDoc}
+     * {@inheritDoc}
      */
     @Override
     public void updateTimerView(final int second) {
@@ -61,7 +61,4 @@ public abstract class AbstractMiniGameController extends AbstractSceneController
             this.progressBar.setProgress((double) second / this.gameTimer.getInitialSeconds());
         });
     }
-    
-    abstract void initGame();
-
 }

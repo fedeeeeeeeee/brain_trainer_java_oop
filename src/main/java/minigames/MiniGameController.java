@@ -2,8 +2,7 @@ package minigames;
 
 /**
  * 
- * This interface represents the common parts of
- * the minigame view.
+ * This interface represents the common parts of the minigame view.
  *
  */
 public interface MiniGameController {
@@ -19,5 +18,5 @@ public interface MiniGameController {
      * Indicates that the time available is finished.
      */
     void timeFinsh();
+    
 }
-

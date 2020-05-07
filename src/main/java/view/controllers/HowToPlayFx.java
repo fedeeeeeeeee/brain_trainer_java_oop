@@ -40,7 +40,7 @@ public class HowToPlayFx extends AbstractSceneController {
 
     @FXML
     private void goBack() throws IOException { // NOPMD
-        this.getView().switchScene(ViewScene.MAIN_MENU);
+        this.getView().switchScene(ViewScene.MAIN_MENU.getFilePath());
     }
 
     private void scanner(final String fileTxt) {

@@ -23,16 +23,16 @@ public class MainMenuFx extends AbstractSceneController {
 
     @FXML
     private void startTraining() throws IOException { // NOPMD
-        this.getView().switchScene(ViewScene.TRAINING_AREA);
+        this.getView().switchScene(ViewScene.TRAINING_AREA.getFilePath());
     }
 
     @FXML
     private void showStatistics() throws IOException { // NOPMD
-        this.getView().switchScene(ViewScene.STATISTICS);
+        this.getView().switchScene(ViewScene.STATISTICS.getFilePath());
     }
 
     @FXML
     private void showInfo() throws IOException { // NOPMD
-        this.getView().switchScene(ViewScene.HOW_TO_PLAY);
+        this.getView().switchScene(ViewScene.HOW_TO_PLAY.getFilePath());
     }
 }

@@ -8,20 +8,18 @@ import javafx.stage.Screen;
 import javafx.stage.Stage;
 import view.controllers.FxController;
 
-//crea package minigames.area.minigameNAME.(view,model,controller,view.controller)
-
 /**
  * The implementation of the {@link View}.
  *
  */
 public class ViewImpl extends Application implements View {
-	
+
     private static final double WIDTH = Screen.getPrimary().getBounds().getWidth() / 2;
     private static final double HEIGHT = Screen.getPrimary().getBounds().getHeight() / 1.2;
 
     private final Controller controller;
-    private FxController currentSceneController;
     private final SceneLoader sceneLoader;
+    private FxController currentSceneController;
     private Stage stage;
 
     /**
@@ -46,18 +44,12 @@ public class ViewImpl extends Application implements View {
      * {@inheritDoc}
      */
     @Override
-    public void switchScene(final ViewScene scene) { // nei metodi fx passare il filePath
-        this.currentSceneController = this.sceneLoader.loadScene(scene.getFilePath()).get();
+    public void switchScene(final String path) { 
+        this.currentSceneController = this.sceneLoader.loadScene(path).get();
         this.initializeSceneController();
-        
+
     }
 
-    @Override
-	public void viewMinigame(String path) {
-		this.currentSceneController = this.sceneLoader.loadScene(path).get();
-		this.initializeSceneController();
-	}
-    
     /**
      * {@inheritDoc}
      */
