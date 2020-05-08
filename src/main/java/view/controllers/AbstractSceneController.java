@@ -14,7 +14,7 @@ import view.View;
 public abstract class AbstractSceneController implements FxController { // NOPMD
 
     private static List<String> gameList = new ArrayList<>();
-    private static Controller controller;
+    private Controller controller;
     private View view;
     private Parent root;
 
@@ -43,7 +43,7 @@ public abstract class AbstractSceneController implements FxController { // NOPMD
     @Override
     public void initialize(final View view, final Controller controller) {
         this.view = view;
-        AbstractSceneController.controller = controller;
+        this.controller = controller;
     }
 
     /**

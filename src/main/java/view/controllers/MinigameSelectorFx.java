@@ -48,9 +48,12 @@ public class MinigameSelectorFx extends AbstractSceneController {
         if (checkFieldsNotNull()) {
             final RadioButton selectedRadioBtn = (RadioButton) difficulty.getSelectedToggle();
             DifficultyLevel difficulty = Arrays.asList(DifficultyLevel.values()).stream()
-                    .filter(e -> e.name().equals(selectedRadioBtn.getText())).findAny().get();
+                                               .filter(e -> e.name().equals(selectedRadioBtn.getText()))
+                                               .findAny()
+                                               .get();
+
             this.getController().setMiniGame(gameComboBox.getValue(), difficulty);
-            this.getView().switchScene("/layouts/minigames/" + gameComboBox.getValue().replace(" ", "") + ".fxml");
+            this.getView().setMiniGameScene("/layouts/minigames/" + gameComboBox.getValue().replace(" ", "") + ".fxml");
         } else {
             this.errorLbl.setText("* Please, select all fields to start playing!");
         }

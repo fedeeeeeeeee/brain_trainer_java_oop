@@ -11,32 +11,44 @@
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-<VBox alignment="TOP_CENTER" prefHeight="500.0" prefWidth="580.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.controllers.LoginFx">
+<VBox alignment="TOP_CENTER" prefHeight="500.0" prefWidth="580.0"
+	xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1"
+	fx:controller="view.controllers.LoginFx">
 	<children>
-		<GridPane GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="2" GridPane.vgrow="ALWAYS" VBox.vgrow="ALWAYS">
+		<GridPane GridPane.halignment="CENTER"
+			GridPane.hgrow="ALWAYS" GridPane.rowIndex="2" GridPane.vgrow="ALWAYS"
+			VBox.vgrow="ALWAYS">
 			<columnConstraints>
-				<ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+				<ColumnConstraints hgrow="SOMETIMES"
+					minWidth="10.0" prefWidth="100.0" />
 			</columnConstraints>
 			<rowConstraints>
 				<RowConstraints vgrow="SOMETIMES" />
 				<RowConstraints valignment="CENTER" vgrow="SOMETIMES" />
 				<RowConstraints vgrow="SOMETIMES" />
-				<RowConstraints maxHeight="39.0" minHeight="23.0" prefHeight="39.0" vgrow="SOMETIMES" />
-				<RowConstraints maxHeight="92.0" minHeight="76.0" prefHeight="76.0" vgrow="SOMETIMES" />
+				<RowConstraints maxHeight="39.0" minHeight="23.0"
+					prefHeight="39.0" vgrow="SOMETIMES" />
+				<RowConstraints maxHeight="92.0" minHeight="76.0"
+					prefHeight="76.0" vgrow="SOMETIMES" />
 			</rowConstraints>
 
 			<children>
-				<GridPane prefHeight="128.0" prefWidth="580.0" GridPane.halignment="CENTER" GridPane.rowIndex="2" VBox.vgrow="ALWAYS">
+				<GridPane prefHeight="128.0" prefWidth="580.0"
+					GridPane.halignment="CENTER" GridPane.rowIndex="2"
+					VBox.vgrow="ALWAYS">
 					<columnConstraints>
-						<ColumnConstraints hgrow="ALWAYS" prefWidth="211.0" />
-						<ColumnConstraints hgrow="ALWAYS" prefWidth="369.0" />
+						<ColumnConstraints hgrow="ALWAYS"
+							prefWidth="211.0" />
+						<ColumnConstraints hgrow="ALWAYS"
+							prefWidth="369.0" />
 					</columnConstraints>
 					<rowConstraints>
 						<RowConstraints vgrow="SOMETIMES" />
 						<RowConstraints vgrow="SOMETIMES" />
 					</rowConstraints>
 					<children>
-						<Label nodeOrientation="LEFT_TO_RIGHT" text="Username" GridPane.halignment="RIGHT">
+						<Label nodeOrientation="LEFT_TO_RIGHT" text="Username"
+							GridPane.halignment="RIGHT">
 							<font>
 								<Font size="18.0" />
 							</font>
@@ -44,8 +56,11 @@
 								<Insets right="30.0" />
 							</GridPane.margin>
 						</Label>
-						<PasswordField fx:id="txtPassword" maxWidth="-Infinity" prefHeight="27.0" prefWidth="160.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-						<Label text="Password" GridPane.halignment="RIGHT" GridPane.rowIndex="1">
+						<PasswordField fx:id="txtPassword"
+							maxWidth="-Infinity" prefHeight="27.0" prefWidth="160.0"
+							GridPane.columnIndex="1" GridPane.rowIndex="1" />
+						<Label text="Password" GridPane.halignment="RIGHT"
+							GridPane.rowIndex="1">
 							<font>
 								<Font size="18.0" />
 							</font>
@@ -53,18 +68,22 @@
 								<Insets right="30.0" />
 							</GridPane.margin>
 						</Label>
-						<TextField fx:id="txtPlayer" maxWidth="-Infinity" prefHeight="27.0" prefWidth="160.0" GridPane.columnIndex="1" />
+						<TextField fx:id="txtPlayer" maxWidth="-Infinity"
+							prefHeight="27.0" prefWidth="160.0" GridPane.columnIndex="1" />
 					</children>
 					<GridPane.margin>
 						<Insets />
 					</GridPane.margin>
 				</GridPane>
-				<Label contentDisplay="TEXT_ONLY" text="Brain Trainer" textOverrun="CENTER_ELLIPSIS" GridPane.halignment="CENTER">
+				<Label contentDisplay="TEXT_ONLY" text="Brain Trainer"
+					textOverrun="CENTER_ELLIPSIS" GridPane.halignment="CENTER">
 					<font>
 						<Font size="35.0" />
 					</font>
 				</Label>
-				<ImageView fitHeight="209.0" fitWidth="314.0" nodeOrientation="INHERIT" pickOnBounds="true" preserveRatio="true" GridPane.halignment="CENTER" GridPane.rowIndex="1">
+				<ImageView fitHeight="209.0" fitWidth="314.0"
+					nodeOrientation="INHERIT" pickOnBounds="true" preserveRatio="true"
+					GridPane.halignment="CENTER" GridPane.rowIndex="1">
 					<image>
 						<Image url="@../images/brain_training.png" />
 					</image>
@@ -72,16 +91,23 @@
 						<Insets bottom="15.0" />
 					</GridPane.margin>
 				</ImageView>
-				<GridPane prefHeight="106.0" prefWidth="580.0" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="4" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
+				<GridPane prefHeight="106.0" prefWidth="580.0"
+					GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS"
+					GridPane.rowIndex="4" GridPane.valignment="CENTER"
+					GridPane.vgrow="ALWAYS">
 					<columnConstraints>
 						<ColumnConstraints hgrow="SOMETIMES" />
-						<ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" />
+						<ColumnConstraints halignment="CENTER"
+							hgrow="SOMETIMES" />
 					</columnConstraints>
 					<rowConstraints>
-						<RowConstraints valignment="CENTER" vgrow="SOMETIMES" />
+						<RowConstraints valignment="CENTER"
+							vgrow="SOMETIMES" />
 					</rowConstraints>
 					<children>
-						<Button fx:id="signUpBtn" mnemonicParsing="false" onMouseClicked="#signUpPlayer" prefWidth="90.0" text="Sign Up" GridPane.halignment="RIGHT">
+						<Button fx:id="signUpBtn" mnemonicParsing="false"
+							onMouseClicked="#signUpPlayer" prefWidth="90.0" text="Sign Up"
+							GridPane.halignment="RIGHT">
 							<GridPane.margin>
 								<Insets right="30.0" />
 							</GridPane.margin>
@@ -89,7 +115,10 @@
 								<Font size="18.0" />
 							</font>
 						</Button>
-						<Button fx:id="loginBtn" mnemonicParsing="false" onMouseClicked="#loginPlayer" prefWidth="90.0" text="Login" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.valignment="CENTER">
+						<Button fx:id="loginBtn" mnemonicParsing="false"
+							onMouseClicked="#loginPlayer" prefWidth="90.0" text="Login"
+							GridPane.columnIndex="1" GridPane.halignment="LEFT"
+							GridPane.valignment="CENTER">
 							<font>
 								<Font size="18.0" />
 							</font>
@@ -106,12 +135,14 @@
 					<rowConstraints>
 						<RowConstraints vgrow="SOMETIMES" />
 					</rowConstraints>
-               <children>
-                  <Label fx:id="errorLbl" contentDisplay="CENTER" textFill="#dd0000" GridPane.halignment="CENTER">
-                     <font>
-                        <Font size="15.0" />
-                     </font></Label>
-               </children>
+					<children>
+						<Label fx:id="errorLbl" contentDisplay="CENTER"
+							textFill="#dd0000" GridPane.halignment="CENTER">
+							<font>
+								<Font size="15.0" />
+							</font>
+						</Label>
+					</children>
 				</GridPane>
 
 			</children>

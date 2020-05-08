@@ -14,21 +14,24 @@ public interface Controller {
     /**
      * Set the first scene to show.
      *
-     * @param view the scene to show.
+     * @param view 
+     *             the scene to show.
      */
     void initializeView(View view);
 
     /**
      * Set the logged in user as the player of the actual game session.
      * 
-     * @param player the current player.
+     * @param player 
+     *               the current player.
      */
     void initializePlayer(UserPlayer player);
 
     /**
      * Set the selected training area.
      * 
-     * @param area the selected {@link TrainingArea}.
+     * @param area 
+     *             the selected {@link TrainingArea}.
      */
     void setArea(TrainingArea area);
 
@@ -38,23 +41,25 @@ public interface Controller {
      * @return the selected {@link TrainingArea}.
      */
     TrainingArea getArea();
-    
+
     /**
-     *  Set the selected minigame and difficultyLevel.
-     *  
-     *  @param minigame the selected minigame
-     *  
-     *  @param difficultyLevel the selected {@link DifficultyLevel}.
+     * Set the selected minigame and difficultyLevel.
+     * 
+     * @param minigame 
+     *                 the selected minigame
+     * 
+     * @param difficultyLevel 
+     *                        the selected {@link DifficultyLevel}.
      */
     void setMiniGame(String minigame, DifficultyLevel difficultyLevel);
-    
+
     /**
      * Getter for the selected minigame.
      * 
      * @return the selected minigame
      */
     String getMiniGame();
-    
+
     /**
      * Getter for the selected difficultyLevel.
      * 

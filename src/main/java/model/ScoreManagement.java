@@ -1,4 +1,3 @@
-
 package model;
 
 import java.util.List;
@@ -66,4 +65,3 @@ public interface ScoreManagement {
      */
     void updateScore(int score);
 }
-

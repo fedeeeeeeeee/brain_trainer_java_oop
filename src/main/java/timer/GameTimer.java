@@ -4,7 +4,7 @@ package timer;
 import java.util.TimerTask;
 import java.util.function.Function;
 
-import minigames.MiniGameController;
+import minigames.FxMiniGameController;
 
 /**
  * 
@@ -15,7 +15,7 @@ public class GameTimer extends TimerTask {
 
     private int initialSeconds;
     private int seconds;
-    private final MiniGameController controller;
+    private final FxMiniGameController controller;
     private final Function<Integer, Integer> timeFlow;
     private boolean stop;
 
@@ -25,7 +25,7 @@ public class GameTimer extends TimerTask {
      * @param seconds
      * @param controller
      */
-    public GameTimer(final int seconds, final MiniGameController controller) {
+    public GameTimer(final int seconds, final FxMiniGameController controller) {
         this.initialSeconds = seconds;
         this.seconds = seconds;
         this.controller = controller;

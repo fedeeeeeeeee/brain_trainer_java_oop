@@ -54,7 +54,8 @@ public enum ViewScene {
     }
 
     /**
-     * Getter for the file path
+     * Getter for the file path.
+     * 
      * @return the path of the xml file of the current scene
      */
     public String getFilePath() {

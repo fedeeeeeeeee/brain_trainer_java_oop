@@ -59,7 +59,7 @@ public class ControllerImpl implements Controller {
      * {@inheritDoc}
      */
     @Override
-    public void setMiniGame(String minigame, DifficultyLevel difficultyLevel) {
+    public void setMiniGame(final String minigame, final DifficultyLevel difficultyLevel) {
         this.model.setMiniGame(minigame, difficultyLevel);
     }
 

@@ -1,4 +1,3 @@
-
 package model;
 
 import java.text.DateFormat;
@@ -117,4 +116,3 @@ public class ScoreManagementImpl implements ScoreManagement {
         this.updateAverage(score);
     }
 }
-

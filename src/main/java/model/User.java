@@ -20,13 +20,15 @@ public interface User {
 
     /**
      * 
-     * @param username the submitted username.
+     * @param username 
+     *                 the submitted username.
      */
     void setUsername(String username);
 
     /**
      * 
-     * @param password the submitted password.
+     * @param password 
+     *                 the submitted password.
      */
     void setPassword(String password);
 }

@@ -5,7 +5,7 @@ package model;
  *
  */
 public class UserPlayerImpl implements UserPlayer {
-	
+
     private String username;
     private String password;
 

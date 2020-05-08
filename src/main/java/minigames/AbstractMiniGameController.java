@@ -1,4 +1,3 @@
-
 package minigames;
 
 import java.util.Timer;
@@ -12,11 +11,11 @@ import view.controllers.AbstractSceneController;
 
 /**
  * This abstract class implements the common aspect of
- * {@link MiniGameController}.
+ * {@link FxMiniGameController}.
  *
  */
-public abstract class AbstractMiniGameController extends AbstractSceneController implements MiniGameController {
-    
+public abstract class AbstractMiniGameController extends AbstractSceneController implements FxMiniGameController {
+
     @FXML
     private Label timerLbl;
 
@@ -28,6 +27,7 @@ public abstract class AbstractMiniGameController extends AbstractSceneController
 
     /**
      * Simple constructor of AbstractMiniGameController.
+     * 
      */
     public AbstractMiniGameController() {
         this.timer = new Timer();
@@ -36,7 +36,8 @@ public abstract class AbstractMiniGameController extends AbstractSceneController
     /**
      * Sets the field gameTimer.
      * 
-     * @param gameTimer
+     * @param gameTimer 
+     *                  the timer of the game
      */
     protected void setGameTimer(final GameTimer gameTimer) {
         this.gameTimer = gameTimer;

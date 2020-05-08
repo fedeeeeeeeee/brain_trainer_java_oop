@@ -18,13 +18,13 @@ public class HowToPlayFx extends AbstractSceneController {
 
     @FXML
     private Button backBtn;
-    
+
     @FXML
     private Button gameInfoBtn;
-    
+
     @FXML
     private TextArea infoTxt;
-    
+
     @FXML
     private Button brnTrnInfoBtn;
 
