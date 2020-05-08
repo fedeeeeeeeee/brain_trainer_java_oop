@@ -6,6 +6,7 @@ import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
+import minigames.FxMiniGameController;
 import view.controllers.FxController;
 
 /**
@@ -20,34 +21,45 @@ public class ViewImpl extends Application implements View {
     private final Controller controller;
     private final SceneLoader sceneLoader;
     private FxController currentSceneController;
+    private FxMiniGameController currentMinigameController;
     private Stage stage;
 
     /**
      * Simple constructor of {@link View}.
+     * 
      */
     public ViewImpl() {
         this.controller = new ControllerImpl();
         this.sceneLoader = new SceneLoaderImpl();
     }
 
-    private void initializeSceneController() {
-        this.currentSceneController.initialize(this, this.controller);
+    private void initializeSceneController(final FxController currentController) {
+        currentController.initialize(this, this.controller);
         if (this.stage.getScene() == null) {
-            this.stage.setScene(new Scene(this.currentSceneController.getRoot()));
+            this.stage.setScene(new Scene(currentController.getRoot()));
         } else {
-            this.stage.getScene().setRoot(this.currentSceneController.getRoot());
+            this.stage.getScene().setRoot(currentController.getRoot());
         }
-        this.currentSceneController.getRoot().requestFocus();
+        currentController.getRoot().requestFocus();
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public void switchScene(final String path) { 
+    public void switchScene(final String path) {
         this.currentSceneController = this.sceneLoader.loadScene(path).get();
-        this.initializeSceneController();
+        this.initializeSceneController(this.currentSceneController);
+    }
 
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void setMiniGameScene(final String path) {
+        this.currentMinigameController = (FxMiniGameController) this.sceneLoader.loadScene(path).get();
+        this.initializeSceneController(this.currentMinigameController);
+        this.currentMinigameController.initGame();
     }
 
     /**
