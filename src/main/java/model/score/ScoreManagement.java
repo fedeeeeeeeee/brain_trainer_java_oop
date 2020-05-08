@@ -64,4 +64,3 @@ public interface ScoreManagement {
      */
     void updateScore(int score);
 }
-

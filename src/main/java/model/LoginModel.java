@@ -20,7 +20,7 @@ public interface LoginModel {
      * 
      * @param player
      *              the new user 
-     * @return false if the username is already taken true otherwise.
+     * @return false if the username is already taken, true otherwise.
      */
     boolean registerPlayer(UserPlayer player);
 }

@@ -6,10 +6,12 @@ import view.TrainingArea;
  * The implementation of the {@link Model}.
  * 
  */
-public class ModelImpl implements Model { //NOPMD
+public class ModelImpl implements Model { // NOPMD
 
     private UserPlayer player;
     private TrainingArea selectedArea;
+    private DifficultyLevel difficultyLevel;
+    private String minigame;
 
     /**
      * {@inheritDoc}
@@ -33,6 +35,31 @@ public class ModelImpl implements Model { //NOPMD
     @Override
     public TrainingArea getArea() {
         return this.selectedArea;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void setMiniGame(final String minigame, final DifficultyLevel difficultyLevel) {
+        this.minigame = minigame;
+        this.difficultyLevel = difficultyLevel;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public String getMiniGame() {
+        return this.minigame;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public DifficultyLevel getDifficultyLevel() {
+        return this.difficultyLevel;
     }
 
 }

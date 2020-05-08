@@ -45,7 +45,7 @@ public class LoginModelImpl implements LoginModel {
             try {
                 brainTrainer.mkdir();
             } catch (SecurityException se) {
-            	se.printStackTrace();
+                se.printStackTrace();
             }
         }
     }

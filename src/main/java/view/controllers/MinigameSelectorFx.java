@@ -1,14 +1,17 @@
 package view.controllers;
 
 import java.io.IOException;
+import java.util.Arrays;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
-//import javafx.scene.control.RadioButton;
+import javafx.scene.control.Label;
+import javafx.scene.control.RadioButton;
 import javafx.scene.control.ToggleGroup;
+import model.DifficultyLevel;
 import view.ViewScene;
 
 /**
@@ -27,6 +30,9 @@ public class MinigameSelectorFx extends AbstractSceneController {
     private Button backBtn;
 
     @FXML
+    private Label errorLbl;
+
+    @FXML
     private ComboBox<String> gameComboBox;
 
     @FXML
@@ -39,21 +45,32 @@ public class MinigameSelectorFx extends AbstractSceneController {
 
     @FXML
     private void startMiniGame() { // NOPMD
-//			final RadioButton selectedRadioButton = (RadioButton) difficulty.getSelectedToggle();
-//			final String difficulty = selectedRadioButton.getText();
-//			if( !difficulty.isEmpty()) { 
-//				//fa partire il gioco 
-//			}
+        if (checkFieldsNotNull()) {
+            final RadioButton selectedRadioBtn = (RadioButton) difficulty.getSelectedToggle();
+            DifficultyLevel difficulty = Arrays.asList(DifficultyLevel.values()).stream()
+                                               .filter(e -> e.name().equals(selectedRadioBtn.getText()))
+                                               .findAny()
+                                               .get();
+
+            this.getController().setMiniGame(gameComboBox.getValue(), difficulty);
+            this.getView().setMiniGameScene("/layouts/minigames/" + gameComboBox.getValue().replace(" ", "") + ".fxml");
+        } else {
+            this.errorLbl.setText("* Please, select all fields to start playing!");
+        }
+    }
+
+    private boolean checkFieldsNotNull() {
+        return this.difficulty.getSelectedToggle() != null && this.gameComboBox.getValue() != null;
     }
 
     @FXML
     private void goBack() throws IOException { // NOPMD
-        this.getView().switchScene(ViewScene.TRAINING_AREA);
+        this.getView().switchScene(ViewScene.TRAINING_AREA.getFilePath());
     }
 
     @FXML
     private void backHome() throws IOException { // NOPMD
-        this.getView().switchScene(ViewScene.MAIN_MENU);
+        this.getView().switchScene(ViewScene.MAIN_MENU.getFilePath());
     }
 
 }

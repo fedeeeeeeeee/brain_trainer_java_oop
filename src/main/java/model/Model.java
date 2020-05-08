@@ -3,30 +3,56 @@ package model;
 import view.TrainingArea;
 
 /**
+ * The model interface of the whole game.
  * 
- *  The model interface of the whole game.
  */
 public interface Model {
 
     /**
-     * Set the logged in user as the player of the actual game session.
+     * Set the logged in user as the player of the game session.
      * 
-     * @param player the current player.
+     * @param player 
+     *               the current player.
      */
     void setUserPlayer(UserPlayer player);
 
     /**
+     * Getter for the selected training area.
+     * 
+     * @return the selected {@link TrainingArea}.
+     */
+    TrainingArea getArea();
+
+    /**
      * Set the selected training area.
      * 
-     * @param area the selected {@link TrainingArea}.
+     * @param area 
+     *             the selected {@link TrainingArea}.
      */
     void setArea(TrainingArea area);
 
     /**
-     * Getter for the selected training area.
+     * Getter for the selected difficultyLevel.
      * 
-     * @return area the selected {@link TrainingArea}.
+     * @return the selected {@link DifficultyLevel}.
      */
-    TrainingArea getArea();
+    DifficultyLevel getDifficultyLevel();
 
+    /**
+     * Getter for the selected minigame.
+     * 
+     * @return the selected minigame
+     */
+    String getMiniGame();
+
+    /**
+     * Set the selected minigame and difficulty.
+     * 
+     * @param minigame 
+     *                 the selected minigame
+     * 
+     * @param difficultyLevel 
+     *                        the selected {@link DifficultyLevel}.
+     */
+    void setMiniGame(String minigame, DifficultyLevel difficultyLevel);
 }

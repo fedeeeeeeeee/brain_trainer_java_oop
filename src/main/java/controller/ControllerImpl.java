@@ -1,5 +1,6 @@
 package controller;
 
+import model.DifficultyLevel;
 import model.Model;
 import model.ModelImpl;
 import model.UserPlayer;
@@ -12,7 +13,7 @@ import view.ViewScene;
  * 
  */
 public class ControllerImpl implements Controller {
-	
+
     private final Model model;
 
     /**
@@ -27,7 +28,7 @@ public class ControllerImpl implements Controller {
      */
     @Override
     public void initializeView(final View view) {
-        view.switchScene(ViewScene.LOGIN);
+        view.switchScene(ViewScene.LOGIN.getFilePath());
     }
 
     /**
@@ -52,6 +53,30 @@ public class ControllerImpl implements Controller {
     @Override
     public TrainingArea getArea() {
         return this.model.getArea();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void setMiniGame(final String minigame, final DifficultyLevel difficultyLevel) {
+        this.model.setMiniGame(minigame, difficultyLevel);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public String getMiniGame() {
+        return this.model.getMiniGame();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public DifficultyLevel getDifficultyLevel() {
+        return this.model.getDifficultyLevel();
     }
 
 }

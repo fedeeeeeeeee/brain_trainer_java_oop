@@ -18,13 +18,13 @@ public class HowToPlayFx extends AbstractSceneController {
 
     @FXML
     private Button backBtn;
-    
+
     @FXML
     private Button gameInfoBtn;
-    
+
     @FXML
     private TextArea infoTxt;
-    
+
     @FXML
     private Button brnTrnInfoBtn;
 
@@ -40,18 +40,18 @@ public class HowToPlayFx extends AbstractSceneController {
 
     @FXML
     private void goBack() throws IOException { // NOPMD
-        this.getView().switchScene(ViewScene.MAIN_MENU);
+        this.getView().switchScene(ViewScene.MAIN_MENU.getFilePath());
     }
 
     private void scanner(final String fileTxt) {
         infoTxt.clear();
         final String filePath = "src/main/resources/info/" + fileTxt + ".txt";
         try {
-            final Scanner s = new Scanner(new File(filePath));
-            while (s.hasNext()) {
-                infoTxt.appendText(s.nextLine() + "\n");
+            final Scanner scanner = new Scanner(new File(filePath));
+            while (scanner.hasNext()) {
+                infoTxt.appendText(scanner.nextLine() + "\n");
             }
-            s.close();
+            scanner.close();
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }

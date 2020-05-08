@@ -3,6 +3,7 @@ package model.score;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Comparator;
+
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
@@ -154,4 +155,3 @@ public class ScoreManagementImpl implements ScoreManagement {
         this.updateAverage(score);
     }
 }
-

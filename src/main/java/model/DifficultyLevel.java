@@ -29,8 +29,8 @@ public enum DifficultyLevel {
     }
 
     /**
-     * @return
-     *          the name of the difficulty level
+     * @return the name of the difficulty level
+     * 
      */
     public String toString() {
         return this.name;

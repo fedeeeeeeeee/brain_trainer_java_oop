@@ -4,7 +4,8 @@ import java.util.Arrays;
 import java.util.List;
 
 /**
- *  Enumeration for all the training area with the correspondent list of minigames.
+ *  Enumeration for all the training area 
+ *  with the correspondent list of minigames.
  *
  */
 public enum TrainingArea {

@@ -19,9 +19,10 @@ public interface FxController {
 
     /**
      * Setter for the {@link View} and {@link Controller}.
+     * 
      * @param view
-     *             the view to show
      * @param controller
+     * 
      */
     void initialize(View view, Controller controller);
 

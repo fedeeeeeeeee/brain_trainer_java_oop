@@ -49,13 +49,6 @@
 					</toggleGroup>
 				</RadioButton>
 				<RadioButton mnemonicParsing="false" prefWidth="120.0"
-					text="HARD" toggleGroup="$difficulty" GridPane.halignment="CENTER"
-					GridPane.rowIndex="4" GridPane.valignment="BASELINE">
-					<font>
-						<Font size="20.0" />
-					</font>
-				</RadioButton>
-				<RadioButton mnemonicParsing="false" prefWidth="120.0"
 					text="NORMAL" toggleGroup="$difficulty"
 					GridPane.halignment="CENTER" GridPane.rowIndex="3">
 					<font>
@@ -70,6 +63,31 @@
 						<Insets />
 					</GridPane.margin>
 				</ComboBox>
+				<GridPane GridPane.rowIndex="4">
+					<columnConstraints>
+						<ColumnConstraints hgrow="SOMETIMES" />
+					</columnConstraints>
+					<rowConstraints>
+						<RowConstraints vgrow="SOMETIMES" />
+						<RowConstraints vgrow="SOMETIMES" />
+					</rowConstraints>
+					<children>
+						<Label fx:id="errorLbl" textFill="#dd0000"
+							GridPane.halignment="CENTER" GridPane.rowIndex="1"
+							GridPane.valignment="CENTER">
+							<font>
+								<Font size="15.0" />
+							</font>
+						</Label>
+						<RadioButton mnemonicParsing="false" prefWidth="120.0"
+							text="HARD" toggleGroup="$difficulty"
+							GridPane.halignment="CENTER" GridPane.valignment="BASELINE">
+							<font>
+								<Font size="20.0" />
+							</font>
+						</RadioButton>
+					</children>
+				</GridPane>
 			</children>
 		</GridPane>
 		<GridPane prefHeight="80.0" prefWidth="500.0"

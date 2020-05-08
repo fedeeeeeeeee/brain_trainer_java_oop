@@ -53,7 +53,7 @@ public class LoginFx extends AbstractSceneController {
     }
 
     private void switchToMenu() {
-        this.getView().switchScene(ViewScene.MAIN_MENU);
+        this.getView().switchScene(ViewScene.MAIN_MENU.getFilePath());
     }
 
     private void setUserPlayer(final UserPlayer player) {

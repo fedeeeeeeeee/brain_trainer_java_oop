@@ -22,20 +22,23 @@ public class TrainingAreaFx extends AbstractSceneController {
     private void areaClicked(final MouseEvent event) throws IOException { // NOPMD
         final String selectedArea = ((Button) event.getSource()).getText();
         final TrainingArea area = Arrays.asList(TrainingArea.values()).stream()
-                .filter(e -> e.getName().equals(selectedArea)).findAny().get();
+                            .filter(e -> e.getName().equals(selectedArea))
+                            .findAny()
+                            .get();
+
         this.getController().setArea(area);
         populateList(area);
-        this.getView().switchScene(ViewScene.GAME_SELECTOR);
+        this.getView().switchScene(ViewScene.GAME_SELECTOR.getFilePath());
     }
 
     @FXML
     private void goBack() throws IOException { // NOPMD
-        this.getView().switchScene(ViewScene.MAIN_MENU);
+        this.getView().switchScene(ViewScene.MAIN_MENU.getFilePath());
     }
 
     private void populateList(final TrainingArea selectedArea) {
         this.getGameList().clear();
-        this.getGameList().addAll(selectedArea.getMiniGameList());    
+        this.getGameList().addAll(selectedArea.getMiniGameList());
     }
 
 }
