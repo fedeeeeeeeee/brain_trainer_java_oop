@@ -1,4 +1,3 @@
-
 package model.score;
 
 import model.DifficultyLevel;

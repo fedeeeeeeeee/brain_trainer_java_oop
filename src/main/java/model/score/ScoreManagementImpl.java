@@ -1,12 +1,10 @@
+package model.score;
 
-package model;
-
-import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Comparator;
 import java.util.Date;
 import java.util.HashMap;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Locale;
 import java.util.Map;
 
 
@@ -21,22 +19,31 @@ public class ScoreManagementImpl implements ScoreManagement {
      */
     private static final double ALPHA = 0.125;
 
-    private Map<String, List<Integer>> miniGameHistory;
+    /**
+     * The max number of dates allowed.
+     */
+    private static final int HISTORY_SIZE = 7;
+
+    private Map<String, Integer> miniGameHistory;
+    private int counter;
+    private int sum;
     private int average;
     private int best;
 
     /**
-     * Constructor for a score management.
+     * Constructor for {@link ScoreManagement}.
      */
     public ScoreManagementImpl() {
         this.miniGameHistory = new HashMap<>();
+        this.sum = 0;
+        this.counter = 0;
         this.average = 0;
         this.best = 0;
     }
 
     private String createDate() {
         final Date date = new Date();
-        final DateFormat dateFormat = DateFormat.getDateInstance(DateFormat.SHORT, Locale.ITALY);
+        final SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yy");
         return dateFormat.format(date);
     }
 
@@ -50,20 +57,50 @@ public class ScoreManagementImpl implements ScoreManagement {
         this.average = this.average == 0 ? score : (int) ((1 - ALPHA) * this.average + ALPHA * score);
     }
 
+    private int computeDailyAverage() {
+        return (int) this.sum / this.counter;
+    }
+
+    private void checkFullHistory() {
+        final SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yy");
+
+        while (this.miniGameHistory.size() >= HISTORY_SIZE) {
+
+            this.miniGameHistory.remove(this.miniGameHistory.keySet().stream().min(new Comparator<>() {
+
+                @Override
+                public int compare(final String o1, final String o2) {
+                    try {
+                        return dateFormat.parse(o1).compareTo(dateFormat.parse(o2));
+                    } catch (ParseException e) {
+                        e.printStackTrace();
+                    }
+                    return 0;
+                }
+            }).get());
+        }
+    }
+
     private void addScore(final int score) {
         final String date = this.createDate();
 
         if (!this.miniGameHistory.containsKey(date)) {
-            this.miniGameHistory.put(date, new LinkedList<>());
+            this.sum = score;
+            this.counter = 1;
+            this.checkFullHistory();
+        } else {
+            this.sum = this.sum + score;
+            this.counter = this.counter + 1;
         }
-        this.miniGameHistory.get(date).add(score);
+
+        this.miniGameHistory.put(date, this.computeDailyAverage());
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public Map<String, List<Integer>> getMiniGameHistory() {
+    public Map<String, Integer> getMiniGameHistory() {
         return this.miniGameHistory;
     }
 
@@ -71,7 +108,7 @@ public class ScoreManagementImpl implements ScoreManagement {
      * {@inheritDoc}
      */
     @Override
-    public void setMiniGameHistory(final Map<String, List<Integer>> miniGameHistory) {
+    public void setMiniGameHistory(final Map<String, Integer> miniGameHistory) {
         this.miniGameHistory = miniGameHistory;
     }
 

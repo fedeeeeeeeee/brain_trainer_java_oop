@@ -1,7 +1,5 @@
+package model.score;
 
-package model;
-
-import java.util.List;
 import java.util.Map;
 
 /**
@@ -14,17 +12,17 @@ public interface ScoreManagement {
      * Get the minigame history map.
      * 
      * @return 
-     *          map with key a Date and value a list of score. 
+     *          map with key a date and value the average of the minigame score. 
      */
-    Map<String, List<Integer>> getMiniGameHistory();
+    Map<String, Integer> getMiniGameHistory();
 
     /**
      * Set the minigame history map.
      * 
      * @param miniGameHistory
-     *      map with key a Date and value a list of score. 
+     *      map with key a date and value the average of the minigame score. 
      */
-    void setMiniGameHistory(Map<String, List<Integer>> miniGameHistory);
+    void setMiniGameHistory(Map<String, Integer> miniGameHistory);
 
     /**
      * Get the average score of minigame.
