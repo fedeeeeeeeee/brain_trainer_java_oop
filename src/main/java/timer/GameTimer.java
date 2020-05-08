@@ -76,7 +76,7 @@ public class GameTimer extends TimerTask {
             try {
                 this.notifyChange();
             } catch (OverTimeException e) {
-                this.controller.timeFinsh();
+                this.controller.timeFinish();
             }
         }
     }

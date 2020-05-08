@@ -33,7 +33,7 @@ public abstract class AbstractSceneController implements FxController { // NOPMD
      */
     @Override
     public Controller getController() {
-        return this.controller;
+        return controller;
     }
 
     /**
@@ -43,7 +43,7 @@ public abstract class AbstractSceneController implements FxController { // NOPMD
     @Override
     public void initialize(final View view, final Controller controller) {
         this.view = view;
-        this.controller = controller;
+        AbstractSceneController.controller = controller;
     }
 
     /**

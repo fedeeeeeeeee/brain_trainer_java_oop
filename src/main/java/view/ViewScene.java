@@ -53,6 +53,10 @@ public enum ViewScene {
         this.fileName = fileName;
     }
 
+    /**
+     * Getter for the file path
+     * @return the path of the xml file of the current scene
+     */
     public String getFilePath() {
         return PATH + fileName + PATH_END;
     }

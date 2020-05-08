@@ -41,7 +41,7 @@ public class ModelImpl implements Model { // NOPMD
          * {@inheritDoc}
          */
         @Override
-        public void setMiniGame(String minigame, DifficultyLevel difficultyLevel) {
+        public void setMiniGame(final String minigame, final DifficultyLevel difficultyLevel) {
                 this.minigame = minigame;
                 this.difficultyLevel = difficultyLevel;
         }

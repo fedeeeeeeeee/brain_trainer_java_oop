@@ -47,11 +47,11 @@ public class HowToPlayFx extends AbstractSceneController {
         infoTxt.clear();
         final String filePath = "src/main/resources/info/" + fileTxt + ".txt";
         try {
-            final Scanner s = new Scanner(new File(filePath));
-            while (s.hasNext()) {
-                infoTxt.appendText(s.nextLine() + "\n");
+            final Scanner scanner = new Scanner(new File(filePath));
+            while (scanner.hasNext()) {
+                infoTxt.appendText(scanner.nextLine() + "\n");
             }
-            s.close();
+            scanner.close();
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }

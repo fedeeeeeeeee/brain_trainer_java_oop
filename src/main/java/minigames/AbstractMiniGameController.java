@@ -23,7 +23,7 @@ public abstract class AbstractMiniGameController extends AbstractSceneController
     @FXML
     private ProgressBar progressBar;
 
-    private Timer timer;
+    private final Timer timer;
     private GameTimer gameTimer;
 
     /**

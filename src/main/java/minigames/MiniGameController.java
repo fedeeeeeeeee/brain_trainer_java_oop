@@ -17,6 +17,6 @@ public interface MiniGameController {
     /**
      * Indicates that the time available is finished.
      */
-    void timeFinsh();
+    void timeFinish();
     
 }
