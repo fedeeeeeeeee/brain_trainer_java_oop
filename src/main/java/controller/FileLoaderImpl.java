@@ -1,4 +1,4 @@
-package model;
+package controller;
 
 import java.io.File;
 import java.io.IOException;
@@ -8,20 +8,22 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+import model.UserPlayer;
+import model.UserPlayerImpl;
+
 public final class FileLoaderImpl implements FileLoader {
     
     private UserPlayer player;
 
     @Override
     public void saveData() {
-        // TODO Auto-generated method stub
+       
 
     }
 
     @Override
     public UserPlayer loadData(final File userFileName) {
        final ObjectMapper mapper = new ObjectMapper();
-       
        
        try {
         this.player = mapper.readValue(userFileName, UserPlayerImpl.class);
