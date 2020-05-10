@@ -1,9 +1,10 @@
 package controller;
 
+import java.io.File;
+
 import model.DifficultyLevel;
 import model.Model;
 import model.ModelImpl;
-import model.UserPlayer;
 import view.TrainingArea;
 import view.View;
 import view.ViewScene;
@@ -15,12 +16,14 @@ import view.ViewScene;
 public class ControllerImpl implements Controller {
 
     private final Model model;
+    private final FileLoader loader;
 
     /**
      * Simple constructor of {@link Controller}.
      */
     public ControllerImpl() {
         this.model = new ModelImpl();
+        this.loader = new FileLoaderImpl();
     }
 
     /**
@@ -35,8 +38,8 @@ public class ControllerImpl implements Controller {
      * {@inheritDoc}
      */
     @Override
-    public void initializePlayer(final UserPlayer player) {
-        this.model.setUserPlayer(player);
+    public void initializePlayer(final File userFileName) {
+        this.model.setUserPlayer(this.loader.loadData(userFileName));
     }
 
     /**

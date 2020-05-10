@@ -1,7 +1,8 @@
 package controller;
 
+import java.io.File;
+
 import model.DifficultyLevel;
-import model.UserPlayer;
 import view.TrainingArea;
 import view.View;
 
@@ -22,10 +23,10 @@ public interface Controller {
     /**
      * Set the logged in user as the player of the actual game session.
      * 
-     * @param player 
-     *               the current player.
+     * @param userFileName 
+     *               the file's name of the current player.
      */
-    void initializePlayer(UserPlayer player);
+    void initializePlayer(File userFileName);
 
     /**
      * Set the selected training area.
