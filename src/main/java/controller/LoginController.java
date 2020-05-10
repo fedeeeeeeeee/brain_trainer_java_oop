@@ -1,5 +1,7 @@
 package controller;
 
+import java.io.File;
+
 import model.LoginModel;
 import model.LoginModelImpl;
 import model.UserPlayer;
@@ -21,15 +23,17 @@ public class LoginController {
     }
 
     /**
-     * Check if the player is logged.
+     * Check if user exists in data storage.
      * 
-     * @param player 
-     *              the player to check
-     * @return false if the user isn't already logged or the password isn't correct
-     *         true otherwise.
+     * @param username
+     *          the username of the player to check
+     * @param password
+     *          the password of the player to check
+     * @return
+     *         false if the user isn't already registered, true otherwise.
      */
-    public boolean isLoggedIn(final UserPlayer player) {
-        return this.model.loginUser(player); // boolean
+    public boolean isLoggedIn(final String username, final String password) {
+        return this.model.loginUser(username, password); 
     }
 
     /**
@@ -44,13 +48,13 @@ public class LoginController {
     }
 
     /**
-     * Load the data of the current user.
+     * Get the current user's file.
      * 
      * @return
-     *          the current user
+     *          the user's file
      */
-    public UserPlayer loadUser() {
-        return this.model.loadUser();
+    public File getUserFile() {
+        return this.model.getUserFile();
     }
 
 }

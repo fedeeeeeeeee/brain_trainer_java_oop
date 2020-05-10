@@ -1,5 +1,6 @@
 package view.controllers;
 
+import java.io.File;
 import java.io.IOException;
 
 import controller.LoginController;
@@ -49,23 +50,24 @@ public class LoginFx extends AbstractSceneController {
         final UserPlayer player = new UserPlayerImpl();
         player.setUsername(this.txtPlayer.getText());
         player.setPassword(this.txtPassword.getText());
+
         return player;
     }
+
 
     private void switchToMenu() {
         this.getView().switchScene(ViewScene.MAIN_MENU.getFilePath());
     }
 
-    private void setUserPlayer(final UserPlayer player) {
-        this.getController().initializePlayer(player);
+    private void setUserPlayer(final File userFileName) {
+        this.getController().initializePlayer(userFileName);
     }
 
     @FXML
     private void loginPlayer() throws IOException { // NOPMD
         if (!this.checkEmptyFields()) {
-            final UserPlayer player = this.initPlayer();
-            if (this.loginController.isLoggedIn(player)) {
-                this.setUserPlayer(this.loginController.loadUser());
+            if (this.loginController.isLoggedIn(this.txtPlayer.getText(), this.txtPassword.getText())) {
+                this.setUserPlayer(this.loginController.getUserFile());
                 this.switchToMenu();
             } else {
                 this.errorLbl.setText(MessageError.INCORRECT_ENTRY.toString());
@@ -80,7 +82,7 @@ public class LoginFx extends AbstractSceneController {
         if (!this.checkEmptyFields()) {
             final UserPlayer player = this.initPlayer();
             if (this.loginController.isRegistered(player)) {
-                this.setUserPlayer(player);
+                this.setUserPlayer(this.loginController.getUserFile());
                 this.switchToMenu();
             } else {
                 final Alert alert = new Alert(AlertType.ERROR, MessageError.EXISTING_USERNAME.toString(),
@@ -93,8 +95,7 @@ public class LoginFx extends AbstractSceneController {
     }
 
     private enum MessageError {
-        EMPTY_FIELD("Fields cannot be empty!"), 
-        EXISTING_USERNAME("Username already exists!"),
+        EMPTY_FIELD("Fields cannot be empty!"), EXISTING_USERNAME("Username already exists!"),
         INCORRECT_ENTRY("Incorrect password or non-existent user!");
 
         private String message;

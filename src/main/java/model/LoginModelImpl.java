@@ -6,6 +6,8 @@ import java.io.IOException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 
+import model.score.ProgressImpl;
+
 /**
  * The implementation of the {@link LoginModel} interface.
  * 
@@ -28,10 +30,10 @@ public class LoginModelImpl implements LoginModel {
         return false;
     }
 
-    private boolean checkPassword(final UserPlayer player) {
+    private boolean checkPassword(final String password) {
         final ObjectMapper mapper = new ObjectMapper();
         try {
-            if (mapper.readValue(userFile, UserPlayerImpl.class).getPassword().equals(player.getPassword())) {
+            if (mapper.readValue(userFile, UserPlayerImpl.class).getPassword().equals(password)) {
                 return true;
             }
         } catch (IOException e) {
@@ -54,9 +56,9 @@ public class LoginModelImpl implements LoginModel {
      * {@inheritDoc}
      */
     @Override
-    public boolean loginUser(final UserPlayer player) {
-        final String userFileName = player.getUsername() + ".txt";
-        return this.checkIfUserExist(userFileName) && this.checkPassword(player);
+    public boolean loginUser(final String username, final String password) {
+        final String userFileName = username + ".txt";
+        return this.checkIfUserExist(userFileName) && this.checkPassword(password);
     }
 
     /**
@@ -71,6 +73,7 @@ public class LoginModelImpl implements LoginModel {
 
         if (!this.checkIfUserExist(userFileName)) {
             this.userFile = new File(PATH + File.separator + userFileName);
+            player.setProgress(new ProgressImpl());
             try {
                 mapper.writeValue(userFile, player);
             } catch (IOException e) {
@@ -85,9 +88,8 @@ public class LoginModelImpl implements LoginModel {
      * {@inheritDoc}
      */
     @Override
-    public UserPlayer loadUser() {
-        final FileLoader loader = new FileLoaderImpl();
-        return loader.loadData(this.userFile);
+    public File getUserFile() {
+        return this.userFile;
     }
 
 }

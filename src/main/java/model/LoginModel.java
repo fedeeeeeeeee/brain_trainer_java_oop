@@ -1,5 +1,7 @@
 package model;
 
+import java.io.File;
+
 /**
  * The interface for the Login model.
  * 
@@ -9,26 +11,30 @@ public interface LoginModel {
     /**
      * Check if user exists in data storage.
      * 
-     * @param player
-     *              the player to check
-     * @return false if the user isn't already registered, true otherwise.
+     * @param username
+     *          the username of the player to check
+     * @param password
+     *          the password of the player to check
+     * @return
+     *         false if the user isn't already registered, true otherwise.
      */
-    boolean loginUser(UserPlayer player);
+    boolean loginUser(String username, String password);
 
     /**
      * Register the new user and create the related file.
      * 
      * @param player
      *              the new user 
-     * @return false if the username is already taken, true otherwise.
+     * @return 
+     *         false if the registration is wrong, true otherwise.
      */
     boolean registerPlayer(UserPlayer player);
 
     /**
-     * Load the data of the current user.
+     *Get the current user's file.
      * 
      * @return
-     *          the current user
+     *          the current user's file
      */
-    UserPlayer loadUser();
+    File getUserFile();
 }
