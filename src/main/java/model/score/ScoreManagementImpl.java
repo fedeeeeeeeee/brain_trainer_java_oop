@@ -9,6 +9,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 
+
 /**
  * This class implements {@link ScoreManagment}.
  *
@@ -30,6 +31,21 @@ public class ScoreManagementImpl implements ScoreManagement {
     private int sum;
     private int average;
     private int best;
+
+//    @JsonCreator
+//    public ScoreManagementImpl(@JsonProperty("miniGameHistory")final Map<String, Integer> minigameHistory,
+//                               @JsonProperty("counter")final int counter, 
+//                               @JsonProperty("sum") final int sum,
+//                               @JsonProperty("average") final int average,
+//                               @JsonProperty("best") final int best) {
+//
+//        this.miniGameHistory = minigameHistory;
+//        this.counter = counter;
+//        this.sum = sum;
+//        this.average = average;
+//        this.best = best;
+//
+//    }
 
     /**
      * Constructor for {@link ScoreManagement}.

@@ -3,9 +3,12 @@ package view;
 import java.util.Arrays;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 /**
- *  Enumeration for all the training area 
- *  with the correspondent list of minigames.
+ * Enumeration for all the training area with the correspondent list of
+ * minigames.
  *
  */
 public enum TrainingArea {
@@ -43,10 +46,18 @@ public enum TrainingArea {
     private String name;
     private List<String> miniGames;
 
+//    @JsonCreator
+//    TrainingArea(@JsonProperty("name") final String name, @JsonProperty("minigames") final List<String> miniGames) {
+//
+//        this.name = name;
+//        this.miniGames = miniGames;
+//
+//    }
+
     TrainingArea(final String name, final List<String> miniGames) {
-        this.name = name;
-        this.miniGames = miniGames;
-    }
+       this.name = name;
+       this.miniGames = miniGames;
+   }
 
     /**
      * 

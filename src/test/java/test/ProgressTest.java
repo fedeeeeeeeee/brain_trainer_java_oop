@@ -33,8 +33,8 @@ public class ProgressTest {
         this.progress.addMiniGameScore(TrainingArea.ATTENTION, "True Color", 80);
         this.progress.addMiniGameScore(TrainingArea.BRAIN_SPEED, "One Way", 100);
         this.progress.addMiniGameScore(TrainingArea.BRAIN_SPEED, "One Way", 60);
-        assertEquals(106, this.progress.getAverageTrainingAreaScore().get(TrainingArea.ATTENTION).get());
-        assertEquals(95, this.progress.getAverageTrainingAreaScore().get(TrainingArea.BRAIN_SPEED).get());
+        assertEquals(106, this.progress.getAverageTrainingAreaScore().get(TrainingArea.ATTENTION));
+        assertEquals(95, this.progress.getAverageTrainingAreaScore().get(TrainingArea.BRAIN_SPEED));
     }
 
     /**

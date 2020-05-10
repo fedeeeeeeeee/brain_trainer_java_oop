@@ -18,7 +18,7 @@ public interface Progress {
      * @return
      *          the score associated at each minigame to every area
      */
-    Map<TrainingArea, Map<String, ScoreManagement>> getHistoryScore();
+    Map<TrainingArea, Map<String, ScoreManagementImpl>> getHistoryScore();
 
     /**
      * The user's average progress for each area.

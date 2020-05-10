@@ -11,14 +11,8 @@ public class UserPlayerImpl implements UserPlayer {
 
     private String username;
     private String password;
-    private Progress progress;
+    private ProgressImpl progress;
 
-    /**
-     * Constructor for {@link UserPlayer}.
-     */
-    public UserPlayerImpl() {
-        this.progress = new ProgressImpl();
-    }
 
     /**
      * {@inheritDoc}
@@ -58,6 +52,14 @@ public class UserPlayerImpl implements UserPlayer {
     @Override
     public Progress getProgress() {
         return this.progress;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void setProgress(final ProgressImpl progress) {
+        this.progress = progress;
     }
 
 }

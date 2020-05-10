@@ -14,8 +14,16 @@ import view.TrainingArea;
  */
 public class ProgressImpl implements Progress {
 
-    private Map<TrainingArea, Map<String, ScoreManagement>> historyScore;
+    private Map<TrainingArea, Map<String, ScoreManagementImpl>> historyScore;
     private Map<TrainingArea, Optional<Integer>> averageTrainingAreaScore;
+
+//    @JsonCreator
+//    public ProgressImpl(@JsonProperty("historyScore") final Map<TrainingArea, Map<String, ScoreManagementImpl>> historyScore,
+//                        @JsonProperty("averageTrainingAreaScore") final Map<TrainingArea, Integer> averageTrainingAreaScore) {
+//
+//      this.historyScore = historyScore;
+//       this.averageTrainingAreaScore = averageTrainingAreaScore;
+//    }
 
     /**
      * Constructor for {@link Progress}.
@@ -37,14 +45,15 @@ public class ProgressImpl implements Progress {
     }
 
     private int computeAverage(final TrainingArea area) {
-        return (int) this.historyScore.get(area).entrySet().stream().mapToInt(s -> s.getValue().getAverage()).average().getAsDouble();
+        return (int) this.historyScore.get(area).entrySet().stream().mapToInt(s -> s.getValue().getAverage()).average()
+                .getAsDouble();
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public Map<TrainingArea, Map<String, ScoreManagement>> getHistoryScore() {
+    public Map<TrainingArea, Map<String, ScoreManagementImpl>> getHistoryScore() {
         return Collections.unmodifiableMap(this.historyScore);
     }
 
