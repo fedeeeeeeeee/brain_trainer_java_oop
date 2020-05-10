@@ -15,9 +15,11 @@ public interface FileLoader {
     /**
      * Load the user's data.
      * 
+     * @param userFileName
+     *         the name of the file where data are storage
      * @return
-     *      the current user
+     *         the current user
      */
-    UserPlayer loadData();
+    UserPlayer loadData(String userFileName);
 
 }
