@@ -29,7 +29,7 @@ public class LoginController {
      *         true otherwise.
      */
     public boolean isLoggedIn(final UserPlayer player) {
-        return this.model.loginUser(player);
+        return this.model.loginUser(player); // boolean
     }
 
     /**
@@ -41,6 +41,16 @@ public class LoginController {
      */
     public boolean isRegistered(final UserPlayer player) {
         return this.model.registerPlayer(player);
+    }
+
+    /**
+     * Load the data of the current user.
+     * 
+     * @return
+     *          the current user
+     */
+    public UserPlayer loadUser() {
+        return this.model.loadUser();
     }
 
 }

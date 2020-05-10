@@ -65,7 +65,7 @@ public class LoginFx extends AbstractSceneController {
         if (!this.checkEmptyFields()) {
             final UserPlayer player = this.initPlayer();
             if (this.loginController.isLoggedIn(player)) {
-                this.setUserPlayer(player);
+                this.setUserPlayer(this.loginController.loadUser());
                 this.switchToMenu();
             } else {
                 this.errorLbl.setText(MessageError.INCORRECT_ENTRY.toString());

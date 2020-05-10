@@ -1,5 +1,7 @@
 package model;
 
+import java.io.File;
+
 /**
  * 
  * This interface represent a loader for user's file.
@@ -20,6 +22,6 @@ public interface FileLoader {
      * @return
      *         the current user
      */
-    UserPlayer loadData(String userFileName);
+    UserPlayer loadData(File userFileName);
 
 }

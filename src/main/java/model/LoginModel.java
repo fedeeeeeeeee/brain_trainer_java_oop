@@ -23,4 +23,12 @@ public interface LoginModel {
      * @return false if the username is already taken, true otherwise.
      */
     boolean registerPlayer(UserPlayer player);
+
+    /**
+     * Load the data of the current user.
+     * 
+     * @return
+     *          the current user
+     */
+    UserPlayer loadUser();
 }

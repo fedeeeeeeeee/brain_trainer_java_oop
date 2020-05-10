@@ -56,10 +56,7 @@ public class LoginModelImpl implements LoginModel {
     @Override
     public boolean loginUser(final UserPlayer player) {
         final String userFileName = player.getUsername() + ".txt";
-        if (this.checkIfUserExist(userFileName)) {
-            return this.checkPassword(player);
-        }
-        return false;
+        return this.checkIfUserExist(userFileName) && this.checkPassword(player);
     }
 
     /**
@@ -82,6 +79,15 @@ public class LoginModelImpl implements LoginModel {
             return true;
         }
         return false;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public UserPlayer loadUser() {
+        final FileLoader loader = new FileLoaderImpl();
+        return loader.loadData(this.userFile);
     }
 
 }
