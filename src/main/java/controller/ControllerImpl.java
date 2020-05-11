@@ -82,4 +82,12 @@ public class ControllerImpl implements Controller {
         return this.model.getDifficultyLevel();
     }
 
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void saveData() {
+       this.loader.saveData();
+    }
+
 }

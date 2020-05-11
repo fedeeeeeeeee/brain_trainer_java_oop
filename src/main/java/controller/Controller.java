@@ -67,4 +67,9 @@ public interface Controller {
      * @return the selected {@link DifficultyLevel}.
      */
     DifficultyLevel getDifficultyLevel();
+
+    /**
+     * Save the user's data.
+     */
+    void saveData();
 }

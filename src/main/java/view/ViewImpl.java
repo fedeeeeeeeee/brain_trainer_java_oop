@@ -3,9 +3,11 @@ package view;
 import controller.Controller;
 import controller.ControllerImpl;
 import javafx.application.Application;
+import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
+import javafx.stage.WindowEvent;
 import minigames.FxMiniGameController;
 import view.controllers.FxController;
 
@@ -74,6 +76,8 @@ public class ViewImpl extends Application implements View {
         this.stage.setResizable(true);
         this.stage.show();
         this.controller.initializeView(this);
+        
+        this.stage.setOnCloseRequest((e)-> controller.saveData());
     }
 
 }
