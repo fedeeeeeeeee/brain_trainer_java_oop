@@ -7,7 +7,7 @@
 
 <VBox prefHeight="301.0" prefWidth="325.0"
 	xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1"
-	fx:controller="minigames.example.controller.ExampleMiniGameController">
+	fx:controller="minigames.ExampleMiniGameController">
 
 	<children>
 		<Button fx:id="btn" alignment="CENTER"
