@@ -72,4 +72,13 @@ public interface Controller {
      * Save the user's data.
      */
     void saveData();
+
+    /**
+     * Add the score to the current user.
+     * 
+     * @param score
+     *          the score to add
+     */
+    void updateProgress(Integer score);
+
 }

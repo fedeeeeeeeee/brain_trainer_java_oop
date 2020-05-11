@@ -87,7 +87,16 @@ public class ControllerImpl implements Controller {
      */
     @Override
     public void saveData() {
-       this.loader.saveData();
+       this.loader.saveData(this.model.getUser());
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void updateProgress(final Integer score) {
+        this.model.addScore(score);
+
     }
 
 }
