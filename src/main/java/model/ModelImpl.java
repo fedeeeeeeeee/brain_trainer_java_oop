@@ -62,4 +62,20 @@ public class ModelImpl implements Model { // NOPMD
         return this.difficultyLevel;
     }
 
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void addScore(final Integer score) {
+        this.player.getProgress().addMiniGameScore(selectedArea, minigame, score);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public UserPlayer getUser() {
+        return this.player;
+    }
+
 }

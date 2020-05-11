@@ -55,4 +55,20 @@ public interface Model {
      *                        the selected {@link DifficultyLevel}.
      */
     void setMiniGame(String minigame, DifficultyLevel difficultyLevel);
+
+    /**
+     * Add the score to the current user.
+     * 
+     * @param score
+     *          the score to add
+     */
+    void addScore(Integer score);
+
+    /**
+     * Get the current user.
+     * 
+     * @return
+     *          the current user
+     */
+    UserPlayer getUser();
 }
