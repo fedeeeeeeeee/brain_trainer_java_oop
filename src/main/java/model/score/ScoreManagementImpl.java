@@ -8,8 +8,6 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
-
-
 /**
  * This class implements {@link ScoreManagment}.
  *
@@ -32,30 +30,11 @@ public class ScoreManagementImpl implements ScoreManagement {
     private int average;
     private int best;
 
-//    @JsonCreator
-//    public ScoreManagementImpl(@JsonProperty("miniGameHistory")final Map<String, Integer> minigameHistory,
-//                               @JsonProperty("counter")final int counter, 
-//                               @JsonProperty("sum") final int sum,
-//                               @JsonProperty("average") final int average,
-//                               @JsonProperty("best") final int best) {
-//
-//        this.miniGameHistory = minigameHistory;
-//        this.counter = counter;
-//        this.sum = sum;
-//        this.average = average;
-//        this.best = best;
-//
-//    }
-
     /**
      * Constructor for {@link ScoreManagement}.
      */
     public ScoreManagementImpl() {
         this.miniGameHistory = new HashMap<>();
-        this.sum = 0;
-        this.counter = 0;
-        this.average = 0;
-        this.best = 0;
     }
 
     private String createDate() {
@@ -169,5 +148,33 @@ public class ScoreManagementImpl implements ScoreManagement {
         this.addScore(score);
         this.checkBest(score);
         this.updateAverage(score);
+    }
+
+    /**
+     * @return the counter
+     */
+    public int getCounter() {
+        return this.counter;
+    }
+
+    /**
+     * @param counter the counter to set
+     */
+    public void setCounter(final int counter) {
+        this.counter = counter;
+    }
+
+    /**
+     * @return the sum
+     */
+    public int getSum() {
+        return this.sum;
+    }
+
+    /**
+     * @param sum the sum to set
+     */
+    public void setSum(final int sum) {
+        this.sum = sum;
     }
 }
