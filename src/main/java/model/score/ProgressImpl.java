@@ -3,8 +3,6 @@ package model.score;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Optional;
-
 import view.TrainingArea;
 
 /**
@@ -15,15 +13,7 @@ import view.TrainingArea;
 public class ProgressImpl implements Progress {
 
     private Map<TrainingArea, Map<String, ScoreManagementImpl>> historyScore;
-    private Map<TrainingArea, Optional<Integer>> averageTrainingAreaScore;
-
-//    @JsonCreator
-//    public ProgressImpl(@JsonProperty("historyScore") final Map<TrainingArea, Map<String, ScoreManagementImpl>> historyScore,
-//                        @JsonProperty("averageTrainingAreaScore") final Map<TrainingArea, Integer> averageTrainingAreaScore) {
-//
-//      this.historyScore = historyScore;
-//       this.averageTrainingAreaScore = averageTrainingAreaScore;
-//    }
+    private Map<TrainingArea, Integer> averageTrainingAreaScore;
 
     /**
      * Constructor for {@link Progress}.
@@ -37,7 +27,7 @@ public class ProgressImpl implements Progress {
     private void initialize() {
         for (TrainingArea area : TrainingArea.values()) {
             this.historyScore.put(area, new HashMap<>());
-            this.averageTrainingAreaScore.put(area, Optional.empty());
+            this.averageTrainingAreaScore.put(area, 0);
             for (String miniGame : area.getMiniGameList()) {
                 this.historyScore.get(area).put(miniGame, new ScoreManagementImpl());
             }
@@ -45,8 +35,10 @@ public class ProgressImpl implements Progress {
     }
 
     private int computeAverage(final TrainingArea area) {
-        return (int) this.historyScore.get(area).entrySet().stream().mapToInt(s -> s.getValue().getAverage()).average()
-                .getAsDouble();
+        return (int) this.historyScore.get(area).entrySet().stream()
+                                                           .mapToInt(s -> s.getValue().getAverage())
+                                                           .average()
+                                                           .getAsDouble();
     }
 
     /**
@@ -61,7 +53,7 @@ public class ProgressImpl implements Progress {
      * {@inheritDoc}
      */
     @Override
-    public Map<TrainingArea, Optional<Integer>> getAverageTrainingAreaScore() {
+    public Map<TrainingArea, Integer> getAverageTrainingAreaScore() {
         return Collections.unmodifiableMap(this.averageTrainingAreaScore);
     }
 
@@ -71,7 +63,7 @@ public class ProgressImpl implements Progress {
     @Override
     public void addMiniGameScore(final TrainingArea area, final String miniGame, final int score) {
         this.historyScore.get(area).get(miniGame).updateScore(score);
-        this.averageTrainingAreaScore.replace(area, Optional.of(this.computeAverage(area)));
+        this.averageTrainingAreaScore.replace(area, this.computeAverage(area));
     }
 
 }
