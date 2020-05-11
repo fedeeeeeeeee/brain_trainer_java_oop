@@ -12,9 +12,13 @@ import model.UserPlayer;
 public interface FileLoader {
 
     /**
+     * 
      * Save the user's data.
+     *
+     * @param player
+     *          the current player
      */
-    void saveData();
+    void saveData(UserPlayer player);
 
     /**
      * Load the user's data.

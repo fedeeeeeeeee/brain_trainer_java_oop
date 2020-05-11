@@ -5,21 +5,26 @@ import java.io.IOException;
 
 import com.fasterxml.jackson.core.JsonGenerationException;
 import com.fasterxml.jackson.core.JsonParseException;
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.SerializationFeature;
 
 import model.UserPlayer;
 import model.UserPlayerImpl;
 
+/**
+ * 
+ * This class implements {@link FileLoader}.
+ *
+ */
 public final class FileLoaderImpl implements FileLoader {
 
-    private UserPlayer player;
     private File userFileName;
 
     @Override
-    public void saveData() {
+    public void saveData(final UserPlayer player) {
         final ObjectMapper mapper = new ObjectMapper();
+        mapper.configure(SerializationFeature.INDENT_OUTPUT, true);
 
         try {
             mapper.writeValue(this.userFileName, player);
@@ -37,10 +42,13 @@ public final class FileLoaderImpl implements FileLoader {
     @Override
     public UserPlayer loadData(final File userFileName) {
        final ObjectMapper mapper = new ObjectMapper();
+       mapper.configure(SerializationFeature.INDENT_OUTPUT, true);
        this.userFileName = userFileName;
+       UserPlayer player = null;
 
        try {
-        this.player = mapper.readValue(this.userFileName, UserPlayerImpl.class);
+       player = mapper.readValue(this.userFileName, UserPlayerImpl.class);
+       System.out.println(player.toString());
     } catch (JsonParseException e) {
         e.printStackTrace();
     } catch (JsonMappingException e) {
@@ -48,8 +56,7 @@ public final class FileLoaderImpl implements FileLoader {
     } catch (IOException e) {
         e.printStackTrace();
     }
-       
-        return this.player;
+        return player;
     }
 
 }
