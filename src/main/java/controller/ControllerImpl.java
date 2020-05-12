@@ -5,6 +5,7 @@ import java.io.File;
 import model.DifficultyLevel;
 import model.Model;
 import model.ModelImpl;
+import model.UserPlayer;
 import view.TrainingArea;
 import view.View;
 import view.ViewScene;
@@ -86,6 +87,14 @@ public class ControllerImpl implements Controller {
      * {@inheritDoc}
      */
     @Override
+    public UserPlayer getUserPlayer() {
+        return this.model.getUser();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
     public void saveData() {
        this.loader.saveData(this.model.getUser());
     }
@@ -98,5 +107,4 @@ public class ControllerImpl implements Controller {
         this.model.addScore(score);
 
     }
-
 }

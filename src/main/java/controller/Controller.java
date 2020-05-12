@@ -3,6 +3,7 @@ package controller;
 import java.io.File;
 
 import model.DifficultyLevel;
+import model.UserPlayer;
 import view.TrainingArea;
 import view.View;
 
@@ -80,5 +81,12 @@ public interface Controller {
      *          the score to add
      */
     void updateProgress(Integer score);
+
+    /**
+     * Get the current user.
+     * 
+     * @return the current user
+     */
+    UserPlayer getUserPlayer();
 
 }
