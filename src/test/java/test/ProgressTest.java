@@ -33,8 +33,16 @@ public class ProgressTest {
         this.progress.addMiniGameScore(TrainingArea.ATTENTION, "True Color", 80);
         this.progress.addMiniGameScore(TrainingArea.BRAIN_SPEED, "One Way", 100);
         this.progress.addMiniGameScore(TrainingArea.BRAIN_SPEED, "One Way", 60);
-        assertEquals(106, this.progress.getAverageTrainingAreaScore().get(TrainingArea.ATTENTION));
-        assertEquals(95, this.progress.getAverageTrainingAreaScore().get(TrainingArea.BRAIN_SPEED));
+        int avarageAttention = (int) this.progress.getHistoryScore().get(TrainingArea.ATTENTION).entrySet().stream()
+                                                                                                           .mapToInt(s -> s.getValue().getAverage())
+                                                                                                           .average()
+                                                                                                           .getAsDouble();
+        int avarageBrainSpeed = (int) this.progress.getHistoryScore().get(TrainingArea.BRAIN_SPEED).entrySet().stream()
+                                                                                                              .mapToInt(s -> s.getValue().getAverage())
+                                                                                                              .average()
+                                                                                                              .getAsDouble();
+        assertEquals(avarageAttention, this.progress.getAverageTrainingAreaScore().get(TrainingArea.ATTENTION));
+        assertEquals(avarageBrainSpeed, this.progress.getAverageTrainingAreaScore().get(TrainingArea.BRAIN_SPEED));
     }
 
     /**
@@ -51,7 +59,7 @@ public class ProgressTest {
         this.progress.addMiniGameScore(TrainingArea.MEMORY, "Perilous Path", 50);
         this.progress.addMiniGameScore(TrainingArea.REASONING, "Size Count", 110);
         this.progress.addMiniGameScore(TrainingArea.REASONING, "Size Count", 90);
-        assertTrue(this.progress.getHistoryScore().get(TrainingArea.MEMORY).get("Perilous Path").getMiniGameHistory().get(s).equals(Arrays.asList(60, 50)));
-        assertTrue(this.progress.getHistoryScore().get(TrainingArea.REASONING).get("Size Count").getMiniGameHistory().get(s).equals(Arrays.asList(110, 90)));
+        assertTrue(this.progress.getHistoryScore().get(TrainingArea.MEMORY).get("Perilous Path").getMiniGameHistory().get(s).equals(55));
+        assertTrue(this.progress.getHistoryScore().get(TrainingArea.REASONING).get("Size Count").getMiniGameHistory().get(s).equals(100));
     }
 }
