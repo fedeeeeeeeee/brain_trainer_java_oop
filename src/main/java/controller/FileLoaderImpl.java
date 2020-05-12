@@ -41,21 +41,20 @@ public final class FileLoaderImpl implements FileLoader {
 
     @Override
     public UserPlayer loadData(final File userFileName) {
-       final ObjectMapper mapper = new ObjectMapper();
-       mapper.configure(SerializationFeature.INDENT_OUTPUT, true);
-       this.userFileName = userFileName;
-       UserPlayer player = null;
+        final ObjectMapper mapper = new ObjectMapper();
+        mapper.configure(SerializationFeature.INDENT_OUTPUT, true);
+        this.userFileName = userFileName;
+        UserPlayer player = null;
 
-       try {
-       player = mapper.readValue(this.userFileName, UserPlayerImpl.class);
-       System.out.println(player.toString());
-    } catch (JsonParseException e) {
-        e.printStackTrace();
-    } catch (JsonMappingException e) {
-        e.printStackTrace();
-    } catch (IOException e) {
-        e.printStackTrace();
-    }
+        try {
+            player = mapper.readValue(this.userFileName, UserPlayerImpl.class);
+        } catch (JsonParseException e) {
+            e.printStackTrace();
+        } catch (JsonMappingException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         return player;
     }
 
