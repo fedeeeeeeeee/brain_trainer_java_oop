@@ -3,13 +3,12 @@ package view;
 import controller.Controller;
 import controller.ControllerImpl;
 import javafx.application.Application;
-import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
-import javafx.stage.WindowEvent;
 import minigames.FxMiniGameController;
 import view.controllers.FxController;
+import view.controllers.StatisticsFx;
 
 /**
  * The implementation of the {@link View}.
@@ -58,6 +57,15 @@ public class ViewImpl extends Application implements View {
      * {@inheritDoc}
      */
     @Override
+    public void setStatisticsScene(final String path) {
+        this.switchScene(path);
+        ((StatisticsFx) currentSceneController).init();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
     public void setMiniGameScene(final String path) {
         this.currentMinigameController = (FxMiniGameController) this.sceneLoader.loadScene(path).get();
         this.initializeSceneController(this.currentMinigameController);
@@ -76,8 +84,7 @@ public class ViewImpl extends Application implements View {
         this.stage.setResizable(true);
         this.stage.show();
         this.controller.initializeView(this);
-        
-        this.stage.setOnCloseRequest((e)-> controller.saveData());
-    }
 
+        this.stage.setOnCloseRequest((e) -> controller.saveData());
+    }
 }
