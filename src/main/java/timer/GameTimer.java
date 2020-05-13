@@ -4,7 +4,7 @@ package timer;
 import java.util.TimerTask;
 import java.util.function.Function;
 
-import minigames.FxMiniGameController;
+import view.controllers.minigames.FxMiniGameController;
 
 /**
  * 

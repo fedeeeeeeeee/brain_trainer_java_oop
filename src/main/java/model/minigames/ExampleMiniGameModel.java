@@ -1,4 +1,4 @@
-package minigames;
+package model.minigames;
 
 import model.DifficultyLevel;
 import model.score.ScoreModel;

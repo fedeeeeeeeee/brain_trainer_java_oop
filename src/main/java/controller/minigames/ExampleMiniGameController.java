@@ -1,12 +1,14 @@
-package minigames;
+package controller.minigames;
 
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import model.DifficultyLevel;
+import model.minigames.ExampleMiniGameModel;
 import timer.GameTimer;
 import view.SceneType;
+import view.controllers.minigames.AbstractMiniGameController;
 
 public class ExampleMiniGameController  extends AbstractMiniGameController {
 
@@ -58,10 +60,9 @@ public class ExampleMiniGameController  extends AbstractMiniGameController {
         Platform.runLater(() -> {
             this.scoreLbl.setText(Integer.toString(score));
             this.getController().updateProgress(score);
-            this.getView().setDataScene(SceneType.END_GAME.getFilePath());
+            this.getView().setHandleDataScene(SceneType.END_GAME.getFilePath());
         });
     }
-
 
     @Override
     public void initGame() {

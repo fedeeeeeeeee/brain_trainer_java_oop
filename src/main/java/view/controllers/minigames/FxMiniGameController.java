@@ -1,4 +1,4 @@
-package minigames;
+package view.controllers.minigames;
 
 import view.controllers.FxController;
 

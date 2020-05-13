@@ -28,7 +28,7 @@ public class MainMenuFx extends AbstractSceneController {
 
     @FXML
     private void showStatistics() throws IOException { // NOPMD
-        this.getView().setDataScene(SceneType.STATISTICS.getFilePath());
+        this.getView().setHandleDataScene(SceneType.STATISTICS.getFilePath());
     }
 
     @FXML
