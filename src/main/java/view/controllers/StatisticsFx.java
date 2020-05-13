@@ -6,13 +6,13 @@ import java.util.stream.Collectors;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import view.ViewScene;
+import view.SceneType;
 
 /**
  * The fx controller for Statistics scene.
  *
  */
-public class StatisticsFx extends AbstractSceneController {
+public class StatisticsFx extends AbstractSceneController implements FxDataScene {
 
     @FXML
     private Label statistics;
@@ -22,7 +22,7 @@ public class StatisticsFx extends AbstractSceneController {
 
     @FXML
     private void goBack() throws IOException { // NOPMD
-        this.getView().switchScene(ViewScene.MAIN_MENU.getFilePath());
+        this.getView().switchScene(SceneType.MAIN_MENU.getFilePath());
     }
 
     /**
