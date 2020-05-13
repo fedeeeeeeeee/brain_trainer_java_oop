@@ -12,7 +12,7 @@ import view.SceneType;
  * The fx controller for Statistics scene.
  *
  */
-public class StatisticsFx extends AbstractSceneController implements FxDataScene {
+public class StatisticsFx extends AbstractSceneController implements FxHandleDataScene {
 
     @FXML
     private Label statistics;

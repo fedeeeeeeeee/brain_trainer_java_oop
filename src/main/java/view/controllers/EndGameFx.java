@@ -6,7 +6,7 @@ import javafx.scene.control.Label;
 /**
  * The fx controller for the end game scene.
  */
-public class EndGameFx extends AbstractSceneController implements FxDataScene {
+public class EndGameFx extends AbstractSceneController implements FxHandleDataScene {
 
     @FXML
     private Label score;

@@ -1,6 +1,6 @@
 package view.controllers;
 
-public interface FxDataScene {
+public interface FxHandleDataScene {
 
     /**
      * Initialize the scene to show. //TODO

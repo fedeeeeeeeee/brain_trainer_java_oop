@@ -8,7 +8,7 @@ import javafx.stage.Screen;
 import javafx.stage.Stage;
 import minigames.FxMiniGameController;
 import view.controllers.FxController;
-import view.controllers.FxDataScene;
+import view.controllers.FxHandleDataScene;
 
 /**
  * The implementation of the {@link View}.
@@ -57,9 +57,9 @@ public class ViewImpl extends Application implements View {
      * {@inheritDoc} //TODO
      */
     @Override
-    public void setDataScene(final String path) {
+    public void setHandleDataScene(final String path) {
         this.switchScene(path);
-        ((FxDataScene) currentSceneController).init();
+        ((FxHandleDataScene) currentSceneController).init();
     }
 
     /**

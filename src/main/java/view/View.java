@@ -18,7 +18,7 @@ public interface View {
      * @param path
      *             the statistics scene to show.
      */
-    void setDataScene(String path);
+    void setHandleDataScene(String path);
 
     /**
      * 
