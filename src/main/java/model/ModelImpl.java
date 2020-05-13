@@ -12,6 +12,7 @@ public class ModelImpl implements Model { // NOPMD
     private TrainingArea selectedArea;
     private DifficultyLevel difficultyLevel;
     private String minigame;
+    private int currentScore;
 
     /**
      * {@inheritDoc}
@@ -67,6 +68,7 @@ public class ModelImpl implements Model { // NOPMD
      */
     @Override
     public void addScore(final Integer score) {
+        this.currentScore = score;
         this.player.getProgress().addMiniGameScore(selectedArea, minigame, score);
     }
 
@@ -76,6 +78,22 @@ public class ModelImpl implements Model { // NOPMD
     @Override
     public UserPlayer getUser() {
         return this.player;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public int getCurrentScore() {
+        return this.currentScore;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public int getCurrentMiniGameBest() {
+        return this.player.getProgress().getHistoryScore().get(this.selectedArea).get(minigame).getBest();
     }
 
 }

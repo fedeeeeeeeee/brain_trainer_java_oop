@@ -8,7 +8,7 @@ import model.ModelImpl;
 import model.UserPlayer;
 import view.TrainingArea;
 import view.View;
-import view.ViewScene;
+import view.SceneType;
 
 /**
  * The implementation of the {@link Controller}.
@@ -32,7 +32,7 @@ public class ControllerImpl implements Controller {
      */
     @Override
     public void initializeView(final View view) {
-        view.switchScene(ViewScene.LOGIN.getFilePath());
+        view.switchScene(SceneType.LOGIN.getFilePath());
     }
 
     /**
@@ -106,5 +106,21 @@ public class ControllerImpl implements Controller {
     public void updateProgress(final Integer score) {
         this.model.addScore(score);
 
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public int getCurrentScore() {
+        return this.model.getCurrentScore();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public int getCurrentMiniGameBest() {
+        return this.model.getCurrentMiniGameBest();
     }
 }

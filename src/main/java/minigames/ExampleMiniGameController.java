@@ -6,10 +6,10 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import model.DifficultyLevel;
 import timer.GameTimer;
+import view.SceneType;
 
-public class ExampleMiniGameController  extends AbstractMiniGameController{
-    
-    
+public class ExampleMiniGameController  extends AbstractMiniGameController {
+
     private static final int SECONDS = 10;
     private ExampleMiniGameModel model;
     private boolean pause;
@@ -27,7 +27,6 @@ public class ExampleMiniGameController  extends AbstractMiniGameController{
     private Label scoreLbl;
 
     public ExampleMiniGameController() {
-        //this.setGameTimer();
         this.model = new ExampleMiniGameModel(DifficultyLevel.EASY, 5);
         this.pause = false;
     }
@@ -56,8 +55,11 @@ public class ExampleMiniGameController  extends AbstractMiniGameController{
     @Override
     public void timeFinish() {
         Integer score = this.model.getFinalScore();
-        Platform.runLater(() -> this.scoreLbl.setText(Integer.toString(score)));
-        this.getController().updateProgress(score);
+        Platform.runLater(() -> {
+            this.scoreLbl.setText(Integer.toString(score));
+            this.getController().updateProgress(score);
+            this.getView().setDataScene(SceneType.END_GAME.getFilePath());
+        });
     }
 
 

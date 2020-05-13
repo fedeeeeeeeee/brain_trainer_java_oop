@@ -89,4 +89,18 @@ public interface Controller {
      */
     UserPlayer getUserPlayer();
 
+    /**
+     * Get the score related to the current minigame.
+     * 
+     * @return the current score
+     */
+    int getCurrentScore();
+
+    /**
+     * Get the best score related to the current minigame.
+     * 
+     * @return the current best score
+     */
+    int getCurrentMiniGameBest();
+
 }
