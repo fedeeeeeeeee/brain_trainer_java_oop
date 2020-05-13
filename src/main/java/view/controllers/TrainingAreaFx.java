@@ -5,7 +5,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.input.MouseEvent;
 import view.TrainingArea;
-import view.ViewScene;
+import view.SceneType;
 
 import java.util.Arrays;
 
@@ -28,12 +28,12 @@ public class TrainingAreaFx extends AbstractSceneController {
 
         this.getController().setArea(area);
         populateList(area);
-        this.getView().switchScene(ViewScene.GAME_SELECTOR.getFilePath());
+        this.getView().switchScene(SceneType.GAME_SELECTOR.getFilePath());
     }
 
     @FXML
     private void goBack() throws IOException { // NOPMD
-        this.getView().switchScene(ViewScene.MAIN_MENU.getFilePath());
+        this.getView().switchScene(SceneType.MAIN_MENU.getFilePath());
     }
 
     private void populateList(final TrainingArea selectedArea) {

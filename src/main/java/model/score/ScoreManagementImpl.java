@@ -88,7 +88,6 @@ public class ScoreManagementImpl implements ScoreManagement {
             this.sum = this.sum + score;
             this.counter = this.counter + 1;
         }
-
         this.miniGameHistory.put(date, this.computeDailyAverage());
     }
 
@@ -141,16 +140,6 @@ public class ScoreManagementImpl implements ScoreManagement {
     }
 
     /**
-     * {@inheritDoc}
-     */
-    @Override
-    public void updateScore(final int score) {
-        this.addScore(score);
-        this.checkBest(score);
-        this.updateAverage(score);
-    }
-
-    /**
      * @return the counter
      */
     public int getCounter() {
@@ -176,5 +165,15 @@ public class ScoreManagementImpl implements ScoreManagement {
      */
     public void setSum(final int sum) {
         this.sum = sum;
+    }
+    
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void updateScore(final int score) {
+        this.addScore(score);
+        this.checkBest(score);
+        this.updateAverage(score);
     }
 }

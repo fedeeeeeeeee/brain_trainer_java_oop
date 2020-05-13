@@ -8,7 +8,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
 import model.UserPlayer;
 import model.UserPlayerImpl;
-import view.ViewScene;
+import view.SceneType;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.layout.VBox;
@@ -56,7 +56,7 @@ public class LoginFx extends AbstractSceneController {
 
 
     private void switchToMenu() {
-        this.getView().switchScene(ViewScene.MAIN_MENU.getFilePath());
+        this.getView().switchScene(SceneType.MAIN_MENU.getFilePath());
     }
 
     private void setUserPlayer(final File userFileName) {

@@ -4,7 +4,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.text.DateFormat;
-import java.util.Arrays;
 import java.util.Date;
 import java.util.Locale;
 
@@ -59,7 +58,7 @@ public class ProgressTest {
         this.progress.addMiniGameScore(TrainingArea.MEMORY, "Perilous Path", 50);
         this.progress.addMiniGameScore(TrainingArea.REASONING, "Size Count", 110);
         this.progress.addMiniGameScore(TrainingArea.REASONING, "Size Count", 90);
-        assertTrue(this.progress.getHistoryScore().get(TrainingArea.MEMORY).get("Perilous Path").getMiniGameHistory().get(s).equals(55));
-        assertTrue(this.progress.getHistoryScore().get(TrainingArea.REASONING).get("Size Count").getMiniGameHistory().get(s).equals(100));
+        assertEquals(55, this.progress.getHistoryScore().get(TrainingArea.MEMORY).get("Perilous Path").getMiniGameHistory().get(s));
+        assertEquals(100, this.progress.getHistoryScore().get(TrainingArea.REASONING).get("Size Count").getMiniGameHistory().get(s));
     }
 }

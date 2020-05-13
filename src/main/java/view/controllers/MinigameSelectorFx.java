@@ -12,10 +12,10 @@ import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.ToggleGroup;
 import model.DifficultyLevel;
-import view.ViewScene;
+import view.SceneType;
 
 /**
- * The fx controller for the minigame selector and game start scene.
+ * The fx controller for the minigame selector and the game start scene.
  * 
  */
 public class MinigameSelectorFx extends AbstractSceneController {
@@ -65,12 +65,12 @@ public class MinigameSelectorFx extends AbstractSceneController {
 
     @FXML
     private void goBack() throws IOException { // NOPMD
-        this.getView().switchScene(ViewScene.TRAINING_AREA.getFilePath());
+        this.getView().switchScene(SceneType.TRAINING_AREA.getFilePath());
     }
 
     @FXML
     private void backHome() throws IOException { // NOPMD
-        this.getView().switchScene(ViewScene.MAIN_MENU.getFilePath());
+        this.getView().switchScene(SceneType.MAIN_MENU.getFilePath());
     }
 
 }

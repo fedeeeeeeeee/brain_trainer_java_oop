@@ -8,7 +8,7 @@ import java.util.Scanner;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
-import view.ViewScene;
+import view.SceneType;
 
 /**
  * The fx controller for the howToPlay scene.
@@ -40,7 +40,7 @@ public class HowToPlayFx extends AbstractSceneController {
 
     @FXML
     private void goBack() throws IOException { // NOPMD
-        this.getView().switchScene(ViewScene.MAIN_MENU.getFilePath());
+        this.getView().switchScene(SceneType.MAIN_MENU.getFilePath());
     }
 
     private void scanner(final String fileTxt) {
