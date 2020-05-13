@@ -4,7 +4,7 @@ package view;
  * Enumeration for the possible scene.
  *
  */
-public enum ViewScene {
+public enum SceneType {
 
     /**
      * The login and sign up scene.
@@ -40,16 +40,18 @@ public enum ViewScene {
      * The scene to learn how to play.
      * 
      */
-    HOW_TO_PLAY("HowToPlay");
+    HOW_TO_PLAY("HowToPlay"),
 
-    /* The final scene to show.
-    GAME_FINISH("EndGame"); */
+    /**
+     * 
+     */
+    END_GAME("EndGame");
 
     private static final String PATH = "/layouts/";
     private static final String PATH_END = ".fxml";
     private String fileName;
 
-    ViewScene(final String fileName) {
+    SceneType(final String fileName) {
         this.fileName = fileName;
     }
 
