@@ -9,7 +9,7 @@ public interface View {
     /**
      * 
      * @param path 
-     *              the next {@link ViewScene} to show.
+     *              the next {@link SceneType} to show.
      */
     void switchScene(String path);
 
@@ -18,7 +18,7 @@ public interface View {
      * @param path
      *             the statistics scene to show.
      */
-    void setStatisticsScene(String path);
+    void setDataScene(String path);
 
     /**
      * 

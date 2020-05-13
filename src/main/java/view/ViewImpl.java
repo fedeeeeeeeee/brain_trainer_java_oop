@@ -8,7 +8,7 @@ import javafx.stage.Screen;
 import javafx.stage.Stage;
 import minigames.FxMiniGameController;
 import view.controllers.FxController;
-import view.controllers.StatisticsFx;
+import view.controllers.FxDataScene;
 
 /**
  * The implementation of the {@link View}.
@@ -22,7 +22,7 @@ public class ViewImpl extends Application implements View {
     private final Controller controller;
     private final SceneLoader sceneLoader;
     private FxController currentSceneController;
-    private FxMiniGameController currentMinigameController;
+    private FxMiniGameController currentMiniGameController;
     private Stage stage;
 
     /**
@@ -54,12 +54,12 @@ public class ViewImpl extends Application implements View {
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritDoc} //TODO
      */
     @Override
-    public void setStatisticsScene(final String path) {
+    public void setDataScene(final String path) {
         this.switchScene(path);
-        ((StatisticsFx) currentSceneController).init();
+        ((FxDataScene) currentSceneController).init();
     }
 
     /**
@@ -67,9 +67,8 @@ public class ViewImpl extends Application implements View {
      */
     @Override
     public void setMiniGameScene(final String path) {
-        this.currentMinigameController = (FxMiniGameController) this.sceneLoader.loadScene(path).get();
-        this.initializeSceneController(this.currentMinigameController);
-        this.currentMinigameController.initGame();
+        this.switchScene(path);
+        ((FxMiniGameController) currentMiniGameController).initGame();
     }
 
     /**
@@ -85,6 +84,10 @@ public class ViewImpl extends Application implements View {
         this.stage.show();
         this.controller.initializeView(this);
 
-        this.stage.setOnCloseRequest((e) -> controller.saveData());
+        this.stage.setOnCloseRequest((e) -> {
+            if (this.controller.getUserPlayer() != null) {
+                controller.saveData();
+            }
+        });
     }
 }
