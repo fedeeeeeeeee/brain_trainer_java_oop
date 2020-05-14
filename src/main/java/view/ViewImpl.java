@@ -68,7 +68,7 @@ public class ViewImpl extends Application implements View {
     @Override
     public void setMiniGameScene(final String path) {
         this.switchScene(path);
-        ((FxMiniGameController) currentMiniGameController).initGame();
+        ((FxMiniGameController) currentSceneController).initGame();
     }
 
     /**
