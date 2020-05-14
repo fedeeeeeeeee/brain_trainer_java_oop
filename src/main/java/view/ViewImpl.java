@@ -22,7 +22,6 @@ public class ViewImpl extends Application implements View {
     private final Controller controller;
     private final SceneLoader sceneLoader;
     private FxController currentSceneController;
-    private FxMiniGameController currentMiniGameController;
     private Stage stage;
 
     /**
