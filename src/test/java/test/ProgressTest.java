@@ -1,7 +1,6 @@
 package test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.text.DateFormat;
 import java.util.Date;
@@ -33,13 +32,9 @@ public class ProgressTest {
         this.progress.addMiniGameScore(TrainingArea.BRAIN_SPEED, "One Way", 100);
         this.progress.addMiniGameScore(TrainingArea.BRAIN_SPEED, "One Way", 60);
         int avarageAttention = (int) this.progress.getHistoryScore().get(TrainingArea.ATTENTION).entrySet().stream()
-                                                                                                           .mapToInt(s -> s.getValue().getAverage())
-                                                                                                           .average()
-                                                                                                           .getAsDouble();
+                .mapToInt(s -> s.getValue().getAverage()).average().getAsDouble();
         int avarageBrainSpeed = (int) this.progress.getHistoryScore().get(TrainingArea.BRAIN_SPEED).entrySet().stream()
-                                                                                                              .mapToInt(s -> s.getValue().getAverage())
-                                                                                                              .average()
-                                                                                                              .getAsDouble();
+                .mapToInt(s -> s.getValue().getAverage()).average().getAsDouble();
         assertEquals(avarageAttention, this.progress.getAverageTrainingAreaScore().get(TrainingArea.ATTENTION));
         assertEquals(avarageBrainSpeed, this.progress.getAverageTrainingAreaScore().get(TrainingArea.BRAIN_SPEED));
     }
