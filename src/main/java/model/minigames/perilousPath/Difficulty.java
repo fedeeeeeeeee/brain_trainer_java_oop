@@ -1,0 +1,21 @@
+package model.minigames.perilousPath;
+
+/**
+ * Represents the difficulty at each level.
+ */
+public interface Difficulty {
+
+    /**
+     * Specific size of the current difficulty.
+     * 
+     * @return the size
+     */
+    int getSize();
+
+    /**
+     * Specific amount of mines of the current difficulty.
+     * 
+     * @return the mines' number
+     */
+    int getNumMines();
+}

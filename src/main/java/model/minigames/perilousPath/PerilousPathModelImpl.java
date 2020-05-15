@@ -4,8 +4,13 @@ import model.DifficultyLevel;
 
 public class PerilousPathModelImpl implements PerilousPathModel {
 
+    private final int size;
+    private final int numMines;
+    
     public PerilousPathModelImpl(DifficultyLevel difficultyLevel) {
-        // TODO Auto-generated constructor stub
+        Difficulty difficulty = new DifficultyImpl(difficultyLevel);
+        this.size = difficulty.getSize();
+        this.numMines = difficulty.getNumMines();
     }
 
 }
