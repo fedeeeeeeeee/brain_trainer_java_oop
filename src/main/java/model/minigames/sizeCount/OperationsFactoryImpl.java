@@ -14,7 +14,7 @@ import java.util.stream.Stream;
  */
 public class OperationsFactoryImpl implements OperationsFactory {
 
-    private static final int NUM_OPERANDS_SIMPLE_OPERATION = 3;
+    private static final int NUM_OPERANDS_SIMPLE_OPERATION = 2;
 
     private final Random rnd;
 
@@ -41,7 +41,6 @@ public class OperationsFactoryImpl implements OperationsFactory {
 
         result.add(num);
         for (int i = 0; i < numOfOperands; i++) {
-            System.out.println("num" + num);
             List<Integer> dividersList = div.getDividers(num);
             Integer divider = dividersList.get(this.rnd.nextInt(dividersList.size()));
             result.add(divider);
