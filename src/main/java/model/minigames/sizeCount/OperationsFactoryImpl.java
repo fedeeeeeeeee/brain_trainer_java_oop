@@ -8,14 +8,13 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
-
 /**
  * The implementation of the {@link OperationsFactory}.
  *
  */
 public class OperationsFactoryImpl implements OperationsFactory {
 
-    private static final int NUM_OPERANDS_SIMPLE_OPERATION = 2;
+    private static final int NUM_OPERANDS_SIMPLE_OPERATION = 3;
 
     private final Random rnd;
 
@@ -38,12 +37,16 @@ public class OperationsFactoryImpl implements OperationsFactory {
     private Stream<Integer> generateRandomOperandDivision(final Integer numOfOperands, final Integer limit) {
         final Dividers div = new DividersImpl();
         final List<Integer> result = new LinkedList<>();
+        Integer num = this.rnd.nextInt(limit+1)+1;
 
+        result.add(num);
         for (int i = 0; i < numOfOperands; i++) {
-            Integer num = this.rnd.nextInt(limit + 1);
-            result.add(num);
-            List<Integer> dividers = div.getDividers(num);
-            result.add(dividers.get(this.rnd.nextInt(dividers.size())));
+            System.out.println("num" + num);
+            List<Integer> dividersList = div.getDividers(num);
+            Integer divider = dividersList.get(this.rnd.nextInt(dividersList.size()));
+            result.add(divider);
+            num = num / divider;
+
         }
 
         return result.stream().limit(numOfOperands);
@@ -77,7 +80,6 @@ public class OperationsFactoryImpl implements OperationsFactory {
 
         return result;
     }
-
 
     /**
      * {@inheritDoc}
@@ -178,6 +180,5 @@ public class OperationsFactoryImpl implements OperationsFactory {
             }
         };
     }
-
 
 }

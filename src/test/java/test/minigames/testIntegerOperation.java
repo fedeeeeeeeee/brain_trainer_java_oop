@@ -29,11 +29,11 @@ class testIntegerOperation {
        IntegerOperation op =  this.factory.multiplication(10);
        System.out.println("result " + "toString " + op.getResult() + " " + op.toString());
     }
-    
+
     @Test
     void division() {
-       IntegerOperation op =  this.factory.division(10);
+       IntegerOperation op =  this.factory.division(100);
        System.out.println("division " + "toString " + op.getResult() + " " + op.toString());
     }
-    
+
 }
