@@ -5,44 +5,56 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
+import controller.Controller;
+import model.UserPlayer;
+
+/**
+ * The implementation of the {@link OperationsFactory}.
+ *
+ */
 public class OperationsFactoryImpl implements OperationsFactory {
 
-    private Random rnd;
-    private Integer limit;
+    private static final int NUM_OPERANDS = 2;
 
-    public OperationsFactoryImpl(Integer limit) {
+    private final Random rnd;
+
+    /**
+     * Simple constructor of {@link OperationsFactory}.
+     * 
+     */
+    public OperationsFactoryImpl() {
         this.rnd = new Random();
-        this.limit = limit;
     }
 
-    private Stream<Integer> generateIntegerOperand(Integer numOfOperands) {
-        return IntStream.range(0, numOfOperands - 1).mapToObj(i -> rnd.nextInt(limit + 1));
-
+    private Stream<Integer> generateIntegerOperand(final Integer numOfOperands, final Integer limit) {
+        return IntStream.range(0, numOfOperands).mapToObj(i -> rnd.nextInt(limit + 1));
     }
-    
-    private String generateToStrong(List<Integer> operands, Operator op) {
-        String result = new String();
-        String separator = new String();
-        
-        switch(op) {
-            case SUM:
-                separator = "+";
-                break;
-                case SUB:
-                separator = "-";
-                break;
-                case MUL:
-                separator = "*";
-                break;
-                case DIV:
-                separator = "/";
-                break;
+
+    private String generateToStrong(final List<Integer> operands, final Operator operator) {
+        String result = "";
+        String separator = "";
+
+        switch (operator) {
+        case SUM:
+            separator = "+";
+            break;
+        case SUB:
+            separator = "-";
+            break;
+        case MUL:
+            separator = "*";
+            break;
+        case DIV:
+            separator = "/";
+            break;
+        default:
+            break;
         }
-             
-        for(int i = 0; i< operands.size()-1;i++) {
-           result.concat(Integer.toString(operands.get(i))).concat(separator);
+
+        for (int i = 0; i < operands.size() - 1; i++) {
+            result = result.concat(Integer.toString(operands.get(i))).concat(separator);
         }
-        result.concat(Integer.toString(operands.get(operands.size()-1)));
+        result = result.concat(Integer.toString(operands.get(operands.size() - 1)));
         return result;
     }
 
@@ -50,20 +62,18 @@ public class OperationsFactoryImpl implements OperationsFactory {
      * {@inheritDoc}
      */
     @Override
-    public IntegerOperation addiction() {
+    public IntegerOperation addiction(final Integer limit) {
+        final List<Integer> operands = this.generateIntegerOperand(NUM_OPERANDS, limit).collect(Collectors.toList());
+
         return new IntegerOperation() {
-            
-            private List<Integer> operands;
-            
             @Override
             public Integer getResult() {
-                this.operands = generateIntegerOperand(2).collect(Collectors.toList());
-                return this.operands.stream().mapToInt(e->e).sum();
+                return operands.stream().mapToInt(e -> e).sum();
             }
-            
+
             @Override
             public String toString() {
-                return generateToStrong(this.operands, Operator.SUM);
+                return generateToStrong(operands, Operator.SUM);
             }
 
         };
@@ -73,7 +83,7 @@ public class OperationsFactoryImpl implements OperationsFactory {
      * {@inheritDoc}
      */
     @Override
-    public IntegerOperation subtraction() {
+    public IntegerOperation subtraction(final Integer limit) {
         // TODO Auto-generated method stub
         return null;
     }
@@ -82,7 +92,7 @@ public class OperationsFactoryImpl implements OperationsFactory {
      * {@inheritDoc}
      */
     @Override
-    public IntegerOperation multiplicaiton() {
+    public IntegerOperation multiplicaiton(final Integer limit) {
         // TODO Auto-generated method stub
         return null;
     }
@@ -91,7 +101,7 @@ public class OperationsFactoryImpl implements OperationsFactory {
      * {@inheritDoc}
      */
     @Override
-    public IntegerOperation division() {
+    public IntegerOperation division(final Integer limit) {
         // TODO Auto-generated method stub
         return null;
     }
@@ -100,7 +110,7 @@ public class OperationsFactoryImpl implements OperationsFactory {
      * {@inheritDoc}
      */
     @Override
-    public IntegerOperation sumExpression(Integer numOfOperand) {
+    public IntegerOperation sumExpression(final Integer numOfOperand, final Integer limit) {
         // TODO Auto-generated method stub
         return null;
     }
@@ -109,7 +119,7 @@ public class OperationsFactoryImpl implements OperationsFactory {
      * {@inheritDoc}
      */
     @Override
-    public IntegerOperation subExpression(Integer numOfOperand) {
+    public IntegerOperation subExpression(final Integer numOfOperand, final Integer limit) {
         // TODO Auto-generated method stub
         return null;
     }

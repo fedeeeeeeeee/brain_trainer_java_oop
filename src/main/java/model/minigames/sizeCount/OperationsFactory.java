@@ -12,28 +12,28 @@ public interface OperationsFactory {
      * 
      * @return a IntegerOperation which is an addiction
      */
-    IntegerOperation addiction();
+    IntegerOperation addiction(Integer limit);
 
     /**
      * Generate a subtraction between two random Integer.
      * 
      * @return a IntegerOperation which is a subtraction
      */
-    IntegerOperation subtraction();
+    IntegerOperation subtraction(Integer limit);
 
     /**
      * Generate a multiplication between two random Integer.
      * 
      * @return a IntegerOperation which is a multiplication
      */
-    IntegerOperation multiplicaiton();
+    IntegerOperation multiplicaiton(Integer limit);
 
     /**
      * Generate a division between two random Integer.
      * 
      * @return a IntegerOperation which is a division
      */
-    IntegerOperation division(); 
+    IntegerOperation division(Integer limit); 
 
     /**
      * 
@@ -41,7 +41,7 @@ public interface OperationsFactory {
      * @return a IntegerOperation which is a sum expression of a number of operand
      *         indicated by numOfOperand
      */
-    IntegerOperation sumExpression(Integer numOfOperand);
+    IntegerOperation sumExpression(Integer numOfOperand,Integer limit);
 
     /**
      * 
@@ -49,5 +49,5 @@ public interface OperationsFactory {
      * @return a IntegerOperation which is a subtraction expression of a number of
      *         operand indicated by numOfOperand
      */
-    IntegerOperation subExpression(Integer numOfOperand);
+    IntegerOperation subExpression(Integer numOfOperand,Integer limit);
 }
