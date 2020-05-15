@@ -42,13 +42,10 @@ public class OperationsFactoryImpl implements OperationsFactory {
         for (int i = 0; i < numOfOperands; i++) {
             Integer num = this.rnd.nextInt(limit + 1);
             result.add(num);
-            System.out.println("num "+ num);
             List<Integer> dividers = div.getDividers(num);
-            System.out.println(dividers.toString());
             result.add(dividers.get(this.rnd.nextInt(dividers.size())));
         }
 
-        System.out.println("result list"+ result);
         return result.stream().limit(numOfOperands);
 
     }
@@ -74,7 +71,7 @@ public class OperationsFactoryImpl implements OperationsFactory {
             break;
         }
 
-        for (int i = 0; i < operands.size() - 1; i++) {
+        for (int i = 1; i < operands.size(); i++) {
             result = result.concat(separator).concat(Integer.toString(operands.get(i)));
         }
 
@@ -168,7 +165,6 @@ public class OperationsFactoryImpl implements OperationsFactory {
 
             @Override
             public Integer getResult() {
-                System.out.println("result funzione"+ operands.toString());
                 Integer result = operands.get(0);
                 for (int i = 1; i < operands.size(); i++) {
                     result = result / operands.get(i);
