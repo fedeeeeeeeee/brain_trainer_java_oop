@@ -14,25 +14,26 @@ class testIntegerOperation {
 
     @Test
     void addiction() {
-       IntegerOperation op =  this.factory.addiction(10);
+       IntegerOperation op =  this.factory.addiction(100);
        System.out.println("result " + "toString " + op.getResult() + " " + op.toString());
     }
 
     @Test
     void subtraction() {
-       IntegerOperation op =  this.factory.subtraction(10);
+       IntegerOperation op =  this.factory.subtraction(100);
        System.out.println("result " + "toString " + op.getResult() + " " + op.toString());
     }
 
     @Test
     void multiplication() {
-       IntegerOperation op =  this.factory.multiplication(10);
+       IntegerOperation op =  this.factory.multiplication(100);
        System.out.println("result " + "toString " + op.getResult() + " " + op.toString());
     }
     
     @Test
     void division() {
-       IntegerOperation op =  this.factory.division(10);
+       IntegerOperation op =  this.factory.division(100);
        System.out.println("result " + "toString " + op.getResult() + " " + op.toString());
     }
+    
 }

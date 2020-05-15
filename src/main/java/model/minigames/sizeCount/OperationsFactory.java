@@ -35,19 +35,4 @@ public interface OperationsFactory {
      */
     IntegerOperation division(Integer limit); 
 
-    /**
-     * 
-     * @param numOfOperand the number of operands involved in the operation.
-     * @return a IntegerOperation which is a sum expression of a number of operand
-     *         indicated by numOfOperand
-     */
-    IntegerOperation sumExpression(Integer numOfOperand,Integer limit);
-
-    /**
-     * 
-     * @param numOfOperand the number of operands involved in the operation.
-     * @return a IntegerOperation which is a subtraction expression of a number of
-     *         operand indicated by numOfOperand
-     */
-    IntegerOperation subExpression(Integer numOfOperand,Integer limit);
 }

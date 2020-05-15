@@ -1,12 +1,13 @@
 package model.minigames.sizeCount;
 
-import java.util.*;
+import java.util.Arrays;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Random;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
-import controller.Controller;
-import model.UserPlayer;
 
 /**
  * The implementation of the {@link OperationsFactory}.
@@ -30,22 +31,30 @@ public class OperationsFactoryImpl implements OperationsFactory {
         return IntStream.range(0, numOfOperands).mapToObj(i -> rnd.nextInt(limit + 1));
     }
 
+    /*
+     * Method to compute random operand for the division cause the result must be an
+     * integer
+     */
     private Stream<Integer> generateRandomOperandDivision(final Integer numOfOperands, final Integer limit) {
         final Dividers div = new DividersImpl();
         final List<Integer> result = new LinkedList<>();
 
         for (int i = 0; i < numOfOperands; i++) {
             Integer num = this.rnd.nextInt(limit + 1);
+            result.add(num);
+            System.out.println("num "+ num);
             List<Integer> dividers = div.getDividers(num);
+            System.out.println(dividers.toString());
             result.add(dividers.get(this.rnd.nextInt(dividers.size())));
         }
 
+        System.out.println("result list"+ result);
         return result.stream().limit(numOfOperands);
 
     }
 
     private String generateToStrong(final List<Integer> operands, final Operator operator) {
-        String result = "";
+        String result = Integer.toString(operands.get(0));
         String separator = "";
 
         switch (operator) {
@@ -66,37 +75,12 @@ public class OperationsFactoryImpl implements OperationsFactory {
         }
 
         for (int i = 0; i < operands.size() - 1; i++) {
-            result = result.concat(Integer.toString(operands.get(i))).concat(separator);
+            result = result.concat(separator).concat(Integer.toString(operands.get(i)));
         }
-        result = result.concat(Integer.toString(operands.get(operands.size() - 1)));
+
         return result;
     }
 
-    private List<IntegerOperation> generateRandomOperations(final Integer numOfOperand, final Integer limit) {
-        List<Operator> operators = Arrays.asList(Operator.values());
-        List<IntegerOperation> list = new LinkedList<>();
-
-        for (int i = numOfOperand; i > 0; i--) {
-            Operator op = operators.get(rnd.nextInt(operators.size()));
-            switch (op) {
-            case SUM:
-                list.add(this.addiction(limit));
-                break;
-            case SUB:
-                list.add(this.subtraction(limit));
-                break;
-            case MUL:
-                list.add(this.multiplication(limit));
-                break;
-            case DIV:
-                list.add(this.division(limit));
-                break;
-            default:
-                break;
-            }
-        }
-        return list;
-    }
 
     /**
      * {@inheritDoc}
@@ -184,6 +168,7 @@ public class OperationsFactoryImpl implements OperationsFactory {
 
             @Override
             public Integer getResult() {
+                System.out.println("result funzione"+ operands.toString());
                 Integer result = operands.get(0);
                 for (int i = 1; i < operands.size(); i++) {
                     result = result / operands.get(i);
@@ -198,22 +183,5 @@ public class OperationsFactoryImpl implements OperationsFactory {
         };
     }
 
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public IntegerOperation sumExpression(final Integer numOfOperand, final Integer limit) {
-        // TODO Auto-generated method stub
-        return null;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public IntegerOperation subExpression(final Integer numOfOperand, final Integer limit) {
-        // TODO Auto-generated method stub
-        return null;
-    }
 
 }
