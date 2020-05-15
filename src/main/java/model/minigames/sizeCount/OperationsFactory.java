@@ -33,7 +33,7 @@ public interface OperationsFactory {
      * 
      * @return a IntegerOperation which is a division
      */
-    IntegerOperation division();
+    IntegerOperation division(); 
 
     /**
      * 
