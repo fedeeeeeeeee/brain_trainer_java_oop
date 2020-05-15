@@ -26,7 +26,7 @@ public interface OperationsFactory {
      * 
      * @return a IntegerOperation which is a multiplication
      */
-    IntegerOperation multiplicaiton(Integer limit);
+    IntegerOperation multiplication(Integer limit);
 
     /**
      * Generate a division between two random Integer.

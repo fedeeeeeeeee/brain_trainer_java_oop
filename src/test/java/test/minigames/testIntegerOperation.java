@@ -26,7 +26,13 @@ class testIntegerOperation {
 
     @Test
     void multiplication() {
-       IntegerOperation op =  this.factory.multiplicaiton(10);
+       IntegerOperation op =  this.factory.multiplication(10);
+       System.out.println("result " + "toString " + op.getResult() + " " + op.toString());
+    }
+    
+    @Test
+    void division() {
+       IntegerOperation op =  this.factory.division(10);
        System.out.println("result " + "toString " + op.getResult() + " " + op.toString());
     }
 }

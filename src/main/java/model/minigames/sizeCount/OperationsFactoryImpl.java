@@ -14,7 +14,7 @@ import model.UserPlayer;
  */
 public class OperationsFactoryImpl implements OperationsFactory {
 
-    private static final int NUM_OPERANDS = 2;
+    private static final int NUM_OPERANDS_SIMPLE_OPERATION = 2;
 
     private final Random rnd;
 
@@ -26,8 +26,22 @@ public class OperationsFactoryImpl implements OperationsFactory {
         this.rnd = new Random();
     }
 
-    private Stream<Integer> generateIntegerOperand(final Integer numOfOperands, final Integer limit) {
+    private Stream<Integer> generateRandomOperand(final Integer numOfOperands, final Integer limit) {
         return IntStream.range(0, numOfOperands).mapToObj(i -> rnd.nextInt(limit + 1));
+    }
+
+    private Stream<Integer> generateRandomOperandDivision(final Integer numOfOperands, final Integer limit) {
+        final Dividers div = new DividersImpl();
+        final List<Integer> result = new LinkedList<>();
+
+        for (int i = 0; i < numOfOperands; i++) {
+            Integer num = this.rnd.nextInt(limit + 1);
+            List<Integer> dividers = div.getDividers(num);
+            result.add(dividers.get(this.rnd.nextInt(dividers.size())));
+        }
+
+        return result.stream().limit(numOfOperands);
+
     }
 
     private String generateToStrong(final List<Integer> operands, final Operator operator) {
@@ -58,12 +72,39 @@ public class OperationsFactoryImpl implements OperationsFactory {
         return result;
     }
 
+    private List<IntegerOperation> generateRandomOperations(final Integer numOfOperand, final Integer limit) {
+        List<Operator> operators = Arrays.asList(Operator.values());
+        List<IntegerOperation> list = new LinkedList<>();
+
+        for (int i = numOfOperand; i > 0; i--) {
+            Operator op = operators.get(rnd.nextInt(operators.size()));
+            switch (op) {
+            case SUM:
+                list.add(this.addiction(limit));
+                break;
+            case SUB:
+                list.add(this.subtraction(limit));
+                break;
+            case MUL:
+                list.add(this.multiplication(limit));
+                break;
+            case DIV:
+                list.add(this.division(limit));
+                break;
+            default:
+                break;
+            }
+        }
+        return list;
+    }
+
     /**
      * {@inheritDoc}
      */
     @Override
     public IntegerOperation addiction(final Integer limit) {
-        final List<Integer> operands = this.generateIntegerOperand(NUM_OPERANDS, limit).collect(Collectors.toList());
+        final List<Integer> operands = this.generateRandomOperand(NUM_OPERANDS_SIMPLE_OPERATION, limit)
+                .collect(Collectors.toList());
 
         return new IntegerOperation() {
             @Override
@@ -84,7 +125,8 @@ public class OperationsFactoryImpl implements OperationsFactory {
      */
     @Override
     public IntegerOperation subtraction(final Integer limit) {
-        final List<Integer> operands = this.generateIntegerOperand(NUM_OPERANDS, limit).collect(Collectors.toList());
+        final List<Integer> operands = this.generateRandomOperand(NUM_OPERANDS_SIMPLE_OPERATION, limit)
+                .collect(Collectors.toList());
 
         return new IntegerOperation() {
 
@@ -108,8 +150,9 @@ public class OperationsFactoryImpl implements OperationsFactory {
      * {@inheritDoc}
      */
     @Override
-    public IntegerOperation multiplicaiton(final Integer limit) {
-        final List<Integer> operands = this.generateIntegerOperand(NUM_OPERANDS, limit).collect(Collectors.toList());
+    public IntegerOperation multiplication(final Integer limit) {
+        final List<Integer> operands = this.generateRandomOperand(NUM_OPERANDS_SIMPLE_OPERATION, limit)
+                .collect(Collectors.toList());
 
         return new IntegerOperation() {
 
@@ -134,8 +177,25 @@ public class OperationsFactoryImpl implements OperationsFactory {
      */
     @Override
     public IntegerOperation division(final Integer limit) {
-        // TODO Auto-generated method stub
-        return null;
+        final List<Integer> operands = this.generateRandomOperandDivision(NUM_OPERANDS_SIMPLE_OPERATION, limit)
+                .collect(Collectors.toList());
+
+        return new IntegerOperation() {
+
+            @Override
+            public Integer getResult() {
+                Integer result = operands.get(0);
+                for (int i = 1; i < operands.size(); i++) {
+                    result = result / operands.get(i);
+                }
+                return result;
+            }
+
+            @Override
+            public String toString() {
+                return generateToStrong(operands, Operator.DIV);
+            }
+        };
     }
 
     /**
