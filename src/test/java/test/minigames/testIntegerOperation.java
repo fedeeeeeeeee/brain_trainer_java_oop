@@ -18,4 +18,15 @@ class testIntegerOperation {
        System.out.println("result " + "toString " + op.getResult() + " " + op.toString());
     }
 
+    @Test
+    void subtraction() {
+       IntegerOperation op =  this.factory.subtraction(10);
+       System.out.println("result " + "toString " + op.getResult() + " " + op.toString());
+    }
+
+    @Test
+    void multiplication() {
+       IntegerOperation op =  this.factory.multiplicaiton(10);
+       System.out.println("result " + "toString " + op.getResult() + " " + op.toString());
+    }
 }

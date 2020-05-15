@@ -84,8 +84,24 @@ public class OperationsFactoryImpl implements OperationsFactory {
      */
     @Override
     public IntegerOperation subtraction(final Integer limit) {
-        // TODO Auto-generated method stub
-        return null;
+        final List<Integer> operands = this.generateIntegerOperand(NUM_OPERANDS, limit).collect(Collectors.toList());
+
+        return new IntegerOperation() {
+
+            @Override
+            public Integer getResult() {
+                Integer result = operands.get(0);
+                for (int i = 1; i < operands.size(); i++) {
+                    result = result - operands.get(i);
+                }
+                return result;
+            }
+
+            @Override
+            public String toString() {
+                return generateToStrong(operands, Operator.SUB);
+            }
+        };
     }
 
     /**
@@ -93,8 +109,24 @@ public class OperationsFactoryImpl implements OperationsFactory {
      */
     @Override
     public IntegerOperation multiplicaiton(final Integer limit) {
-        // TODO Auto-generated method stub
-        return null;
+        final List<Integer> operands = this.generateIntegerOperand(NUM_OPERANDS, limit).collect(Collectors.toList());
+
+        return new IntegerOperation() {
+
+            @Override
+            public Integer getResult() {
+                Integer result = operands.get(0);
+                for (int i = 1; i < operands.size(); i++) {
+                    result = result * operands.get(i);
+                }
+                return result;
+            }
+
+            @Override
+            public String toString() {
+                return generateToStrong(operands, Operator.MUL);
+            }
+        };
     }
 
     /**
