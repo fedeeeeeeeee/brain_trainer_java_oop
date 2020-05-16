@@ -9,6 +9,9 @@ import model.score.ScoreModelImpl;
  */
 public class PerilousPathModelImpl implements PerilousPathModel {
 
+    /**
+     * Perilous Path's base point.
+     */
     private static final int BASE_POINT = 5;
     
     private final int size;
@@ -28,11 +31,17 @@ public class PerilousPathModelImpl implements PerilousPathModel {
         this.score = new ScoreModelImpl(difficultyLevel, BASE_POINT);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void addPoint() {
         this.score.addPoint();
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public int getFinalScore() {
         return this.score.getScore();

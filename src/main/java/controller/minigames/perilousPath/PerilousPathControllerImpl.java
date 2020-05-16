@@ -26,11 +26,17 @@ public class PerilousPathControllerImpl implements PerilousPathController {
         this.view = perilousPathFx;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void addPoint() {
         this.model.addPoint();
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public int getFinalScore() {
         return this.model.getFinalScore();
