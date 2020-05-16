@@ -21,8 +21,7 @@ public class PerilousPathModelImpl implements PerilousPathModel {
     /**
      * Constructor of {@link PerilousPathModel}.
      * 
-     * @param difficultyLevel
-     *                       the current difficulty level
+     * @param difficultyLevel the current difficulty level
      */
     public PerilousPathModelImpl(final DifficultyLevel difficultyLevel) {
         Difficulty difficulty = new DifficultyImpl(difficultyLevel);

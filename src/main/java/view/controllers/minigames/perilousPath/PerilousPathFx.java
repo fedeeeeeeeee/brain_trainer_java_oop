@@ -2,8 +2,11 @@ package view.controllers.minigames.perilousPath;
 
 import controller.minigames.perilousPath.PerilousPathController;
 import controller.minigames.perilousPath.PerilousPathControllerImpl;
-import javafx.application.Platform;
-import model.DifficultyLevel;
+import javafx.fxml.FXML;
+import javafx.scene.control.Label;
+import javafx.scene.layout.GridPane;
+import timer.GameTimer;
+import view.SceneType;
 import view.controllers.minigames.AbstractMiniGameController;
 
 /**
@@ -11,8 +14,18 @@ import view.controllers.minigames.AbstractMiniGameController;
  */
 public class PerilousPathFx extends AbstractMiniGameController {
 
+    /**
+     * The Perilous Path's duration.
+     */
+    private static final int SECONDS = 31;
+
     private PerilousPathController controller;
-    private boolean timeFinish;
+
+    @FXML
+    private GridPane grid;
+
+    @FXML
+    private Label instructions;
 
     /**
      * {@inheritDoc}
@@ -20,7 +33,7 @@ public class PerilousPathFx extends AbstractMiniGameController {
     @Override
     public void initGame() {
         this.controller = new PerilousPathControllerImpl(this);
-        this.timeFinish = false;
+        this.setGameTimer(new GameTimer(SECONDS, this));
     }
 
     /**
@@ -28,17 +41,16 @@ public class PerilousPathFx extends AbstractMiniGameController {
      */
     @Override
     public void timeFinish() {
-        Platform.runLater(() -> {
-            this.timeFinish = true;
-        });
+        this.controller.notifyTimeFinish();
     }
 
     /**
-     * Check if the time is finished.
+     * Show the final score.
      * 
-     * @return true if time is finished, false otherwise
+     * @param finalScore
      */
-    public boolean isTimeFinish() {
-        return this.timeFinish;
+    public void showScore(final int finalScore) {
+        this.getController().updateProgress(finalScore);
+        this.getView().setHandleDataScene(SceneType.END_GAME.getFilePath());
     }
 }

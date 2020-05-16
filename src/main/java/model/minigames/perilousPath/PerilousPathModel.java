@@ -9,7 +9,7 @@ public interface PerilousPathModel {
      * Add point when user finds the right path.
      */
     void addPoint();
-    
+
     /**
      * Get the final score.
      * 
