@@ -1,5 +1,6 @@
 package model.minigames.sizeCount;
 
+import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Random;
@@ -7,13 +8,12 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
+
 /**
  * The implementation of the {@link OperationsFactory}.
  *
  */
 public class OperationsFactoryImpl implements OperationsFactory {
-
-    private static final int NUM_OPERANDS_SIMPLE_OPERATION = 2;
 
     private final Random rnd;
 
@@ -36,7 +36,7 @@ public class OperationsFactoryImpl implements OperationsFactory {
     private Stream<Integer> generateRandomOperandDivision(final int numOfOperands, final int limit) {
         final Dividers div = new DividersImpl();
         final List<Integer> result = new LinkedList<>();
-        Integer num = this.rnd.nextInt(limit+1)+1;
+        Integer num = this.rnd.nextInt(limit + 1) + 1; // zero is not allowed
 
         result.add(num);
         for (int i = 0; i < numOfOperands; i++) {
@@ -51,26 +51,8 @@ public class OperationsFactoryImpl implements OperationsFactory {
 
     }
 
-    private String generateToStrong(final List<Integer> operands, final Operator operator) {
+    private String generateToStrong(final List<Integer> operands, final String separator) {
         String result = Integer.toString(operands.get(0));
-        String separator = "";
-
-        switch (operator) {
-        case SUM:
-            separator = "+";
-            break;
-        case SUB:
-            separator = "-";
-            break;
-        case MUL:
-            separator = "*";
-            break;
-        case DIV:
-            separator = "/";
-            break;
-        default:
-            break;
-        }
 
         for (int i = 1; i < operands.size(); i++) {
             result = result.concat(separator).concat(Integer.toString(operands.get(i)));
@@ -79,13 +61,39 @@ public class OperationsFactoryImpl implements OperationsFactory {
         return result;
     }
 
+    private List<IntegerOperation> generateRandomOperations(final int numOfOperations, final int numOfOperand,
+            final int limit) {
+        List<Operator> operators = Arrays.asList(Operator.values());
+        List<IntegerOperation> list = new LinkedList<>();
+
+        for (int i = numOfOperations; i > 0; i--) {
+            Operator op = operators.get(rnd.nextInt(operators.size()));
+            switch (op) {
+            case SUM:
+                list.add(this.addiction(numOfOperand, limit));
+                break;
+            case SUB:
+                list.add(this.subtraction(numOfOperand, limit));
+                break;
+            case MUL:
+                list.add(this.multiplication(numOfOperand, limit));
+                break;
+            case DIV:
+                list.add(this.division(numOfOperand, limit));
+                break;
+            default:
+                break;
+            }
+        }
+        return list;
+    }
+
     /**
      * {@inheritDoc}
      */
     @Override
     public IntegerOperation addiction(final int numOfOperands, final int limit) {
-        final List<Integer> operands = this.generateRandomOperand(numOfOperands, limit)
-                                           .collect(Collectors.toList());
+        final List<Integer> operands = this.generateRandomOperand(numOfOperands, limit).collect(Collectors.toList());
         return new IntegerOperation() {
             @Override
             public Integer getResult() {
@@ -94,7 +102,7 @@ public class OperationsFactoryImpl implements OperationsFactory {
 
             @Override
             public String toString() {
-                return generateToStrong(operands, Operator.SUM);
+                return generateToStrong(operands, "+");
             }
 
         };
@@ -105,10 +113,8 @@ public class OperationsFactoryImpl implements OperationsFactory {
      */
     @Override
     public IntegerOperation subtraction(final int numOfOperands, final int limit) {
-        final List<Integer> operands =  this.generateRandomOperand(numOfOperands, limit)
-                                            .collect(Collectors.toList());
+        final List<Integer> operands = this.generateRandomOperand(numOfOperands, limit).collect(Collectors.toList());
         return new IntegerOperation() {
-            
             @Override
             public Integer getResult() {
                 return operands.stream().reduce((e1, e2) -> e1 - e2).get();
@@ -116,7 +122,7 @@ public class OperationsFactoryImpl implements OperationsFactory {
 
             @Override
             public String toString() {
-                return generateToStrong(operands, Operator.SUB);
+                return generateToStrong(operands, "-");
             }
         };
     }
@@ -126,8 +132,7 @@ public class OperationsFactoryImpl implements OperationsFactory {
      */
     @Override
     public IntegerOperation multiplication(final int numOfOperands, final int limit) {
-        final List<Integer> operands = this.generateRandomOperand(numOfOperands, limit)
-                                            .collect(Collectors.toList());
+        final List<Integer> operands = this.generateRandomOperand(numOfOperands, limit).collect(Collectors.toList());
         return new IntegerOperation() {
 
             @Override
@@ -137,7 +142,7 @@ public class OperationsFactoryImpl implements OperationsFactory {
 
             @Override
             public String toString() {
-                return generateToStrong(operands, Operator.MUL);
+                return generateToStrong(operands, "*");
             }
         };
     }
@@ -148,7 +153,7 @@ public class OperationsFactoryImpl implements OperationsFactory {
     @Override
     public IntegerOperation division(final int numOfOperands, final int limit) {
         final List<Integer> operands = this.generateRandomOperandDivision(numOfOperands, limit)
-                                            .collect(Collectors.toList());
+                .collect(Collectors.toList());
         return new IntegerOperation() {
 
             @Override
@@ -158,7 +163,55 @@ public class OperationsFactoryImpl implements OperationsFactory {
 
             @Override
             public String toString() {
-                return generateToStrong(operands, Operator.DIV);
+                return generateToStrong(operands, "/");
+            }
+        };
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public IntegerOperation sumExpression(final int numOfOperations, final int numOfOperand, final int limit) {
+        List<IntegerOperation> operations = this.generateRandomOperations(numOfOperations, numOfOperand, limit);
+        return new IntegerOperation() {
+
+            @Override
+            public Integer getResult() {
+                return operations.stream().mapToInt(e -> e.getResult()).sum();
+            }
+
+            @Override
+            public String toString() {
+                String string = new String("(" + operations.get(0).toString() + ")");
+                for (int i = 1; i < operations.size(); i++) {
+                    string = string.concat(" + " + "(" + operations.get(i).toString() + ")");
+                }
+                return string;
+            }
+        };
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public IntegerOperation subExpression(final int numOfOperations, final int numOfOperand, final int limit) {
+        List<IntegerOperation> operations = this.generateRandomOperations(numOfOperations, numOfOperand, limit);
+        return new IntegerOperation() {
+
+            @Override
+            public Integer getResult() {
+                return operations.stream().map(e -> e.getResult()).reduce((e1, e2) -> e1 - e2).get();
+            }
+
+            @Override
+            public String toString() {
+                String string = new String("(" + operations.get(0).toString() + ")");
+                for (int i = 1; i < operations.size(); i++) {
+                    string = string.concat(" - " + "(" + operations.get(i).toString() + ")");
+                }
+                return string;
             }
         };
     }
