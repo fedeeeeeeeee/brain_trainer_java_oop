@@ -12,27 +12,27 @@ public interface OperationsFactory {
      * 
      * @return a IntegerOperation which is an addiction
      */
-    IntegerOperation addiction(Integer limit);
+    IntegerOperation addiction(int numOfOperand, int limit);
 
     /**
      * Generate a subtraction between two random Integer.
      * 
      * @return a IntegerOperation which is a subtraction
      */
-    IntegerOperation subtraction(Integer limit);
+    IntegerOperation subtraction(int numOfOperand, int limit);
 
     /**
      * Generate a multiplication between two random Integer.
      * 
      * @return a IntegerOperation which is a multiplication
      */
-    IntegerOperation multiplication(Integer limit);
+    IntegerOperation multiplication(int numOfOperand, int limit);
 
     /**
      * Generate a division between two random Integer.
      * 
      * @return a IntegerOperation which is a division
      */
-    IntegerOperation division(Integer limit); 
+    IntegerOperation division(int numOfOperand, int limit); 
 
 }

@@ -1,6 +1,5 @@
 package model.minigames.sizeCount;
 
-import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Random;
@@ -34,7 +33,7 @@ public class OperationsFactoryImpl implements OperationsFactory {
      * Method to compute random operand for the division cause the result must be an
      * integer
      */
-    private Stream<Integer> generateRandomOperandDivision(final Integer numOfOperands, final Integer limit) {
+    private Stream<Integer> generateRandomOperandDivision(final int numOfOperands, final int limit) {
         final Dividers div = new DividersImpl();
         final List<Integer> result = new LinkedList<>();
         Integer num = this.rnd.nextInt(limit+1)+1;
@@ -84,10 +83,9 @@ public class OperationsFactoryImpl implements OperationsFactory {
      * {@inheritDoc}
      */
     @Override
-    public IntegerOperation addiction(final Integer limit) {
-        final List<Integer> operands = this.generateRandomOperand(NUM_OPERANDS_SIMPLE_OPERATION, limit)
-                .collect(Collectors.toList());
-
+    public IntegerOperation addiction(final int numOfOperands, final int limit) {
+        final List<Integer> operands = this.generateRandomOperand(numOfOperands, limit)
+                                           .collect(Collectors.toList());
         return new IntegerOperation() {
             @Override
             public Integer getResult() {
@@ -106,19 +104,14 @@ public class OperationsFactoryImpl implements OperationsFactory {
      * {@inheritDoc}
      */
     @Override
-    public IntegerOperation subtraction(final Integer limit) {
-        final List<Integer> operands = this.generateRandomOperand(NUM_OPERANDS_SIMPLE_OPERATION, limit)
-                .collect(Collectors.toList());
-
+    public IntegerOperation subtraction(final int numOfOperands, final int limit) {
+        final List<Integer> operands =  this.generateRandomOperand(numOfOperands, limit)
+                                            .collect(Collectors.toList());
         return new IntegerOperation() {
-
+            
             @Override
             public Integer getResult() {
-                Integer result = operands.get(0);
-                for (int i = 1; i < operands.size(); i++) {
-                    result = result - operands.get(i);
-                }
-                return result;
+                return operands.stream().reduce((e1, e2) -> e1 - e2).get();
             }
 
             @Override
@@ -132,19 +125,14 @@ public class OperationsFactoryImpl implements OperationsFactory {
      * {@inheritDoc}
      */
     @Override
-    public IntegerOperation multiplication(final Integer limit) {
-        final List<Integer> operands = this.generateRandomOperand(NUM_OPERANDS_SIMPLE_OPERATION, limit)
-                .collect(Collectors.toList());
-
+    public IntegerOperation multiplication(final int numOfOperands, final int limit) {
+        final List<Integer> operands = this.generateRandomOperand(numOfOperands, limit)
+                                            .collect(Collectors.toList());
         return new IntegerOperation() {
 
             @Override
             public Integer getResult() {
-                Integer result = operands.get(0);
-                for (int i = 1; i < operands.size(); i++) {
-                    result = result * operands.get(i);
-                }
-                return result;
+                return operands.stream().reduce((e1, e2) -> e1 * e2).get();
             }
 
             @Override
@@ -158,19 +146,14 @@ public class OperationsFactoryImpl implements OperationsFactory {
      * {@inheritDoc}
      */
     @Override
-    public IntegerOperation division(final Integer limit) {
-        final List<Integer> operands = this.generateRandomOperandDivision(NUM_OPERANDS_SIMPLE_OPERATION, limit)
-                .collect(Collectors.toList());
-
+    public IntegerOperation division(final int numOfOperands, final int limit) {
+        final List<Integer> operands = this.generateRandomOperandDivision(numOfOperands, limit)
+                                            .collect(Collectors.toList());
         return new IntegerOperation() {
 
             @Override
             public Integer getResult() {
-                Integer result = operands.get(0);
-                for (int i = 1; i < operands.size(); i++) {
-                    result = result / operands.get(i);
-                }
-                return result;
+                return operands.stream().reduce((e1, e2) -> e1 / e2).get();
             }
 
             @Override
