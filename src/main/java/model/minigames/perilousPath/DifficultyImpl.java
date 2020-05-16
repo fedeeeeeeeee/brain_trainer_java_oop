@@ -9,7 +9,7 @@ import model.DifficultyLevel;
 import utility.Pair;
 
 /**
- * Implements {@link Difficulty}.
+ * Implementation of {@link Difficulty}.
  */
 public class DifficultyImpl implements Difficulty {
 
