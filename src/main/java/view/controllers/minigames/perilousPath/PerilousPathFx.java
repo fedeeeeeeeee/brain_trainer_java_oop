@@ -2,6 +2,7 @@ package view.controllers.minigames.perilousPath;
 
 import controller.minigames.perilousPath.PerilousPathController;
 import controller.minigames.perilousPath.PerilousPathControllerImpl;
+import javafx.application.Platform;
 import model.DifficultyLevel;
 import view.controllers.minigames.AbstractMiniGameController;
 
@@ -11,15 +12,15 @@ import view.controllers.minigames.AbstractMiniGameController;
 public class PerilousPathFx extends AbstractMiniGameController {
 
     private PerilousPathController controller;
-    private DifficultyLevel difficultyLevel;
+    private boolean timeFinish;
 
     /**
      * {@inheritDoc}
      */
     @Override
     public void initGame() {
-        this.difficultyLevel = this.getController().getDifficultyLevel();
-        this.controller = new PerilousPathControllerImpl(this.difficultyLevel, this);
+        this.controller = new PerilousPathControllerImpl(this);
+        this.timeFinish = false;
     }
 
     /**
@@ -27,7 +28,17 @@ public class PerilousPathFx extends AbstractMiniGameController {
      */
     @Override
     public void timeFinish() {
-        // TODO Auto-generated method stub
+        Platform.runLater(() -> {
+            this.timeFinish = true;
+        });
+    }
 
+    /**
+     * Check if the time is finished.
+     * 
+     * @return true if time is finished, false otherwise
+     */
+    public boolean isTimeFinish() {
+        return this.timeFinish;
     }
 }

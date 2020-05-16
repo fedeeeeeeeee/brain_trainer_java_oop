@@ -13,7 +13,7 @@ public class PerilousPathModelImpl implements PerilousPathModel {
      * Perilous Path's base point.
      */
     private static final int BASE_POINT = 5;
-    
+
     private final int size;
     private final int numMines;
     private final ScoreModel score;
