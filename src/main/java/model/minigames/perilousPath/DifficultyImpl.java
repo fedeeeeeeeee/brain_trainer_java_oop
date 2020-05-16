@@ -41,11 +41,11 @@ public class DifficultyImpl implements Difficulty {
     }
 
     private int increment(final DifficultyLevel difficultyLevel) {
-        return DifficultyLevel.valueOf(difficultyLevel.toString()).ordinal();
+        return DifficultyLevel.valueOf(difficultyLevel.toString().toUpperCase()).ordinal();
     }
 
-    private Pair<Integer, Integer> getValue() {
-        return this.difficulty.get(currentDifficultyLevel);
+    private Pair<Integer, Integer> getValue(final DifficultyLevel difficultyLevel) {
+        return this.difficulty.get(difficultyLevel);
     }
 
     /**
@@ -53,7 +53,7 @@ public class DifficultyImpl implements Difficulty {
      */
     @Override
     public int getSize() {
-        return this.getValue().getX();
+        return this.getValue(this.currentDifficultyLevel).getX();
     }
 
     /**
@@ -61,6 +61,6 @@ public class DifficultyImpl implements Difficulty {
      */
     @Override
     public int getNumMines() {
-        return this.getValue().getY();
+        return this.getValue(this.currentDifficultyLevel).getY();
     }
 }
