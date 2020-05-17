@@ -7,10 +7,8 @@ package controller.minigames.colorGama;
 public interface ColorGamaController {
 
     /**
-     * Get the final score of the game played.
+     * The time is expired. 
      * 
-     * @return
-     *          final score
      */
-    int getFinalScore();
+    void timeExpired();
 }

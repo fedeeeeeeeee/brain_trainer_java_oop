@@ -10,7 +10,7 @@ import view.SceneType;
 import view.controllers.minigames.AbstractMiniGameController;
 
 /**
- * 
+ * This class implements {@link ColorGamaView}.
  *
  */
 public class ColorGamaViewImpl extends AbstractMiniGameController implements ColorGamaView {
@@ -26,21 +26,28 @@ public class ColorGamaViewImpl extends AbstractMiniGameController implements Col
      * {@inheritDoc}
      */
     @Override
-    public void timeFinish() {
-        Platform.runLater(() -> {
-            this.getController().updateProgress(this.colorGamaController.getFinalScore());
-            this.getView().setHandleDataScene(SceneType.END_GAME.getFilePath());
-        });
-
+    public void initGame() {
+        this.colorGamaController = new ColorGamaControllerImpl(this, this.getController().getDifficultyLevel());
+        this.setGameTimer(new GameTimer(SECONDS, this)); 
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public void initGame() {
-        this.colorGamaController = new ColorGamaControllerImpl(this.getController().getDifficultyLevel());
-        this.setGameTimer(new GameTimer(SECONDS, this)); 
+    public void timeFinish() {
+       this.colorGamaController.timeExpired();
     }
 
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void endGame(final int finalScore) {
+        Platform.runLater(() -> {
+            this.getController().updateProgress(finalScore);
+            this.getView().setHandleDataScene(SceneType.END_GAME.getFilePath());
+        });
+
+    }
 }
