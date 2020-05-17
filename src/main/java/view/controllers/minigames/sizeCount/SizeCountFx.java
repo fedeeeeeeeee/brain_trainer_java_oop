@@ -9,7 +9,7 @@ import model.minigames.sizeCount.IntegerOperation;
  * A interface view for the game size count.
  *
  */
-public interface SizeCountView {
+public interface SizeCountFx {
 
     /**
      * Draw the view of the minigame.

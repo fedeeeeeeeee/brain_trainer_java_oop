@@ -5,7 +5,7 @@ import java.util.List;
 import model.minigames.sizeCount.IntegerOperation;
 import view.controllers.minigames.AbstractMiniGameController;
 
-public class SizeCountViewImpl extends AbstractMiniGameController implements SizeCountView {
+public class SizeCountFxImpl extends AbstractMiniGameController implements SizeCountFx {
 
     @Override
     public void draw(final List<IntegerOperation> operations) {
