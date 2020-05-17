@@ -10,6 +10,8 @@ import java.util.Random;
 import java.util.stream.Collectors;
 
 import model.DifficultyLevel;
+import model.score.ScoreModel;
+import model.score.ScoreModelImpl;
 import utility.Pair;
 
 public class SizeCountModelImpl implements SizeCountModel {
@@ -22,10 +24,10 @@ public class SizeCountModelImpl implements SizeCountModel {
     private static final Integer NUM_OPERATION_EXPR_HARD = 3;
 
     private static final Integer NUM_OPERAND = 2;
-
     private static final Integer NUM_OPERATIONS_GAME = 2;
 
     private static final String SAME_ANSWER = "SAME";
+    private static final int BASE_POINT = 5;
 
     private static Map<DifficultyLevel, Pair<Integer, Integer>> difficultyOptions;
 
@@ -43,6 +45,7 @@ public class SizeCountModelImpl implements SizeCountModel {
     private List<Operations> opOptions;
     private boolean same;
     private Optional<IntegerOperation> maxOperation;
+    private ScoreModel scoreModel;
 
     public SizeCountModelImpl(final DifficultyLevel difficulty) {
         this.operations = new LinkedList<>();
@@ -50,6 +53,7 @@ public class SizeCountModelImpl implements SizeCountModel {
         this.maxOperation = Optional.empty();
         this.opFactory = new OperationsFactoryImpl();
         this.opOptions = Arrays.asList(Operations.values());
+        this.scoreModel = new ScoreModelImpl(difficulty, BASE_POINT);
         this.initSetting(difficulty);
     }
 
@@ -77,7 +81,7 @@ public class SizeCountModelImpl implements SizeCountModel {
             operation = this.opFactory.multiplication(NUM_OPERAND, this.upperBound);
             break;
         case SUM_EXPRESSION:
-            operation = this.opFactory.sumExpression(this.numOperationsExpr,NUM_OPERAND , this.upperBound);
+            operation = this.opFactory.sumExpression(this.numOperationsExpr, NUM_OPERAND , this.upperBound);
             break;
         case SUB_EXPRESSION:
             operation = this.opFactory.subExpression(this.numOperationsExpr, NUM_OPERAND,  this.upperBound);
@@ -108,7 +112,11 @@ public class SizeCountModelImpl implements SizeCountModel {
      */
     @Override
     public boolean isCorrectAnswer(final String answer) {
-        return (answer.equals(SAME_ANSWER) && this.same) || answer.equals(this.maxOperation.get().toString());
+        if ((answer.equals(SAME_ANSWER) && this.same) || answer.equals(this.maxOperation.get().toString())){
+            this.scoreModel.addPoint();
+            return true;
+        }
+        return false;
     }
 
     /**
@@ -141,6 +149,14 @@ public class SizeCountModelImpl implements SizeCountModel {
     @Override
     public Integer getNumOfOperations() {
         return NUM_OPERATIONS_GAME;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public int getScore() {
+        return this.scoreModel.getScore();
     }
 
 }

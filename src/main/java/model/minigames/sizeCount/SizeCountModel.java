@@ -22,7 +22,7 @@ public interface SizeCountModel {
      * 
      * @return the list of {@link IntegerOperation} that compose the game
      */
-   List<IntegerOperation> getOperations();
+    List<IntegerOperation> getOperations();
 
     /**
      * Reset the game and compute new operations.
@@ -35,5 +35,12 @@ public interface SizeCountModel {
      * @return the number of operations of which the game is made up
      */
     Integer getNumOfOperations();
+
+    /**
+     * Get the score gained.
+     * 
+     * @return the score gained
+     */
+    int getScore();
 
 }
