@@ -50,7 +50,7 @@ public class PerilousPathFx extends AbstractMiniGameController {
      * 
      * @param finalScore
      */
-    public void showScore(final int finalScore) {
+    public void endGame(final int finalScore) {
         Platform.runLater(() -> {
             this.getController().updateProgress(finalScore);
             this.getView().setHandleDataScene(SceneType.END_GAME.getFilePath());

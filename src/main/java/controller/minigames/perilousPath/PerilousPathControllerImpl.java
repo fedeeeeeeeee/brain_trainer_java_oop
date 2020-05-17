@@ -31,6 +31,6 @@ public class PerilousPathControllerImpl implements PerilousPathController {
      */
     @Override
     public void timerExpired() {
-        this.view.showScore(this.model.getFinalScore());
+        this.view.endGame(this.model.getFinalScore());
     }
 }
