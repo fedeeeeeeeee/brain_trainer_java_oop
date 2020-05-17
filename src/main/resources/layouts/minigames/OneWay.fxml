@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.GridPane?>
 
-<VBox prefHeight="580.0" prefWidth="500.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.controllers.minigames.oneWay.OneWayFx.OneWayFx">
+<VBox prefHeight="580.0" prefWidth="500.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.controllers.minigames.oneWay.OneWayFx">
 	<children>
 		<GridPane fx:id="outerGrid" layoutX="10.0" layoutY="10.0">
 			<columnConstraints>
@@ -80,9 +80,6 @@
 						<RowConstraints maxHeight="100.0" minHeight="20.0" prefHeight="100.0" vgrow="SOMETIMES" />
 						<RowConstraints maxHeight="100.0" minHeight="20.0" prefHeight="100.0" vgrow="SOMETIMES" />
 					</rowConstraints>
-					<children>
-						<Button fx:id="play" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onMouseClicked="#playClicked" prefHeight="27.0" prefWidth="77.0" text="Play" textAlignment="CENTER" GridPane.columnIndex="2" GridPane.rowIndex="3" />
-					</children>
 					<GridPane.margin>
 						<Insets bottom="30.0" left="30.0" right="30.0" top="30.0" />
 					</GridPane.margin>
