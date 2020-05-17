@@ -4,7 +4,7 @@ import java.util.List;
 
 /**
  * 
- * A model interface for the game size count
+ * A model interface for the game size count.
  *
  */
 public interface SizeCountModel {

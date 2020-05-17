@@ -21,7 +21,7 @@ public class SizeCountModelImpl implements SizeCountModel {
     private static final Integer NUM_OPERATION_EXPR_EASY_NORMAL = 2;
     private static final Integer NUM_OPERATION_EXPR_HARD = 3;
 
-    private static final Integer NUM_OPERAND = 3;
+    private static final Integer NUM_OPERAND = 2;
 
     private static final Integer NUM_OPERATIONS_GAME = 2;
 
@@ -55,7 +55,7 @@ public class SizeCountModelImpl implements SizeCountModel {
 
     private void initSetting(final DifficultyLevel difficulty) {
         this.upperBound = difficultyOptions.get(difficulty).getX();
-        this.numOperationsExpr = difficultyOptions.get(difficulty).getX();
+        this.numOperationsExpr = difficultyOptions.get(difficulty).getY();
 
         this.reset();
     }
@@ -77,10 +77,10 @@ public class SizeCountModelImpl implements SizeCountModel {
             operation = this.opFactory.multiplication(NUM_OPERAND, this.upperBound);
             break;
         case SUM_EXPRESSION:
-            operation = this.opFactory.sumExpression(this.numOperationsExpr, NUM_OPERAND, this.upperBound);
+            operation = this.opFactory.sumExpression(this.numOperationsExpr,NUM_OPERAND , this.upperBound);
             break;
         case SUB_EXPRESSION:
-            operation = this.opFactory.subExpression(this.numOperationsExpr, NUM_OPERAND, this.upperBound);
+            operation = this.opFactory.subExpression(this.numOperationsExpr, NUM_OPERAND,  this.upperBound);
             break;
         default:
             break;
