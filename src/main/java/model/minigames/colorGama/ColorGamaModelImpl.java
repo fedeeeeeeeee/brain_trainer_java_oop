@@ -19,11 +19,9 @@ public class ColorGamaModelImpl implements ColorGamaModel {
      * 
      * @param difficulty
      *          the difficulty selected
-     * @param basePoint
-     *          base point of ColorGama minigame
      * 
      */
-    public ColorGamaModelImpl(final DifficultyLevel difficulty, final int basePoint) {
+    public ColorGamaModelImpl(final DifficultyLevel difficulty) {
         this.score = new ScoreModelImpl(difficulty, BASEPOINT);
     }
 
