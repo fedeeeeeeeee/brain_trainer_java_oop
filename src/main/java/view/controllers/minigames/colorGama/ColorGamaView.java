@@ -13,4 +13,12 @@ public interface ColorGamaView {
      *          the final score obtained
      */
     void endGame(int finalScore);
+
+    /**
+     * Fill a grid with buttons.
+     *
+     * @param size
+     *          the grid size
+     */
+    void drawGrid(int size);
 }
