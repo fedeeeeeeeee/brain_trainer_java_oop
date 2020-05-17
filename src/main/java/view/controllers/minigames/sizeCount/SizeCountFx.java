@@ -18,4 +18,28 @@ public interface SizeCountFx {
      */
     void draw(List<IntegerOperation> operations);
 
+    /**
+     * Set the operations to show.
+     * 
+     * @param numOperations the number of operations to show
+     */
+    void setOperations(Integer numOperations);
+
+    /**
+     * Show that the selected answer is wrong.
+     */
+    void showWrongAnswer();
+
+    /**
+     * Show that the selected answer is wrong.
+     */
+    void showCorrectAnswer();
+
+    /**
+     * Show the end game scene.
+     * @param score
+     *          the score gained
+     */
+    void showEndGame(final int score);
+
 }
