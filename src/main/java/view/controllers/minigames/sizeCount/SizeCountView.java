@@ -1,4 +1,4 @@
-package view.controllers.minigames;
+package view.controllers.minigames.sizeCount;
 
 import java.util.List;
 
