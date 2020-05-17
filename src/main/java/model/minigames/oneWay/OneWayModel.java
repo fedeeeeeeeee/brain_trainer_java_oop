@@ -23,4 +23,7 @@ public interface OneWayModel {
     void addPoint();
 
     int getFinalScore();
+
+    void initializeOneWay();
+
 }
