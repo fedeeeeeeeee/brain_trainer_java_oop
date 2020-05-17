@@ -13,7 +13,7 @@ import view.controllers.minigames.AbstractMiniGameController;
  * 
  *
  */
-public class ColorGamaFx extends AbstractMiniGameController {
+public class ColorGamaViewImpl extends AbstractMiniGameController implements ColorGamaView {
 
     private static final int SECONDS = 30;
 
