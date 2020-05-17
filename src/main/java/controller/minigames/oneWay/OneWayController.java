@@ -1,5 +1,8 @@
 package controller.minigames.oneWay;
 
+import java.util.List;
+
+import model.minigames.oneWay.Direction;
 import utility.Pair;
 
 public interface OneWayController {
@@ -8,9 +11,14 @@ public interface OneWayController {
     
     int getSize();
     
-    //List<Direction> getSteps();
+    List<Direction> getSteps();
     
     Pair<Integer, Integer> getInitialPos();
     
+    Pair<Integer, Integer> getFinalPos();
+    
     int getFinalScore();
+
+    void expiredTime();
+    
 }
