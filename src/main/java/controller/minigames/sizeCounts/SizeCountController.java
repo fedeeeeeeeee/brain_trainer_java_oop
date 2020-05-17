@@ -20,13 +20,14 @@ public interface SizeCountController {
     void newAttempt(String answer);
 
     /**
-     * Requires the model the score.
+     * The time is expired so the game must ended.
      */
-    void computeScore();
+    void timeExpired();
 
     /**
      * Asks the model to compute new operations.
      */
     void computeOperations();
+
 
 }
