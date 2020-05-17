@@ -6,8 +6,8 @@ package controller.minigames.perilousPath;
 public interface PerilousPathController {
 
     /**
-     * Notify that the time is finished.
+     * The time is expired.
      */
-    void notifyTimeFinish();
+    void timerExpired();
 
 }

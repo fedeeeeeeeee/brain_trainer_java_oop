@@ -2,6 +2,7 @@ package view.controllers.minigames.perilousPath;
 
 import controller.minigames.perilousPath.PerilousPathController;
 import controller.minigames.perilousPath.PerilousPathControllerImpl;
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
@@ -32,7 +33,7 @@ public class PerilousPathFx extends AbstractMiniGameController {
      */
     @Override
     public void initGame() {
-        this.controller = new PerilousPathControllerImpl(this);
+        this.controller = new PerilousPathControllerImpl(this.getController().getDifficultyLevel(), this);
         this.setGameTimer(new GameTimer(SECONDS, this));
     }
 
@@ -41,7 +42,7 @@ public class PerilousPathFx extends AbstractMiniGameController {
      */
     @Override
     public void timeFinish() {
-        this.controller.notifyTimeFinish();
+        this.controller.timerExpired();
     }
 
     /**
@@ -50,7 +51,9 @@ public class PerilousPathFx extends AbstractMiniGameController {
      * @param finalScore
      */
     public void showScore(final int finalScore) {
-        this.getController().updateProgress(finalScore);
-        this.getView().setHandleDataScene(SceneType.END_GAME.getFilePath());
+        Platform.runLater(() -> {
+            this.getController().updateProgress(finalScore);
+            this.getView().setHandleDataScene(SceneType.END_GAME.getFilePath());
+        });
     }
 }

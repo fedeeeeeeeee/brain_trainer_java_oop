@@ -1,6 +1,6 @@
 package controller.minigames.perilousPath;
 
-import javafx.application.Platform;
+import model.DifficultyLevel;
 import model.minigames.perilousPath.PerilousPathModel;
 import model.minigames.perilousPath.PerilousPathModelImpl;
 import view.controllers.minigames.perilousPath.PerilousPathFx;
@@ -16,20 +16,21 @@ public class PerilousPathControllerImpl implements PerilousPathController {
     /**
      * Constructor of {@link PerilousPathController}.
      * 
-     * @param perilousPathFx the view controller
+     * @param difficultyLevel 
+     *                       the current difficulty level
+     * @param perilousPathFx 
+     *                       the view controller
      */
-    public PerilousPathControllerImpl(final PerilousPathFx perilousPathFx) {
+    public PerilousPathControllerImpl(final DifficultyLevel difficultyLevel, final PerilousPathFx perilousPathFx) {
         this.view = perilousPathFx;
-        this.model = new PerilousPathModelImpl(this.view.getController().getDifficultyLevel());
+        this.model = new PerilousPathModelImpl(difficultyLevel);
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public void notifyTimeFinish() {
-        Platform.runLater(() -> {
-            this.view.showScore(this.model.getFinalScore());
-        });
+    public void timerExpired() {
+        this.view.showScore(this.model.getFinalScore());
     }
 }
