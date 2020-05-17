@@ -8,10 +8,16 @@ import model.DifficultyLevel;
 import model.minigames.perilousPath.Difficulty;
 import model.minigames.perilousPath.DifficultyImpl;
 
+/**
+ * Class to test if {@link Difficulty} works correctly.
+ */
 public class DifficultyTest {
 
     private Difficulty difficulty;
 
+    /**
+     * Test the easy difficulty.
+     */
     @Test
     public void easyDifficultyTest() {
         this.difficulty = new DifficultyImpl(DifficultyLevel.EASY);
@@ -19,6 +25,9 @@ public class DifficultyTest {
         assertEquals(11, this.difficulty.getNumMines());
     }
 
+    /**
+     * Test the normal difficulty.
+     */
     @Test
     public void normalDifficultyTest() {
         this.difficulty = new DifficultyImpl(DifficultyLevel.NORMAL);
@@ -26,6 +35,9 @@ public class DifficultyTest {
         assertEquals(22, this.difficulty.getNumMines());
     }
 
+    /**
+     * Test the hard difficulty.
+     */
     @Test
     public void hardDifficultyTest() {
         this.difficulty = new DifficultyImpl(DifficultyLevel.HARD);
