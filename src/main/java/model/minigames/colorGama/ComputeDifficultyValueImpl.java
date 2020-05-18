@@ -5,7 +5,7 @@ import java.util.Arrays;
 import model.DifficultyLevel;
 
 /**
- * This class implements {@link ComputeDifficultyValueImpl}.
+ * This class implements {@link ComputeDifficultyValue}.
  *
  */
 public final class ComputeDifficultyValueImpl implements ComputeDifficultyValue {

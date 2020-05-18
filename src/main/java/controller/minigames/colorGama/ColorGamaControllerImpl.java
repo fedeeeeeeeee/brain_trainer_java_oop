@@ -3,7 +3,7 @@ package controller.minigames.colorGama;
 import model.DifficultyLevel;
 import model.minigames.colorGama.ColorGamaModel;
 import model.minigames.colorGama.ColorGamaModelImpl;
-import view.controllers.minigames.colorGama.ColorGamaView;
+import view.controllers.minigames.colorGama.ColorGamaFx;
 
 /**
  * This class implements {@link ColorGamaController}.
@@ -12,7 +12,7 @@ import view.controllers.minigames.colorGama.ColorGamaView;
 public class ColorGamaControllerImpl implements ColorGamaController {
 
     private ColorGamaModel model;
-    private ColorGamaView view;
+    private ColorGamaFx view;
 
     /**
      * Constructor of {@link ColorGamaController}.
@@ -23,7 +23,7 @@ public class ColorGamaControllerImpl implements ColorGamaController {
      * @param difficulty
      *          the difficulty selected
      */
-    public ColorGamaControllerImpl(final ColorGamaView view, final DifficultyLevel difficulty) {
+    public ColorGamaControllerImpl(final ColorGamaFx view, final DifficultyLevel difficulty) {
         this.model = new ColorGamaModelImpl(difficulty);
         this.view = view;
     }

@@ -1,4 +1,4 @@
-package model;
+package model.minigames.colorGama;
 
 /**
  * Enumeration of the possible question.
@@ -33,7 +33,7 @@ public enum QuestionType {
      * @return
      *          the name of the question type
      */
-    public final String toString() {
+    public final String getQuestionName() {
         return this.question;
     }
 }

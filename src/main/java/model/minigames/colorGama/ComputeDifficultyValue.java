@@ -1,7 +1,7 @@
 package model.minigames.colorGama;
 
 /**
- * this interface calculates constants according to the difficulty.
+ * This interface calculates constants according to the difficulty.
  *
  */
 public interface ComputeDifficultyValue {

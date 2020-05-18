@@ -14,12 +14,13 @@ import view.SceneType;
 import view.controllers.minigames.AbstractMiniGameController;
 
 /**
- * This class implements {@link ColorGamaView}.
+ * This class implements {@link ColorGamaFx}.
  *
  */
-public class ColorGamaViewImpl extends AbstractMiniGameController implements ColorGamaView {
+public class ColorGamaFxImpl extends AbstractMiniGameController implements ColorGamaFx {
 
     private static final int SECONDS = 30;
+    private static final int BT_SIZE = 300;
 
     @FXML
     private GridPane buttonsGrid;
@@ -37,7 +38,7 @@ public class ColorGamaViewImpl extends AbstractMiniGameController implements Col
         for (int i = 0; i < size; i++) {
             for (int j = 0; j < size; j++) {
                 final Button bt = new Button();
-                bt.setPrefSize(100, 100);
+                bt.setPrefSize(BT_SIZE, BT_SIZE);
                 bt.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
                 bt.addEventHandler(MouseEvent.MOUSE_CLICKED, eventHandler);
                 GridPane.setMargin(bt, new Insets(2));

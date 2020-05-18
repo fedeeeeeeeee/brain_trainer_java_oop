@@ -4,7 +4,7 @@ package view.controllers.minigames.colorGama;
  * The view interface of ColorGama minigame.
  *
  */
-public interface ColorGamaView {
+public interface ColorGamaFx {
 
     /**
      * Switch to the end scene of the game.
