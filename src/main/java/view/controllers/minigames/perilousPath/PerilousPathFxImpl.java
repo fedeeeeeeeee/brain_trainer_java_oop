@@ -1,17 +1,23 @@
 package view.controllers.minigames.perilousPath;
 
+import java.util.Map;
+
 import controller.minigames.perilousPath.PerilousPathController;
 import controller.minigames.perilousPath.PerilousPathControllerImpl;
 import javafx.application.Platform;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import timer.GameTimer;
+import utility.Pair;
 import view.SceneType;
 import view.controllers.minigames.AbstractMiniGameController;
 
 /**
- * Represents the Perilous Path View.
+ * Implementation of {@link PerilousPathFx}.
  */
 public class PerilousPathFxImpl extends AbstractMiniGameController implements PerilouPathFx {
 
@@ -21,6 +27,7 @@ public class PerilousPathFxImpl extends AbstractMiniGameController implements Pe
     private static final int SECONDS = 31;
 
     private PerilousPathController controller;
+    private Map<Button, Pair<Integer, Integer>> buttons;
 
     @FXML
     private GridPane grid;
@@ -35,6 +42,26 @@ public class PerilousPathFxImpl extends AbstractMiniGameController implements Pe
     public void initGame() {
         this.controller = new PerilousPathControllerImpl(this.getController().getDifficultyLevel(), this);
         this.setGameTimer(new GameTimer(SECONDS, this));
+        this.controller.initGame();
+    }
+
+    private EventHandler<MouseEvent> eventHandler = (e) -> {
+
+    };
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void drawGrid(final int size) {
+        for (int i = 0; i < size; i++) {
+            for (int j = 0; j < size; j++) {
+                final Button bt = new Button();
+                bt.addEventHandler(MouseEvent.MOUSE_CLICKED, eventHandler);
+                this.grid.add(bt, j, i);
+                this.buttons.put(bt, new Pair<>(i, j));
+            }
+        }
     }
 
     /**
@@ -48,6 +75,7 @@ public class PerilousPathFxImpl extends AbstractMiniGameController implements Pe
     /**
      * {@inheritDoc}
      */
+    @Override
     public void endGame(final int finalScore) {
         Platform.runLater(() -> {
             this.getController().updateProgress(finalScore);

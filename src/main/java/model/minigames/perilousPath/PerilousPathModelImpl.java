@@ -34,6 +34,14 @@ public class PerilousPathModelImpl implements PerilousPathModel {
      * {@inheritDoc}
      */
     @Override
+    public int getSize() {
+        return this.size;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
     public void addPoint() {
         this.score.addPoint();
     }
@@ -45,5 +53,4 @@ public class PerilousPathModelImpl implements PerilousPathModel {
     public int getFinalScore() {
         return this.score.getScore();
     }
-
 }

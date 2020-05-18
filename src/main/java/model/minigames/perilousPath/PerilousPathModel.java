@@ -6,6 +6,13 @@ package model.minigames.perilousPath;
 public interface PerilousPathModel {
 
     /**
+     * Get the size of the current level.
+     * 
+     * @return the size of the current level
+     */
+    int getSize();
+
+    /**
      * Add point when user finds the right path.
      */
     void addPoint();
@@ -15,5 +22,5 @@ public interface PerilousPathModel {
      * 
      * @return the final score
      */
-    int getFinalScore();
+    int getFinalScore(); 
 }

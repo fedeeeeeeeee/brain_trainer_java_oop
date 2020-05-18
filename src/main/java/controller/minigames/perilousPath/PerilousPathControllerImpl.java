@@ -30,6 +30,14 @@ public class PerilousPathControllerImpl implements PerilousPathController {
      * {@inheritDoc}
      */
     @Override
+    public void initGame() {
+        this.view.drawGrid(this.model.getSize());
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
     public void timerExpired() {
         this.view.endGame(this.model.getFinalScore());
     }

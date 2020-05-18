@@ -6,8 +6,12 @@ package controller.minigames.perilousPath;
 public interface PerilousPathController {
 
     /**
+     * Initialize the game.
+     */
+    void initGame();
+
+    /**
      * The time is expired.
      */
     void timerExpired();
-
 }
