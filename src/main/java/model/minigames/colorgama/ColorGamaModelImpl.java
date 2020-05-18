@@ -1,4 +1,4 @@
-package model.minigames.colorGama;
+package model.minigames.colorgama;
 
 import model.DifficultyLevel;
 import model.score.ScoreModel;

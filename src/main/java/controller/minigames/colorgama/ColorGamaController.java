@@ -1,4 +1,4 @@
-package controller.minigames.colorGama;
+package controller.minigames.colorgama;
 
 /**
  * The controller interface of ColorGama minigame.

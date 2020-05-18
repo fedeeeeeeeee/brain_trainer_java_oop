@@ -1,4 +1,4 @@
-package model.minigames.colorGama;
+package model.minigames.colorgama;
 
 /**
  * Enumeration of the possible question.

@@ -1,7 +1,7 @@
-package view.controllers.minigames.colorGama;
+package view.controllers.minigames.colorgama;
 
-import controller.minigames.colorGama.ColorGamaController;
-import controller.minigames.colorGama.ColorGamaControllerImpl;
+import controller.minigames.colorgama.ColorGamaController;
+import controller.minigames.colorgama.ColorGamaControllerImpl;
 import javafx.application.Platform;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -26,7 +26,7 @@ public class ColorGamaFxImpl extends AbstractMiniGameController implements Color
     private GridPane buttonsGrid;
 
     private ColorGamaController colorGamaController;
-    private EventHandler<MouseEvent> eventHandler = (l) -> {
+    private final EventHandler<MouseEvent> eventHandler = (l) -> {
 
     };
 

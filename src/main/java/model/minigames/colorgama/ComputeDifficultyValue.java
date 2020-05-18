@@ -1,4 +1,4 @@
-package model.minigames.colorGama;
+package model.minigames.colorgama;
 
 /**
  * This interface calculates constants according to the difficulty.

@@ -1,9 +1,9 @@
-package controller.minigames.colorGama;
+package controller.minigames.colorgama;
 
 import model.DifficultyLevel;
-import model.minigames.colorGama.ColorGamaModel;
-import model.minigames.colorGama.ColorGamaModelImpl;
-import view.controllers.minigames.colorGama.ColorGamaFx;
+import model.minigames.colorgama.ColorGamaModel;
+import model.minigames.colorgama.ColorGamaModelImpl;
+import view.controllers.minigames.colorgama.ColorGamaFx;
 
 /**
  * This class implements {@link ColorGamaController}.
@@ -11,8 +11,8 @@ import view.controllers.minigames.colorGama.ColorGamaFx;
  */
 public class ColorGamaControllerImpl implements ColorGamaController {
 
-    private ColorGamaModel model;
-    private ColorGamaFx view;
+    private final ColorGamaModel model;
+    private final ColorGamaFx view;
 
     /**
      * Constructor of {@link ColorGamaController}.
