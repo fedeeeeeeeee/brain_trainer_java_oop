@@ -81,30 +81,38 @@ public class SizeCountModelImpl implements SizeCountModel {
             operation = this.opFactory.multiplication(NUM_OPERAND, this.upperBound);
             break;
         case SUM_EXPRESSION:
-            operation = this.opFactory.sumExpression(this.numOperationsExpr, NUM_OPERAND , this.upperBound);
+            operation = this.opFactory.sumExpression(this.numOperationsExpr, NUM_OPERAND, this.upperBound);
             break;
         case SUB_EXPRESSION:
-            operation = this.opFactory.subExpression(this.numOperationsExpr, NUM_OPERAND,  this.upperBound);
+            operation = this.opFactory.subExpression(this.numOperationsExpr, NUM_OPERAND, this.upperBound);
             break;
         default:
             break;
         }
         this.operations.add(new Pair<>(operation, operation.getResult()));
 
+
     }
 
     private void computeAnswer() {
         int count = 0;
         int maxRes = this.operations.stream().mapToInt(e -> e.getY()).max().getAsInt();
-
-        for (int i = 1; i < this.operations.size(); i++) {
+        IntegerOperation maxOpTemp = null;
+        System.out.println("max res " + maxRes);
+        for (int i = 0; i < this.operations.size(); i++) {
             if (this.operations.get(i).getY().equals(maxRes)) {
                 count = count + 1;
-                this.maxOperation = Optional.of(operations.get(i).getX());
+                maxOpTemp = operations.get(i).getX();
             }
         }
 
-        this.same = count == this.operations.size() ? true : false;
+        if (count == this.operations.size()) {
+            this.same = true;
+            this.maxOperation = Optional.empty();
+        } else {
+            this.same = false;
+            this.maxOperation = Optional.of(maxOpTemp);
+        }
     }
 
     /**
@@ -112,7 +120,9 @@ public class SizeCountModelImpl implements SizeCountModel {
      */
     @Override
     public boolean isCorrectAnswer(final String answer) {
-        if ((answer.equals(SAME_ANSWER) && this.same) || answer.equals(this.maxOperation.get().toString())){
+        System.out.println("max operation " + this.maxOperation.toString());
+        System.out.println("same " + this.same);
+        if ((answer.equals(SAME_ANSWER) && this.same) || (this.maxOperation.isPresent() && answer.equals(this.maxOperation.get().toString()))) {
             this.scoreModel.addPoint();
             return true;
         }
