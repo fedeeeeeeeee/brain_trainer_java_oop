@@ -13,7 +13,7 @@ import view.controllers.minigames.AbstractMiniGameController;
 /**
  * Represents the Perilous Path View.
  */
-public class PerilousPathFx extends AbstractMiniGameController {
+public class PerilousPathFxImpl extends AbstractMiniGameController implements PerilouPathFx {
 
     /**
      * The Perilous Path's duration.
@@ -46,9 +46,7 @@ public class PerilousPathFx extends AbstractMiniGameController {
     }
 
     /**
-     * Show the final score.
-     * 
-     * @param finalScore
+     * {@inheritDoc}
      */
     public void endGame(final int finalScore) {
         Platform.runLater(() -> {

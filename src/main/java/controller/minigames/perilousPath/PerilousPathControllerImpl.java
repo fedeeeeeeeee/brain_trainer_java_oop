@@ -3,7 +3,7 @@ package controller.minigames.perilousPath;
 import model.DifficultyLevel;
 import model.minigames.perilousPath.PerilousPathModel;
 import model.minigames.perilousPath.PerilousPathModelImpl;
-import view.controllers.minigames.perilousPath.PerilousPathFx;
+import view.controllers.minigames.perilousPath.PerilousPathFxImpl;
 
 /**
  * Implementation of {@link PerilousPathController}.
@@ -11,7 +11,7 @@ import view.controllers.minigames.perilousPath.PerilousPathFx;
 public class PerilousPathControllerImpl implements PerilousPathController {
 
     private final PerilousPathModel model;
-    private final PerilousPathFx view;
+    private final PerilousPathFxImpl view;
 
     /**
      * Constructor of {@link PerilousPathController}.
@@ -21,7 +21,7 @@ public class PerilousPathControllerImpl implements PerilousPathController {
      * @param perilousPathFx 
      *                       the view controller
      */
-    public PerilousPathControllerImpl(final DifficultyLevel difficultyLevel, final PerilousPathFx perilousPathFx) {
+    public PerilousPathControllerImpl(final DifficultyLevel difficultyLevel, final PerilousPathFxImpl perilousPathFx) {
         this.view = perilousPathFx;
         this.model = new PerilousPathModelImpl(difficultyLevel);
     }
