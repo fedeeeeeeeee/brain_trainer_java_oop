@@ -1,4 +1,4 @@
-package model.minigames.perilousPath;
+package model.minigames.perilouspath;
 
 import model.DifficultyLevel;
 import model.score.ScoreModel;

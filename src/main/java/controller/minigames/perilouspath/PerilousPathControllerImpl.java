@@ -1,9 +1,9 @@
-package controller.minigames.perilousPath;
+package controller.minigames.perilouspath;
 
 import model.DifficultyLevel;
-import model.minigames.perilousPath.PerilousPathModel;
-import model.minigames.perilousPath.PerilousPathModelImpl;
-import view.controllers.minigames.perilousPath.PerilousPathFxImpl;
+import model.minigames.perilouspath.PerilousPathModel;
+import model.minigames.perilouspath.PerilousPathModelImpl;
+import view.controllers.minigames.perilouspath.PerilousPathFxImpl;
 
 /**
  * Implementation of {@link PerilousPathController}.

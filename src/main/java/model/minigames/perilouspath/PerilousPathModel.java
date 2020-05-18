@@ -1,4 +1,4 @@
-package model.minigames.perilousPath;
+package model.minigames.perilouspath;
 
 /**
  * Represents the Perilous Path Model.

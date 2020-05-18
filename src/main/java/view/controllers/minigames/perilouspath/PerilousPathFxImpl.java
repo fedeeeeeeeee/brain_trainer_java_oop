@@ -1,9 +1,9 @@
-package view.controllers.minigames.perilousPath;
+package view.controllers.minigames.perilouspath;
 
 import java.util.Map;
 
-import controller.minigames.perilousPath.PerilousPathController;
-import controller.minigames.perilousPath.PerilousPathControllerImpl;
+import controller.minigames.perilouspath.PerilousPathController;
+import controller.minigames.perilouspath.PerilousPathControllerImpl;
 import javafx.application.Platform;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;

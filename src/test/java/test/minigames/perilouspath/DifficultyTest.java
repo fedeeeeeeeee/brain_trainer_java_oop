@@ -1,12 +1,12 @@
-package test.minigames.perilousPath;
+package test.minigames.perilouspath;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.junit.jupiter.api.Test;
 
 import model.DifficultyLevel;
-import model.minigames.perilousPath.Difficulty;
-import model.minigames.perilousPath.DifficultyImpl;
+import model.minigames.perilouspath.Difficulty;
+import model.minigames.perilouspath.DifficultyImpl;
 
 /**
  * Class to test if {@link Difficulty} works correctly.

@@ -1,4 +1,4 @@
-package view.controllers.minigames.perilousPath;
+package view.controllers.minigames.perilouspath;
 
 /**
  * Represents the Perilous Path View.

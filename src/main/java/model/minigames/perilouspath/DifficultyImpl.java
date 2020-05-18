@@ -1,4 +1,4 @@
-package model.minigames.perilousPath;
+package model.minigames.perilouspath;
 
 import java.util.Arrays;
 import java.util.EnumMap;

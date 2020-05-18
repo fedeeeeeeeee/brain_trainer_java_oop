@@ -1,4 +1,4 @@
-package controller.minigames.perilousPath;
+package controller.minigames.perilouspath;
 
 /**
  * Represents the Perilous Path Controller.
