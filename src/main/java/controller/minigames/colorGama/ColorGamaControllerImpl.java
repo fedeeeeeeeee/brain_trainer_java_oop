@@ -32,9 +32,17 @@ public class ColorGamaControllerImpl implements ColorGamaController {
      * {@inheritDoc}
      */
     @Override
+    public void startGame() {
+        this.view.drawGrid(this.model.getDifficultyValue().getGridSize());
+
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
     public void timeExpired() {
         this.view.endGame(this.model.getFinalScore());
     }
-
 
 }

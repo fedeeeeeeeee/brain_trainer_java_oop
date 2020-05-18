@@ -7,6 +7,11 @@ package controller.minigames.colorGama;
 public interface ColorGamaController {
 
     /**
+     * Start ColorGama minigame.
+     */
+    void startGame();
+
+    /**
      * The time is expired. 
      * 
      */
