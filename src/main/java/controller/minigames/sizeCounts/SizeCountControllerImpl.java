@@ -12,6 +12,8 @@ public class SizeCountControllerImpl implements SizeCountController {
     public SizeCountControllerImpl(final SizeCountFxImpl view) {
         this.view = view;
         this.model = new SizeCountModelImpl((this.view.getController().getDifficultyLevel()));
+
+        this.view.setOperations(this.model.getNumOfOperations());
     }
 
     /**
@@ -19,7 +21,8 @@ public class SizeCountControllerImpl implements SizeCountController {
      */
     @Override
     public void resetGame() {
-        this.model.reset();
+
+        this.view.draw(this.model.getOperations());
 
     }
 
@@ -28,6 +31,7 @@ public class SizeCountControllerImpl implements SizeCountController {
      */
     @Override
     public void newAttempt(final String answer) {
+        System.out.println("answer "+this.model.isCorrectAnswer(answer));
         if (this.model.isCorrectAnswer(answer)) {
             this.view.showCorrectAnswer();
         } else {
@@ -40,6 +44,8 @@ public class SizeCountControllerImpl implements SizeCountController {
      */
     @Override
     public void computeOperations() {
+        System.out.println("compute operations");
+        this.model.reset();
         this.view.draw(this.model.getOperations());
 
     }
