@@ -12,6 +12,7 @@ import javafx.scene.control.Button;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
 import model.minigames.sizeCount.IntegerOperation;
+import timer.GameTimer;
 import view.SceneType;
 import view.controllers.minigames.AbstractMiniGameController;
 
@@ -22,12 +23,17 @@ public class SizeCountFxImpl extends AbstractMiniGameController implements SizeC
     private Button currentAnswer;
     private Button same;
 
+    private static final int SECONDS = 30;
+
     @FXML
     private VBox panel;
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void timeFinish() {
-        // TODO Auto-generated method stub
+        this.controller.timeExpired();
 
     }
 
@@ -38,6 +44,10 @@ public class SizeCountFxImpl extends AbstractMiniGameController implements SizeC
     public void initGame() {
         this.buttons = new LinkedList<>();
         this.controller = new SizeCountControllerImpl(this);
+
+        this.controller.computeOperations();
+
+        this.setGameTimer(new GameTimer(SECONDS, this));
 
     }
 
@@ -80,7 +90,10 @@ public class SizeCountFxImpl extends AbstractMiniGameController implements SizeC
      */
     @Override
     public void showWrongAnswer() {
-        // TODO Auto-generated method stub
+//        Platform.runLater(() -> {
+//            this.currentAnswer.setStyle("-fx-border-color: #66FF66; -fx-border-width: 2px;");
+//        });
+        this.controller.computeOperations();
 
     }
 
@@ -89,8 +102,10 @@ public class SizeCountFxImpl extends AbstractMiniGameController implements SizeC
      */
     @Override
     public void showCorrectAnswer() {
-        // TODO Auto-generated method stub
-
+//        Platform.runLater(() -> {
+//            this.currentAnswer.setStyle("-fx-border-color: #FF0000; -fx-border-width: 2px;");
+//        });
+        this.controller.computeOperations();
     }
 
     /**
