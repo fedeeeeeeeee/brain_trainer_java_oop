@@ -1,5 +1,6 @@
 package view.controllers.minigames.perilouspath;
 
+import java.util.HashMap;
 import java.util.Map;
 
 import controller.minigames.perilouspath.PerilousPathController;
@@ -26,6 +27,11 @@ public class PerilousPathFxImpl extends AbstractMiniGameController implements Pe
      */
     private static final int SECONDS = 31;
 
+    /**
+     * The size of the button.
+     */
+    private static final int BUTTON_SIZE = 100;
+
     private PerilousPathController controller;
     private Map<Button, Pair<Integer, Integer>> buttons;
 
@@ -41,8 +47,9 @@ public class PerilousPathFxImpl extends AbstractMiniGameController implements Pe
     @Override
     public void initGame() {
         this.controller = new PerilousPathControllerImpl(this.getController().getDifficultyLevel(), this);
+        this.buttons = new HashMap<>();
         this.setGameTimer(new GameTimer(SECONDS, this));
-        this.controller.initGame();
+        this.controller.startGame();
     }
 
     private EventHandler<MouseEvent> eventHandler = (e) -> {
@@ -58,6 +65,7 @@ public class PerilousPathFxImpl extends AbstractMiniGameController implements Pe
             for (int j = 0; j < size; j++) {
                 final Button bt = new Button();
                 bt.addEventHandler(MouseEvent.MOUSE_CLICKED, eventHandler);
+                bt.setPrefSize(BUTTON_SIZE, BUTTON_SIZE);
                 this.grid.add(bt, j, i);
                 this.buttons.put(bt, new Pair<>(i, j));
             }

@@ -8,7 +8,7 @@ public interface PerilousPathController {
     /**
      * Initialize the game.
      */
-    void initGame();
+    void startGame();
 
     /**
      * The time is expired.
