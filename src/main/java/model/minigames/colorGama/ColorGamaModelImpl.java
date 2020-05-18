@@ -13,6 +13,7 @@ public class ColorGamaModelImpl implements ColorGamaModel {
     private static final int BASEPOINT = 5;
 
     private final ScoreModel score;
+    private final ComputeDifficultyValue computeValue;
 
     /**
      * Constructor of {@link ColorGamaModel}.
@@ -23,6 +24,7 @@ public class ColorGamaModelImpl implements ColorGamaModel {
      */
     public ColorGamaModelImpl(final DifficultyLevel difficulty) {
         this.score = new ScoreModelImpl(difficulty, BASEPOINT);
+        this.computeValue = new ComputeDifficultyValueImpl(difficulty);
     }
 
     /**
@@ -39,6 +41,14 @@ public class ColorGamaModelImpl implements ColorGamaModel {
     @Override
     public int getFinalScore() {
         return this.score.getScore();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public ComputeDifficultyValue getDifficultyValue() {
+        return this.computeValue;
     }
 
 }

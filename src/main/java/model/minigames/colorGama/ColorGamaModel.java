@@ -17,4 +17,13 @@ public interface ColorGamaModel {
      * @return score
      */
     int getFinalScore();
+
+    /**
+     * Get the constants according to the difficulty.
+     * 
+     * @return
+     *      Compute
+     */
+    ComputeDifficultyValue getDifficultyValue();
+
 }
