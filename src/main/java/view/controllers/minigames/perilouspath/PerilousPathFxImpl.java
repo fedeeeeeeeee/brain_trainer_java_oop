@@ -101,8 +101,8 @@ public class PerilousPathFxImpl extends AbstractMiniGameController implements Pe
     @Override
     public void showMines(final Set<Pair<Integer, Integer>> mines) {
         this.buttons.entrySet().stream()
-        .filter(bt -> mines.contains(bt.getValue()))
-        .forEach(bt -> bt.getKey().setText("X"));
+                               .filter(bt -> mines.contains(bt.getValue()))
+                               .forEach(bt -> bt.getKey().setText("X"));
     }
 
     /**

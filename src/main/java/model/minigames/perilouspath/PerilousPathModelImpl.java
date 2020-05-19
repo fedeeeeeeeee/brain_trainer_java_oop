@@ -36,7 +36,6 @@ public class PerilousPathModelImpl implements PerilousPathModel {
         this.size = difficulty.getSize();
         this.numMines = difficulty.getNumMines();
         this.score = new ScoreModelImpl(difficultyLevel, BASE_POINT);
-        this.mines = new HashSet<>();
     }
 
     private Pair<Integer, Integer> getRandomPosition() {
@@ -59,7 +58,7 @@ public class PerilousPathModelImpl implements PerilousPathModel {
     @Override
     public boolean hit(final int row, final int col) {
         // TODO Auto-generated method stub
-        return false;
+        return true;
     }
 
     /**
@@ -96,6 +95,7 @@ public class PerilousPathModelImpl implements PerilousPathModel {
      */
     @Override
     public void initMines() {
+        this.mines = new HashSet<>();
         for (int i = 0; i < this.numMines; i++) {
             this.mines.add(this.getRandomMines());
         }
