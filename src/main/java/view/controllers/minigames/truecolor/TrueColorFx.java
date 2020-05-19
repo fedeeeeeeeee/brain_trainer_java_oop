@@ -1,9 +1,9 @@
-package view.controllers.minigames.trueColor;
+package view.controllers.minigames.truecolor;
 
 import java.io.IOException;
 
-import controller.minigames.trueColor.TrueColorController;
-import controller.minigames.trueColor.TrueColorControllerImpl;
+import controller.minigames.truecolor.TrueColorController;
+import controller.minigames.truecolor.TrueColorControllerImpl;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -18,7 +18,7 @@ import view.controllers.minigames.AbstractMiniGameController;
 public class TrueColorFx extends AbstractMiniGameController{
 	
 	/**
-     * The Perilous Path's duration.
+     * The minigame's duration.
      */
 	private static final int SECONDS = 30;
 	

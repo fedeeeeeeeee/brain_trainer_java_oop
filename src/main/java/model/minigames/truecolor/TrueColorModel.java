@@ -1,4 +1,4 @@
-package model.minigames.trueColor;
+package model.minigames.truecolor;
 
 /**
  * The model interface of TrueColor minigame.

@@ -1,9 +1,9 @@
-package controller.minigames.trueColor;
+package controller.minigames.truecolor;
 
 import model.DifficultyLevel;
-import model.minigames.trueColor.TrueColorModel;
-import model.minigames.trueColor.TrueColorModelImpl;
-import view.controllers.minigames.trueColor.TrueColorFx;
+import model.minigames.truecolor.TrueColorModel;
+import model.minigames.truecolor.TrueColorModelImpl;
+import view.controllers.minigames.truecolor.TrueColorFx;
 
 /**
  * Implementation of {@link TrueColorController}.
@@ -16,7 +16,7 @@ public class TrueColorControllerImpl implements TrueColorController{
 	private final TrueColorFx view;
 
 	/**
-     * Constructor of {@link PerilousPathController}.
+     * Constructor of {@link TrueColorController}.
      * 
      * @param difficultyLevel 
      *                       the current difficulty level

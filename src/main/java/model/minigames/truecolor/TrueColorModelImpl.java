@@ -1,4 +1,4 @@
-package model.minigames.trueColor;
+package model.minigames.truecolor;
 import model.DifficultyLevel;
 import model.score.ScoreModel;
 import model.score.ScoreModelImpl;

@@ -1,4 +1,4 @@
-package controller.minigames.trueColor;
+package controller.minigames.truecolor;
 
 public interface TrueColorController {
 
