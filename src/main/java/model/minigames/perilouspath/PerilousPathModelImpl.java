@@ -1,8 +1,11 @@
 package model.minigames.perilouspath;
 
+import java.util.Set;
+
 import model.DifficultyLevel;
 import model.score.ScoreModel;
 import model.score.ScoreModelImpl;
+import utility.Pair;
 
 /**
  * Implementation of {@link PerilousPathModel}.
@@ -34,8 +37,62 @@ public class PerilousPathModelImpl implements PerilousPathModel {
      * {@inheritDoc}
      */
     @Override
+    public boolean hit(final int row, final int col) {
+        // TODO Auto-generated method stub
+        return false;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
     public int getSize() {
         return this.size;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void setStart() {
+        // TODO Auto-generated method stub
+
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void setFinish() {
+        // TODO Auto-generated method stub
+
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public Pair<Integer, Integer> getStart() {
+        // TODO Auto-generated method stub
+        return null;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public Pair<Integer, Integer> getFinish() {
+        // TODO Auto-generated method stub
+        return null;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public Set<Pair<Integer, Integer>> getMines() {
+        // TODO Auto-generated method stub
+        return null;
     }
 
     /**
@@ -52,5 +109,32 @@ public class PerilousPathModelImpl implements PerilousPathModel {
     @Override
     public int getFinalScore() {
         return this.score.getScore();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public boolean isDone() {
+        // TODO Auto-generated method stub
+        return false;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public boolean isFailed() {
+        // TODO Auto-generated method stub
+        return false;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void reset() {
+        // TODO Auto-generated method stub
+
     }
 }
