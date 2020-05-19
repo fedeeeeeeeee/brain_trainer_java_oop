@@ -14,7 +14,15 @@ public interface PerilouPathFx {
     void drawGrid(int size);
 
     /**
-     * Show the final score.
+     * Shows the step taken by the user.
+     * 
+     * @param row
+     * @param col
+     */
+    void showStep(int row, int col);
+
+    /**
+     * Shows the final score.
      * 
      * @param finalScore
      */

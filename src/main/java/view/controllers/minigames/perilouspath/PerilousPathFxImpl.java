@@ -53,7 +53,9 @@ public class PerilousPathFxImpl extends AbstractMiniGameController implements Pe
     }
 
     private EventHandler<MouseEvent> eventHandler = (e) -> {
-
+        final Button bt = (Button) e.getSource();
+        final Pair<Integer, Integer> position = this.buttons.get(bt);
+        this.controller.hitAttempt(position.getX(), position.getY());
     };
 
     /**
@@ -70,6 +72,16 @@ public class PerilousPathFxImpl extends AbstractMiniGameController implements Pe
                 this.buttons.put(bt, new Pair<>(i, j));
             }
         }
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void showStep(final int row, final int col) {
+        this.buttons.entrySet().stream()
+                               .filter(bt -> bt.getValue().equals(new Pair<>(row, col)))
+                               .forEach(bt -> bt.getKey().setStyle("-fx-background-color: rgb(158,61,100); -fx-border-color: darkred;"));
     }
 
     /**

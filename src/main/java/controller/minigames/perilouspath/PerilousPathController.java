@@ -11,6 +11,14 @@ public interface PerilousPathController {
     void startGame();
 
     /**
+     * Check if the user can hit this position.
+     * 
+     * @param row
+     * @param col
+     */
+    void hitAttempt(int row, int col);
+
+    /**
      * The time is expired.
      */
     void timerExpired();

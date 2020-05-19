@@ -38,6 +38,19 @@ public class PerilousPathControllerImpl implements PerilousPathController {
      * {@inheritDoc}
      */
     @Override
+    public void hitAttempt(final int row, final int col) {
+        if (this.model.hit(row, col)) {
+            this.view.showStep(row, col);
+        }
+        if (this.model.isDone()) {
+            this.model.addPoint();
+        }
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
     public void timerExpired() {
         this.view.endGame(this.model.getFinalScore());
     }
