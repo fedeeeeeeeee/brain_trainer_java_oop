@@ -35,7 +35,7 @@ public class PerilousPathControllerImpl implements PerilousPathController {
         this.model.reset();
         this.view.showStart(this.model.getStart());
         this.view.showFinish(this.model.getFinish());
-//        this.view.showMines(this.model.getMines());
+        this.view.showMines(this.model.getMines());
     }
 
     /**

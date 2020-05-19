@@ -1,5 +1,6 @@
 package model.minigames.perilouspath;
 
+import java.util.HashSet;
 import java.util.Random;
 import java.util.Set;
 
@@ -23,6 +24,7 @@ public class PerilousPathModelImpl implements PerilousPathModel {
     private final ScoreModel score;
     private Pair<Integer, Integer> start;
     private Pair<Integer, Integer> finish;
+    private Set<Pair<Integer, Integer>> mines;
 
     /**
      * Constructor of {@link PerilousPathModel}.
@@ -34,11 +36,17 @@ public class PerilousPathModelImpl implements PerilousPathModel {
         this.size = difficulty.getSize();
         this.numMines = difficulty.getNumMines();
         this.score = new ScoreModelImpl(difficultyLevel, BASE_POINT);
+        this.mines = new HashSet<>();
     }
 
     private Pair<Integer, Integer> getRandomPosition() {
         Random random = new Random();
         return new Pair<>(random.nextInt(this.size), random.nextInt(this.size));
+    }
+
+    private Pair<Integer, Integer> getRandomMines() {
+        Pair<Integer, Integer> mine = this.getRandomPosition();
+        return (this.mines.contains(mine) || mine.equals(this.start) || mine.equals(this.finish)) ? this.getRandomPosition() : mine;
     }
 
     private boolean adjacent(final Pair<Integer, Integer> position1, final Pair<Integer, Integer> position2) {
@@ -87,6 +95,16 @@ public class PerilousPathModelImpl implements PerilousPathModel {
      * {@inheritDoc}
      */
     @Override
+    public void initMines() {
+        for (int i = 0; i < this.numMines; i++) {
+            this.mines.add(this.getRandomMines());
+        }
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
     public Pair<Integer, Integer> getStart() {
         return this.start;
     }
@@ -104,8 +122,7 @@ public class PerilousPathModelImpl implements PerilousPathModel {
      */
     @Override
     public Set<Pair<Integer, Integer>> getMines() {
-        // TODO Auto-generated method stub
-        return null;
+        return this.mines;
     }
 
     /**
@@ -149,5 +166,6 @@ public class PerilousPathModelImpl implements PerilousPathModel {
     public void reset() {
         this.initStart();
         this.initFinish();
+        this.initMines();
     }
 }

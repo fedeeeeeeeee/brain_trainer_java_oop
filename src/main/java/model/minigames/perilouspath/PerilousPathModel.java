@@ -26,14 +26,19 @@ public interface PerilousPathModel {
     int getSize();
 
     /**
-     * Sets the start position.
+     * Initialize the start position.
      */
     void initStart();
 
     /**
-     * Sets the finish position.
+     * Initialize the finish position.
      */
     void initFinish();
+
+    /**
+     * Initialize the mines position.
+     */
+    void initMines();
 
     /**
      * Gets the start position.
