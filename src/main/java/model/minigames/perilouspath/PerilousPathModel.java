@@ -28,12 +28,12 @@ public interface PerilousPathModel {
     /**
      * Sets the start position.
      */
-    void setStart();
+    void initStart();
 
     /**
      * Sets the finish position.
      */
-    void setFinish();
+    void initFinish();
 
     /**
      * Gets the start position.

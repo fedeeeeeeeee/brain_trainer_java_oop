@@ -1,5 +1,6 @@
 package model.minigames.perilouspath;
 
+import java.util.Random;
 import java.util.Set;
 
 import model.DifficultyLevel;
@@ -20,6 +21,8 @@ public class PerilousPathModelImpl implements PerilousPathModel {
     private final int size;
     private final int numMines;
     private final ScoreModel score;
+    private Pair<Integer, Integer> start;
+    private Pair<Integer, Integer> finish;
 
     /**
      * Constructor of {@link PerilousPathModel}.
@@ -31,6 +34,15 @@ public class PerilousPathModelImpl implements PerilousPathModel {
         this.size = difficulty.getSize();
         this.numMines = difficulty.getNumMines();
         this.score = new ScoreModelImpl(difficultyLevel, BASE_POINT);
+    }
+
+    private Pair<Integer, Integer> getRandomPosition() {
+        Random random = new Random();
+        return new Pair<>(random.nextInt(this.size), random.nextInt(this.size));
+    }
+
+    private boolean adjacent(final Pair<Integer, Integer> position1, final Pair<Integer, Integer> position2) {
+        return Math.abs(position1.getX() - position2.getX()) <= 1 && Math.abs(position1.getY() - position2.getY()) <= 1;
     }
 
     /**
@@ -54,18 +66,21 @@ public class PerilousPathModelImpl implements PerilousPathModel {
      * {@inheritDoc}
      */
     @Override
-    public void setStart() {
-        // TODO Auto-generated method stub
-
+    public void initStart() {
+        this.start = this.getRandomPosition();
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public void setFinish() {
-        // TODO Auto-generated method stub
-
+    public void initFinish() {
+        Pair<Integer, Integer> finish = this.getRandomPosition();
+        if (finish.equals(this.start) || this.adjacent(finish, this.start)) {
+            this.initFinish();
+        } else {
+            this.finish = finish;
+        }
     }
 
     /**
@@ -73,8 +88,7 @@ public class PerilousPathModelImpl implements PerilousPathModel {
      */
     @Override
     public Pair<Integer, Integer> getStart() {
-        // TODO Auto-generated method stub
-        return null;
+        return this.start;
     }
 
     /**
@@ -82,8 +96,7 @@ public class PerilousPathModelImpl implements PerilousPathModel {
      */
     @Override
     public Pair<Integer, Integer> getFinish() {
-        // TODO Auto-generated method stub
-        return null;
+        return this.finish;
     }
 
     /**
@@ -134,7 +147,7 @@ public class PerilousPathModelImpl implements PerilousPathModel {
      */
     @Override
     public void reset() {
-        // TODO Auto-generated method stub
-
+        this.initStart();
+        this.initFinish();
     }
 }
