@@ -14,7 +14,10 @@
 
 <AnchorPane xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.controllers.minigames.sizeCount.SizeCountFxImpl">
    <children>
-      <VBox fx:id="panel" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="580.0" prefWidth="522.0" spacing="100.0" />
+      <VBox fx:id="panel" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="580.0" prefWidth="522.0" spacing="100.0" AnchorPane.leftAnchor="50.0">
+         <padding>
+            <Insets left="50.0" />
+         </padding></VBox>
       <FlowPane prefHeight="98.0" prefWidth="286.0">
          <children>
             <ProgressBar fx:id="progressBar" prefWidth="200.0" progress="0.0">
