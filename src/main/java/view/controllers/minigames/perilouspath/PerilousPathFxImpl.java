@@ -2,6 +2,7 @@ package view.controllers.minigames.perilouspath;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Set;
 
 import controller.minigames.perilouspath.PerilousPathController;
 import controller.minigames.perilouspath.PerilousPathControllerImpl;
@@ -48,8 +49,8 @@ public class PerilousPathFxImpl extends AbstractMiniGameController implements Pe
     public void initGame() {
         this.controller = new PerilousPathControllerImpl(this.getController().getDifficultyLevel(), this);
         this.buttons = new HashMap<>();
-        this.setGameTimer(new GameTimer(SECONDS, this));
         this.controller.startGame();
+        this.setGameTimer(new GameTimer(SECONDS, this));
     }
 
     private EventHandler<MouseEvent> eventHandler = (e) -> {
@@ -72,6 +73,36 @@ public class PerilousPathFxImpl extends AbstractMiniGameController implements Pe
                 this.buttons.put(bt, new Pair<>(i, j));
             }
         }
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void showStart(final Pair<Integer, Integer> start) {
+        this.buttons.entrySet().stream()
+                               .filter(bt -> bt.getValue().equals(start))
+                               .forEach(bt -> bt.getKey().setText("START"));
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void showFinish(final Pair<Integer, Integer> finish) {
+        this.buttons.entrySet().stream()
+                               .filter(bt -> bt.getValue().equals(finish))
+                               .forEach(bt -> bt.getKey().setText("FINISH"));
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void showMines(final Set<Pair<Integer, Integer>> mines) {
+        this.buttons.entrySet().stream()
+        .filter(bt -> mines.contains(bt.getValue()))
+        .forEach(bt -> bt.getKey().setText("X"));
     }
 
     /**

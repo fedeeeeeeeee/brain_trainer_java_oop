@@ -32,6 +32,10 @@ public class PerilousPathControllerImpl implements PerilousPathController {
     @Override
     public void startGame() {
         this.view.drawGrid(this.model.getSize());
+        this.model.reset();
+        this.view.showStart(this.model.getStart());
+        this.view.showFinish(this.model.getFinish());
+//        this.view.showMines(this.model.getMines());
     }
 
     /**
