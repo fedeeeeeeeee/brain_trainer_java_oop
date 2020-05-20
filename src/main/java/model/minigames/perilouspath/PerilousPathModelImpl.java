@@ -1,6 +1,7 @@
 package model.minigames.perilouspath;
 
 import java.util.HashSet;
+import java.util.LinkedList;
 import java.util.Random;
 import java.util.Set;
 
@@ -25,6 +26,8 @@ public class PerilousPathModelImpl implements PerilousPathModel {
     private Pair<Integer, Integer> start;
     private Pair<Integer, Integer> finish;
     private Set<Pair<Integer, Integer>> mines;
+    private LinkedList<Pair<Integer, Integer>> selected;
+    private MineState mineState;
 
     /**
      * Constructor of {@link PerilousPathModel}.
@@ -36,6 +39,7 @@ public class PerilousPathModelImpl implements PerilousPathModel {
         this.size = difficulty.getSize();
         this.numMines = difficulty.getNumMines();
         this.score = new ScoreModelImpl(difficultyLevel, BASE_POINT);
+        this.selected = new LinkedList<>();
     }
 
     private Pair<Integer, Integer> getRandomPosition() {
@@ -48,6 +52,11 @@ public class PerilousPathModelImpl implements PerilousPathModel {
         return (this.mines.contains(mine) || mine.equals(this.start) || mine.equals(this.finish)) ? this.getRandomPosition() : mine;
     }
 
+    private boolean couldHit(final int row, final int col) {
+        // TODO Auto-generated method stub
+        return false;
+    }
+
     private boolean adjacent(final Pair<Integer, Integer> position1, final Pair<Integer, Integer> position2) {
         return Math.abs(position1.getX() - position2.getX()) <= 1 && Math.abs(position1.getY() - position2.getY()) <= 1;
     }
@@ -57,8 +66,13 @@ public class PerilousPathModelImpl implements PerilousPathModel {
      */
     @Override
     public boolean hit(final int row, final int col) {
-        // TODO Auto-generated method stub
-        return true;
+        if (this.couldHit(row, col)) {
+            if (this.mines.contains(new Pair<>(row, col))) {
+                this.mineState = MineState.EXPLODED;
+            }
+            this.selected.add(new Pair<>(row, col));
+        }
+        return !this.mineState.isExploded();
     }
 
     /**
@@ -95,6 +109,7 @@ public class PerilousPathModelImpl implements PerilousPathModel {
      */
     @Override
     public void initMines() {
+        this.mineState = MineState.UNEXPLODED;
         this.mines = new HashSet<>();
         for (int i = 0; i < this.numMines; i++) {
             this.mines.add(this.getRandomMines());
@@ -155,8 +170,7 @@ public class PerilousPathModelImpl implements PerilousPathModel {
      */
     @Override
     public boolean isFailed() {
-        // TODO Auto-generated method stub
-        return false;
+        return this.mineState.isExploded();
     }
 
     /**
