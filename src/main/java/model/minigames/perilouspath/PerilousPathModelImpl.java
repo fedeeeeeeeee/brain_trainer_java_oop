@@ -43,17 +43,25 @@ public class PerilousPathModelImpl implements PerilousPathModel {
     }
 
     private Pair<Integer, Integer> getRandomPosition() {
-        Random random = new Random();
-        return new Pair<>(random.nextInt(this.size), random.nextInt(this.size));
+        return new Pair<>(new Random().nextInt(this.size), new Random().nextInt(this.size));
     }
 
     private Pair<Integer, Integer> getRandomMines() {
         Pair<Integer, Integer> mine = this.getRandomPosition();
-        return (this.mines.contains(mine) || mine.equals(this.start) || mine.equals(this.finish)) ? this.getRandomMines() : mine;
+        return this.mines.contains(mine) || mine.equals(this.start) || mine.equals(this.finish) ? this.getRandomMines() : mine;
+    }
+
+    private boolean couldMove(final Pair<Integer, Integer> position, final Pair<Integer, Integer> last) {
+        return Math.abs(position.getX() - last.getX()) + Math.abs(position.getY() - last.getY()) == 1;
     }
 
     private boolean couldHit(final int row, final int col) {
-        // TODO Auto-generated method stub
+        Pair<Integer, Integer> position = new Pair<>(row, col);
+        if ((this.selected.isEmpty() && position.equals(this.start))
+                || (!this.selected.isEmpty() && this.couldMove(position, this.selected.getLast()))) {
+            this.selected.add(position);
+            return true;
+        }
         return false;
     }
 
@@ -70,9 +78,9 @@ public class PerilousPathModelImpl implements PerilousPathModel {
             if (this.mines.contains(new Pair<>(row, col))) {
                 this.mineState = MineState.EXPLODED;
             }
-            this.selected.add(new Pair<>(row, col));
+            return true;
         }
-        return !this.mineState.isExploded();
+        return false;
     }
 
     /**
@@ -161,8 +169,7 @@ public class PerilousPathModelImpl implements PerilousPathModel {
      */
     @Override
     public boolean isDone() {
-        // TODO Auto-generated method stub
-        return false;
+        return !this.selected.isEmpty() && this.selected.getLast().equals(this.finish);
     }
 
     /**
@@ -181,5 +188,6 @@ public class PerilousPathModelImpl implements PerilousPathModel {
         this.initStart();
         this.initFinish();
         this.initMines();
+        this.selected.clear();
     }
 }
