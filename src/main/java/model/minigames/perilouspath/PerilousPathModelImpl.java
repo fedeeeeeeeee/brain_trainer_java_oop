@@ -65,6 +65,27 @@ public class PerilousPathModelImpl implements PerilousPathModel {
         return Math.abs(position1.getX() - position2.getX()) <= 1 && Math.abs(position1.getY() - position2.getY()) <= 1;
     }
 
+    private void initStart() {
+        this.start = this.getRandomPosition();
+    }
+
+    private void initFinish() {
+        Pair<Integer, Integer> finish = this.getRandomPosition();
+        if (finish.equals(this.start) || this.adjacent(finish, this.start)) {
+            this.initFinish();
+        } else {
+            this.finish = finish;
+        }
+    }
+
+    private void initMines() {
+        this.mineState = MineState.UNDETONATED;
+        this.mines = new HashSet<>();
+        for (int i = 0; i < this.numMines; i++) {
+            this.mines.add(this.getRandomMines());
+        }
+    }
+
     /**
      * {@inheritDoc}
      */
@@ -86,39 +107,6 @@ public class PerilousPathModelImpl implements PerilousPathModel {
     @Override
     public int getSize() {
         return this.size;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public void initStart() {
-        this.start = this.getRandomPosition();
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public void initFinish() {
-        Pair<Integer, Integer> finish = this.getRandomPosition();
-        if (finish.equals(this.start) || this.adjacent(finish, this.start)) {
-            this.initFinish();
-        } else {
-            this.finish = finish;
-        }
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public void initMines() {
-        this.mineState = MineState.UNDETONATED;
-        this.mines = new HashSet<>();
-        for (int i = 0; i < this.numMines; i++) {
-            this.mines.add(this.getRandomMines());
-        }
     }
 
     /**

@@ -26,21 +26,6 @@ public interface PerilousPathModel {
     int getSize();
 
     /**
-     * Initialize the start position.
-     */
-    void initStart();
-
-    /**
-     * Initialize the finish position.
-     */
-    void initFinish();
-
-    /**
-     * Initialize the mines position.
-     */
-    void initMines();
-
-    /**
      * Gets the start position.
      * 
      * @return the start coordinate
@@ -88,7 +73,7 @@ public interface PerilousPathModel {
     boolean isFailed();
 
     /**
-     * Reset the game.
+     * Reset the game at the initial state.
      */
     void reset();
 }
