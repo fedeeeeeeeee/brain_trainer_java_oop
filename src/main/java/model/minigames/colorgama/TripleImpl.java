@@ -2,9 +2,13 @@ package model.minigames.colorgama;
 
 /**
  * This class implements {@link TripleImpl}.
+ * 
  * @param <X>
+ *          the first element
  * @param <Y>
+ *          the second element
  * @param <Z>
+ *          the third element
  *
  */
 public final class TripleImpl<X, Y, Z> implements Triple<X, Y, Z> {
