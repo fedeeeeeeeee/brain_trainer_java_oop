@@ -7,10 +7,34 @@ package model.minigames.colorgama;
 public interface ComputeDifficultyValue {
 
     /**
-     * Getter for a buttons grid size.
+     * Get the size of the grid of buttons.
      * 
-     * @return
+     * @return size
      *          a grid size
      */
     int getGridSize();
+
+    /**
+     * Get the range value for the color.
+     * 
+     * @return range
+     *          the range of color
+     */
+    int getColorRange();
+
+    /**
+     * Get of the random origin of the color value.
+     * 
+     * @return origin
+     *           the origin (inclusive) of each random value
+     */
+    double getRandomColorOrigin();
+
+    /**
+     * Get of the random bound of the color value.
+     * 
+     * @return bound
+     *           the bound (exclusive) of each random value
+     */
+    double getRandomColorBound();
 }

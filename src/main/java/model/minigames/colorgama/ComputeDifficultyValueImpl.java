@@ -1,7 +1,5 @@
 package model.minigames.colorgama;
 
-import java.util.Arrays;
-
 import model.DifficultyLevel;
 
 /**
@@ -12,8 +10,10 @@ public final class ComputeDifficultyValueImpl implements ComputeDifficultyValue 
 
     private static final int BASE_SIZE = 5;
     private static final int OFFSET = 3;
-    private DifficultyLevel difficulty;
-    private int gridSize;
+    private static final int RANGE = 15;
+    private static final double ORIGIN = 0.30;
+    private static final double BOUND = 0.75;
+    private final int gridSize;
 
     /**
      * Constructor of {@link ComputeDifficultyValue}.
@@ -22,17 +22,28 @@ public final class ComputeDifficultyValueImpl implements ComputeDifficultyValue 
      *          the current difficulty.
      */
     public ComputeDifficultyValueImpl(final DifficultyLevel difficulty) {
-        this.difficulty = difficulty;
-        this.computeValues(this.difficulty);
-    }
-
-    private void computeValues(final DifficultyLevel difficulty) {
-        this.gridSize = BASE_SIZE + (Arrays.asList(DifficultyLevel.values()).indexOf(difficulty) * OFFSET);
+        this.gridSize =  BASE_SIZE + difficulty.ordinal() * OFFSET;
     }
 
     @Override
     public int getGridSize() {
         return this.gridSize;
     }
+
+    @Override
+    public int getColorRange() {
+        return RANGE;
+    }
+
+    @Override
+    public double getRandomColorOrigin() {
+        return ORIGIN;
+    }
+
+    @Override
+    public double getRandomColorBound() {
+        return BOUND;
+    }
+
 
 }
