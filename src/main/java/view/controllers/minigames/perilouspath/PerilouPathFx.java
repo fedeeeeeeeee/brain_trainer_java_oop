@@ -46,6 +46,14 @@ public interface PerilouPathFx {
     void showStep(int row, int col);
 
     /**
+     * Shows the mine exploded.
+     * 
+     * @param row
+     * @param col
+     */
+    void showExplosion(int row, int col);
+
+    /**
      * Shows the final score.
      * 
      * @param finalScore

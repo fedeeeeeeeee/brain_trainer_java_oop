@@ -119,6 +119,16 @@ public class PerilousPathFxImpl extends AbstractMiniGameController implements Pe
      * {@inheritDoc}
      */
     @Override
+    public void showExplosion(final int row, final int col) {
+        this.buttons.entrySet().stream()
+                               .filter(bt -> bt.getValue().equals(new Pair<>(row, col)))
+                               .forEach(bt -> bt.getKey().setText("***"));
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
     public void timeFinish() {
         this.controller.timerExpired();
     }
