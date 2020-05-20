@@ -26,6 +26,21 @@ public class PerilousPathControllerImpl implements PerilousPathController {
         this.model = new PerilousPathModelImpl(difficultyLevel);
     }
 
+    private void updateView() {
+        this.view.showStart(this.model.getStart());
+        this.view.showFinish(this.model.getFinish());
+    }
+
+    private void resetView() {
+        this.view.showMines(this.model.getMines());
+    }
+
+    private void hangingView(final int row, final int col) {
+        this.view.showExplosion(row, col);
+        this.updateView();
+        this.resetView();
+    }
+
     /**
      * {@inheritDoc}
      */
@@ -33,9 +48,8 @@ public class PerilousPathControllerImpl implements PerilousPathController {
     public void startGame() {
         this.view.drawGrid(this.model.getSize());
         this.model.reset();
-        this.view.showStart(this.model.getStart());
-        this.view.showFinish(this.model.getFinish());
-        this.view.showMines(this.model.getMines());
+        this.updateView();
+        this.resetView();
     }
 
     /**
@@ -48,6 +62,11 @@ public class PerilousPathControllerImpl implements PerilousPathController {
         }
         if (this.model.isDone()) {
             this.model.addPoint();
+            this.startGame();
+        }
+        if (this.model.isFailed()) {
+            this.hangingView(row, col);
+            this.startGame();
         }
     }
 
