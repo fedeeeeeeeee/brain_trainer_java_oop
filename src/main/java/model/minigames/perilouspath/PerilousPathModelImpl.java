@@ -57,12 +57,8 @@ public class PerilousPathModelImpl implements PerilousPathModel {
 
     private boolean couldHit(final int row, final int col) {
         Pair<Integer, Integer> position = new Pair<>(row, col);
-        if ((this.selected.isEmpty() && position.equals(this.start))
-                || (!this.selected.isEmpty() && this.couldMove(position, this.selected.getLast()))) {
-            this.selected.add(position);
-            return true;
-        }
-        return false;
+        return ((this.selected.isEmpty() && position.equals(this.start))
+                || (!this.selected.isEmpty() && this.couldMove(position, this.selected.getLast())));
     }
 
     private boolean adjacent(final Pair<Integer, Integer> position1, final Pair<Integer, Integer> position2) {
@@ -78,6 +74,7 @@ public class PerilousPathModelImpl implements PerilousPathModel {
             if (this.mines.contains(new Pair<>(row, col))) {
                 this.mineState = MineState.EXPLODED;
             }
+            this.selected.add(new Pair<>(row, col));
             return true;
         }
         return false;
