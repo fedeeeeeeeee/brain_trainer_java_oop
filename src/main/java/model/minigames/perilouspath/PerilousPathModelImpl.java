@@ -49,7 +49,7 @@ public class PerilousPathModelImpl implements PerilousPathModel {
 
     private Pair<Integer, Integer> getRandomMines() {
         Pair<Integer, Integer> mine = this.getRandomPosition();
-        return (this.mines.contains(mine) || mine.equals(this.start) || mine.equals(this.finish)) ? this.getRandomPosition() : mine;
+        return (this.mines.contains(mine) || mine.equals(this.start) || mine.equals(this.finish)) ? this.getRandomMines() : mine;
     }
 
     private boolean couldHit(final int row, final int col) {
@@ -109,7 +109,7 @@ public class PerilousPathModelImpl implements PerilousPathModel {
      */
     @Override
     public void initMines() {
-        this.mineState = MineState.UNEXPLODED;
+        this.mineState = MineState.UNDETONATED;
         this.mines = new HashSet<>();
         for (int i = 0; i < this.numMines; i++) {
             this.mines.add(this.getRandomMines());
