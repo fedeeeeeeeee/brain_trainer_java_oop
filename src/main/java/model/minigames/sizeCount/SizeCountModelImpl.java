@@ -98,7 +98,7 @@ public class SizeCountModelImpl implements SizeCountModel {
         int count = 0;
         int maxRes = this.operations.stream().mapToInt(e -> e.getY()).max().getAsInt();
         IntegerOperation maxOpTemp = null;
-        System.out.println("max res " + maxRes);
+        //System.out.println("max res " + maxRes);
         for (int i = 0; i < this.operations.size(); i++) {
             if (this.operations.get(i).getY().equals(maxRes)) {
                 count = count + 1;
@@ -120,8 +120,8 @@ public class SizeCountModelImpl implements SizeCountModel {
      */
     @Override
     public boolean isCorrectAnswer(final String answer) {
-        System.out.println("max operation " + this.maxOperation.toString());
-        System.out.println("same " + this.same);
+        //System.out.println("max operation " + this.maxOperation.toString());
+        //System.out.println("same " + this.same);
         if ((answer.equals(SAME_ANSWER) && this.same) || (this.maxOperation.isPresent() && answer.equals(this.maxOperation.get().toString()))) {
             this.scoreModel.addPoint();
             return true;

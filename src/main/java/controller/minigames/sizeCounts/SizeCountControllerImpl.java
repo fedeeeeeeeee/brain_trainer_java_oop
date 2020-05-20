@@ -31,7 +31,7 @@ public class SizeCountControllerImpl implements SizeCountController {
      */
     @Override
     public void newAttempt(final String answer) {
-        System.out.println("answer "+this.model.isCorrectAnswer(answer));
+       // System.out.println("answer "+this.model.isCorrectAnswer(answer));
         if (this.model.isCorrectAnswer(answer)) {
             this.view.showCorrectAnswer();
         } else {
@@ -44,7 +44,7 @@ public class SizeCountControllerImpl implements SizeCountController {
      */
     @Override
     public void computeOperations() {
-        System.out.println("compute operations");
+        //System.out.println("compute operations");
         this.model.reset();
         this.view.draw(this.model.getOperations());
 

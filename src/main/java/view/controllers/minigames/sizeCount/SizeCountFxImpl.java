@@ -24,6 +24,7 @@ public class SizeCountFxImpl extends AbstractMiniGameController implements SizeC
     private Button same;
 
     private static final int SECONDS = 30;
+    private static final int WIDTH = 333;
 
     @FXML
     private VBox panel;
@@ -57,8 +58,11 @@ public class SizeCountFxImpl extends AbstractMiniGameController implements SizeC
     @Override
     public void draw(final List<IntegerOperation> operations) {
         for (int i = 0; i < operations.size(); i++) {
-            this.buttons.get(i).setText(operations.get(i).toString());
+            Button bt = this.buttons.get(i);
+            bt.setStyle("-fx-font-size: 20; -fx-border-color: #000000; -fx-border-width: 0.1px;");
+            bt.setText(operations.get(i).toString());
         }
+        this.same.setStyle("-fx-font-size: 20; -fx-border-color: #000000; -fx-border-width: 0.1px;");
 
     }
 
@@ -75,7 +79,7 @@ public class SizeCountFxImpl extends AbstractMiniGameController implements SizeC
         for (int i = 0; i < numOperations; i++) {
             final Button bt = new Button();
             bt.setStyle("-fx-font-size: 20");
-            bt.setPrefWidth(192);
+            bt.setPrefWidth(WIDTH);
             this.buttons.add(bt);
             bt.addEventHandler(MouseEvent.MOUSE_CLICKED, ev);
             this.panel.getChildren().add(bt);
@@ -83,7 +87,7 @@ public class SizeCountFxImpl extends AbstractMiniGameController implements SizeC
 
         this.same = new Button("SAME");
         this.same.setStyle("-fx-font-size: 20");
-        this.same.setPrefWidth(192);
+        this.same.setPrefWidth(WIDTH);
         this.same.addEventHandler(MouseEvent.MOUSE_CLICKED, ev);
         this.panel.getChildren().add(this.same);
 
@@ -94,9 +98,9 @@ public class SizeCountFxImpl extends AbstractMiniGameController implements SizeC
      */
     @Override
     public void showWrongAnswer() {
-//        Platform.runLater(() -> {
-//            this.currentAnswer.setStyle("-fx-border-color: #66FF66; -fx-border-width: 2px;");
-//        });
+        Platform.runLater(() -> {
+            this.currentAnswer.setStyle("-fx-font-size: 20;-fx-border-color:#FF0000 ; -fx-border-width: 2px;");
+        });
         this.controller.computeOperations();
 
     }
@@ -106,9 +110,9 @@ public class SizeCountFxImpl extends AbstractMiniGameController implements SizeC
      */
     @Override
     public void showCorrectAnswer() {
-//        Platform.runLater(() -> {
-//            this.currentAnswer.setStyle("-fx-border-color: #FF0000; -fx-border-width: 2px;");
-//        });
+        Platform.runLater(() -> {
+            this.currentAnswer.setStyle("-fx-font-size: 20; -fx-border-color:#66FF66 ; -fx-border-width: 2px;");
+        });
         this.controller.computeOperations();
     }
 
