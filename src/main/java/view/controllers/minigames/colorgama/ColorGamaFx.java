@@ -1,5 +1,7 @@
 package view.controllers.minigames.colorgama;
 
+import model.minigames.colorgama.ComputeColor;
+
 /**
  * The view interface of ColorGama minigame.
  *
@@ -19,6 +21,27 @@ public interface ColorGamaFx {
      *
      * @param size
      *          the grid size
+     *
+     * @param computeColor 
+     *          the colors of buttons
      */
-    void drawGrid(int size);
+    void drawGrid(int size, ComputeColor computeColor);
+
+    /**
+     * Show the next level.
+     * 
+     * @param computeColor
+     *          the colors of buttons
+     */
+    void showNext(ComputeColor computeColor);
+
+    /**
+     * Show the tick image.
+     */
+    void rightAnswer();
+
+    /**
+     * Show the cross image. 
+     */
+    void wrongAnswer();
 }
