@@ -169,7 +169,7 @@ public class PerilousPathModelImpl implements PerilousPathModel {
      * {@inheritDoc}
      */
     @Override
-    public void reset() {
+    public void resetGame() {
         this.initStart();
         this.initFinish();
         this.initMines();

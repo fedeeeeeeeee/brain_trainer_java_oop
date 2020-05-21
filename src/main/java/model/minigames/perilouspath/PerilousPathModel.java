@@ -75,5 +75,5 @@ public interface PerilousPathModel {
     /**
      * Reset the game at the initial state.
      */
-    void reset();
+    void resetGame();
 }
