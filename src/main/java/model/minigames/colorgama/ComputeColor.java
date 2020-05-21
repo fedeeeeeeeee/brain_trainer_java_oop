@@ -1,5 +1,7 @@
 package model.minigames.colorgama;
 
+import org.apache.commons.lang3.tuple.Triple;
+
 /**
  * This interface calculates the hsb values of the colors to put.
  *
@@ -24,7 +26,7 @@ public interface ComputeColor {
      *          the hsb component of the color
      *
      */
-    Triple<Integer, Double, Double> getRightColorValues(QuestionType question);
+    int getRightColorIndex(QuestionType question);
 
     /**
      * Reset all values according to the question.
