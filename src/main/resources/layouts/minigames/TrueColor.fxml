@@ -16,116 +16,91 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="580.0" prefWidth="500.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.controllers.minigames.trueColor.TrueColorFx">
-	<children>
-		<GridPane VBox.vgrow="ALWAYS">
-			<rowConstraints>
-				<RowConstraints maxHeight="142.0" minHeight="68.0" prefHeight="119.0" vgrow="SOMETIMES" />
-            <RowConstraints maxHeight="142.0" minHeight="68.0" prefHeight="71.0" vgrow="SOMETIMES" />
-            <RowConstraints maxHeight="66.0" minHeight="31.0" prefHeight="66.0" valignment="CENTER" vgrow="SOMETIMES" />
-            <RowConstraints vgrow="SOMETIMES" />
-				<RowConstraints vgrow="SOMETIMES" />
-				<RowConstraints valignment="CENTER" vgrow="SOMETIMES" />
-				<RowConstraints maxHeight="109.0" minHeight="58.0" prefHeight="109.0" vgrow="SOMETIMES" />
-			</rowConstraints>
-         <columnConstraints>
-            <ColumnConstraints />
-            <ColumnConstraints />
-            <ColumnConstraints />
-            <ColumnConstraints />
-            <ColumnConstraints />
-            <ColumnConstraints />
-            <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" />
-         </columnConstraints>
+<VBox alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="150.0" minWidth="100.0" prefHeight="580.0" prefWidth="500.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.controllers.minigames.truecolor.TrueColorFx">
+   <children>
+      <GridPane VBox.vgrow="SOMETIMES">
+        <columnConstraints>
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="70.0" prefWidth="150.0" />
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+        </columnConstraints>
+        <rowConstraints>
+          <RowConstraints maxHeight="1.7976931348623157E308" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+          <RowConstraints maxHeight="1.7976931348623157E308" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+          <RowConstraints maxHeight="1.7976931348623157E308" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="1.7976931348623157E308" minHeight="30.0" prefHeight="75.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="1.7976931348623157E308" minHeight="30.0" prefHeight="75.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+        </rowConstraints>
          <children>
-            <GridPane GridPane.columnIndex="6" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="6" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
-              <columnConstraints>
-                <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" />
-                <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" />
-              </columnConstraints>
-              <rowConstraints>
-                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-              </rowConstraints>
-               <children>
-                  <Button fx:id="noBtn" mnemonicParsing="false" onMouseClicked="#buttonClicked" prefHeight="58.0" prefWidth="134.0" text="NO" GridPane.halignment="CENTER" />
-                  <Button fx:id="yesBtn" mnemonicParsing="false" onMouseClicked="#buttonClicked" prefHeight="58.0" prefWidth="134.0" text="YES" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
-               </children>
-            </GridPane>
-            <Label text="Does the meaning match the ink color?" GridPane.columnIndex="6" GridPane.rowIndex="5" GridPane.valignment="BOTTOM">
+            <Label fx:id="timerLbl" alignment="CENTER_LEFT" prefHeight="59.0" prefWidth="42.0" text="Time" textAlignment="CENTER" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
                <font>
                   <Font size="18.0" />
                </font>
             </Label>
-		<Label fx:id="timerLbl" alignment="CENTER_LEFT" prefHeight="134.0" prefWidth="246.0" text="Time" GridPane.columnIndex="6">
+            <Label prefWidth="70.0" text="meaning" textOverrun="CLIP" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER">
                <effect>
-                  <DropShadow />
+                  <DropShadow color="#a8aeaa" />
                </effect>
                <font>
                   <Font size="18.0" />
                </font>
             </Label>
-            <GridPane GridPane.columnIndex="6" GridPane.rowIndex="2">
-              <columnConstraints>
-                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-              </columnConstraints>
-              <rowConstraints>
-                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-              </rowConstraints>
-               <children>
-                  <Label text="meaning" textOverrun="CLIP" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
-                     <font>
-                        <Font size="18.0" />
-                     </font>
-                     <effect>
-                        <DropShadow color="#06ae3e" />
-                     </effect>
-                  </Label>
-               </children>
-            </GridPane>
-            <GridPane prefHeight="194.0" prefWidth="500.0" GridPane.columnIndex="6" GridPane.rowIndex="3">
-              <columnConstraints>
-                <ColumnConstraints hgrow="SOMETIMES" />
-              </columnConstraints>
-              <rowConstraints>
-                <RowConstraints maxHeight="136.0" minHeight="111.0" prefHeight="111.0" valignment="CENTER" vgrow="ALWAYS" />
-                <RowConstraints maxHeight="99.0" minHeight="74.0" prefHeight="99.0" valignment="CENTER" vgrow="SOMETIMES" />
-              </rowConstraints>
-               <children>
-                  <Button fx:id="meanColorBtn" mnemonicParsing="false" prefHeight="70.0" prefWidth="150.0" text="COLORE SIGNIFICATO" GridPane.halignment="CENTER" GridPane.hgrow="SOMETIMES" GridPane.valignment="CENTER" GridPane.vgrow="SOMETIMES">
-                     <font>
-                        <Font size="18.0" />
-                     </font>
-                     <tooltip>
-                        <Tooltip text="ciaoooo" />
-                     </tooltip>
-                  </Button>
-                  <Button fx:id="trueColorBtn" mnemonicParsing="false" prefHeight="70.0" prefWidth="150.0" text="COLORE DEL SIGNIFICATO" GridPane.halignment="CENTER" GridPane.hgrow="SOMETIMES" GridPane.rowIndex="1" GridPane.valignment="CENTER" GridPane.vgrow="SOMETIMES">
-                     <font>
-                        <Font size="18.0" />
-                     </font>
-                  </Button>
-               </children>
-            </GridPane>
-            <GridPane GridPane.columnIndex="6" GridPane.rowIndex="4">
-               <columnConstraints>
-                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-               </columnConstraints>
-               <rowConstraints>
-                  <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
-               </rowConstraints>
-               <children>
-                  <Label text="ink color" GridPane.halignment="CENTER" GridPane.hgrow="SOMETIMES" GridPane.valignment="CENTER" GridPane.vgrow="SOMETIMES">
-                     <font>
-                        <Font size="18.0" />
-                     </font>
-                     <effect>
-                        <DropShadow color="#06ae3e" />
-                     </effect>
-                  </Label>
-               </children>
-            </GridPane>
-            <ProgressBar fx:id="progressBar" prefWidth="200.0" progress="0.0" GridPane.columnIndex="6" GridPane.rowIndex="1" />
+            <ProgressBar fx:id="progressBar" minWidth="70.0" prefWidth="200.0" progress="0.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
+            <Button fx:id="meanColorBtn" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="20.0" minWidth="70.0" mnemonicParsing="false" prefHeight="75.0" prefWidth="150.0" text="COLORE SIGNIFICATO" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER">
+               <font>
+                  <Font name="System Bold Italic" size="24.0" />
+               </font>
+               <GridPane.margin>
+                  <Insets bottom="10.0" />
+               </GridPane.margin>
+            </Button>
+            <Button fx:id="trueColorBtn" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="20.0" minWidth="70.0" mnemonicParsing="false" prefHeight="75.0" prefWidth="150.0" text="COLORE DEL SIGNIFICATO" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="4" GridPane.valignment="CENTER">
+               <font>
+                  <Font name="System Bold Italic" size="24.0" />
+               </font>
+               <GridPane.margin>
+                  <Insets bottom="10.0" />
+               </GridPane.margin>
+            </Button>
+            <Label text="ink color" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="6" GridPane.valignment="CENTER">
+               <effect>
+                  <DropShadow color="#a8aeaa" />
+               </effect>
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
          </children>
-		</GridPane>
-	</children>
+      </GridPane>
+      <GridPane>
+        <columnConstraints>
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+        </columnConstraints>
+        <rowConstraints>
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+        </rowConstraints>
+         <children>
+            <Label text="Does the meaning match the ink color?" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+         </children>
+      </GridPane>
+      <GridPane prefHeight="83.0" prefWidth="500.0">
+        <columnConstraints>
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+        </columnConstraints>
+        <rowConstraints>
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+        </rowConstraints>
+         <children>
+            <Button fx:id="noBtn" mnemonicParsing="false" onMouseClicked="#buttonClicked" prefHeight="58.0" prefWidth="134.0" text="NO" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
+            <Button fx:id="yesBtn" mnemonicParsing="false" onMouseClicked="#buttonClicked" prefHeight="58.0" prefWidth="134.0" text="YES" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
+         </children>
+      </GridPane>
+   </children>
 </VBox>
