@@ -22,8 +22,7 @@ public class ColorGamaModelImpl implements ColorGamaModel {
     /**
      * Constructor of {@link ColorGamaModel}.
      * 
-     * @param difficulty
-     *          the difficulty selected
+     * @param difficulty the difficulty selected
      * 
      */
     public ColorGamaModelImpl(final DifficultyLevel difficulty) {
@@ -31,7 +30,7 @@ public class ColorGamaModelImpl implements ColorGamaModel {
         this.question = QuestionType.values()[new Random().nextInt(QuestionType.values().length)];
         System.out.println(this.question);
         this.computeValue = new ComputeDifficultyValueImpl(difficulty);
-        this.computeColor = new ComputeColorImpl(this.computeValue, question);
+        this.computeColor = new ComputeColorImpl(this.computeValue);
     }
 
     /**
@@ -82,5 +81,4 @@ public class ColorGamaModelImpl implements ColorGamaModel {
         this.question = QuestionType.values()[new Random().nextInt(QuestionType.values().length)];
         System.out.println(this.question);
     }
-
 }

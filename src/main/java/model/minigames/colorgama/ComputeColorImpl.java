@@ -7,8 +7,6 @@ import java.util.Random;
 
 import org.apache.commons.lang3.tuple.Triple;
 
-
-
 /**
  * This class implements {@link ComputeColor}.
  *
@@ -18,18 +16,15 @@ public class ComputeColorImpl implements ComputeColor {
     private static final int DEGREE = 360;
 
     private final ComputeDifficultyValue difficultyValue;
-    private final List<Triple<Integer, Double, Double>> valuesList; 
+    private final List<Triple<Integer, Double, Double>> valuesList;
     private Integer hue;
 
     /**
      * Constructor of {@link ComputeColor}.
      * 
-     * @param difficultyValue
-     *          constants according to the difficulty.
-     * @param question
-     *          the current question.
+     * @param difficultyValue constants according to the difficulty.
      */
-    public ComputeColorImpl(final ComputeDifficultyValue difficultyValue, final QuestionType question) {
+    public ComputeColorImpl(final ComputeDifficultyValue difficultyValue) {
         this.difficultyValue = difficultyValue;
         this.valuesList = new LinkedList<>();
         this.calculateHue();
@@ -40,16 +35,19 @@ public class ComputeColorImpl implements ComputeColor {
     }
 
     private Double calulateRandomValue() {
-        return new Random().doubles(this.difficultyValue.getRandomColorOrigin(), this.difficultyValue.getRandomColorBound())
+        return new Random()
+                .doubles(this.difficultyValue.getRandomColorOrigin(), this.difficultyValue.getRandomColorBound())
                 .iterator().nextDouble();
     }
 
     private Optional<Triple<Integer, Double, Double>> calculateRightValues(final QuestionType question) {
         switch (question) {
         case DARKEST:
-            return this.valuesList.stream().max((c1, c2) -> Double.compare(c1.getMiddle() - c1.getRight(), c2.getMiddle() - c2.getRight()));
+            return this.valuesList.stream()
+                                  .max((c1, c2) -> Double.compare(c1.getMiddle() - c1.getRight(), c2.getMiddle() - c2.getRight()));
         case LIGHTEST:
-            return this.valuesList.stream().max((c1, c2) -> Double.compare(c1.getRight() - c1.getMiddle(), c2.getRight() - c2.getMiddle()));
+            return this.valuesList.stream()
+                                  .max((c1, c2) -> Double.compare(c1.getRight() - c1.getMiddle(), c2.getRight() - c2.getMiddle()));
         case COLOR:
             return Optional.of(this.valuesList.iterator().next());
         default:
@@ -63,7 +61,8 @@ public class ComputeColorImpl implements ComputeColor {
      */
     @Override
     public Triple<Integer, Double, Double> nextColorValues() {
-        final Triple<Integer, Double, Double> triple = Triple.of(this.hue, this.calulateRandomValue(), this.calulateRandomValue());
+        final Triple<Integer, Double, Double> triple = Triple.of(this.hue, this.calulateRandomValue(),
+                                                                           this.calulateRandomValue());
         this.valuesList.add(triple);
         return triple;
     }
@@ -84,8 +83,4 @@ public class ComputeColorImpl implements ComputeColor {
         this.calculateHue();
         this.valuesList.clear();
     }
-
-
-
-
 }
