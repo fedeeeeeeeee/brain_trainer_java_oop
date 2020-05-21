@@ -1,4 +1,4 @@
-package model.minigames.sizeCount;
+package model.minigames.sizecount;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -22,13 +22,12 @@ public class DividersImpl implements Dividers {
             divider = number % i;
             if (divider == 0) {
                 dividers.add(i);
-                if (i != (number / i)) {
+                if (i != number / i) {
                     dividers.add(number / i);
                 }
             }
 
         }
-
         return dividers;
     }
 

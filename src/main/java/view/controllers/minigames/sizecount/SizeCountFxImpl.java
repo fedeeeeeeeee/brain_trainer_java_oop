@@ -1,17 +1,17 @@
-package view.controllers.minigames.sizeCount;
+package view.controllers.minigames.sizecount;
 
 import java.util.LinkedList;
 import java.util.List;
 
-import controller.minigames.sizeCounts.SizeCountController;
-import controller.minigames.sizeCounts.SizeCountControllerImpl;
+import controller.minigames.sizecounts.SizeCountController;
+import controller.minigames.sizecounts.SizeCountControllerImpl;
 import javafx.application.Platform;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
-import model.minigames.sizeCount.IntegerOperation;
+import model.minigames.sizecount.IntegerOperation;
 import timer.GameTimer;
 import view.SceneType;
 import view.controllers.minigames.AbstractMiniGameController;
@@ -58,7 +58,7 @@ public class SizeCountFxImpl extends AbstractMiniGameController implements SizeC
     @Override
     public void draw(final List<IntegerOperation> operations) {
         for (int i = 0; i < operations.size(); i++) {
-            Button bt = this.buttons.get(i);
+            final Button bt = this.buttons.get(i);
             bt.setStyle("-fx-font-size: 20; -fx-border-color: #000000; -fx-border-width: 0.1px;");
             bt.setText(operations.get(i).toString());
         }
@@ -71,7 +71,7 @@ public class SizeCountFxImpl extends AbstractMiniGameController implements SizeC
      */
     @Override
     public void setOperations(final Integer numOperations) {
-        EventHandler<MouseEvent> ev = (e) -> {
+        final EventHandler<MouseEvent> ev = (e) -> {
             final Button bt = (Button) e.getSource();
             this.currentAnswer = bt;
             this.controller.newAttempt(bt.getText());

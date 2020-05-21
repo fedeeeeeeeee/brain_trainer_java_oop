@@ -1,4 +1,4 @@
-package controller.minigames.sizeCounts;
+package controller.minigames.sizecounts;
 
 /**
  * 

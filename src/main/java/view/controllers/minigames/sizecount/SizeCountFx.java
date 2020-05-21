@@ -1,8 +1,8 @@
-package view.controllers.minigames.sizeCount;
+package view.controllers.minigames.sizecount;
 
 import java.util.List;
 
-import model.minigames.sizeCount.IntegerOperation;
+import model.minigames.sizecount.IntegerOperation;
 
 /**
  * 

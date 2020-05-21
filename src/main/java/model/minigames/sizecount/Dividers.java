@@ -1,4 +1,4 @@
-package model.minigames.sizeCount;
+package model.minigames.sizecount;
 
 import java.util.List;
 
@@ -10,11 +10,11 @@ import java.util.List;
 public interface Dividers {
 
     /**
-     * Get the dividers of a number.
+     * Get dividers of a number.
      * 
      * @param number the number whose dividers you want to know
      * 
-     * @return the list of the dividers of the number specify
+     * @return the list of dividers of the number specify
      */
     List<Integer> getDividers(Integer number);
 

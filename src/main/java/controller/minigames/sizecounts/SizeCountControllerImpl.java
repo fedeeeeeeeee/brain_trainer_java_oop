@@ -1,18 +1,17 @@
-package controller.minigames.sizeCounts;
+package controller.minigames.sizecounts;
 
-import model.minigames.sizeCount.SizeCountModel;
-import model.minigames.sizeCount.SizeCountModelImpl;
-import view.controllers.minigames.sizeCount.SizeCountFxImpl;
+import model.minigames.sizecount.SizeCountModel;
+import model.minigames.sizecount.SizeCountModelImpl;
+import view.controllers.minigames.sizecount.SizeCountFxImpl;
 
 public class SizeCountControllerImpl implements SizeCountController {
 
-    private SizeCountModel model;
-    private SizeCountFxImpl view;
+    final private SizeCountModel model;
+    final private SizeCountFxImpl view;
 
     public SizeCountControllerImpl(final SizeCountFxImpl view) {
         this.view = view;
-        this.model = new SizeCountModelImpl((this.view.getController().getDifficultyLevel()));
-
+        this.model = new SizeCountModelImpl(this.view.getController().getDifficultyLevel());
         this.view.setOperations(this.model.getNumOfOperations());
     }
 
@@ -31,7 +30,7 @@ public class SizeCountControllerImpl implements SizeCountController {
      */
     @Override
     public void newAttempt(final String answer) {
-       // System.out.println("answer "+this.model.isCorrectAnswer(answer));
+        // System.out.println("answer "+this.model.isCorrectAnswer(answer));
         if (this.model.isCorrectAnswer(answer)) {
             this.view.showCorrectAnswer();
         } else {
@@ -44,7 +43,6 @@ public class SizeCountControllerImpl implements SizeCountController {
      */
     @Override
     public void computeOperations() {
-        //System.out.println("compute operations");
         this.model.reset();
         this.view.draw(this.model.getOperations());
 

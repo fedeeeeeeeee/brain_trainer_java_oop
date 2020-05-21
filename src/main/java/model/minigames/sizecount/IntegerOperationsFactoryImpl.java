@@ -1,4 +1,4 @@
-package model.minigames.sizeCount;
+package model.minigames.sizecount;
 
 import java.util.Arrays;
 import java.util.LinkedList;
@@ -8,20 +8,19 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
-
 /**
- * The implementation of the {@link OperationsFactory}.
+ * The implementation of the {@link IntegerOperationsFactory}.
  *
  */
-public class OperationsFactoryImpl implements OperationsFactory {
+public class IntegerOperationsFactoryImpl implements IntegerOperationsFactory {
 
     private final Random rnd;
 
     /**
-     * Simple constructor of {@link OperationsFactory}.
+     * Simple constructor of {@link IntegerOperationsFactory}.
      * 
      */
-    public OperationsFactoryImpl() {
+    public IntegerOperationsFactoryImpl() {
         this.rnd = new Random();
     }
 
@@ -31,55 +30,49 @@ public class OperationsFactoryImpl implements OperationsFactory {
 
     /*
      * Method to compute random operand for the division cause the result must be an
-     * integer
+     * Integer
      */
     private Stream<Integer> generateRandomOperandDivision(final int numOfOperands, final int limit) {
         final Dividers div = new DividersImpl();
         final List<Integer> result = new LinkedList<>();
         Integer num = this.rnd.nextInt(limit + 1) + 1; // zero is not allowed
-
         result.add(num);
         for (int i = 0; i < numOfOperands; i++) {
-            List<Integer> dividersList = div.getDividers(num);
-            Integer divider = dividersList.get(this.rnd.nextInt(dividersList.size()));
+            final List<Integer> dividersList = div.getDividers(num);
+            final Integer divider = dividersList.get(this.rnd.nextInt(dividersList.size()));
             result.add(divider);
             num = num / divider;
 
         }
-
         return result.stream().limit(numOfOperands);
-
     }
 
     private String generateToStrong(final List<Integer> operands, final String separator) {
         String result = Integer.toString(operands.get(0));
-
         for (int i = 1; i < operands.size(); i++) {
             result = result.concat(separator).concat(Integer.toString(operands.get(i)));
         }
-
         return result;
     }
 
     private List<IntegerOperation> generateRandomOperations(final int numOfOperations, final int numOfOperand,
-            final int limit) {
-        List<Operator> operators = Arrays.asList(Operator.values());
-        List<IntegerOperation> list = new LinkedList<>();
-
+            final int bound) {
+        final List<Operator> operators = Arrays.asList(Operator.values());
+        final List<IntegerOperation> list = new LinkedList<>();
         for (int i = numOfOperations; i > 0; i--) {
-            Operator op = operators.get(rnd.nextInt(operators.size()));
+            final Operator op = operators.get(rnd.nextInt(operators.size()));
             switch (op) {
             case SUM:
-                list.add(this.addiction(numOfOperand, limit));
+                list.add(this.addiction(numOfOperand, bound));
                 break;
             case SUB:
-                list.add(this.subtraction(numOfOperand, limit));
+                list.add(this.subtraction(numOfOperand, bound));
                 break;
             case MUL:
-                list.add(this.multiplication(numOfOperand, limit));
+                list.add(this.multiplication(numOfOperand, bound));
                 break;
             case DIV:
-                list.add(this.division(numOfOperand, limit));
+                list.add(this.division(numOfOperand, bound));
                 break;
             default:
                 break;
@@ -104,7 +97,6 @@ public class OperationsFactoryImpl implements OperationsFactory {
             public String toString() {
                 return generateToStrong(operands, "+");
             }
-
         };
     }
 
@@ -173,7 +165,7 @@ public class OperationsFactoryImpl implements OperationsFactory {
      */
     @Override
     public IntegerOperation sumExpression(final int numOfOperations, final int numOfOperand, final int limit) {
-        List<IntegerOperation> operations = this.generateRandomOperations(numOfOperations, numOfOperand, limit);
+        final List<IntegerOperation> operations = this.generateRandomOperations(numOfOperations, numOfOperand, limit);
         return new IntegerOperation() {
 
             @Override
@@ -197,7 +189,7 @@ public class OperationsFactoryImpl implements OperationsFactory {
      */
     @Override
     public IntegerOperation subExpression(final int numOfOperations, final int numOfOperand, final int limit) {
-        List<IntegerOperation> operations = this.generateRandomOperations(numOfOperations, numOfOperand, limit);
+        final List<IntegerOperation> operations = this.generateRandomOperations(numOfOperations, numOfOperand, limit);
         return new IntegerOperation() {
 
             @Override
