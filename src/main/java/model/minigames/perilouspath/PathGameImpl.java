@@ -5,7 +5,7 @@ import java.util.LinkedList;
 import utility.Pair;
 
 /**
- * Implementations of {@link PathGame}
+ * Implementations of {@link PathGame}.
  */
 public class PathGameImpl implements PathGame {
 
@@ -14,7 +14,7 @@ public class PathGameImpl implements PathGame {
     private final Pair<Integer, Integer> start;
     private final Pair<Integer, Integer> finish;
     private LinkedList<Pair<Integer, Integer>> path;
-    
+
     /**
      * Constructor of {@link PathGame}.
      * 
