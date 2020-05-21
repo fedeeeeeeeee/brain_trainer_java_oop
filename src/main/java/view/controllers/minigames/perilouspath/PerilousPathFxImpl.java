@@ -41,6 +41,12 @@ public class PerilousPathFxImpl extends AbstractMiniGameController implements Pe
 
     @FXML
     private Label instructions;
+    
+    private final EventHandler<MouseEvent> eventHandler = (e) -> {
+        final Button bt = (Button) e.getSource();
+        final Pair<Integer, Integer> position = this.buttons.get(bt);
+        this.controller.hitAttempt(position.getX(), position.getY());
+    };
 
     /**
      * {@inheritDoc}
@@ -52,12 +58,6 @@ public class PerilousPathFxImpl extends AbstractMiniGameController implements Pe
         this.controller.startGame();
         this.setGameTimer(new GameTimer(SECONDS, this));
     }
-
-    private EventHandler<MouseEvent> eventHandler = (e) -> {
-        final Button bt = (Button) e.getSource();
-        final Pair<Integer, Integer> position = this.buttons.get(bt);
-        this.controller.hitAttempt(position.getX(), position.getY());
-    };
 
     /**
      * {@inheritDoc}

@@ -13,6 +13,13 @@ import model.minigames.perilouspath.DifficultyImpl;
  */
 public class DifficultyTest {
 
+    private static final int EASY_SIZE = 5;
+    private static final int EASY_NUM_MINES = 11;
+    private static final int NORMAL_SIZE = 6;
+    private static final int NORMAL_NUM_MINES = 22;
+    private static final int HARD_SIZE = 7;
+    private static final int HARD_NUM_MINES = 33;
+
     private Difficulty difficulty;
 
     /**
@@ -21,8 +28,8 @@ public class DifficultyTest {
     @Test
     public void easyDifficultyTest() {
         this.difficulty = new DifficultyImpl(DifficultyLevel.EASY);
-        assertEquals(5, this.difficulty.getSize());
-        assertEquals(11, this.difficulty.getNumMines());
+        assertEquals(EASY_SIZE, this.difficulty.getSize());
+        assertEquals(EASY_NUM_MINES, this.difficulty.getNumMines());
     }
 
     /**
@@ -31,8 +38,8 @@ public class DifficultyTest {
     @Test
     public void normalDifficultyTest() {
         this.difficulty = new DifficultyImpl(DifficultyLevel.NORMAL);
-        assertEquals(6, this.difficulty.getSize());
-        assertEquals(22, this.difficulty.getNumMines());
+        assertEquals(NORMAL_SIZE, this.difficulty.getSize());
+        assertEquals(NORMAL_NUM_MINES, this.difficulty.getNumMines());
     }
 
     /**
@@ -41,7 +48,7 @@ public class DifficultyTest {
     @Test
     public void hardDifficultyTest() {
         this.difficulty = new DifficultyImpl(DifficultyLevel.HARD);
-        assertEquals(7, this.difficulty.getSize());
-        assertEquals(33, this.difficulty.getNumMines());
+        assertEquals(HARD_SIZE, this.difficulty.getSize());
+        assertEquals(HARD_NUM_MINES, this.difficulty.getNumMines());
     }
 }

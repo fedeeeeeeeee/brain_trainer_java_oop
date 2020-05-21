@@ -22,14 +22,14 @@ public class PerilousPathModelImpl implements PerilousPathModel {
 
     private final int size;
     private final int numMines;
-    private Difficulty difficulty;
+    private final Difficulty difficulty;
     private final ScoreModel score;
     private Pair<Integer, Integer> start;
     private Pair<Integer, Integer> finish;
     private Set<Pair<Integer, Integer>> mines;
-    private LinkedList<Pair<Integer, Integer>> selected;
+    private final LinkedList<Pair<Integer, Integer>> selected;
     private LinkedList<Pair<Integer, Integer>> path;
-    private PathGameFactory pathFactory;
+    private final PathGameFactory pathFactory;
     private MineState mineState;
 
     /**
@@ -62,8 +62,8 @@ public class PerilousPathModelImpl implements PerilousPathModel {
 
     private boolean couldHit(final int row, final int col) {
         Pair<Integer, Integer> position = new Pair<>(row, col);
-        return ((this.selected.isEmpty() && position.equals(this.start))
-                || (!this.selected.isEmpty() && this.couldMove(position, this.selected.getLast())));
+        return this.selected.isEmpty() && position.equals(this.start)
+                || !this.selected.isEmpty() && this.couldMove(position, this.selected.getLast());
     }
 
     private boolean adjacent(final Pair<Integer, Integer> position1, final Pair<Integer, Integer> position2) {
@@ -82,7 +82,7 @@ public class PerilousPathModelImpl implements PerilousPathModel {
             this.finish = finish;
         }
     }
-    
+
     private void initPath() {
         this.path = this.pathFactory.createRandomDirectionPath(this.difficulty, this.start, this.finish).getPathList();
     }
