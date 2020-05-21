@@ -33,7 +33,7 @@ public class ColorGamaControllerImpl implements ColorGamaController {
      */
     @Override
     public void startGame() {
-        this.view.drawGrid(this.model.getDifficultyValue().getGridSize());
+        this.view.drawGrid(this.model.getDifficultyValue().getGridSize(), this.model.getComputeColor());
 
     }
 
@@ -43,6 +43,20 @@ public class ColorGamaControllerImpl implements ColorGamaController {
     @Override
     public void timeExpired() {
         this.view.endGame(this.model.getFinalScore());
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void checkAnswer(final int index) {
+        if (this.model.getRightIndex() == index) {
+            this.model.nextQuestion();
+            this.model.addPoint();
+            this.view.showNext(this.model.getComputeColor());
+        } else {
+            this.view.wrongAnswer();
+        }
     }
 
 }

@@ -16,4 +16,12 @@ public interface ColorGamaController {
      * 
      */
     void timeExpired();
+
+    /**
+     * Check the response given by the user.
+     * 
+     * @param index
+     *          the button's index 
+     */
+    void checkAnswer(int index);
 }
