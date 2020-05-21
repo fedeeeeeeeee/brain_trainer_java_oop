@@ -88,12 +88,8 @@ public class TrueColorModelImpl implements TrueColorModel{
      * create a list from number passed 
      */
     private void createListColorDifficulty(Integer numberColor) {
-//    	Colors limitColor = Colors.values()[numberColor];
         this.colorList = Stream.of(Colors.values())
-//                .filter(e-> e.getNumber()>numberColor+1)
-//                .forEach(i->i.getName())
-//        		.takeWhile(e-> e.equals(limitColor))
-//        		.dropWhile(e-> e.equals(limitColor))
+        		.limit(numberColor)
                 .map(Colors::name)
                 .collect(Collectors.toList());
         
@@ -113,7 +109,7 @@ public class TrueColorModelImpl implements TrueColorModel{
 			this.createListColorDifficulty(6);
 			break;
 		case HARD:
-			this.createListColorDifficulty(6);
+			this.createListColorDifficulty(8);
 			break;
 		default:
 			break;
