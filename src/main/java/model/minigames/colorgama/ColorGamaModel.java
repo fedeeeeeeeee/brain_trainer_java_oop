@@ -26,4 +26,25 @@ public interface ColorGamaModel {
      */
     ComputeDifficultyValue getDifficultyValue();
 
+    /**
+     * Get the color calculator.
+     * 
+     * @return colors
+     *          colors to fill the buttons
+     */
+    ComputeColor getComputeColor();
+
+    /**
+     * Get the index of the right answers.
+     * 
+     * @return index
+     *          right index
+     */
+    int getRightIndex();
+
+    /**
+     * Set the next question.
+     */
+    void nextQuestion();
+
 }
