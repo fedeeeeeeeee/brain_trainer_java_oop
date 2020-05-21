@@ -1,6 +1,7 @@
 package view.controllers.minigames.truecolor;
 
 import java.io.IOException;
+import java.util.Map;
 
 import controller.minigames.truecolor.TrueColorController;
 import controller.minigames.truecolor.TrueColorControllerImpl;
@@ -9,6 +10,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.input.MouseEvent;
 import timer.GameTimer;
+import utility.Pair;
 import view.SceneType;
 import view.controllers.minigames.AbstractMiniGameController;
 
@@ -33,18 +35,33 @@ public class TrueColorFx extends AbstractMiniGameController{
     @FXML
     private Button trueColorBtn;
     
+    @FXML
+	private void buttonClicked(MouseEvent event) throws IOException {
+    	final String selectedAnswer = ((Button) event.getSource()).getText();
+    	this.trueColorController.check(selectedAnswer);
+	}
+	
+	public void next() {
+		this.trueColorController.refresh();
+        this.trueColorController.startGame();
+	}
+	
+	
+	public void setButton(Map<String, Pair<String, String>> randomColor) {
+		meanColorBtn.setText(randomColor.get("meanColorBtn").getX());
+		meanColorBtn.setStyle("-fx-text-fill: " + randomColor.get("meanColorBtn").getY());
+		trueColorBtn.setText(randomColor.get("trueColorBtn").getX());
+		trueColorBtn.setStyle("-fx-text-fill: " + randomColor.get("trueColorBtn").getY());
+	}
+	
 	 /**
      * {@inheritDoc}
      */
 	@Override
 	public void initGame() {
 		this.trueColorController = new TrueColorControllerImpl(this.getController().getDifficultyLevel(), this);
-        this.setGameTimer(new GameTimer(SECONDS, this));
-	}
-
-	@FXML
-	private void buttonClicked(MouseEvent event) throws IOException {
-		// TODO
+		this.trueColorController.startGame();
+		this.setGameTimer(new GameTimer(SECONDS, this));
 	}
 
 	/**
