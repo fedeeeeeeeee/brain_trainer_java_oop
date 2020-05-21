@@ -29,10 +29,37 @@ public class TrueColorControllerImpl implements TrueColorController{
 	}
 	
 	/**
+	 * {@inheritDoc}
+	 */
+	public void refresh() {
+		this.model.reloadRandomColorMap();
+	}
+	
+	/**
+	 * {@inheritDoc}
+	 */
+	public void check(String selectedAnswer) {
+		if (model.matchingMeaningAndInk(selectedAnswer)) {
+			System.out.println("corretto");
+			this.model.addPoint();
+		}
+		this.view.next();
+
+	}
+	
+	/**
      * {@inheritDoc}
      */
 	@Override
 	public void timeExpired() {
 		this.view.endGame(this.model.getFinalScore());
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public void startGame() {
+		this.view.setButton(model.getColorMap());
 	}
 }
