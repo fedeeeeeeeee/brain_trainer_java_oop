@@ -47,6 +47,12 @@ public class SizeCountModelImpl implements SizeCountModel {
     private Optional<IntegerOperation> maxOperation;
     private final ScoreModel scoreModel;
 
+   /**
+     * Constructor for {@link SizeCountModel}.
+     *
+    * @param difficulty
+    *           the {@link DifficultyLevel} selected for the game
+    */
     public SizeCountModelImpl(final DifficultyLevel difficulty) {
         this.operations = new LinkedList<>();
         this.same = false;

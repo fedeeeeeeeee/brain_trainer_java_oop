@@ -2,13 +2,19 @@ package controller.minigames.sizecounts;
 
 import model.minigames.sizecount.SizeCountModel;
 import model.minigames.sizecount.SizeCountModelImpl;
+import model.score.Progress;
 import view.controllers.minigames.sizecount.SizeCountFxImpl;
 
 public class SizeCountControllerImpl implements SizeCountController {
 
-    final private SizeCountModel model;
-    final private SizeCountFxImpl view;
+    private final SizeCountModel model;
+    private final SizeCountFxImpl view;
 
+    /**
+     * Constructor for {@link SizeCountController}.
+     *
+     * @param view the view of the game
+     */
     public SizeCountControllerImpl(final SizeCountFxImpl view) {
         this.view = view;
         this.model = new SizeCountModelImpl(this.view.getController().getDifficultyLevel());
