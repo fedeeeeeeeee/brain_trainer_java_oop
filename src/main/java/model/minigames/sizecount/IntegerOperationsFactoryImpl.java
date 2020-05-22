@@ -47,7 +47,7 @@ public class IntegerOperationsFactoryImpl implements IntegerOperationsFactory {
         return result.stream().limit(numOfOperands);
     }
 
-    private String generateToStrong(final List<Integer> operands, final String separator) {
+    private String generateToString(final List<Integer> operands, final String separator) {
         String result = Integer.toString(operands.get(0));
         for (int i = 1; i < operands.size(); i++) {
             result = result.concat(separator).concat(Integer.toString(operands.get(i)));
@@ -95,7 +95,7 @@ public class IntegerOperationsFactoryImpl implements IntegerOperationsFactory {
 
             @Override
             public String toString() {
-                return generateToStrong(operands, "+");
+                return generateToString(operands, Operator.SUM.toString());
             }
         };
     }
@@ -114,7 +114,7 @@ public class IntegerOperationsFactoryImpl implements IntegerOperationsFactory {
 
             @Override
             public String toString() {
-                return generateToStrong(operands, "-");
+                return generateToString(operands, Operator.SUB.toString());
             }
         };
     }
@@ -134,7 +134,7 @@ public class IntegerOperationsFactoryImpl implements IntegerOperationsFactory {
 
             @Override
             public String toString() {
-                return generateToStrong(operands, "*");
+                return generateToString(operands, Operator.MUL.toString());
             }
         };
     }
@@ -155,7 +155,7 @@ public class IntegerOperationsFactoryImpl implements IntegerOperationsFactory {
 
             @Override
             public String toString() {
-                return generateToStrong(operands, "/");
+                return generateToString(operands, Operator.DIV.toString());
             }
         };
     }

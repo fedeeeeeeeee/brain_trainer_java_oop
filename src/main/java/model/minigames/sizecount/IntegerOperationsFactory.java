@@ -47,9 +47,10 @@ public interface IntegerOperationsFactory {
      * Generate an expression of random IntegerOperations united by an addiction.
      * 
      * @param numOfOperations the number of random IntegerOperation involved in the
-     *                       expression
-     * @param numOfOperand the number of operands involved in the operation
-     * @param bound          the max value that a number can take in the operation
+     *                        expression
+     * @param numOfOperand    the number of operands involved in each
+     *                        IntegerOperation that compose the expression
+     * @param bound           the max value that a number can take in the operation
      * @return a integer operation which is a sum Expression
      */
     IntegerOperation sumExpression(int numOfOperations, int numOfOperand, int bound);
@@ -58,9 +59,10 @@ public interface IntegerOperationsFactory {
      * Generate an expression of random IntegerOperations united by a subtraction.
      * 
      * @param numOfOperations the number of random IntegerOperation involved in the
-     *                       expression
-     * @param numOfOperand the number of operands involved in the operation
-     * @param bound          the max value that a number can take in the operation
+     *                        expression
+     * @param numOfOperand    the number of operands involved in each
+     *                        IntegerOperation that compose the expression
+     * @param bound           the max value that a number can take in the operation
      * @return a integer operation which is a sum Expression
      */
     IntegerOperation subExpression(int numOfOperations, int numOfOperand, int bound);
