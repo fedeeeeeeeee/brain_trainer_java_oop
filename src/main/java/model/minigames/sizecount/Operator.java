@@ -5,21 +5,32 @@ public enum Operator {
     /**
      * Sum operator.
      */
-    SUM,
+    SUM("+"),
 
     /**
      * Subtraction operator.
      */
-    SUB,
+    SUB("-"),
 
     /**
-     *Multiplication operator.
+     * Multiplication operator.
      */
-    MUL,
+    MUL("*"),
 
     /**
      * Division operator.
      */
-    DIV;
+    DIV("/");
+
+    private String operator;
+
+    Operator(final String operator) {
+        this.operator = operator;
+    }
+
+    @Override
+    public String toString() {
+        return this.operator;
+    }
 
 }
