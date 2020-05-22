@@ -19,7 +19,12 @@ public interface PerilousPathController {
     void hitAttempt(int row, int col);
 
     /**
-     * The time is expired.
+     * The time of the secondary timer is expired. 
+     */
+    void secondaryTimerExpired();
+
+    /**
+     * The time of the primary timer is expired.
      */
     void timerExpired();
 }

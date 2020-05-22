@@ -3,6 +3,7 @@ package view.controllers.minigames.perilouspath;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
+import java.util.Timer;
 
 import controller.minigames.perilouspath.PerilousPathController;
 import controller.minigames.perilouspath.PerilousPathControllerImpl;
@@ -11,6 +12,7 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.ProgressBar;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import timer.GameTimer;
@@ -29,19 +31,32 @@ public class PerilousPathFxImpl extends AbstractMiniGameController implements Pe
     private static final int SECONDS = 31;
 
     /**
+     * The duration dedicated to the memorization of the mines position.
+     */
+    private static final int MINE_SECONDS = 6;
+
+    /**
      * The size of the button.
      */
     private static final int BUTTON_SIZE = 100;
 
     private PerilousPathController controller;
     private Map<Button, Pair<Integer, Integer>> buttons;
+    private boolean timeFinish;
+    private boolean lifeSecondaryTimer;
 
     @FXML
     private GridPane grid;
 
     @FXML
     private Label instructions;
-    
+
+    @FXML
+    private Label timerLbl;
+
+    @FXML
+    private ProgressBar progressBar;
+
     private final EventHandler<MouseEvent> eventHandler = (e) -> {
         final Button bt = (Button) e.getSource();
         final Pair<Integer, Integer> position = this.buttons.get(bt);
@@ -56,7 +71,6 @@ public class PerilousPathFxImpl extends AbstractMiniGameController implements Pe
         this.controller = new PerilousPathControllerImpl(this.getController().getDifficultyLevel(), this);
         this.buttons = new HashMap<>();
         this.controller.startGame();
-        this.setGameTimer(new GameTimer(SECONDS, this));
     }
 
     /**
@@ -129,8 +143,78 @@ public class PerilousPathFxImpl extends AbstractMiniGameController implements Pe
      * {@inheritDoc}
      */
     @Override
+    public void reset() {
+        this.buttons.entrySet().stream().forEach(bt -> bt.getKey().setText(""));
+        this.buttons.entrySet().stream().forEach(bt -> bt.getKey().setStyle(null));
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void startGameTimer() {
+        this.setGameTimer(new GameTimer(SECONDS, this));
+        this.timeFinish = false;
+        this.lifeSecondaryTimer = false;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void pauseGameTimer() {
+        this.getGameTimer().pause();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void restartGameTimer() {
+        this.getGameTimer().restart();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void startSecondaryTimer() {
+        Timer secondaryTimer = new Timer();
+        secondaryTimer.schedule(new GameTimer(MINE_SECONDS, this), 0, 1000);
+        this.lifeSecondaryTimer = true;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void updateTimerView(final int second) {
+        Platform.runLater(() -> {
+            if (this.lifeSecondaryTimer) {
+                this.instructions.setText("Memorize the mine's position ");
+            } else {
+                this.instructions.setText("Find a safe path to start from finish ");
+                this.timerLbl.setText("Remaining time " + Integer.toString(second));
+                this.progressBar.setProgress((double) second / this.getGameTimer().getInitialSeconds());
+                if (second == 0) {
+                    this.timeFinish = true;
+                }
+            }
+            if (this.lifeSecondaryTimer && second == 0) {
+                this.lifeSecondaryTimer = false;
+                this.controller.secondaryTimerExpired();
+            }
+        });
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
     public void timeFinish() {
-        this.controller.timerExpired();
+        if (this.timeFinish) {
+            this.controller.timerExpired();
+        }
     }
 
     /**

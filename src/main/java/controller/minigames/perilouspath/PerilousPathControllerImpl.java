@@ -27,18 +27,25 @@ public class PerilousPathControllerImpl implements PerilousPathController {
     }
 
     private void updateView() {
+        this.view.restartGameTimer();
         this.view.showStart(this.model.getStart());
         this.view.showFinish(this.model.getFinish());
     }
 
     private void resetView() {
+        this.view.pauseGameTimer();
+        this.view.startSecondaryTimer();
         this.view.showMines(this.model.getMines());
     }
 
     private void hangingView(final int row, final int col) {
         this.view.showExplosion(row, col);
-        this.updateView();
-        this.resetView();
+        this.view.showStart(this.model.getStart());
+        this.view.showFinish(this.model.getFinish());
+        this.view.showMines(this.model.getMines());
+//        this.model.resetGame();
+//        this.view.reset();
+//        this.resetView();
     }
 
     /**
@@ -48,7 +55,7 @@ public class PerilousPathControllerImpl implements PerilousPathController {
     public void startGame() {
         this.view.drawGrid(this.model.getSize());
         this.model.resetGame();
-        this.updateView();
+        this.view.startGameTimer();
         this.resetView();
     }
 
@@ -62,12 +69,23 @@ public class PerilousPathControllerImpl implements PerilousPathController {
         }
         if (this.model.isDone()) {
             this.model.addPoint();
-            this.startGame();
+            this.model.resetGame();
+            this.view.reset();
+            this.resetView();
         }
         if (this.model.isFailed()) {
+            this.view.reset();
             this.hangingView(row, col);
-            this.startGame();
         }
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void secondaryTimerExpired() {
+        this.view.reset();
+        this.updateView();
     }
 
     /**
