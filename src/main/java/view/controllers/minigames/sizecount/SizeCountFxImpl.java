@@ -25,7 +25,6 @@ public class SizeCountFxImpl extends AbstractMiniGameController implements SizeC
     private SizeCountController controller;
     private List<Button> buttons;
     private Button currentAnswer;
-    private Button same;
 
     private static final int SECONDS = 50;
     private static final int WIDTH = 333;
@@ -33,7 +32,7 @@ public class SizeCountFxImpl extends AbstractMiniGameController implements SizeC
     @FXML
     private VBox panel;
 
-    private EventHandler<ActionEvent> event = (e) -> {
+    private final EventHandler<ActionEvent> event = (e) -> {
         this.currentAnswer.setStyle("-fx-font-size: 20; -fx-border-color: #000000; -fx-border-width: 0.1px;");
     };
 
@@ -97,11 +96,11 @@ public class SizeCountFxImpl extends AbstractMiniGameController implements SizeC
             this.panel.getChildren().add(bt);
         }
 
-        this.same = new Button("SAME");
-        this.same.setStyle("-fx-font-size: 20");
-        this.same.setPrefWidth(WIDTH);
-        this.same.addEventHandler(MouseEvent.MOUSE_CLICKED, ev);
-        this.panel.getChildren().add(this.same);
+        final Button same = new Button("SAME");
+        same.setStyle("-fx-font-size: 20");
+        same.setPrefWidth(WIDTH);
+        same.addEventHandler(MouseEvent.MOUSE_CLICKED, ev);
+        this.panel.getChildren().add(same);
 
     }
 
