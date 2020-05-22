@@ -10,11 +10,13 @@ import controller.minigames.perilouspath.PerilousPathControllerImpl;
 import javafx.application.Platform;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ProgressBar;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.VBox;
 import timer.GameTimer;
 import utility.Pair;
 import view.SceneType;
@@ -44,6 +46,9 @@ public class PerilousPathFxImpl extends AbstractMiniGameController implements Pe
     private Map<Button, Pair<Integer, Integer>> buttons;
     private boolean timeFinish;
     private boolean lifeSecondaryTimer;
+
+    @FXML
+    private VBox vBox;
 
     @FXML
     private GridPane grid;
@@ -78,11 +83,13 @@ public class PerilousPathFxImpl extends AbstractMiniGameController implements Pe
      */
     @Override
     public void drawGrid(final int size) {
+        this.vBox.setAlignment(Pos.CENTER);
         for (int i = 0; i < size; i++) {
             for (int j = 0; j < size; j++) {
                 final Button bt = new Button();
                 bt.addEventHandler(MouseEvent.MOUSE_CLICKED, eventHandler);
                 bt.setPrefSize(BUTTON_SIZE, BUTTON_SIZE);
+                bt.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
                 this.grid.add(bt, j, i);
                 this.buttons.put(bt, new Pair<>(i, j));
             }
@@ -191,10 +198,10 @@ public class PerilousPathFxImpl extends AbstractMiniGameController implements Pe
     public void updateTimerView(final int second) {
         Platform.runLater(() -> {
             if (this.lifeSecondaryTimer) {
-                this.instructions.setText("Memorize the mine's position ");
+                this.instructions.setText("Memorize the mine's position");
             } else {
-                this.instructions.setText("Find a safe path to start from finish ");
-                this.timerLbl.setText("Remaining time " + Integer.toString(second));
+                this.instructions.setText("Find a safe path to start from finish");
+                this.timerLbl.setText("Remaining time: " + Integer.toString(second));
                 this.progressBar.setProgress((double) second / this.getGameTimer().getInitialSeconds());
                 if (second == 0) {
                     this.timeFinish = true;
