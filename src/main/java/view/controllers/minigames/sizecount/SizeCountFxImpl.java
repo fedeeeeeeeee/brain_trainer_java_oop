@@ -5,12 +5,16 @@ import java.util.List;
 
 import controller.minigames.sizecounts.SizeCountController;
 import controller.minigames.sizecounts.SizeCountControllerImpl;
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
 import javafx.application.Platform;
+import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
+import javafx.util.Duration;
 import model.minigames.sizecount.IntegerOperation;
 import timer.GameTimer;
 import view.SceneType;
@@ -23,11 +27,22 @@ public class SizeCountFxImpl extends AbstractMiniGameController implements SizeC
     private Button currentAnswer;
     private Button same;
 
-    private static final int SECONDS = 30;
+    private static final int SECONDS = 50;
     private static final int WIDTH = 333;
 
     @FXML
     private VBox panel;
+
+    private EventHandler<ActionEvent> event = (e) -> {
+        this.currentAnswer.setStyle("-fx-font-size: 20; -fx-border-color: #000000; -fx-border-width: 0.1px;");
+    };
+
+    private void animation() {
+        final Timeline timeline = new Timeline();
+        final KeyFrame kf = new KeyFrame(Duration.millis(300), event);
+        timeline.getKeyFrames().add(kf);
+        timeline.play();
+    }
 
     /**
      * {@inheritDoc}
@@ -59,11 +74,8 @@ public class SizeCountFxImpl extends AbstractMiniGameController implements SizeC
     public void draw(final List<IntegerOperation> operations) {
         for (int i = 0; i < operations.size(); i++) {
             final Button bt = this.buttons.get(i);
-            bt.setStyle("-fx-font-size: 20; -fx-border-color: #000000; -fx-border-width: 0.1px;");
             bt.setText(operations.get(i).toString());
         }
-        this.same.setStyle("-fx-font-size: 20; -fx-border-color: #000000; -fx-border-width: 0.1px;");
-
     }
 
     /**
@@ -98,9 +110,8 @@ public class SizeCountFxImpl extends AbstractMiniGameController implements SizeC
      */
     @Override
     public void showWrongAnswer() {
-        Platform.runLater(() -> {
-            this.currentAnswer.setStyle("-fx-font-size: 20;-fx-border-color:#FF0000 ; -fx-border-width: 2px;");
-        });
+        this.currentAnswer.setStyle("-fx-font-size: 20;-fx-border-color:#FF0000 ; -fx-border-width: 2px;");
+        this.animation();
         this.controller.computeOperations();
 
     }
@@ -110,9 +121,8 @@ public class SizeCountFxImpl extends AbstractMiniGameController implements SizeC
      */
     @Override
     public void showCorrectAnswer() {
-        Platform.runLater(() -> {
-            this.currentAnswer.setStyle("-fx-font-size: 20; -fx-border-color:#66FF66 ; -fx-border-width: 2px;");
-        });
+        this.currentAnswer.setStyle("-fx-font-size: 20; -fx-border-color:#66FF66 ; -fx-border-width: 2px;");
+        this.animation();
         this.controller.computeOperations();
     }
 

@@ -20,9 +20,7 @@ public class SizeCountControllerImpl implements SizeCountController {
      */
     @Override
     public void resetGame() {
-
         this.view.draw(this.model.getOperations());
-
     }
 
     /**
