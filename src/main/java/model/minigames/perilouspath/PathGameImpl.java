@@ -1,6 +1,7 @@
 package model.minigames.perilouspath;
 
 import java.util.LinkedList;
+import java.util.Random;
 
 import utility.Pair;
 
@@ -13,7 +14,7 @@ public class PathGameImpl implements PathGame {
     private final int numMines;
     private final Pair<Integer, Integer> start;
     private final Pair<Integer, Integer> finish;
-    private LinkedList<Pair<Integer, Integer>> path;
+    private final LinkedList<Pair<Integer, Integer>> path;
 
     /**
      * Constructor of {@link PathGame}.
@@ -28,6 +29,46 @@ public class PathGameImpl implements PathGame {
         this.start = start;
         this.finish = finish;
         this.path = new LinkedList<>();
+        this.initPath();
+    }
+
+    private Direction getRandomDirection() {
+        final int direction = new Random().nextInt(Direction.values().length);
+        return Direction.values()[direction];
+    }
+
+    private boolean checkReachLimit(final Pair<Integer, Integer> lastPosition) {
+        return lastPosition.getX() < 0 || lastPosition.getY() < 0 || lastPosition.getX() >= this.size || lastPosition.getY() >= this.size;
+    }
+
+    private void setPath() {
+        final Direction direction = this.getRandomDirection();
+        final Pair<Integer, Integer> lastPosition;
+        if (direction == Direction.RIGHT || direction == Direction.LEFT) {
+            lastPosition = new Pair<>(this.path.getLast().getX(), this.path.getLast().getY() + direction.horizontal());
+        } else {
+            lastPosition = new Pair<>(this.path.getLast().getX() + direction.vertical(), this.path.getLast().getY());
+        }
+        if (!this.path.contains(lastPosition) && !this.checkReachLimit(lastPosition)) {
+            this.path.add(lastPosition);
+        } else {
+            if (this.path.size() >= 2) {
+                this.path.remove(this.path.getLast()); 
+            }
+            this.setPath();
+        }
+    }
+
+    private void initPath() {
+        this.path.clear();
+        this.path.add(this.start);
+        while (!this.path.getLast().equals(this.finish)) {
+            if (this.path.size() < (this.size * this.size) - this.numMines) {
+                this.setPath();
+            } else {
+                this.initPath();
+            }
+        }
     }
 
     /**
