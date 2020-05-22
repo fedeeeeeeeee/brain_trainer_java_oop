@@ -26,7 +26,14 @@ public class SizeCountFxImpl extends AbstractMiniGameController implements SizeC
     private List<Button> buttons;
     private Button currentAnswer;
 
+    /**
+     * The seconds of the {@link GameTimer}.
+     */
     private static final int SECONDS = 50;
+
+    /**
+     * The width of the button that make up the view.
+     */
     private static final int WIDTH = 333;
 
     @FXML
@@ -49,7 +56,6 @@ public class SizeCountFxImpl extends AbstractMiniGameController implements SizeC
     @Override
     public void timeFinish() {
         this.controller.timeExpired();
-
     }
 
     /**
@@ -59,11 +65,8 @@ public class SizeCountFxImpl extends AbstractMiniGameController implements SizeC
     public void initGame() {
         this.buttons = new LinkedList<>();
         this.controller = new SizeCountControllerImpl(this);
-
         this.controller.computeOperations();
-
         this.setGameTimer(new GameTimer(SECONDS, this));
-
     }
 
     /**
@@ -95,13 +98,11 @@ public class SizeCountFxImpl extends AbstractMiniGameController implements SizeC
             bt.addEventHandler(MouseEvent.MOUSE_CLICKED, ev);
             this.panel.getChildren().add(bt);
         }
-
         final Button same = new Button("SAME");
         same.setStyle("-fx-font-size: 20");
         same.setPrefWidth(WIDTH);
         same.addEventHandler(MouseEvent.MOUSE_CLICKED, ev);
         this.panel.getChildren().add(same);
-
     }
 
     /**
@@ -112,7 +113,6 @@ public class SizeCountFxImpl extends AbstractMiniGameController implements SizeC
         this.currentAnswer.setStyle("-fx-font-size: 20;-fx-border-color:#FF0000 ; -fx-border-width: 2px;");
         this.animation();
         this.controller.computeOperations();
-
     }
 
     /**
@@ -134,7 +134,6 @@ public class SizeCountFxImpl extends AbstractMiniGameController implements SizeC
             this.getController().updateProgress(score);
             this.getView().setHandleDataScene(SceneType.END_GAME.getFilePath());
         });
-
     }
 
 }

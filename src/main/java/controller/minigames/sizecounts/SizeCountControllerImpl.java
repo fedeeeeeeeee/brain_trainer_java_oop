@@ -2,7 +2,6 @@ package controller.minigames.sizecounts;
 
 import model.minigames.sizecount.SizeCountModel;
 import model.minigames.sizecount.SizeCountModelImpl;
-import model.score.Progress;
 import view.controllers.minigames.sizecount.SizeCountFxImpl;
 
 public class SizeCountControllerImpl implements SizeCountController {
@@ -34,7 +33,6 @@ public class SizeCountControllerImpl implements SizeCountController {
      */
     @Override
     public void newAttempt(final String answer) {
-        // System.out.println("answer "+this.model.isCorrectAnswer(answer));
         if (this.model.isCorrectAnswer(answer)) {
             this.view.showCorrectAnswer();
         } else {
@@ -49,7 +47,6 @@ public class SizeCountControllerImpl implements SizeCountController {
     public void computeOperations() {
         this.model.reset();
         this.view.draw(this.model.getOperations());
-
     }
 
     /**
@@ -58,7 +55,6 @@ public class SizeCountControllerImpl implements SizeCountController {
     @Override
     public void timeExpired() {
         this.view.showEndGame(this.model.getScore());
-
     }
 
 }

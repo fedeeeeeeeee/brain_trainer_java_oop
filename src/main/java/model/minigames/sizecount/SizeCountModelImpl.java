@@ -15,18 +15,37 @@ import model.score.ScoreModelImpl;
 import utility.Pair;
 
 public class SizeCountModelImpl implements SizeCountModel {
-
+    /**
+     * The upper bound of the {@link IntegerOperation} for each level.
+     */
     private static final Integer UPPER_BOUND_EASY = 15;
     private static final Integer UPPER_BOUND_NORMAL = 50;
     private static final Integer UPPER_BOUND_HARD = 100;
 
+    /**
+     * The number of operations involved in expressions for each level.
+     */
     private static final Integer NUM_OPERATION_EXPR_EASY_NORMAL = 2;
     private static final Integer NUM_OPERATION_EXPR_HARD = 3;
 
+    /**
+     * The number of operand for each {@link IntegerOperation} of the game.
+     */
     private static final Integer NUM_OPERAND = 2;
+
+    /**
+     * The number of operations that make up the game.
+     */
     private static final Integer NUM_OPERATIONS_GAME = 2;
 
+    /**
+     * The answer option same.
+     */
     private static final String SAME_ANSWER = "SAME";
+
+    /**
+     * The base point of the correct answer of the game.
+     */
     private static final int BASE_POINT = 5;
 
     private static Map<DifficultyLevel, Pair<Integer, Integer>> difficultyOptions;
@@ -47,12 +66,11 @@ public class SizeCountModelImpl implements SizeCountModel {
     private Optional<IntegerOperation> maxOperation;
     private final ScoreModel scoreModel;
 
-   /**
+    /**
      * Constructor for {@link SizeCountModel}.
      *
-    * @param difficulty
-    *           the {@link DifficultyLevel} selected for the game
-    */
+     * @param difficulty the {@link DifficultyLevel} selected for the game
+     */
     public SizeCountModelImpl(final DifficultyLevel difficulty) {
         this.operations = new LinkedList<>();
         this.same = false;
@@ -67,7 +85,6 @@ public class SizeCountModelImpl implements SizeCountModel {
 
     private void generateOperation(final Operations opType) {
         IntegerOperation operation = null;
-
         switch (opType) {
         case ADDICTION:
             operation = this.opFactory.addiction(NUM_OPERAND, this.upperBound);
@@ -91,7 +108,6 @@ public class SizeCountModelImpl implements SizeCountModel {
             break;
         }
         this.operations.add(new Pair<>(operation, operation.getResult()));
-
     }
 
     private void computeAnswer() {
@@ -104,7 +120,6 @@ public class SizeCountModelImpl implements SizeCountModel {
                 maxOpTemp = operations.get(i).getX();
             }
         }
-
         if (count == this.operations.size()) {
             this.same = true;
             this.maxOperation = Optional.empty();
@@ -146,7 +161,6 @@ public class SizeCountModelImpl implements SizeCountModel {
             this.generateOperation(this.opOptions.get(rnd.nextInt(this.opOptions.size())));
         }
         this.computeAnswer();
-
     }
 
     /**

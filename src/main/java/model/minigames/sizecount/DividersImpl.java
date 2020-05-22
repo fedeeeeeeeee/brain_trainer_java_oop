@@ -26,9 +26,7 @@ public class DividersImpl implements Dividers {
                     dividers.add(number / i);
                 }
             }
-
         }
         return dividers;
     }
-
 }
