@@ -38,7 +38,7 @@ public class PerilousPathControllerImpl implements PerilousPathController {
         this.view.showMines(this.model.getMines());
     }
 
-    private void hangingView(final int row, final int col) {
+    private void suspendedView(final int row, final int col) {
         this.view.showExplosion(row, col);
         this.view.showStart(this.model.getStart());
         this.view.showFinish(this.model.getFinish());
@@ -75,7 +75,7 @@ public class PerilousPathControllerImpl implements PerilousPathController {
         }
         if (this.model.isFailed()) {
             this.view.reset();
-            this.hangingView(row, col);
+            this.suspendedView(row, col);
         }
     }
 

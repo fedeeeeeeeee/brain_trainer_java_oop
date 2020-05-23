@@ -83,7 +83,6 @@ public class PerilousPathFxImpl extends AbstractMiniGameController implements Pe
      */
     @Override
     public void drawGrid(final int size) {
-        this.vBox.setAlignment(Pos.CENTER);
         for (int i = 0; i < size; i++) {
             for (int j = 0; j < size; j++) {
                 final Button bt = new Button();
@@ -94,6 +93,7 @@ public class PerilousPathFxImpl extends AbstractMiniGameController implements Pe
                 this.buttons.put(bt, new Pair<>(i, j));
             }
         }
+        this.vBox.setAlignment(Pos.CENTER);
     }
 
     /**
@@ -201,8 +201,7 @@ public class PerilousPathFxImpl extends AbstractMiniGameController implements Pe
                 this.instructions.setText("Memorize the mine's position");
             } else {
                 this.instructions.setText("Find a safe path to start from finish");
-                this.timerLbl.setText("Remaining time: " + Integer.toString(second));
-                this.progressBar.setProgress((double) second / this.getGameTimer().getInitialSeconds());
+                super.updateTimerView(second);
                 if (second == 0) {
                     this.timeFinish = true;
                 }
