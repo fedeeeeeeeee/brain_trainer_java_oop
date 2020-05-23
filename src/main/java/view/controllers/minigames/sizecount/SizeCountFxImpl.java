@@ -93,6 +93,7 @@ public class SizeCountFxImpl extends AbstractMiniGameController implements SizeC
         for (int i = 0; i < numOperations; i++) {
             final Button bt = new Button();
             bt.setStyle("-fx-font-size: 20");
+            //bt.setMinSize(bt.USE_COMPUTED_SIZE, bt.USE_COMPUTED_SIZE);
             bt.setPrefWidth(WIDTH);
             this.buttons.add(bt);
             bt.addEventHandler(MouseEvent.MOUSE_CLICKED, ev);
@@ -100,6 +101,7 @@ public class SizeCountFxImpl extends AbstractMiniGameController implements SizeC
         }
         final Button same = new Button("SAME");
         same.setStyle("-fx-font-size: 20");
+        //same.setMinSize(same.USE_COMPUTED_SIZE, same.USE_COMPUTED_SIZE);
         same.setPrefWidth(WIDTH);
         same.addEventHandler(MouseEvent.MOUSE_CLICKED, ev);
         this.panel.getChildren().add(same);
