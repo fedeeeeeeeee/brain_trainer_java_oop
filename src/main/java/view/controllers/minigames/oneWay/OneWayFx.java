@@ -2,11 +2,11 @@ package view.controllers.minigames.oneWay;
 
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
 import controller.minigames.oneWay.OneWayController;
-import controller.minigames.oneWay.OneWayControllerWithShuffle;
 import controller.minigames.oneWay.SimpleOneWayController;
 import javafx.application.Platform;
 import javafx.event.EventHandler;
@@ -28,7 +28,7 @@ public class OneWayFx extends AbstractMiniGameController {
     private static final int BUTTON_SIZE = 100;
 
     private OneWayController controller;
-    private final Map<Button, Pair<Integer, Integer>> buttons = new HashMap<>();
+    private Map<Button, Pair<Integer, Integer>> buttons;
     private boolean isTimerStarted = false;
 
     @FXML
@@ -46,41 +46,28 @@ public class OneWayFx extends AbstractMiniGameController {
     @FXML
     private Label scoreLbl;
 
+    private final EventHandler<MouseEvent> gridEventHandler = (e) -> {
+        final Button btn = (Button) e.getSource();
+        this.controller.hit(buttons.get(btn).getX(), buttons.get(btn).getY());
+
+    }; 
+
     @Override
     public void initGame() {
+        this.controller = new SimpleOneWayController(this, this.getController().getDifficultyLevel());
+        this.buttons = new HashMap<>();
+        this.controller.start();
 
-        switch (this.getController().getArea()) {
-        case MEMORY:
-            this.controller = new OneWayControllerWithShuffle(this, this.getController().getDifficultyLevel());
-            break;
-        case BRAIN_SPEED:
-            this.controller = new SimpleOneWayController(this, this.getController().getDifficultyLevel());
-            break;
-        default:
-            break;
-        }
-
-        this.drawGrid();
-        this.drawArrow();
-        this.updateView();
         if (!isTimerStarted) {
             this.setGameTimer(new GameTimer(SEC, this));
         }
         this.isTimerStarted = true;
     }
-    
-    EventHandler<MouseEvent> gridEventHandler = (e) -> {
-        final Button btn = (Button) e.getSource();
-        this.controller.hit(buttons.get(btn).getX(), buttons.get(btn).getY());
 
-        // NON VA BENE PERCHE CREO BOTTONI UNO SOPRA L'ALTRO AD OGNI CLICK--> ridisegna
-        // le frrecce
-//        this.initGame();  
-    };
 
-    private void drawArrow() {
-        for (int x = 0; x < controller.getSteps().size(); x++) {
-            final String txt = controller.getSteps().get(x).toString();
+    public void drawArrow(final List<Direction> steps) {
+        for (int x = 0; x < steps.size(); x++) {
+            final String txt = steps.get(x).toString();
             final Button bt = new Button();
             bt.setPrefSize(BUTTON_SIZE, BUTTON_SIZE);
             this.arrowRow.add(bt, x, 0);
@@ -95,9 +82,9 @@ public class OneWayFx extends AbstractMiniGameController {
         }
     }
 
-    private void drawGrid() {
-        for (int i = 0; i < controller.getSize(); i++) {
-            for (int j = 0; j < controller.getSize(); j++) {
+    public void drawGrid(final int size) {
+        for (int i = 0; i < size; i++) {
+            for (int j = 0; j < size; j++) {
                 final Button btn = new Button();
                 btn.setPrefSize(BUTTON_SIZE, BUTTON_SIZE);
                 btn.addEventHandler(MouseEvent.MOUSE_CLICKED, gridEventHandler);
@@ -107,24 +94,23 @@ public class OneWayFx extends AbstractMiniGameController {
         }
     }
 
-    private void updateView() {
-        Pair<Integer, Integer> initialPos = this.controller.getInitialPos();
+    public void updateView(final Pair<Integer, Integer> initialPosition) {
         for (Entry<Button, Pair<Integer, Integer>> entry : this.buttons.entrySet()) {
-            entry.getKey().setText(initialPos.equals(entry.getValue()) ? "START" : "");
+            entry.getKey().setText(initialPosition.equals(entry.getValue()) ? "START" : "");
         }
     }
 
     @Override
     public void timeFinish() {
-        this.controller.expiredTime();
+        this.controller.timeExpired();
     }
 
-    public void showScore(int finalScore) {
+    public void showScore(final int finalScore) {
         Platform.runLater(() -> {
             this.scoreLbl.setText(Integer.toString(finalScore));
             this.getController().updateProgress(finalScore);
             this.getView().setHandleDataScene(SceneType.END_GAME.getFilePath());
         });
     }
-    
+
 }

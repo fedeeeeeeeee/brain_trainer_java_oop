@@ -1,68 +1,40 @@
 package controller.minigames.oneWay;
 
-import java.util.List;
 import model.DifficultyLevel;
-import model.minigames.oneWay.Direction;
 import model.minigames.oneWay.OneWayModel;
 import model.minigames.oneWay.OneWayModelImpl;
-import utility.Pair;
 import view.controllers.minigames.oneWay.OneWayFx;
 
 public class SimpleOneWayController implements OneWayController {
-    
-    private OneWayFx view;
-    private OneWayModel model;
 
-    public SimpleOneWayController(OneWayFx oneWayFx, DifficultyLevel difficultyLevel) {
+    private final OneWayFx view;
+    private final OneWayModel model;
+
+    public SimpleOneWayController(final OneWayFx oneWayFx, final DifficultyLevel difficultyLevel) {
         this.view = oneWayFx;
-        this.model = new OneWayModelImpl(this.view.getController().getDifficultyLevel());
+        this.model = new OneWayModelImpl(difficultyLevel);
         this.model.initializeOneWay();
     }
 
-    //mvc -> ok
     @Override
-    public void hit(int row, int col) {
-        if (this.model.hitFinalPos(row, col)) {
+    public void hit(final int row, final int col) {
+        if (this.model.hitFinalPosition(row, col)) {
             this.model.addPoint();
         }
-        // this.view.draw(); --> metodo per ridisegnare la griglia (nuovo livello)
+        this.model.initializeOneWay();
+        this.start();
     }
 
-    //mvc -> ok
     @Override
-    public void expiredTime() {
+    public void timeExpired() {
         this.view.showScore(this.model.getFinalScore());
     }
 
-    // TODO
     @Override
-    public List<Direction> getSteps() {
-        return this.model.getSteps();
-    }
-
-    // TODO
-    @Override
-    public Pair<Integer, Integer> getFinalPos() {
-        return this.model.getFinalPos();
-    }
-    
-
-    // TODO
-    @Override
-    public int getSize() {
-        return this.model.getSize();
-    }
-
-    // TODO
-    @Override
-    public Pair<Integer, Integer> getInitialPos() {
-        return this.model.getInitialPos();
-    }
-
-    // TODO
-    @Override
-    public int getFinalScore() {
-        return this.model.getFinalScore();
+    public void start() {
+        this.view.drawGrid(this.model.getSize());
+        this.view.drawArrow(this.model.getSteps());
+        this.view.updateView(this.model.getInitialPosition());
     }
 
 }
