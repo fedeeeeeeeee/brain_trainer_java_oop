@@ -27,7 +27,6 @@ public class OneWayModelImpl implements OneWayModel {
 
     private int arrows;
     private int size;
-    private int points;
 
     public OneWayModelImpl(final DifficultyLevel selectedDifficulty) {
         this.difficulty = selectedDifficulty;
@@ -36,7 +35,7 @@ public class OneWayModelImpl implements OneWayModel {
         this.steps = new ArrayList<>();
 
         //metodo pubblico chiamato dal controller???
-        this.initializeOneWay();
+        //this.initializeOneWay();
     }
 
     private void setLevel() {
@@ -101,11 +100,6 @@ public class OneWayModelImpl implements OneWayModel {
     @Override
     public DifficultyLevel getDifficulty() {
         return this.difficulty;
-    }
-
-    @Override
-    public int getPoint() {
-        return this.points;
     }
 
     @Override

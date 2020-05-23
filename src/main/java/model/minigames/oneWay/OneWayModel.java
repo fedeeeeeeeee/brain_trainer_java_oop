@@ -5,12 +5,10 @@ import model.DifficultyLevel;
 import utility.Pair;
 
 public interface OneWayModel {
-    
+
     boolean hitFinalPos(int row, int col);
 
     DifficultyLevel getDifficulty();
-
-    int getPoint();
 
     int getSize();
 
@@ -19,7 +17,7 @@ public interface OneWayModel {
     Pair<Integer, Integer> getInitialPos();
 
     Pair<Integer, Integer> getFinalPos();
-    
+
     void addPoint();
 
     int getFinalScore();
