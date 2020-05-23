@@ -19,11 +19,10 @@ public class OneWayModelImpl implements OneWayModel {
 
     private final ScoreModel score;
     private DifficultyLevel difficulty;
-    private Pair<Integer, Integer> currentPos;
-    private Pair<Integer, Integer> initialPos;
-    private Pair<Integer, Integer> finalPos;
+    private Pair<Integer, Integer> currentPosition;
+    private Pair<Integer, Integer> initialPosition;
+    private Pair<Integer, Integer> finalPosition;
     private List<Direction> steps;
-
 
     private int arrows;
     private int size;
@@ -33,13 +32,10 @@ public class OneWayModelImpl implements OneWayModel {
         this.score = new ScoreModelImpl(this.difficulty, BASE_POINT);
         this.size = SIZE;
         this.steps = new ArrayList<>();
-
-        //metodo pubblico chiamato dal controller???
-        //this.initializeOneWay();
     }
 
     private void setLevel() {
-        switch (difficulty) {
+        switch (this.difficulty) {
         case EASY:
             this.arrows = EASY_LEVEL_ARROW;
             break;
@@ -55,9 +51,14 @@ public class OneWayModelImpl implements OneWayModel {
 
     @Override
     public void initializeOneWay() {
+        this.resetPath();
         this.setLevel();
-        this.setStartPos();
+        this.setInitialPosition();
         this.drawPath();
+    }
+
+    private void resetPath() {
+        this.steps.clear();
     }
 
     private void drawPath() {
@@ -69,32 +70,32 @@ public class OneWayModelImpl implements OneWayModel {
                 dir = Direction.generateStep();
                 increment = Direction.delta(dir);
             }
-            int x = increment.getX() + this.currentPos.getX();
-            int y = increment.getY() + this.currentPos.getY();
-            this.currentPos = new Pair<>(x, y);
+            final int x = increment.getX() + this.currentPosition.getX();
+            final int y = increment.getY() + this.currentPosition.getY();
+            this.currentPosition = new Pair<>(x, y);
 
             this.steps.add(dir);
 
         }
-        this.finalPos = this.currentPos;
+        this.finalPosition = this.currentPosition;
 
         System.out.println(this.steps.toString());
-        System.out.println("initial pos is " + this.initialPos);
-        System.out.println("final pos is " + this.finalPos);
+        System.out.println("initial pos is " + this.initialPosition);
+        System.out.println("final pos is " + this.finalPosition);
     }
 
-    private boolean checkX(int x) {
-        return x + this.currentPos.getX() < 0 || x + this.currentPos.getX() >= size;
+    private boolean checkX(final int x) {
+        return x + this.currentPosition.getX() < 0 || x + this.currentPosition.getX() >= size;
     }
 
-    private boolean checkY(int y) {
-        return y + this.currentPos.getY() < 0 || y + this.currentPos.getY() >= size;
+    private boolean checkY(final int y) {
+        return y + this.currentPosition.getY() < 0 || y + this.currentPosition.getY() >= size;
     }
 
-    private void setStartPos() {
+    private void setInitialPosition() {
         Random random = new Random();
-        this.currentPos = new Pair<>(random.nextInt(this.size), random.nextInt(this.size));
-        this.initialPos = this.currentPos;
+        this.currentPosition = new Pair<>(random.nextInt(this.size), random.nextInt(this.size));
+        this.initialPosition = this.currentPosition;
     }
 
     @Override
@@ -113,37 +114,19 @@ public class OneWayModelImpl implements OneWayModel {
     }
 
     @Override
-    public Pair<Integer, Integer> getInitialPos() {
-        return this.initialPos;
+    public Pair<Integer, Integer> getInitialPosition() {
+        return this.initialPosition;
     }
 
     @Override
-    public Pair<Integer, Integer> getFinalPos() {
-        return this.finalPos;
+    public Pair<Integer, Integer> getFinalPosition() {
+        return this.finalPosition;
     }
 
     @Override
-    public boolean hitFinalPos(int row, int col) {
-        return (this.finalPos.getX() == row && this.finalPos.getY() == col) ? true : false;
+    public boolean hitFinalPosition(final int row, final int col) {
+        return this.finalPosition.getX() == row && this.finalPosition.getY() == col ? true : false;
     }
-
-//    @Override
-//    public void shuffle() {
-//        Collections.shuffle(steps);
-//        while (!isValidSequence()) {
-//            Collections.shuffle(steps);
-//        }
-//
-//    }
-//
-//    private Boolean isValidSequence() {
-//        for (Direction dir : this.steps) {
-//            if (checkX(Direction.delta(dir).getX()) || checkY(Direction.delta(dir).getY())) {
-//                return false;
-//            }
-//        }
-//        return true;
-//    }
 
     @Override
     public void addPoint() {

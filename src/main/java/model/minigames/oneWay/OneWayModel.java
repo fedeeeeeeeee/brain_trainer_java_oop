@@ -6,7 +6,7 @@ import utility.Pair;
 
 public interface OneWayModel {
 
-    boolean hitFinalPos(int row, int col);
+    boolean hitFinalPosition(int row, int col);
 
     DifficultyLevel getDifficulty();
 
@@ -14,9 +14,9 @@ public interface OneWayModel {
 
     List<Direction> getSteps();
 
-    Pair<Integer, Integer> getInitialPos();
+    Pair<Integer, Integer> getInitialPosition();
 
-    Pair<Integer, Integer> getFinalPos();
+    Pair<Integer, Integer> getFinalPosition();
 
     void addPoint();
 
