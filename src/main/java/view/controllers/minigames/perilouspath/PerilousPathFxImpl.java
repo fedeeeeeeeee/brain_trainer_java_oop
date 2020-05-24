@@ -7,7 +7,10 @@ import java.util.Timer;
 
 import controller.minigames.perilouspath.PerilousPathController;
 import controller.minigames.perilouspath.PerilousPathControllerImpl;
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
 import javafx.application.Platform;
+import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.geometry.Pos;
@@ -17,6 +20,7 @@ import javafx.scene.control.ProgressBar;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
+import javafx.util.Duration;
 import timer.GameTimer;
 import utility.Pair;
 import view.SceneType;
@@ -42,11 +46,6 @@ public class PerilousPathFxImpl extends AbstractMiniGameController implements Pe
      */
     private static final int BUTTON_SIZE = 100;
 
-    private PerilousPathController controller;
-    private Map<Button, Pair<Integer, Integer>> buttons;
-    private boolean timeFinish;
-    private boolean lifeSecondaryTimer;
-
     @FXML
     private VBox vBox;
 
@@ -62,11 +61,30 @@ public class PerilousPathFxImpl extends AbstractMiniGameController implements Pe
     @FXML
     private ProgressBar progressBar;
 
-    private final EventHandler<MouseEvent> eventHandler = (e) -> {
+    private PerilousPathController controller;
+    private Map<Button, Pair<Integer, Integer>> buttons;
+    private Timer secondaryTimer;
+    private boolean timeFinish;
+    private boolean lifeSecondaryTimer;
+
+    private final EventHandler<MouseEvent> eventHit = (e) -> {
         final Button bt = (Button) e.getSource();
         final Pair<Integer, Integer> position = this.buttons.get(bt);
         this.controller.hitAttempt(position.getX(), position.getY());
     };
+
+    private final EventHandler<ActionEvent> eventReset = (e) -> {
+        this.buttons.entrySet().stream()
+                               .forEach(bt -> bt.getKey().setDisable(false));
+        this.controller.resetView();
+    };
+
+    private void animation() {
+        final Timeline timeline = new Timeline();
+        final KeyFrame keyFrame = new KeyFrame(Duration.millis(1000), eventReset);
+        timeline.getKeyFrames().add(keyFrame);
+        timeline.play();
+    }
 
     /**
      * {@inheritDoc}
@@ -86,7 +104,7 @@ public class PerilousPathFxImpl extends AbstractMiniGameController implements Pe
         for (int i = 0; i < size; i++) {
             for (int j = 0; j < size; j++) {
                 final Button bt = new Button();
-                bt.addEventHandler(MouseEvent.MOUSE_CLICKED, eventHandler);
+                bt.addEventHandler(MouseEvent.MOUSE_CLICKED, eventHit);
                 bt.setPrefSize(BUTTON_SIZE, BUTTON_SIZE);
                 bt.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
                 this.grid.add(bt, j, i);
@@ -144,6 +162,9 @@ public class PerilousPathFxImpl extends AbstractMiniGameController implements Pe
         this.buttons.entrySet().stream()
                                .filter(bt -> bt.getValue().equals(new Pair<>(row, col)))
                                .forEach(bt -> bt.getKey().setText("***"));
+        this.buttons.entrySet().stream()
+                               .forEach(bt -> bt.getKey().setDisable(true));
+        this.animation();
     }
 
     /**
@@ -186,8 +207,8 @@ public class PerilousPathFxImpl extends AbstractMiniGameController implements Pe
      */
     @Override
     public void startSecondaryTimer() {
-        Timer secondaryTimer = new Timer();
-        secondaryTimer.schedule(new GameTimer(MINE_SECONDS, this), 0, 1000);
+        this.secondaryTimer = new Timer();
+        this.secondaryTimer.schedule(new GameTimer(MINE_SECONDS, this), 0, 1000);
         this.lifeSecondaryTimer = true;
     }
 
@@ -200,7 +221,7 @@ public class PerilousPathFxImpl extends AbstractMiniGameController implements Pe
             if (this.lifeSecondaryTimer) {
                 this.instructions.setText("Memorize the mine's position");
             } else {
-                this.instructions.setText("Find a safe path to start from finish");
+                this.instructions.setText("Find a safe path from start to finish");
                 super.updateTimerView(second);
                 if (second == 0) {
                     this.timeFinish = true;
@@ -219,6 +240,7 @@ public class PerilousPathFxImpl extends AbstractMiniGameController implements Pe
     @Override
     public void timeFinish() {
         if (this.timeFinish) {
+            this.secondaryTimer.cancel();
             this.controller.timerExpired();
         }
     }

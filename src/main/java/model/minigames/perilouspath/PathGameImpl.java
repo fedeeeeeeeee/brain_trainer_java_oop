@@ -14,7 +14,7 @@ public class PathGameImpl implements PathGame {
     private final int numMines;
     private final Pair<Integer, Integer> start;
     private final Pair<Integer, Integer> finish;
-    private final LinkedList<Pair<Integer, Integer>> path;
+    private final LinkedList<Pair<Integer, Integer>> path;  //NOPMD
 
     /**
      * Constructor of {@link PathGame}.

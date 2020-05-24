@@ -27,8 +27,8 @@ public class PerilousPathModelImpl implements PerilousPathModel {
     private Pair<Integer, Integer> start;
     private Pair<Integer, Integer> finish;
     private Set<Pair<Integer, Integer>> mines;
-    private final LinkedList<Pair<Integer, Integer>> selected;
-    private LinkedList<Pair<Integer, Integer>> path;
+    private final LinkedList<Pair<Integer, Integer>> selected; //NOPMD
+    private LinkedList<Pair<Integer, Integer>> path; //NOPMD
     private final PathGameFactory pathFactory;
     private MineState mineState;
 
@@ -52,7 +52,7 @@ public class PerilousPathModelImpl implements PerilousPathModel {
     }
 
     private Pair<Integer, Integer> getRandomMines() {
-        Pair<Integer, Integer> mine = this.getRandomPosition();
+        final Pair<Integer, Integer> mine = this.getRandomPosition();
         return this.mines.contains(mine) || this.path.contains(mine) || mine.equals(this.start) || mine.equals(this.finish) ? this.getRandomMines() : mine;
     }
 
@@ -61,7 +61,7 @@ public class PerilousPathModelImpl implements PerilousPathModel {
     }
 
     private boolean couldHit(final int row, final int col) {
-        Pair<Integer, Integer> position = new Pair<>(row, col);
+        final Pair<Integer, Integer> position = new Pair<>(row, col);
         return this.selected.isEmpty() && position.equals(this.start)
                 || !this.selected.isEmpty() && this.couldMove(position, this.selected.getLast());
     }
@@ -75,7 +75,7 @@ public class PerilousPathModelImpl implements PerilousPathModel {
     }
 
     private void initFinish() {
-        Pair<Integer, Integer> finish = this.getRandomPosition();
+        final Pair<Integer, Integer> finish = this.getRandomPosition();
         if (finish.equals(this.start) || this.adjacent(finish, this.start)) {
             this.initFinish();
         } else {

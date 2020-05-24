@@ -19,6 +19,11 @@ public interface PerilousPathController {
     void hitAttempt(int row, int col);
 
     /**
+     * Reset the view at the initial state.
+     */
+    void resetView();
+
+    /**
      * The time of the secondary timer is expired. 
      */
     void secondaryTimerExpired();
