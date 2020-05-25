@@ -62,12 +62,15 @@ public interface ColorGamaModel {
 
     /**
      * Set the next question.
+     * 
+     * @return question
+     *          the next question set
      */
     QuestionType nextQuestion();
 
     /**
-     * 
+     * Calculates the right color values.
      */
-    void setRightColorValue();
+    void calculateRightColorValue();
 
 }

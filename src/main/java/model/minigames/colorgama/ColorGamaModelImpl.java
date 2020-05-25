@@ -29,8 +29,6 @@ public class ColorGamaModelImpl implements ColorGamaModel {
      */
     public ColorGamaModelImpl(final DifficultyLevel difficulty) {
         this.score = new ScoreModelImpl(difficulty, BASEPOINT);
-//        this.question = QuestionType.values()[new Random().nextInt(QuestionType.values().length)];
-//        System.out.println(this.question);
         this.computeValue = new ComputeDifficultyValueImpl(difficulty);
         this.computeColor = new ComputeColorImpl(this.computeValue);
     }
@@ -71,8 +69,7 @@ public class ColorGamaModelImpl implements ColorGamaModel {
      * {@inheritDoc}
      */
     @Override
-    public void setRightColorValue() {
-        System.out.println(this.question);
+    public void calculateRightColorValue() {
         this.computeColor.calculateRightValues(this.question);
     }
 
@@ -107,12 +104,7 @@ public class ColorGamaModelImpl implements ColorGamaModel {
     public QuestionType nextQuestion() {
         this.question = QuestionType.values()[new Random().nextInt(QuestionType.values().length)];
         this.computeColor.reset();
-        System.out.println(this.question);
         return this.question;
     }
-
-
-
-
 
 }
