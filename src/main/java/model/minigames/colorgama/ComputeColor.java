@@ -17,20 +17,33 @@ public interface ComputeColor {
     Triple<Integer, Double, Double> nextColorValues();
 
     /**
-     * Get a triple of the right color values.
-     * 
+     * Calculates the right color values.
+     *
      * @param question
      *          the current question
-     *
-     * @return triple
-     *          the hsb component of the color
-     *
      */
-    int getRightColorIndex(QuestionType question);
+    void calculateRightValues(QuestionType question);
+
+    /**
+     * Get a index of the right color.
+     * 
+     * @return index
+     *          right color's index
+     */
+    int getRightColorIndex();
+
+    /**
+     * Get a triple of the right color values.
+     * 
+     * @return values
+     *          the hsb component of the right color
+     */
+    Triple<Integer, Double, Double> getRightColor();
 
     /**
      * Reset all values according to the question.
      * 
      */
     void reset();
+
 }
