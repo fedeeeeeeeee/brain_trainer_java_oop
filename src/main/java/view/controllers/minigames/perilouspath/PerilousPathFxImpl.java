@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 import java.util.Timer;
+import java.util.function.Function;
 
 import controller.minigames.perilouspath.PerilousPathController;
 import controller.minigames.perilouspath.PerilousPathControllerImpl;
@@ -17,6 +18,7 @@ import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ProgressBar;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
@@ -74,6 +76,13 @@ public class PerilousPathFxImpl extends AbstractMiniGameController implements Pe
         this.controller.hitAttempt(position.getX(), position.getY());
     };
 
+    private final Function<String, ImageView> image = (imageName) -> {
+        final ImageView image = new ImageView("/images/" + imageName + ".png");
+        image.setFitHeight(BUTTON_SIZE / 2);
+        image.setFitWidth(BUTTON_SIZE / 2);
+        return image;
+    };
+
     private final EventHandler<ActionEvent> eventReset = (e) -> {
         this.buttons.entrySet().stream()
                                .forEach(bt -> bt.getKey().setDisable(false));
@@ -122,7 +131,7 @@ public class PerilousPathFxImpl extends AbstractMiniGameController implements Pe
     public void showStart(final Pair<Integer, Integer> start) {
         this.buttons.entrySet().stream()
                                .filter(bt -> bt.getValue().equals(start))
-                               .forEach(bt -> bt.getKey().setText("START"));
+                               .forEach(bt -> bt.getKey().setGraphic(image.apply("start")));
     }
 
     /**
@@ -132,7 +141,7 @@ public class PerilousPathFxImpl extends AbstractMiniGameController implements Pe
     public void showFinish(final Pair<Integer, Integer> finish) {
         this.buttons.entrySet().stream()
                                .filter(bt -> bt.getValue().equals(finish))
-                               .forEach(bt -> bt.getKey().setText("FINISH"));
+                               .forEach(bt -> bt.getKey().setGraphic(image.apply("finish")));
     }
 
     /**
@@ -143,7 +152,7 @@ public class PerilousPathFxImpl extends AbstractMiniGameController implements Pe
         mines.stream()
              .forEach(m -> this.buttons.entrySet().stream()
                                                   .filter(bt -> bt.getValue().equals(m.getMinePosition()))
-                                                  .forEach(bt -> bt.getKey().setText("X")));
+                                                  .forEach(bt -> bt.getKey().setGraphic(image.apply("mine"))));
     }
 
     /**
@@ -163,9 +172,11 @@ public class PerilousPathFxImpl extends AbstractMiniGameController implements Pe
     public void showExplosion(final int row, final int col) {
         this.buttons.entrySet().stream()
                                .filter(bt -> bt.getValue().equals(new Pair<>(row, col)))
-                               .forEach(bt -> bt.getKey().setText("***"));
+                               .forEach(bt -> bt.getKey().setGraphic(image.apply("boomm")));
         this.buttons.entrySet().stream()
                                .forEach(bt -> bt.getKey().setDisable(true));
+        this.buttons.entrySet().stream()
+                               .forEach(bt -> bt.getKey().setStyle("-fx-opacity: 1"));
         this.animation();
     }
 
@@ -174,7 +185,7 @@ public class PerilousPathFxImpl extends AbstractMiniGameController implements Pe
      */
     @Override
     public void reset() {
-        this.buttons.entrySet().stream().forEach(bt -> bt.getKey().setText(""));
+        this.buttons.entrySet().stream().forEach(bt -> bt.getKey().setGraphic(null));
         this.buttons.entrySet().stream().forEach(bt -> bt.getKey().setStyle(null));
     }
 
