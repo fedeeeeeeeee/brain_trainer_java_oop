@@ -27,9 +27,9 @@ public class PerilousPathModelImpl implements PerilousPathModel {
     private Pair<Integer, Integer> start;
     private Pair<Integer, Integer> finish;
     private Set<Mine> mines;
-    private final LinkedList<Pair<Integer, Integer>> selected; //NOPMD
     private LinkedList<Pair<Integer, Integer>> path; //NOPMD
     private final PathGameFactory pathFactory;
+    private final LinkedList<Pair<Integer, Integer>> selected; //NOPMD
 
     /**
      * Constructor of {@link PerilousPathModel}.
@@ -53,8 +53,8 @@ public class PerilousPathModelImpl implements PerilousPathModel {
     private Mine getRandomMines() {
         final Mine mine = new MineImpl(this.getRandomPosition());
         final Pair<Integer, Integer> minePosition = mine.getMinePosition();
-        return this.mines.contains(mine) || this.path.contains(minePosition) || this.start.equals(minePosition)
-                || this.finish.equals(minePosition) ? this.getRandomMines() : mine;
+        return this.path.contains(minePosition) || this.start.equals(minePosition) || this.finish.equals(minePosition)
+                || this.mines.stream().anyMatch(m -> m.getMinePosition().equals(mine.getMinePosition())) ? this.getRandomMines() : mine;
     }
 
     private boolean couldMove(final Pair<Integer, Integer> position, final Pair<Integer, Integer> last) {
