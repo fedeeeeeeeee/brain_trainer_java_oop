@@ -3,15 +3,15 @@ package model.minigames.perilouspath;
 import utility.Pair;
 
 /**
- * Implementation of {@link Mine}
+ * Implementation of {@link Mine}.
  */
 public class MineImpl implements Mine {
 
     private final Pair<Integer, Integer> mine;
     private MineState mineState;
-    
+
     /**
-     * Constructor of {@link Mine}
+     * Constructor of {@link Mine}.
      * 
      * @param mine
      */
@@ -19,7 +19,7 @@ public class MineImpl implements Mine {
         this.mine = mine;
         this.mineState = MineState.UNDETONATED;
     }
-    
+
     /**
      * {@inheritDoc}
      */

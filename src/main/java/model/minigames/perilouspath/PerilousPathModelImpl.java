@@ -26,11 +26,10 @@ public class PerilousPathModelImpl implements PerilousPathModel {
     private final ScoreModel score;
     private Pair<Integer, Integer> start;
     private Pair<Integer, Integer> finish;
-    private Set<Pair<Integer, Integer>> mines;
+    private Set<Mine> mines;
     private final LinkedList<Pair<Integer, Integer>> selected; //NOPMD
     private LinkedList<Pair<Integer, Integer>> path; //NOPMD
     private final PathGameFactory pathFactory;
-    private MineState mineState;
 
     /**
      * Constructor of {@link PerilousPathModel}.
@@ -51,9 +50,11 @@ public class PerilousPathModelImpl implements PerilousPathModel {
         return new Pair<>(new Random().nextInt(this.size), new Random().nextInt(this.size));
     }
 
-    private Pair<Integer, Integer> getRandomMines() {
-        final Pair<Integer, Integer> mine = this.getRandomPosition();
-        return this.mines.contains(mine) || this.path.contains(mine) || mine.equals(this.start) || mine.equals(this.finish) ? this.getRandomMines() : mine;
+    private Mine getRandomMines() {
+        final Mine mine = new MineImpl(this.getRandomPosition());
+        final Pair<Integer, Integer> minePosition = mine.getMinePosition();
+        return this.mines.contains(mine) || this.path.contains(minePosition) || this.start.equals(minePosition)
+                || this.finish.equals(minePosition) ? this.getRandomMines() : mine;
     }
 
     private boolean couldMove(final Pair<Integer, Integer> position, final Pair<Integer, Integer> last) {
@@ -88,7 +89,6 @@ public class PerilousPathModelImpl implements PerilousPathModel {
     }
 
     private void initMines() {
-        this.mineState = MineState.UNDETONATED;
         this.mines = new HashSet<>();
         for (int i = 0; i < this.numMines; i++) {
             this.mines.add(this.getRandomMines());
@@ -101,9 +101,7 @@ public class PerilousPathModelImpl implements PerilousPathModel {
     @Override
     public boolean hit(final int row, final int col) {
         if (this.couldHit(row, col)) {
-            if (this.mines.contains(new Pair<>(row, col))) {
-                this.mineState = MineState.EXPLODED;
-            }
+            this.mines.stream().filter(m -> m.getMinePosition().equals(new Pair<>(row, col))).peek(m -> m.setExploded());
             this.selected.add(new Pair<>(row, col));
             return true;
         }
@@ -138,7 +136,7 @@ public class PerilousPathModelImpl implements PerilousPathModel {
      * {@inheritDoc}
      */
     @Override
-    public Set<Pair<Integer, Integer>> getMines() {
+    public Set<Mine> getMines() {
         return this.mines;
     }
 
@@ -171,7 +169,7 @@ public class PerilousPathModelImpl implements PerilousPathModel {
      */
     @Override
     public boolean isFailed() {
-        return this.mineState.isExploded();
+        return this.mines.stream().anyMatch(m -> m.isExploded());
     }
 
     /**

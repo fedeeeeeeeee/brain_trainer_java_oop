@@ -40,11 +40,11 @@ public interface PerilousPathModel {
     Pair<Integer, Integer> getFinish();
 
     /**
-     * Gets the mines position.
+     * Gets the mines.
      * 
-     * @return a set of mines' coordinate
+     * @return a set of mines
      */
-    Set<Pair<Integer, Integer>> getMines();
+    Set<Mine> getMines();
 
     /**
      * Add point when user finds the right path.
