@@ -68,6 +68,7 @@ public class PerilousPathControllerImpl implements PerilousPathController {
             this.resetView();
         }
         if (this.model.isFailed()) {
+            this.view.showMines(this.model.getMines());
             this.view.showExplosion(row, col);
         }
     }

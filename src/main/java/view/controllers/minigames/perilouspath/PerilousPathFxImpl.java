@@ -39,7 +39,7 @@ public class PerilousPathFxImpl extends AbstractMiniGameController implements Pe
     /**
      * The duration dedicated to the memorization of the mines position.
      */
-    private static final int MINE_SECONDS = 6;
+    private static final int MINE_SECONDS = 4;
 
     /**
      * The size of the button.
