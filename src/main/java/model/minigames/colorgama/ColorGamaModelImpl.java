@@ -2,6 +2,8 @@ package model.minigames.colorgama;
 
 import java.util.Random;
 
+import org.apache.commons.lang3.tuple.Triple;
+
 import model.DifficultyLevel;
 import model.score.ScoreModel;
 import model.score.ScoreModelImpl;
@@ -27,8 +29,8 @@ public class ColorGamaModelImpl implements ColorGamaModel {
      */
     public ColorGamaModelImpl(final DifficultyLevel difficulty) {
         this.score = new ScoreModelImpl(difficulty, BASEPOINT);
-        this.question = QuestionType.values()[new Random().nextInt(QuestionType.values().length)];
-        System.out.println(this.question);
+//        this.question = QuestionType.values()[new Random().nextInt(QuestionType.values().length)];
+//        System.out.println(this.question);
         this.computeValue = new ComputeDifficultyValueImpl(difficulty);
         this.computeColor = new ComputeColorImpl(this.computeValue);
     }
@@ -69,16 +71,48 @@ public class ColorGamaModelImpl implements ColorGamaModel {
      * {@inheritDoc}
      */
     @Override
-    public int getRightIndex() {
-        return this.computeColor.getRightColorIndex(question);
+    public void setRightColorValue() {
+        System.out.println(this.question);
+        this.computeColor.calculateRightValues(this.question);
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public void nextQuestion() {
-        this.question = QuestionType.values()[new Random().nextInt(QuestionType.values().length)];
-        System.out.println(this.question);
+    public int getRightIndex() {
+        return this.computeColor.getRightColorIndex();
     }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public Triple<Integer, Double, Double> getRightColorValues() {
+        return this.computeColor.getRightColor();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public QuestionType getCurrentQuestion() {
+        return this.question;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public QuestionType nextQuestion() {
+        this.question = QuestionType.values()[new Random().nextInt(QuestionType.values().length)];
+        this.computeColor.reset();
+        System.out.println(this.question);
+        return this.question;
+    }
+
+
+
+
+
 }

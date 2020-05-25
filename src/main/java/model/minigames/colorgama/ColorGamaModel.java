@@ -1,5 +1,7 @@
 package model.minigames.colorgama;
 
+import org.apache.commons.lang3.tuple.Triple;
+
 /**
  * The model interface of ColorGama minigame.
  *
@@ -43,8 +45,29 @@ public interface ColorGamaModel {
     int getRightIndex();
 
     /**
+     * Get the values of the right color.
+     * 
+     * @return values
+     *          a hsb value
+     */
+    Triple<Integer, Double, Double> getRightColorValues();
+
+    /**
+     * Get the type of the current question.
+     * 
+     * @return question
+     *          current question
+     */
+    QuestionType getCurrentQuestion();
+
+    /**
      * Set the next question.
      */
-    void nextQuestion();
+    QuestionType nextQuestion();
+
+    /**
+     * 
+     */
+    void setRightColorValue();
 
 }
