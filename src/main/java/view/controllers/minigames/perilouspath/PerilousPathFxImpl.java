@@ -21,6 +21,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 import javafx.util.Duration;
+import model.minigames.perilouspath.Mine;
 import timer.GameTimer;
 import utility.Pair;
 import view.SceneType;
@@ -138,10 +139,11 @@ public class PerilousPathFxImpl extends AbstractMiniGameController implements Pe
      * {@inheritDoc}
      */
     @Override
-    public void showMines(final Set<Pair<Integer, Integer>> mines) {
-        this.buttons.entrySet().stream()
-                               .filter(bt -> mines.contains(bt.getValue()))
-                               .forEach(bt -> bt.getKey().setText("X"));
+    public void showMines(final Set<Mine> mines) {
+        mines.stream()
+             .forEach(m -> this.buttons.entrySet().stream()
+                                                  .filter(bt -> bt.getValue().equals(m.getMinePosition()))
+                                                  .forEach(bt -> bt.getKey().setText("X")));
     }
 
     /**

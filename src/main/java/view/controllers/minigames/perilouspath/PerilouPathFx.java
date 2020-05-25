@@ -2,6 +2,7 @@ package view.controllers.minigames.perilouspath;
 
 import java.util.Set;
 
+import model.minigames.perilouspath.Mine;
 import utility.Pair;
 
 /**
@@ -35,7 +36,7 @@ public interface PerilouPathFx {
      * 
      * @param mines
      */
-    void showMines(Set<Pair<Integer, Integer>> mines);
+    void showMines(Set<Mine> mines);
 
     /**
      * Shows the step of the path taken by the user.

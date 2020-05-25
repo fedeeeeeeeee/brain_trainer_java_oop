@@ -101,7 +101,7 @@ public class PerilousPathModelImpl implements PerilousPathModel {
     @Override
     public boolean hit(final int row, final int col) {
         if (this.couldHit(row, col)) {
-            this.mines.stream().filter(m -> m.getMinePosition().equals(new Pair<>(row, col))).peek(m -> m.setExploded());
+            this.mines.stream().filter(m -> m.getMinePosition().equals(new Pair<>(row, col))).forEach(m -> m.setExploded());
             this.selected.add(new Pair<>(row, col));
             return true;
         }
