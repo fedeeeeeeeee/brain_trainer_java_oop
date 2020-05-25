@@ -2,6 +2,9 @@ package model.minigames.perilouspath;
 
 import utility.Pair;
 
+/**
+ * Represents a mine.
+ */
 public interface Mine {
     
     /**
