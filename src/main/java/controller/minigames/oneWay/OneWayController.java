@@ -6,6 +6,10 @@ public interface OneWayController {
 
     void timeExpired();
 
-    void start();
+    void nextLevel();
+
+    void firstInit();
+
+    void showSolution();
 
 }

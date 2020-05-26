@@ -13,7 +13,6 @@ public class SimpleOneWayController implements OneWayController {
     public SimpleOneWayController(final OneWayFx oneWayFx, final DifficultyLevel difficultyLevel) {
         this.view = oneWayFx;
         this.model = new OneWayModelImpl(difficultyLevel);
-        this.model.initializeOneWay();
     }
 
     @Override
@@ -21,8 +20,6 @@ public class SimpleOneWayController implements OneWayController {
         if (this.model.hitFinalPosition(row, col)) {
             this.model.addPoint();
         }
-        this.model.initializeOneWay();
-        this.start();
     }
 
     @Override
@@ -31,10 +28,22 @@ public class SimpleOneWayController implements OneWayController {
     }
 
     @Override
-    public void start() {
+    public void nextLevel() {
+        this.model.initializeOneWay();
+        this.view.updateArrows(this.model.getSteps());
+        this.view.updateView(this.model.getInitialPosition());
+    }
+
+    @Override
+    public void showSolution() {
+        this.view.showCorrectAnswer(this.model.getFinalPosition());
+    }
+
+    @Override
+    public void firstInit() {
+        this.model.initializeOneWay();
         this.view.drawGrid(this.model.getSize());
         this.view.drawArrow(this.model.getSteps());
         this.view.updateView(this.model.getInitialPosition());
     }
-
 }
