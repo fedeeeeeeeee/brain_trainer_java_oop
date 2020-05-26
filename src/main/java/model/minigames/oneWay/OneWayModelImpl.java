@@ -78,10 +78,6 @@ public class OneWayModelImpl implements OneWayModel {
 
         }
         this.finalPosition = this.currentPosition;
-
-        System.out.println(this.steps.toString());
-        System.out.println("initial pos is " + this.initialPosition);
-        System.out.println("final pos is " + this.finalPosition);
     }
 
     private boolean checkX(final int x) {
@@ -93,7 +89,7 @@ public class OneWayModelImpl implements OneWayModel {
     }
 
     private void setInitialPosition() {
-        Random random = new Random();
+        final Random random = new Random();
         this.currentPosition = new Pair<>(random.nextInt(this.size), random.nextInt(this.size));
         this.initialPosition = this.currentPosition;
     }
@@ -136,6 +132,11 @@ public class OneWayModelImpl implements OneWayModel {
     @Override
     public int getFinalScore() {
         return this.score.getScore();
+    }
+
+    @Override
+    public int getArrowsCount() {
+        return this.arrows;
     }
 
 }

@@ -3,14 +3,14 @@ package controller.minigames.oneWay;
 import model.DifficultyLevel;
 import model.minigames.oneWay.OneWayModel;
 import model.minigames.oneWay.OneWayModelImpl;
-import view.controllers.minigames.oneWay.OneWayFx;
+import view.controllers.minigames.oneWay.OneWayFxImpl;
 
 public class SimpleOneWayController implements OneWayController {
 
-    private final OneWayFx view;
+    private final OneWayFxImpl view;
     private final OneWayModel model;
 
-    public SimpleOneWayController(final OneWayFx oneWayFx, final DifficultyLevel difficultyLevel) {
+    public SimpleOneWayController(final OneWayFxImpl oneWayFx, final DifficultyLevel difficultyLevel) {
         this.view = oneWayFx;
         this.model = new OneWayModelImpl(difficultyLevel);
     }

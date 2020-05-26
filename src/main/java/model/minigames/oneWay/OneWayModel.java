@@ -24,4 +24,6 @@ public interface OneWayModel {
 
     void initializeOneWay();
 
+    int getArrowsCount();
+
 }
