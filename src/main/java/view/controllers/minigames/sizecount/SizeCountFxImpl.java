@@ -11,30 +11,25 @@ import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.geometry.Insets;
 import javafx.scene.control.Button;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
 import javafx.util.Duration;
 import model.minigames.sizecount.IntegerOperation;
-import timer.GameTimer;
 import view.SceneType;
-import view.controllers.minigames.AbstractMiniGameController;
+import view.controllers.minigames.AbstractMiniGameControllerFx;
 
-public class SizeCountFxImpl extends AbstractMiniGameController implements SizeCountFx {
-
-    private SizeCountController controller;
-    private List<Button> buttons;
-    private Button currentAnswer;
-
-    /**
-     * The seconds of the {@link GameTimer}.
-     */
-    private static final int SECONDS = 50;
+public class SizeCountFxImpl extends AbstractMiniGameControllerFx implements SizeCountFx {
 
     /**
      * The width of the button that make up the view.
      */
     private static final int WIDTH = 333;
+
+    private SizeCountController controller;
+    private List<Button> buttons;
+    private Button currentAnswer;
 
     @FXML
     private VBox panel;
@@ -54,19 +49,11 @@ public class SizeCountFxImpl extends AbstractMiniGameController implements SizeC
      * {@inheritDoc}
      */
     @Override
-    public void timeFinish() {
-        this.controller.timeExpired();
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
     public void initGame() {
         this.buttons = new LinkedList<>();
         this.controller = new SizeCountControllerImpl(this);
-        this.controller.computeOperations();
-        this.setGameTimer(new GameTimer(SECONDS, this));
+        this.controller.startTimer();
+        this.controller.resetGame();
     }
 
     /**
@@ -93,7 +80,7 @@ public class SizeCountFxImpl extends AbstractMiniGameController implements SizeC
         for (int i = 0; i < numOperations; i++) {
             final Button bt = new Button();
             bt.setStyle("-fx-font-size: 20");
-            //bt.setMinSize(bt.USE_COMPUTED_SIZE, bt.USE_COMPUTED_SIZE);
+            // bt.setMinSize(bt.USE_COMPUTED_SIZE, bt.USE_COMPUTED_SIZE);
             bt.setPrefWidth(WIDTH);
             this.buttons.add(bt);
             bt.addEventHandler(MouseEvent.MOUSE_CLICKED, ev);
@@ -101,7 +88,7 @@ public class SizeCountFxImpl extends AbstractMiniGameController implements SizeC
         }
         final Button same = new Button("SAME");
         same.setStyle("-fx-font-size: 20");
-        //same.setMinSize(same.USE_COMPUTED_SIZE, same.USE_COMPUTED_SIZE);
+        // same.setMinSize(same.USE_COMPUTED_SIZE, same.USE_COMPUTED_SIZE);
         same.setPrefWidth(WIDTH);
         same.addEventHandler(MouseEvent.MOUSE_CLICKED, ev);
         this.panel.getChildren().add(same);
@@ -114,7 +101,7 @@ public class SizeCountFxImpl extends AbstractMiniGameController implements SizeC
     public void showWrongAnswer() {
         this.currentAnswer.setStyle("-fx-font-size: 20;-fx-border-color:#FF0000 ; -fx-border-width: 2px;");
         this.animation();
-        this.controller.computeOperations();
+        this.controller.resetGame();
     }
 
     /**
@@ -124,7 +111,7 @@ public class SizeCountFxImpl extends AbstractMiniGameController implements SizeC
     public void showCorrectAnswer() {
         this.currentAnswer.setStyle("-fx-font-size: 20; -fx-border-color:#66FF66 ; -fx-border-width: 2px;");
         this.animation();
-        this.controller.computeOperations();
+        this.controller.resetGame();
     }
 
     /**
@@ -136,6 +123,14 @@ public class SizeCountFxImpl extends AbstractMiniGameController implements SizeC
             this.getController().updateProgress(score);
             this.getView().setHandleDataScene(SceneType.END_GAME.getFilePath());
         });
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void stopTimer() {
+        this.controller.stopTimer();
     }
 
 }
