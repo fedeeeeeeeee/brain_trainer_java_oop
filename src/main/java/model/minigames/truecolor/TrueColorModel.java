@@ -42,4 +42,18 @@ public interface TrueColorModel {
      */
 	boolean matchingMeaningAndInk(String selectedAnswer);
     
+	/**
+	 * RIP
+     * Reload the map containing the random color for three buttons.
+     *
+     */
+	void reloadThreeRandomColorMap();
+	
+	/**
+	 * RIP
+     * Check if is the right answer.
+     * 
+     * @return true if the meaning and the ink match for three buttons.
+     */
+	boolean matchingMeaningAndInkThreeBtn(String selectedAnswer);
 }

@@ -22,8 +22,12 @@ public class TrueColorModelImpl implements TrueColorModel{
 	private static final int BASE_POINT = 5;
 	
 	private final ScoreModel score;
+	
 	private List<String> colorList; 
+	
 	private Map<String, Pair<String, String>> randomColor;
+	
+	private DifficultyColor difficultyLevel;
 
 	/**
      * Constructor of {@link TrueColorModel}.
@@ -36,8 +40,15 @@ public class TrueColorModelImpl implements TrueColorModel{
      */
     public TrueColorModelImpl(final DifficultyLevel difficultyLevel) {
     	this.score = new ScoreModelImpl(difficultyLevel, BASE_POINT);
-    	this.createListColorRelatedDifficulty(difficultyLevel);
-    	this.createMap();
+    	
+    	this.difficultyLevel = new DifficultyColor(difficultyLevel);
+    	this.colorList = this.difficultyLevel.getColorList();
+    	
+    	if(difficultyLevel.equals(DifficultyLevel.EASY)) {
+    		this.createMap();
+    	}else {
+    		this.createMapThreeBtn();
+    	}
     }
     
     private void createMap() {
@@ -66,7 +77,35 @@ public class TrueColorModelImpl implements TrueColorModel{
         }
         return false;
     }
+    //-------------------RIPETIZIONE MOMENTANEAMENTE VOLUTA------------------- 
     
+    private void createMapThreeBtn() {
+    	this.randomColor = new HashMap<String, Pair<String, String>>();
+    	this.randomColor.put("meanColorBtn", new Pair<String, String>(getRandomColor(),getRandomColor()));
+    	this.randomColor.put("trueColorBtn", new Pair<String, String>(getRandomColor(),getRandomColor()));
+    	this.randomColor.put("trueColorBtn2", new Pair<String, String>(getRandomColor(),getRandomColor()));
+    	
+    }
+    /**
+     * {@inheritDoc}
+     */
+    public void reloadThreeRandomColorMap() {
+    	randomColor.replace("meanColorBtn", new Pair<String, String>(getRandomColor(),getRandomColor()));
+    	randomColor.replace("trueColorBtn", new Pair<String, String>(getRandomColor(),getRandomColor()));
+    	randomColor.replace("trueColorBtn2", new Pair<String, String>(getRandomColor(),getRandomColor()));
+    }
+    
+    public boolean matchingMeaningAndInkThreeBtn(String selectedAnswer) {
+    	Boolean match = randomColor.get("meanColorBtn").getX().equals(randomColor.get("trueColorBtn").getY());
+    	Boolean match2 = randomColor.get("meanColorBtn").getX().equals(randomColor.get("trueColorBtn2").getY());
+    	Boolean answer = selectedAnswer.contentEquals("YES");
+        if (((match || match2) && answer) || (((!match && !match2) && !answer))) {
+            return true;
+        }
+        return false;
+    }
+  //------------------- FINE RIPETIZIONE --------------------------------------  
+   
     private String getRandomColor() {
         String randomColor = this.colorList
                 .stream()
@@ -83,40 +122,7 @@ public class TrueColorModelImpl implements TrueColorModel{
     	return this.randomColor;
     }
     
-    /**
-     * !!!! APPUNTO
-     * create a list from number passed 
-     */
-    private void createListColorDifficulty(Integer numberColor) {
-        this.colorList = Stream.of(Colors.values())
-        		.limit(numberColor)
-                .map(Colors::name)
-                .collect(Collectors.toList());
-        
- }
     
-    
-    /**
-     * !!!! APPUNTO
-     * create a list in base alla difficoltà passata 
-     */
-	private void createListColorRelatedDifficulty(DifficultyLevel difficultyLevel) {
-		switch (difficultyLevel) {
-		case EASY:
-			this.createListColorDifficulty(4);
-			break;
-		case NORMAL:
-			this.createListColorDifficulty(6);
-			break;
-		case HARD:
-			this.createListColorDifficulty(8);
-			break;
-		default:
-			break;
-		}
-	}
-	
-	
     /**
      * {@inheritDoc}
      */
