@@ -1,12 +1,10 @@
 package controller.minigames.truecolor;
 
-public interface TrueColorController {
+import controller.minigames.MiniGameController;
 
-	/**
-	 * The time is expired.
-	 */
-	void timeExpired();
-	
+
+public interface TrueColorController extends MiniGameController {
+
 	
 	void startGame();
 	
@@ -23,5 +21,10 @@ public interface TrueColorController {
      * @return true if the meaning and the ink match
      */
 	void check(String selectedAnswer);
+	
+	void stopTimer();
+	
+
+	void startTimer();
 	
 }

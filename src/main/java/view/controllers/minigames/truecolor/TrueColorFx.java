@@ -45,5 +45,6 @@ public interface TrueColorFx {
      */
 	public void showCorrectAnswer();
 	
+	public void stopTimer();
 	
 }

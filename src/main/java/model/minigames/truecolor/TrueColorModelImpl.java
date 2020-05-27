@@ -29,6 +29,7 @@ public class TrueColorModelImpl implements TrueColorModel{
 	
 	private DifficultyColor difficultyLevel;
 
+	private static final int SECONDS = 30;
 	/**
      * Constructor of {@link TrueColorModel}.
      * 
@@ -140,4 +141,7 @@ public class TrueColorModelImpl implements TrueColorModel{
 		return this.score.getScore();
 	}
 
+	public int getSecondsGame() {
+		return SECONDS;
+	}
 }

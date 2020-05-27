@@ -56,4 +56,12 @@ public interface TrueColorModel {
      * @return true if the meaning and the ink match for three buttons.
      */
 	boolean matchingMeaningAndInkThreeBtn(String selectedAnswer);
+	
+	/**
+	 * 
+     * Return minigame's duration.
+     * 
+     * @return minigame's duration in seconds
+     */
+	int getSecondsGame();
 }
