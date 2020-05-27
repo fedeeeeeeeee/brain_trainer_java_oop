@@ -4,11 +4,15 @@ import org.apache.commons.lang3.tuple.Triple;
 
 import controller.minigames.colorgama.ColorGamaController;
 import controller.minigames.colorgama.ColorGamaControllerImpl;
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
 import javafx.application.Platform;
+import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.geometry.Insets;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
@@ -17,6 +21,7 @@ import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
+import javafx.util.Duration;
 import model.minigames.colorgama.ComputeColor;
 import timer.GameTimer;
 import view.SceneType;
@@ -28,8 +33,9 @@ import view.controllers.minigames.AbstractMiniGameController;
  */
 public class ColorGamaFxImpl extends AbstractMiniGameController implements ColorGamaFx {
 
-    private static final int SECONDS = 30;
     private static final int BT_SIZE = 300;
+
+    private static final double MILLIS = 300;
 
     @FXML
     private GridPane buttonsGrid;
@@ -37,29 +43,54 @@ public class ColorGamaFxImpl extends AbstractMiniGameController implements Color
     @FXML
     private ImageView image;
 
+    @FXML
+    private Label questionTitle;
+
+    @FXML
+    private Label questionColor;
+
     private ColorGamaController colorGamaController;
+
     private final EventHandler<MouseEvent> eventHandler = (l) -> {
         final Button bt = (Button) l.getSource();
         this.colorGamaController.checkAnswer(this.buttonsGrid.getChildren().indexOf(bt));
     };
 
+    private final EventHandler<ActionEvent> rightEvent = (l) -> {
+        this.image.setVisible(false);
+        this.colorGamaController.nextLevel();
+    };
+
+    private final EventHandler<ActionEvent> wrongEvent = (l) -> this.image.setVisible(false);
+
     private void setImage(final String imagePath) {
+        this.image.setVisible(true);
         this.image.setImage(new Image(imagePath, true));
+    }
+
+    private void showAnimation(final boolean isRight) {
+        final Timeline timeline = new Timeline();
+        KeyFrame frame;
+        if (isRight) {
+            frame = new KeyFrame(Duration.millis(MILLIS), rightEvent);
+        } else {
+            frame = new KeyFrame(Duration.millis(MILLIS), wrongEvent);
+        }
+        timeline.getKeyFrames().add(frame);
+        timeline.play();
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public void drawGrid(final int size, final ComputeColor colors) {
+    public void drawGrid(final int size) {
         for (int i = 0; i < size; i++) {
             for (int j = 0; j < size; j++) {
                 final Button bt = new Button();
-                final Triple<Integer, Double, Double> color = colors.nextColorValues();
                 bt.setPrefSize(BT_SIZE, BT_SIZE);
                 bt.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
                 bt.addEventHandler(MouseEvent.MOUSE_CLICKED, eventHandler);
-                bt.setBackground(new Background(new BackgroundFill(Color.hsb(color.getLeft(), color.getMiddle(), color.getRight()), new CornerRadii(2), new Insets(2))));
                 buttonsGrid.add(bt, i, j);
             }
         }
@@ -72,7 +103,6 @@ public class ColorGamaFxImpl extends AbstractMiniGameController implements Color
     public void initGame() {
         this.colorGamaController = new ColorGamaControllerImpl(this, this.getController().getDifficultyLevel());
         this.colorGamaController.startGame();
-        this.setGameTimer(new GameTimer(SECONDS, this)); 
     }
 
     /**
@@ -112,6 +142,7 @@ public class ColorGamaFxImpl extends AbstractMiniGameController implements Color
     @Override
     public void rightAnswer() {
         this.setImage("/images/tick.png");
+        this.showAnimation(true);
     }
 
     /**
@@ -120,6 +151,48 @@ public class ColorGamaFxImpl extends AbstractMiniGameController implements Color
     @Override
     public void wrongAnswer() {
         this.setImage("/images/cross.png");
+        this.showAnimation(false);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void showNextQuestion(final String currentQuestion) {
+        this.questionTitle.setText(currentQuestion);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void showQuestionColor(final Integer hue, final Double saturation, final Double brightness) {
+        this.questionColor.setVisible(true);
+        this.questionColor.setBackground(new Background(new BackgroundFill(Color.hsb(hue, saturation, brightness), new CornerRadii(2), new Insets(2))));
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void hideQuestionColor() {
+        this.questionColor.setVisible(false);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void setRightColor(final int index, final Triple<Integer, Double, Double> triple) {
+        ((Button) this.buttonsGrid.getChildren().get(index)).setBackground(new Background(new BackgroundFill(Color.hsb(triple.getLeft(), triple.getMiddle(), triple.getRight()), new CornerRadii(2), new Insets(2))));
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void startTimer(final int seconds) {
+        this.setGameTimer(new GameTimer(seconds, this)); 
     }
 
 }

@@ -1,5 +1,7 @@
 package view.controllers.minigames.colorgama;
 
+import org.apache.commons.lang3.tuple.Triple;
+
 import model.minigames.colorgama.ComputeColor;
 
 /**
@@ -21,11 +23,8 @@ public interface ColorGamaFx {
      *
      * @param size
      *          the grid size
-     *
-     * @param computeColor 
-     *          the colors of buttons
      */
-    void drawGrid(int size, ComputeColor computeColor);
+    void drawGrid(int size);
 
     /**
      * Show the next level.
@@ -44,4 +43,36 @@ public interface ColorGamaFx {
      * Show the cross image. 
      */
     void wrongAnswer();
+
+    /**
+     * 
+     * @param currentQuestion
+     */
+    void showNextQuestion(String currentQuestion);
+
+    /**
+     * 
+     * @param hue
+     * @param saturation
+     * @param brightness
+     */
+    void showQuestionColor(Integer hue, Double saturation, Double brightness);
+
+    /**
+     * 
+     */
+    void hideQuestionColor();
+
+    /**
+     * 
+     * @param index
+     * @param triple
+     */
+    void setRightColor(int index, Triple<Integer, Double, Double> triple);
+
+    /**
+     * 
+     * @param seconds
+     */
+    void startTimer(int seconds);
 }
