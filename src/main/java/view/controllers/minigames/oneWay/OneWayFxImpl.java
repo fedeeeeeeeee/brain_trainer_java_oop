@@ -15,6 +15,7 @@ import javafx.fxml.FXML;
 import javafx.geometry.Insets;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.ProgressBar;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
@@ -29,6 +30,8 @@ public class OneWayFxImpl extends AbstractMiniGameControllerFx implements OneWay
     private static final String GREEN = "-fx-border-color: #56b72d; -fx-border-width: 5px;";
     private static final String RED = "-fx-border-color: #ff0000; -fx-border-width: 5px;";
     private static final String BACKGROUND = "-fx-background-color: rgb(143,187,189)";
+    private static final String BLUE = "-fx-accent: #49618C";
+    private static final int IMG_DIM = 50;
  
     private OneWayController controller;
     private Map<Button, Pair<Integer, Integer>> buttons;
@@ -48,6 +51,9 @@ public class OneWayFxImpl extends AbstractMiniGameControllerFx implements OneWay
 
     @FXML
     private Label scoreLbl;
+    
+    @FXML
+    private ProgressBar progressBar;
 
     private Button clickedBtn;
     private Button correctBtn;
@@ -66,15 +72,16 @@ public class OneWayFxImpl extends AbstractMiniGameControllerFx implements OneWay
         this.controller.showSolution();
         pause.setOnFinished(event -> {
             this.buttons.keySet().forEach(b -> b.setDisable(false));
-            correctBtn.setStyle(null);
+            this.correctBtn.setStyle(null);
         });
         
-        pause.play();
+        pause.play();      
         this.controller.nextLevel();
     };
 
     @Override
     public void initGame() {
+        this.progressBar.setStyle(BLUE);
         this.controller = new SimpleOneWayController(this, this.getController().getDifficultyLevel());
         this.buttons = new HashMap<>();
         this.arrows = new ArrayList<>();
@@ -106,13 +113,16 @@ public class OneWayFxImpl extends AbstractMiniGameControllerFx implements OneWay
         Direction direction = Arrays.asList(Direction.values()).stream()
                 .filter(d -> d.toString().equals(txt))
                 .findFirst().get();
-
-        ImageView img = new ImageView(direction.getPath());
-        img.setFitHeight(50);
-        img.setFitWidth(50);
-        this.arrows.get(idx).setGraphic(img);
+        this.arrows.get(idx).setGraphic(this.getImage(direction.getPath()));
     }
 
+    private ImageView getImage(String path) {
+        ImageView img = new ImageView(path);
+        img.setFitHeight(IMG_DIM);
+        img.setFitWidth(IMG_DIM);
+        return img;
+    }
+    
     @Override
     public void drawGrid(final int size) {
         for (int i = 0; i < size; i++) {
@@ -130,10 +140,7 @@ public class OneWayFxImpl extends AbstractMiniGameControllerFx implements OneWay
     public void updateView(final Pair<Integer, Integer> initialPosition) {             
         for (Entry<Button, Pair<Integer, Integer>> entry : this.buttons.entrySet()) {
            if(initialPosition.equals(entry.getValue())) {
-                  ImageView img = new ImageView("/images/start.png");
-               img.setFitHeight(50);
-               img.setFitWidth(50);
-               entry.getKey().setGraphic(img);
+               entry.getKey().setGraphic(this.getImage("/images/start.png"));
                entry.getKey().setPadding(new Insets(-1,-1,-1,-1));
            } else {
                entry.getKey().setGraphic(null);
@@ -146,9 +153,9 @@ public class OneWayFxImpl extends AbstractMiniGameControllerFx implements OneWay
         this.correctBtn = this.buttons.entrySet().stream()
                 .filter(e -> e.getValue().getX() == finalPosition.getX() && e.getValue().getY() == finalPosition.getY())
                 .map(x -> x.getKey()).findAny().get();
-
         this.correctBtn.setStyle(BACKGROUND);
         this.correctBtn.setStyle(check(finalPosition) ? GREEN : RED);
+        
     }
 
     private boolean check(final Pair<Integer, Integer> finalPosition) {
