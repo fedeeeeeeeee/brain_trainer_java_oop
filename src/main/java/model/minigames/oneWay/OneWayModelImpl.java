@@ -24,10 +24,10 @@ public class OneWayModelImpl implements OneWayModel {
 
     private final ScoreModel score;
     private DifficultyLevel difficulty;
+    private List<Direction> steps;
     private Pair<Integer, Integer> currentPosition;
     private Pair<Integer, Integer> initialPosition;
     private Pair<Integer, Integer> finalPosition;
-    private List<Direction> steps;
 
     private int arrows;
     private int size;
@@ -38,6 +38,7 @@ public class OneWayModelImpl implements OneWayModel {
         this.score = new ScoreModelImpl(this.difficulty, BASE_POINT);
         this.size = SIZE;
         this.steps = new ArrayList<>();
+        this.setLevel();
     }
 
     private void setLevel() {
@@ -52,7 +53,7 @@ public class OneWayModelImpl implements OneWayModel {
             break;
         case HARD:
             this.arrows = HARD_LEVEL_ARROW;
-            this.duration = NORMAL_LEVEL_SEC;
+            this.duration = HARD_LEVEL_SEC;
             break;
         }
     } 
@@ -60,7 +61,6 @@ public class OneWayModelImpl implements OneWayModel {
     @Override
     public void initializeOneWay() {
         this.resetPath();
-        this.setLevel();
         this.setInitialPosition();
         this.drawPath();
     }
@@ -85,7 +85,12 @@ public class OneWayModelImpl implements OneWayModel {
             this.steps.add(dir);
 
         }
-        this.finalPosition = this.currentPosition;
+       
+        if(this.currentPosition.getX() == this.initialPosition.getX() && this.currentPosition.getY() == this.initialPosition.getY()) {
+            this.drawPath();
+        } else {
+            this.finalPosition = this.currentPosition;
+        }
     }
 
     private boolean checkX(final int x) {
@@ -102,30 +107,6 @@ public class OneWayModelImpl implements OneWayModel {
         this.initialPosition = this.currentPosition;
     }
 
-    @Override
-    public DifficultyLevel getDifficulty() {
-        return this.difficulty;
-    }
-
-    @Override
-    public List<Direction> getSteps() {
-        return this.steps;
-    }
-
-    @Override
-    public int getSize() {
-        return this.size;
-    }
-
-    @Override
-    public Pair<Integer, Integer> getInitialPosition() {
-        return this.initialPosition;
-    }
-
-    @Override
-    public Pair<Integer, Integer> getFinalPosition() {
-        return this.finalPosition;
-    }
 
     @Override
     public boolean hitFinalPosition(final int row, final int col) {
@@ -142,14 +123,40 @@ public class OneWayModelImpl implements OneWayModel {
         return this.score.getScore();
     }
 
-    @Override
-    public int getArrowsCount() {
-        return this.arrows;
-    }
 
     @Override
     public int getSeconds() {
         return this.duration;
+    }
+    
+    @Override
+    public DifficultyLevel getDifficulty() {
+        return this.difficulty;
+    }
+
+    @Override
+    public int getSize() {
+        return this.size;
+    }
+    
+    @Override
+    public int getArrowsCount() {
+        return this.arrows;
+    }
+    
+    @Override
+    public List<Direction> getSteps() {
+        return this.steps;
+    }
+
+    @Override
+    public Pair<Integer, Integer> getInitialPosition() {
+        return this.initialPosition;
+    }
+
+    @Override
+    public Pair<Integer, Integer> getFinalPosition() {
+        return this.finalPosition;
     }
 
 }

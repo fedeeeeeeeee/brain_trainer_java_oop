@@ -1,6 +1,7 @@
 package test.minigames.oneway;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.Test;
@@ -16,7 +17,10 @@ public class OneWayTest {
     private static final int EASY_LEVEL_ARROW = 3;
     private static final int NORMAL_LEVEL_ARROW = 4;
     private static final int HARD_LEVEL_ARROW = 5;
-
+    private static final int EASY_LEVEL_SEC = 45;
+    private static final int NORMAL_LEVEL_SEC = 30;
+    private static final int HARD_LEVEL_SEC = 40;
+    
     private OneWayModel model;
 
     @Test
@@ -24,6 +28,7 @@ public class OneWayTest {
         this.model = new OneWayModelImpl(DifficultyLevel.EASY);
         this.model.initializeOneWay();
         assertEquals(EASY_LEVEL_ARROW, this.model.getArrowsCount());
+        assertEquals(EASY_LEVEL_SEC, this.model.getSeconds());
     }
 
     @Test
@@ -31,6 +36,7 @@ public class OneWayTest {
         this.model = new OneWayModelImpl(DifficultyLevel.NORMAL);
         this.model.initializeOneWay();
         assertEquals(NORMAL_LEVEL_ARROW, this.model.getArrowsCount());
+        assertEquals(NORMAL_LEVEL_SEC, this.model.getSeconds());
     }
 
     @Test
@@ -38,6 +44,7 @@ public class OneWayTest {
         this.model = new OneWayModelImpl(DifficultyLevel.HARD);
         this.model.initializeOneWay();
         assertEquals(HARD_LEVEL_ARROW, this.model.getArrowsCount());
+        assertEquals(HARD_LEVEL_SEC, this.model.getSeconds());
     }
 
     /**
@@ -46,17 +53,25 @@ public class OneWayTest {
      */
     @Test
     public void testInitialAndFinalPosValidity() {
-        OneWayModel model2 = new OneWayModelImpl(DifficultyLevel.EASY);
-        model2.initializeOneWay();
+        OneWayModel model = new OneWayModelImpl(DifficultyLevel.EASY);
+        model.initializeOneWay();
 
-        assertTrue(model2.getInitialPosition().getX() < model2.getSize());
-        assertTrue(model2.getInitialPosition().getY() < model2.getSize());
-        assertTrue(model2.getInitialPosition().getX() >= 0);
-        assertTrue(model2.getInitialPosition().getY() >= 0);
+        assertTrue(model.getInitialPosition().getX() < model.getSize());
+        assertTrue(model.getInitialPosition().getY() < model.getSize());
+        assertTrue(model.getInitialPosition().getX() >= 0);
+        assertTrue(model.getInitialPosition().getY() >= 0);
 
-        assertTrue(model2.getFinalPosition().getX() < model2.getSize());
-        assertTrue(model2.getFinalPosition().getY() < model2.getSize());
-        assertTrue(model2.getFinalPosition().getX() >= 0);
-        assertTrue(model2.getFinalPosition().getY() >= 0);
+        assertTrue(model.getFinalPosition().getX() < model.getSize());
+        assertTrue(model.getFinalPosition().getY() < model.getSize());
+        assertTrue(model.getFinalPosition().getX() >= 0);
+        assertTrue(model.getFinalPosition().getY() >= 0);
     }
+    
+    @Test
+    public void testPositions() {
+        OneWayModel model = new OneWayModelImpl(DifficultyLevel.EASY);
+        model.initializeOneWay();
+        assertFalse(model.getInitialPosition().getX() == model.getFinalPosition().getX() && model.getInitialPosition().getY() == model.getFinalPosition().getY());
+    }
+    
 }
