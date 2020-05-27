@@ -1,88 +1,49 @@
 package view.controllers.minigames.truecolor;
 
-import java.io.IOException;
 import java.util.Map;
 
-import controller.minigames.truecolor.TrueColorController;
-import controller.minigames.truecolor.TrueColorControllerImpl;
-import javafx.application.Platform;
-import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.input.MouseEvent;
-import timer.GameTimer;
 import utility.Pair;
-import view.SceneType;
-import view.controllers.minigames.AbstractMiniGameController;
 
-/**
- * Represents the True Color View.
- */
-public class TrueColorFx extends AbstractMiniGameController{
-	
-	/**
-     * The minigame's duration.
-     */
-	private static final int SECONDS = 30;
-	
-	private TrueColorController trueColorController;
-	
-	@FXML
-    private Button yesBtn;
-    @FXML
-    private Button noBtn;
-    @FXML
-    private Button meanColorBtn;
-    @FXML
-    private Button trueColorBtn;
-    
-    @FXML
-	private void buttonClicked(MouseEvent event) throws IOException {
-    	final String selectedAnswer = ((Button) event.getSource()).getText();
-    	this.trueColorController.check(selectedAnswer);
-	}
-	
-	public void next() {
-		this.trueColorController.refresh();
-        this.trueColorController.startGame();
-	}
-	
-	
-	public void setButton(Map<String, Pair<String, String>> randomColor) {
-		meanColorBtn.setText(randomColor.get("meanColorBtn").getX());
-		meanColorBtn.setStyle("-fx-text-fill: " + randomColor.get("meanColorBtn").getY());
-		trueColorBtn.setText(randomColor.get("trueColorBtn").getX());
-		trueColorBtn.setStyle("-fx-text-fill: " + randomColor.get("trueColorBtn").getY());
-	}
-	
-	 /**
-     * {@inheritDoc}
-     */
-	@Override
-	public void initGame() {
-		this.trueColorController = new TrueColorControllerImpl(this.getController().getDifficultyLevel(), this);
-		this.trueColorController.startGame();
-		this.setGameTimer(new GameTimer(SECONDS, this));
-	}
+public interface TrueColorFx {
 
 	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public void timeFinish() {
-		this.trueColorController.timeExpired();	
-	}
-	
+     * Reload the components of the scene.
+     * 
+     */
+	public void next();
 	
 	/**
-     * Show the final score.
+     * Associate a random color from map with text of the button.
      * 
      * @param finalScore
      */
-	public void endGame(final int finalScore) {
-		Platform.runLater(() -> {
-			this.getController().updateProgress(finalScore);
-			this.getView().setHandleDataScene(SceneType.END_GAME.getFilePath());
-		});
-	}
-
+	public void setButton(Map<String, Pair<String, String>> randomColor);
+	
+	/**
+     * Associate a random color from map with text of the button for three times.
+     * 
+     * @param randomColor map of buttons name and random colors
+     */
+	public void setThreeButton(Map<String, Pair<String, String>> randomColor);
+	
+	/**
+     * Associate a random color from the map with background button for three times.
+     * 
+     * @param randomColor map of buttons name and random colors
+     */
+	public void alternativeSetThreeButton(Map<String, Pair<String, String>> randomColor);
+	
+	/**
+     * Show the wrong answer coloring the button's border
+     * 
+     */
+	public void showWrongAnswer();
+		
+	/**
+     * Show the correct answer coloring the button's border
+     * 
+     */
+	public void showCorrectAnswer();
+	
+	
 }
