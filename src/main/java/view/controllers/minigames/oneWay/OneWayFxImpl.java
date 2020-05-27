@@ -20,23 +20,19 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.util.Duration;
 import model.minigames.oneWay.Direction;
-import timer.GameTimer;
 import utility.Pair;
 import view.SceneType;
-import view.controllers.minigames.AbstractMiniGameController;
+import view.controllers.minigames.AbstractMiniGameControllerFx;
 
-public class OneWayFxImpl extends AbstractMiniGameController implements OneWayFx {
+public class OneWayFxImpl extends AbstractMiniGameControllerFx implements OneWayFx {
 
     private static final String GREEN = "-fx-border-color: #56b72d; -fx-border-width: 5px;";
     private static final String RED = "-fx-border-color: #ff0000; -fx-border-width: 5px;";
     private static final String BACKGROUND = "-fx-background-color: rgb(143,187,189)";
-    private static final int SEC = 20;
-
+ 
     private OneWayController controller;
     private Map<Button, Pair<Integer, Integer>> buttons;
     private List<Button> arrows;
-
-    private boolean isTimerStarted = false;
 
     @FXML
     private Button play;
@@ -55,7 +51,6 @@ public class OneWayFxImpl extends AbstractMiniGameController implements OneWayFx
 
     private Button clickedBtn;
     private Button correctBtn;
-    private Button startBtn;
 
     private final PauseTransition pause = new PauseTransition(Duration.seconds(0.5));
 
@@ -63,7 +58,6 @@ public class OneWayFxImpl extends AbstractMiniGameController implements OneWayFx
         this.clickedBtn = (Button) e.getSource();
         this.controller.hit(buttons.get(clickedBtn).getX(), buttons.get(clickedBtn).getY());
 
-        this.getGameTimer().pause();
         this.buttons.keySet().forEach(b -> {
             b.setDisable(true);
             b.setStyle("-fx-opacity: 1");
@@ -76,8 +70,6 @@ public class OneWayFxImpl extends AbstractMiniGameController implements OneWayFx
         });
         
         pause.play();
-
-        this.getGameTimer().restart();
         this.controller.nextLevel();
     };
 
@@ -87,15 +79,9 @@ public class OneWayFxImpl extends AbstractMiniGameController implements OneWayFx
         this.buttons = new HashMap<>();
         this.arrows = new ArrayList<>();
         this.controller.firstInit();
-        this.startTimer(SEC);
+        this.controller.startTimer();
     }
 
-    private void startTimer(int sec) {
-        if (!isTimerStarted) {
-            this.setGameTimer(new GameTimer(sec, this));
-        }
-        this.isTimerStarted = true;
-    }
 
     @Override
     public void drawArrow(final List<Direction> steps) {
@@ -147,35 +133,12 @@ public class OneWayFxImpl extends AbstractMiniGameController implements OneWayFx
                   ImageView img = new ImageView("/images/start.png");
                img.setFitHeight(50);
                img.setFitWidth(50);
-               
-
-//               Image image = new Image("/images/start.png",entry.getKey().getWidth(), entry.getKey().getHeight(), false, true, true);
-//               BackgroundImage bImage = new BackgroundImage(image, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER, new BackgroundSize(entry.getKey().getWidth(), entry.getKey().getHeight(), true, true, true, false));
-//
-//               Background backGround = new Background(bImage);
-//               entry.getKey().setBackground(backGround);
-               
                entry.getKey().setGraphic(img);
                entry.getKey().setPadding(new Insets(-1,-1,-1,-1));
            } else {
                entry.getKey().setGraphic(null);
            }
         }
-
-    }
-
-    @Override
-    public void timeFinish() {
-        this.controller.timeExpired();
-    }
-
-    @Override
-    public void showScore(final int finalScore) {
-        Platform.runLater(() -> {
-            this.scoreLbl.setText(Integer.toString(finalScore));
-            this.getController().updateProgress(finalScore);
-            this.getView().setHandleDataScene(SceneType.END_GAME.getFilePath());
-        });
     }
 
     @Override
@@ -191,6 +154,20 @@ public class OneWayFxImpl extends AbstractMiniGameController implements OneWayFx
     private boolean check(final Pair<Integer, Integer> finalPosition) {
         return this.buttons.get(clickedBtn).getX() == finalPosition.getX()
                 && this.buttons.get(clickedBtn).getY() == finalPosition.getY();
+    }
+
+    @Override
+    public void showEndGame(int finalScore) {
+        Platform.runLater(() -> {
+            this.scoreLbl.setText(Integer.toString(finalScore));
+            this.getController().updateProgress(finalScore);
+            this.getView().setHandleDataScene(SceneType.END_GAME.getFilePath());
+        });
+    }
+
+    @Override
+    public void stopTimer() {
+        this.controller.stopTimer();
     }
 
 }

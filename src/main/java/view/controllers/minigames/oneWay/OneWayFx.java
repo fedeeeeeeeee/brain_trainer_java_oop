@@ -15,7 +15,5 @@ public interface OneWayFx {
 
     void updateView(Pair<Integer, Integer> initialPosition);
 
-    void showScore(int finalScore);
-
     void showCorrectAnswer(Pair<Integer, Integer> finalPosition);
 }

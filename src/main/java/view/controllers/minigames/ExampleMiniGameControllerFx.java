@@ -10,7 +10,7 @@ import model.minigames.ExampleMiniGameModel;
 import timer.GameTimer;
 import view.SceneType;
 
-public class ExampleMiniGameControllerFx  extends AbstractMiniGameControllerFx {
+public class ExampleMiniGameControllerFx extends AbstractMiniGameControllerFx {
 
     private static final int SECONDS = 10;
     private ExampleMiniGameControllerImpl exampleController;

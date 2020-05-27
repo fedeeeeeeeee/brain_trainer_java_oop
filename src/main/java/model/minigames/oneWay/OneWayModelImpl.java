@@ -147,4 +147,9 @@ public class OneWayModelImpl implements OneWayModel {
         return this.arrows;
     }
 
+    @Override
+    public int getSeconds() {
+        return this.duration;
+    }
+
 }

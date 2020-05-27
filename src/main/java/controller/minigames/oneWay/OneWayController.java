@@ -1,6 +1,8 @@
 package controller.minigames.oneWay;
 
-public interface OneWayController {
+import controller.minigames.MiniGameController;
+
+public interface OneWayController extends MiniGameController {
 
     void hit(int x, int y);
 
@@ -11,5 +13,9 @@ public interface OneWayController {
     void firstInit();
 
     void showSolution();
+    
+    void stopTimer();
+    
+    void startTimer();
 
 }

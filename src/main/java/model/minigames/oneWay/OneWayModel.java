@@ -26,4 +26,6 @@ public interface OneWayModel {
 
     int getArrowsCount();
 
+    int getSeconds();
+
 }
