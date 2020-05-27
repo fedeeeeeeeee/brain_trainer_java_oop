@@ -9,17 +9,12 @@ import view.controllers.FxController;
 public interface FxMiniGameController extends FxController {
 
     /**
-     * Update the seconds of the timer on the view.
+     * Show the seconds of the timer on the view.
      * 
      * @param second 
      *              the seconds of the timer
      */
-    void updateTimerView(int second);
-
-    /**
-     * Indicate that the time available is finished.
-     */
-    void timeFinish();
+    void showTimerSeconds(int second);
 
     /**
      * Initialize the current minigame with specific settings.
@@ -27,4 +22,24 @@ public interface FxMiniGameController extends FxController {
      */
     void initGame();
 
+    /**
+     * Show the end game scene.
+     * 
+     * @param finalScore
+     *              the score of the minigame
+     */
+    void showEndGame(int finalScore);
+
+    /**
+     * Set the initial seconds.
+     * 
+     * @param initialSeconds
+     *          initialSeconds of the timer
+     */
+    void setInitialSeconds(int initialSeconds);
+
+    /**
+     * Stop timer.
+     */
+    void stopTimer();
 }
