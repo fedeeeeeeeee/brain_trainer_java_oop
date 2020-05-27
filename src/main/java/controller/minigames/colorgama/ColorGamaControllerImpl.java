@@ -17,9 +17,10 @@ import view.controllers.minigames.colorgama.ColorGamaFxImpl;
  */
 public class ColorGamaControllerImpl implements ColorGamaController {
 
+    private static final long DELAY = 0;
+    private static final long PERIOD = 1000;
     private final ColorGamaModel model;
     private final ColorGamaFxImpl view;
-    private QuestionType currentQuestion;
     private final GameTimer gameTimer;
     private final Timer timer;
 
@@ -39,59 +40,13 @@ public class ColorGamaControllerImpl implements ColorGamaController {
         this.gameTimer = new GameTimer(this.model.getDifficultyValue().getSeconds(), this);
     }
 
-
-    private void setQuestion() {
-        this.view.showNextQuestion(this.currentQuestion.getQuestionName());
-        if (this.currentQuestion.equals(QuestionType.COLOR)) {
-            final Triple<Integer, Double, Double> values = this.model.getRightColorValues();
-            this.view.showQuestionColor(values.getLeft(), values.getMiddle(), values.getRight());
-        } else {
-            this.view.hideQuestionColor();
-        }
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public void startGame() {
-        this.view.drawGrid(this.model.getDifficultyValue().getGridSize());
-        this.nextLevel();
-    }
-
     /**
      * {@inheritDoc}
      */
     @Override
     public void startTimer() {
-      this.timer.schedule(this.gameTimer, 0, 1000);
+      this.timer.schedule(this.gameTimer, DELAY, PERIOD);
       this.view.setInitialSeconds(this.model.getDifficultyValue().getSeconds());
-    }
-
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public void nextLevel() {
-        this.currentQuestion = this.model.nextQuestion();
-        this.view.showNext(this.model.getComputeColor());
-        this.model.calculateRightColorValue();
-        this.view.setRightColor(this.model.getRightIndex(), this.model.getRightColorValues());
-        this.setQuestion();
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public void checkAnswer(final int index) {
-        if (this.model.getRightIndex() == index) {
-            this.view.rightAnswer();
-            this.model.addPoint();
-        } else {
-            this.view.wrongAnswer();
-        }
     }
 
     /**
@@ -117,6 +72,47 @@ public class ColorGamaControllerImpl implements ColorGamaController {
     public void stopTimer() {
         this.timer.cancel();
         this.gameTimer.cancel();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void startGame() {
+        this.view.initGrid(this.model.getDifficultyValue().getGridSize());
+        this.next();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void next() {
+        final QuestionType currentQuestion = this.model.nextQuestion();
+
+        this.view.renderNext(this.model.getComputeColor(), currentQuestion.getQuestionName());
+        this.model.calculateRightColorValue();
+        this.view.setRightColor(this.model.getRightIndex(), this.model.getRightColorValues());
+
+        if (currentQuestion.equals(QuestionType.COLOR)) {
+            final Triple<Integer, Double, Double> values = this.model.getRightColorValues();
+            this.view.showQuestionColor(values.getLeft(), values.getMiddle(), values.getRight());
+        } else {
+            this.view.hideQuestionColor();
+        }
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void checkAnswer(final int index) {
+        if (this.model.getRightIndex() == index) {
+            this.view.rightAnswer();
+            this.model.addPoint();
+        } else {
+            this.view.wrongAnswer();
+        }
     }
 
 }
