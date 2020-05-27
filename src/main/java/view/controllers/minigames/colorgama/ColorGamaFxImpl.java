@@ -23,15 +23,14 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
 import javafx.util.Duration;
 import model.minigames.colorgama.ComputeColor;
-import timer.GameTimer;
 import view.SceneType;
-import view.controllers.minigames.AbstractMiniGameController;
+import view.controllers.minigames.AbstractMiniGameControllerFx;
 
 /**
  * This class implements {@link ColorGamaFx}.
  *
  */
-public class ColorGamaFxImpl extends AbstractMiniGameController implements ColorGamaFx {
+public class ColorGamaFxImpl extends AbstractMiniGameControllerFx implements ColorGamaFx {
 
     private static final int BT_SIZE = 300;
 
@@ -102,27 +101,8 @@ public class ColorGamaFxImpl extends AbstractMiniGameController implements Color
     @Override
     public void initGame() {
         this.colorGamaController = new ColorGamaControllerImpl(this, this.getController().getDifficultyLevel());
+        this.colorGamaController.startTimer();
         this.colorGamaController.startGame();
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public void timeFinish() {
-       this.colorGamaController.timeExpired();
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public void endGame(final int finalScore) {
-        Platform.runLater(() -> {
-            this.getController().updateProgress(finalScore);
-            this.getView().setHandleDataScene(SceneType.END_GAME.getFilePath());
-        });
-
     }
 
     /**
@@ -191,8 +171,19 @@ public class ColorGamaFxImpl extends AbstractMiniGameController implements Color
      * {@inheritDoc}
      */
     @Override
-    public void startTimer(final int seconds) {
-        this.setGameTimer(new GameTimer(seconds, this)); 
+    public void showEndGame(final int finalScore) {
+        Platform.runLater(() -> {
+            this.getController().updateProgress(finalScore);
+            this.getView().setHandleDataScene(SceneType.END_GAME.getFilePath());
+        });
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void stopTimer() {
+        this.colorGamaController.stopTimer();
     }
 
 }

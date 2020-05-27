@@ -1,12 +1,15 @@
 package controller.minigames.colorgama;
 
+import java.util.Timer;
+
 import org.apache.commons.lang3.tuple.Triple;
 
 import model.DifficultyLevel;
 import model.minigames.colorgama.ColorGamaModel;
 import model.minigames.colorgama.ColorGamaModelImpl;
 import model.minigames.colorgama.QuestionType;
-import view.controllers.minigames.colorgama.ColorGamaFx;
+import timer.GameTimer;
+import view.controllers.minigames.colorgama.ColorGamaFxImpl;
 
 /**
  * This class implements {@link ColorGamaController}.
@@ -15,8 +18,10 @@ import view.controllers.minigames.colorgama.ColorGamaFx;
 public class ColorGamaControllerImpl implements ColorGamaController {
 
     private final ColorGamaModel model;
-    private final ColorGamaFx view;
+    private final ColorGamaFxImpl view;
     private QuestionType currentQuestion;
+    private final GameTimer gameTimer;
+    private final Timer timer;
 
     /**
      * Constructor of {@link ColorGamaController}.
@@ -27,9 +32,11 @@ public class ColorGamaControllerImpl implements ColorGamaController {
      * @param difficulty
      *          the difficulty selected
      */
-    public ColorGamaControllerImpl(final ColorGamaFx view, final DifficultyLevel difficulty) {
+    public ColorGamaControllerImpl(final ColorGamaFxImpl view, final DifficultyLevel difficulty) {
         this.model = new ColorGamaModelImpl(difficulty);
         this.view = view;
+        this.timer = new Timer();
+        this.gameTimer = new GameTimer(this.model.getDifficultyValue().getSeconds(), this);
     }
 
 
@@ -48,7 +55,6 @@ public class ColorGamaControllerImpl implements ColorGamaController {
      */
     @Override
     public void startGame() {
-        this.view.startTimer(this.model.getDifficultyValue().getSeconds());
         this.view.drawGrid(this.model.getDifficultyValue().getGridSize());
         this.nextLevel();
     }
@@ -57,9 +63,11 @@ public class ColorGamaControllerImpl implements ColorGamaController {
      * {@inheritDoc}
      */
     @Override
-    public void timeExpired() {
-        this.view.endGame(this.model.getFinalScore());
+    public void startTimer() {
+      this.timer.schedule(this.gameTimer, 0, 1000);
+      this.view.setInitialSeconds(this.model.getDifficultyValue().getSeconds());
     }
+
 
     /**
      * {@inheritDoc}
@@ -84,6 +92,31 @@ public class ColorGamaControllerImpl implements ColorGamaController {
         } else {
             this.view.wrongAnswer();
         }
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void updateTimerView(final int second) {
+        this.view.showTimerSeconds(second);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void timeFinish() {
+        this.view.showEndGame(this.model.getFinalScore());
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void stopTimer() {
+        this.timer.cancel();
+        this.gameTimer.cancel();
     }
 
 }

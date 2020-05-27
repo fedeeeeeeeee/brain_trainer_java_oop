@@ -11,14 +11,6 @@ import model.minigames.colorgama.ComputeColor;
 public interface ColorGamaFx {
 
     /**
-     * Switch to the end scene of the game.
-     * 
-     * @param finalScore
-     *          the final score obtained
-     */
-    void endGame(int finalScore);
-
-    /**
      * Fill a grid with buttons.
      *
      * @param size
@@ -70,9 +62,5 @@ public interface ColorGamaFx {
      */
     void setRightColor(int index, Triple<Integer, Double, Double> triple);
 
-    /**
-     * 
-     * @param seconds
-     */
-    void startTimer(int seconds);
+
 }

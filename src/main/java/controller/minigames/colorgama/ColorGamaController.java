@@ -1,21 +1,17 @@
 package controller.minigames.colorgama;
 
+import controller.minigames.MiniGameController;
+
 /**
  * The controller interface of ColorGama minigame.
  *
  */
-public interface ColorGamaController {
+public interface ColorGamaController extends MiniGameController {
 
     /**
      * Start ColorGama minigame.
      */
     void startGame();
-
-    /**
-     * The time is expired. 
-     * 
-     */
-    void timeExpired();
 
     /**
      * Check the response given by the user.
@@ -29,4 +25,14 @@ public interface ColorGamaController {
      * Reset the game for the next level.
      */
     void nextLevel();
+
+    /**
+     * 
+     */
+    void stopTimer();
+
+    /**
+     * 
+     */
+    void startTimer();
 }
