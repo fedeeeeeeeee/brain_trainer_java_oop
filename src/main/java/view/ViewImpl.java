@@ -23,6 +23,7 @@ public class ViewImpl extends Application implements View {
     private final SceneLoader sceneLoader;
     private FxController currentSceneController;
     private Stage stage;
+    private boolean inGame;
 
     /**
      * Simple constructor of {@link View}.
@@ -57,6 +58,9 @@ public class ViewImpl extends Application implements View {
      */
     @Override
     public void setHandleDataScene(final String path) {
+        if (this.inGame) {
+            this.inGame = false;
+        }
         this.switchScene(path);
         ((FxHandleDataScene) currentSceneController).init();
     }
@@ -66,6 +70,7 @@ public class ViewImpl extends Application implements View {
      */
     @Override
     public void setMiniGameScene(final String path) {
+        this.inGame = true;
         this.switchScene(path);
         ((FxMiniGameController) currentSceneController).initGame();
     }
@@ -75,6 +80,7 @@ public class ViewImpl extends Application implements View {
      */
     @Override
     public void start(final Stage stage) throws Exception {
+        this.inGame = false;
         this.stage = stage;
         stage.setWidth(WIDTH);
         stage.setHeight(HEIGHT);
@@ -86,6 +92,10 @@ public class ViewImpl extends Application implements View {
         this.stage.setOnCloseRequest((e) -> {
             if (this.controller.getUserPlayer() != null) {
                 controller.saveData();
+            }
+
+            if (this.inGame) {
+                ((FxMiniGameController) currentSceneController).stopTimer();
             }
         });
     }
