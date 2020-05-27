@@ -14,6 +14,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.VBox;
 import javafx.util.Duration;
 import model.DifficultyLevel;
 import timer.GameTimer;
@@ -45,7 +46,7 @@ public class TrueColorFxImpl extends AbstractMiniGameControllerFx implements Tru
 	@FXML
 	private Button trueColorBtn2;
 	@FXML
-	private GridPane gridPane;
+	private VBox vBoxId;
 
 	private Button currentAnswer;
 
@@ -101,10 +102,29 @@ public class TrueColorFxImpl extends AbstractMiniGameControllerFx implements Tru
 	}
 
 	private void addButton() {
+//		 for (int i = 0; i < numOperations; i++) {
+//	            final Button bt = new Button();
+//	            bt.setStyle("-fx-font-size: 20");
+//	            // bt.setMinSize(bt.USE_COMPUTED_SIZE, bt.USE_COMPUTED_SIZE);
+//	            bt.setPrefWidth(WIDTH);
+//	            this.buttons.add(bt);
+//	            bt.addEventHandler(MouseEvent.MOUSE_CLICKED, ev);
+//	            this.panel.getChildren().add(bt);
+//	        }
+		this.meanColorBtn = new Button();
+		this.meanColorBtn.setPrefSize(300, 300);
+		this.meanColorBtn.setStyle("-fx-font-size: 50");
+		this.vBoxId.getChildren().add(meanColorBtn);
+		
+		this.trueColorBtn = new Button();
+		this.trueColorBtn.setPrefSize(300, 300);
+		this.trueColorBtn.setStyle("-fx-font-size: 50");
+		this.vBoxId.getChildren().add(trueColorBtn);
+		
 		this.trueColorBtn2 = new Button();
 		this.trueColorBtn2.setPrefSize(300, 300);
-		this.trueColorBtn2.setStyle("-fx-font-size: 30");
-		this.gridPane.add(this.trueColorBtn2, 1, 5);
+		this.trueColorBtn2.setStyle("-fx-font-size: 50");
+		this.vBoxId.getChildren().add(trueColorBtn2);
 	}
 
 	// old endGame()

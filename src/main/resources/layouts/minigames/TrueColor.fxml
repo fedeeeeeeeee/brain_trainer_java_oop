@@ -28,10 +28,6 @@
           <RowConstraints maxHeight="1.7976931348623157E308" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
           <RowConstraints maxHeight="1.7976931348623157E308" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
           <RowConstraints maxHeight="1.7976931348623157E308" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-            <RowConstraints maxHeight="1.7976931348623157E308" minHeight="30.0" prefHeight="75.0" vgrow="SOMETIMES" />
-            <RowConstraints maxHeight="1.7976931348623157E308" minHeight="30.0" prefHeight="75.0" vgrow="SOMETIMES" />
-            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
             <Label fx:id="timerLbl" alignment="CENTER_LEFT" prefHeight="59.0" prefWidth="42.0" text="Time" textAlignment="CENTER" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
@@ -54,47 +50,33 @@
                </padding>
             </Label>
             <ProgressBar fx:id="progressBar" minWidth="70.0" prefWidth="200.0" progress="0.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
-            <Button fx:id="meanColorBtn" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="20.0" minWidth="70.0" mnemonicParsing="false" prefHeight="75.0" prefWidth="150.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER">
-               <font>
-                  <Font name="System Bold Italic" size="24.0" />
-               </font>
-               <GridPane.margin>
-                  <Insets bottom="10.0" />
-               </GridPane.margin>
-            </Button>
-            <Button fx:id="trueColorBtn" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="20.0" minWidth="70.0" mnemonicParsing="false" prefHeight="75.0" prefWidth="150.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="4" GridPane.valignment="CENTER">
-               <font>
-                  <Font name="System Bold Italic" size="24.0" />
-               </font>
-               <GridPane.margin>
-                  <Insets bottom="10.0" />
-               </GridPane.margin>
-            </Button>
-            <Label text="ink color" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="6" GridPane.valignment="CENTER">
-               <effect>
-                  <DropShadow color="#a8aeaa" />
-               </effect>
-               <font>
-                  <Font size="18.0" />
-               </font>
-            </Label>
          </children>
       </GridPane>
+      <VBox fx:id="vBoxId" alignment="CENTER" prefHeight="319.0" prefWidth="500.0" VBox.vgrow="SOMETIMES" />
       <GridPane>
         <columnConstraints>
           <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
         </columnConstraints>
         <rowConstraints>
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
           <RowConstraints vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <Label text="Does the meaning match the ink color?" GridPane.halignment="CENTER" GridPane.hgrow="NEVER" GridPane.valignment="CENTER">
+            <Label text="Does the meaning match the ink color?" GridPane.halignment="CENTER" GridPane.hgrow="NEVER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
                <font>
                   <Font size="18.0" />
                </font>
                <GridPane.margin>
                   <Insets bottom="5.0" />
                </GridPane.margin>
+            </Label>
+            <Label text="ink color" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+               <effect>
+                  <DropShadow color="#a8aeaa" />
+               </effect>
+               <font>
+                  <Font size="18.0" />
+               </font>
             </Label>
          </children>
       </GridPane>
