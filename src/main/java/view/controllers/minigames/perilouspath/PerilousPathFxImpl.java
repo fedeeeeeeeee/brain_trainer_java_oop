@@ -3,7 +3,6 @@ package view.controllers.minigames.perilouspath;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
-import java.util.Timer;
 import java.util.function.Function;
 
 import controller.minigames.perilouspath.PerilousPathController;
@@ -24,25 +23,14 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 import javafx.util.Duration;
 import model.minigames.perilouspath.Mine;
-import timer.GameTimer;
 import utility.Pair;
 import view.SceneType;
-import view.controllers.minigames.AbstractMiniGameController;
+import view.controllers.minigames.AbstractMiniGameControllerFx;
 
 /**
  * Implementation of {@link PerilousPathFx}.
  */
-public class PerilousPathFxImpl extends AbstractMiniGameController implements PerilouPathFx {
-
-    /**
-     * The Perilous Path's duration.
-     */
-    private static final int SECONDS = 31;
-
-    /**
-     * The duration dedicated to the memorization of the mines position.
-     */
-    private static final int MINE_SECONDS = 4;
+public class PerilousPathFxImpl extends AbstractMiniGameControllerFx implements PerilouPathFx {
 
     /**
      * The size of the button.
@@ -59,16 +47,11 @@ public class PerilousPathFxImpl extends AbstractMiniGameController implements Pe
     private Label instructions;
 
     @FXML
-    private Label timerLbl;
-
-    @FXML
     private ProgressBar progressBar;
 
     private PerilousPathController controller;
     private Map<Button, Pair<Integer, Integer>> buttons;
-    private Timer secondaryTimer;
-    private boolean timeFinish;
-    private boolean lifeSecondaryTimer;
+    private boolean mineExplosion;
 
     private final EventHandler<MouseEvent> eventHit = (e) -> {
         final Button bt = (Button) e.getSource();
@@ -89,9 +72,22 @@ public class PerilousPathFxImpl extends AbstractMiniGameController implements Pe
         this.controller.resetView();
     };
 
+    private final EventHandler<ActionEvent> eventMines = (e) -> {
+        this.buttons.entrySet().stream()
+                               .forEach(bt -> bt.getKey().setDisable(false));
+        this.controller.updateView();
+    };
+
     private void animation() {
         final Timeline timeline = new Timeline();
-        final KeyFrame keyFrame = new KeyFrame(Duration.millis(1000), eventReset);
+        final KeyFrame keyFrame = new KeyFrame(Duration.millis(1500), eventReset);
+        timeline.getKeyFrames().add(keyFrame);
+        timeline.play();
+    }
+
+    private void secondaryTimer() {
+        final Timeline timeline = new Timeline();
+        final KeyFrame keyFrame = new KeyFrame(Duration.seconds(4), eventMines);
         timeline.getKeyFrames().add(keyFrame);
         timeline.play();
     }
@@ -103,6 +99,7 @@ public class PerilousPathFxImpl extends AbstractMiniGameController implements Pe
     public void initGame() {
         this.controller = new PerilousPathControllerImpl(this.getController().getDifficultyLevel(), this);
         this.buttons = new HashMap<>();
+        this.progressBar.setStyle("-fx-accent: rgb(158,61,100)");
         this.controller.startGame();
     }
 
@@ -153,6 +150,13 @@ public class PerilousPathFxImpl extends AbstractMiniGameController implements Pe
              .forEach(m -> this.buttons.entrySet().stream()
                                                   .filter(bt -> bt.getValue().equals(m.getMinePosition()))
                                                   .forEach(bt -> bt.getKey().setGraphic(image.apply("mine"))));
+        this.buttons.entrySet().stream()
+                               .forEach(bt -> bt.getKey().setDisable(true));
+        this.buttons.entrySet().stream()
+                               .forEach(bt -> bt.getKey().setStyle("-fx-opacity: 1"));
+        if (!this.mineExplosion) {
+            this.secondaryTimer();
+        }
     }
 
     /**
@@ -172,11 +176,12 @@ public class PerilousPathFxImpl extends AbstractMiniGameController implements Pe
     public void showExplosion(final int row, final int col) {
         this.buttons.entrySet().stream()
                                .filter(bt -> bt.getValue().equals(new Pair<>(row, col)))
-                               .forEach(bt -> bt.getKey().setGraphic(image.apply("boomm")));
+                               .forEach(bt -> bt.getKey().setGraphic(image.apply("bang")));
         this.buttons.entrySet().stream()
                                .forEach(bt -> bt.getKey().setDisable(true));
         this.buttons.entrySet().stream()
                                .forEach(bt -> bt.getKey().setStyle("-fx-opacity: 1"));
+        this.mineExplosion = true;
         this.animation();
     }
 
@@ -186,86 +191,25 @@ public class PerilousPathFxImpl extends AbstractMiniGameController implements Pe
     @Override
     public void reset() {
         this.buttons.entrySet().stream().forEach(bt -> bt.getKey().setGraphic(null));
-        this.buttons.entrySet().stream().forEach(bt -> bt.getKey().setStyle(null));
+        this.mineExplosion = false;
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public void startGameTimer() {
-        this.setGameTimer(new GameTimer(SECONDS, this));
-        this.timeFinish = false;
-        this.lifeSecondaryTimer = false;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public void pauseGameTimer() {
-        this.getGameTimer().pause();
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public void restartGameTimer() {
-        this.getGameTimer().restart();
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public void startSecondaryTimer() {
-        this.secondaryTimer = new Timer();
-        this.secondaryTimer.schedule(new GameTimer(MINE_SECONDS, this), 0, 1000);
-        this.lifeSecondaryTimer = true;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public void updateTimerView(final int second) {
-        Platform.runLater(() -> {
-            if (this.lifeSecondaryTimer) {
-                this.instructions.setText("Memorize the mine's position");
-            } else {
-                this.instructions.setText("Find a safe path from start to finish");
-                super.updateTimerView(second);
-                if (second == 0) {
-                    this.timeFinish = true;
-                }
-            }
-            if (this.lifeSecondaryTimer && second == 0) {
-                this.lifeSecondaryTimer = false;
-                this.controller.secondaryTimerExpired();
-            }
-        });
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public void timeFinish() {
-        if (this.timeFinish) {
-            this.secondaryTimer.cancel();
-            this.controller.timerExpired();
-        }
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public void endGame(final int finalScore) {
+    public void showEndGame(final int finalScore) {
         Platform.runLater(() -> {
             this.getController().updateProgress(finalScore);
             this.getView().setHandleDataScene(SceneType.END_GAME.getFilePath());
         });
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void stopTimer() {
+        this.controller.timeFinish();
     }
 }

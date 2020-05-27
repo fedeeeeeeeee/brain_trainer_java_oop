@@ -1,8 +1,10 @@
 package controller.minigames.perilouspath;
 
+import java.util.Timer;
 import model.DifficultyLevel;
 import model.minigames.perilouspath.PerilousPathModel;
 import model.minigames.perilouspath.PerilousPathModelImpl;
+import timer.GameTimer;
 import view.controllers.minigames.perilouspath.PerilousPathFxImpl;
 
 /**
@@ -12,6 +14,8 @@ public class PerilousPathControllerImpl implements PerilousPathController {
 
     private final PerilousPathModel model;
     private final PerilousPathFxImpl view;
+    private final Timer timer;
+    private final GameTimer gameTimer;
 
     /**
      * Constructor of {@link PerilousPathController}.
@@ -22,12 +26,18 @@ public class PerilousPathControllerImpl implements PerilousPathController {
      *                       the view controller
      */
     public PerilousPathControllerImpl(final DifficultyLevel difficultyLevel, final PerilousPathFxImpl perilousPathFx) {
-        this.view = perilousPathFx;
         this.model = new PerilousPathModelImpl(difficultyLevel);
+        this.view = perilousPathFx;
+        this.timer = new Timer();
+        this.gameTimer = new GameTimer(this.model.getSeconds(), this);
     }
 
-    private void updateView() {
-        this.view.restartGameTimer();
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void updateView() {
+        this.gameTimer.restart();
         this.view.reset();
         this.view.showStart(this.model.getStart());
         this.view.showFinish(this.model.getFinish());
@@ -38,8 +48,7 @@ public class PerilousPathControllerImpl implements PerilousPathController {
      */
     @Override
     public void resetView() {
-        this.view.pauseGameTimer();
-        this.view.startSecondaryTimer();
+        this.gameTimer.pause();
         this.model.resetGame();
         this.view.reset();
         this.view.showMines(this.model.getMines());
@@ -51,7 +60,7 @@ public class PerilousPathControllerImpl implements PerilousPathController {
     @Override
     public void startGame() {
         this.view.drawGrid(this.model.getSize());
-        this.view.startGameTimer();
+        this.startTimer();
         this.resetView();
     }
 
@@ -85,7 +94,33 @@ public class PerilousPathControllerImpl implements PerilousPathController {
      * {@inheritDoc}
      */
     @Override
-    public void timerExpired() {
-        this.view.endGame(this.model.getFinalScore());
+    public void updateTimerView(final int second) {
+        this.view.showTimerSeconds(second);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void startTimer() {
+        this.timer.schedule(this.gameTimer, 0, 1000);
+        this.view.setInitialSeconds(this.model.getSeconds());
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void stopTimer() {
+        this.timer.cancel();
+        this.gameTimer.cancel();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void timeFinish() {
+        this.view.showEndGame(this.model.getFinalScore());
     }
 }

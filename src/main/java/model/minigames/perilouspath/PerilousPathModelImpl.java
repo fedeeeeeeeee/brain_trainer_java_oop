@@ -16,7 +16,17 @@ import utility.Pair;
 public class PerilousPathModelImpl implements PerilousPathModel {
 
     /**
-     * Perilous Path's base point.
+     * The Perilous Path's duration.
+     */
+    private static final int SECONDS = 600;
+
+    /**
+     * The duration dedicated to the memorization of the mines position.
+     */
+    private static final int MINE_SECONDS = 4;
+
+    /**
+     * The Perilous Path's base point.
      */
     private static final int BASE_POINT = 10;
 
@@ -63,8 +73,8 @@ public class PerilousPathModelImpl implements PerilousPathModel {
 
     private boolean couldHit(final int row, final int col) {
         final Pair<Integer, Integer> position = new Pair<>(row, col);
-        return this.selected.isEmpty() && position.equals(this.start)
-                || !this.selected.isEmpty() && this.couldMove(position, this.selected.getLast());
+        return this.selected.isEmpty() && position.equals(this.start) || !this.selected.contains(position)
+                && !this.selected.isEmpty() && this.couldMove(position, this.selected.getLast());
     }
 
     private boolean adjacent(final Pair<Integer, Integer> position1, final Pair<Integer, Integer> position2) {
@@ -103,6 +113,7 @@ public class PerilousPathModelImpl implements PerilousPathModel {
         if (this.couldHit(row, col)) {
             this.mines.stream().filter(m -> m.getMinePosition().equals(new Pair<>(row, col))).forEach(m -> m.setExploded());
             this.selected.add(new Pair<>(row, col));
+            System.out.println("selected -> " + this.selected);
             return true;
         }
         return false;
@@ -144,6 +155,22 @@ public class PerilousPathModelImpl implements PerilousPathModel {
      * {@inheritDoc}
      */
     @Override
+    public int getSeconds() {
+        return SECONDS;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public int getMemorizationSeconds() {
+        return MINE_SECONDS;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
     public void addPoint() {
         this.score.addPoint();
     }
@@ -178,8 +205,11 @@ public class PerilousPathModelImpl implements PerilousPathModel {
     @Override
     public void resetGame() {
         this.initStart();
+        System.out.println("start -> " + this.start);
         this.initFinish();
+        System.out.println("finish -> " + this.finish);
         this.initPath();
+        System.out.println("path -> " + this.path);
         this.initMines();
         this.selected.clear();
     }

@@ -58,31 +58,4 @@ public interface PerilouPathFx {
      * Reset the view.
      */
     void reset();
-
-    /**
-     * Start the primary timer of the game.
-     */
-    void startGameTimer();
-
-    /**
-     * Pause the primary timer of the game.
-     */
-    void pauseGameTimer();
-
-    /**
-     * Restart the primary timer of the game.
-     */
-    void restartGameTimer();
-
-    /**
-     * Start the secondary timer of the game.
-     */
-    void startSecondaryTimer();
-
-    /**
-     * Shows the final score.
-     * 
-     * @param finalScore
-     */
-    void endGame(int finalScore);
 }

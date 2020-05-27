@@ -47,6 +47,20 @@ public interface PerilousPathModel {
     Set<Mine> getMines();
 
     /**
+     * Gets the game's duration.
+     * 
+     * @return the seconds
+     */
+    int getSeconds();
+
+    /**
+     * Gets the memorization's duration.
+     * 
+     * @return the seconds
+     */
+    int getMemorizationSeconds();
+
+    /**
      * Add point when user finds the right path.
      */
     void addPoint();
