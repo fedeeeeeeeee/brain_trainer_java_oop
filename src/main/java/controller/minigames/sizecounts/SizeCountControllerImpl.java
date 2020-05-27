@@ -1,13 +1,23 @@
 package controller.minigames.sizecounts;
 
+import java.util.Timer;
+
 import model.minigames.sizecount.SizeCountModel;
 import model.minigames.sizecount.SizeCountModelImpl;
+import timer.GameTimer;
 import view.controllers.minigames.sizecount.SizeCountFxImpl;
 
 public class SizeCountControllerImpl implements SizeCountController {
 
+    /**
+     * The seconds of the {@link GameTimer}.
+     */
+    private static final int SECONDS = 50;
+
     private final SizeCountModel model;
     private final SizeCountFxImpl view;
+    private final GameTimer gameTimer;
+    private final Timer timer;
 
     /**
      * Constructor for {@link SizeCountController}.
@@ -15,17 +25,11 @@ public class SizeCountControllerImpl implements SizeCountController {
      * @param view the view of the game
      */
     public SizeCountControllerImpl(final SizeCountFxImpl view) {
+        this.timer = new Timer();
+        this.gameTimer = new GameTimer(SECONDS, this);
         this.view = view;
         this.model = new SizeCountModelImpl(this.view.getController().getDifficultyLevel());
         this.view.setOperations(this.model.getNumOfOperations());
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public void resetGame() {
-        this.view.draw(this.model.getOperations());
     }
 
     /**
@@ -44,7 +48,7 @@ public class SizeCountControllerImpl implements SizeCountController {
      * {@inheritDoc}
      */
     @Override
-    public void computeOperations() {
+    public void resetGame() {
         this.model.reset();
         this.view.draw(this.model.getOperations());
     }
@@ -53,8 +57,34 @@ public class SizeCountControllerImpl implements SizeCountController {
      * {@inheritDoc}
      */
     @Override
-    public void timeExpired() {
+    public void updateTimerView(final int second) {
+        this.view.showTimerSeconds(second);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void timeFinish() {
         this.view.showEndGame(this.model.getScore());
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void stopTimer() {
+        this.timer.cancel();
+        this.gameTimer.cancel();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void startTimer() {
+        this.timer.schedule(this.gameTimer, 0, 1000);
+        this.view.setInitialSeconds(SECONDS);
     }
 
 }

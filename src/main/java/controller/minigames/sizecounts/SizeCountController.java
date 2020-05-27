@@ -1,17 +1,13 @@
 package controller.minigames.sizecounts;
 
+import controller.minigames.MiniGameController;
+
 /**
  * 
  * A interface controller for the game size count.
  *
  */
-public interface SizeCountController {
-
-    /**
-     * Resets the game for a new match.
-     */
-    void resetGame();
-
+public interface SizeCountController extends MiniGameController {
     /**
      * Informs the model of the new attempt of the user.
      * 
@@ -20,14 +16,18 @@ public interface SizeCountController {
     void newAttempt(String answer);
 
     /**
-     * The time is expired so the game must ended.
+     * Resets the game for a new match.
      */
-    void timeExpired();
+    void resetGame();
 
     /**
-     * Asks the model to compute new operations.
+     * Start the {@link GameTimer}.
      */
-    void computeOperations();
+    void startTimer();
 
+    /**
+     * Stop the {@link GameTimer}.
+     */
+    void stopTimer();
 
 }
