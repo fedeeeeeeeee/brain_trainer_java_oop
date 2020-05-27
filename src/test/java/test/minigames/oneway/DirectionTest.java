@@ -9,14 +9,20 @@ import org.junit.jupiter.api.Test;
 
 import model.minigames.oneWay.Direction;
 
+/**
+ * Class to test if {@link Direction} works correctly.
+ *
+ */
 public class DirectionTest {
     private List<Direction> steps = new ArrayList<>();
     private int counter = 0;
 
+    /**
+     * Test if steps have the correct increments.
+     * 
+     */
     @Test
     public void deltaTest() {
-        // this.steps.addAll(Arrays.asList(Direction.UP, Direction.DOWN, Direction.LEFT, Direction.RIGHT));
-
         this.steps.add(Direction.UP);
         this.checkPosition(-1, 0);
 
