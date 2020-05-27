@@ -5,7 +5,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<VBox prefHeight="301.0" prefWidth="325.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.minigames.ExampleMiniGameController">
+<VBox prefHeight="301.0" prefWidth="325.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.controllers.minigames.ExampleMiniGameControllerFx">
 
 	<children>
 		<Button fx:id="btn" alignment="CENTER" onMouseClicked="#btnOnClickHandler" text="Say Hello!" />
