@@ -12,6 +12,7 @@ import javafx.animation.PauseTransition;
 import javafx.application.Platform;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.geometry.Insets;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
@@ -54,6 +55,8 @@ public class OneWayFxImpl extends AbstractMiniGameController implements OneWayFx
 
     private Button clickedBtn;
     private Button correctBtn;
+    private Button startBtn;
+
     private final PauseTransition pause = new PauseTransition(Duration.seconds(0.5));
 
     private final EventHandler<MouseEvent> gridEventHandler = (e) -> {
@@ -71,6 +74,7 @@ public class OneWayFxImpl extends AbstractMiniGameController implements OneWayFx
             this.buttons.keySet().forEach(b -> b.setDisable(false));
             correctBtn.setStyle(null);
         });
+        
         pause.play();
 
         this.getGameTimer().restart();
@@ -113,7 +117,8 @@ public class OneWayFxImpl extends AbstractMiniGameController implements OneWayFx
 
     private void loadImages(int idx, final List<Direction> steps) {
         final String txt = steps.get(idx).toString();
-        Direction direction = Arrays.asList(Direction.values()).stream().filter(d -> d.toString().equals(txt))
+        Direction direction = Arrays.asList(Direction.values()).stream()
+                .filter(d -> d.toString().equals(txt))
                 .findFirst().get();
 
         ImageView img = new ImageView(direction.getPath());
@@ -136,10 +141,27 @@ public class OneWayFxImpl extends AbstractMiniGameController implements OneWayFx
     }
 
     @Override
-    public void updateView(final Pair<Integer, Integer> initialPosition) {
+    public void updateView(final Pair<Integer, Integer> initialPosition) {             
         for (Entry<Button, Pair<Integer, Integer>> entry : this.buttons.entrySet()) {
-            entry.getKey().setText(initialPosition.equals(entry.getValue()) ? "Start" : "");
+           if(initialPosition.equals(entry.getValue())) {
+                  ImageView img = new ImageView("/images/start.png");
+               img.setFitHeight(50);
+               img.setFitWidth(50);
+               
+
+//               Image image = new Image("/images/start.png",entry.getKey().getWidth(), entry.getKey().getHeight(), false, true, true);
+//               BackgroundImage bImage = new BackgroundImage(image, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER, new BackgroundSize(entry.getKey().getWidth(), entry.getKey().getHeight(), true, true, true, false));
+//
+//               Background backGround = new Background(bImage);
+//               entry.getKey().setBackground(backGround);
+               
+               entry.getKey().setGraphic(img);
+               entry.getKey().setPadding(new Insets(-1,-1,-1,-1));
+           } else {
+               entry.getKey().setGraphic(null);
+           }
         }
+
     }
 
     @Override
@@ -162,7 +184,7 @@ public class OneWayFxImpl extends AbstractMiniGameController implements OneWayFx
                 .filter(e -> e.getValue().getX() == finalPosition.getX() && e.getValue().getY() == finalPosition.getY())
                 .map(x -> x.getKey()).findAny().get();
 
-        correctBtn.setStyle(BACKGROUND);
+        this.correctBtn.setStyle(BACKGROUND);
         this.correctBtn.setStyle(check(finalPosition) ? GREEN : RED);
     }
 

@@ -6,6 +6,7 @@ import model.minigames.oneWay.Direction;
 import utility.Pair;
 
 public interface OneWayFx {
+    
     void drawArrow(List<Direction> steps);
 
     void updateArrows(List<Direction> steps);

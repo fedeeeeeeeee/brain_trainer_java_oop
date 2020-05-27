@@ -14,6 +14,11 @@ public class OneWayModelImpl implements OneWayModel {
     private static final int EASY_LEVEL_ARROW = 3;
     private static final int NORMAL_LEVEL_ARROW = 4;
     private static final int HARD_LEVEL_ARROW = 5;
+    
+    private static final int EASY_LEVEL_SEC = 45;
+    private static final int NORMAL_LEVEL_SEC = 30;
+    private static final int HARD_LEVEL_SEC = 40;
+    
     private static final int SIZE = 6;
     private static final int BASE_POINT = 10;
 
@@ -26,6 +31,7 @@ public class OneWayModelImpl implements OneWayModel {
 
     private int arrows;
     private int size;
+    private int duration;
 
     public OneWayModelImpl(final DifficultyLevel selectedDifficulty) {
         this.difficulty = selectedDifficulty;
@@ -38,16 +44,18 @@ public class OneWayModelImpl implements OneWayModel {
         switch (this.difficulty) {
         case EASY:
             this.arrows = EASY_LEVEL_ARROW;
+            this.duration = EASY_LEVEL_SEC;
             break;
         case NORMAL:
             this.arrows = NORMAL_LEVEL_ARROW;
+            this.duration = NORMAL_LEVEL_SEC;
             break;
         case HARD:
             this.arrows = HARD_LEVEL_ARROW;
+            this.duration = NORMAL_LEVEL_SEC;
             break;
         }
     } 
-
 
     @Override
     public void initializeOneWay() {
