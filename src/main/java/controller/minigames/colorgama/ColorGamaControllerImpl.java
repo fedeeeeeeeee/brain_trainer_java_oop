@@ -1,8 +1,11 @@
 package controller.minigames.colorgama;
 
+import org.apache.commons.lang3.tuple.Triple;
+
 import model.DifficultyLevel;
 import model.minigames.colorgama.ColorGamaModel;
 import model.minigames.colorgama.ColorGamaModelImpl;
+import model.minigames.colorgama.QuestionType;
 import view.controllers.minigames.colorgama.ColorGamaFx;
 
 /**
@@ -13,6 +16,7 @@ public class ColorGamaControllerImpl implements ColorGamaController {
 
     private final ColorGamaModel model;
     private final ColorGamaFx view;
+    private QuestionType currentQuestion;
 
     /**
      * Constructor of {@link ColorGamaController}.
@@ -28,13 +32,25 @@ public class ColorGamaControllerImpl implements ColorGamaController {
         this.view = view;
     }
 
+
+    private void setQuestion() {
+        this.view.showNextQuestion(this.currentQuestion.getQuestionName());
+        if (this.currentQuestion.equals(QuestionType.COLOR)) {
+            final Triple<Integer, Double, Double> values = this.model.getRightColorValues();
+            this.view.showQuestionColor(values.getLeft(), values.getMiddle(), values.getRight());
+        } else {
+            this.view.hideQuestionColor();
+        }
+    }
+
     /**
      * {@inheritDoc}
      */
     @Override
     public void startGame() {
-        this.view.drawGrid(this.model.getDifficultyValue().getGridSize(), this.model.getComputeColor());
-
+        this.view.startTimer(this.model.getDifficultyValue().getSeconds());
+        this.view.drawGrid(this.model.getDifficultyValue().getGridSize());
+        this.nextLevel();
     }
 
     /**
@@ -49,11 +65,22 @@ public class ColorGamaControllerImpl implements ColorGamaController {
      * {@inheritDoc}
      */
     @Override
+    public void nextLevel() {
+        this.currentQuestion = this.model.nextQuestion();
+        this.view.showNext(this.model.getComputeColor());
+        this.model.calculateRightColorValue();
+        this.view.setRightColor(this.model.getRightIndex(), this.model.getRightColorValues());
+        this.setQuestion();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
     public void checkAnswer(final int index) {
         if (this.model.getRightIndex() == index) {
-            this.model.nextQuestion();
+            this.view.rightAnswer();
             this.model.addPoint();
-            this.view.showNext(this.model.getComputeColor());
         } else {
             this.view.wrongAnswer();
         }
