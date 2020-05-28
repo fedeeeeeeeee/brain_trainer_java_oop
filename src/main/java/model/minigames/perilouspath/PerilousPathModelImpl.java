@@ -18,12 +18,7 @@ public class PerilousPathModelImpl implements PerilousPathModel {
     /**
      * The Perilous Path's duration.
      */
-    private static final int SECONDS = 600;
-
-    /**
-     * The duration dedicated to the memorization of the mines position.
-     */
-    private static final int MINE_SECONDS = 4;
+    private static final int SECONDS = 30;
 
     /**
      * The Perilous Path's base point.
@@ -113,7 +108,6 @@ public class PerilousPathModelImpl implements PerilousPathModel {
         if (this.couldHit(row, col)) {
             this.mines.stream().filter(m -> m.getMinePosition().equals(new Pair<>(row, col))).forEach(m -> m.setExploded());
             this.selected.add(new Pair<>(row, col));
-            System.out.println("selected -> " + this.selected);
             return true;
         }
         return false;
@@ -163,14 +157,6 @@ public class PerilousPathModelImpl implements PerilousPathModel {
      * {@inheritDoc}
      */
     @Override
-    public int getMemorizationSeconds() {
-        return MINE_SECONDS;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
     public void addPoint() {
         this.score.addPoint();
     }
@@ -205,11 +191,8 @@ public class PerilousPathModelImpl implements PerilousPathModel {
     @Override
     public void resetGame() {
         this.initStart();
-        System.out.println("start -> " + this.start);
         this.initFinish();
-        System.out.println("finish -> " + this.finish);
         this.initPath();
-        System.out.println("path -> " + this.path);
         this.initMines();
         this.selected.clear();
     }

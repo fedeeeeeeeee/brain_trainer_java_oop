@@ -18,6 +18,11 @@ public interface PerilouPathFx {
     void drawGrid(int size);
 
     /**
+     * Restore the view.
+     */
+    void restore();
+
+    /**
      * Shows the starting point from which the user must depart.
      * 
      * @param start
@@ -53,9 +58,4 @@ public interface PerilouPathFx {
      * @param col
      */
     void showExplosion(int row, int col);
-
-    /**
-     * Reset the view.
-     */
-    void reset();
 }

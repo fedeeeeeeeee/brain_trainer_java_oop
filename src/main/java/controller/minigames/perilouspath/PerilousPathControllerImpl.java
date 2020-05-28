@@ -38,7 +38,6 @@ public class PerilousPathControllerImpl implements PerilousPathController {
     @Override
     public void updateView() {
         this.gameTimer.restart();
-        this.view.reset();
         this.view.showStart(this.model.getStart());
         this.view.showFinish(this.model.getFinish());
     }
@@ -50,7 +49,6 @@ public class PerilousPathControllerImpl implements PerilousPathController {
     public void resetView() {
         this.gameTimer.pause();
         this.model.resetGame();
-        this.view.reset();
         this.view.showMines(this.model.getMines());
     }
 
@@ -74,6 +72,7 @@ public class PerilousPathControllerImpl implements PerilousPathController {
         }
         if (this.model.isDone()) {
             this.model.addPoint();
+            this.view.restore();
             this.resetView();
         }
         if (this.model.isFailed()) {

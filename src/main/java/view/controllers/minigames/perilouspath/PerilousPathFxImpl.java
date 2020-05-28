@@ -33,6 +33,16 @@ import view.controllers.minigames.AbstractMiniGameControllerFx;
 public class PerilousPathFxImpl extends AbstractMiniGameControllerFx implements PerilouPathFx {
 
     /**
+     * The duration dedicated to the memorization of the mines position.
+     */
+    private static final int MILLIS_MEMORIZATION_MINES = 3000;
+
+    /**
+     * The duration dedicated to the visualization of the mine's explosion.
+     */
+    private static final int MILLIS_VISUALIZATION_EXPLOSION = 1000;
+
+    /**
      * The size of the button.
      */
     private static final int BUTTON_SIZE = 100;
@@ -67,27 +77,23 @@ public class PerilousPathFxImpl extends AbstractMiniGameControllerFx implements 
     };
 
     private final EventHandler<ActionEvent> eventReset = (e) -> {
-        this.buttons.entrySet().stream()
-                               .forEach(bt -> bt.getKey().setDisable(false));
+        this.restore();
         this.controller.resetView();
     };
 
-    private final EventHandler<ActionEvent> eventMines = (e) -> {
-        this.buttons.entrySet().stream()
-                               .forEach(bt -> bt.getKey().setDisable(false));
+    private final EventHandler<ActionEvent> eventUpdate = (e) -> {
+        this.restore();
         this.controller.updateView();
     };
 
     private void animation() {
         final Timeline timeline = new Timeline();
-        final KeyFrame keyFrame = new KeyFrame(Duration.millis(1500), eventReset);
-        timeline.getKeyFrames().add(keyFrame);
-        timeline.play();
-    }
-
-    private void secondaryTimer() {
-        final Timeline timeline = new Timeline();
-        final KeyFrame keyFrame = new KeyFrame(Duration.seconds(4), eventMines);
+        KeyFrame keyFrame;
+        if (mineExplosion) {
+            keyFrame = new KeyFrame(Duration.millis(MILLIS_VISUALIZATION_EXPLOSION), eventReset);
+        } else {
+            keyFrame = new KeyFrame(Duration.millis(MILLIS_MEMORIZATION_MINES), eventUpdate);
+        }
         timeline.getKeyFrames().add(keyFrame);
         timeline.play();
     }
@@ -125,6 +131,16 @@ public class PerilousPathFxImpl extends AbstractMiniGameControllerFx implements 
      * {@inheritDoc}
      */
     @Override
+    public void restore() {
+        this.buttons.entrySet().stream().forEach(bt -> bt.getKey().setGraphic(null));
+        this.buttons.entrySet().stream().forEach(bt -> bt.getKey().setDisable(false));
+        this.mineExplosion = false;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
     public void showStart(final Pair<Integer, Integer> start) {
         this.buttons.entrySet().stream()
                                .filter(bt -> bt.getValue().equals(start))
@@ -150,13 +166,9 @@ public class PerilousPathFxImpl extends AbstractMiniGameControllerFx implements 
              .forEach(m -> this.buttons.entrySet().stream()
                                                   .filter(bt -> bt.getValue().equals(m.getMinePosition()))
                                                   .forEach(bt -> bt.getKey().setGraphic(image.apply("mine"))));
-        this.buttons.entrySet().stream()
-                               .forEach(bt -> bt.getKey().setDisable(true));
-        this.buttons.entrySet().stream()
-                               .forEach(bt -> bt.getKey().setStyle("-fx-opacity: 1"));
-        if (!this.mineExplosion) {
-            this.secondaryTimer();
-        }
+        this.buttons.entrySet().stream().forEach(bt -> bt.getKey().setDisable(true));
+        this.buttons.entrySet().stream().forEach(bt -> bt.getKey().setStyle("-fx-opacity: 1"));
+        this.animation();
     }
 
     /**
@@ -177,21 +189,10 @@ public class PerilousPathFxImpl extends AbstractMiniGameControllerFx implements 
         this.buttons.entrySet().stream()
                                .filter(bt -> bt.getValue().equals(new Pair<>(row, col)))
                                .forEach(bt -> bt.getKey().setGraphic(image.apply("bang")));
-        this.buttons.entrySet().stream()
-                               .forEach(bt -> bt.getKey().setDisable(true));
-        this.buttons.entrySet().stream()
-                               .forEach(bt -> bt.getKey().setStyle("-fx-opacity: 1"));
+        this.buttons.entrySet().stream().forEach(bt -> bt.getKey().setDisable(true));
+        this.buttons.entrySet().stream().forEach(bt -> bt.getKey().setStyle("-fx-opacity: 1"));
         this.mineExplosion = true;
         this.animation();
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public void reset() {
-        this.buttons.entrySet().stream().forEach(bt -> bt.getKey().setGraphic(null));
-        this.mineExplosion = false;
     }
 
     /**
@@ -210,6 +211,6 @@ public class PerilousPathFxImpl extends AbstractMiniGameControllerFx implements 
      */
     @Override
     public void stopTimer() {
-        this.controller.timeFinish();
+        this.controller.stopTimer();
     }
 }

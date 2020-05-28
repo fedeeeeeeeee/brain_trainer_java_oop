@@ -19,7 +19,7 @@ public interface PerilousPathController extends MiniGameController {
      * @param col
      */
     void hitAttempt(int row, int col);
-    
+
     /**
      * Update the view.
      */

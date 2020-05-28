@@ -54,13 +54,6 @@ public interface PerilousPathModel {
     int getSeconds();
 
     /**
-     * Gets the memorization's duration.
-     * 
-     * @return the seconds
-     */
-    int getMemorizationSeconds();
-
-    /**
      * Add point when user finds the right path.
      */
     void addPoint();
