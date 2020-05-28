@@ -15,12 +15,9 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 import javafx.util.Duration;
-import model.DifficultyLevel;
 import model.minigames.truecolor.Colors;
-import timer.GameTimer;
 import utility.Pair;
 import view.SceneType;
 import view.controllers.minigames.AbstractMiniGameControllerFx;
@@ -35,7 +32,6 @@ public class TrueColorFxImpl extends AbstractMiniGameControllerFx implements Tru
 	 */
 	private static final String textfill = "-fx-text-fill: ";
 	private static final String background = "-fx-background-color: ";
-	private boolean pause;
 	private TrueColorController trueColorController;
 	private List<Button> meaningColorBtnList;
 	private List<Button> trueColorBtnList;
@@ -107,8 +103,8 @@ public class TrueColorFxImpl extends AbstractMiniGameControllerFx implements Tru
 	private void addButtonGeneral(List<Button> btnList, Integer size) {
 		for (int i = 0; i < size; i++) {
 			final Button bt = new Button();
-			bt.setStyle("-fx-font-size: 20");
-			bt.setPrefSize(300, 300);
+			bt.setStyle("-fx-font-size: 50");
+			bt.setPrefSize(200, 200);
 			btnList.add(bt);
 			this.vBoxId.getChildren().add(bt);
 		}
