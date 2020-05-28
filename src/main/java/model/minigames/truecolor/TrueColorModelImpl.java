@@ -1,7 +1,9 @@
 package model.minigames.truecolor;
 import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+import java.util.Random;
 import java.util.concurrent.ThreadLocalRandom;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -21,15 +23,20 @@ public class TrueColorModelImpl implements TrueColorModel{
      */
 	private static final int BASE_POINT = 5;
 	
-	private final ScoreModel score;
-	
-	private List<String> colorList; 
-	
-	private Map<String, Pair<String, String>> randomColor;
-	
-	private DifficultyColor difficultyLevel;
-
 	private static final int SECONDS = 30;
+	
+	private final ScoreModel score;
+
+	private List<Colors> colorList;
+
+	private List<Pair<Colors, Colors>> randomTrueColorBtn;
+
+	private List<Pair<Colors, Colors>> randomMeaningColorBtn;
+
+	private DifficultyColor difficultyLevel;
+	
+	private Boolean bool = false;
+	
 	/**
      * Constructor of {@link TrueColorModel}.
      * 
@@ -41,74 +48,50 @@ public class TrueColorModelImpl implements TrueColorModel{
      */
     public TrueColorModelImpl(final DifficultyLevel difficultyLevel) {
     	this.score = new ScoreModelImpl(difficultyLevel, BASE_POINT);
-    	
     	this.difficultyLevel = new DifficultyColor(difficultyLevel);
     	this.colorList = this.difficultyLevel.getColorList();
+    	this.randomMeaningColorBtn = new LinkedList<Pair<Colors, Colors>>();
+    	this.randomTrueColorBtn = new LinkedList<Pair<Colors, Colors>>();
     	
-    	if(difficultyLevel.equals(DifficultyLevel.EASY)) {
-    		this.createMap();
-    	}else {
-    		this.createMapThreeBtn();
-    	}
+    	this.createLists();
     }
     
-    private void createMap() {
-    	this.randomColor = new HashMap<String, Pair<String, String>>();
-    	this.randomColor.put("meanColorBtn", new Pair<String, String>(getRandomColor(),getRandomColor()));
-    	this.randomColor.put("trueColorBtn", new Pair<String, String>(getRandomColor(),getRandomColor()));
+    private void createRandomColorInList(List<Pair<Colors, Colors>> list, Integer numberBtn) {
+		for(int i=0; i < numberBtn; i++) {
+			list.add(new Pair<Colors, Colors>(getRandomColor(), getRandomColor()));
+		}
+	}
     	
+    private void createLists() {
+    	this.createRandomColorInList(this.randomMeaningColorBtn, this.difficultyLevel.getNumberMeaningColorButton());
+    	this.createRandomColorInList(this.randomTrueColorBtn, this.difficultyLevel.getNumberTrueColorButton());
     }
     
     /**
      * {@inheritDoc}
      */
-    public void reloadRandomColorMap() {
-    	randomColor.replace("meanColorBtn", new Pair<String, String>(getRandomColor(),getRandomColor()));
-    	randomColor.replace("trueColorBtn", new Pair<String, String>(getRandomColor(),getRandomColor()));
-    }
-    
+	public void reloadRandomColorMap() {
+		this.alternateMethod();
+		this.randomMeaningColorBtn.clear();
+		this.randomTrueColorBtn.clear();
+		this.createLists();
+	}
+
     /**
      * {@inheritDoc}
      */
     public boolean matchingMeaningAndInk(String selectedAnswer) {
-    	Boolean match = randomColor.get("meanColorBtn").getX().equals(randomColor.get("trueColorBtn").getY());
-    	Boolean answer = selectedAnswer.contentEquals("YES");
-        if ((match && answer) || (!match && !answer)) {
-            return true;
-        }
-        return false;
-    }
-    //-------------------RIPETIZIONE MOMENTANEAMENTE VOLUTA------------------- 
+		Boolean match = this.randomMeaningColorBtn.stream()
+				.anyMatch(mean -> this.randomTrueColorBtn.stream().anyMatch(trueC -> mean.getX().equals(trueC.getY())));
+		Boolean answer = selectedAnswer.contentEquals("YES");
+		if ((match && answer) || (!match && !answer)) {
+			return true;
+		}
+		return false;
+	}
     
-    private void createMapThreeBtn() {
-    	this.randomColor = new HashMap<String, Pair<String, String>>();
-    	this.randomColor.put("meanColorBtn", new Pair<String, String>(getRandomColor(),getRandomColor()));
-    	this.randomColor.put("trueColorBtn", new Pair<String, String>(getRandomColor(),getRandomColor()));
-    	this.randomColor.put("trueColorBtn2", new Pair<String, String>(getRandomColor(),getRandomColor()));
-    	
-    }
-    /**
-     * {@inheritDoc}
-     */
-    public void reloadThreeRandomColorMap() {
-    	randomColor.replace("meanColorBtn", new Pair<String, String>(getRandomColor(),getRandomColor()));
-    	randomColor.replace("trueColorBtn", new Pair<String, String>(getRandomColor(),getRandomColor()));
-    	randomColor.replace("trueColorBtn2", new Pair<String, String>(getRandomColor(),getRandomColor()));
-    }
-    
-    public boolean matchingMeaningAndInkThreeBtn(String selectedAnswer) {
-    	Boolean match = randomColor.get("meanColorBtn").getX().equals(randomColor.get("trueColorBtn").getY());
-    	Boolean match2 = randomColor.get("meanColorBtn").getX().equals(randomColor.get("trueColorBtn2").getY());
-    	Boolean answer = selectedAnswer.contentEquals("YES");
-        if (((match || match2) && answer) || (((!match && !match2) && !answer))) {
-            return true;
-        }
-        return false;
-    }
-  //------------------- FINE RIPETIZIONE --------------------------------------  
-   
-    private String getRandomColor() {
-        String randomColor = this.colorList
+    private Colors getRandomColor() {
+    	Colors randomColor = this.colorList
                 .stream()
                 .sorted((o1, o2) -> ThreadLocalRandom.current().nextInt(-1, 2))
                 .findAny()
@@ -116,14 +99,32 @@ public class TrueColorModelImpl implements TrueColorModel{
         return randomColor;
     }
     
-    /**
-     * {@inheritDoc}
-     */
-    public Map<String, Pair<String, String>> getColorMap() {
-    	return this.randomColor;
+    public List<Pair<Colors, Colors>> getMeaningColorBtnList() {
+//    	System.out.println(" meaningList in Model --> " + this.randomMeaningColorBtn);
+    	return this.randomMeaningColorBtn;
     }
     
+    public List<Pair<Colors, Colors>> getTrueColorBtnList() {
+//    	System.out.println(" trueColorList in Model --> " +this.randomTrueColorBtn);
+    	return this.randomTrueColorBtn;
+    }
     
+    private void alternateMethod() {
+		Random rd = new Random();
+		this.bool = rd.nextBoolean();
+	}
+    
+    public Integer getNumberTrueColorButton() {
+		return this.difficultyLevel.getNumberTrueColorButton();
+	}
+	
+	public Integer getNumberMeaningColorButton() {
+		return this.difficultyLevel.getNumberMeaningColorButton();
+	}
+	
+    public Boolean getStatusMethod() {
+		return this.bool;
+	}
     /**
      * {@inheritDoc}
      */
@@ -131,7 +132,6 @@ public class TrueColorModelImpl implements TrueColorModel{
 	public void addPoint() {
 		this.score.addPoint();		
 	}
-	
 	
 	/**
      * {@inheritDoc}

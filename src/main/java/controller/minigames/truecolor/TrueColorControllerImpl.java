@@ -18,7 +18,6 @@ public class TrueColorControllerImpl implements TrueColorController {
 	private final TrueColorFxImpl view;
 	private final GameTimer gameTimer;
 	private final Timer timer;
-	private Boolean bool = false;
 
 	/**
 	 * Constructor of {@link TrueColorController}.
@@ -31,49 +30,28 @@ public class TrueColorControllerImpl implements TrueColorController {
 		this.timer = new Timer();
 		this.gameTimer = new GameTimer(model.getSecondsGame(), this);
 		this.view = trueColorFx;
-
-		if (difficultyLevel == DifficultyLevel.HARD) {
-			this.alternateMethod();
-		}
+		this.view.setNumberBtn(model.getNumberMeaningColorButton(), model.getNumberTrueColorButton());
 	}
 
 	/**
 	 * {@inheritDoc}
 	 */
 	public void refresh() {
-		if (this.view.getController().getDifficultyLevel().equals(DifficultyLevel.EASY)) {
-			this.model.reloadRandomColorMap();
-		} else {
-			this.model.reloadThreeRandomColorMap();
-		}
+		this.model.reloadRandomColorMap();
 	}
 
 	/**
 	 * {@inheritDoc}
 	 */
 	public void check(String selectedAnswer) {
-		if (this.view.getController().getDifficultyLevel().equals(DifficultyLevel.EASY)) {
-			if (model.matchingMeaningAndInk(selectedAnswer)) {
-				System.out.println("corretto");
-				this.model.addPoint();
-				this.view.showCorrectAnswer();
-			} else {
-				this.view.showWrongAnswer();
-			}
+		if (model.matchingMeaningAndInk(selectedAnswer)) {
+			System.out.println("corretto");
+			this.model.addPoint();
+			this.view.showCorrectAnswer();
 		} else {
-			if (model.matchingMeaningAndInkThreeBtn(selectedAnswer)) {// !!!!
-				System.out.println("corretto");
-				this.model.addPoint();
-				this.view.showCorrectAnswer();
-				if (this.view.getController().getDifficultyLevel().equals(DifficultyLevel.HARD)) {
-					this.alternateMethod();
-				}
-			} else {
-				this.view.showWrongAnswer();
-			}
+			this.view.showWrongAnswer();
 		}
 		this.view.next();
-
 	}
 
 	/**
@@ -81,18 +59,10 @@ public class TrueColorControllerImpl implements TrueColorController {
 	 */
 	@Override
 	public void startGame() {
-		if (this.view.getController().getDifficultyLevel().equals(DifficultyLevel.EASY)) {
-			this.view.setButton(model.getColorMap());
-		} else if (bool == false) {
-			this.view.setThreeButton(model.getColorMap()); // !!!!
-		} else {
-			this.view.alternativeSetThreeButton(model.getColorMap());
+		this.view.setButtons(model.getMeaningColorBtnList(), model.getTrueColorBtnList());
+		if (this.view.getController().getDifficultyLevel().equals(DifficultyLevel.HARD) && model.getStatusMethod()) {
+			this.view.alternativeSetButton(model.getTrueColorBtnList());
 		}
-	}
-
-	private void alternateMethod() {
-		Random rd = new Random();
-		this.bool = rd.nextBoolean();
 	}
 	
 	/**
