@@ -44,6 +44,11 @@ public final class ComputeDifficultyValueImpl implements ComputeDifficultyValue 
     }
 
     @Override
+    public int getBasePoint() {
+        return BASE;
+    }
+
+    @Override
     public double getColorRange() {
         return this.valueRange;
     }

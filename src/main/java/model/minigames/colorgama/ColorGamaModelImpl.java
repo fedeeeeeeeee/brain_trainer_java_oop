@@ -14,8 +14,6 @@ import model.score.ScoreModelImpl;
  */
 public class ColorGamaModelImpl implements ColorGamaModel {
 
-    private static final int BASEPOINT = 5;
-
     private final ScoreModel score;
     private final ComputeDifficultyValue computeValue;
     private final ComputeColor computeColor;
@@ -28,9 +26,9 @@ public class ColorGamaModelImpl implements ColorGamaModel {
      * 
      */
     public ColorGamaModelImpl(final DifficultyLevel difficulty) {
-        this.score = new ScoreModelImpl(difficulty, BASEPOINT);
         this.computeValue = new ComputeDifficultyValueImpl(difficulty);
         this.computeColor = new ComputeColorImpl(this.computeValue);
+        this.score = new ScoreModelImpl(difficulty, this.computeValue.getBasePoint());
     }
 
     /**

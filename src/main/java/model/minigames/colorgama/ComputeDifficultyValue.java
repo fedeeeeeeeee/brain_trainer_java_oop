@@ -15,6 +15,14 @@ public interface ComputeDifficultyValue {
     int getGridSize();
 
     /**
+     * Get the base point of minigame.
+     *
+     * @return point
+     *          base point
+     */
+    int getBasePoint();
+
+    /**
      * Get the range value for the color.
      * 
      * @return range
