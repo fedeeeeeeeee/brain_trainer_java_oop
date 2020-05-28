@@ -1,7 +1,6 @@
 package view.controllers.minigames.colorgama;
 
 import org.apache.commons.lang3.tuple.Triple;
-
 import model.minigames.colorgama.ComputeColor;
 
 /**
@@ -16,15 +15,48 @@ public interface ColorGamaFx {
      * @param size
      *          the grid size
      */
-    void drawGrid(int size);
+    void initGrid(int size);
 
     /**
-     * Show the next level.
+     * Render the next level.
      * 
      * @param computeColor
      *          the colors of buttons
+     *
+     * @param questionSentence
+     *          the sentence of the question to show
      */
-    void showNext(ComputeColor computeColor);
+    void renderNext(ComputeColor computeColor, String questionSentence);
+ 
+    /**
+     * Set the right color to the button.
+     * 
+     * @param index
+     *          the button index
+     *
+     * @param colorValues
+     *          the hsb values of the color
+     */
+    void setRightColor(int index, Triple<Integer, Double, Double> colorValues);
+ 
+    /**
+     * Shows the color indicated in the question. 
+     * 
+     * @param hue
+     *          the hue value
+     *
+     * @param saturation
+     *          the saturation value
+     *
+     * @param brightness
+     *          the brightness value
+     */
+    void showQuestionColor(Integer hue, Double saturation, Double brightness);
+
+    /**
+     * Hide the color indicated in the question. 
+     */
+    void hideQuestionColor();
 
     /**
      * Show the tick image.
@@ -35,32 +67,5 @@ public interface ColorGamaFx {
      * Show the cross image. 
      */
     void wrongAnswer();
-
-    /**
-     * 
-     * @param currentQuestion
-     */
-    void showNextQuestion(String currentQuestion);
-
-    /**
-     * 
-     * @param hue
-     * @param saturation
-     * @param brightness
-     */
-    void showQuestionColor(Integer hue, Double saturation, Double brightness);
-
-    /**
-     * 
-     */
-    void hideQuestionColor();
-
-    /**
-     * 
-     * @param index
-     * @param triple
-     */
-    void setRightColor(int index, Triple<Integer, Double, Double> triple);
-
 
 }
