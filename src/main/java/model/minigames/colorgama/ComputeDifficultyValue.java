@@ -61,4 +61,5 @@ public interface ComputeDifficultyValue {
      *          seconds according to the difficulty
      */
     int getSeconds();
+
 }
