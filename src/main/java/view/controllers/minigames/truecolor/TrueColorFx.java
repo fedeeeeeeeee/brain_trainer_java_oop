@@ -19,7 +19,7 @@ public interface TrueColorFx {
 	 * 
 	 * @param finalScore
 	 */
-	void setButtons(List<Pair<Colors, Colors>> randomColor, List<Pair<Colors, Colors>> randomColor2);
+	void setButtons(Map<String, List<Pair<Colors, Colors>>> colorMap);
 	
 	void setNumberBtn(Integer meaningColor, Integer trueColor);
 

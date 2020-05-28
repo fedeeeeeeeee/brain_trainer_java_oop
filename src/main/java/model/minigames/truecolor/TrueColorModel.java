@@ -28,9 +28,7 @@ public interface TrueColorModel {
 	 * 
 	 * @return Map<String, Pair<String, String>> of random color
 	 */
-	List<Pair<Colors, Colors>> getMeaningColorBtnList();
-
-	List<Pair<Colors, Colors>> getTrueColorBtnList();
+    Map<String, List<Pair<Colors, Colors>>> getRandomColorMap() ;
 
 	/**
 	 * Reload the map containing the random color for the button.

@@ -63,11 +63,11 @@ public class TrueColorFxImpl extends AbstractMiniGameControllerFx implements Tru
 		this.trueColorController.startGame();
 	}
 
-	public void setButtons(List<Pair<Colors, Colors>> meaninglist, List<Pair<Colors, Colors>> trueColorlist) {
+	public void setButtons(Map<String, List<Pair<Colors, Colors>>> colorMap) {
 //		System.out.println(" meaningList in FxController --> " + meaninglist);
 //		System.out.println(" trueColorList in FxController --> " +trueColorlist);
-		this.setStyleButton(meaninglist, this.meaningColorBtnList);
-		this.setStyleButton(trueColorlist, this.trueColorBtnList);
+		this.setStyleButton(colorMap.get("randomMeaningColor"), this.meaningColorBtnList);
+		this.setStyleButton(colorMap.get("randomTrueColor"), this.trueColorBtnList);
 	}
 
 	private void setStyleButton(List<Pair<Colors, Colors>> listColor, List<Button> listBtn) {
@@ -93,7 +93,6 @@ public class TrueColorFxImpl extends AbstractMiniGameControllerFx implements Tru
 	public void initGame() {
 		this.trueColorController = new TrueColorControllerImpl(this.getController().getDifficultyLevel(), this);
 		this.addButtons();
-		this.trueColorController = new TrueColorControllerImpl(this.getController().getDifficultyLevel(), this);
 		this.trueColorController.startTimer();
 		this.trueColorController.startGame();
 	}

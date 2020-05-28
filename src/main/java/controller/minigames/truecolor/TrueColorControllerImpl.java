@@ -59,9 +59,9 @@ public class TrueColorControllerImpl implements TrueColorController {
 	 */
 	@Override
 	public void startGame() {
-		this.view.setButtons(model.getMeaningColorBtnList(), model.getTrueColorBtnList());
+		this.view.setButtons(model.getRandomColorMap());
 		if (this.view.getController().getDifficultyLevel().equals(DifficultyLevel.HARD) && model.getStatusMethod()) {
-			this.view.alternativeSetButton(model.getTrueColorBtnList());
+			this.view.alternativeSetButton(model.getRandomColorMap().get("randomTrueColor"));
 		}
 	}
 	

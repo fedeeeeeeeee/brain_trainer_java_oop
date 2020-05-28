@@ -27,13 +27,9 @@ public class TrueColorModelImpl implements TrueColorModel{
 	
 	private final ScoreModel score;
 
-	private List<Colors> colorList;
-
-	private List<Pair<Colors, Colors>> randomTrueColorBtn;
-
-	private List<Pair<Colors, Colors>> randomMeaningColorBtn;
-
 	private DifficultyColor difficultyLevel;
+	
+	private Map<String, List<Pair<Colors, Colors>>> randomColorMap = new HashMap<>();
 	
 	private Boolean bool = false;
 	
@@ -49,65 +45,34 @@ public class TrueColorModelImpl implements TrueColorModel{
     public TrueColorModelImpl(final DifficultyLevel difficultyLevel) {
     	this.score = new ScoreModelImpl(difficultyLevel, BASE_POINT);
     	this.difficultyLevel = new DifficultyColor(difficultyLevel);
-    	this.colorList = this.difficultyLevel.getColorList();
-    	this.randomMeaningColorBtn = new LinkedList<Pair<Colors, Colors>>();
-    	this.randomTrueColorBtn = new LinkedList<Pair<Colors, Colors>>();
-    	
-    	this.createLists();
+    	this.randomColorMap = this.difficultyLevel.getRandomColorMap();
     }
-    
-    private void createRandomColorInList(List<Pair<Colors, Colors>> list, Integer numberBtn) {
-		for(int i=0; i < numberBtn; i++) {
-			list.add(new Pair<Colors, Colors>(getRandomColor(), getRandomColor()));
-		}
-	}
-    	
-    private void createLists() {
-    	this.createRandomColorInList(this.randomMeaningColorBtn, this.difficultyLevel.getNumberMeaningColorButton());
-    	this.createRandomColorInList(this.randomTrueColorBtn, this.difficultyLevel.getNumberTrueColorButton());
-    }
-    
+  
     /**
      * {@inheritDoc}
      */
-	public void reloadRandomColorMap() {
-		this.alternateMethod();
-		this.randomMeaningColorBtn.clear();
-		this.randomTrueColorBtn.clear();
-		this.createLists();
-	}
+    public void reloadRandomColorMap() {
+    	this.alternateMethod();
+    	this.randomColorMap.clear();
+    	this.difficultyLevel.createRandomColorMap();
+    	this.randomColorMap = this.difficultyLevel.getRandomColorMap();
+    }
 
     /**
      * {@inheritDoc}
      */
+    // trovare un modo migliore 
     public boolean matchingMeaningAndInk(String selectedAnswer) {
-		Boolean match = this.randomMeaningColorBtn.stream()
-				.anyMatch(mean -> this.randomTrueColorBtn.stream().anyMatch(trueC -> mean.getX().equals(trueC.getY())));
-		Boolean answer = selectedAnswer.contentEquals("YES");
-		if ((match && answer) || (!match && !answer)) {
-			return true;
-		}
-		return false;
-	}
-    
-    private Colors getRandomColor() {
-    	Colors randomColor = this.colorList
-                .stream()
-                .sorted((o1, o2) -> ThreadLocalRandom.current().nextInt(-1, 2))
-                .findAny()
-                .get();
-        return randomColor;
+    	List<Pair<Colors, Colors>> randomMeaningColorBtn = this.randomColorMap.get("randomMeaningColor");
+    	List<Pair<Colors, Colors>> randomTrueColorBtn = this.randomColorMap.get("randomTrueColor");
+        Boolean match = randomMeaningColorBtn.stream().anyMatch(mean -> randomTrueColorBtn.stream().anyMatch(trueC -> mean.getX().equals(trueC.getY())));
+    	Boolean answer = selectedAnswer.contentEquals("YES");
+        if ((match && answer) || (!match && !answer)) {
+            return true;
+        }
+        return false;
     }
-    
-    public List<Pair<Colors, Colors>> getMeaningColorBtnList() {
-//    	System.out.println(" meaningList in Model --> " + this.randomMeaningColorBtn);
-    	return this.randomMeaningColorBtn;
-    }
-    
-    public List<Pair<Colors, Colors>> getTrueColorBtnList() {
-//    	System.out.println(" trueColorList in Model --> " +this.randomTrueColorBtn);
-    	return this.randomTrueColorBtn;
-    }
+
     
     private void alternateMethod() {
 		Random rd = new Random();
@@ -115,11 +80,15 @@ public class TrueColorModelImpl implements TrueColorModel{
 	}
     
     public Integer getNumberTrueColorButton() {
-		return this.difficultyLevel.getNumberTrueColorButton();
+		return this.randomColorMap.get("randomTrueColor").size();
 	}
 	
 	public Integer getNumberMeaningColorButton() {
-		return this.difficultyLevel.getNumberMeaningColorButton();
+		return this.randomColorMap.get("randomMeaningColor").size();
+	}
+	
+	public Map<String, List<Pair<Colors, Colors>>> getRandomColorMap(){
+		return this.randomColorMap;
 	}
 	
     public Boolean getStatusMethod() {
