@@ -26,7 +26,7 @@ public class OneWayTest {
     @Test
     public void easyLevelTest() {
         this.model = new OneWayModelImpl(DifficultyLevel.EASY);
-        this.model.initializeOneWay();
+        this.model.oneWayInit();
         assertEquals(EASY_LEVEL_ARROW, this.model.getArrowsCount());
         assertEquals(EASY_LEVEL_SEC, this.model.getSeconds());
     }
@@ -34,7 +34,7 @@ public class OneWayTest {
     @Test
     public void normalLevelyTest() {
         this.model = new OneWayModelImpl(DifficultyLevel.NORMAL);
-        this.model.initializeOneWay();
+        this.model.oneWayInit();
         assertEquals(NORMAL_LEVEL_ARROW, this.model.getArrowsCount());
         assertEquals(NORMAL_LEVEL_SEC, this.model.getSeconds());
     }
@@ -42,7 +42,7 @@ public class OneWayTest {
     @Test
     public void hardLevelTest() {
         this.model = new OneWayModelImpl(DifficultyLevel.HARD);
-        this.model.initializeOneWay();
+        this.model.oneWayInit();
         assertEquals(HARD_LEVEL_ARROW, this.model.getArrowsCount());
         assertEquals(HARD_LEVEL_SEC, this.model.getSeconds());
     }
@@ -54,7 +54,7 @@ public class OneWayTest {
     @Test
     public void testInitialAndFinalPosValidity() {
         OneWayModel model = new OneWayModelImpl(DifficultyLevel.EASY);
-        model.initializeOneWay();
+        model.oneWayInit();
 
         assertTrue(model.getInitialPosition().getX() < model.getSize());
         assertTrue(model.getInitialPosition().getY() < model.getSize());
@@ -70,7 +70,7 @@ public class OneWayTest {
     @Test
     public void testPositions() {
         OneWayModel model = new OneWayModelImpl(DifficultyLevel.EASY);
-        model.initializeOneWay();
+        model.oneWayInit();
         assertFalse(model.getInitialPosition().getX() == model.getFinalPosition().getX() && model.getInitialPosition().getY() == model.getFinalPosition().getY());
     }
     

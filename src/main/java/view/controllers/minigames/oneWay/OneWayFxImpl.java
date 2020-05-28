@@ -25,14 +25,18 @@ import utility.Pair;
 import view.SceneType;
 import view.controllers.minigames.AbstractMiniGameControllerFx;
 
+/**
+ * The implementation of the {@link OneWayFx}.
+ *
+ */
 public class OneWayFxImpl extends AbstractMiniGameControllerFx implements OneWayFx {
 
+    private static final String BACKGROUND = "-fx-background-color: rgb(143,187,189)";
     private static final String GREEN = "-fx-border-color: #56b72d; -fx-border-width: 5px;";
     private static final String RED = "-fx-border-color: #ff0000; -fx-border-width: 5px;";
-    private static final String BACKGROUND = "-fx-background-color: rgb(143,187,189)";
     private static final String BLUE = "-fx-accent: #49618C";
     private static final int IMG_DIM = 50;
- 
+
     private OneWayController controller;
     private Map<Button, Pair<Integer, Integer>> buttons;
     private List<Button> arrows;
@@ -51,7 +55,7 @@ public class OneWayFxImpl extends AbstractMiniGameControllerFx implements OneWay
 
     @FXML
     private Label scoreLbl;
-    
+
     @FXML
     private ProgressBar progressBar;
 
@@ -70,15 +74,22 @@ public class OneWayFxImpl extends AbstractMiniGameControllerFx implements OneWay
         });
 
         this.controller.showSolution();
+        this.correctBtn.setGraphic(this.getImage("/images/finish.png"));
+        this.correctBtn.setPadding(new Insets(-1, -1, -1, -1));
+
         pause.setOnFinished(event -> {
             this.buttons.keySet().forEach(b -> b.setDisable(false));
             this.correctBtn.setStyle(null);
+            this.correctBtn.setGraphic(null);
         });
-        
-        pause.play();      
+
+        pause.play();
         this.controller.nextLevel();
     };
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void initGame() {
         this.progressBar.setStyle(BLUE);
@@ -89,7 +100,9 @@ public class OneWayFxImpl extends AbstractMiniGameControllerFx implements OneWay
         this.controller.startTimer();
     }
 
-
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void drawArrow(final List<Direction> steps) {
         for (int i = 0; i < steps.size(); i++) {
@@ -101,6 +114,9 @@ public class OneWayFxImpl extends AbstractMiniGameControllerFx implements OneWay
         }
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void updateArrows(final List<Direction> steps) {
         for (int i = 0; i < steps.size(); i++) {
@@ -108,21 +124,23 @@ public class OneWayFxImpl extends AbstractMiniGameControllerFx implements OneWay
         }
     }
 
-    private void loadImages(int idx, final List<Direction> steps) {
+    private void loadImages(final int idx, final List<Direction> steps) {
         final String txt = steps.get(idx).toString();
-        Direction direction = Arrays.asList(Direction.values()).stream()
-                .filter(d -> d.toString().equals(txt))
+        final Direction direction = Arrays.asList(Direction.values()).stream().filter(d -> d.toString().equals(txt))
                 .findFirst().get();
         this.arrows.get(idx).setGraphic(this.getImage(direction.getPath()));
     }
 
-    private ImageView getImage(String path) {
-        ImageView img = new ImageView(path);
+    private ImageView getImage(final String path) {
+        final ImageView img = new ImageView(path);
         img.setFitHeight(IMG_DIM);
         img.setFitWidth(IMG_DIM);
         return img;
     }
-    
+
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void drawGrid(final int size) {
         for (int i = 0; i < size; i++) {
@@ -136,18 +154,24 @@ public class OneWayFxImpl extends AbstractMiniGameControllerFx implements OneWay
         }
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
-    public void updateView(final Pair<Integer, Integer> initialPosition) {             
-        for (Entry<Button, Pair<Integer, Integer>> entry : this.buttons.entrySet()) {
-           if(initialPosition.equals(entry.getValue())) {
-               entry.getKey().setGraphic(this.getImage("/images/start.png"));
-               entry.getKey().setPadding(new Insets(-1,-1,-1,-1));
-           } else {
-               entry.getKey().setGraphic(null);
-           }
+    public void updateView(final Pair<Integer, Integer> initialPosition) {
+        for (final Entry<Button, Pair<Integer, Integer>> entry : this.buttons.entrySet()) {
+            if (initialPosition.equals(entry.getValue())) {
+                entry.getKey().setGraphic(this.getImage("/images/start.png"));
+                entry.getKey().setPadding(new Insets(-1, -1, -1, -1));
+            } else {
+                entry.getKey().setGraphic(null);
+            }
         }
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void showCorrectAnswer(final Pair<Integer, Integer> finalPosition) {
         this.correctBtn = this.buttons.entrySet().stream()
@@ -155,7 +179,7 @@ public class OneWayFxImpl extends AbstractMiniGameControllerFx implements OneWay
                 .map(x -> x.getKey()).findAny().get();
         this.correctBtn.setStyle(BACKGROUND);
         this.correctBtn.setStyle(check(finalPosition) ? GREEN : RED);
-        
+
     }
 
     private boolean check(final Pair<Integer, Integer> finalPosition) {
@@ -163,8 +187,11 @@ public class OneWayFxImpl extends AbstractMiniGameControllerFx implements OneWay
                 && this.buttons.get(clickedBtn).getY() == finalPosition.getY();
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
-    public void showEndGame(int finalScore) {
+    public void showEndGame(final int finalScore) {
         Platform.runLater(() -> {
             this.scoreLbl.setText(Integer.toString(finalScore));
             this.getController().updateProgress(finalScore);
@@ -172,9 +199,11 @@ public class OneWayFxImpl extends AbstractMiniGameControllerFx implements OneWay
         });
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void stopTimer() {
         this.controller.stopTimer();
     }
-
 }

@@ -9,30 +9,40 @@ import model.score.ScoreModel;
 import model.score.ScoreModelImpl;
 import utility.Pair;
 
+/**
+ * Implementation of {@link OneWayModel}.
+ * 
+ *
+ */
 public class OneWayModelImpl implements OneWayModel {
 
     private static final int EASY_LEVEL_ARROW = 3;
     private static final int NORMAL_LEVEL_ARROW = 4;
     private static final int HARD_LEVEL_ARROW = 5;
-    
+
     private static final int EASY_LEVEL_SEC = 45;
     private static final int NORMAL_LEVEL_SEC = 30;
     private static final int HARD_LEVEL_SEC = 40;
-    
+
     private static final int SIZE = 6;
     private static final int BASE_POINT = 10;
 
     private final ScoreModel score;
-    private DifficultyLevel difficulty;
-    private List<Direction> steps;
+    private final List<Direction> steps;
+    private final DifficultyLevel difficulty;
+    private final int size;
+    private int arrows;
+    private int duration;
+
     private Pair<Integer, Integer> currentPosition;
     private Pair<Integer, Integer> initialPosition;
     private Pair<Integer, Integer> finalPosition;
 
-    private int arrows;
-    private int size;
-    private int duration;
-
+    /**
+     * OneWayModelImpl constructor.
+     * @param selectedDifficulty
+     *                        the difficulty to set
+     */
     public OneWayModelImpl(final DifficultyLevel selectedDifficulty) {
         this.difficulty = selectedDifficulty;
         this.score = new ScoreModelImpl(this.difficulty, BASE_POINT);
@@ -55,11 +65,16 @@ public class OneWayModelImpl implements OneWayModel {
             this.arrows = HARD_LEVEL_ARROW;
             this.duration = HARD_LEVEL_SEC;
             break;
+        default:
+            break;
         }
-    } 
+    }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
-    public void initializeOneWay() {
+    public void oneWayInit() {
         this.resetPath();
         this.setInitialPosition();
         this.drawPath();
@@ -85,8 +100,9 @@ public class OneWayModelImpl implements OneWayModel {
             this.steps.add(dir);
 
         }
-       
-        if(this.currentPosition.getX() == this.initialPosition.getX() && this.currentPosition.getY() == this.initialPosition.getY()) {
+
+        if (this.currentPosition.getX() == this.initialPosition.getX()
+                && this.currentPosition.getY() == this.initialPosition.getY()) {
             this.drawPath();
         } else {
             this.finalPosition = this.currentPosition;
@@ -107,53 +123,81 @@ public class OneWayModelImpl implements OneWayModel {
         this.initialPosition = this.currentPosition;
     }
 
-
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public boolean hitFinalPosition(final int row, final int col) {
         return this.finalPosition.getX() == row && this.finalPosition.getY() == col ? true : false;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void addPoint() {
         this.score.addPoint();
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public int getFinalScore() {
         return this.score.getScore();
     }
 
-
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public int getSeconds() {
         return this.duration;
     }
-    
+
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public DifficultyLevel getDifficulty() {
         return this.difficulty;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public int getSize() {
         return this.size;
     }
-    
+
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public int getArrowsCount() {
         return this.arrows;
     }
-    
+
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public List<Direction> getSteps() {
         return this.steps;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public Pair<Integer, Integer> getInitialPosition() {
         return this.initialPosition;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public Pair<Integer, Integer> getFinalPosition() {
         return this.finalPosition;

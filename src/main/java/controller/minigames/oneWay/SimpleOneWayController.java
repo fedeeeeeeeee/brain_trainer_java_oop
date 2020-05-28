@@ -8,15 +8,25 @@ import model.minigames.oneWay.OneWayModelImpl;
 import timer.GameTimer;
 import view.controllers.minigames.oneWay.OneWayFxImpl;
 
+/**
+ * Implementation of {@link OneWayController}.
+ *
+ */
 public class SimpleOneWayController implements OneWayController {
-  
 
     private final OneWayFxImpl view;
     private final OneWayModel model;
 
     private final GameTimer gameTimer;
     private final Timer timer;
-    
+
+    /**
+     * SimpleOneWayController constructor.
+     * @param oneWayFx
+     *              the {@link OneWayFx} to set
+     * @param difficultyLevel
+     *              the {@link DifficultyLevel}
+     */
     public SimpleOneWayController(final OneWayFxImpl oneWayFx, final DifficultyLevel difficultyLevel) {
         this.view = oneWayFx;
         this.model = new OneWayModelImpl(difficultyLevel);
@@ -24,6 +34,9 @@ public class SimpleOneWayController implements OneWayController {
         this.gameTimer = new GameTimer(this.model.getSeconds(), this);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void hit(final int row, final int col) {
         if (this.model.hitFinalPosition(row, col)) {
@@ -31,47 +44,71 @@ public class SimpleOneWayController implements OneWayController {
         }
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void timeExpired() {
         this.view.showEndGame(this.model.getFinalScore());
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void nextLevel() {
-        this.model.initializeOneWay();
+        this.model.oneWayInit();
         this.view.updateArrows(this.model.getSteps());
         this.view.updateView(this.model.getInitialPosition());
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void showSolution() {
         this.view.showCorrectAnswer(this.model.getFinalPosition());
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void firstInit() {
-        this.model.initializeOneWay();
+        this.model.oneWayInit();
         this.view.drawGrid(this.model.getSize());
         this.view.drawArrow(this.model.getSteps());
         this.view.updateView(this.model.getInitialPosition());
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
-    public void updateTimerView(int second) {
+    public void updateTimerView(final int second) {
         this.view.showTimerSeconds(second);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void timeFinish() {
         this.view.showEndGame(this.model.getFinalScore());
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void startTimer() {
         this.timer.schedule(this.gameTimer, 0, 1000);
         this.view.setInitialSeconds(this.model.getSeconds());
     }
-    
+
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void stopTimer() {
         this.timer.cancel();
