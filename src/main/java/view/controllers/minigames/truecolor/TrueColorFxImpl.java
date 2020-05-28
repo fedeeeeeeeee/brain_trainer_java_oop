@@ -13,6 +13,7 @@ import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.geometry.Insets;
 import javafx.scene.control.Button;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
@@ -32,6 +33,7 @@ public class TrueColorFxImpl extends AbstractMiniGameControllerFx implements Tru
 	 */
 	private static final String textfill = "-fx-text-fill: ";
 	private static final String background = "-fx-background-color: ";
+	private static final String textfont = "-fx-font-size:35";
 	private TrueColorController trueColorController;
 	private List<Button> meaningColorBtnList;
 	private List<Button> trueColorBtnList;
@@ -60,8 +62,6 @@ public class TrueColorFxImpl extends AbstractMiniGameControllerFx implements Tru
 	}
 
 	public void setButtons(Map<String, List<Pair<Colors, Colors>>> colorMap) {
-//		System.out.println(" meaningList in FxController --> " + meaninglist);
-//		System.out.println(" trueColorList in FxController --> " +trueColorlist);
 		this.setStyleButton(colorMap.get("randomMeaningColor"), this.meaningColorBtnList);
 		this.setStyleButton(colorMap.get("randomTrueColor"), this.trueColorBtnList);
 	}
@@ -70,7 +70,7 @@ public class TrueColorFxImpl extends AbstractMiniGameControllerFx implements Tru
 		int size = listBtn.size();
 		for (int i = 0; i < size; i++) {
 			listBtn.get(i).setText(listColor.get(i).getX().toString());
-			listBtn.get(i).setStyle(textfill + listColor.get(i).getY().getName());
+			listBtn.get(i).setStyle(textfill + listColor.get(i).getY().getName() + ";" + textfont);
 		}
 	}
 	
@@ -103,8 +103,7 @@ public class TrueColorFxImpl extends AbstractMiniGameControllerFx implements Tru
 	private void addButtonGeneral(List<Button> btnList, Integer size) {
 		for (int i = 0; i < size; i++) {
 			final Button bt = new Button();
-			bt.setStyle("-fx-font-size: 50");
-			bt.setPrefSize(200, 200);
+			bt.setPrefSize(300, 100);
 			btnList.add(bt);
 			this.vBoxId.getChildren().add(bt);
 		}
