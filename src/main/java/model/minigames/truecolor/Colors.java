@@ -2,13 +2,14 @@ package model.minigames.truecolor;
 
 public enum Colors {
 
-	BLACK("green"),
+	BLACK("black"),
     BLUE("blue"),
     YELLOW("yellow"),
     RED("red"),
     
     GREEN("green"),
     PINK("pink"),
+    
     BROWN("brown"),
     ORANGE("orange");
     
