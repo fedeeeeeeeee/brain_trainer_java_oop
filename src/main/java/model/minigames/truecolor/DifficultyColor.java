@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+import java.util.Random;
 import java.util.concurrent.ThreadLocalRandom;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -62,14 +63,17 @@ public class DifficultyColor {
 	private List<Pair<Colors, Colors>> createRandomColorList(Integer numberBtn) {
 		List<Pair<Colors, Colors>> list = new LinkedList<>();
 		for(int i=0; i < numberBtn; i++) {
-			list.add(new Pair<Colors, Colors>(getRandomColor(), getRandomColor()));
+			list.add(new Pair<Colors, Colors>(this.getRandomColor(), this.getRandomColor()));
 		}
 		return list;
 	}
 
 	private Colors getRandomColor() {
-		Colors randomColor = this.colorList.stream().sorted((o1, o2) -> ThreadLocalRandom.current().nextInt(-1, 2))
-				.findAny().get();
+//		Colors randomColor = this.colorList.stream().sorted((o1, o2) -> ThreadLocalRandom.current().nextInt(-1, 2))
+//				.findAny().get();
+//		return randomColor;
+		Random rand = new Random();
+		Colors randomColor = this.colorList.get(rand.nextInt(this.colorList.size()));
 		return randomColor;
 	}
 	 
