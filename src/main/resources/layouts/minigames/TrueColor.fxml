@@ -18,16 +18,16 @@
 
 <VBox alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="580.0" prefWidth="500.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.controllers.minigames.truecolor.TrueColorFxImpl">
    <children>
-      <GridPane VBox.vgrow="SOMETIMES">
+      <GridPane prefHeight="123.0" prefWidth="500.0" VBox.vgrow="SOMETIMES">
         <columnConstraints>
           <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
             <ColumnConstraints hgrow="SOMETIMES" minWidth="70.0" prefWidth="150.0" />
           <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
         </columnConstraints>
         <rowConstraints>
-          <RowConstraints maxHeight="1.7976931348623157E308" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-          <RowConstraints maxHeight="1.7976931348623157E308" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-          <RowConstraints maxHeight="1.7976931348623157E308" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+          <RowConstraints maxHeight="1.7976931348623157E308" minHeight="10.0" prefHeight="40.0" vgrow="SOMETIMES" />
+          <RowConstraints maxHeight="1.7976931348623157E308" minHeight="10.0" prefHeight="45.0" vgrow="SOMETIMES" />
+          <RowConstraints maxHeight="1.7976931348623157E308" minHeight="10.0" prefHeight="21.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
             <Label fx:id="timerLbl" alignment="CENTER_LEFT" prefHeight="59.0" prefWidth="42.0" text="Time" textAlignment="CENTER" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
@@ -38,10 +38,7 @@
                   <Insets bottom="5.0" />
                </GridPane.margin>
             </Label>
-            <Label contentDisplay="CENTER" prefWidth="70.0" text="meaning" textOverrun="CLIP" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER">
-               <effect>
-                  <DropShadow color="#a8aeaa" />
-               </effect>
+            <Label contentDisplay="CENTER" prefWidth="70.0" text="meaning" textOverrun="CENTER_ELLIPSIS" underline="true" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER">
                <font>
                   <Font size="18.0" />
                </font>
@@ -49,10 +46,10 @@
                   <Insets bottom="5.0" />
                </padding>
             </Label>
-            <ProgressBar fx:id="progressBar" minWidth="70.0" prefWidth="200.0" progress="0.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
+            <ProgressBar fx:id="progressBar" minWidth="70.0" prefWidth="200.0" progress="0.0" style="-fx-background-color: green;" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
          </children>
       </GridPane>
-      <VBox fx:id="vBoxId" alignment="CENTER" prefHeight="319.0" prefWidth="500.0" spacing="30.0" VBox.vgrow="SOMETIMES">
+      <VBox fx:id="vBoxId" alignment="CENTER" prefHeight="319.0" prefWidth="500.0" spacing="35.0" VBox.vgrow="SOMETIMES">
          <opaqueInsets>
             <Insets />
          </opaqueInsets></VBox>
@@ -74,9 +71,6 @@
                </GridPane.margin>
             </Label>
             <Label text="ink color" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
-               <effect>
-                  <DropShadow color="#a8aeaa" />
-               </effect>
                <font>
                   <Font size="18.0" />
                </font>
@@ -92,8 +86,14 @@
           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <Button fx:id="noBtn" cacheShape="false" focusTraversable="false" mnemonicParsing="false" onMouseClicked="#buttonClicked" prefHeight="58.0" prefWidth="134.0" text="NO" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
-            <Button fx:id="yesBtn" mnemonicParsing="false" onMouseClicked="#buttonClicked" prefHeight="58.0" prefWidth="134.0" text="YES" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
+            <Button fx:id="noBtn" cacheShape="false" focusTraversable="false" mnemonicParsing="false" onMouseClicked="#buttonClicked" prefHeight="58.0" prefWidth="134.0" text="NO" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+               <font>
+                  <Font size="18.0" />
+               </font></Button>
+            <Button fx:id="yesBtn" mnemonicParsing="false" onMouseClicked="#buttonClicked" prefHeight="58.0" prefWidth="134.0" text="YES" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+               <font>
+                  <Font size="18.0" />
+               </font></Button>
          </children>
       </GridPane>
    </children>

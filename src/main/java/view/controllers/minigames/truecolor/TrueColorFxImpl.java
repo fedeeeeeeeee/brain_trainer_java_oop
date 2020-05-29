@@ -14,6 +14,7 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.effect.DropShadow;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
 import javafx.util.Duration;
@@ -33,12 +34,14 @@ public class TrueColorFxImpl extends AbstractMiniGameControllerFx implements Tru
 	private static final String BORDERC = "-fx-border-color: ";
 	private static final String BORDERW = "-fx-border-width: ";
 	private static final String NOFOCUS = "-fx-focus-color: transparent";
+	private static final String RADIUS = "-fx-background-radius: ";
 	private TrueColorController trueColorController;
 	private List<Button> meaningColorBtnList;
 	private List<Button> trueColorBtnList;
 	private int meanColorSize;
 	private int trueColorSize;
 	private Button currentAnswer;
+	private DropShadow shadow = new DropShadow();
 	
 	@FXML
 	private VBox vBoxId;
@@ -61,10 +64,16 @@ public class TrueColorFxImpl extends AbstractMiniGameControllerFx implements Tru
 	public void initGame() {
 		this.trueColorController = new TrueColorControllerImpl(this.getController().getDifficultyLevel(), this);
 		this.addButtons();
+		this.setDropShadow();
 		this.trueColorController.startTimer();
 		this.trueColorController.startGame();
 	}
 	
+	private void setDropShadow() {
+		this.shadow.setOffsetX(4);
+		this.shadow.setOffsetY(6);
+	}
+
 	/**
 	 * {@inheritDoc}
 	 */
@@ -87,7 +96,11 @@ public class TrueColorFxImpl extends AbstractMiniGameControllerFx implements Tru
 		final int size = listBtn.size();
 		for (int i = 0; i < size; i++) {
 			listBtn.get(i).setText(listColor.get(i).getX().toString());
-			listBtn.get(i).setStyle(TXTFILL + listColor.get(i).getY().getName() + ";" + FONT + "35");
+			listBtn.get(i).setStyle(TXTFILL + listColor.get(i).getY().getName() + ";" + FONT + "35"+ ";"+ RADIUS+"5em");
+			
+			if(this.meaningColorBtnList == listBtn ) {
+				listBtn.get(i).setEffect(this.shadow);
+			}
 		}
 	}
 	
