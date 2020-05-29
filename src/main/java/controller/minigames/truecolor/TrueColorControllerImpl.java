@@ -46,6 +46,7 @@ public class TrueColorControllerImpl implements TrueColorController {
 	/**
 	 * {@inheritDoc}
 	 */
+	@Override
 	public void refresh() {
 		this.model.reloadRandomColorMap();
 	}
@@ -53,7 +54,8 @@ public class TrueColorControllerImpl implements TrueColorController {
 	/**
 	 * {@inheritDoc}
 	 */
-	public void check(String selectedAnswer) {
+	@Override
+	public void check(final String selectedAnswer) {
 		if (model.matchingMeaningAndInk(selectedAnswer)) {
 			System.out.println("corretto");
 			this.model.addPoint();
@@ -68,7 +70,7 @@ public class TrueColorControllerImpl implements TrueColorController {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public void updateTimerView(int second) {
+	public void updateTimerView(final int second) {
 		this.view.showTimerSeconds(second);
 	}
 	

@@ -5,7 +5,6 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
-import java.util.concurrent.ThreadLocalRandom;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -17,18 +16,19 @@ public class DifficultyColor {
 	private List<Colors> colorList; 
 	private Integer numberMeaningColorButton;
 	private Integer numberTrueColorButton;
-	private Map<String, List<Pair<Colors, Colors>>> randomColorMap = new HashMap<>();
+	private final Map<String, List<Pair<Colors, Colors>>> randomColorMap;
 	
 	public DifficultyColor(final DifficultyLevel difficultyLevel) {
+		this.randomColorMap = new HashMap<>();
 		this.createListColorRelatedDifficulty(difficultyLevel);	
 		this.createRandomColorMap();
 	}
 
-	private void createListColorDifficulty(Integer numberColor) {
+	private void createListColorDifficulty(final Integer numberColor) {
 		this.colorList = Stream.of(Colors.values()).limit(numberColor).collect(Collectors.toList());
 	}
     
-	private void createListColorRelatedDifficulty(DifficultyLevel difficultyLevel) {
+	private void createListColorRelatedDifficulty(final DifficultyLevel difficultyLevel) {
 		switch (difficultyLevel) {
 		case EASY:
 			this.createListColorDifficulty(4);
@@ -55,13 +55,13 @@ public class DifficultyColor {
 	/**
 	 * Create the random color map 
 	 */
-	public void createRandomColorMap() {
+	private void createRandomColorMap() {
 		this.randomColorMap.put("randomMeaningColor", this.createRandomColorList(numberMeaningColorButton));
 		this.randomColorMap.put("randomTrueColor", this.createRandomColorList(numberTrueColorButton));
 	}
 
-	private List<Pair<Colors, Colors>> createRandomColorList(Integer numberBtn) {
-		List<Pair<Colors, Colors>> list = new LinkedList<>();
+	private List<Pair<Colors, Colors>> createRandomColorList(final Integer numberBtn) {
+		final List<Pair<Colors, Colors>> list = new LinkedList<>();
 		for(int i=0; i < numberBtn; i++) {
 			list.add(new Pair<Colors, Colors>(this.getRandomColor(), this.getRandomColor()));
 		}
@@ -69,11 +69,17 @@ public class DifficultyColor {
 	}
 
 	private Colors getRandomColor() {
-		Random rand = new Random();
-		Colors randomColor = this.colorList.get(rand.nextInt(this.colorList.size()));
-		return randomColor;
+		final Random rand = new Random();
+		return this.colorList.get(rand.nextInt(this.colorList.size()));
 	}
 	 
+	/**
+	 * Initialize the random color map 
+	 */
+	public void initMap() {
+		this.randomColorMap.clear();
+		this.createRandomColorMap();
+	}
 	/**
 	 * Getter for the random color map 
 	 * @return

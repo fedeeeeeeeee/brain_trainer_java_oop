@@ -13,7 +13,6 @@ import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
-import javafx.geometry.Insets;
 import javafx.scene.control.Button;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
@@ -28,25 +27,28 @@ import view.controllers.minigames.AbstractMiniGameControllerFx;
  */
 public class TrueColorFxImpl extends AbstractMiniGameControllerFx implements TrueColorFx {
 
-	private static final String textfill = "-fx-text-fill: ";
-	private static final String background = "-fx-background-color: ";
-	private static final String textfont = "-fx-font-size:35";
+	private static final String TXTFILL = "-fx-text-fill: ";
+	private static final String BACKGROUND = "-fx-background-color: ";
+	private static final String FONT = "-fx-font-size: ";
+	private static final String BORDERC = "-fx-border-color: ";
+	private static final String BORDERW = "-fx-border-width: ";
+	private static final String NOFOCUS = "-fx-focus-color: transparent";
 	private TrueColorController trueColorController;
 	private List<Button> meaningColorBtnList;
 	private List<Button> trueColorBtnList;
-	private int meanColorSize = 0;
-	private int trueColorSize = 0;
+	private int meanColorSize;
+	private int trueColorSize;
 	private Button currentAnswer;
 	
 	@FXML
-	private Button yesBtn;
-	@FXML
-	private Button noBtn;
-	@FXML
 	private VBox vBoxId;
 
+	private final EventHandler<ActionEvent> event = (e) -> {
+		this.currentAnswer.setStyle(BORDERC + "#000000;" + BORDERW + "0.3px;" + NOFOCUS);
+	};
+	
 	@FXML
-	private void buttonClicked(MouseEvent event) throws IOException {
+	private void buttonClicked(final MouseEvent event) throws IOException { //NOPMD
 		final String selectedAnswer = ((Button) event.getSource()).getText();
 		this.currentAnswer = (Button) event.getSource();
 		this.trueColorController.check(selectedAnswer);
@@ -66,6 +68,7 @@ public class TrueColorFxImpl extends AbstractMiniGameControllerFx implements Tru
 	/**
 	 * {@inheritDoc}
 	 */
+	@Override
 	public void next() {
 		this.trueColorController.refresh();
 		this.trueColorController.startGame();
@@ -74,27 +77,29 @@ public class TrueColorFxImpl extends AbstractMiniGameControllerFx implements Tru
 	/**
 	 * {@inheritDoc}
 	 */
-	public void setButtons(Map<String, List<Pair<Colors, Colors>>> colorMap) {
+	@Override
+	public void setButtons(final Map<String, List<Pair<Colors, Colors>>> colorMap) {
 		this.setStyleButton(colorMap.get("randomMeaningColor"), this.meaningColorBtnList);
 		this.setStyleButton(colorMap.get("randomTrueColor"), this.trueColorBtnList);
 	}
 
-	private void setStyleButton(List<Pair<Colors, Colors>> listColor, List<Button> listBtn) {
-		int size = listBtn.size();
+	private void setStyleButton(final List<Pair<Colors, Colors>> listColor, final List<Button> listBtn) {
+		final int size = listBtn.size();
 		for (int i = 0; i < size; i++) {
 			listBtn.get(i).setText(listColor.get(i).getX().toString());
-			listBtn.get(i).setStyle(textfill + listColor.get(i).getY().getName() + ";" + textfont);
+			listBtn.get(i).setStyle(TXTFILL + listColor.get(i).getY().getName() + ";" + FONT + "35");
 		}
 	}
 	
 	/**
 	 * {@inheritDoc}
 	 */
-	public void alternativeSetButton(List<Pair<Colors, Colors>> list) {
-		int size = this.trueColorBtnList.size();
+	@Override
+	public void alternativeSetButton(final List<Pair<Colors, Colors>> list) {
+		final int size = this.trueColorBtnList.size();
 		for (int i = 0; i < size; i++) {
 			this.trueColorBtnList.get(i).setText("");
-			this.trueColorBtnList.get(i).setStyle(background + list.get(i).getY().getName());
+			this.trueColorBtnList.get(i).setStyle(BACKGROUND + list.get(i).getY().getName());
 		}
 	}
 
@@ -106,7 +111,7 @@ public class TrueColorFxImpl extends AbstractMiniGameControllerFx implements Tru
 		this.addButtonGeneral(this.trueColorBtnList, this.trueColorSize);
 	}
 	
-	private void addButtonGeneral(List<Button> btnList, Integer size) {
+	private void addButtonGeneral(final List<Button> btnList, final Integer size) {
 		for (int i = 0; i < size; i++) {
 			final Button bt = new Button();
 			bt.setPrefSize(300, 100);
@@ -118,7 +123,8 @@ public class TrueColorFxImpl extends AbstractMiniGameControllerFx implements Tru
 	/**
 	 * {@inheritDoc}
 	 */
-	public void setNumberBtn(Integer meaningColor, Integer trueColor) {
+	@Override
+	public void setNumberBtn(final Integer meaningColor, final Integer trueColor) {
 		this.meanColorSize= meaningColor;
 		this.trueColorSize = trueColor;	
 	}
@@ -127,7 +133,7 @@ public class TrueColorFxImpl extends AbstractMiniGameControllerFx implements Tru
 	 * {@inheritDoc}
 	 */
 	@Override
-	public void showEndGame(int finalScore) {
+	public void showEndGame(final int finalScore) {
 		Platform.runLater(() -> {
 			this.getController().updateProgress(finalScore);
 			this.getView().setHandleDataScene(SceneType.END_GAME.getFilePath());
@@ -142,12 +148,6 @@ public class TrueColorFxImpl extends AbstractMiniGameControllerFx implements Tru
 		this.trueColorController.stopTimer();
 	}
 
-	// Border button animation correct answer---------------
-	private final EventHandler<ActionEvent> event = (e) -> {
-		this.currentAnswer.setStyle("-fx-focus-color: transparent;");
-		this.currentAnswer.setStyle("-fx-border-color: #000000; -fx-border-width: 0.1px;");
-	};
-
 	private void animation() {
 		final Timeline timeline = new Timeline();
 		final KeyFrame kf = new KeyFrame(Duration.millis(300), event);
@@ -158,8 +158,9 @@ public class TrueColorFxImpl extends AbstractMiniGameControllerFx implements Tru
 	/**
 	 * {@inheritDoc}
 	 */
+	@Override
 	public void showWrongAnswer() {
-		this.currentAnswer.setStyle("-fx-border-color:#FF0000 ; -fx-border-width: 2px;");
+		this.currentAnswer.setStyle(BORDERC + "#FF0000;" + BORDERW + "2px;");
 		this.animation();
 
 	}
@@ -167,8 +168,9 @@ public class TrueColorFxImpl extends AbstractMiniGameControllerFx implements Tru
 	/**
 	 * {@inheritDoc}
 	 */
+	@Override
 	public void showCorrectAnswer() {
-		this.currentAnswer.setStyle("-fx-border-color:#66FF66 ; -fx-border-width: 2px;");
+		this.currentAnswer.setStyle(BORDERC + "#66FF66;" + BORDERW + "2px;");
 		this.animation();
 	}
 }
