@@ -62,21 +62,21 @@ public class TrueColorModelImpl implements TrueColorModel{
         return match && answer || !match && !answer ? true : false;
     }
     
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public Integer getNumberTrueColorButton() {
-		return this.randomColorMap.get("randomTrueColor").size();
-	}
-    
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-	public Integer getNumberMeaningColorButton() {
-		return this.randomColorMap.get("randomMeaningColor").size();
-	}
+//    /**
+//     * {@inheritDoc}
+//     */
+//    @Override
+//    public Integer getNumberTrueColorButton() {
+//		return this.randomColorMap.get("randomTrueColor").size();
+//	}
+//    
+//    /**
+//     * {@inheritDoc}
+//     */
+//    @Override
+//	public Integer getNumberMeaningColorButton() {
+//		return this.randomColorMap.get("randomMeaningColor").size();
+//	}
 	
 	 /**
      * {@inheritDoc}

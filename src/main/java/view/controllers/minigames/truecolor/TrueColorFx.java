@@ -30,7 +30,7 @@ public interface TrueColorFx {
 	 * @param trueColor
 	 * 						the buttons that hold true color of the others button meaning 
 	 */
-	void setNumberBtn(Integer meaningColor, Integer trueColor);
+	void setNumberBtn(Map<String, List<Pair<Colors, Colors>>> colorMap);
 
 	/**
 	 * Set a random color to the buttons background.

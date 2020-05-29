@@ -29,7 +29,7 @@ public class TrueColorControllerImpl implements TrueColorController {
 		this.timer = new Timer();
 		this.gameTimer = new GameTimer(model.getSecondsGame(), this);
 		this.view = trueColorFx;
-		this.view.setNumberBtn(model.getNumberMeaningColorButton(), model.getNumberTrueColorButton());
+		this.view.setNumberBtn(model.getRandomColorMap());
 	}
 
 	/**

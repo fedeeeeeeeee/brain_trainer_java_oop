@@ -124,10 +124,11 @@ public class TrueColorFxImpl extends AbstractMiniGameControllerFx implements Tru
 	 * {@inheritDoc}
 	 */
 	@Override
-	public void setNumberBtn(final Integer meaningColor, final Integer trueColor) {
-		this.meanColorSize= meaningColor;
-		this.trueColorSize = trueColor;	
+	public void setNumberBtn(final Map<String, List<Pair<Colors, Colors>>> colorMap) {
+	this.meanColorSize= colorMap.get("randomMeaningColor").size();
+	this.trueColorSize = colorMap.get("randomTrueColor").size();
 	}
+	
 
 	/**
 	 * {@inheritDoc}

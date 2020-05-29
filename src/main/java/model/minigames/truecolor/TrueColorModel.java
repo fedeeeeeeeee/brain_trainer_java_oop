@@ -32,14 +32,14 @@ public interface TrueColorModel {
 	 * @return
 	 * 			number {@link Integer} of bottons
 	 */
-	Integer getNumberTrueColorButton();
+//	Integer getNumberTrueColorButton();
 
 	/**
 	 * Getter for the number of button holding the meaning text
 	 * @return
 	 * 			number {@link Integer} of bottons
 	 */
-	Integer getNumberMeaningColorButton();
+//	Integer getNumberMeaningColorButton();
 	
 	/**
 	 * Get the a Map of random color.
