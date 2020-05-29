@@ -26,9 +26,13 @@ public class ColorGamaModelImpl implements ColorGamaModel {
      * 
      */
     public ColorGamaModelImpl(final DifficultyLevel difficulty) {
-        this.computeValue = new ComputeDifficultyValueImpl(difficulty);
-        this.computeColor = new ComputeColorImpl(this.computeValue);
-        this.score = new ScoreModelImpl(difficulty, this.computeValue.getBasePoint());
+        if (difficulty != null) {
+            this.computeValue = new ComputeDifficultyValueImpl(difficulty);
+            this.computeColor = new ComputeColorImpl(this.computeValue);
+            this.score = new ScoreModelImpl(difficulty, this.computeValue.getBasePoint());
+        } else {
+            throw new IllegalStateException();
+        }
     }
 
     /**

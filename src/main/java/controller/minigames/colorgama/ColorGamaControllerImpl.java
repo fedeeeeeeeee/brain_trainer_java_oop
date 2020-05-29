@@ -34,10 +34,18 @@ public class ColorGamaControllerImpl implements ColorGamaController {
      *          the difficulty selected
      */
     public ColorGamaControllerImpl(final ColorGamaFxImpl view, final DifficultyLevel difficulty) {
+        this.check(view);
+        this.check(difficulty);
         this.model = new ColorGamaModelImpl(difficulty);
         this.view = view;
         this.timer = new Timer();
         this.gameTimer = new GameTimer(this.model.getDifficultyValue().getSeconds(), this);
+    }
+
+    private void check(final Object o) {
+        if (o == null) {
+            throw new IllegalStateException();
+        }
     }
 
     /**

@@ -30,6 +30,9 @@ public final class ComputeDifficultyValueImpl implements ComputeDifficultyValue 
      *          the current difficulty.
      */
     public ComputeDifficultyValueImpl(final DifficultyLevel difficulty) {
+        if (difficulty == null) {
+            throw new IllegalStateException();
+        }
         final BiFunction<Integer, Integer, Integer> calculator = (i1, i2) -> i1 * difficulty.ordinal() + i2;
         this.gridSize = calculator.apply(BASE, BASE);
         this.decimalNumber = calculator.apply(BOUND, BOUND);
@@ -77,12 +80,6 @@ public final class ComputeDifficultyValueImpl implements ComputeDifficultyValue 
     @Override
     public int getSeconds() {
         return this.seconds;
-    }
-
-    @Override
-    public String toString() {
-        return "ComputeDifficultyValueImpl [gridSize=" + gridSize + ", decimalNumber=" + decimalNumber + ", hueRange="
-                + hueRange + ", valueRange=" + valueRange + ", seconds=" + seconds + "]";
     }
 
 }

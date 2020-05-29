@@ -29,10 +29,17 @@ public class ComputeColorImpl implements ComputeColor {
      * @param difficultyValue constants according to the difficulty.
      */
     public ComputeColorImpl(final ComputeDifficultyValue difficultyValue) {
+        this.check(difficultyValue);
         this.difficultyValue = difficultyValue;
         this.valuesList = new HashSet<>();
         this.calculateHue();
     }
+
+    private void check(final Object o) {
+        if (o == null) {
+            throw new IllegalStateException();
+        }
+    } 
 
     private void calculateHue() {
         this.hue = new Random().nextInt(DEGREE - this.difficultyValue.getHueRange());
@@ -50,6 +57,7 @@ public class ComputeColorImpl implements ComputeColor {
      */
     @Override
     public void calculateRightValues(final QuestionType question) {
+        this.check(question);
         final Comparator<Triple<Integer, Double, Double>> bComparator = (c1, c2) -> Double.compare(c1.getRight(), c2.getRight());
         final Comparator<Triple<Integer, Double, Double>> sComparator = (c1, c2) -> Double.compare(c1.getMiddle(), c2.getMiddle());
         Triple<Integer, Double, Double> triple;
