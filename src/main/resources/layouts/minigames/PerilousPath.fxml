@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.text.*?>
 <?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
 <?import java.lang.*?>
@@ -10,7 +11,10 @@
    <children>
       <HBox alignment="CENTER" prefHeight="62.0" prefWidth="500.0">
          <children>
-            <Label fx:id="instructions" alignment="CENTER" contentDisplay="CENTER" prefHeight="20.0" prefWidth="208.0" />
+            <Label fx:id="instructions" alignment="CENTER" contentDisplay="CENTER" prefHeight="27.0" prefWidth="281.0">
+               <font>
+                  <Font size="16.0" />
+               </font></Label>
             <ProgressBar fx:id="progressBar" prefWidth="200.0" progress="1.0" />
             <Label fx:id="timerLbl" alignment="CENTER" contentDisplay="CENTER" prefHeight="27.0" prefWidth="30.0" />
          </children>

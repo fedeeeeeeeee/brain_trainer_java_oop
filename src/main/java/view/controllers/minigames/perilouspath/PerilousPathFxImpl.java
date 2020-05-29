@@ -43,6 +43,16 @@ public class PerilousPathFxImpl extends AbstractMiniGameControllerFx implements 
     private static final int MILLIS_VISUALIZATION_EXPLOSION = 1000;
 
     /**
+     * Mines memorization instruction.
+     */
+    private static final String MEMORIZATION_INSTRUCTION = "Memorize the position of the mines";
+
+    /**
+     * The instruction for the search of a safe path from start to finish.
+     */
+    private static final String PATH_INSTRUCTION = "Find a safe path from start to finish";
+
+    /**
      * The size of the button.
      */
     private static final int BUTTON_SIZE = 100;
@@ -83,6 +93,7 @@ public class PerilousPathFxImpl extends AbstractMiniGameControllerFx implements 
 
     private final EventHandler<ActionEvent> eventUpdate = (e) -> {
         this.restore();
+        this.instructions.setText(PATH_INSTRUCTION);
         this.controller.updateView();
     };
 
@@ -90,8 +101,10 @@ public class PerilousPathFxImpl extends AbstractMiniGameControllerFx implements 
         final Timeline timeline = new Timeline();
         KeyFrame keyFrame;
         if (mineExplosion) {
+            this.instructions.setText("");
             keyFrame = new KeyFrame(Duration.millis(MILLIS_VISUALIZATION_EXPLOSION), eventReset);
         } else {
+            this.instructions.setText(MEMORIZATION_INSTRUCTION);
             keyFrame = new KeyFrame(Duration.millis(MILLIS_MEMORIZATION_MINES), eventUpdate);
         }
         timeline.getKeyFrames().add(keyFrame);
