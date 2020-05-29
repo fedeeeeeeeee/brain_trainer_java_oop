@@ -9,17 +9,17 @@ public enum QuestionType {
     /**
      * The darkest color.
      */
-    DARKEST("darkest color"),
+    DARKEST("Find the darkest color"),
 
     /**
      * The lightest color.
      */
-    LIGHTEST("lightest color"),
+    LIGHTEST("Find the lightest color"),
 
     /**
      * The color indicated.
      */
-    COLOR("color indicated");
+    COLOR("Find the color indicated");
 
     private String question;
 
@@ -28,9 +28,9 @@ public enum QuestionType {
     }
 
     /**
-     * Getter for the question.
+     * Getter for the sentence of the question.
      * 
-     * @return
+     * @return name
      *          the name of the question type
      */
     public final String getQuestionName() {
