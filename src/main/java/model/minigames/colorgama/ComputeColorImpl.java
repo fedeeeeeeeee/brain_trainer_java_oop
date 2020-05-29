@@ -27,6 +27,9 @@ public class ComputeColorImpl implements ComputeColor {
      * Constructor of {@link ComputeColor}.
      * 
      * @param difficultyValue constants according to the difficulty.
+     * 
+     * @throws IllegalStateException
+     *          if difficultyValue is null
      */
     public ComputeColorImpl(final ComputeDifficultyValue difficultyValue) {
         this.check(difficultyValue);

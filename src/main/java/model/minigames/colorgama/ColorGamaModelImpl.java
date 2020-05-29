@@ -22,15 +22,21 @@ public class ColorGamaModelImpl implements ColorGamaModel {
     /**
      * Constructor of {@link ColorGamaModel}.
      * 
-     * @param difficulty the difficulty selected
-     * 
+     * @param difficulty 
+     *          the difficulty selected
+     *
+     * @throws IllegalStateException
+     *          if parameters are null
      */
     public ColorGamaModelImpl(final DifficultyLevel difficulty) {
-        if (difficulty != null) {
-            this.computeValue = new ComputeDifficultyValueImpl(difficulty);
-            this.computeColor = new ComputeColorImpl(this.computeValue);
-            this.score = new ScoreModelImpl(difficulty, this.computeValue.getBasePoint());
-        } else {
+        this.check(difficulty);
+        this.computeValue = new ComputeDifficultyValueImpl(difficulty);
+        this.computeColor = new ComputeColorImpl(this.computeValue);
+        this.score = new ScoreModelImpl(difficulty, this.computeValue.getBasePoint());
+    }
+
+    private void check(final DifficultyLevel difficulty) {
+        if (difficulty == null) {
             throw new IllegalStateException();
         }
     }

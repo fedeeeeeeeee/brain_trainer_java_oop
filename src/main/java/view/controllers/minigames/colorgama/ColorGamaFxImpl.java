@@ -33,7 +33,6 @@ import view.controllers.minigames.AbstractMiniGameControllerFx;
 public class ColorGamaFxImpl extends AbstractMiniGameControllerFx implements ColorGamaFx {
 
     private static final int BT_SIZE = 300;
-
     private static final double MILLIS = 300;
 
     @FXML
@@ -61,11 +60,6 @@ public class ColorGamaFxImpl extends AbstractMiniGameControllerFx implements Col
     };
 
     private final EventHandler<ActionEvent> wrongEvent = (l) -> this.image.setVisible(false);
-
-    private void setImage(final String imagePath) {
-        this.image.setVisible(true);
-        this.image.setImage(new Image(imagePath, true));
-    }
 
     private void showAnimation(final boolean isRight) {
         final Timeline timeline = new Timeline();
@@ -121,7 +115,6 @@ public class ColorGamaFxImpl extends AbstractMiniGameControllerFx implements Col
         ((Button) this.buttonsGrid.getChildren().get(index)).setBackground(new Background(new BackgroundFill(Color.hsb(triple.getLeft(), triple.getMiddle(), triple.getRight()), new CornerRadii(2), new Insets(2))));
     }
 
-
     /**
      * {@inheritDoc}
      */
@@ -143,24 +136,6 @@ public class ColorGamaFxImpl extends AbstractMiniGameControllerFx implements Col
      * {@inheritDoc}
      */
     @Override
-    public void rightAnswer() {
-        this.setImage("/images/tick.png");
-        this.showAnimation(true);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public void wrongAnswer() {
-        this.setImage("/images/cross.png");
-        this.showAnimation(false);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
     public void showEndGame(final int finalScore) {
         Platform.runLater(() -> {
             this.getController().updateProgress(finalScore);
@@ -174,6 +149,16 @@ public class ColorGamaFxImpl extends AbstractMiniGameControllerFx implements Col
     @Override
     public void stopTimer() {
         this.colorGamaController.stopTimer();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void showImage(final String imagePath, final boolean check) {
+        this.image.setVisible(true);
+        this.image.setImage(new Image(imagePath, true));
+        this.showAnimation(check);
     }
 
 }

@@ -59,13 +59,14 @@ public interface ColorGamaFx {
     void hideQuestionColor();
 
     /**
-     * Show the tick image.
+     * Show the image.
+     * 
+     * @param imagePath
+     *          the path of the image
+     *
+     * @param check
+     *          true if the answer is correct, false others
      */
-    void rightAnswer();
-
-    /**
-     * Show the cross image. 
-     */
-    void wrongAnswer();
+    void showImage(String imagePath, boolean check);
 
 }
