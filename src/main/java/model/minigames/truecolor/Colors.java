@@ -13,7 +13,6 @@ public enum Colors {
     BROWN("brown"),
     ORANGE("orange");
     
-    
     private String color;
 
     Colors(final String color) {

@@ -53,7 +53,7 @@ public class DifficultyColor {
 	}
 	
 	/**
-	 * 
+	 * Create the random color map 
 	 */
 	public void createRandomColorMap() {
 		this.randomColorMap.put("randomMeaningColor", this.createRandomColorList(numberMeaningColorButton));
@@ -69,15 +69,17 @@ public class DifficultyColor {
 	}
 
 	private Colors getRandomColor() {
-//		Colors randomColor = this.colorList.stream().sorted((o1, o2) -> ThreadLocalRandom.current().nextInt(-1, 2))
-//				.findAny().get();
-//		return randomColor;
 		Random rand = new Random();
 		Colors randomColor = this.colorList.get(rand.nextInt(this.colorList.size()));
 		return randomColor;
 	}
 	 
-	public Map<String, List<Pair<Colors, Colors>>> getRandomColorMap(){
+	/**
+	 * Getter for the random color map 
+	 * @return
+	 * 			the created {@link Map<String,List<Pair<Colors,Colors>>}
+	 */
+	public Map<String,List<Pair<Colors,Colors>>> getRandomColorMap(){
 		return this.randomColorMap;
 	}
 }

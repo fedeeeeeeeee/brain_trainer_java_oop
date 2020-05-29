@@ -22,15 +22,13 @@ public class TrueColorModelImpl implements TrueColorModel{
      * TrueColor's base point.
      */
 	private static final int BASE_POINT = 5;
-	
+	/**
+     * TrueColor minigame's duration
+     */
 	private static final int SECONDS = 30;
-	
 	private final ScoreModel score;
-
 	private DifficultyColor difficultyLevel;
-	
 	private Map<String, List<Pair<Colors, Colors>>> randomColorMap = new HashMap<>();
-	
 	private Boolean bool = false;
 	
 	/**
@@ -38,9 +36,6 @@ public class TrueColorModelImpl implements TrueColorModel{
      * 
      * @param difficulty
      *          the difficulty selected
-     * @param basePoint
-     *          base point of TrueColor minigame
-     * 
      */
     public TrueColorModelImpl(final DifficultyLevel difficultyLevel) {
     	this.score = new ScoreModelImpl(difficultyLevel, BASE_POINT);
@@ -72,25 +67,30 @@ public class TrueColorModelImpl implements TrueColorModel{
         }
         return false;
     }
-
-    
-    private void alternateMethod() {
-		Random rd = new Random();
-		this.bool = rd.nextBoolean();
-	}
-    
+    /**
+     * {@inheritDoc}
+     */
     public Integer getNumberTrueColorButton() {
 		return this.randomColorMap.get("randomTrueColor").size();
 	}
-	
+    
+    /**
+     * {@inheritDoc}
+     */
 	public Integer getNumberMeaningColorButton() {
 		return this.randomColorMap.get("randomMeaningColor").size();
 	}
 	
+	 /**
+     * {@inheritDoc}
+     */
 	public Map<String, List<Pair<Colors, Colors>>> getRandomColorMap(){
 		return this.randomColorMap;
 	}
 	
+	 /**
+     * {@inheritDoc}
+     */
     public Boolean getStatusMethod() {
 		return this.bool;
 	}
@@ -110,7 +110,15 @@ public class TrueColorModelImpl implements TrueColorModel{
 		return this.score.getScore();
 	}
 
+	/**
+     * {@inheritDoc}
+     */
 	public int getSecondsGame() {
 		return SECONDS;
+	}
+	 
+	private void alternateMethod() {
+		Random rd = new Random();
+		this.bool = rd.nextBoolean();
 	}
 }

@@ -28,9 +28,6 @@ import view.controllers.minigames.AbstractMiniGameControllerFx;
  */
 public class TrueColorFxImpl extends AbstractMiniGameControllerFx implements TrueColorFx {
 
-	/**
-	 * The minigame's duration.
-	 */
 	private static final String textfill = "-fx-text-fill: ";
 	private static final String background = "-fx-background-color: ";
 	private static final String textfont = "-fx-font-size:35";
@@ -39,15 +36,14 @@ public class TrueColorFxImpl extends AbstractMiniGameControllerFx implements Tru
 	private List<Button> trueColorBtnList;
 	private int meanColorSize = 0;
 	private int trueColorSize = 0;
-
+	private Button currentAnswer;
+	
 	@FXML
 	private Button yesBtn;
 	@FXML
 	private Button noBtn;
 	@FXML
 	private VBox vBoxId;
-
-	private Button currentAnswer;
 
 	@FXML
 	private void buttonClicked(MouseEvent event) throws IOException {
@@ -56,11 +52,28 @@ public class TrueColorFxImpl extends AbstractMiniGameControllerFx implements Tru
 		this.trueColorController.check(selectedAnswer);
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public void initGame() {
+		this.trueColorController = new TrueColorControllerImpl(this.getController().getDifficultyLevel(), this);
+		this.addButtons();
+		this.trueColorController.startTimer();
+		this.trueColorController.startGame();
+	}
+	
+	/**
+	 * {@inheritDoc}
+	 */
 	public void next() {
 		this.trueColorController.refresh();
 		this.trueColorController.startGame();
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	public void setButtons(Map<String, List<Pair<Colors, Colors>>> colorMap) {
 		this.setStyleButton(colorMap.get("randomMeaningColor"), this.meaningColorBtnList);
 		this.setStyleButton(colorMap.get("randomTrueColor"), this.trueColorBtnList);
@@ -74,6 +87,9 @@ public class TrueColorFxImpl extends AbstractMiniGameControllerFx implements Tru
 		}
 	}
 	
+	/**
+	 * {@inheritDoc}
+	 */
 	public void alternativeSetButton(List<Pair<Colors, Colors>> list) {
 		int size = this.trueColorBtnList.size();
 		for (int i = 0; i < size; i++) {
@@ -82,16 +98,6 @@ public class TrueColorFxImpl extends AbstractMiniGameControllerFx implements Tru
 		}
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public void initGame() {
-		this.trueColorController = new TrueColorControllerImpl(this.getController().getDifficultyLevel(), this);
-		this.addButtons();
-		this.trueColorController.startTimer();
-		this.trueColorController.startGame();
-	}
 	
 	private void addButtons() {
 		this.meaningColorBtnList = new LinkedList<>();
@@ -109,12 +115,17 @@ public class TrueColorFxImpl extends AbstractMiniGameControllerFx implements Tru
 		}
 	}
 	
+	/**
+	 * {@inheritDoc}
+	 */
 	public void setNumberBtn(Integer meaningColor, Integer trueColor) {
 		this.meanColorSize= meaningColor;
-		this.trueColorSize = trueColor;
-		
+		this.trueColorSize = trueColor;	
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public void showEndGame(int finalScore) {
 		Platform.runLater(() -> {
@@ -123,6 +134,9 @@ public class TrueColorFxImpl extends AbstractMiniGameControllerFx implements Tru
 		});
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public void stopTimer() {
 		this.trueColorController.stopTimer();
@@ -140,13 +154,19 @@ public class TrueColorFxImpl extends AbstractMiniGameControllerFx implements Tru
 		timeline.getKeyFrames().add(kf);
 		timeline.play();
 	}
-
+	
+	/**
+	 * {@inheritDoc}
+	 */
 	public void showWrongAnswer() {
 		this.currentAnswer.setStyle("-fx-border-color:#FF0000 ; -fx-border-width: 2px;");
 		this.animation();
 
 	}
-
+	
+	/**
+	 * {@inheritDoc}
+	 */
 	public void showCorrectAnswer() {
 		this.currentAnswer.setStyle("-fx-border-color:#66FF66 ; -fx-border-width: 2px;");
 		this.animation();

@@ -15,18 +15,28 @@ public interface TrueColorFx {
 	void next();
 
 	/**
-	 * Associate a random color from map with text of the button.
+	 * Set a random color and a random textColor to buttons.
 	 * 
-	 * @param finalScore
+	 * @param colorMap
+	 * 					map with lists of Colors pair
 	 */
 	void setButtons(Map<String, List<Pair<Colors, Colors>>> colorMap);
 	
+	/**
+	 * Set the number of button.
+	 * 
+	 * @param meaningColor
+	 * 						the buttons that hold the meaning of the text
+	 * @param trueColor
+	 * 						the buttons that hold true color of the others button meaning 
+	 */
 	void setNumberBtn(Integer meaningColor, Integer trueColor);
 
 	/**
-	 * Associate a random color from the map with background button for three times.
+	 * Set a random color to the buttons background.
 	 * 
-	 * @param randomColor map of buttons name and random colors
+	 * @param randomColor
+	 * 					 list of random color belonging to true color list
 	 */
 	void alternativeSetButton(List<Pair<Colors, Colors>> randomColor);
 
@@ -42,6 +52,5 @@ public interface TrueColorFx {
 	 */
 	void showCorrectAnswer();
 
-	void stopTimer();
 
 }

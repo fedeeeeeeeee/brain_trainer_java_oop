@@ -5,7 +5,9 @@ import controller.minigames.MiniGameController;
 
 public interface TrueColorController extends MiniGameController {
 
-	
+	/**
+	 * Builds and transfer the useful elements to the View
+	 */
 	void startGame();
 	
 	/**
@@ -22,9 +24,13 @@ public interface TrueColorController extends MiniGameController {
      */
 	void check(String selectedAnswer);
 	
+	/**
+	 * 
+	 */
 	void stopTimer();
 	
-
+	/**
+	 * 
+	 */
 	void startTimer();
-	
 }

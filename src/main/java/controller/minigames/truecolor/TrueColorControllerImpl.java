@@ -1,6 +1,5 @@
 package controller.minigames.truecolor;
 
-import java.util.Random;
 import java.util.Timer;
 
 import model.DifficultyLevel;
@@ -36,6 +35,17 @@ public class TrueColorControllerImpl implements TrueColorController {
 	/**
 	 * {@inheritDoc}
 	 */
+	@Override
+	public void startGame() {
+		this.view.setButtons(model.getRandomColorMap());
+		if (this.view.getController().getDifficultyLevel().equals(DifficultyLevel.HARD) && model.getStatusMethod()) {
+			this.view.alternativeSetButton(model.getRandomColorMap().get("randomTrueColor"));
+		}
+	}
+	
+	/**
+	 * {@inheritDoc}
+	 */
 	public void refresh() {
 		this.model.reloadRandomColorMap();
 	}
@@ -58,20 +68,8 @@ public class TrueColorControllerImpl implements TrueColorController {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public void startGame() {
-		this.view.setButtons(model.getRandomColorMap());
-		if (this.view.getController().getDifficultyLevel().equals(DifficultyLevel.HARD) && model.getStatusMethod()) {
-			this.view.alternativeSetButton(model.getRandomColorMap().get("randomTrueColor"));
-		}
-	}
-	
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
 	public void updateTimerView(int second) {
 		this.view.showTimerSeconds(second);
-
 	}
 	
 	/**
@@ -81,7 +79,6 @@ public class TrueColorControllerImpl implements TrueColorController {
 	public void timeFinish() {
 		this.view.showEndGame(this.model.getFinalScore());
 	}
-	
 	
 	/**
 	 * {@inheritDoc}
@@ -99,7 +96,5 @@ public class TrueColorControllerImpl implements TrueColorController {
 	public void stopTimer() {
 		this.timer.cancel();
 		this.gameTimer.cancel();
-
 	}
-
 }
