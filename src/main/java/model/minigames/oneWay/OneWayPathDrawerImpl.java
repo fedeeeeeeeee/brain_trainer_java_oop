@@ -2,10 +2,16 @@ package model.minigames.oneWay;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 import java.util.Random;
+import java.util.function.Predicate;
+
 import utility.Pair;
 
+/**
+ * Implementation of {@link PathDrawer}. This class generates the path from
+ * an initial random position to a computed final position.
+ *
+ */
 public class OneWayPathDrawerImpl implements PathDrawer {
 
     private final int size;
@@ -16,6 +22,17 @@ public class OneWayPathDrawerImpl implements PathDrawer {
     private Pair<Integer, Integer> initialPosition;
     private Pair<Integer, Integer> finalPosition;
 
+    private final Predicate<Pair<Integer, Integer>> isClosedPath = currentPosition -> 
+                                    currentPosition.getX() == this.initialPosition.getX()
+                                    && currentPosition.getY() == this.initialPosition.getY();
+
+    /**
+     * Constructor of {@link PathDrawer}.
+     * @param size
+     *          the size of the playground main grid
+     * @param arrows 
+     *          the number of steps to compute
+     */
     public OneWayPathDrawerImpl(final int size, final int arrows) {
         this.size = size;
         this.arrows = arrows;
@@ -36,6 +53,9 @@ public class OneWayPathDrawerImpl implements PathDrawer {
         return y + this.currentPosition.getY() < 0 || y + this.currentPosition.getY() >= size;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void drawPath() {
         this.setInitialPosition();
@@ -52,27 +72,35 @@ public class OneWayPathDrawerImpl implements PathDrawer {
             this.currentPosition = new Pair<>(x, y);
             this.steps.add(dir);
         }
-        if (this.currentPosition.getX() == this.initialPosition.getX()
-                && this.currentPosition.getY() == this.initialPosition.getY()) {
+        if (this.isClosedPath.test(currentPosition)) {
             this.drawPath();
         } else {
             this.finalPosition = this.currentPosition;
         }
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public Pair<Integer, Integer> getInitialPosition() {
-        return Objects.requireNonNull(this.initialPosition);
+        return this.initialPosition;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public Pair<Integer, Integer> getFinalPosition() {
-        return Objects.requireNonNull(this.finalPosition);
+        return this.finalPosition;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public List<Direction> getSteps() {
-        return Objects.requireNonNull(this.steps);
+        return this.steps;
     }
 
 }
