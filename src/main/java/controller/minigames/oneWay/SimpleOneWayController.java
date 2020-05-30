@@ -75,8 +75,8 @@ public class SimpleOneWayController implements OneWayController {
      */
     @Override
     public void firstInit() {
+        this.view.drawGrid(OneWayModelImpl.SIZE);
         this.model.oneWayInit();
-        this.view.drawGrid(this.model.getSize());
         this.view.drawArrow(this.model.getSteps());
         this.view.updateView(this.model.getInitialPosition());
     }

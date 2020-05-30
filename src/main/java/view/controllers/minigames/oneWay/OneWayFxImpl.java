@@ -6,9 +6,14 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.function.Function;
+import java.util.stream.IntStream;
+
 import controller.minigames.oneWay.OneWayController;
 import controller.minigames.oneWay.SimpleOneWayController;
+import javafx.animation.KeyFrame;
 import javafx.animation.PauseTransition;
+import javafx.animation.Timeline;
 import javafx.application.Platform;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -31,11 +36,12 @@ import view.controllers.minigames.AbstractMiniGameControllerFx;
  */
 public class OneWayFxImpl extends AbstractMiniGameControllerFx implements OneWayFx {
 
-    private static final String BACKGROUND = "-fx-background-color: rgb(143,187,189)";
+    private static final int IMG_DIM = 50;
+
+    private static final String PLAY_GRID_BUTTON_BACKGROUND = "-fx-background-color: rgb(143,187,189)";
     private static final String GREEN = "-fx-border-color: #56b72d; -fx-border-width: 5px;";
     private static final String RED = "-fx-border-color: #ff0000; -fx-border-width: 5px;";
     private static final String BLUE = "-fx-accent: #49618C";
-    private static final int IMG_DIM = 50;
 
     private OneWayController controller;
     private Map<Button, Pair<Integer, Integer>> buttons;
@@ -62,7 +68,15 @@ public class OneWayFxImpl extends AbstractMiniGameControllerFx implements OneWay
     private Button clickedBtn;
     private Button correctBtn;
 
-    private final PauseTransition pause = new PauseTransition(Duration.seconds(0.5));
+    private final PauseTransition pause = new PauseTransition(Duration.seconds(0.4));
+ //   private final PauseTransition finish = new PauseTransition(Duration.seconds(0.1));
+
+    private final Function<String, ImageView> image = (path) -> {
+        final ImageView image = new ImageView(path);
+        image.setFitHeight(IMG_DIM);
+        image.setFitWidth(IMG_DIM);
+        return image;
+    };
 
     private final EventHandler<MouseEvent> gridEventHandler = (e) -> {
         this.clickedBtn = (Button) e.getSource();
@@ -74,20 +88,18 @@ public class OneWayFxImpl extends AbstractMiniGameControllerFx implements OneWay
         });
 
         this.controller.showSolution();
-        this.correctBtn.setGraphic(this.getImage("/images/finish.png"));
-        this.correctBtn.setPadding(new Insets(-1, -1, -1, -1));
 
         pause.setOnFinished(event -> {
             this.buttons.keySet().forEach(b -> b.setDisable(false));
             this.correctBtn.setStyle(null);
-            this.correctBtn.setGraphic(null);
         });
+        pause.playFromStart();
 
-        pause.play();
         this.controller.nextLevel();
     };
 
     /**
+     * 
      * {@inheritDoc}
      */
     @Override
@@ -105,13 +117,14 @@ public class OneWayFxImpl extends AbstractMiniGameControllerFx implements OneWay
      */
     @Override
     public void drawArrow(final List<Direction> steps) {
-        for (int i = 0; i < steps.size(); i++) {
+        // CHECK ARGS (CERCA CHECKANDRAISE METODO PROF
+        IntStream.range(0, steps.size()).boxed().forEach(i -> {
             final Button btn = new Button();
             btn.setPrefSize(Double.MAX_VALUE, Double.MAX_VALUE);
             this.arrowRow.add(btn, i, 0);
             this.arrows.add(btn);
-            this.loadImages(i, steps);
-        }
+            this.loadImage(i, steps.get(i));
+        });
     }
 
     /**
@@ -119,23 +132,11 @@ public class OneWayFxImpl extends AbstractMiniGameControllerFx implements OneWay
      */
     @Override
     public void updateArrows(final List<Direction> steps) {
-        for (int i = 0; i < steps.size(); i++) {
-            this.loadImages(i, steps);
-        }
+        IntStream.range(0, steps.size()).boxed().forEach(i -> this.loadImage(i, steps.get(i)));
     }
 
-    private void loadImages(final int idx, final List<Direction> steps) {
-        final String txt = steps.get(idx).toString();
-        final Direction direction = Arrays.asList(Direction.values()).stream().filter(d -> d.toString().equals(txt))
-                .findFirst().get();
-        this.arrows.get(idx).setGraphic(this.getImage(direction.getPath()));
-    }
-
-    private ImageView getImage(final String path) {
-        final ImageView img = new ImageView(path);
-        img.setFitHeight(IMG_DIM);
-        img.setFitWidth(IMG_DIM);
-        return img;
+    private void loadImage(final int idx, final Direction step) {
+        this.arrows.get(idx).setGraphic(this.image.apply(step.getPath()));
     }
 
     /**
@@ -159,14 +160,13 @@ public class OneWayFxImpl extends AbstractMiniGameControllerFx implements OneWay
      */
     @Override
     public void updateView(final Pair<Integer, Integer> initialPosition) {
-        for (final Entry<Button, Pair<Integer, Integer>> entry : this.buttons.entrySet()) {
-            if (initialPosition.equals(entry.getValue())) {
-                entry.getKey().setGraphic(this.getImage("/images/start.png"));
-                entry.getKey().setPadding(new Insets(-1, -1, -1, -1));
-            } else {
-                entry.getKey().setGraphic(null);
-            }
-        }
+        this.buttons.entrySet().stream()
+                               .peek(e -> e.getKey().setGraphic(null))
+                               .filter(bt -> bt.getValue().equals(initialPosition))
+                               .forEach(bt -> {
+                                        bt.getKey().setGraphic(this.image.apply("/images/start.png"));
+                                        bt.getKey().setPadding(new Insets(-1, -1, -1, -1));
+                                });
     }
 
     /**
@@ -177,11 +177,11 @@ public class OneWayFxImpl extends AbstractMiniGameControllerFx implements OneWay
         this.correctBtn = this.buttons.entrySet().stream()
                 .filter(e -> e.getValue().getX() == finalPosition.getX() && e.getValue().getY() == finalPosition.getY())
                 .map(x -> x.getKey()).findAny().get();
-        this.correctBtn.setStyle(BACKGROUND);
-        this.correctBtn.setStyle(check(finalPosition) ? GREEN : RED);
-
+        this.correctBtn.setStyle(PLAY_GRID_BUTTON_BACKGROUND);
+        this.correctBtn.setStyle(this.check(finalPosition) ? GREEN : RED);
     }
 
+    // trova modo per farlo con predicate
     private boolean check(final Pair<Integer, Integer> finalPosition) {
         return this.buttons.get(clickedBtn).getX() == finalPosition.getX()
                 && this.buttons.get(clickedBtn).getY() == finalPosition.getY();

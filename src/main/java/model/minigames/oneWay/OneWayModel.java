@@ -28,12 +28,6 @@ public interface OneWayModel {
 
     /**
      * 
-     * @return the size of the grid to draw
-     */
-    int getSize();
-
-    /**
-     * 
      * @return the list of generated {@link Direction} 
      */
     List<Direction> getSteps();

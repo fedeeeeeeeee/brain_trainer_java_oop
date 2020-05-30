@@ -20,7 +20,7 @@ public class OneWayTest {
     private static final int EASY_LEVEL_SEC = 45;
     private static final int NORMAL_LEVEL_SEC = 30;
     private static final int HARD_LEVEL_SEC = 40;
-    
+
     private OneWayModel model;
 
     @Test
@@ -56,22 +56,23 @@ public class OneWayTest {
         OneWayModel model = new OneWayModelImpl(DifficultyLevel.EASY);
         model.oneWayInit();
 
-        assertTrue(model.getInitialPosition().getX() < model.getSize());
-        assertTrue(model.getInitialPosition().getY() < model.getSize());
+        assertTrue(model.getInitialPosition().getX() < OneWayModelImpl.SIZE);
+        assertTrue(model.getInitialPosition().getY() < OneWayModelImpl.SIZE);
         assertTrue(model.getInitialPosition().getX() >= 0);
         assertTrue(model.getInitialPosition().getY() >= 0);
 
-        assertTrue(model.getFinalPosition().getX() < model.getSize());
-        assertTrue(model.getFinalPosition().getY() < model.getSize());
+        assertTrue(model.getFinalPosition().getX() < OneWayModelImpl.SIZE);
+        assertTrue(model.getFinalPosition().getY() < OneWayModelImpl.SIZE);
         assertTrue(model.getFinalPosition().getX() >= 0);
         assertTrue(model.getFinalPosition().getY() >= 0);
     }
-    
+
     @Test
     public void testPositions() {
         OneWayModel model = new OneWayModelImpl(DifficultyLevel.EASY);
         model.oneWayInit();
-        assertFalse(model.getInitialPosition().getX() == model.getFinalPosition().getX() && model.getInitialPosition().getY() == model.getFinalPosition().getY());
+        assertFalse(model.getInitialPosition().getX() == model.getFinalPosition().getX()
+                && model.getInitialPosition().getY() == model.getFinalPosition().getY());
     }
-    
+
 }
