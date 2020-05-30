@@ -19,8 +19,6 @@ public final class ColorGamaControllerImpl implements ColorGamaController {
 
     private static final long DELAY = 0;
     private static final long PERIOD = 1000;
-    private static final String RIGHT_IMAGE_PATH = "/images/tick.png";
-    private static final String WRONG_IMAGE_PATH = "/images/cross.png";
     private final ColorGamaModel model;
     private final ColorGamaFxImpl view;
     private final GameTimer gameTimer;
@@ -99,10 +97,10 @@ public final class ColorGamaControllerImpl implements ColorGamaController {
     @Override
     public void checkAnswer(final int index) {
         if (this.model.getRightIndex() == index) {
-            this.view.showImage(RIGHT_IMAGE_PATH, true);
+            this.view.showImage(true);
             this.model.addPoint();
         } else {
-            this.view.showImage(WRONG_IMAGE_PATH, false);
+            this.view.showImage(false);
         }
     }
 }

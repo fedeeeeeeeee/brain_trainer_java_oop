@@ -34,6 +34,8 @@ public class ColorGamaFxImpl extends AbstractMiniGameControllerFx implements Col
 
     private static final int BT_SIZE = 300;
     private static final double MILLIS = 300;
+    private static final String RIGHT_IMAGE_PATH = "/images/tick.png";
+    private static final String WRONG_IMAGE_PATH = "/images/cross.png";
 
     @FXML
     private GridPane buttonsGrid;
@@ -49,7 +51,7 @@ public class ColorGamaFxImpl extends AbstractMiniGameControllerFx implements Col
 
     private ColorGamaController colorGamaController;
 
-    private final EventHandler<MouseEvent> eventHandler = (l) -> {
+    private final EventHandler<MouseEvent> bntClicked = (l) -> {
         final Button bt = (Button) l.getSource();
         this.colorGamaController.checkAnswer(this.buttonsGrid.getChildren().indexOf(bt));
     };
@@ -88,7 +90,7 @@ public class ColorGamaFxImpl extends AbstractMiniGameControllerFx implements Col
                 final Button bt = new Button();
                 bt.setPrefSize(BT_SIZE, BT_SIZE);
                 bt.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
-                bt.addEventHandler(MouseEvent.MOUSE_CLICKED, eventHandler);
+                bt.addEventHandler(MouseEvent.MOUSE_CLICKED, bntClicked);
                 buttonsGrid.add(bt, i, j);
             }
         }
@@ -155,9 +157,10 @@ public class ColorGamaFxImpl extends AbstractMiniGameControllerFx implements Col
      * {@inheritDoc}
      */
     @Override
-    public void showImage(final String imagePath, final boolean check) {
+    public void showImage(final boolean check) {
+        final Image image = check ? new Image(RIGHT_IMAGE_PATH) : new Image(WRONG_IMAGE_PATH);
         this.image.setVisible(true);
-        this.image.setImage(new Image(imagePath, true));
+        this.image.setImage(image);
         this.showAnimation(check);
     }
 

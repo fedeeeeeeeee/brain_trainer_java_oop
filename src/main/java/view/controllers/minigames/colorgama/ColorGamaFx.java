@@ -60,13 +60,10 @@ public interface ColorGamaFx {
 
     /**
      * Show the image.
-     * 
-     * @param imagePath
-     *          the path of the image
      *
      * @param check
-     *          true if the answer is correct, false others
+     *          check for right or wrong answer
      */
-    void showImage(String imagePath, boolean check);
+    void showImage(boolean check);
 
 }
