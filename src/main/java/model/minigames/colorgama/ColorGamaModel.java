@@ -23,8 +23,8 @@ public interface ColorGamaModel {
     /**
      * Get the constants according to the difficulty.
      * 
-     * @return
-     *      Compute
+     * @return difficultyValues
+     *          values of the minigame
      */
     ComputeDifficultyValue getDifficultyValue();
 
@@ -40,7 +40,7 @@ public interface ColorGamaModel {
      * Get the index of the right answers.
      * 
      * @return index
-     *          right index
+     *          the right index
      */
     int getRightIndex();
 
@@ -56,7 +56,7 @@ public interface ColorGamaModel {
      * Get the type of the current question.
      * 
      * @return question
-     *          current question
+     *          the current question
      */
     QuestionType getCurrentQuestion();
 

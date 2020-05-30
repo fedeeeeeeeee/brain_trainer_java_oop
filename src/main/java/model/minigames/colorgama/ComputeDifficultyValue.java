@@ -34,7 +34,7 @@ public interface ComputeDifficultyValue {
      * Get of the random origin of the color value.
      * 
      * @return origin
-     *           the origin (inclusive) of each random value
+     *           the origin of each random value
      */
     double getRandomColorOrigin();
 
@@ -42,7 +42,7 @@ public interface ComputeDifficultyValue {
      * Get of the random bound of the color value.
      * 
      * @return bound
-     *           the bound (exclusive) of each random value
+     *           the bound of each random value
      */
     double getRandomColorBound();
 
@@ -63,10 +63,10 @@ public interface ComputeDifficultyValue {
     int getHueRange();
 
     /**
-     * Get the seconds of the game.
+     * Get the seconds according to the difficulty.
      * 
      * @return seconds
-     *          seconds according to the difficulty
+     *          seconds of the game
      */
     int getSeconds();
 

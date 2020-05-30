@@ -27,12 +27,12 @@ public interface ColorGamaController extends MiniGameController {
     void next();
 
     /**
-     * 
+     * Stop the timer.
      */
     void stopTimer();
 
     /**
-     * 
+     * Start the timer.
      */
     void startTimer();
 }
