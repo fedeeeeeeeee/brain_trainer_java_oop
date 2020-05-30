@@ -1,20 +1,17 @@
 package view.controllers.minigames.oneWay;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Map.Entry;
 import java.util.function.Function;
+import java.util.function.Predicate;
 import java.util.function.Supplier;
 import java.util.stream.IntStream;
 
 import controller.minigames.oneWay.OneWayController;
 import controller.minigames.oneWay.SimpleOneWayController;
-import javafx.animation.KeyFrame;
 import javafx.animation.PauseTransition;
-import javafx.animation.Timeline;
 import javafx.application.Platform;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -77,6 +74,10 @@ public class OneWayFxImpl extends AbstractMiniGameControllerFx implements OneWay
         return image;
     };
 
+    private final Predicate<Pair<Integer, Integer>> predicate = finalPosition -> 
+                                                    this.buttons.get(clickedBtn).getX() == finalPosition.getX() 
+                                                    && this.buttons.get(clickedBtn).getY() == finalPosition.getY();
+
     private final EventHandler<MouseEvent> gridEventHandler = (e) -> {
         this.clickedBtn = (Button) e.getSource();
         this.controller.hit(buttons.get(clickedBtn).getX(), buttons.get(clickedBtn).getY());
@@ -126,7 +127,7 @@ public class OneWayFxImpl extends AbstractMiniGameControllerFx implements OneWay
     @Override
     public void drawArrow(final List<Direction> steps) {
         raiseException(steps.isEmpty(), ILLEGAL_ARGUMENT_EXCEPTION_SUPPLIER);
-        IntStream.range(0, steps.size()).boxed().forEach(i -> {
+        IntStream.range(0, steps.size()).forEach(i -> {
             final Button btn = new Button();
             btn.setPrefSize(Double.MAX_VALUE, Double.MAX_VALUE);
             this.arrowRow.add(btn, i, 0);
@@ -153,6 +154,7 @@ public class OneWayFxImpl extends AbstractMiniGameControllerFx implements OneWay
             for (int j = 0; j < size; j++) {
                 final Button btn = new Button();
                 btn.setPrefSize(Double.MAX_VALUE, Double.MAX_VALUE);
+                btn.setPadding(new Insets(-1, -1, -1, -1));
                 btn.addEventHandler(MouseEvent.MOUSE_CLICKED, gridEventHandler);
                 this.grid.add(btn, j, i);
                 this.buttons.put(btn, new Pair<>(i, j));
@@ -171,7 +173,6 @@ public class OneWayFxImpl extends AbstractMiniGameControllerFx implements OneWay
                                .filter(bt -> bt.getValue().equals(initialPosition))
                                .forEach(bt -> {
                                         bt.getKey().setGraphic(this.image.apply("/images/start.png"));
-                                        bt.getKey().setPadding(new Insets(-1, -1, -1, -1));
                                 });
     }
 
@@ -181,18 +182,11 @@ public class OneWayFxImpl extends AbstractMiniGameControllerFx implements OneWay
     @Override
     public void showCorrectAnswer(final Pair<Integer, Integer> finalPosition) {
         raiseException(finalPosition == null, ILLEGAL_ARGUMENT_EXCEPTION_SUPPLIER);
-
         this.correctBtn = this.buttons.entrySet().stream()
                 .filter(e -> e.getValue().getX() == finalPosition.getX() && e.getValue().getY() == finalPosition.getY())
-                .map(x -> x.getKey()).findAny().get();
+                .map(e -> e.getKey()).findAny().get();
         this.correctBtn.setStyle(PLAY_GRID_BUTTON_BACKGROUND);
-        this.correctBtn.setStyle(this.check(finalPosition) ? GREEN : RED);
-    }
-
-    // usa Predicate
-    private boolean check(final Pair<Integer, Integer> finalPosition) {
-        return this.buttons.get(clickedBtn).getX() == finalPosition.getX()
-                && this.buttons.get(clickedBtn).getY() == finalPosition.getY();
+        this.correctBtn.setStyle(predicate.test(finalPosition) ? GREEN : RED);
     }
 
     /**

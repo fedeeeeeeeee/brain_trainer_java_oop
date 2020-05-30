@@ -37,7 +37,8 @@ public class OneWayModelImpl implements OneWayModel {
     /**
      * OneWayModelImpl constructor.
      * 
-     * @param selectedDifficulty the difficulty to set
+     * @param selectedDifficulty 
+     *                       the difficulty to set
      */
     public OneWayModelImpl(final DifficultyLevel selectedDifficulty) {
         this.difficulty = selectedDifficulty;
@@ -78,9 +79,8 @@ public class OneWayModelImpl implements OneWayModel {
      */
     @Override
     public boolean hitFinalPosition(final int row, final int col) {
-        return this.pathDrawer.getFinalPosition().getX() == row && this.pathDrawer.getFinalPosition().getY() == col
-                ? true
-                : false;
+        return this.pathDrawer.getFinalPosition().getX() == row 
+                && this.pathDrawer.getFinalPosition().getY() == col ? true : false;
     }
 
     /**
