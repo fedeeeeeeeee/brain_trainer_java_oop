@@ -30,7 +30,7 @@ public interface TrueColorFx {
 	 * @param trueColor
 	 * 						the buttons that hold true color of the others button meaning 
 	 */
-	void setNumberBtn(Map<String, List<Pair<Colors, Colors>>> colorMap);
+	void setBtnNumber(Map<String, List<Pair<Colors, Colors>>> colorMap);
 
 	/**
 	 * Set a random color to the buttons background.
@@ -41,16 +41,12 @@ public interface TrueColorFx {
 	void alternativeSetButton(List<Pair<Colors, Colors>> randomColor);
 
 	/**
-	 * Show the wrong answer coloring the button's border
+	 * Show the answer coloring the button's border
 	 * 
+	 * @param bool
+	 * 				that identify if the answer is correct or not.
 	 */
-	void showWrongAnswer();
-
-	/**
-	 * Show the correct answer coloring the button's border
-	 * 
-	 */
-	void showCorrectAnswer();
+	void showAnswer(boolean bool);
 
 
 }

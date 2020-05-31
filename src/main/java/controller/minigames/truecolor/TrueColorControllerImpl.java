@@ -29,7 +29,7 @@ public class TrueColorControllerImpl implements TrueColorController {
 		this.timer = new Timer();
 		this.gameTimer = new GameTimer(model.getSecondsGame(), this);
 		this.view = trueColorFx;
-		this.view.setNumberBtn(model.getRandomColorMap());
+		this.view.setBtnNumber(model.getRandomColorMap());
 	}
 
 	/**
@@ -59,9 +59,9 @@ public class TrueColorControllerImpl implements TrueColorController {
 		if (model.matchingMeaningAndInk(selectedAnswer)) {
 			System.out.println("corretto");
 			this.model.addPoint();
-			this.view.showCorrectAnswer();
+			this.view.showAnswer(true);
 		} else {
-			this.view.showWrongAnswer();
+			this.view.showAnswer(false);
 		}
 		this.view.next();
 	}

@@ -87,6 +87,7 @@ public class TrueColorFxImpl extends AbstractMiniGameControllerFx implements Tru
 	 * {@inheritDoc}
 	 */
 	@Override
+	// aggiungere controllo sulla map
 	public void setButtons(final Map<String, List<Pair<Colors, Colors>>> colorMap) {
 		this.setStyleButton(colorMap.get("randomMeaningColor"), this.meaningColorBtnList);
 		this.setStyleButton(colorMap.get("randomTrueColor"), this.trueColorBtnList);
@@ -96,9 +97,9 @@ public class TrueColorFxImpl extends AbstractMiniGameControllerFx implements Tru
 		final int size = listBtn.size();
 		for (int i = 0; i < size; i++) {
 			listBtn.get(i).setText(listColor.get(i).getX().toString());
-			listBtn.get(i).setStyle(TXTFILL + listColor.get(i).getY().getName() + ";" + FONT + "35"+ ";"+ RADIUS+"5em");
+			listBtn.get(i).setStyle(TXTFILL + listColor.get(i).getY().getName() + ";" + FONT + "35;"+ RADIUS+"5em");
 			
-			if(this.meaningColorBtnList == listBtn ) {
+			if(this.meaningColorBtnList == listBtn) {
 				listBtn.get(i).setEffect(this.shadow);
 			}
 		}
@@ -137,7 +138,7 @@ public class TrueColorFxImpl extends AbstractMiniGameControllerFx implements Tru
 	 * {@inheritDoc}
 	 */
 	@Override
-	public void setNumberBtn(final Map<String, List<Pair<Colors, Colors>>> colorMap) {
+	public void setBtnNumber(final Map<String, List<Pair<Colors, Colors>>> colorMap) {
 	this.meanColorSize= colorMap.get("randomMeaningColor").size();
 	this.trueColorSize = colorMap.get("randomTrueColor").size();
 	}
@@ -173,18 +174,8 @@ public class TrueColorFxImpl extends AbstractMiniGameControllerFx implements Tru
 	 * {@inheritDoc}
 	 */
 	@Override
-	public void showWrongAnswer() {
-		this.currentAnswer.setStyle(BORDERC + "#FF0000;" + BORDERW + "2px;");
-		this.animation();
-
-	}
-	
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public void showCorrectAnswer() {
-		this.currentAnswer.setStyle(BORDERC + "#66FF66;" + BORDERW + "2px;");
+	public void showAnswer(boolean bool) {
+		this.currentAnswer.setStyle(BORDERW + "2px;"+ BORDERC + ( bool ? "#66FF66" : "#FF0000"));
 		this.animation();
 	}
 }
