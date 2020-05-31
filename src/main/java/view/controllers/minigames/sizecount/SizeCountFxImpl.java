@@ -2,6 +2,7 @@ package view.controllers.minigames.sizecount;
 
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Objects;
 
 import controller.minigames.sizecounts.SizeCountController;
 import controller.minigames.sizecounts.SizeCountControllerImpl;
@@ -45,6 +46,12 @@ public class SizeCountFxImpl extends AbstractMiniGameControllerFx implements Siz
         timeline.play();
     }
 
+    private void checkNumOperations(int numOperations) {
+        if (numOperations == 0) {
+            throw new IllegalStateException();
+        }
+    }
+
     /**
      * {@inheritDoc}
      */
@@ -61,6 +68,7 @@ public class SizeCountFxImpl extends AbstractMiniGameControllerFx implements Siz
      */
     @Override
     public void draw(final List<IntegerOperation> operations) {
+        Objects.requireNonNull(operations, "operations can't be null");
         for (int i = 0; i < operations.size(); i++) {
             final Button bt = this.buttons.get(i);
             bt.setText(operations.get(i).toString());
@@ -71,7 +79,8 @@ public class SizeCountFxImpl extends AbstractMiniGameControllerFx implements Siz
      * {@inheritDoc}
      */
     @Override
-    public void setOperations(final Integer numOperations) {
+    public void setOperations(final int numOperations) {
+        this.checkNumOperations(numOperations);
         final EventHandler<MouseEvent> ev = (e) -> {
             final Button bt = (Button) e.getSource();
             this.currentAnswer = bt;

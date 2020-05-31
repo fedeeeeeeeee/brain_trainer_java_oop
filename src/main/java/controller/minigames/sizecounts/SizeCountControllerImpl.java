@@ -1,5 +1,6 @@
 package controller.minigames.sizecounts;
 
+import java.util.Objects;
 import java.util.Timer;
 
 import model.minigames.sizecount.SizeCountModel;
@@ -37,6 +38,7 @@ public class SizeCountControllerImpl implements SizeCountController {
      */
     @Override
     public void newAttempt(final String answer) {
+        Objects.requireNonNull(answer, "answer can't be null");
         if (this.model.isCorrectAnswer(answer)) {
             this.view.showCorrectAnswer();
         } else {

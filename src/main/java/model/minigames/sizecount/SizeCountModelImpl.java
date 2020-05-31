@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Optional;
 import java.util.Random;
 import java.util.stream.Collectors;
@@ -72,6 +73,7 @@ public class SizeCountModelImpl implements SizeCountModel {
      * @param difficulty the {@link DifficultyLevel} selected for the game
      */
     public SizeCountModelImpl(final DifficultyLevel difficulty) {
+        Objects.requireNonNull(difficulty, "difficulty can't be null");
         this.operations = new LinkedList<>();
         this.same = false;
         this.maxOperation = Optional.empty();
@@ -134,6 +136,7 @@ public class SizeCountModelImpl implements SizeCountModel {
      */
     @Override
     public boolean isCorrectAnswer(final String answer) {
+        Objects.requireNonNull(answer, "answer can't be null");
         if (answer.equals(SAME_ANSWER) && this.same
                 || this.maxOperation.isPresent() && answer.equals(this.maxOperation.get().toString())) {
             this.scoreModel.addPoint();

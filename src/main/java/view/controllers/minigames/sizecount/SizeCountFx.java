@@ -23,7 +23,7 @@ public interface SizeCountFx {
      * 
      * @param numOperations the number of operations to show
      */
-    void setOperations(Integer numOperations);
+    void setOperations(int numOperations);
 
     /**
      * Show that the selected answer is wrong.
