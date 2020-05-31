@@ -1,14 +1,16 @@
 package test.minigames;
 
+import static org.junit.jupiter.api.Assertions.fail;
+
 import org.junit.jupiter.api.Test;
 
 import model.minigames.sizecount.IntegerOperation;
 import model.minigames.sizecount.IntegerOperationsFactory;
 import model.minigames.sizecount.IntegerOperationsFactoryImpl;
 
-class TestIntegerOperation {
+class TestIntegerOperationsFactory {
 
-    final private IntegerOperationsFactory factory = new IntegerOperationsFactoryImpl();
+    private final IntegerOperationsFactory factory = new IntegerOperationsFactoryImpl();
 
     @Test
     void addiction() {
@@ -46,4 +48,12 @@ class TestIntegerOperation {
         System.out.println("division " + "toString " + op.getResult() + " " + op.toString());
     }
 
+    @Test
+    public void argumentsCanBeZero() throws IllegalStateException {
+        try {
+            this.factory.addiction(0, 0);
+            fail("Expected an IllegalStateException to be thrown");
+        } catch (IllegalStateException e) {
+        }
+    }
 }

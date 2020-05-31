@@ -24,18 +24,26 @@ public class IntegerOperationsFactoryImpl implements IntegerOperationsFactory {
         this.rnd = new Random();
     }
 
-    private Stream<Integer> generateRandomOperand(final Integer numOfOperands, final Integer limit) {
-        return IntStream.range(0, numOfOperands).mapToObj(i -> rnd.nextInt(limit + 1));
+    private void checkArguments(final List<Integer> arguments) {
+        arguments.forEach(e -> {
+            if (e == 0) {
+                throw new IllegalStateException();
+            }
+        });
+    }
+
+    private Stream<Integer> generateRandomOperand(final int numOfOperands, final int bound) {
+        return IntStream.range(0, numOfOperands).mapToObj(i -> rnd.nextInt(bound + 1));
     }
 
     /*
      * Method to compute random operand for the division cause the result must be an
      * Integer
      */
-    private Stream<Integer> generateRandomOperandDivision(final int numOfOperands, final int limit) {
+    private Stream<Integer> generateRandomOperandDivision(final int numOfOperands, final int bound) {
         final Dividers div = new DividersImpl();
         final List<Integer> result = new LinkedList<>();
-        Integer num = this.rnd.nextInt(limit + 1) + 1; // zero is not allowed
+        Integer num = this.rnd.nextInt(bound + 1) + 1; // zero is not allowed
         result.add(num);
         for (int i = 0; i < numOfOperands; i++) {
             final List<Integer> dividersList = div.getDividers(num);
@@ -85,8 +93,9 @@ public class IntegerOperationsFactoryImpl implements IntegerOperationsFactory {
      * {@inheritDoc}
      */
     @Override
-    public IntegerOperation addiction(final int numOfOperands, final int limit) {
-        final List<Integer> operands = this.generateRandomOperand(numOfOperands, limit).collect(Collectors.toList());
+    public IntegerOperation addiction(final int numOfOperands, final int bound) {
+        this.checkArguments(List.of(numOfOperands, bound));
+        final List<Integer> operands = this.generateRandomOperand(numOfOperands, bound).collect(Collectors.toList());
         return new IntegerOperation() {
             @Override
             public Integer getResult() {
@@ -104,8 +113,9 @@ public class IntegerOperationsFactoryImpl implements IntegerOperationsFactory {
      * {@inheritDoc}
      */
     @Override
-    public IntegerOperation subtraction(final int numOfOperands, final int limit) {
-        final List<Integer> operands = this.generateRandomOperand(numOfOperands, limit).collect(Collectors.toList());
+    public IntegerOperation subtraction(final int numOfOperands, final int bound) {
+        this.checkArguments(List.of(numOfOperands, bound));
+        final List<Integer> operands = this.generateRandomOperand(numOfOperands, bound).collect(Collectors.toList());
         return new IntegerOperation() {
             @Override
             public Integer getResult() {
@@ -123,8 +133,9 @@ public class IntegerOperationsFactoryImpl implements IntegerOperationsFactory {
      * {@inheritDoc}
      */
     @Override
-    public IntegerOperation multiplication(final int numOfOperands, final int limit) {
-        final List<Integer> operands = this.generateRandomOperand(numOfOperands, limit).collect(Collectors.toList());
+    public IntegerOperation multiplication(final int numOfOperands, final int bound) {
+        this.checkArguments(List.of(numOfOperands, bound));
+        final List<Integer> operands = this.generateRandomOperand(numOfOperands, bound).collect(Collectors.toList());
         return new IntegerOperation() {
 
             @Override
@@ -143,8 +154,9 @@ public class IntegerOperationsFactoryImpl implements IntegerOperationsFactory {
      * {@inheritDoc}
      */
     @Override
-    public IntegerOperation division(final int numOfOperands, final int limit) {
-        final List<Integer> operands = this.generateRandomOperandDivision(numOfOperands, limit)
+    public IntegerOperation division(final int numOfOperands, final int bound) {
+        this.checkArguments(List.of(numOfOperands, bound));
+        final List<Integer> operands = this.generateRandomOperandDivision(numOfOperands, bound)
                 .collect(Collectors.toList());
         return new IntegerOperation() {
 
@@ -164,8 +176,9 @@ public class IntegerOperationsFactoryImpl implements IntegerOperationsFactory {
      * {@inheritDoc}
      */
     @Override
-    public IntegerOperation sumExpression(final int numOfOperations, final int numOfOperand, final int limit) {
-        final List<IntegerOperation> operations = this.generateRandomOperations(numOfOperations, numOfOperand, limit);
+    public IntegerOperation sumExpression(final int numOfOperations, final int numOfOperands, final int bound) {
+        this.checkArguments(List.of(numOfOperations, numOfOperands, bound));
+        final List<IntegerOperation> operations = this.generateRandomOperations(numOfOperations, numOfOperands, bound);
         return new IntegerOperation() {
 
             @Override
@@ -188,8 +201,9 @@ public class IntegerOperationsFactoryImpl implements IntegerOperationsFactory {
      * {@inheritDoc}
      */
     @Override
-    public IntegerOperation subExpression(final int numOfOperations, final int numOfOperand, final int limit) {
-        final List<IntegerOperation> operations = this.generateRandomOperations(numOfOperations, numOfOperand, limit);
+    public IntegerOperation subExpression(final int numOfOperations, final int numOfOperands, final int bound) {
+        this.checkArguments(List.of(numOfOperations, numOfOperands, bound));
+        final List<IntegerOperation> operations = this.generateRandomOperations(numOfOperations, numOfOperands, bound);
         return new IntegerOperation() {
 
             @Override
