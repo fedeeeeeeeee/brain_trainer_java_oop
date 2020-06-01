@@ -33,16 +33,6 @@ import view.controllers.minigames.AbstractMiniGameControllerFx;
 public class PerilousPathFxImpl extends AbstractMiniGameControllerFx implements PerilouPathFx {
 
     /**
-     * The duration dedicated to the memorization of the mines position.
-     */
-    private static final int MILLIS_MEMORIZATION_MINES = 3000;
-
-    /**
-     * The duration dedicated to the visualization of the mine's explosion.
-     */
-    private static final int MILLIS_VISUALIZATION_EXPLOSION = 1000;
-
-    /**
      * Mines memorization instruction.
      */
     private static final String MEMORIZATION_INSTRUCTION = "Memorize the position of the mines";
@@ -71,7 +61,6 @@ public class PerilousPathFxImpl extends AbstractMiniGameControllerFx implements 
 
     private PerilousPathController controller;
     private Map<Button, Pair<Integer, Integer>> buttons;
-    private boolean mineExplosion;
 
     private final EventHandler<MouseEvent> eventHit = (e) -> {
         final Button bt = (Button) e.getSource();
@@ -96,20 +85,6 @@ public class PerilousPathFxImpl extends AbstractMiniGameControllerFx implements 
         this.instructions.setText(PATH_INSTRUCTION);
         this.controller.updateView();
     };
-
-    private void animation() {
-        final Timeline timeline = new Timeline();
-        KeyFrame keyFrame;
-        if (mineExplosion) {
-            this.instructions.setText("");
-            keyFrame = new KeyFrame(Duration.millis(MILLIS_VISUALIZATION_EXPLOSION), eventReset);
-        } else {
-            this.instructions.setText(MEMORIZATION_INSTRUCTION);
-            keyFrame = new KeyFrame(Duration.millis(MILLIS_MEMORIZATION_MINES), eventUpdate);
-        }
-        timeline.getKeyFrames().add(keyFrame);
-        timeline.play();
-    }
 
     /**
      * {@inheritDoc}
@@ -144,10 +119,27 @@ public class PerilousPathFxImpl extends AbstractMiniGameControllerFx implements 
      * {@inheritDoc}
      */
     @Override
+    public void animation(final int millis, final boolean mineExplosion) {
+        final Timeline timeline = new Timeline();
+        KeyFrame keyFrame;
+        if (mineExplosion) {
+            this.instructions.setText("");
+            keyFrame = new KeyFrame(Duration.millis(millis), eventReset);
+        } else {
+            this.instructions.setText(MEMORIZATION_INSTRUCTION);
+            keyFrame = new KeyFrame(Duration.millis(millis), eventUpdate);
+        }
+        timeline.getKeyFrames().add(keyFrame);
+        timeline.play();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
     public void restore() {
         this.buttons.entrySet().stream().forEach(bt -> bt.getKey().setGraphic(null));
         this.buttons.entrySet().stream().forEach(bt -> bt.getKey().setDisable(false));
-        this.mineExplosion = false;
     }
 
     /**
@@ -181,7 +173,6 @@ public class PerilousPathFxImpl extends AbstractMiniGameControllerFx implements 
                                                   .forEach(bt -> bt.getKey().setGraphic(image.apply("mine"))));
         this.buttons.entrySet().stream().forEach(bt -> bt.getKey().setDisable(true));
         this.buttons.entrySet().stream().forEach(bt -> bt.getKey().setStyle("-fx-opacity: 1"));
-        this.animation();
     }
 
     /**
@@ -204,8 +195,6 @@ public class PerilousPathFxImpl extends AbstractMiniGameControllerFx implements 
                                .forEach(bt -> bt.getKey().setGraphic(image.apply("bang")));
         this.buttons.entrySet().stream().forEach(bt -> bt.getKey().setDisable(true));
         this.buttons.entrySet().stream().forEach(bt -> bt.getKey().setStyle("-fx-opacity: 1"));
-        this.mineExplosion = true;
-        this.animation();
     }
 
     /**

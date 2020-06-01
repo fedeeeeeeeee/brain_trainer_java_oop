@@ -12,6 +12,16 @@ import view.controllers.minigames.perilouspath.PerilousPathFxImpl;
  */
 public class PerilousPathControllerImpl implements PerilousPathController {
 
+    /**
+     * The duration dedicated to the memorization of the mines position.
+     */
+    private static final int MILLIS_MEMORIZATION_MINES = 3000;
+
+    /**
+     * The duration dedicated to the visualization of the mine's explosion.
+     */
+    private static final int MILLIS_VISUALIZATION_EXPLOSION = 500;
+
     private final PerilousPathModel model;
     private final PerilousPathFxImpl view;
     private final Timer timer;
@@ -50,6 +60,7 @@ public class PerilousPathControllerImpl implements PerilousPathController {
         this.gameTimer.pause();
         this.model.resetGame();
         this.view.showMines(this.model.getMines());
+        this.view.animation(MILLIS_MEMORIZATION_MINES, false);
     }
 
     /**
@@ -78,6 +89,7 @@ public class PerilousPathControllerImpl implements PerilousPathController {
         if (this.model.isFailed()) {
             this.view.showMines(this.model.getMines());
             this.view.showExplosion(row, col);
+            this.view.animation(MILLIS_VISUALIZATION_EXPLOSION, true);
         }
     }
 

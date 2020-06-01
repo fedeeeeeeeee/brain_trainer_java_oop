@@ -18,6 +18,16 @@ public interface PerilouPathFx {
     void drawGrid(int size);
 
     /**
+     * Wait a few milliseconds to show the mines or a mine explosion.
+     * 
+     * @param millis
+     *              milliseconds it has to wait
+     * @param mineExplosion
+     *              true if the mine is exploded, false otherwise
+     */
+    void animation(int millis, boolean mineExplosion);
+
+    /**
      * Restore the view.
      */
     void restore();
