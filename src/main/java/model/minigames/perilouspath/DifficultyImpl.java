@@ -21,7 +21,7 @@ public class DifficultyImpl implements Difficulty {
     /**
      * The initial amount of mines.
      */
-    private static final int NUM_MINES = 11;
+    private static final int NUM_MINES = 10;
 
     private final Map<DifficultyLevel, Pair<Integer, Integer>> difficulty;
     private final DifficultyLevel currentDifficultyLevel;
