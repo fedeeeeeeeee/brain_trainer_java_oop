@@ -85,6 +85,12 @@ public class PerilousPathFxImpl extends AbstractMiniGameControllerFx implements 
         this.instructions.setText(PATH_INSTRUCTION);
         this.controller.updateView();
     };
+    
+    private void check(final Object o) {
+        if (o == null) {
+            throw new IllegalArgumentException(); 
+        }
+    }
 
     /**
      * {@inheritDoc}
@@ -147,6 +153,7 @@ public class PerilousPathFxImpl extends AbstractMiniGameControllerFx implements 
      */
     @Override
     public void showStart(final Pair<Integer, Integer> start) {
+        this.check(start);
         this.buttons.entrySet().stream()
                                .filter(bt -> bt.getValue().equals(start))
                                .forEach(bt -> bt.getKey().setGraphic(image.apply("start")));
@@ -157,6 +164,7 @@ public class PerilousPathFxImpl extends AbstractMiniGameControllerFx implements 
      */
     @Override
     public void showFinish(final Pair<Integer, Integer> finish) {
+        this.check(finish);
         this.buttons.entrySet().stream()
                                .filter(bt -> bt.getValue().equals(finish))
                                .forEach(bt -> bt.getKey().setGraphic(image.apply("finish")));
@@ -167,6 +175,7 @@ public class PerilousPathFxImpl extends AbstractMiniGameControllerFx implements 
      */
     @Override
     public void showMines(final Set<Mine> mines) {
+        this.check(mines);
         mines.stream()
              .forEach(m -> this.buttons.entrySet().stream()
                                                   .filter(bt -> bt.getValue().equals(m.getMinePosition()))

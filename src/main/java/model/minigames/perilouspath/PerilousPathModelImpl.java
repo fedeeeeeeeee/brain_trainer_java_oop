@@ -42,6 +42,7 @@ public class PerilousPathModelImpl implements PerilousPathModel {
      * @param difficultyLevel the current difficulty level
      */
     public PerilousPathModelImpl(final DifficultyLevel difficultyLevel) {
+        this.check(difficultyLevel);
         this.difficulty = new DifficultyImpl(difficultyLevel);
         this.pathFactory = new PathGameFactoryImpl();
         this.score = new ScoreModelImpl(difficultyLevel, BASE_POINT);
@@ -49,6 +50,12 @@ public class PerilousPathModelImpl implements PerilousPathModel {
         this.path = new LinkedList<>();
         this.size = difficulty.getSize();
         this.numMines = difficulty.getNumMines();
+    }
+    
+    private void check(final Object o) {
+        if (o == null) {
+            throw new IllegalArgumentException(); 
+        }
     }
 
     private Pair<Integer, Integer> getRandomPosition() {
@@ -63,6 +70,8 @@ public class PerilousPathModelImpl implements PerilousPathModel {
     }
 
     private boolean couldMove(final Pair<Integer, Integer> position, final Pair<Integer, Integer> last) {
+        this.check(position);
+        this.check(last);
         return Math.abs(position.getX() - last.getX()) + Math.abs(position.getY() - last.getY()) == 1;
     }
 
@@ -73,6 +82,8 @@ public class PerilousPathModelImpl implements PerilousPathModel {
     }
 
     private boolean adjacent(final Pair<Integer, Integer> position1, final Pair<Integer, Integer> position2) {
+        this.check(position1);
+        this.check(position2);
         return Math.abs(position1.getX() - position2.getX()) <= 1 && Math.abs(position1.getY() - position2.getY()) <= 1;
     }
 

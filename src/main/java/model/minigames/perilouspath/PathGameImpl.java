@@ -24,12 +24,21 @@ public class PathGameImpl implements PathGame {
      * @param finish
      */
     public PathGameImpl(final Difficulty difficulty, final Pair<Integer, Integer> start, final Pair<Integer, Integer> finish) {
+        this.check(difficulty);
+        this.check(start);
+        this.check(finish);
         this.size = difficulty.getSize();
         this.numMines = difficulty.getNumMines();
         this.start = start;
         this.finish = finish;
         this.path = new LinkedList<>();
         this.initPath();
+    }
+    
+    private void check(final Object o) {
+        if (o == null) {
+            throw new IllegalArgumentException(); 
+        }
     }
 
     private Direction getRandomDirection() {
@@ -38,6 +47,7 @@ public class PathGameImpl implements PathGame {
     }
 
     private boolean checkReachLimit(final Pair<Integer, Integer> lastPosition) {
+        this.check(lastPosition);
         return lastPosition.getX() < 0 || lastPosition.getY() < 0 || lastPosition.getX() >= this.size || lastPosition.getY() >= this.size;
     }
 
