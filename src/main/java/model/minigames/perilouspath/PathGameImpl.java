@@ -1,6 +1,7 @@
 package model.minigames.perilouspath;
 
 import java.util.LinkedList;
+import java.util.Objects;
 import java.util.Random;
 
 import utility.Pair;
@@ -20,25 +21,22 @@ public class PathGameImpl implements PathGame {
      * Constructor of {@link PathGame}.
      * 
      * @param difficulty
+     *              the size and the number of mines related to the current difficulty level
      * @param start
+     *              the initial step
      * @param finish
+     *              the end step
      */
     public PathGameImpl(final Difficulty difficulty, final Pair<Integer, Integer> start, final Pair<Integer, Integer> finish) {
-        this.check(difficulty);
-        this.check(start);
-        this.check(finish);
+        Objects.requireNonNull(difficulty);
+        Objects.requireNonNull(start);
+        Objects.requireNonNull(finish);
         this.size = difficulty.getSize();
         this.numMines = difficulty.getNumMines();
         this.start = start;
         this.finish = finish;
         this.path = new LinkedList<>();
         this.initPath();
-    }
-    
-    private void check(final Object o) {
-        if (o == null) {
-            throw new IllegalArgumentException(); 
-        }
     }
 
     private Direction getRandomDirection() {
@@ -47,7 +45,7 @@ public class PathGameImpl implements PathGame {
     }
 
     private boolean checkReachLimit(final Pair<Integer, Integer> lastPosition) {
-        this.check(lastPosition);
+        Objects.requireNonNull(lastPosition);
         return lastPosition.getX() < 0 || lastPosition.getY() < 0 || lastPosition.getX() >= this.size || lastPosition.getY() >= this.size;
     }
 

@@ -2,8 +2,10 @@ package model.minigames.perilouspath;
 
 import java.util.HashSet;
 import java.util.LinkedList;
+import java.util.Objects;
 import java.util.Random;
 import java.util.Set;
+import java.util.function.Predicate;
 
 import model.DifficultyLevel;
 import model.score.ScoreModel;
@@ -42,36 +44,35 @@ public class PerilousPathModelImpl implements PerilousPathModel {
      * @param difficultyLevel the current difficulty level
      */
     public PerilousPathModelImpl(final DifficultyLevel difficultyLevel) {
-        this.check(difficultyLevel);
+        Objects.requireNonNull(difficultyLevel);
         this.difficulty = new DifficultyImpl(difficultyLevel);
         this.pathFactory = new PathGameFactoryImpl();
         this.score = new ScoreModelImpl(difficultyLevel, BASE_POINT);
         this.selected = new LinkedList<>();
         this.path = new LinkedList<>();
         this.size = difficulty.getSize();
+        this.check(this.size);
         this.numMines = difficulty.getNumMines();
+        this.check(this.numMines);
     }
-    
-    private void check(final Object o) {
-        if (o == null) {
-            throw new IllegalArgumentException(); 
+
+    private void check(final int value) {
+        final Predicate<Integer> predicate = (i) -> i == 0;
+        if (predicate.test(value)) {
+            throw new IllegalStateException();
         }
     }
 
-    private Pair<Integer, Integer> getRandomPosition() {
-        return new Pair<>(new Random().nextInt(this.size), new Random().nextInt(this.size));
-    }
-
     private Mine getRandomMines() {
-        final Mine mine = new MineImpl(this.getRandomPosition());
+        final Mine mine = new MineImpl(new Pair<>(new Random().nextInt(this.size), new Random().nextInt(this.size)));
         final Pair<Integer, Integer> minePosition = mine.getMinePosition();
         return this.path.contains(minePosition) || this.start.equals(minePosition) || this.finish.equals(minePosition)
                 || this.mines.stream().anyMatch(m -> m.getMinePosition().equals(mine.getMinePosition())) ? this.getRandomMines() : mine;
     }
 
     private boolean couldMove(final Pair<Integer, Integer> position, final Pair<Integer, Integer> last) {
-        this.check(position);
-        this.check(last);
+        Objects.requireNonNull(position);
+        Objects.requireNonNull(last);
         return Math.abs(position.getX() - last.getX()) + Math.abs(position.getY() - last.getY()) == 1;
     }
 
@@ -81,27 +82,10 @@ public class PerilousPathModelImpl implements PerilousPathModel {
                 && !this.selected.isEmpty() && this.couldMove(position, this.selected.getLast());
     }
 
-    private boolean adjacent(final Pair<Integer, Integer> position1, final Pair<Integer, Integer> position2) {
-        this.check(position1);
-        this.check(position2);
-        return Math.abs(position1.getX() - position2.getX()) <= 1 && Math.abs(position1.getY() - position2.getY()) <= 1;
-    }
-
-    private void initStart() {
-        this.start = this.getRandomPosition();
-    }
-
-    private void initFinish() {
-        final Pair<Integer, Integer> finish = this.getRandomPosition();
-        if (finish.equals(this.start) || this.adjacent(finish, this.start)) {
-            this.initFinish();
-        } else {
-            this.finish = finish;
-        }
-    }
-
     private void initPath() {
-        this.path = this.pathFactory.createRandomDirectionPath(this.difficulty, this.start, this.finish).getPathList();
+        this.path = this.pathFactory.createRandomDirectionPath(this.difficulty).getPathList();
+        this.start = this.path.getFirst();
+        this.finish = this.path.getLast();
     }
 
     private void initMines() {
@@ -201,8 +185,6 @@ public class PerilousPathModelImpl implements PerilousPathModel {
      */
     @Override
     public void resetGame() {
-        this.initStart();
-        this.initFinish();
         this.initPath();
         this.initMines();
         this.selected.clear();

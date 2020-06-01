@@ -12,7 +12,7 @@ public interface PathGame {
     /**
      * Gets the game's path.
      * 
-     * @return the game's path.
+     * @return the game's path
      */
     LinkedList<Pair<Integer, Integer>> getPathList(); //NOPMD
 
