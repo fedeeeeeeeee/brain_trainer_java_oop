@@ -1,5 +1,6 @@
 package controller.minigames.perilouspath;
 
+import java.util.Objects;
 import java.util.Timer;
 import model.DifficultyLevel;
 import model.minigames.perilouspath.PerilousPathModel;
@@ -36,18 +37,12 @@ public class PerilousPathControllerImpl implements PerilousPathController {
      *                       the view controller
      */
     public PerilousPathControllerImpl(final DifficultyLevel difficultyLevel, final PerilousPathFxImpl perilousPathFx) {
-        this.check(difficultyLevel);
-        this.check(perilousPathFx);
+        Objects.requireNonNull(difficultyLevel);
+        Objects.requireNonNull(perilousPathFx);
         this.model = new PerilousPathModelImpl(difficultyLevel);
         this.view = perilousPathFx;
         this.timer = new Timer();
         this.gameTimer = new GameTimer(this.model.getSeconds(), this);
-    }
-
-    private void check(final Object o) {
-        if (o == null) {
-            throw new IllegalArgumentException(); 
-        }
     }
 
     /**
