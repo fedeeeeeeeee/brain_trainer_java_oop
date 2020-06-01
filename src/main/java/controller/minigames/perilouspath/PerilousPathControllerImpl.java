@@ -27,6 +27,7 @@ public class PerilousPathControllerImpl implements PerilousPathController {
     private final PerilousPathFxImpl view;
     private final Timer timer;
     private final GameTimer gameTimer;
+    private boolean timeFinish;
 
     /**
      * Constructor of {@link PerilousPathController}.
@@ -43,6 +44,7 @@ public class PerilousPathControllerImpl implements PerilousPathController {
         this.view = perilousPathFx;
         this.timer = new Timer();
         this.gameTimer = new GameTimer(this.model.getSeconds(), this);
+        this.timeFinish = false;
     }
 
     /**
@@ -60,7 +62,9 @@ public class PerilousPathControllerImpl implements PerilousPathController {
      */
     @Override
     public void resetView() {
-        this.gameTimer.pause();
+        if (!this.timeFinish) {
+            this.gameTimer.pause();
+        }
         this.model.resetGame();
         this.view.showMines(this.model.getMines());
         this.view.animation(MILLIS_MEMORIZATION_MINES, false);
@@ -109,6 +113,9 @@ public class PerilousPathControllerImpl implements PerilousPathController {
      */
     @Override
     public void updateTimerView(final int second) {
+        if (second == 0) {
+            this.timeFinish = true;
+        }
         this.view.showTimerSeconds(second);
     }
 
