@@ -1,5 +1,7 @@
 package view.controllers.minigames.colorgama;
 
+import java.util.Objects;
+
 import org.apache.commons.lang3.tuple.Triple;
 
 import controller.minigames.colorgama.ColorGamaController;
@@ -102,6 +104,8 @@ public class ColorGamaFxImpl extends AbstractMiniGameControllerFx implements Col
      */
     @Override
     public void renderNext(final ComputeColor computeColor, final String questionSentence) {
+        Objects.requireNonNull(computeColor);
+        Objects.requireNonNull(questionSentence);
         this.buttonsGrid.getChildren().forEach((b) -> {
             final Triple<Integer, Double, Double> color = computeColor.nextColorValues();
             ((Button) b).setBackground(new Background(new BackgroundFill(Color.hsb(color.getLeft(), color.getMiddle(), color.getRight()), new CornerRadii(2), new Insets(2))));
@@ -114,6 +118,10 @@ public class ColorGamaFxImpl extends AbstractMiniGameControllerFx implements Col
      */
     @Override
     public void setRightColor(final int index, final Triple<Integer, Double, Double> triple) {
+        Objects.requireNonNull(triple);
+        if (index < 0 && index >= this.buttonsGrid.getChildren().size()) {
+            throw new IllegalArgumentException("index must be positive and less than grid size");
+        }
         ((Button) this.buttonsGrid.getChildren().get(index)).setBackground(new Background(new BackgroundFill(Color.hsb(triple.getLeft(), triple.getMiddle(), triple.getRight()), new CornerRadii(2), new Insets(2))));
     }
 
@@ -163,5 +171,4 @@ public class ColorGamaFxImpl extends AbstractMiniGameControllerFx implements Col
         this.image.setImage(image);
         this.showAnimation(check);
     }
-
 }

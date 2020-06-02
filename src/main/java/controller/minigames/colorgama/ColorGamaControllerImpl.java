@@ -1,5 +1,6 @@
 package controller.minigames.colorgama;
 
+import java.util.Objects;
 import java.util.Timer;
 
 import org.apache.commons.lang3.tuple.Triple;
@@ -37,17 +38,12 @@ public final class ColorGamaControllerImpl implements ColorGamaController {
      *          if parameters are null
      */
     public ColorGamaControllerImpl(final ColorGamaFxImpl view, final DifficultyLevel difficulty) {
-        this.check(view, difficulty);
+        Objects.requireNonNull(view, "ColorGamaFxImpl is null");
+        Objects.requireNonNull(difficulty, "DifficultyLevel is null");
         this.model = new ColorGamaModelImpl(difficulty);
         this.timer = new Timer();
         this.gameTimer = new GameTimer(this.model.getDifficultyValue().getSeconds(), this);
         this.view = view;
-    }
-
-    private void check(final ColorGamaFxImpl view, final DifficultyLevel difficulty) {
-        if (view == null || difficulty == null) {
-            throw new IllegalStateException();
-        }
     }
 
     @Override
@@ -96,6 +92,10 @@ public final class ColorGamaControllerImpl implements ColorGamaController {
 
     @Override
     public void checkAnswer(final int index) {
+        final int size = this.model.getDifficultyValue().getGridSize();
+        if (index < 0 && index >= size * size) {
+            throw new IllegalArgumentException("index must be positive and less than grid size");
+        }
         if (this.model.getRightIndex() == index) {
             this.view.showImage(true);
             this.model.addPoint();
