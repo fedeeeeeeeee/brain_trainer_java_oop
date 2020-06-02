@@ -4,6 +4,8 @@ import java.math.BigDecimal;
 import java.math.MathContext;
 import java.util.Comparator;
 import java.util.HashSet;
+import java.util.Objects;
+import java.util.Optional;
 import java.util.Random;
 import java.util.Set;
 
@@ -18,40 +20,33 @@ public class ComputeColorImpl implements ComputeColor {
     private static final int DEGREE = 360;
 
     private final ComputeDifficultyValue difficultyValue;
-    private final Set<Triple<Integer, Double, Double>> valuesList;
-    private Integer hue;
-    private Triple<Integer, Double, Double> rightValues;
-    private int rightIndex;
+    private final ColorValuesGenerator colorValuesGenerator;
+    private final Set<Triple<Integer, Double, Double>> colorValuesSet;
+    private int hue;
+    private Optional<Integer> rightIndex;
+    private Optional<Triple<Integer, Double, Double>> rightValues;
 
     /**
      * Constructor of {@link ComputeColor}.
      * 
-     * @param difficultyValue constants according to the difficulty.
+     * @param difficultyValue 
+     *          constants according to the difficulty.
      * 
      * @throws IllegalStateException
      *          if difficultyValue is null
      */
     public ComputeColorImpl(final ComputeDifficultyValue difficultyValue) {
-        this.check(difficultyValue);
+        Objects.requireNonNull(difficultyValue, "difficultyValue is null");
         this.difficultyValue = difficultyValue;
-        this.valuesList = new HashSet<>();
-        this.calculateHue();
-    }
-
-    private void check(final Object o) {
-        if (o == null) {
-            throw new IllegalStateException();
-        }
-    } 
-
-    private void calculateHue() {
-        this.hue = new Random().nextInt(DEGREE - this.difficultyValue.getHueRange());
+        this.colorValuesGenerator = new ColorValuesGeneratorImpl();
+        this.colorValuesSet = new HashSet<>();
+        this.hue = this.colorValuesGenerator.getRandomH(DEGREE - this.difficultyValue.getHueRange());
+        this.rightIndex = Optional.empty();
+        this.rightValues = Optional.empty();
     }
 
     private Double calulateRandomValue() {
-        final double d = new Random()
-                .doubles(this.difficultyValue.getRandomColorOrigin(), this.difficultyValue.getRandomColorBound())
-                .iterator().nextDouble();
+        final double d = this.colorValuesGenerator.getRandomSB(this.difficultyValue.getRandomColorOrigin(), this.difficultyValue.getRandomColorBound());
         return new BigDecimal(Double.toString(d)).round(new MathContext(this.difficultyValue.contextSettings())).doubleValue();
     }
 
@@ -60,23 +55,23 @@ public class ComputeColorImpl implements ComputeColor {
      */
     @Override
     public void calculateRightValues(final QuestionType question) {
-        this.check(question);
+        Objects.requireNonNull(difficultyValue, "question is null");
         final Comparator<Triple<Integer, Double, Double>> bComparator = (c1, c2) -> Double.compare(c1.getRight(), c2.getRight());
         final Comparator<Triple<Integer, Double, Double>> sComparator = (c1, c2) -> Double.compare(c1.getMiddle(), c2.getMiddle());
         Triple<Integer, Double, Double> triple;
 
-        this.rightIndex = new Random().nextInt(this.difficultyValue.getGridSize() * this.difficultyValue.getGridSize());
+        this.rightIndex = Optional.of(new Random().nextInt(this.difficultyValue.getGridSize() * this.difficultyValue.getGridSize()));
         switch (question) {
         case DARKEST:
-            triple = this.valuesList.stream().min(bComparator).stream().max(sComparator).get();
-            this.rightValues = Triple.of(triple.getLeft(), triple.getMiddle() + this.difficultyValue.getColorRange(), triple.getRight() - this.difficultyValue.getColorRange());
+            triple = this.colorValuesSet.stream().min(bComparator).stream().max(sComparator).get();
+            this.rightValues = Optional.of(Triple.of(triple.getLeft(), triple.getMiddle() + this.difficultyValue.getColorRange(), triple.getRight() - this.difficultyValue.getColorRange()));
             break;
         case LIGHTEST:
-            triple =  this.valuesList.stream().min(sComparator).stream().max(bComparator).get();
-            this.rightValues = Triple.of(triple.getLeft(), triple.getMiddle() - this.difficultyValue.getColorRange(), triple.getRight() + this.difficultyValue.getColorRange());
+            triple =  this.colorValuesSet.stream().min(sComparator).stream().max(bComparator).get();
+            this.rightValues = Optional.of(Triple.of(triple.getLeft(), triple.getMiddle() - this.difficultyValue.getColorRange(), triple.getRight() + this.difficultyValue.getColorRange()));
             break;
         case COLOR:
-            this.rightValues = Triple.of(this.hue + this.difficultyValue.getHueRange(), this.calulateRandomValue(), this.calulateRandomValue());
+            this.rightValues = Optional.of(Triple.of(this.hue + this.difficultyValue.getHueRange(), this.calulateRandomValue(), this.calulateRandomValue()));
             break;
         default:
             break;
@@ -89,7 +84,7 @@ public class ComputeColorImpl implements ComputeColor {
     @Override
     public Triple<Integer, Double, Double> nextColorValues() {
         final Triple<Integer, Double, Double> triple = Triple.of(this.hue, this.calulateRandomValue(), this.calulateRandomValue());
-        this.valuesList.add(triple);
+        this.colorValuesSet.add(triple);
         return triple;
     }
 
@@ -98,7 +93,7 @@ public class ComputeColorImpl implements ComputeColor {
      */
     @Override
     public int getRightColorIndex() {
-        return this.rightIndex;
+        return this.rightIndex.orElseThrow();
     }
 
     /**
@@ -106,7 +101,7 @@ public class ComputeColorImpl implements ComputeColor {
      */
     @Override
     public Triple<Integer, Double, Double> getRightColor() {
-        return this.rightValues;
+        return this.rightValues.orElseThrow();
     }
 
     /**
@@ -114,7 +109,9 @@ public class ComputeColorImpl implements ComputeColor {
      */
     @Override
     public void reset() {
-        this.calculateHue();
-        this.valuesList.clear();
+        this.hue = this.colorValuesGenerator.getRandomH(DEGREE - this.difficultyValue.getHueRange());
+        this.rightIndex = Optional.empty();
+        this.rightValues = Optional.empty();
+        this.colorValuesSet.clear();
     }
 }
