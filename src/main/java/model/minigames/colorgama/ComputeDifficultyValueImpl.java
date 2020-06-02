@@ -1,8 +1,7 @@
 package model.minigames.colorgama;
 
+import java.util.Objects;
 import java.util.function.BiFunction;
-
-import model.DifficultyLevel;
 
 /**
  * This class implements {@link ComputeDifficultyValue}.
@@ -26,26 +25,19 @@ public final class ComputeDifficultyValueImpl implements ComputeDifficultyValue 
     /**
      * Constructor of {@link ComputeDifficultyValue}.
      * 
-     * @param difficulty
-     *          the current difficulty.
+     * @param operation
+     *          the operation to calculate constants
      *
      * @throws IllegalStateException
      *          if parameters are null
      */
-    public ComputeDifficultyValueImpl(final DifficultyLevel difficulty) {
-        this.check(difficulty);
-        final BiFunction<Integer, Integer, Integer> calculator = (i1, i2) -> i1 * difficulty.ordinal() + i2;
-        this.gridSize = calculator.apply(BASE, BASE);
-        this.decimalNumber = calculator.apply(BOUND, BOUND);
-        this.seconds = calculator.apply(BASE_SECONDS, OFFSET);
-        this.hueRange = calculator.apply(BASE_HUE, OFFSET);
+    public ComputeDifficultyValueImpl(final BiFunction<Integer, Integer, Integer> operation) {
+        Objects.requireNonNull(operation, "BiFunction is null");
+        this.gridSize = operation.apply(BASE, BASE);
+        this.decimalNumber = operation.apply(BOUND, BOUND);
+        this.seconds = operation.apply(BASE_SECONDS, OFFSET);
+        this.hueRange = operation.apply(BASE_HUE, OFFSET);
         this.valueRange = (double) hueRange / HUNDRED;
-    }
-
-    private void check(final DifficultyLevel difficulty) {
-        if (difficulty == null) {
-            throw new IllegalStateException();
-        }
     }
 
     @Override

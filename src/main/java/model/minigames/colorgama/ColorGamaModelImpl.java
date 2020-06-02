@@ -1,5 +1,6 @@
 package model.minigames.colorgama;
 
+import java.util.Objects;
 import java.util.Random;
 
 import org.apache.commons.lang3.tuple.Triple;
@@ -29,16 +30,10 @@ public class ColorGamaModelImpl implements ColorGamaModel {
      *          if parameters are null
      */
     public ColorGamaModelImpl(final DifficultyLevel difficulty) {
-        this.check(difficulty);
-        this.computeValue = new ComputeDifficultyValueImpl(difficulty);
+        Objects.requireNonNull(difficulty, "difficulty is null");
+        this.computeValue = new ComputeDifficultyValueImpl((i1, i2) -> i1 * difficulty.ordinal() + i2);
         this.computeColor = new ComputeColorImpl(this.computeValue);
         this.score = new ScoreModelImpl(difficulty, this.computeValue.getBasePoint());
-    }
-
-    private void check(final DifficultyLevel difficulty) {
-        if (difficulty == null) {
-            throw new IllegalStateException();
-        }
     }
 
     /**

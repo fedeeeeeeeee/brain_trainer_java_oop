@@ -41,28 +41,28 @@ class ComputeColorTest {
 
     @Test
     public void testEasy() {
-        this.difficultyValue = new ComputeDifficultyValueImpl(DifficultyLevel.EASY);
+        this.difficultyValue = new ComputeDifficultyValueImpl((i1, i2) -> i1 * DifficultyLevel.EASY.ordinal() + i2);
         this.compute = new ComputeColorImpl(difficultyValue);
         this.testValues();
     }
 
     @Test
     public void testNormal() {
-        this.difficultyValue = new ComputeDifficultyValueImpl(DifficultyLevel.NORMAL);
+        this.difficultyValue = new ComputeDifficultyValueImpl((i1, i2) -> i1 * DifficultyLevel.NORMAL.ordinal() + i2);
         this.compute = new ComputeColorImpl(difficultyValue);
         this.testValues();
     }
 
     @Test
     public void testHard() {
-        this.difficultyValue = new ComputeDifficultyValueImpl(DifficultyLevel.HARD);
+        this.difficultyValue = new ComputeDifficultyValueImpl((i1, i2) -> i1 * DifficultyLevel.HARD.ordinal() + i2);
         this.compute = new ComputeColorImpl(difficultyValue);
         this.testValues();
     }
 
     @Test
     public void testNotAssegnedRightValues() {
-        this.difficultyValue = new ComputeDifficultyValueImpl(DifficultyLevel.HARD);
+        this.difficultyValue = new ComputeDifficultyValueImpl((i1, i2) -> i1 * DifficultyLevel.HARD.ordinal() + i2);
         this.compute = new ComputeColorImpl(difficultyValue);
         assertThrows(NoSuchElementException.class, () -> this.compute.getRightColorIndex());
         assertThrows(NoSuchElementException.class, () -> this.compute.getRightColor());
