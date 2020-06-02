@@ -54,7 +54,7 @@ public class ColorValuesGeneratorImpl implements ColorValuesGenerator {
         if (origin < 0.0 || bound > 1.0) {
             throw new IllegalArgumentException("Origin must be greater than or equal to 0.0 and bound must be less than or equal to 1.0");
         }
-        if (bound >= origin) {
+        if (origin >= bound) {
             throw new IllegalArgumentException("bound must be greater than origin");
         }
         return this.rand.doubles(origin, bound).iterator().nextDouble();
