@@ -1,6 +1,10 @@
 package test.minigames.colorgama;
 
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+
+import java.util.NoSuchElementException;
+import java.util.Random;
 
 import org.apache.commons.lang3.tuple.Triple;
 import org.junit.jupiter.api.Test;
@@ -10,6 +14,7 @@ import model.minigames.colorgama.ComputeColor;
 import model.minigames.colorgama.ComputeColorImpl;
 import model.minigames.colorgama.ComputeDifficultyValue;
 import model.minigames.colorgama.ComputeDifficultyValueImpl;
+import model.minigames.colorgama.QuestionType;
 
 class ComputeColorTest {
 
@@ -26,10 +31,11 @@ class ComputeColorTest {
             final double origin = this.difficultyValue.getRandomColorOrigin();
             final double bound = this.difficultyValue.getRandomColorBound();
 
-            assertTrue(color.getLeft() > ORIGIN && color.getLeft() <= DEGREE);
-            assertTrue(color.getMiddle() >= origin && color.getMiddle() <= bound);
-            assertTrue(color.getRight() >= origin && color.getRight() <= bound);
+            assertTrue(color.getLeft() >= ORIGIN && color.getLeft() <= DEGREE);
+            assertTrue(color.getMiddle() >= origin && color.getMiddle() < bound);
+            assertTrue(color.getRight() >= origin && color.getRight() < bound);
         }
+        this.compute.calculateRightValues(QuestionType.values()[new Random().nextInt(QuestionType.values().length)]);
         assertTrue(this.compute.getRightColorIndex() >= 0 && this.compute.getRightColorIndex() < size * size);
     }
 
@@ -52,5 +58,13 @@ class ComputeColorTest {
         this.difficultyValue = new ComputeDifficultyValueImpl(DifficultyLevel.HARD);
         this.compute = new ComputeColorImpl(difficultyValue);
         this.testValues();
+    }
+
+    @Test
+    public void testNotAssegnedRightValues() {
+        this.difficultyValue = new ComputeDifficultyValueImpl(DifficultyLevel.HARD);
+        this.compute = new ComputeColorImpl(difficultyValue);
+        assertThrows(NoSuchElementException.class, () -> this.compute.getRightColorIndex());
+        assertThrows(NoSuchElementException.class, () -> this.compute.getRightColor());
     }
 }

@@ -75,7 +75,7 @@ public final class ComputeDifficultyValueImpl implements ComputeDifficultyValue 
 
     @Override
     public String contextSettings() {
-        return "precision=" + this.decimalNumber + " roundingMode=HALF_EVEN";
+        return "precision=" + this.decimalNumber + " roundingMode=DOWN";
     }
 
     @Override
