@@ -3,6 +3,7 @@ package model.minigames.perilouspath;
 import java.util.Arrays;
 import java.util.Locale;
 import java.util.Map;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 import model.DifficultyLevel;
@@ -33,6 +34,7 @@ public class DifficultyImpl implements Difficulty {
      *                       the current difficulty level
      */
     public DifficultyImpl(final DifficultyLevel difficultyLevel) {
+        Objects.requireNonNull(difficultyLevel);
         this.difficulty = Arrays.asList(DifficultyLevel.values())
                                 .stream()
                                 .collect(Collectors.toMap(k -> k, k -> new Pair<>(SIZE + this.increment(k), NUM_MINES * this.increment(k) + NUM_MINES)));
@@ -40,10 +42,12 @@ public class DifficultyImpl implements Difficulty {
     }
 
     private int increment(final DifficultyLevel difficultyLevel) {
+        Objects.requireNonNull(difficultyLevel);
         return DifficultyLevel.valueOf(difficultyLevel.toString().toUpperCase(Locale.getDefault())).ordinal();
     }
 
     private Pair<Integer, Integer> getValue(final DifficultyLevel difficultyLevel) {
+        Objects.requireNonNull(difficultyLevel);
         return this.difficulty.get(difficultyLevel);
     }
 

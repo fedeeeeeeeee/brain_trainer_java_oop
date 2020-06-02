@@ -37,9 +37,8 @@ public class PathGameFactoryImpl implements PathGameFactory {
      * {@inheritDoc}
      */
     @Override
-    public PathGame createRandomDirectionPath(final Difficulty difficulty) {
-        Objects.requireNonNull(difficulty);
-        final Pair<Integer, Integer> start = this.initStart(difficulty.getSize());
-        return new PathGameImpl(difficulty, start, this.initFinish(difficulty.getSize(), start));
+    public PathGame createRandomDirectionPath(final int size, final int numMines) {
+        final Pair<Integer, Integer> start = this.initStart(size);
+        return new PathGameImpl(size, numMines, start, this.initFinish(size, start));
     }
 }

@@ -3,6 +3,7 @@ package model.minigames.perilouspath;
 import java.util.LinkedList;
 import java.util.Objects;
 import java.util.Random;
+import java.util.function.Predicate;
 
 import utility.Pair;
 
@@ -20,23 +21,32 @@ public class PathGameImpl implements PathGame {
     /**
      * Constructor of {@link PathGame}.
      * 
-     * @param difficulty
+     * @param size
      *              the size and the number of mines related to the current difficulty level
+     * @param numMines 
      * @param start
      *              the initial step
      * @param finish
      *              the end step
      */
-    public PathGameImpl(final Difficulty difficulty, final Pair<Integer, Integer> start, final Pair<Integer, Integer> finish) {
-        Objects.requireNonNull(difficulty);
+    public PathGameImpl(final int size, final int numMines, final Pair<Integer, Integer> start, final Pair<Integer, Integer> finish) {
         Objects.requireNonNull(start);
         Objects.requireNonNull(finish);
-        this.size = difficulty.getSize();
-        this.numMines = difficulty.getNumMines();
+        this.check(size);
+        this.check(numMines);
+        this.size = size;
+        this.numMines = numMines;
         this.start = start;
         this.finish = finish;
         this.path = new LinkedList<>();
         this.initPath();
+    }
+
+    private void check(final int value) {
+        final Predicate<Integer> predicate = (i) -> i == 0;
+        if (predicate.test(value)) {
+            throw new IllegalStateException();
+        }
     }
 
     private Direction getRandomDirection() {

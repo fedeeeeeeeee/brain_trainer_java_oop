@@ -8,10 +8,11 @@ public interface PathGameFactory {
     /**
      * Creates a path based on the random direction.
      * 
-     * @param difficulty
-     *                  the size and the number of mines related to the current difficulty level
-     *
+     * @param size
+     *              the size related to the current difficulty level
+     * @param numMines
+     *              the number of mines related to the current difficulty level
      * @return a {@link PathGame} which is the game's path
      */
-    PathGame createRandomDirectionPath(Difficulty difficulty);
+    PathGame createRandomDirectionPath(int size, int numMines);
 }

@@ -29,7 +29,6 @@ public class PerilousPathModelImpl implements PerilousPathModel {
 
     private final int size;
     private final int numMines;
-    private final Difficulty difficulty;
     private final ScoreModel score;
     private Pair<Integer, Integer> start;
     private Pair<Integer, Integer> finish;
@@ -45,7 +44,7 @@ public class PerilousPathModelImpl implements PerilousPathModel {
      */
     public PerilousPathModelImpl(final DifficultyLevel difficultyLevel) {
         Objects.requireNonNull(difficultyLevel);
-        this.difficulty = new DifficultyImpl(difficultyLevel);
+        final Difficulty difficulty = new DifficultyImpl(difficultyLevel);
         this.pathFactory = new PathGameFactoryImpl();
         this.score = new ScoreModelImpl(difficultyLevel, BASE_POINT);
         this.selected = new LinkedList<>();
@@ -83,7 +82,7 @@ public class PerilousPathModelImpl implements PerilousPathModel {
     }
 
     private void initPath() {
-        this.path = this.pathFactory.createRandomDirectionPath(this.difficulty).getPathList();
+        this.path = this.pathFactory.createRandomDirectionPath(this.size, this.numMines).getPathList();
         this.start = this.path.getFirst();
         this.finish = this.path.getLast();
     }
