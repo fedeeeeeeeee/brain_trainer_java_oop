@@ -5,11 +5,11 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import org.junit.jupiter.api.Test;
 
 import model.DifficultyLevel;
-import model.minigames.perilouspath.Difficulty;
+import model.minigames.perilouspath.PerilousPathDifficulty;
 import model.minigames.perilouspath.DifficultyImpl;
 
 /**
- * Class to test if {@link Difficulty} works correctly.
+ * Class to test if {@link PerilousPathDifficulty} works correctly.
  */
 public class DifficultyTest {
 
@@ -20,9 +20,9 @@ public class DifficultyTest {
     private static final int HARD_SIZE = 7;
     private static final int HARD_NUM_MINES = 30;
 
-    private Difficulty difficulty;
+    private PerilousPathDifficulty difficulty;
 
-    private Difficulty difficulty(final DifficultyLevel difficulty) {
+    private PerilousPathDifficulty difficulty(final DifficultyLevel difficulty) {
         return new DifficultyImpl(difficulty);
     }
 

@@ -9,7 +9,7 @@ import java.util.LinkedList;
 import org.junit.jupiter.api.Test;
 
 import model.DifficultyLevel;
-import model.minigames.perilouspath.Difficulty;
+import model.minigames.perilouspath.PerilousPathDifficulty;
 import model.minigames.perilouspath.DifficultyImpl;
 import model.minigames.perilouspath.PathGameFactory;
 import model.minigames.perilouspath.PathGameFactoryImpl;
@@ -23,7 +23,7 @@ public class PathGameTest {
 
     private LinkedList<Pair<Integer, Integer>> path; //NOPMD
 
-    private Difficulty difficulty(final DifficultyLevel difficulty) {
+    private PerilousPathDifficulty difficulty(final DifficultyLevel difficulty) {
         return new DifficultyImpl(difficulty);
     }
 
@@ -32,7 +32,7 @@ public class PathGameTest {
      */
     @Test
     public void pathGameLengthTest() {
-        final Difficulty difficulty = this.difficulty(DifficultyLevel.EASY);
+        final PerilousPathDifficulty difficulty = this.difficulty(DifficultyLevel.EASY);
         final PathGameFactory pathFactory = new PathGameFactoryImpl();
         this.path = pathFactory.createRandomDirectionPath(difficulty.getSize(), difficulty.getNumMines()).getPathList();
         assertTrue(this.path.size() <= (difficulty.getSize() * difficulty.getSize()) - difficulty.getNumMines());
@@ -43,7 +43,7 @@ public class PathGameTest {
      */
     @Test
     public void pathGameStartFinishTest() {
-        final Difficulty difficulty = this.difficulty(DifficultyLevel.EASY);
+        final PerilousPathDifficulty difficulty = this.difficulty(DifficultyLevel.EASY);
         this.path = new PathGameImpl(difficulty.getSize(), difficulty.getNumMines(), new Pair<>(0, 0), new Pair<>(4, 4)).getPathList();
         assertEquals(new Pair<>(0, 0), this.path.getFirst());
         assertEquals(new Pair<>(4, 4), this.path.getLast());
@@ -54,7 +54,7 @@ public class PathGameTest {
      */
     @Test
     public void pathGameNullTest() {
-        final Difficulty difficulty = this.difficulty(DifficultyLevel.EASY);
+        final PerilousPathDifficulty difficulty = this.difficulty(DifficultyLevel.EASY);
         assertThrows(NullPointerException.class, () -> new PathGameImpl(difficulty.getSize(), difficulty.getNumMines(), null, null));
     }
 

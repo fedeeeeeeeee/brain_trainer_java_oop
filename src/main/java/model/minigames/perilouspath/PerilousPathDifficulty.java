@@ -3,7 +3,7 @@ package model.minigames.perilouspath;
 /**
  * Represents the difficulty at each level.
  */
-public interface Difficulty {
+public interface PerilousPathDifficulty {
 
     /**
      * Specific size of the current difficulty.
