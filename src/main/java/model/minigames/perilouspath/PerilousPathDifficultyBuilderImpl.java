@@ -1,7 +1,6 @@
 package model.minigames.perilouspath;
 
 import java.util.EnumMap;
-import java.util.Locale;
 import java.util.Objects;
 import java.util.Optional;
 
@@ -26,18 +25,22 @@ public class PerilousPathDifficultyBuilderImpl implements PerilousPathDifficulty
     private static final int NUM_MINES = 10;
 
     private EnumMap<DifficultyLevel, Pair<Integer, Integer>> difficulty;
-    private Optional<DifficultyLevel> currentDifficultyLevel;
+    private Optional<DifficultyLevel> optCurrentDifficultyLevel;
+    private Optional<Integer> optSize;
+    private Optional<Integer> optNumMines;
     private boolean built;
 
     public PerilousPathDifficultyBuilderImpl() {
         this.difficulty = this.initDefaultDifficulty();
-        this.currentDifficultyLevel = Optional.empty();
+        this.optCurrentDifficultyLevel = Optional.empty();
+        this.optSize = Optional.empty();
+        this.optNumMines = Optional.empty();
         this.built = false;
     }
 
     private int increment(final DifficultyLevel difficultyLevel) {
         Objects.requireNonNull(difficultyLevel);
-        return DifficultyLevel.valueOf(difficultyLevel.toString().toUpperCase(Locale.getDefault())).ordinal();
+        return difficultyLevel.ordinal();
     }
 
     private EnumMap<DifficultyLevel, Pair<Integer, Integer>> initDefaultDifficulty() {
@@ -71,7 +74,7 @@ public class PerilousPathDifficultyBuilderImpl implements PerilousPathDifficulty
     @Override
     public PerilousPathDifficultyBuilder setDifficultyLevel(final DifficultyLevel currentDifficultyLevel) {
         check(!this.built);
-        this.currentDifficultyLevel = reassignOptional(this.currentDifficultyLevel, currentDifficultyLevel);
+        this.optCurrentDifficultyLevel = reassignOptional(this.optCurrentDifficultyLevel, currentDifficultyLevel);
         return this;
     }
 
@@ -80,9 +83,11 @@ public class PerilousPathDifficultyBuilderImpl implements PerilousPathDifficulty
      */
     @Override
     public PerilousPathDifficultyBuilder setSize(final int size) {
-        final int numMines = this.difficulty.get(this.currentDifficultyLevel.get()).getY();
+        check(!this.built);
+        this.optSize = reassignOptional(this.optSize, size);
         validity(size < MINIMUM_SIZE);
-        this.difficulty.replace(this.currentDifficultyLevel.get(), new Pair<>(size, numMines));
+        final int numMines = this.difficulty.get(this.optCurrentDifficultyLevel.get()).getY();
+        this.difficulty.replace(this.optCurrentDifficultyLevel.get(), new Pair<>(size, numMines));
         return this;
     }
 
@@ -91,9 +96,11 @@ public class PerilousPathDifficultyBuilderImpl implements PerilousPathDifficulty
      */
     @Override
     public PerilousPathDifficultyBuilder setNumMines(final int numMines) {
-        final int size = this.difficulty.get(this.currentDifficultyLevel.get()).getX();
+        check(!this.built);
+        this.optNumMines = reassignOptional(this.optNumMines, numMines);
+        final int size = this.difficulty.get(this.optCurrentDifficultyLevel.get()).getX();
         validity(numMines >= size * size);
-        this.difficulty.replace(this.currentDifficultyLevel.get(), new Pair<>(size, numMines));
+        this.difficulty.replace(this.optCurrentDifficultyLevel.get(), new Pair<>(size, numMines));
         return this;
     }
 
@@ -103,7 +110,7 @@ public class PerilousPathDifficultyBuilderImpl implements PerilousPathDifficulty
     @Override
     public PerilousPathDifficulty build() {
         check(!this.built);
-        check(this.currentDifficultyLevel.isPresent());
+        check(this.optCurrentDifficultyLevel.isPresent());
         this.built = true;
 
         return new PerilousPathDifficulty() {
@@ -114,12 +121,12 @@ public class PerilousPathDifficultyBuilderImpl implements PerilousPathDifficulty
 
             @Override
             public int getSize() {
-                return this.getValue(currentDifficultyLevel.get()).getX();
+                return this.getValue(optCurrentDifficultyLevel.get()).getX();
             }
 
             @Override
             public int getNumMines() {
-                return this.getValue(currentDifficultyLevel.get()).getY();
+                return this.getValue(optCurrentDifficultyLevel.get()).getY();
             }
 
         };
