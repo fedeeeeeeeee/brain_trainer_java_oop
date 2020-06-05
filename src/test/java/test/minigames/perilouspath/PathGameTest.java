@@ -10,7 +10,7 @@ import org.junit.jupiter.api.Test;
 
 import model.DifficultyLevel;
 import model.minigames.perilouspath.PerilousPathDifficulty;
-import model.minigames.perilouspath.DifficultyImpl;
+import model.minigames.perilouspath.PerilousPathDifficultyBuilderImpl;
 import model.minigames.perilouspath.PathGameFactory;
 import model.minigames.perilouspath.PathGameFactoryImpl;
 import model.minigames.perilouspath.PathGameImpl;
@@ -24,7 +24,9 @@ public class PathGameTest {
     private LinkedList<Pair<Integer, Integer>> path; //NOPMD
 
     private PerilousPathDifficulty difficulty(final DifficultyLevel difficulty) {
-        return new DifficultyImpl(difficulty);
+        System.out.println(difficulty);
+        System.out.println(new PerilousPathDifficultyBuilderImpl().setDifficultyLevel(difficulty).build());
+        return new PerilousPathDifficultyBuilderImpl().setDifficultyLevel(difficulty).build();
     }
 
     /**

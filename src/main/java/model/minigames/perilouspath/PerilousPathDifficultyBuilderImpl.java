@@ -25,12 +25,13 @@ public class PerilousPathDifficultyBuilderImpl implements PerilousPathDifficulty
      */
     private static final int NUM_MINES = 10;
 
-    private final EnumMap<DifficultyLevel, Pair<Integer, Integer>> difficulty;
+    private EnumMap<DifficultyLevel, Pair<Integer, Integer>> difficulty;
     private Optional<DifficultyLevel> currentDifficultyLevel;
     private boolean built;
 
     public PerilousPathDifficultyBuilderImpl() {
         this.difficulty = this.initDefaultDifficulty();
+        this.currentDifficultyLevel = Optional.empty();
         this.built = false;
     }
 
@@ -40,6 +41,7 @@ public class PerilousPathDifficultyBuilderImpl implements PerilousPathDifficulty
     }
 
     private EnumMap<DifficultyLevel, Pair<Integer, Integer>> initDefaultDifficulty() {
+        this.difficulty = new EnumMap<>(DifficultyLevel.class);
         for (final DifficultyLevel d : DifficultyLevel.values()) {
             this.difficulty.put(d, new Pair<>(SIZE + this.increment(d), NUM_MINES * this.increment(d) + NUM_MINES));
         }
