@@ -2,8 +2,14 @@ package model.minigames.perilouspath;
 
 import model.DifficultyLevel;
 
+/**
+ * Represents the generic difficulty builder.
+ *
+ * @param <X> 
+ *            the specific difficulty builder
+ */
 public interface DifficultyBuilder<X> {
-    
+
     /**
      * Initialize the current difficulty level.
      * 
@@ -11,8 +17,8 @@ public interface DifficultyBuilder<X> {
      *              the current difficulty level
      * @return a generic difficulty builder
      */
-    X setDifficultyLevel(DifficultyLevel currentDifficultyLevel);
-    
+    X setDifficultyLevel(DifficultyLevel currentDifficultyLevel); //NOPMD
+
     /**
      * Modify the default size in a specific difficulty.
      * 
@@ -20,6 +26,5 @@ public interface DifficultyBuilder<X> {
      *          the dimension's size
      * @return a generic difficulty builder
      */
-    X setSize(int size);
-
+    X setSize(int size); //NOPMD
 }

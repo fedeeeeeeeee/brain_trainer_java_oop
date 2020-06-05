@@ -15,7 +15,7 @@ public interface PerilousPathDifficulty {
     /**
      * Specific amount of mines of the current difficulty.
      * 
-     * @return the mines' number
+     * @return the number of mines
      */
     int getNumMines();
 }
