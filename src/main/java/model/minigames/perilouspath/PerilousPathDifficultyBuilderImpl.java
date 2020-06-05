@@ -8,6 +8,11 @@ import utility.Pair;
 
 public class PerilousPathDifficultyBuilderImpl implements PerilousPathDifficultyBuilder {
 
+    /**
+     * The size's lower bound.
+     */
+    private static final int MINIMUM_SIZE = 4;
+    
     private final EnumMap<DifficultyLevel, Pair<Integer, Integer>> difficulty;
     private Optional<DifficultyLevel> currentDifficultyLevel;
     private boolean built;
@@ -30,6 +35,12 @@ public class PerilousPathDifficultyBuilderImpl implements PerilousPathDifficulty
         }
     }
     
+    private static void validity(final boolean b) {
+        if (b) {
+           throw new IllegalArgumentException();
+        }
+    }
+    
     private static <X> Optional<X> reassignOptional(final Optional<X> opt, final X x) {
         check(!opt.isPresent());
         return Optional.of(x);
@@ -45,6 +56,7 @@ public class PerilousPathDifficultyBuilderImpl implements PerilousPathDifficulty
     @Override
     public PerilousPathDifficultyBuilder setSize(final int size) {
         final int numMines = this.difficulty.get(this.currentDifficultyLevel.get()).getY();
+        validity(size < MINIMUM_SIZE);
         this.difficulty.replace(this.currentDifficultyLevel.get(), new Pair<>(size, numMines));
         return this;
     }
@@ -52,6 +64,7 @@ public class PerilousPathDifficultyBuilderImpl implements PerilousPathDifficulty
     @Override
     public PerilousPathDifficultyBuilder setNumMines(final int numMines) {
         final int size = this.difficulty.get(this.currentDifficultyLevel.get()).getX();
+        validity(numMines >= size * size);
         this.difficulty.replace(this.currentDifficultyLevel.get(), new Pair<>(size, numMines));
         return this;
     }
