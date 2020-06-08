@@ -23,12 +23,12 @@ public interface ComputeDifficultyValue {
     int getBasePoint();
 
     /**
-     * Get the range value for the color.
+     * Get the number of different color to show.
      * 
-     * @return range
-     *          the range of color
+     * @return colors
+     *          the number of the color
      */
-    double getColorRange();
+    int getNumColor();
 
     /**
      * Get of the random origin of the color value.
@@ -36,7 +36,7 @@ public interface ComputeDifficultyValue {
      * @return origin
      *           the origin of each random value
      */
-    double getRandomColorOrigin();
+    int getRandomColorOrigin();
 
     /**
      * Get of the random bound of the color value.
@@ -44,15 +44,7 @@ public interface ComputeDifficultyValue {
      * @return bound
      *           the bound of each random value
      */
-    double getRandomColorBound();
-
-    /**
-     * Get a specified precision and rounding mode.
-     * 
-     * @return context
-     *          representing the math context settings
-     */
-    String contextSettings();
+    int getRandomColorBound();
 
     /**
      * Get the range of the hue component.
@@ -60,7 +52,7 @@ public interface ComputeDifficultyValue {
      * @return range
      *          the range of the hue
      */
-    int getHueRange();
+    int getValueRange();
 
     /**
      * Get the seconds according to the difficulty.
@@ -69,5 +61,4 @@ public interface ComputeDifficultyValue {
      *          seconds of the game
      */
     int getSeconds();
-
 }

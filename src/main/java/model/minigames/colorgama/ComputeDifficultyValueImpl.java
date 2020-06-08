@@ -10,34 +10,27 @@ import java.util.function.BiFunction;
 public final class ComputeDifficultyValueImpl implements ComputeDifficultyValue {
 
     private static final int BASE = 4;
-    private static final int OFFSET = 30;
-    private static final double ORIGIN = 0.50;
-    private static final int BOUND = 1;
-    private static final int BASE_HUE = -5;
-    private static final int BASE_SECONDS = 5;
-    private static final int HUNDRED = 100;
+    private static final int OFFSET = 20;
+    private static final int ORIGIN = 30;
+    private static final int BOUND = 100;
+    private static final int BASE_VALUE = 5;
     private final int gridSize;
-    private final int decimalNumber;
-    private final int hueRange;
-    private final double valueRange;
+    private final int valueRange;
     private final int seconds;
+    private final int numColors;
 
     /**
      * Constructor of {@link ComputeDifficultyValue}.
      * 
      * @param operation
      *          the operation to calculate constants
-     *
-     * @throws IllegalStateException
-     *          if parameters are null
      */
     public ComputeDifficultyValueImpl(final BiFunction<Integer, Integer, Integer> operation) {
         Objects.requireNonNull(operation, "BiFunction is null");
         this.gridSize = operation.apply(BASE, BASE);
-        this.decimalNumber = operation.apply(BOUND, BOUND);
-        this.seconds = operation.apply(BASE_SECONDS, OFFSET);
-        this.hueRange = operation.apply(BASE_HUE, OFFSET);
-        this.valueRange = (double) hueRange / HUNDRED;
+        this.seconds = operation.apply(BASE_VALUE, ORIGIN);
+        this.valueRange = operation.apply(-BASE_VALUE, OFFSET);
+        this.numColors = operation.apply(BASE, BASE);
     }
 
     @Override
@@ -51,28 +44,23 @@ public final class ComputeDifficultyValueImpl implements ComputeDifficultyValue 
     }
 
     @Override
-    public double getColorRange() {
-        return this.valueRange;
+    public int getNumColor() {
+        return this.numColors;
     }
 
     @Override
-    public double getRandomColorOrigin() {
+    public int getRandomColorOrigin() {
         return ORIGIN;
     }
 
     @Override
-    public double getRandomColorBound() {
-        return BOUND - this.getColorRange();
+    public int getRandomColorBound() {
+        return BOUND - this.valueRange;
     }
 
     @Override
-    public String contextSettings() {
-        return "precision=" + this.decimalNumber + " roundingMode=DOWN";
-    }
-
-    @Override
-    public int getHueRange() {
-        return this.hueRange;
+    public int getValueRange() {
+        return this.valueRange;
     }
 
     @Override
