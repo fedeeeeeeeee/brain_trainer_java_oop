@@ -41,6 +41,7 @@ public class OneWayFxImpl extends AbstractMiniGameControllerFx implements OneWay
     private static final String RED = "-fx-border-color: #ff0000; -fx-border-width: 5px;";
     private static final String BLUE = "-fx-accent: #49618C";
     private static final int IMG_DIM = 50;
+    private static final int ZERO = 0;
 
     private OneWayController controller;
     private Map<Button, Pair<Integer, Integer>> buttons;
@@ -60,6 +61,9 @@ public class OneWayFxImpl extends AbstractMiniGameControllerFx implements OneWay
 
     @FXML
     private ProgressBar progressBar;
+
+    @FXML
+    private Button quitBn;
 
     private Button clickedBtn;
     private Button correctBtn;
@@ -195,7 +199,7 @@ public class OneWayFxImpl extends AbstractMiniGameControllerFx implements OneWay
     @Override
     public void showEndGame(final int finalScore) {
         Platform.runLater(() -> {
-            this.scoreLbl.setText(Integer.toString(finalScore));
+            this.scoreLbl.setText(String.valueOf(finalScore));
             this.getController().updateProgress(finalScore);
             this.getView().setHandleDataScene(SceneType.END_GAME.getFilePath());
         });
@@ -207,5 +211,12 @@ public class OneWayFxImpl extends AbstractMiniGameControllerFx implements OneWay
     @Override
     public void stopTimer() {
         this.controller.stopTimer();
+    }
+
+    @FXML
+    private void quitGame() {
+        this.scoreLbl.setText(String.valueOf(ZERO));
+        this.getController().updateProgress(ZERO);
+        this.getView().setHandleDataScene(SceneType.END_GAME.getFilePath());
     }
 }
