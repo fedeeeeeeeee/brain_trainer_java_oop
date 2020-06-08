@@ -3,8 +3,6 @@ package controller.minigames.colorgama;
 import java.util.Objects;
 import java.util.Timer;
 
-import org.apache.commons.lang3.tuple.Triple;
-
 import model.DifficultyLevel;
 import model.minigames.colorgama.ColorGamaModel;
 import model.minigames.colorgama.ColorGamaModelImpl;
@@ -33,9 +31,6 @@ public final class ColorGamaControllerImpl implements ColorGamaController {
      *
      * @param difficulty
      *          the difficulty selected
-     *
-     * @throws IllegalStateException
-     *          if parameters are null
      */
     public ColorGamaControllerImpl(final ColorGamaFxImpl view, final DifficultyLevel difficulty) {
         Objects.requireNonNull(view, "ColorGamaFxImpl is null");
@@ -71,20 +66,16 @@ public final class ColorGamaControllerImpl implements ColorGamaController {
     @Override
     public void startGame() {
         this.view.initGrid(this.model.getDifficultyValue().getGridSize());
-        this.next();
+        this.nextLevel();
     }
 
     @Override
-    public void next() {
+    public void nextLevel() {
         final QuestionType currentQuestion = this.model.nextQuestion();
 
-        this.view.renderNext(this.model.getComputeColor(), currentQuestion.getQuestionName());
-        this.model.calculateRightColorValue();
-        this.view.setRightColor(this.model.getRightIndex(), this.model.getRightColorValues());
-
+        this.view.renderNext(this.model.getColorIterator(), currentQuestion.getQuestionName());
         if (currentQuestion.equals(QuestionType.COLOR)) {
-            final Triple<Integer, Double, Double> values = this.model.getRightColorValues();
-            this.view.showQuestionColor(values.getLeft(), values.getMiddle(), values.getRight());
+            this.view.showQuestionColor(this.model.getColorIterator());
         } else {
             this.view.hideQuestionColor();
         }
@@ -96,7 +87,7 @@ public final class ColorGamaControllerImpl implements ColorGamaController {
         if (index < 0 && index >= size * size) {
             throw new IllegalArgumentException("index must be positive and less than grid size");
         }
-        if (this.model.getRightIndex() == index) {
+        if (this.model.getColorIterator().getRightColorIndex() == index) {
             this.view.showImage(true);
             this.model.addPoint();
         } else {

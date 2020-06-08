@@ -1,7 +1,6 @@
 package view.controllers.minigames.colorgama;
 
-import org.apache.commons.lang3.tuple.Triple;
-import model.minigames.colorgama.ComputeColor;
+import model.minigames.colorgama.ColorValuesIterator;
 
 /**
  * The view interface of ColorGama minigame.
@@ -20,38 +19,21 @@ public interface ColorGamaFx {
     /**
      * Render the next level.
      * 
-     * @param computeColor
+     * @param colorIterator
      *          the colors of buttons
      *
      * @param questionSentence
      *          the sentence of the question to show
      */
-    void renderNext(ComputeColor computeColor, String questionSentence);
- 
-    /**
-     * Set the right color to the button.
-     * 
-     * @param index
-     *          the button index
-     *
-     * @param colorValues
-     *          the hsb values of the color
-     */
-    void setRightColor(int index, Triple<Integer, Double, Double> colorValues);
+    void renderNext(ColorValuesIterator colorIterator, String questionSentence);
  
     /**
      * Shows the color indicated in the question. 
      * 
-     * @param hue
-     *          the hue value
-     *
-     * @param saturation
-     *          the saturation value
-     *
-     * @param brightness
-     *          the brightness value
+     * @param colorIterator
+     *          the colors of buttons
      */
-    void showQuestionColor(Integer hue, Double saturation, Double brightness);
+    void showQuestionColor(ColorValuesIterator colorIterator);
 
     /**
      * Hide the color indicated in the question. 

@@ -1,7 +1,5 @@
 package model.minigames.colorgama;
 
-import org.apache.commons.lang3.tuple.Triple;
-
 /**
  * The model interface of ColorGama minigame.
  *
@@ -29,28 +27,12 @@ public interface ColorGamaModel {
     ComputeDifficultyValue getDifficultyValue();
 
     /**
-     * Get the color calculator.
+     * Get the color iterator.
      * 
-     * @return colors
-     *          colors to fill the buttons
+     * @return colorsIterator
+     *          the iterator of colors to fill the buttons
      */
-    ComputeColor getComputeColor();
-
-    /**
-     * Get the index of the right answers.
-     * 
-     * @return index
-     *          the right index
-     */
-    int getRightIndex();
-
-    /**
-     * Get the values of the right color.
-     * 
-     * @return values
-     *          a hsb value
-     */
-    Triple<Integer, Double, Double> getRightColorValues();
+    ColorValuesIterator getColorIterator();
 
     /**
      * Get the type of the current question.
@@ -67,10 +49,4 @@ public interface ColorGamaModel {
      *          the next question set
      */
     QuestionType nextQuestion();
-
-    /**
-     * Calculates the right color values.
-     */
-    void calculateRightColorValue();
-
 }

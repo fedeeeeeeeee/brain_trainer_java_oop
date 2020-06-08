@@ -2,8 +2,6 @@ package view.controllers.minigames.colorgama;
 
 import java.util.Objects;
 
-import org.apache.commons.lang3.tuple.Triple;
-
 import controller.minigames.colorgama.ColorGamaController;
 import controller.minigames.colorgama.ColorGamaControllerImpl;
 import javafx.animation.KeyFrame;
@@ -24,7 +22,7 @@ import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
 import javafx.util.Duration;
-import model.minigames.colorgama.ComputeColor;
+import model.minigames.colorgama.ColorValuesIterator;
 import view.SceneType;
 import view.controllers.minigames.AbstractMiniGameControllerFx;
 
@@ -38,7 +36,6 @@ public class ColorGamaFxImpl extends AbstractMiniGameControllerFx implements Col
     private static final double MILLIS = 300;
     private static final String RIGHT_IMAGE_PATH = "/images/tick.png";
     private static final String WRONG_IMAGE_PATH = "/images/cross.png";
-
     @FXML
     private GridPane buttonsGrid;
 
@@ -54,20 +51,21 @@ public class ColorGamaFxImpl extends AbstractMiniGameControllerFx implements Col
     private ColorGamaController colorGamaController;
 
     private final EventHandler<MouseEvent> bntClicked = (l) -> {
-        final Button bt = (Button) l.getSource();
-        this.colorGamaController.checkAnswer(this.buttonsGrid.getChildren().indexOf(bt));
+        final Button answer = (Button) l.getSource();
+        this.colorGamaController.checkAnswer(this.buttonsGrid.getChildren().indexOf(answer));
     };
 
     private final EventHandler<ActionEvent> rightEvent = (l) -> {
         this.image.setVisible(false);
-        this.colorGamaController.next();
+        this.colorGamaController.nextLevel();
     };
 
     private final EventHandler<ActionEvent> wrongEvent = (l) -> this.image.setVisible(false);
 
     private void showAnimation(final boolean isRight) {
         final Timeline timeline = new Timeline();
-        final KeyFrame frame = isRight ? new KeyFrame(Duration.millis(MILLIS), rightEvent) : new KeyFrame(Duration.millis(MILLIS), wrongEvent);
+        final KeyFrame frame = isRight ? new KeyFrame(Duration.millis(MILLIS), rightEvent)
+                                       : new KeyFrame(Duration.millis(MILLIS), wrongEvent);
         timeline.getKeyFrames().add(frame);
         timeline.play();
     }
@@ -103,13 +101,12 @@ public class ColorGamaFxImpl extends AbstractMiniGameControllerFx implements Col
      * 
      */
     @Override
-    public void renderNext(final ComputeColor computeColor, final String questionSentence) {
-        Objects.requireNonNull(computeColor);
+    public void renderNext(final ColorValuesIterator colorIterator, final String questionSentence) {
+        Objects.requireNonNull(colorIterator);
         Objects.requireNonNull(questionSentence);
-        this.buttonsGrid.getChildren().forEach((b) -> {
-            final Triple<Integer, Double, Double> color = computeColor.nextColorValues();
-            ((Button) b).setBackground(new Background(new BackgroundFill(Color.hsb(color.getLeft(), color.getMiddle(), color.getRight()), new CornerRadii(2), new Insets(2))));
-        });
+        this.buttonsGrid.getChildren().forEach((b) -> ((Button) b)
+                .setBackground(new Background(new BackgroundFill(Color.web(colorIterator.next().getColorString()),
+                                              new CornerRadii(2), new Insets(2)))));
         this.questionTitle.setText(questionSentence);
     }
 
@@ -117,21 +114,11 @@ public class ColorGamaFxImpl extends AbstractMiniGameControllerFx implements Col
      * {@inheritDoc}
      */
     @Override
-    public void setRightColor(final int index, final Triple<Integer, Double, Double> triple) {
-        Objects.requireNonNull(triple);
-        if (index < 0 && index >= this.buttonsGrid.getChildren().size()) {
-            throw new IllegalArgumentException("index must be positive and less than grid size");
-        }
-        ((Button) this.buttonsGrid.getChildren().get(index)).setBackground(new Background(new BackgroundFill(Color.hsb(triple.getLeft(), triple.getMiddle(), triple.getRight()), new CornerRadii(2), new Insets(2))));
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public void showQuestionColor(final Integer hue, final Double saturation, final Double brightness) {
+    public void showQuestionColor(final ColorValuesIterator colorIterator) {
+        Objects.requireNonNull(colorIterator);
         this.questionColor.setVisible(true);
-        this.questionColor.setBackground(new Background(new BackgroundFill(Color.hsb(hue, saturation, brightness), new CornerRadii(2), new Insets(2))));
+        this.questionColor.setBackground(new Background(new BackgroundFill(
+                Color.web(colorIterator.getRightColor().getColorString()), new CornerRadii(2), new Insets(2))));
     }
 
     /**

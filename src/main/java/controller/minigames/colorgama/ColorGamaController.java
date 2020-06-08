@@ -24,7 +24,7 @@ public interface ColorGamaController extends MiniGameController {
     /**
      * Reset the game for the next level.
      */
-    void next();
+    void nextLevel();
 
     /**
      * Stop the timer.
