@@ -39,9 +39,4 @@ public interface PerilousPathController extends MiniGameController {
      * Stop the timer of the game.
      */
     void stopTimer();
-
-    /**
-     * The time of the secondary timer is expired. 
-     */
-    void secondaryTimerExpired();
 }

@@ -104,14 +104,6 @@ public class PerilousPathControllerImpl implements PerilousPathController {
      * {@inheritDoc}
      */
     @Override
-    public void secondaryTimerExpired() {
-        this.updateView();
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
     public void updateTimerView(final int second) {
         if (second == 0) {
             this.timeFinish = true;
