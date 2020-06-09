@@ -10,7 +10,7 @@ import java.util.function.Supplier;
 import java.util.stream.IntStream;
 
 import controller.minigames.oneWay.OneWayController;
-import controller.minigames.oneWay.SimpleOneWayController;
+import controller.minigames.oneWay.OneWayControllerImpl;
 import javafx.animation.PauseTransition;
 import javafx.application.Platform;
 import javafx.event.EventHandler;
@@ -40,7 +40,7 @@ public class OneWayFxImpl extends AbstractMiniGameControllerFx implements OneWay
     private static final String GREEN = "-fx-border-color: #56b72d; -fx-border-width: 5px;";
     private static final String RED = "-fx-border-color: #ff0000; -fx-border-width: 5px;";
     private static final String BLUE = "-fx-accent: #49618C";
-    private static final int IMG_DIM = 50;
+    private static final int IMG_DIM = 40;
     private static final int ZERO = 0;
 
     private OneWayController controller;
@@ -69,7 +69,7 @@ public class OneWayFxImpl extends AbstractMiniGameControllerFx implements OneWay
     private Button correctBtn;
 
     private final PauseTransition pause = new PauseTransition(Duration.seconds(0.5));
- //   private final PauseTransition finish = new PauseTransition(Duration.seconds(0.1));
+    private final PauseTransition finish = new PauseTransition(Duration.seconds(0.1));
 
     private final Function<String, ImageView> image = (path) -> {
         final ImageView image = new ImageView(path);
@@ -78,33 +78,40 @@ public class OneWayFxImpl extends AbstractMiniGameControllerFx implements OneWay
         return image;
     };
 
-    private final Predicate<Pair<Integer, Integer>> predicate = finalPosition -> 
-                                                    this.buttons.get(clickedBtn).getX() == finalPosition.getX() 
-                                                    && this.buttons.get(clickedBtn).getY() == finalPosition.getY();
+    private final Predicate<Pair<Integer, Integer>> predicate = finalPosition -> this.buttons.get(clickedBtn)
+            .getX() == finalPosition.getX() && this.buttons.get(clickedBtn).getY() == finalPosition.getY();
 
     private final EventHandler<MouseEvent> gridEventHandler = (e) -> {
         this.clickedBtn = (Button) e.getSource();
         this.controller.hit(buttons.get(clickedBtn).getX(), buttons.get(clickedBtn).getY());
+        this.handlePauseTransitions();
+        this.controller.nextLevel();
+    };
 
+    private void raiseException(final boolean condition, final Supplier<RuntimeException> supplier) {
+        if (condition) {
+            throw supplier.get();
+        }
+    }
+
+    private void handlePauseTransitions() {
         this.buttons.keySet().forEach(b -> {
             b.setDisable(true);
             b.setStyle("-fx-opacity: 1");
         });
         this.controller.showSolution();
 
+        finish.setOnFinished(event -> {
+            this.correctBtn.setGraphic(image.apply("/images/finish.png"));
+        });
+        finish.playFromStart();
+
         pause.setOnFinished(event -> {
             this.buttons.keySet().forEach(b -> b.setDisable(false));
             this.correctBtn.setStyle(null);
+            this.correctBtn.setGraphic(null);
         });
         pause.playFromStart();
-        this.controller.nextLevel();
-    };
-
-
-    private void raiseException(final boolean condition, final Supplier<RuntimeException> supplier) {
-        if (condition) {
-            throw supplier.get();
-        }
     }
 
     private void loadImage(final int idx, final Direction step) {
@@ -118,7 +125,7 @@ public class OneWayFxImpl extends AbstractMiniGameControllerFx implements OneWay
     @Override
     public void initGame() {
         this.progressBar.setStyle(BLUE);
-        this.controller = new SimpleOneWayController(this, this.getController().getDifficultyLevel());
+        this.controller = new OneWayControllerImpl(this, this.getController().getDifficultyLevel());
         this.buttons = new HashMap<>();
         this.arrows = new ArrayList<>();
         this.controller.firstInit();
@@ -172,12 +179,10 @@ public class OneWayFxImpl extends AbstractMiniGameControllerFx implements OneWay
     @Override
     public void updateView(final Pair<Integer, Integer> initialPosition) {
         raiseException(initialPosition == null, ILLEGAL_ARGUMENT_EXCEPTION_SUPPLIER);
-        this.buttons.entrySet().stream()
-                               .peek(e -> e.getKey().setGraphic(null))
-                               .filter(bt -> bt.getValue().equals(initialPosition))
-                               .forEach(bt -> {
-                                        bt.getKey().setGraphic(this.image.apply("/images/start.png"));
-                                });
+        this.buttons.entrySet().stream().peek(e -> e.getKey().setGraphic(null))
+                .filter(bt -> bt.getValue().equals(initialPosition)).forEach(bt -> {
+                    bt.getKey().setGraphic(this.image.apply("/images/start.png"));
+                });
     }
 
     /**
@@ -214,9 +219,10 @@ public class OneWayFxImpl extends AbstractMiniGameControllerFx implements OneWay
     }
 
     @FXML
-    private void quitGame() {
+    private void quitGame() { // NOPMD
         this.scoreLbl.setText(String.valueOf(ZERO));
         this.getController().updateProgress(ZERO);
         this.getView().setHandleDataScene(SceneType.END_GAME.getFilePath());
     }
+
 }
