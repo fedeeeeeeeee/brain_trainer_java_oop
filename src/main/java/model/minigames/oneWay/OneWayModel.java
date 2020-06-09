@@ -74,4 +74,10 @@ public interface OneWayModel {
      */
     int getSeconds();
 
+    /**
+     * 
+     * @return the number of rows and columns 
+     */
+    int getGridSize();
+
 }

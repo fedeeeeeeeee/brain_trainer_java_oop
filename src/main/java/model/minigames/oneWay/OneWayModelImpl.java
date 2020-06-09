@@ -22,11 +22,7 @@ public class OneWayModelImpl implements OneWayModel {
     private static final int HARD_LEVEL_SEC = 40;
 
     private static final int BASE_POINT = 10;
-
-    /**
-     * 
-     */
-    public static final int SIZE = 6;
+    private static final int SIZE = 6;
 
     private final ScoreModel score;
     private final DifficultyLevel difficulty;
@@ -145,6 +141,14 @@ public class OneWayModelImpl implements OneWayModel {
     @Override
     public Pair<Integer, Integer> getFinalPosition() {
         return this.pathDrawer.getFinalPosition();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public int getGridSize() {
+        return OneWayModelImpl.SIZE;
     }
 
 }

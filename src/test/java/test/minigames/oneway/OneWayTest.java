@@ -56,13 +56,13 @@ public class OneWayTest {
         OneWayModel model = new OneWayModelImpl(DifficultyLevel.EASY);
         model.oneWayInit();
 
-        assertTrue(model.getInitialPosition().getX() < OneWayModelImpl.SIZE);
-        assertTrue(model.getInitialPosition().getY() < OneWayModelImpl.SIZE);
+        assertTrue(model.getInitialPosition().getX() < model.getGridSize());
+        assertTrue(model.getInitialPosition().getY() < model.getGridSize());
         assertTrue(model.getInitialPosition().getX() >= 0);
         assertTrue(model.getInitialPosition().getY() >= 0);
 
-        assertTrue(model.getFinalPosition().getX() < OneWayModelImpl.SIZE);
-        assertTrue(model.getFinalPosition().getY() < OneWayModelImpl.SIZE);
+        assertTrue(model.getFinalPosition().getX() < model.getGridSize());
+        assertTrue(model.getFinalPosition().getY() < model.getGridSize());
         assertTrue(model.getFinalPosition().getX() >= 0);
         assertTrue(model.getFinalPosition().getY() >= 0);
     }
