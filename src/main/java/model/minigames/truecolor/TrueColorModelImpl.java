@@ -24,18 +24,21 @@ public class TrueColorModelImpl implements TrueColorModel {
 	 * TrueColor minigame's duration
 	 */
 	private static final int SECONDS = 30;
-	private static final String positiveAnswer = "YES";
+	private static final String POS_ANSWER = "YES";
 	private static final String MEANCOLOR = "randomMeaningColor";
 	private static final String TRUECOLOR = "randomTrueColor";
 	private final ScoreModel score;
-	private DifficultyStrategy difficultySpecific;
+	private final DifficultyStrategy difficultySpecific;
 	private Map<String, List<Pair<Colors, Colors>>> randomColorMap = new HashMap<>();
 	private Boolean bool = false;
 
 	/**
 	 * Constructor of {@link TrueColorModel}.
 	 * 
-	 * @param difficulty the difficulty selected
+	 * @param difficultyLevel the difficulty selected
+	 * 
+	 * @param difficultyStategy the difficulty create
+
 	 */
 	public TrueColorModelImpl(final DifficultyLevel difficultyLevel, final DifficultyStrategy difficultyStategy) {
 		Objects.requireNonNull(difficultyLevel, "difficulty is null");
@@ -46,8 +49,8 @@ public class TrueColorModelImpl implements TrueColorModel {
 	}
 
 	private void alternateMethod() {
-		final Random rd = new Random();
-		this.bool = rd.nextBoolean();
+		final Random random = new Random();
+		this.bool = random.nextBoolean();
 	}
 
 	/**
@@ -71,7 +74,7 @@ public class TrueColorModelImpl implements TrueColorModel {
 		final List<Pair<Colors, Colors>> randomTrueColorBtn = this.randomColorMap.get(TRUECOLOR);
 		final boolean match = randomMeaningColorBtn.stream()
 				.anyMatch(mean -> randomTrueColorBtn.stream().anyMatch(trueC -> mean.getX().equals(trueC.getY())));
-		final boolean answer = selectedAnswer.contentEquals(positiveAnswer);
+		final boolean answer = selectedAnswer.contentEquals(POS_ANSWER);
 		return match && answer || !match && !answer ? true : false;
 	}
 

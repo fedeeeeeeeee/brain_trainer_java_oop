@@ -9,6 +9,10 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 import utility.Pair;
 
+/**
+ * Implementation of {@link DifficultyStrategy}
+ *
+ */
 public class DifficultyStrategyImpl implements DifficultyStrategy {
 
 	private static final String MEANCOLOR = "randomMeaningColor";
@@ -18,8 +22,16 @@ public class DifficultyStrategyImpl implements DifficultyStrategy {
 	private Integer numberTrueColorButton;
 	private final Map<String, List<Pair<Colors, Colors>>> randomColorMap;
 	
-	
-	public DifficultyStrategyImpl(int numberColor, int numberMeaningButton, int numberTrueButton) {
+	/**
+	 * Constructor of {@link DifficultyStrategy}
+	 * 
+	 * @param numberColor number of color to create list
+	 *
+	 * @param numberMeaningButton number of meaning color button
+	 * 
+	 * @param numberTrueButton number of true color button
+	 */
+	public DifficultyStrategyImpl(final int numberColor, final int numberMeaningButton, final int numberTrueButton) {
 		this.numberMeaningColorButton = numberMeaningButton;
 		this.numberTrueColorButton = numberTrueButton;
 		this.randomColorMap = new HashMap<>();
@@ -27,7 +39,7 @@ public class DifficultyStrategyImpl implements DifficultyStrategy {
 		this.createRandomColorMap();
 	}
 
-	private void createListColorDifficulty(final Integer numberColor) {
+	private void createListColorDifficulty(final int numberColor) {
 		this.colorList = Stream.of(Colors.values()).limit(numberColor).collect(Collectors.toList());
 	}
     

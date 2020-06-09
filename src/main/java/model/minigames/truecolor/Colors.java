@@ -1,5 +1,9 @@
 package model.minigames.truecolor;
 
+/**
+ * Enum for possible color
+ *
+ */
 public enum Colors {
 
 	BLACK("black"),

@@ -6,6 +6,11 @@ import java.util.Map;
 import model.minigames.truecolor.Colors;
 import utility.Pair;
 
+/**
+ * 
+ * Interface of TrueColorFx
+ *
+ */
 public interface TrueColorFx {
 
 	/**

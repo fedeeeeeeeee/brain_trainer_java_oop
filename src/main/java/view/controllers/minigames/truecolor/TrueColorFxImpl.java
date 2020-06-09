@@ -38,13 +38,15 @@ public class TrueColorFxImpl extends AbstractMiniGameControllerFx implements Tru
 	private static final String RADIUS = "-fx-background-radius: ";
 	private static final String MEANCOLOR = "randomMeaningColor";
 	private static final String TRUECOLOR = "randomTrueColor";
+	private static final int SHADOWX= 4;
+	private static final int SHADOWY= 6;
 	private TrueColorController trueColorController;
 	private List<Button> meaningColorBtnList;
 	private List<Button> trueColorBtnList;
 	private int meanColorSize;
 	private int trueColorSize;
 	private Button currentAnswer;
-	private DropShadow shadow = new DropShadow();
+	private final DropShadow shadow = new DropShadow();
 	
 	@FXML
 	private VBox vBoxId;
@@ -73,8 +75,8 @@ public class TrueColorFxImpl extends AbstractMiniGameControllerFx implements Tru
 	}
 	
 	private void setDropShadow() {
-		this.shadow.setOffsetX(4);
-		this.shadow.setOffsetY(6);
+		this.shadow.setOffsetX(SHADOWX);
+		this.shadow.setOffsetY(SHADOWY);
 	}
 
 	/**
@@ -132,10 +134,10 @@ public class TrueColorFxImpl extends AbstractMiniGameControllerFx implements Tru
 	
 	private void addButtonGeneral(final List<Button> btnList, final Integer size) {
 		for (int i = 0; i < size; i++) {
-			final Button bt = new Button();
-			bt.setPrefSize(300, 100);
-			btnList.add(bt);
-			this.vBoxId.getChildren().add(bt);
+			final Button button = new Button();
+			button.setPrefSize(300, 100);
+			btnList.add(button);
+			this.vBoxId.getChildren().add(button);
 		}
 	}
 	
