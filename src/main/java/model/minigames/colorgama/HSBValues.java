@@ -35,6 +35,6 @@ public final class HSBValues implements ColorValues<Triple<Integer, Integer, Int
 
     @Override
     public String getColorString() {
-        return "hsl(" + hue + "," + saturation + "%," + brightness + "%)";
+        return "hsl(" + this.hue + "," + this.saturation + "%," + this.brightness + "%)";
     }
 }

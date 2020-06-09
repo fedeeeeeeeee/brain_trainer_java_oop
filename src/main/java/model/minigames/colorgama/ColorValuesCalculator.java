@@ -9,7 +9,7 @@ import java.util.Optional;
 public interface ColorValuesCalculator {
 
     /**
-     * Get a triple of the random color values.
+     * Get a the random color values.
      * 
      * @return colorValues
      *          the color values of a random color

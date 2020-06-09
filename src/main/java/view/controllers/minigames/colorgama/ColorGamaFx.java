@@ -47,5 +47,4 @@ public interface ColorGamaFx {
      *          check for right or wrong answer
      */
     void showImage(boolean check);
-
 }

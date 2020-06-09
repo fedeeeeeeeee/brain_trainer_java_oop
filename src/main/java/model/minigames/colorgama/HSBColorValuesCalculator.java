@@ -15,6 +15,7 @@ import java.util.stream.Collectors;
  */
 public class HSBColorValuesCalculator implements ColorValuesCalculator {
 
+    private static final String NULL_ARG = " passed is null";
     private static final int DEGREE = 361;
 
     private final ComputeDifficultyValue difficultyValue;
@@ -29,7 +30,7 @@ public class HSBColorValuesCalculator implements ColorValuesCalculator {
      *          constants according to the difficulty.
      */
     public HSBColorValuesCalculator(final ComputeDifficultyValue difficultyValue) {
-        Objects.requireNonNull(difficultyValue, "difficultyValue is null");
+        Objects.requireNonNull(difficultyValue, "ComputeDifficultyValue" + NULL_ARG);
         this.difficultyValue = difficultyValue;
         this.colorValuesSet = new HashSet<>();
         this.values = new Random().ints(this.difficultyValue.getRandomColorOrigin(), this.difficultyValue.getRandomColorBound()).iterator();
@@ -51,6 +52,7 @@ public class HSBColorValuesCalculator implements ColorValuesCalculator {
      */
     @Override
     public Optional<ColorValues<?>> calculateRightColor(final QuestionType question) {
+        Objects.requireNonNull(question, "QuestionType" + NULL_ARG);
         final Comparator<HSBValues> bComparator = (c1, c2) -> c1.getValue().getRight() - c2.getValue().getRight();
         final Comparator<HSBValues> sComparator = (c1, c2) -> c1.getValue().getMiddle() - c2.getValue().getMiddle();
         switch (question) {
@@ -79,7 +81,7 @@ public class HSBColorValuesCalculator implements ColorValuesCalculator {
                                         .getValue()
                                         .getRight() + this.difficultyValue.getValueRange()));
         case COLOR:
-            return Optional.of(new HSBValues(this.hue + this.difficultyValue.getValueRange(), 
+            return Optional.of(new HSBValues(this.hue + this.difficultyValue.getHueRange(), 
                                              this.calulateRandomValue(),
                                              this.calulateRandomValue()));
         default:
@@ -103,7 +105,7 @@ public class HSBColorValuesCalculator implements ColorValuesCalculator {
     @Override
     public void reset() {
         this.colorValuesSet.clear();
-        this.hue = new Random().nextInt(DEGREE - this.difficultyValue.getValueRange());
+        this.hue = new Random().nextInt(DEGREE - this.difficultyValue.getHueRange());
         this.generateColors();
     }
 }

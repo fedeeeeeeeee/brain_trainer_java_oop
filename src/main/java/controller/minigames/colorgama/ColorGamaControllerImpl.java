@@ -16,8 +16,11 @@ import view.controllers.minigames.colorgama.ColorGamaFxImpl;
  */
 public final class ColorGamaControllerImpl implements ColorGamaController {
 
+    private static final String BAD_INDEX = "index must be positive and less than grid size";
+    private static final String NULL_ARG = " passed is null";
     private static final long DELAY = 0;
     private static final long PERIOD = 1000;
+
     private final ColorGamaModel model;
     private final ColorGamaFxImpl view;
     private final GameTimer gameTimer;
@@ -33,8 +36,8 @@ public final class ColorGamaControllerImpl implements ColorGamaController {
      *          the difficulty selected
      */
     public ColorGamaControllerImpl(final ColorGamaFxImpl view, final DifficultyLevel difficulty) {
-        Objects.requireNonNull(view, "ColorGamaFxImpl is null");
-        Objects.requireNonNull(difficulty, "DifficultyLevel is null");
+        Objects.requireNonNull(view, "ColorGamaFxImpl" + NULL_ARG);
+        Objects.requireNonNull(difficulty, "DifficultyLevel" + NULL_ARG);
         this.model = new ColorGamaModelImpl(difficulty);
         this.timer = new Timer();
         this.gameTimer = new GameTimer(this.model.getDifficultyValue().getSeconds(), this);
@@ -85,7 +88,7 @@ public final class ColorGamaControllerImpl implements ColorGamaController {
     public void checkAnswer(final int index) {
         final int size = this.model.getDifficultyValue().getGridSize();
         if (index < 0 && index >= size * size) {
-            throw new IllegalArgumentException("index must be positive and less than grid size");
+            throw new IllegalArgumentException(BAD_INDEX);
         }
         if (this.model.getColorIterator().getRightColorIndex() == index) {
             this.view.showImage(true);

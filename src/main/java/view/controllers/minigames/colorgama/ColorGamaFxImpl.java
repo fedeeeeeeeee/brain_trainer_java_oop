@@ -32,10 +32,11 @@ import view.controllers.minigames.AbstractMiniGameControllerFx;
  */
 public class ColorGamaFxImpl extends AbstractMiniGameControllerFx implements ColorGamaFx {
 
-    private static final int BT_SIZE = 300;
-    private static final double MILLIS = 300;
+    private static final String NULL_ARG = " passed is null";
     private static final String RIGHT_IMAGE_PATH = "/images/tick.png";
     private static final String WRONG_IMAGE_PATH = "/images/cross.png";
+    private static final int VALUE = 300;
+
     @FXML
     private GridPane buttonsGrid;
 
@@ -64,8 +65,8 @@ public class ColorGamaFxImpl extends AbstractMiniGameControllerFx implements Col
 
     private void showAnimation(final boolean isRight) {
         final Timeline timeline = new Timeline();
-        final KeyFrame frame = isRight ? new KeyFrame(Duration.millis(MILLIS), rightEvent)
-                                       : new KeyFrame(Duration.millis(MILLIS), wrongEvent);
+        final KeyFrame frame = isRight ? new KeyFrame(Duration.millis(VALUE), rightEvent)
+                                       : new KeyFrame(Duration.millis(VALUE), wrongEvent);
         timeline.getKeyFrames().add(frame);
         timeline.play();
     }
@@ -88,7 +89,7 @@ public class ColorGamaFxImpl extends AbstractMiniGameControllerFx implements Col
         for (int i = 0; i < size; i++) {
             for (int j = 0; j < size; j++) {
                 final Button bt = new Button();
-                bt.setPrefSize(BT_SIZE, BT_SIZE);
+                bt.setPrefSize(VALUE, VALUE);
                 bt.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
                 bt.addEventHandler(MouseEvent.MOUSE_CLICKED, bntClicked);
                 buttonsGrid.add(bt, i, j);
@@ -102,8 +103,8 @@ public class ColorGamaFxImpl extends AbstractMiniGameControllerFx implements Col
      */
     @Override
     public void renderNext(final ColorValuesIterator colorIterator, final String questionSentence) {
-        Objects.requireNonNull(colorIterator);
-        Objects.requireNonNull(questionSentence);
+        Objects.requireNonNull(colorIterator, "ColorValuesIterator" + NULL_ARG);
+        Objects.requireNonNull(questionSentence, "QuestionSentence" + NULL_ARG);
         this.buttonsGrid.getChildren().forEach((b) -> ((Button) b)
                 .setBackground(new Background(new BackgroundFill(Color.web(colorIterator.next().getColorString()),
                                               new CornerRadii(2), new Insets(2)))));
@@ -115,7 +116,7 @@ public class ColorGamaFxImpl extends AbstractMiniGameControllerFx implements Col
      */
     @Override
     public void showQuestionColor(final ColorValuesIterator colorIterator) {
-        Objects.requireNonNull(colorIterator);
+        Objects.requireNonNull(colorIterator, "ColorValuesIterator" + NULL_ARG);
         this.questionColor.setVisible(true);
         this.questionColor.setBackground(new Background(new BackgroundFill(
                 Color.web(colorIterator.getRightColor().getColorString()), new CornerRadii(2), new Insets(2))));

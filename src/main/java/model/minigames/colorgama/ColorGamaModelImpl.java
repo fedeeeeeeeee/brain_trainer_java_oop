@@ -13,6 +13,8 @@ import model.score.ScoreModelImpl;
  */
 public class ColorGamaModelImpl implements ColorGamaModel {
 
+    private static final String NULL_ARG = " passed is null";
+
     private final ScoreModel score;
     private final ComputeDifficultyValue computeValue;
     private final ColorValuesIterator colorIterator;
@@ -25,10 +27,12 @@ public class ColorGamaModelImpl implements ColorGamaModel {
      *          the difficulty selected
      */
     public ColorGamaModelImpl(final DifficultyLevel difficulty) {
-        Objects.requireNonNull(difficulty, "difficulty is null");
-        this.computeValue = new ComputeDifficultyValueImpl((i1, i2) -> i1 * difficulty.ordinal() + i2);
-        this.colorIterator = new ColorValuesIteratorImpl(this.computeValue, new HSBColorValuesCalculator(this.computeValue));
+        Objects.requireNonNull(difficulty, "DifficultyLevel" + NULL_ARG);
+        this.computeValue = new ComputeDifficultyValueImpl(difficulty);
         this.score = new ScoreModelImpl(difficulty, this.computeValue.getBasePoint());
+        this.colorIterator = new ColorValuesIteratorImpl(
+                this.computeValue.getGridSize() * this.computeValue.getGridSize(),
+                new HSBColorValuesCalculator(this.computeValue));
     }
 
     /**
@@ -77,7 +81,7 @@ public class ColorGamaModelImpl implements ColorGamaModel {
     @Override
     public QuestionType nextQuestion() {
         this.question = QuestionType.values()[new Random().nextInt(QuestionType.values().length)];
-        this.colorIterator.reset(this.question);
+        this.colorIterator.resetValues(this.question);
         return this.question;
     }
 }

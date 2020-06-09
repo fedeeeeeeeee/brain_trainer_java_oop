@@ -30,5 +30,5 @@ public interface ColorValuesIterator extends Iterator<ColorValues<?>> {
      * @param question
      *          the current question.
      */
-    void reset(QuestionType question);
+    void resetValues(QuestionType question);
 }
