@@ -23,7 +23,7 @@ public class TrueColorModelImpl implements TrueColorModel{
      */
 	private static final int SECONDS = 30;
 	private final ScoreModel score;
-	private final DifficultyColor difficultyLevel;
+	private DifficultyStrategy difficultySpecific;
 	private Map<String, List<Pair<Colors, Colors>>> randomColorMap = new HashMap<>();
 	private Boolean bool = false;
 	
@@ -33,10 +33,10 @@ public class TrueColorModelImpl implements TrueColorModel{
      * @param difficulty
      *          the difficulty selected
      */
-    public TrueColorModelImpl(final DifficultyLevel difficultyLevel) {
+    public TrueColorModelImpl(final DifficultyLevel difficultyLevel, final DifficultyStrategy difficultyStategy) {
     	this.score = new ScoreModelImpl(difficultyLevel, BASE_POINT);
-    	this.difficultyLevel = new DifficultyColor(difficultyLevel);
-    	this.randomColorMap = this.difficultyLevel.getRandomColorMap();
+    	this.difficultySpecific = difficultyStategy;
+    	this.randomColorMap = this.difficultySpecific.getRandomColorMap();
     }
   
     /**
@@ -46,8 +46,8 @@ public class TrueColorModelImpl implements TrueColorModel{
     public void reloadRandomColorMap() {
     	this.alternateMethod();
     	this.randomColorMap.clear();
-    	this.difficultyLevel.initMap();
-    	this.randomColorMap = this.difficultyLevel.getRandomColorMap();
+    	this.difficultySpecific.initMap();
+    	this.randomColorMap = this.difficultySpecific.getRandomColorMap();
     }
 
     /**ì
@@ -61,23 +61,7 @@ public class TrueColorModelImpl implements TrueColorModel{
     	final boolean answer = selectedAnswer.contentEquals("YES");
         return match && answer || !match && !answer ? true : false;
     }
-    
-//    /**
-//     * {@inheritDoc}
-//     */
-//    @Override
-//    public Integer getNumberTrueColorButton() {
-//		return this.randomColorMap.get("randomTrueColor").size();
-//	}
-//    
-//    /**
-//     * {@inheritDoc}
-//     */
-//    @Override
-//	public Integer getNumberMeaningColorButton() {
-//		return this.randomColorMap.get("randomMeaningColor").size();
-//	}
-	
+
 	 /**
      * {@inheritDoc}
      */

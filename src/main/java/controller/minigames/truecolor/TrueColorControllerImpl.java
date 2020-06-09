@@ -3,6 +3,7 @@ package controller.minigames.truecolor;
 import java.util.Timer;
 
 import model.DifficultyLevel;
+import model.minigames.truecolor.DifficultyStrategyFactory;
 import model.minigames.truecolor.TrueColorModel;
 import model.minigames.truecolor.TrueColorModelImpl;
 import timer.GameTimer;
@@ -25,7 +26,7 @@ public class TrueColorControllerImpl implements TrueColorController {
 	 * @param perilousPathFx  the view controller
 	 */
 	public TrueColorControllerImpl(final DifficultyLevel difficultyLevel, final TrueColorFxImpl trueColorFx) {
-		this.model = new TrueColorModelImpl(difficultyLevel);
+		this.model = new TrueColorModelImpl(difficultyLevel, DifficultyStrategyFactory.getSpecifiedDifficulty(difficultyLevel));
 		this.timer = new Timer();
 		this.gameTimer = new GameTimer(model.getSecondsGame(), this);
 		this.view = trueColorFx;
