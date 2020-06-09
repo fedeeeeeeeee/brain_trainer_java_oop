@@ -12,7 +12,6 @@ import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
-import javafx.geometry.Insets;
 import javafx.scene.control.Button;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
@@ -87,13 +86,13 @@ public class SizeCountFxImpl extends AbstractMiniGameControllerFx implements Siz
             this.currentAnswer = bt;
             this.controller.newAttempt(bt.getText());
         };
-        
+
         final Button same = new Button("SAME");
         same.setStyle("-fx-font-size: 20");
         this.defaultStyle = same.getStyle();
         same.setPrefWidth(WIDTH);
         same.addEventHandler(MouseEvent.MOUSE_CLICKED, ev);
-        
+
         for (int i = 0; i < numOperations; i++) {
             final Button bt = new Button();
             bt.setStyle(this.defaultStyle);
