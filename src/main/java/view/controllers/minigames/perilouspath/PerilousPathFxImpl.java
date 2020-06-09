@@ -107,7 +107,7 @@ public class PerilousPathFxImpl extends AbstractMiniGameControllerFx implements 
      * {@inheritDoc}
      */
     @Override
-    public void drawGrid(final int size) {
+    public void draw(final int size) {
         for (int i = 0; i < size; i++) {
             for (int j = 0; j < size; j++) {
                 final Button bt = new Button();
@@ -137,15 +137,6 @@ public class PerilousPathFxImpl extends AbstractMiniGameControllerFx implements 
         }
         timeline.getKeyFrames().add(keyFrame);
         timeline.play();
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public void restore() {
-        this.buttons.entrySet().stream().forEach(bt -> bt.getKey().setGraphic(null));
-        this.buttons.entrySet().stream().forEach(bt -> bt.getKey().setDisable(false));
     }
 
     /**
@@ -204,6 +195,15 @@ public class PerilousPathFxImpl extends AbstractMiniGameControllerFx implements 
                                .forEach(bt -> bt.getKey().setGraphic(image.apply("bang")));
         this.buttons.entrySet().stream().forEach(bt -> bt.getKey().setDisable(true));
         this.buttons.entrySet().stream().forEach(bt -> bt.getKey().setStyle("-fx-opacity: 1"));
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void restore() {
+        this.buttons.entrySet().stream().forEach(bt -> bt.getKey().setGraphic(null));
+        this.buttons.entrySet().stream().forEach(bt -> bt.getKey().setDisable(false));
     }
 
     /**

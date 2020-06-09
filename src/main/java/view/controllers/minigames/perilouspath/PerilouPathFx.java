@@ -15,7 +15,7 @@ public interface PerilouPathFx {
      * 
      * @param size
      */
-    void drawGrid(int size);
+    void draw(int size);
 
     /**
      * Wait a few milliseconds to show the mines or a mine explosion.
@@ -26,11 +26,6 @@ public interface PerilouPathFx {
      *              true if the mine is exploded, false otherwise
      */
     void animation(int millis, boolean mineExplosion);
-
-    /**
-     * Restore the view.
-     */
-    void restore();
 
     /**
      * Shows the starting point from which the user must depart.
@@ -68,4 +63,9 @@ public interface PerilouPathFx {
      * @param col
      */
     void showExplosion(int row, int col);
+
+    /**
+     * Restore the view.
+     */
+    void restore();
 }

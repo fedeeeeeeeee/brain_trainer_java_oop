@@ -10,39 +10,67 @@ import utility.Pair;
 /**
  * Implementations of {@link PathGame}.
  */
-public class PathGameImpl implements PathGame {
+public final class PathGameImpl implements PathGame {
 
-    private final int size;
-    private final int numMines;
-    private final Pair<Integer, Integer> start;
-    private final Pair<Integer, Integer> finish;
-    private final LinkedList<Pair<Integer, Integer>> path;  //NOPMD
+    private int size;
+    private int numMines;
+    private Pair<Integer, Integer> start;
+    private Pair<Integer, Integer> finish;
+    private LinkedList<Pair<Integer, Integer>> path;  //NOPMD
+
+//    /**
+//     * Constructor of {@link PathGame}.
+//     * 
+//     * @param size
+//     *              the size and the number of mines related to the current difficulty level
+//     * @param numMines 
+//     * @param start
+//     *              the initial step
+//     * @param finish
+//     *              the end step
+//     */
+//    private PathGameImpl(final int size, final int numMines, final Pair<Integer, Integer> start, final Pair<Integer, Integer> finish) {
+//        Objects.requireNonNull(start);
+//        Objects.requireNonNull(finish);
+//        this.check(size);
+//        this.check(numMines);
+//        this.size = size;
+//        this.numMines = numMines;
+//        this.start = start;
+//        this.finish = finish;
+//        this.path = new LinkedList<>();
+//        this.initPath();
+//    }
 
     /**
-     * Constructor of {@link PathGame}.
-     * 
-     * @param size
-     *              the size and the number of mines related to the current difficulty level
-     * @param numMines 
-     * @param start
-     *              the initial step
-     * @param finish
-     *              the end step
+     * Private constructor of {@link PathGame}.
      */
-    public PathGameImpl(final int size, final int numMines, final Pair<Integer, Integer> start, final Pair<Integer, Integer> finish) {
-        Objects.requireNonNull(start);
-        Objects.requireNonNull(finish);
-        this.check(size);
-        this.check(numMines);
-        this.size = size;
-        this.numMines = numMines;
-        this.start = start;
-        this.finish = finish;
-        this.path = new LinkedList<>();
-        this.initPath();
+    private PathGameImpl() { }
+
+    private static Pair<Integer, Integer> getRandomPosition(final int size) {
+        return new Pair<>(new Random().nextInt(size), new Random().nextInt(size));
     }
 
-    private void check(final int value) {
+    private static boolean adjacent(final Pair<Integer, Integer> position1, final Pair<Integer, Integer> position2) {
+        Objects.requireNonNull(position1);
+        Objects.requireNonNull(position2);
+        return Math.abs(position1.getX() - position2.getX()) <= 1 && Math.abs(position1.getY() - position2.getY()) <= 1;
+    }
+
+    private static Pair<Integer, Integer> initStart(final int size) {
+        return getRandomPosition(size);
+    }
+
+    private static Pair<Integer, Integer> initFinish(final int size, final Pair<Integer, Integer> start) {
+        final Pair<Integer, Integer> finish = getRandomPosition(size);
+        if (finish.equals(start) || adjacent(finish, start)) {
+            return initFinish(size, start);
+        } else {
+            return finish;
+        }
+    }
+
+    private static void check(final int value) {
         final Predicate<Integer> predicate = (i) -> i == 0;
         if (predicate.test(value)) {
             throw new IllegalStateException();
@@ -87,6 +115,54 @@ public class PathGameImpl implements PathGame {
                 this.initPath();
             }
         }
+    }
+
+    private static PathGame createGenericRandomDirectionPath(final int size, final int numMines,
+            final Pair<Integer, Integer> start, final Pair<Integer, Integer> finish) {
+        check(size);
+        check(numMines);
+        Objects.requireNonNull(start);
+        Objects.requireNonNull(finish);
+        final PathGameImpl pathGame = new PathGameImpl();
+        pathGame.size = size;
+        pathGame.numMines = numMines;
+        pathGame.start = start;
+        pathGame.finish = finish;
+        pathGame.path = new LinkedList<>();
+        pathGame.initPath();
+        return pathGame;
+    }
+
+    public static PathGame createRandomDirectionPath(final int size, final int numMines) {
+        check(size);
+        check(numMines);
+        final Pair<Integer, Integer> start = initStart(size);
+        final Pair<Integer, Integer> finish = initFinish(size, start);
+        return PathGameImpl.createGenericRandomDirectionPath(size, numMines, start, finish);
+    }
+
+    public static PathGame createRandomDirectionPathDefaultStart(final int size, final int numMines) {
+        check(size);
+        check(numMines);
+        final Pair<Integer, Integer> start = new Pair<>(0, 0);
+        final Pair<Integer, Integer> finish = initFinish(size, start);
+        return PathGameImpl.createGenericRandomDirectionPath(size, numMines, start, finish);
+    }
+
+    public static PathGame createRandomDirectionPathDefaultFinish(final int size, final int numMines) {
+        check(size);
+        check(numMines);
+        final Pair<Integer, Integer> start = new Pair<>(size - 1, size - 1);
+        final Pair<Integer, Integer> finish = initFinish(size, start);
+        return PathGameImpl.createGenericRandomDirectionPath(size, numMines, finish, start);
+    }
+
+    public static PathGame createRandomDirectionPathDefaultStartFinish(final int size, final int numMines) {
+        check(size);
+        check(numMines);
+        final Pair<Integer, Integer> start = new Pair<>(0, 0);
+        final Pair<Integer, Integer> finish = new Pair<>(size - 1, size - 1);
+        return PathGameImpl.createGenericRandomDirectionPath(size, numMines, start, finish);
     }
 
     /**
