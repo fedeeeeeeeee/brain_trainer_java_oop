@@ -52,6 +52,14 @@ public interface ComputeDifficultyValue {
      * @return range
      *          the range of the hue
      */
+    int getHueRange();
+
+    /**
+     * Get the range of the saturation or brightness component.
+     * 
+     * @return range
+     *          the range of saturation or brightness
+     */
     int getValueRange();
 
     /**
@@ -61,4 +69,5 @@ public interface ComputeDifficultyValue {
      *          seconds of the game
      */
     int getSeconds();
+
 }
