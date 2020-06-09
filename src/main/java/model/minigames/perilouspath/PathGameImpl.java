@@ -18,30 +18,6 @@ public final class PathGameImpl implements PathGame {
     private Pair<Integer, Integer> finish;
     private LinkedList<Pair<Integer, Integer>> path;  //NOPMD
 
-//    /**
-//     * Constructor of {@link PathGame}.
-//     * 
-//     * @param size
-//     *              the size and the number of mines related to the current difficulty level
-//     * @param numMines 
-//     * @param start
-//     *              the initial step
-//     * @param finish
-//     *              the end step
-//     */
-//    private PathGameImpl(final int size, final int numMines, final Pair<Integer, Integer> start, final Pair<Integer, Integer> finish) {
-//        Objects.requireNonNull(start);
-//        Objects.requireNonNull(finish);
-//        this.check(size);
-//        this.check(numMines);
-//        this.size = size;
-//        this.numMines = numMines;
-//        this.start = start;
-//        this.finish = finish;
-//        this.path = new LinkedList<>();
-//        this.initPath();
-//    }
-
     /**
      * Private constructor of {@link PathGame}.
      */
@@ -119,8 +95,6 @@ public final class PathGameImpl implements PathGame {
 
     private static PathGame createGenericRandomDirectionPath(final int size, final int numMines,
             final Pair<Integer, Integer> start, final Pair<Integer, Integer> finish) {
-        check(size);
-        check(numMines);
         Objects.requireNonNull(start);
         Objects.requireNonNull(finish);
         final PathGameImpl pathGame = new PathGameImpl();
@@ -133,6 +107,16 @@ public final class PathGameImpl implements PathGame {
         return pathGame;
     }
 
+    /**
+     * Create a path based on the random direction.
+     * 
+     * @param size
+     *          the size of the current difficulty level
+     * @param numMines
+     *          the amount of mines of the current difficulty level
+     *
+     * @return a {@link PathGame} which is the game's path
+     */
     public static PathGame createRandomDirectionPath(final int size, final int numMines) {
         check(size);
         check(numMines);
@@ -141,6 +125,16 @@ public final class PathGameImpl implements PathGame {
         return PathGameImpl.createGenericRandomDirectionPath(size, numMines, start, finish);
     }
 
+    /**
+     * Create a path based on the random direction with default initial step.
+     * 
+     * @param size
+     *          the size of the current difficulty level
+     * @param numMines
+     *          the amount of mines of the current difficulty level
+     *
+     * @return a {@link PathGame} which is the game's path
+     */
     public static PathGame createRandomDirectionPathDefaultStart(final int size, final int numMines) {
         check(size);
         check(numMines);
@@ -149,6 +143,16 @@ public final class PathGameImpl implements PathGame {
         return PathGameImpl.createGenericRandomDirectionPath(size, numMines, start, finish);
     }
 
+    /**
+     * Create a path based on the random direction with default end step.
+     * 
+     * @param size
+     *          the size of the current difficulty level
+     * @param numMines
+     *          the amount of mines of the current difficulty level
+     *
+     * @return a {@link PathGame} which is the game's path
+     */
     public static PathGame createRandomDirectionPathDefaultFinish(final int size, final int numMines) {
         check(size);
         check(numMines);
@@ -157,6 +161,16 @@ public final class PathGameImpl implements PathGame {
         return PathGameImpl.createGenericRandomDirectionPath(size, numMines, finish, start);
     }
 
+    /**
+     * Create a path based on the random direction with default initial and end steps.
+     * 
+     * @param size
+     *          the size of the current difficulty level
+     * @param numMines
+     *          the amount of mines of the current difficulty level
+     *
+     * @return a {@link PathGame} which is the game's path
+     */
     public static PathGame createRandomDirectionPathDefaultStartFinish(final int size, final int numMines) {
         check(size);
         check(numMines);

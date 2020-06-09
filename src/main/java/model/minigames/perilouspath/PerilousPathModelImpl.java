@@ -39,13 +39,12 @@ public class PerilousPathModelImpl implements PerilousPathModel {
     /**
      * Constructor of {@link PerilousPathModel}.
      * 
-     * @param difficultyLevel the current difficulty level
+     * @param difficultyLevel 
+     *                  the current difficulty level
      */
     public PerilousPathModelImpl(final DifficultyLevel difficultyLevel) {
         Objects.requireNonNull(difficultyLevel);
-        final PerilousPathDifficulty difficulty = new PerilousPathDifficultyBuilderImpl()
-                                                        .setDifficultyLevel(difficultyLevel)
-                                                        .build();
+        final PerilousPathDifficulty difficulty = new PerilousPathDifficultyBuilderImpl().setDifficultyLevel(difficultyLevel).build();
         this.score = new ScoreModelImpl(difficultyLevel, BASE_POINT);
         this.selected = new LinkedList<>();
         this.path = new LinkedList<>();

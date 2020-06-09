@@ -16,7 +16,9 @@ public interface PerilousPathController extends MiniGameController {
      * Check if the user can hit this position.
      * 
      * @param row
+     *          the step's position row
      * @param col
+     *          the step's position col
      */
     void hitAttempt(int row, int col);
 

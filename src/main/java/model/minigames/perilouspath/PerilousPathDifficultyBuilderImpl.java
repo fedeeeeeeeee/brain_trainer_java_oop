@@ -7,6 +7,9 @@ import java.util.Optional;
 import model.DifficultyLevel;
 import utility.Pair;
 
+/**
+ * Implementation of {@link PerilousPathDifficultyBuilder}.
+ */
 public class PerilousPathDifficultyBuilderImpl implements PerilousPathDifficultyBuilder {
 
     /**
@@ -30,6 +33,9 @@ public class PerilousPathDifficultyBuilderImpl implements PerilousPathDifficulty
     private Optional<Integer> optNumMines;
     private boolean built;
 
+    /**
+     * Constructor of {@link PerilousPathDifficultyBuilder}.
+     */
     public PerilousPathDifficultyBuilderImpl() {
         this.difficulty = this.initDefaultDifficulty();
         this.optCurrentDifficultyLevel = Optional.empty();

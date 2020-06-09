@@ -5,7 +5,7 @@ import java.util.Set;
 import utility.Pair;
 
 /**
- * Represents the Perilous Path Model.
+ * Represents the game's model.
  */
 public interface PerilousPathModel {
 
@@ -28,21 +28,21 @@ public interface PerilousPathModel {
     /**
      * Gets the start position.
      * 
-     * @return the start coordinate
+     * @return the initial step
      */
     Pair<Integer, Integer> getStart();
 
     /**
      * Gets the finish position.
      * 
-     * @return the finish coordinate
+     * @return the end step
      */
     Pair<Integer, Integer> getFinish();
 
     /**
      * Gets the mines.
      * 
-     * @return a set of mines
+     * @return the mines
      */
     Set<Mine> getMines();
 
