@@ -97,6 +97,7 @@ public class IntegerOperationsFactoryImpl implements IntegerOperationsFactory {
         this.checkArguments(List.of(numOfOperands, bound));
         final List<Integer> operands = this.generateRandomOperand(numOfOperands, bound).collect(Collectors.toList());
         return new IntegerOperation() {
+            
             @Override
             public Integer getResult() {
                 return operands.stream().mapToInt(e -> e).sum();
@@ -117,6 +118,7 @@ public class IntegerOperationsFactoryImpl implements IntegerOperationsFactory {
         this.checkArguments(List.of(numOfOperands, bound));
         final List<Integer> operands = this.generateRandomOperand(numOfOperands, bound).collect(Collectors.toList());
         return new IntegerOperation() {
+            
             @Override
             public Integer getResult() {
                 return operands.stream().reduce((e1, e2) -> e1 - e2).get();

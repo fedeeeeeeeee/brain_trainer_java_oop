@@ -40,6 +40,6 @@ public interface SizeCountFx {
      * @param score
      *          the score gained
      */
-    void showEndGame(final int score);
+    void showEndGame(int score);
 
 }

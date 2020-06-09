@@ -1,6 +1,6 @@
 package test.minigames;
 
-import static org.junit.jupiter.api.Assertions.fail;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import org.junit.jupiter.api.Test;
 
@@ -50,10 +50,6 @@ class TestIntegerOperationsFactory {
 
     @Test
     public void argumentsCanBeZero() throws IllegalStateException {
-        try {
-            this.factory.addiction(0, 0);
-            fail("Expected an IllegalStateException to be thrown");
-        } catch (IllegalStateException e) {
-        }
+        assertThrows(IllegalStateException.class, () ->  this.factory.addiction(0, 0));
     }
 }

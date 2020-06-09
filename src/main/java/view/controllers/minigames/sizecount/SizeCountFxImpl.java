@@ -31,12 +31,13 @@ public class SizeCountFxImpl extends AbstractMiniGameControllerFx implements Siz
     private SizeCountController controller;
     private List<Button> buttons;
     private Button currentAnswer;
+    private String defaultStyle;
 
     @FXML
     private VBox panel;
 
     private final EventHandler<ActionEvent> event = (e) -> {
-        this.currentAnswer.setStyle("-fx-font-size: 20; -fx-border-color: #000000; -fx-border-width: 0.1px;");
+        this.currentAnswer.setStyle(this.defaultStyle);
     };
 
     private void animation() {
@@ -46,7 +47,7 @@ public class SizeCountFxImpl extends AbstractMiniGameControllerFx implements Siz
         timeline.play();
     }
 
-    private void checkNumOperations(int numOperations) {
+    private void checkNumOperations(final int numOperations) {
         if (numOperations == 0) {
             throw new IllegalStateException();
         }
@@ -86,20 +87,21 @@ public class SizeCountFxImpl extends AbstractMiniGameControllerFx implements Siz
             this.currentAnswer = bt;
             this.controller.newAttempt(bt.getText());
         };
+        
+        final Button same = new Button("SAME");
+        same.setStyle("-fx-font-size: 20");
+        this.defaultStyle = same.getStyle();
+        same.setPrefWidth(WIDTH);
+        same.addEventHandler(MouseEvent.MOUSE_CLICKED, ev);
+        
         for (int i = 0; i < numOperations; i++) {
             final Button bt = new Button();
-            bt.setStyle("-fx-font-size: 20");
-            // bt.setMinSize(bt.USE_COMPUTED_SIZE, bt.USE_COMPUTED_SIZE);
+            bt.setStyle(this.defaultStyle);
             bt.setPrefWidth(WIDTH);
             this.buttons.add(bt);
             bt.addEventHandler(MouseEvent.MOUSE_CLICKED, ev);
             this.panel.getChildren().add(bt);
         }
-        final Button same = new Button("SAME");
-        same.setStyle("-fx-font-size: 20");
-        // same.setMinSize(same.USE_COMPUTED_SIZE, same.USE_COMPUTED_SIZE);
-        same.setPrefWidth(WIDTH);
-        same.addEventHandler(MouseEvent.MOUSE_CLICKED, ev);
         this.panel.getChildren().add(same);
     }
 
@@ -108,7 +110,7 @@ public class SizeCountFxImpl extends AbstractMiniGameControllerFx implements Siz
      */
     @Override
     public void showWrongAnswer() {
-        this.currentAnswer.setStyle("-fx-font-size: 20;-fx-border-color:#FF0000 ; -fx-border-width: 2px;");
+        this.currentAnswer.setStyle("-fx-font-size: 20;-fx-background-color:#FF0000 ;");
         this.animation();
         this.controller.resetGame();
     }
@@ -118,7 +120,7 @@ public class SizeCountFxImpl extends AbstractMiniGameControllerFx implements Siz
      */
     @Override
     public void showCorrectAnswer() {
-        this.currentAnswer.setStyle("-fx-font-size: 20; -fx-border-color:#66FF66 ; -fx-border-width: 2px;");
+        this.currentAnswer.setStyle("-fx-font-size: 20; -fx-background-color:#66FF66 ;");
         this.animation();
         this.controller.resetGame();
     }
