@@ -1,4 +1,4 @@
-package model.minigames.oneWay;
+package model.minigames.oneway;
 
 import java.util.Random;
 import utility.Pair;

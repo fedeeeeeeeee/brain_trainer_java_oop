@@ -1,4 +1,4 @@
-package controller.minigames.oneWay;
+package controller.minigames.oneway;
 
 import controller.minigames.MiniGameController;
 

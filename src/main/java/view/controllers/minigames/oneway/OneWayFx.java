@@ -1,8 +1,8 @@
-package view.controllers.minigames.oneWay;
+package view.controllers.minigames.oneway;
 
 import java.util.List;
 
-import model.minigames.oneWay.Direction;
+import model.minigames.oneway.Direction;
 import utility.Pair;
 
 /**

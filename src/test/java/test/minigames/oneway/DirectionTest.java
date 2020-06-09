@@ -7,7 +7,7 @@ import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
-import model.minigames.oneWay.Direction;
+import model.minigames.oneway.Direction;
 
 /**
  * Class to test if {@link Direction} works correctly.

@@ -1,12 +1,12 @@
-package controller.minigames.oneWay;
+package controller.minigames.oneway;
 
 import java.util.Timer;
 
 import model.DifficultyLevel;
-import model.minigames.oneWay.OneWayModel;
-import model.minigames.oneWay.OneWayModelImpl;
+import model.minigames.oneway.OneWayModel;
+import model.minigames.oneway.OneWayModelImpl;
 import timer.GameTimer;
-import view.controllers.minigames.oneWay.OneWayFxImpl;
+import view.controllers.minigames.oneway.OneWayFxImpl;
 
 /**
  * Implementation of {@link OneWayController}.

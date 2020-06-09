@@ -1,4 +1,4 @@
-package view.controllers.minigames.oneWay;
+package view.controllers.minigames.oneway;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -9,8 +9,8 @@ import java.util.function.Predicate;
 import java.util.function.Supplier;
 import java.util.stream.IntStream;
 
-import controller.minigames.oneWay.OneWayController;
-import controller.minigames.oneWay.OneWayControllerImpl;
+import controller.minigames.oneway.OneWayController;
+import controller.minigames.oneway.OneWayControllerImpl;
 import javafx.animation.PauseTransition;
 import javafx.application.Platform;
 import javafx.event.EventHandler;
@@ -23,7 +23,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.util.Duration;
-import model.minigames.oneWay.Direction;
+import model.minigames.oneway.Direction;
 import utility.Pair;
 import view.SceneType;
 import view.controllers.minigames.AbstractMiniGameControllerFx;

@@ -6,8 +6,8 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.Test;
 import model.DifficultyLevel;
-import model.minigames.oneWay.OneWayModel;
-import model.minigames.oneWay.OneWayModelImpl;
+import model.minigames.oneway.OneWayModel;
+import model.minigames.oneway.OneWayModelImpl;
 
 /**
  * Class to test if {@link OneWayModel} works correctly.
