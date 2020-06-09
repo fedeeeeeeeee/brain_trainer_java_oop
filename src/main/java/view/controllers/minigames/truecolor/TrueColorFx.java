@@ -25,12 +25,10 @@ public interface TrueColorFx {
 	/**
 	 * Set the number of button.
 	 * 
-	 * @param meaningColor
-	 * 						the buttons that hold the meaning of the text
-	 * @param trueColor
-	 * 						the buttons that hold true color of the others button meaning 
+	 * @param colorMap
+	 * 					map with lists of Colors pair
 	 */
-	void setBtnNumber(Map<String, List<Pair<Colors, Colors>>> colorMap);
+	void setSizeBtnList(Map<String, List<Pair<Colors, Colors>>> colorMap);
 
 	/**
 	 * Set a random color to the buttons background.
@@ -47,6 +45,4 @@ public interface TrueColorFx {
 	 * 				that identify if the answer is correct or not.
 	 */
 	void showAnswer(boolean bool);
-
-
 }

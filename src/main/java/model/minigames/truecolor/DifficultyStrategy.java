@@ -8,14 +8,14 @@ import utility.Pair;
 public interface DifficultyStrategy {
 
 	/**
-	 * Initialize the random color map 
+	 * Initialize the random color map
 	 */
 	public void initMap();
-	
+
 	/**
-	 * Getter for the random color map 
-	 * @return
-	 * 			the created {@link Map<String,List<Pair<Colors,Colors>>}
+	 * Getter for the random color map
+	 * 
+	 * @return the created random color map
 	 */
-	public Map<String,List<Pair<Colors,Colors>>> getRandomColorMap();
+	public Map<String, List<Pair<Colors, Colors>>> getRandomColorMap();
 }

@@ -1,5 +1,6 @@
 package controller.minigames.truecolor;
 
+import java.util.Objects;
 import java.util.Timer;
 
 import model.DifficultyLevel;
@@ -14,6 +15,7 @@ import view.controllers.minigames.truecolor.TrueColorFxImpl;
  */
 public class TrueColorControllerImpl implements TrueColorController {
 
+	private static final String TRUECOLOR = "randomTrueColor";
 	private final TrueColorModel model;
 	private final TrueColorFxImpl view;
 	private final GameTimer gameTimer;
@@ -23,14 +25,21 @@ public class TrueColorControllerImpl implements TrueColorController {
 	 * Constructor of {@link TrueColorController}.
 	 * 
 	 * @param difficultyLevel the current difficulty level
-	 * @param perilousPathFx  the view controller
+	 * 
+	 * @param trueColorFx  the view controller
+	 * 
+	 * @throws IllegalStateException
+     *          if parameters are null
 	 */
 	public TrueColorControllerImpl(final DifficultyLevel difficultyLevel, final TrueColorFxImpl trueColorFx) {
-		this.model = new TrueColorModelImpl(difficultyLevel, DifficultyStrategyFactory.getSpecifiedDifficulty(difficultyLevel));
+		Objects.requireNonNull(trueColorFx, "TrueColorFx is null");
+		Objects.requireNonNull(difficultyLevel, "DifficultyLevel is null");
+		this.model = new TrueColorModelImpl(difficultyLevel,
+				DifficultyStrategyFactory.getSpecifiedDifficulty(difficultyLevel));
 		this.timer = new Timer();
 		this.gameTimer = new GameTimer(model.getSecondsGame(), this);
 		this.view = trueColorFx;
-		this.view.setBtnNumber(model.getRandomColorMap());
+		this.view.setSizeBtnList(model.getRandomColorMap());
 	}
 
 	/**
@@ -40,10 +49,10 @@ public class TrueColorControllerImpl implements TrueColorController {
 	public void startGame() {
 		this.view.setButtons(model.getRandomColorMap());
 		if (this.view.getController().getDifficultyLevel().equals(DifficultyLevel.HARD) && model.getStatusMethod()) {
-			this.view.alternativeSetButton(model.getRandomColorMap().get("randomTrueColor"));
+			this.view.alternativeSetButton(model.getRandomColorMap().get(TRUECOLOR));
 		}
 	}
-	
+
 	/**
 	 * {@inheritDoc}
 	 */
@@ -57,8 +66,8 @@ public class TrueColorControllerImpl implements TrueColorController {
 	 */
 	@Override
 	public void check(final String selectedAnswer) {
+		Objects.requireNonNull(selectedAnswer);
 		if (model.matchingMeaningAndInk(selectedAnswer)) {
-			System.out.println("corretto");
 			this.model.addPoint();
 			this.view.showAnswer(true);
 		} else {
@@ -74,7 +83,7 @@ public class TrueColorControllerImpl implements TrueColorController {
 	public void updateTimerView(final int second) {
 		this.view.showTimerSeconds(second);
 	}
-	
+
 	/**
 	 * {@inheritDoc}
 	 */
@@ -82,7 +91,7 @@ public class TrueColorControllerImpl implements TrueColorController {
 	public void timeFinish() {
 		this.view.showEndGame(this.model.getFinalScore());
 	}
-	
+
 	/**
 	 * {@inheritDoc}
 	 */
@@ -91,7 +100,7 @@ public class TrueColorControllerImpl implements TrueColorController {
 		this.timer.schedule(this.gameTimer, 0, 1000);
 		this.view.setInitialSeconds(model.getSecondsGame());
 	}
-	
+
 	/**
 	 * {@inheritDoc}
 	 */

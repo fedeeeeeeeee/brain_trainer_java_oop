@@ -20,6 +20,8 @@ public interface TrueColorController extends MiniGameController {
 	/**
      * Check if is the right answer.
      * 
+     * @param selectedAnswer answer to check
+     * 
      * @return true if the meaning and the ink match
      */
 	void check(String selectedAnswer);

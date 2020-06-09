@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 
 import controller.minigames.truecolor.TrueColorController;
 import controller.minigames.truecolor.TrueColorControllerImpl;
@@ -35,6 +36,8 @@ public class TrueColorFxImpl extends AbstractMiniGameControllerFx implements Tru
 	private static final String BORDERW = "-fx-border-width: ";
 	private static final String NOFOCUS = "-fx-focus-color: transparent";
 	private static final String RADIUS = "-fx-background-radius: ";
+	private static final String MEANCOLOR = "randomMeaningColor";
+	private static final String TRUECOLOR = "randomTrueColor";
 	private TrueColorController trueColorController;
 	private List<Button> meaningColorBtnList;
 	private List<Button> trueColorBtnList;
@@ -87,13 +90,15 @@ public class TrueColorFxImpl extends AbstractMiniGameControllerFx implements Tru
 	 * {@inheritDoc}
 	 */
 	@Override
-	// aggiungere controllo sulla map
 	public void setButtons(final Map<String, List<Pair<Colors, Colors>>> colorMap) {
-		this.setStyleButton(colorMap.get("randomMeaningColor"), this.meaningColorBtnList);
-		this.setStyleButton(colorMap.get("randomTrueColor"), this.trueColorBtnList);
+		Objects.requireNonNull(colorMap, "Map of Random Color is null");
+		this.setStyleButton(colorMap.get(MEANCOLOR), this.meaningColorBtnList);
+		this.setStyleButton(colorMap.get(TRUECOLOR), this.trueColorBtnList);
 	}
 
 	private void setStyleButton(final List<Pair<Colors, Colors>> listColor, final List<Button> listBtn) {
+		Objects.requireNonNull(listColor);
+		Objects.requireNonNull(listBtn);
 		final int size = listBtn.size();
 		for (int i = 0; i < size; i++) {
 			listBtn.get(i).setText(listColor.get(i).getX().toString());
@@ -110,13 +115,13 @@ public class TrueColorFxImpl extends AbstractMiniGameControllerFx implements Tru
 	 */
 	@Override
 	public void alternativeSetButton(final List<Pair<Colors, Colors>> list) {
+		Objects.requireNonNull(list);
 		final int size = this.trueColorBtnList.size();
 		for (int i = 0; i < size; i++) {
 			this.trueColorBtnList.get(i).setText("");
 			this.trueColorBtnList.get(i).setStyle(BACKGROUND + list.get(i).getY().getName());
 		}
 	}
-
 	
 	private void addButtons() {
 		this.meaningColorBtnList = new LinkedList<>();
@@ -138,11 +143,10 @@ public class TrueColorFxImpl extends AbstractMiniGameControllerFx implements Tru
 	 * {@inheritDoc}
 	 */
 	@Override
-	public void setBtnNumber(final Map<String, List<Pair<Colors, Colors>>> colorMap) {
-	this.meanColorSize= colorMap.get("randomMeaningColor").size();
-	this.trueColorSize = colorMap.get("randomTrueColor").size();
+	public void setSizeBtnList(final Map<String, List<Pair<Colors, Colors>>> colorMap) {
+		this.meanColorSize = colorMap.get(MEANCOLOR).size();
+		this.trueColorSize = colorMap.get(TRUECOLOR).size();
 	}
-	
 
 	/**
 	 * {@inheritDoc}
