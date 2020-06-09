@@ -14,8 +14,8 @@ import utility.Pair;
 public class DifficultyColor {
 
 	private List<Colors> colorList; 
-	private Integer numberMeaningColorButton;
-	private Integer numberTrueColorButton;
+	private int numberMeaningColorButton;
+	private int numberTrueColorButton;
 	private final Map<String, List<Pair<Colors, Colors>>> randomColorMap;
 	
 	public DifficultyColor(final DifficultyLevel difficultyLevel) {
@@ -24,7 +24,7 @@ public class DifficultyColor {
 		this.createRandomColorMap();
 	}
 
-	private void createListColorDifficulty(final Integer numberColor) {
+	private void createListColorDifficulty(final int numberColor) {
 		this.colorList = Stream.of(Colors.values()).limit(numberColor).collect(Collectors.toList());
 	}
     
