@@ -27,7 +27,8 @@ dependencies {
     implementation("com.fasterxml.jackson.core:jackson-databind:2.11.0.rc1")
     implementation("com.fasterxml.jackson.core:jackson-core:2.11.0.rc1")
     implementation("com.fasterxml.jackson.core:jackson-annotations:2.11.0.rc1")
-    
+    implementation("org.apache.commons:commons-lang3:3.10")
+
     // Example library: Guava. Add what you need (and remove Guava if you don't use it)
     implementation("com.google.guava:guava:28.1-jre")
     // JavaFX: comment out if you do not need them
