@@ -6,7 +6,7 @@ import model.DifficultyLevel;
  * A Factory class to create a DifficultyStrategy
  *
  */
-public class DifficultyStrategyFactory {
+public final class DifficultyStrategyFactory {
 	
 	private static final int BASE_NUM_COLOR = 4;
 	private static final int BASE_MEAN_BTN = 1;
@@ -14,6 +14,9 @@ public class DifficultyStrategyFactory {
 	private static final int INC_COLOR = 2;
 	private static final int INC_BTN = 1;
 
+	private DifficultyStrategyFactory () {
+	    
+	}
 	/**
 	 * 
 	 * @param difficultyLevel
