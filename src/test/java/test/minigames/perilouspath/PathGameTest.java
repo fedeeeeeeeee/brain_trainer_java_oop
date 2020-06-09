@@ -11,8 +11,6 @@ import org.junit.jupiter.api.Test;
 import model.DifficultyLevel;
 import model.minigames.perilouspath.PerilousPathDifficulty;
 import model.minigames.perilouspath.PerilousPathDifficultyBuilderImpl;
-import model.minigames.perilouspath.PathGameFactory;
-import model.minigames.perilouspath.PathGameFactoryImpl;
 import model.minigames.perilouspath.PathGameImpl;
 import utility.Pair;
 
@@ -24,8 +22,6 @@ public class PathGameTest {
     private LinkedList<Pair<Integer, Integer>> path; //NOPMD
 
     private PerilousPathDifficulty difficulty(final DifficultyLevel difficulty) {
-        System.out.println(difficulty);
-        System.out.println(new PerilousPathDifficultyBuilderImpl().setDifficultyLevel(difficulty).build());
         return new PerilousPathDifficultyBuilderImpl().setDifficultyLevel(difficulty).build();
     }
 
@@ -35,29 +31,39 @@ public class PathGameTest {
     @Test
     public void pathGameLengthTest() {
         final PerilousPathDifficulty difficulty = this.difficulty(DifficultyLevel.EASY);
-        final PathGameFactory pathFactory = new PathGameFactoryImpl();
-        this.path = pathFactory.createRandomDirectionPath(difficulty.getSize(), difficulty.getNumMines()).getPathList();
+        this.path = PathGameImpl.createRandomDirectionPath(difficulty.getSize(), difficulty.getNumMines()).getPathList();
         assertTrue(this.path.size() <= (difficulty.getSize() * difficulty.getSize()) - difficulty.getNumMines());
+    }
+
+    /**
+     * Test if the first element of the path is the start.
+     */
+    @Test
+    public void pathGameDefaultStartTest() {
+        final PerilousPathDifficulty difficulty = this.difficulty(DifficultyLevel.EASY);
+        this.path = PathGameImpl.createRandomDirectionPathDefaultStartFinish(difficulty.getSize(), difficulty.getNumMines()).getPathList();
+        assertEquals(new Pair<>(0, 0), this.path.getFirst());
+    }
+
+    /**
+     * Test if the last element of the path is the finish.
+     */
+    @Test
+    public void pathGameDefaultFinishTest() {
+        final PerilousPathDifficulty difficulty = this.difficulty(DifficultyLevel.EASY);
+        this.path = PathGameImpl.createRandomDirectionPathDefaultStartFinish(difficulty.getSize(), difficulty.getNumMines()).getPathList();
+        assertEquals(new Pair<>(4, 4), this.path.getLast());
     }
 
     /**
      * Test if the first element of the path is the start and the last is the finish.
      */
     @Test
-    public void pathGameStartFinishTest() {
+    public void pathGameDefaultStartFinishTest() {
         final PerilousPathDifficulty difficulty = this.difficulty(DifficultyLevel.EASY);
-        this.path = new PathGameImpl(difficulty.getSize(), difficulty.getNumMines(), new Pair<>(0, 0), new Pair<>(4, 4)).getPathList();
+        this.path = PathGameImpl.createRandomDirectionPathDefaultStartFinish(difficulty.getSize(), difficulty.getNumMines()).getPathList();
         assertEquals(new Pair<>(0, 0), this.path.getFirst());
         assertEquals(new Pair<>(4, 4), this.path.getLast());
-    }
-
-    /**
-     * Test if throws NullPointerException if the objects passed are null.
-     */
-    @Test
-    public void pathGameNullTest() {
-        final PerilousPathDifficulty difficulty = this.difficulty(DifficultyLevel.EASY);
-        assertThrows(NullPointerException.class, () -> new PathGameImpl(difficulty.getSize(), difficulty.getNumMines(), null, null));
     }
 
     /**
@@ -65,6 +71,6 @@ public class PathGameTest {
      */
     @Test
     public void pathGameZeroTest() {
-        assertThrows(IllegalStateException.class, () -> new PathGameImpl(0, 0, new Pair<>(0, 0), new Pair<>(4, 4)));
+        assertThrows(IllegalStateException.class, () -> PathGameImpl.createRandomDirectionPath(0, 0));
     }
 }
