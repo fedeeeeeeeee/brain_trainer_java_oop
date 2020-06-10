@@ -37,14 +37,14 @@ public class TrueColorModelImpl implements TrueColorModel {
 	 * 
 	 * @param difficultyLevel the difficulty selected
 	 * 
-	 * @param difficultyStategy the difficulty create
+	 * @param difficultyStrategy the difficulty create
 
 	 */
-	public TrueColorModelImpl(final DifficultyLevel difficultyLevel, final DifficultyStrategy difficultyStategy) {
+	public TrueColorModelImpl(final DifficultyLevel difficultyLevel, final DifficultyStrategy difficultyStrategy) {
 		Objects.requireNonNull(difficultyLevel, "difficulty is null");
-		Objects.requireNonNull(difficultyStategy, "DifficultyStrategy is null");
+		Objects.requireNonNull(difficultyStrategy, "DifficultyStrategy is null");
 		this.score = new ScoreModelImpl(difficultyLevel, BASE_POINT);
-		this.difficultySpecific = difficultyStategy;
+		this.difficultySpecific = difficultyStrategy;
 		this.randomColorMap = this.difficultySpecific.getRandomColorMap();
 	}
 

@@ -1,4 +1,4 @@
-package test.minigames;
+package test.minigames.truecolor;
 
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;

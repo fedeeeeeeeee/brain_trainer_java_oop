@@ -17,7 +17,7 @@ public enum TrainingArea {
      * Attention training area.
      * 
      */
-    ATTENTION("Attention", Arrays.asList("True Color","main")),
+    ATTENTION("Attention", Arrays.asList("True Color")),
 
     /**
      * Brain speed training area.
