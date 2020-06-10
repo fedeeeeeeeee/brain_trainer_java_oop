@@ -17,6 +17,16 @@ public class PerilousPathControllerImpl implements PerilousPathController {
      * The game's duration.
      */
     private static final int SECONDS = 30;
+
+    /**
+     * The duration dedicated to the memorization of the mines position.
+     */
+    private static final int MILLIS_MEMORIZATION_MINES = 3000;
+
+    /**
+     * The duration dedicated to the visualization of the mine's explosion.
+     */
+    private static final int MILLIS_VISUALIZATION_EXPLOSION = 1000;
     
     /**
      * The delay of the timer.
@@ -27,16 +37,6 @@ public class PerilousPathControllerImpl implements PerilousPathController {
      * The period of the timer.
      */
     private static final long PERIOD = 1000;
-    
-    /**
-     * The duration dedicated to the memorization of the mines position.
-     */
-    private static final int MILLIS_MEMORIZATION_MINES = 3000;
-
-    /**
-     * The duration dedicated to the visualization of the mine's explosion.
-     */
-    private static final int MILLIS_VISUALIZATION_EXPLOSION = 1000;
 
     private final PerilousPathModel model;
     private final PerilousPathFxImpl view;
