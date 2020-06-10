@@ -16,6 +16,11 @@ public interface SizeCountModel {
      * @return true if the answer is correct false otherwise
      */
     boolean isCorrectAnswer(String answer);
+    
+    /**
+     * Add points at the score of the game
+     */
+    void addPoint();
 
     /**
      * Get the random operations that compose the game.

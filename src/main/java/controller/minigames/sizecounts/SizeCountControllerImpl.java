@@ -46,6 +46,7 @@ public class SizeCountControllerImpl implements SizeCountController {
     public void newAttempt(final String answer) {
         Objects.requireNonNull(answer, "answer can't be null");
         if (this.model.isCorrectAnswer(answer)) {
+            this.model.addPoint();
             this.view.showCorrectAnswer();
         } else {
             this.view.showWrongAnswer();

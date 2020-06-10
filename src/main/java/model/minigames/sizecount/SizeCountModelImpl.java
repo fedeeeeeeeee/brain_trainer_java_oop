@@ -142,12 +142,17 @@ public class SizeCountModelImpl implements SizeCountModel {
     @Override
     public boolean isCorrectAnswer(final String answer) {
         Objects.requireNonNull(answer, "answer can't be null");
-        if (answer.equals(SAME_ANSWER) && this.same
-                || this.maxOperation.isPresent() && answer.equals(this.maxOperation.get().toString())) {
-            this.scoreModel.addPoint();
-            return true;
-        }
-        return false;
+        return answer.equals(SAME_ANSWER) && this.same
+               || this.maxOperation.isPresent() && answer.equals(this.maxOperation.get().toString());
+           
+    }
+    
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void addPoint() {
+        this.scoreModel.addPoint();
     }
 
     /**
