@@ -66,11 +66,4 @@ class ColorValuesIteratorTest {
         assertThrows(IllegalArgumentException.class, () -> new ColorValuesIteratorImpl(0, calculator));
         assertThrows(IllegalArgumentException.class, () -> new ColorValuesIteratorImpl(-5, calculator));
     }
-
-    @Test
-    public void testNullPointerException() {
-        final ComputeDifficultyValue difficultyValue = new ComputeDifficultyValueImpl(DifficultyLevel.EASY);
-        this.size = difficultyValue.getGridSize() * difficultyValue.getGridSize();
-        assertThrows(NullPointerException.class, () -> new ColorValuesIteratorImpl(this.size, null));
-    }
 }
