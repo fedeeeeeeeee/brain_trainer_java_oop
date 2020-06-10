@@ -14,6 +14,21 @@ import view.controllers.minigames.perilouspath.PerilousPathFxImpl;
 public class PerilousPathControllerImpl implements PerilousPathController {
 
     /**
+     * The game's duration.
+     */
+    private static final int SECONDS = 30;
+    
+    /**
+     * The delay of the timer.
+     */
+    private static final long DELAY = 0;
+    
+    /**
+     * The period of the timer.
+     */
+    private static final long PERIOD = 1000;
+    
+    /**
      * The duration dedicated to the memorization of the mines position.
      */
     private static final int MILLIS_MEMORIZATION_MINES = 3000;
@@ -43,7 +58,7 @@ public class PerilousPathControllerImpl implements PerilousPathController {
         this.model = new PerilousPathModelImpl(difficultyLevel);
         this.view = perilousPathFx;
         this.timer = new Timer();
-        this.gameTimer = new GameTimer(this.model.getSeconds(), this);
+        this.gameTimer = new GameTimer(SECONDS, this);
         this.timeFinish = false;
     }
 
@@ -116,8 +131,8 @@ public class PerilousPathControllerImpl implements PerilousPathController {
      */
     @Override
     public void startTimer() {
-        this.timer.schedule(this.gameTimer, 0, 1000);
-        this.view.setInitialSeconds(this.model.getSeconds());
+        this.timer.schedule(this.gameTimer, DELAY, PERIOD);
+        this.view.setInitialSeconds(SECONDS);
     }
 
     /**

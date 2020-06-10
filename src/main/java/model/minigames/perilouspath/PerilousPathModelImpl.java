@@ -18,11 +18,6 @@ import utility.Pair;
 public class PerilousPathModelImpl implements PerilousPathModel {
 
     /**
-     * The Perilous Path's duration.
-     */
-    private static final int SECONDS = 30;
-
-    /**
      * The Perilous Path's base point.
      */
     private static final int BASE_POINT = 10;
@@ -136,14 +131,6 @@ public class PerilousPathModelImpl implements PerilousPathModel {
     @Override
     public Set<Mine> getMines() {
         return this.mines;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public int getSeconds() {
-        return SECONDS;
     }
 
     /**
