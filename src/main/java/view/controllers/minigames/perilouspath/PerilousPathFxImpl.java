@@ -101,6 +101,7 @@ public class PerilousPathFxImpl extends AbstractMiniGameControllerFx implements 
         this.buttons = new HashMap<>();
         this.progressBar.setStyle("-fx-accent: rgb(158,61,100)");
         this.controller.startGame();
+        this.controller.startTimer();
     }
 
     /**
