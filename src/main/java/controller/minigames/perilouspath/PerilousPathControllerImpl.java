@@ -27,12 +27,12 @@ public class PerilousPathControllerImpl implements PerilousPathController {
      * The duration dedicated to the visualization of the mine's explosion.
      */
     private static final int MILLIS_VISUALIZATION_EXPLOSION = 1000;
-    
+
     /**
      * The delay of the timer.
      */
     private static final long DELAY = 0;
-    
+
     /**
      * The period of the timer.
      */
@@ -149,6 +149,7 @@ public class PerilousPathControllerImpl implements PerilousPathController {
      */
     @Override
     public void timeFinish() {
+        this.timer.cancel();
         this.view.showEndGame(this.model.getFinalScore());
     }
 }
