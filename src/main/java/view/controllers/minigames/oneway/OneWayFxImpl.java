@@ -136,7 +136,7 @@ public class OneWayFxImpl extends AbstractMiniGameControllerFx implements OneWay
      * {@inheritDoc}
      */
     @Override
-    public void drawArrow(final List<Direction> steps) {
+    public void drawArrows(final List<Direction> steps) {
         raiseException(steps.isEmpty(), ILLEGAL_ARGUMENT_EXCEPTION_SUPPLIER);
         IntStream.range(0, steps.size()).forEach(i -> {
             final Button btn = new Button();

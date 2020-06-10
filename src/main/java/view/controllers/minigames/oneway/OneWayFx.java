@@ -16,7 +16,7 @@ public interface OneWayFx {
      * @param steps
      *         the steps to turn into arrows
      */
-    void drawArrow(List<Direction> steps);
+    void drawArrows(List<Direction> steps);
 
     /**
      * At each level, update the arrows to draw.

@@ -77,7 +77,7 @@ public class OneWayControllerImpl implements OneWayController {
     public void firstInit() {
         this.view.drawGrid(this.model.getGridSize());
         this.model.oneWayInit();
-        this.view.drawArrow(this.model.getSteps());
+        this.view.drawArrows(this.model.getSteps());
         this.view.updateView(this.model.getInitialPosition());
     }
 
