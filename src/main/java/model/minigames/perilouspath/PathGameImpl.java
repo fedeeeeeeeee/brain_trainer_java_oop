@@ -17,14 +17,14 @@ public final class PathGameImpl implements PathGame {
     private Pair<Integer, Integer> start;
     private Pair<Integer, Integer> finish;
     private LinkedList<Pair<Integer, Integer>> path;  //NOPMD
-
     /**
      * Private constructor of {@link PathGame}.
      */
     private PathGameImpl() { }
 
     private static Pair<Integer, Integer> getRandomPosition(final int size) {
-        return new Pair<>(new Random().nextInt(size), new Random().nextInt(size));
+        final Random random = new Random();
+        return new Pair<>(random.nextInt(size), random.nextInt(size));
     }
 
     private static boolean adjacent(final Pair<Integer, Integer> position1, final Pair<Integer, Integer> position2) {
