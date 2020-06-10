@@ -20,6 +20,11 @@ import model.minigames.sizecount.IntegerOperation;
 import view.SceneType;
 import view.controllers.minigames.AbstractMiniGameControllerFx;
 
+/**
+ * 
+ * The implementation of {@link SizeCountFx}
+ *
+ */
 public class SizeCountFxImpl extends AbstractMiniGameControllerFx implements SizeCountFx {
 
     /**

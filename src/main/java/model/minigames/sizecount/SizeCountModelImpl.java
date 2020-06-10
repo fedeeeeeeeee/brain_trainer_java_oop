@@ -15,6 +15,11 @@ import model.score.ScoreModel;
 import model.score.ScoreModelImpl;
 import utility.Pair;
 
+/**
+ * 
+ * The implementation of {@link SizeCountModel}
+ *
+ */
 public class SizeCountModelImpl implements SizeCountModel {
     /**
      * The upper bound of the {@link IntegerOperation} for each level.
@@ -86,30 +91,30 @@ public class SizeCountModelImpl implements SizeCountModel {
     }
 
     private void generateOperation(final Operations opType) {
-        IntegerOperation operation = null;
+        Optional<IntegerOperation> operation = Optional.empty();
         switch (opType) {
         case ADDICTION:
-            operation = this.opFactory.addiction(NUM_OPERAND, this.upperBound);
+            operation = Optional.of(this.opFactory.addiction(NUM_OPERAND, this.upperBound));
             break;
         case SUBTRACTION:
-            operation = this.opFactory.subtraction(NUM_OPERAND, this.upperBound);
+            operation = Optional.of(this.opFactory.subtraction(NUM_OPERAND, this.upperBound));
             break;
         case DIVISION:
-            operation = this.opFactory.division(NUM_OPERAND, this.upperBound);
+            operation = Optional.of(this.opFactory.division(NUM_OPERAND, this.upperBound));
             break;
         case MULTIPLICATION:
-            operation = this.opFactory.multiplication(NUM_OPERAND, this.upperBound);
+            operation = Optional.of(this.opFactory.multiplication(NUM_OPERAND, this.upperBound));
             break;
         case SUM_EXPRESSION:
-            operation = this.opFactory.sumExpression(this.numOperationsExpr, NUM_OPERAND, this.upperBound);
+            operation = Optional.of(this.opFactory.sumExpression(this.numOperationsExpr, NUM_OPERAND, this.upperBound));
             break;
         case SUB_EXPRESSION:
-            operation = this.opFactory.subExpression(this.numOperationsExpr, NUM_OPERAND, this.upperBound);
+            operation = Optional.of(this.opFactory.subExpression(this.numOperationsExpr, NUM_OPERAND, this.upperBound));
             break;
         default:
             break;
         }
-        this.operations.add(new Pair<>(operation, operation.getResult()));
+        this.operations.add(new Pair<>(operation.get(), operation.get().getResult()));
     }
 
     private void computeAnswer() {

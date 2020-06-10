@@ -1,6 +1,7 @@
 package controller.minigames.sizecounts;
 
 import java.util.Objects;
+
 import java.util.Timer;
 
 import model.minigames.sizecount.SizeCountModel;
@@ -8,6 +9,11 @@ import model.minigames.sizecount.SizeCountModelImpl;
 import timer.GameTimer;
 import view.controllers.minigames.sizecount.SizeCountFxImpl;
 
+/**
+ * 
+ * The implementation of {@link SizeCountController}
+ *
+ */
 public class SizeCountControllerImpl implements SizeCountController {
 
     /**
