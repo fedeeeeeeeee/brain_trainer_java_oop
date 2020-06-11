@@ -14,6 +14,7 @@ public class MineImpl implements Mine {
      * Constructor of {@link Mine}.
      * 
      * @param mine
+     *          the mine's position
      */
     public MineImpl(final Pair<Integer, Integer> mine) {
         this.mine = mine;

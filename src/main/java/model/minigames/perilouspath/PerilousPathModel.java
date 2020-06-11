@@ -13,7 +13,10 @@ public interface PerilousPathModel {
      * Check if the user can hit this position.
      * 
      * @param row
+     *          the step's position row
      * @param col
+     *          the step's position col
+     *
      * @return true if user can hit this coordinate, false otherwise
      */
     boolean hit(int row, int col);
