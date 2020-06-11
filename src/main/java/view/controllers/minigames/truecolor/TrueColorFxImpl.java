@@ -14,10 +14,16 @@ import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.geometry.Insets;
 import javafx.scene.control.Button;
 import javafx.scene.effect.DropShadow;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundFill;
+import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
 import javafx.util.Duration;
 import model.minigames.truecolor.Colors;
 import utility.Pair;
@@ -29,13 +35,8 @@ import view.controllers.minigames.AbstractMiniGameControllerFx;
  */
 public class TrueColorFxImpl extends AbstractMiniGameControllerFx implements TrueColorFx {
 
-    private static final String TXTFILL = "-fx-text-fill: ";
-    private static final String BACKGROUND = "-fx-background-color: ";
-    private static final String FONT = "-fx-font-size: ";
     private static final String BORDERC = "-fx-border-color: ";
     private static final String BORDERW = "-fx-border-width: ";
-    private static final String NOFOCUS = "-fx-focus-color: transparent";
-    private static final String RADIUS = "-fx-background-radius: ";
     private static final String MEANCOLOR = "randomMeaningColor";
     private static final String TRUECOLOR = "randomTrueColor";
     private static final int SHADOWX = 4;
@@ -53,7 +54,7 @@ public class TrueColorFxImpl extends AbstractMiniGameControllerFx implements Tru
     private VBox vBoxId;
 
     private final EventHandler<ActionEvent> event = (e) -> {
-        this.currentAnswer.setStyle(BORDERC + "#000000;" + BORDERW + "0.3px;" + NOFOCUS);
+        this.currentAnswer.setStyle(BORDERC + "#000000;" + BORDERW + "0.3px;");
     };
 
     @FXML
@@ -105,8 +106,8 @@ public class TrueColorFxImpl extends AbstractMiniGameControllerFx implements Tru
         final int size = listBtn.size();
         for (int i = 0; i < size; i++) {
             listBtn.get(i).setText(listColor.get(i).getX().toString());
-            listBtn.get(i).setStyle(TXTFILL + listColor.get(i).getY().getName() + ";" + FONT + "35;" + RADIUS + "5em");
-
+            listBtn.get(i).setTextFill(Color.valueOf(listColor.get(i).getY().getName()));
+            listBtn.get(i).setFont(Font.font(35));
             if (this.meaningColorBtnList == listBtn) {
                 listBtn.get(i).setEffect(this.shadow);
             }
@@ -122,7 +123,8 @@ public class TrueColorFxImpl extends AbstractMiniGameControllerFx implements Tru
         final int size = this.trueColorBtnList.size();
         for (int i = 0; i < size; i++) {
             this.trueColorBtnList.get(i).setText("");
-            this.trueColorBtnList.get(i).setStyle(BACKGROUND + list.get(i).getY().getName());
+            this.trueColorBtnList.get(i).setBackground(
+                    new Background(new BackgroundFill(Color.valueOf(list.get(i).getY().getName()), CornerRadii.EMPTY, Insets.EMPTY)));
         }
     }
 
