@@ -29,159 +29,160 @@ import view.controllers.minigames.AbstractMiniGameControllerFx;
  */
 public class TrueColorFxImpl extends AbstractMiniGameControllerFx implements TrueColorFx {
 
-	private static final String TXTFILL = "-fx-text-fill: ";
-	private static final String BACKGROUND = "-fx-background-color: ";
-	private static final String FONT = "-fx-font-size: ";
-	private static final String BORDERC = "-fx-border-color: ";
-	private static final String BORDERW = "-fx-border-width: ";
-	private static final String NOFOCUS = "-fx-focus-color: transparent";
-	private static final String RADIUS = "-fx-background-radius: ";
-	private static final String MEANCOLOR = "randomMeaningColor";
-	private static final String TRUECOLOR = "randomTrueColor";
-	private static final int SHADOWX= 4;
-	private static final int SHADOWY= 6;
-	private TrueColorController trueColorController;
-	private List<Button> meaningColorBtnList;
-	private List<Button> trueColorBtnList;
-	private int meanColorSize;
-	private int trueColorSize;
-	private Button currentAnswer;
-	private final DropShadow shadow = new DropShadow();
-	
-	@FXML
-	private VBox vBoxId;
+    private static final String TXTFILL = "-fx-text-fill: ";
+    private static final String BACKGROUND = "-fx-background-color: ";
+    private static final String FONT = "-fx-font-size: ";
+    private static final String BORDERC = "-fx-border-color: ";
+    private static final String BORDERW = "-fx-border-width: ";
+    private static final String NOFOCUS = "-fx-focus-color: transparent";
+    private static final String RADIUS = "-fx-background-radius: ";
+    private static final String MEANCOLOR = "randomMeaningColor";
+    private static final String TRUECOLOR = "randomTrueColor";
+    private static final int SHADOWX = 4;
+    private static final int SHADOWY = 6;
+    private static final int SIZE_BUTTON = 300;
+    private TrueColorController trueColorController;
+    private List<Button> meaningColorBtnList;
+    private List<Button> trueColorBtnList;
+    private int meanColorSize;
+    private int trueColorSize;
+    private Button currentAnswer;
+    private final DropShadow shadow = new DropShadow();
 
-	private final EventHandler<ActionEvent> event = (e) -> {
-		this.currentAnswer.setStyle(BORDERC + "#000000;" + BORDERW + "0.3px;" + NOFOCUS);
-	};
-	
-	@FXML
-	private void buttonClicked(final MouseEvent event) throws IOException { //NOPMD
-		final String selectedAnswer = ((Button) event.getSource()).getText();
-		this.currentAnswer = (Button) event.getSource();
-		this.trueColorController.check(selectedAnswer);
-	}
+    @FXML
+    private VBox vBoxId;
 
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public void initGame() {
-		this.trueColorController = new TrueColorControllerImpl(this.getController().getDifficultyLevel(), this);
-		this.addButtons();
-		this.setDropShadow();
-		this.trueColorController.startTimer();
-		this.trueColorController.startGame();
-	}
-	
-	private void setDropShadow() {
-		this.shadow.setOffsetX(SHADOWX);
-		this.shadow.setOffsetY(SHADOWY);
-	}
+    private final EventHandler<ActionEvent> event = (e) -> {
+        this.currentAnswer.setStyle(BORDERC + "#000000;" + BORDERW + "0.3px;" + NOFOCUS);
+    };
 
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public void next() {
-		this.trueColorController.refresh();
-		this.trueColorController.startGame();
-	}
+    @FXML
+    private void buttonClicked(final MouseEvent event) throws IOException { // NOPMD
+        final String selectedAnswer = ((Button) event.getSource()).getText();
+        this.currentAnswer = (Button) event.getSource();
+        this.trueColorController.check(selectedAnswer);
+    }
 
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public void setButtons(final Map<String, List<Pair<Colors, Colors>>> colorMap) {
-		Objects.requireNonNull(colorMap, "Map of Random Color is null");
-		this.setStyleButton(colorMap.get(MEANCOLOR), this.meaningColorBtnList);
-		this.setStyleButton(colorMap.get(TRUECOLOR), this.trueColorBtnList);
-	}
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void initGame() {
+        this.trueColorController = new TrueColorControllerImpl(this.getController().getDifficultyLevel(), this);
+        this.addButtons();
+        this.setDropShadow();
+        this.trueColorController.startTimer();
+        this.trueColorController.startGame();
+    }
 
-	private void setStyleButton(final List<Pair<Colors, Colors>> listColor, final List<Button> listBtn) {
-		Objects.requireNonNull(listColor);
-		Objects.requireNonNull(listBtn);
-		final int size = listBtn.size();
-		for (int i = 0; i < size; i++) {
-			listBtn.get(i).setText(listColor.get(i).getX().toString());
-			listBtn.get(i).setStyle(TXTFILL + listColor.get(i).getY().getName() + ";" + FONT + "35;"+ RADIUS+"5em");
-			
-			if(this.meaningColorBtnList == listBtn) {
-				listBtn.get(i).setEffect(this.shadow);
-			}
-		}
-	}
-	
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public void alternativeSetButton(final List<Pair<Colors, Colors>> list) {
-		Objects.requireNonNull(list);
-		final int size = this.trueColorBtnList.size();
-		for (int i = 0; i < size; i++) {
-			this.trueColorBtnList.get(i).setText("");
-			this.trueColorBtnList.get(i).setStyle(BACKGROUND + list.get(i).getY().getName());
-		}
-	}
-	
-	private void addButtons() {
-		this.meaningColorBtnList = new LinkedList<>();
-		this.trueColorBtnList = new LinkedList<>();
-		this.addButtonGeneral(this.meaningColorBtnList, this.meanColorSize);
-		this.addButtonGeneral(this.trueColorBtnList, this.trueColorSize);
-	}
-	
-	private void addButtonGeneral(final List<Button> btnList, final Integer size) {
-		for (int i = 0; i < size; i++) {
-			final Button button = new Button();
-			button.setPrefSize(300, 100);
-			btnList.add(button);
-			this.vBoxId.getChildren().add(button);
-		}
-	}
-	
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public void setSizeBtnList(final Map<String, List<Pair<Colors, Colors>>> colorMap) {
-		this.meanColorSize = colorMap.get(MEANCOLOR).size();
-		this.trueColorSize = colorMap.get(TRUECOLOR).size();
-	}
+    private void setDropShadow() {
+        this.shadow.setOffsetX(SHADOWX);
+        this.shadow.setOffsetY(SHADOWY);
+    }
 
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public void showEndGame(final int finalScore) {
-		Platform.runLater(() -> {
-			this.getController().updateProgress(finalScore);
-			this.getView().setHandleDataScene(SceneType.END_GAME.getFilePath());
-		});
-	}
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void next() {
+        this.trueColorController.refresh();
+        this.trueColorController.startGame();
+    }
 
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public void stopTimer() {
-		this.trueColorController.stopTimer();
-	}
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void setButtons(final Map<String, List<Pair<Colors, Colors>>> colorMap) {
+        Objects.requireNonNull(colorMap, "Map of Random Color is null");
+        this.setStyleButton(colorMap.get(MEANCOLOR), this.meaningColorBtnList);
+        this.setStyleButton(colorMap.get(TRUECOLOR), this.trueColorBtnList);
+    }
 
-	private void animation() {
-		final Timeline timeline = new Timeline();
-		final KeyFrame kf = new KeyFrame(Duration.millis(300), event);
-		timeline.getKeyFrames().add(kf);
-		timeline.play();
-	}
-	
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public void showAnswer(boolean bool) {
-		this.currentAnswer.setStyle(BORDERW + "2px;"+ BORDERC + ( bool ? "#66FF66" : "#FF0000"));
-		this.animation();
-	}
+    private void setStyleButton(final List<Pair<Colors, Colors>> listColor, final List<Button> listBtn) {
+        Objects.requireNonNull(listColor);
+        Objects.requireNonNull(listBtn);
+        final int size = listBtn.size();
+        for (int i = 0; i < size; i++) {
+            listBtn.get(i).setText(listColor.get(i).getX().toString());
+            listBtn.get(i).setStyle(TXTFILL + listColor.get(i).getY().getName() + ";" + FONT + "35;" + RADIUS + "5em");
+
+            if (this.meaningColorBtnList == listBtn) {
+                listBtn.get(i).setEffect(this.shadow);
+            }
+        }
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void alternativeSetButton(final List<Pair<Colors, Colors>> list) {
+        Objects.requireNonNull(list);
+        final int size = this.trueColorBtnList.size();
+        for (int i = 0; i < size; i++) {
+            this.trueColorBtnList.get(i).setText("");
+            this.trueColorBtnList.get(i).setStyle(BACKGROUND + list.get(i).getY().getName());
+        }
+    }
+
+    private void addButtons() {
+        this.meaningColorBtnList = new LinkedList<>();
+        this.trueColorBtnList = new LinkedList<>();
+        this.addButtonGeneral(this.meaningColorBtnList, this.meanColorSize);
+        this.addButtonGeneral(this.trueColorBtnList, this.trueColorSize);
+    }
+
+    private void addButtonGeneral(final List<Button> btnList, final Integer size) {
+        for (int i = 0; i < size; i++) {
+            final Button button = new Button();
+            button.setPrefSize(SIZE_BUTTON, SIZE_BUTTON / 3);
+            btnList.add(button);
+            this.vBoxId.getChildren().add(button);
+        }
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void setSizeBtnList(final Map<String, List<Pair<Colors, Colors>>> colorMap) {
+        this.meanColorSize = colorMap.get(MEANCOLOR).size();
+        this.trueColorSize = colorMap.get(TRUECOLOR).size();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void showEndGame(final int finalScore) {
+        Platform.runLater(() -> {
+            this.getController().updateProgress(finalScore);
+            this.getView().setHandleDataScene(SceneType.END_GAME.getFilePath());
+        });
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void stopTimer() {
+        this.trueColorController.stopTimer();
+    }
+
+    private void animation() {
+        final Timeline timeline = new Timeline();
+        final KeyFrame kf = new KeyFrame(Duration.millis(300), event);
+        timeline.getKeyFrames().add(kf);
+        timeline.play();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void showAnswer(final boolean bool) {
+        this.currentAnswer.setStyle(BORDERW + "2px;" + BORDERC + (bool ? "#66FF66" : "#FF0000"));
+        this.animation();
+    }
 }

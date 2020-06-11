@@ -6,17 +6,46 @@ package model.minigames.truecolor;
  */
 public enum Colors {
 
-	BLACK("black"),
+    /**
+     * Black color for text button.
+     */
+    BLACK("black"),
+
+    /**
+     * Blue color for text button.
+     */
     BLUE("blue"),
+
+    /**
+     * Yellow color for text button.
+     */
     YELLOW("yellow"),
+
+    /**
+     * Red color for text button.
+     */
     RED("red"),
-    
+
+    /**
+     * Green color for text button.
+     */
     GREEN("green"),
+
+    /**
+     * Pink color for text button.
+     */
     PINK("pink"),
-    
-    BROWN("brown"),
+
+    /**
+     * Brown color for text button.
+     */
+    BROWN("brown"), 
+
+    /**
+     * Orange color for text button.
+     */
     ORANGE("orange");
-    
+
     private String color;
 
     Colors(final String color) {

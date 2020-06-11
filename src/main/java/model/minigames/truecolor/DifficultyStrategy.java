@@ -6,20 +6,20 @@ import java.util.Map;
 import utility.Pair;
 
 /**
- * Interface DifficultyStrategy
+ * Interface DifficultyStrategy.
  *
  */
 public interface DifficultyStrategy {
 
-	/**
-	 * Initialize the random color map
-	 */
-	void initMap();
+    /**
+     * Initialize the random color map.
+     */
+    void initMap();
 
-	/**
-	 * Getter for the random color map
-	 * 
-	 * @return the created random color map
-	 */
-	Map<String, List<Pair<Colors, Colors>>> getRandomColorMap();
+    /**
+     * Getter for the random color map.
+     * 
+     * @return the created random color map
+     */
+    Map<String, List<Pair<Colors, Colors>>> getRandomColorMap();
 }

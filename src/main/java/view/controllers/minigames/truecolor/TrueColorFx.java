@@ -8,46 +8,42 @@ import utility.Pair;
 
 /**
  * 
- * Interface of TrueColorFx
+ * Interface of TrueColorFx.
  *
  */
 public interface TrueColorFx {
 
-	/**
-	 * Reload the components of the scene.
-	 * 
-	 */
-	void next();
+    /**
+     * Reload the components of the scene.
+     * 
+     */
+    void next();
 
-	/**
-	 * Set a random color and a random textColor to buttons.
-	 * 
-	 * @param colorMap
-	 * 					map with lists of Colors pair
-	 */
-	void setButtons(Map<String, List<Pair<Colors, Colors>>> colorMap);
-	
-	/**
-	 * Set the number of button.
-	 * 
-	 * @param colorMap
-	 * 					map with lists of Colors pair
-	 */
-	void setSizeBtnList(Map<String, List<Pair<Colors, Colors>>> colorMap);
+    /**
+     * Set a random color and a random textColor to buttons.
+     * 
+     * @param colorMap map with lists of Colors pair
+     */
+    void setButtons(Map<String, List<Pair<Colors, Colors>>> colorMap);
 
-	/**
-	 * Set a random color to the buttons background.
-	 * 
-	 * @param randomColor
-	 * 					 list of random color belonging to true color list
-	 */
-	void alternativeSetButton(List<Pair<Colors, Colors>> randomColor);
+    /**
+     * Set the number of button.
+     * 
+     * @param colorMap map with lists of Colors pair
+     */
+    void setSizeBtnList(Map<String, List<Pair<Colors, Colors>>> colorMap);
 
-	/**
-	 * Show the answer coloring the button's border
-	 * 
-	 * @param bool
-	 * 				that identify if the answer is correct or not.
-	 */
-	void showAnswer(boolean bool);
+    /**
+     * Set a random color to the buttons background.
+     * 
+     * @param randomColor list of random color belonging to true color list
+     */
+    void alternativeSetButton(List<Pair<Colors, Colors>> randomColor);
+
+    /**
+     * Show the answer coloring the button's border.
+     * 
+     * @param bool that identify if the answer is correct or not.
+     */
+    void showAnswer(boolean bool);
 }
