@@ -31,7 +31,7 @@ import view.controllers.minigames.AbstractMiniGameControllerFx;
 /**
  * Implementation of {@link PerilousPathFx}.
  */
-public class PerilousPathFxImpl extends AbstractMiniGameControllerFx implements PerilouPathFx {
+public class PerilousPathFxImpl extends AbstractMiniGameControllerFx implements PerilousPathFx {
 
     /**
      * Mines memorization instruction.

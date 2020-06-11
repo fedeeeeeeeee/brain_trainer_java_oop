@@ -5,8 +5,8 @@ import java.util.Timer;
 import model.DifficultyLevel;
 import model.minigames.perilouspath.PerilousPathModel;
 import model.minigames.perilouspath.PerilousPathModelImpl;
-import timer.GameTimer;
 import view.controllers.minigames.perilouspath.PerilousPathFxImpl;
+import timer.GameTimer;
 
 /**
  * Implementation of {@link PerilousPathController}.

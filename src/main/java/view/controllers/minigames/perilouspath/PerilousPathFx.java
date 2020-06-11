@@ -8,7 +8,7 @@ import utility.Pair;
 /**
  * Represents the game's view.
  */
-public interface PerilouPathFx {
+public interface PerilousPathFx {
 
     /**
      * Draw the grid.
