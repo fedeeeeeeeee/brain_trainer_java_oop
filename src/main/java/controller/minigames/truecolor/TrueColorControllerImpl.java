@@ -98,7 +98,7 @@ public class TrueColorControllerImpl implements TrueColorController {
 	@Override
 	public void startTimer() {
 		this.timer.schedule(this.gameTimer, 0, 1000);
-		this.view.setInitialSeconds(model.getSecondsGame());
+		this.view.setInitialSeconds(this.gameTimer.getInitialSeconds());
 	}
 
 	/**
