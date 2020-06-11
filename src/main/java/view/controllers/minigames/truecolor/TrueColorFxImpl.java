@@ -41,6 +41,7 @@ public class TrueColorFxImpl extends AbstractMiniGameControllerFx implements Tru
     private static final String TRUECOLOR = "randomTrueColor";
     private static final int SHADOWX = 4;
     private static final int SHADOWY = 6;
+    private static final int FONT = 35;
     private static final int SIZE_BUTTON = 300;
     private TrueColorController trueColorController;
     private List<Button> meaningColorBtnList;
@@ -64,6 +65,48 @@ public class TrueColorFxImpl extends AbstractMiniGameControllerFx implements Tru
         this.trueColorController.check(selectedAnswer);
     }
 
+    private void setDropShadow() {
+        this.shadow.setOffsetX(SHADOWX);
+        this.shadow.setOffsetY(SHADOWY);
+    }
+
+    private void setStyleButton(final List<Pair<Colors, Colors>> listColor, final List<Button> listBtn) {
+        Objects.requireNonNull(listColor);
+        Objects.requireNonNull(listBtn);
+        final int size = listBtn.size();
+        for (int i = 0; i < size; i++) {
+            listBtn.get(i).setText(listColor.get(i).getX().toString());
+            listBtn.get(i).setTextFill(Color.valueOf(listColor.get(i).getY().getName()));
+            listBtn.get(i).setFont(Font.font(FONT));
+            if (this.meaningColorBtnList == listBtn) {
+                listBtn.get(i).setEffect(this.shadow);
+            }
+        }
+    }
+
+    private void prepareButtons() {
+        this.meaningColorBtnList = new LinkedList<>();
+        this.trueColorBtnList = new LinkedList<>();
+        this.addButton(this.meaningColorBtnList, this.meanColorSize);
+        this.addButton(this.trueColorBtnList, this.trueColorSize);
+    }
+
+    private void addButton(final List<Button> btnList, final Integer size) {
+        for (int i = 0; i < size; i++) {
+            final Button button = new Button();
+            button.setPrefSize(SIZE_BUTTON, SIZE_BUTTON / 3);
+            btnList.add(button);
+            this.vBoxId.getChildren().add(button);
+        }
+    }
+ 
+    private void animation() {
+        final Timeline timeline = new Timeline();
+        final KeyFrame kf = new KeyFrame(Duration.millis(300), event);
+        timeline.getKeyFrames().add(kf);
+        timeline.play();
+    }
+
     /**
      * {@inheritDoc}
      */
@@ -74,11 +117,6 @@ public class TrueColorFxImpl extends AbstractMiniGameControllerFx implements Tru
         this.prepareButtons();
         this.trueColorController.startTimer();
         this.trueColorController.startGame();
-    }
-
-    private void setDropShadow() {
-        this.shadow.setOffsetX(SHADOWX);
-        this.shadow.setOffsetY(SHADOWY);
     }
 
     /**
@@ -100,20 +138,6 @@ public class TrueColorFxImpl extends AbstractMiniGameControllerFx implements Tru
         this.setStyleButton(colorMap.get(TRUECOLOR), this.trueColorBtnList);
     }
 
-    private void setStyleButton(final List<Pair<Colors, Colors>> listColor, final List<Button> listBtn) {
-        Objects.requireNonNull(listColor);
-        Objects.requireNonNull(listBtn);
-        final int size = listBtn.size();
-        for (int i = 0; i < size; i++) {
-            listBtn.get(i).setText(listColor.get(i).getX().toString());
-            listBtn.get(i).setTextFill(Color.valueOf(listColor.get(i).getY().getName()));
-            listBtn.get(i).setFont(Font.font(35));
-            if (this.meaningColorBtnList == listBtn) {
-                listBtn.get(i).setEffect(this.shadow);
-            }
-        }
-    }
-
     /**
      * {@inheritDoc}
      */
@@ -125,22 +149,6 @@ public class TrueColorFxImpl extends AbstractMiniGameControllerFx implements Tru
             this.trueColorBtnList.get(i).setText("");
             this.trueColorBtnList.get(i).setBackground(
                     new Background(new BackgroundFill(Color.valueOf(list.get(i).getY().getName()), CornerRadii.EMPTY, Insets.EMPTY)));
-        }
-    }
-
-    private void prepareButtons() {
-        this.meaningColorBtnList = new LinkedList<>();
-        this.trueColorBtnList = new LinkedList<>();
-        this.addButton(this.meaningColorBtnList, this.meanColorSize);
-        this.addButton(this.trueColorBtnList, this.trueColorSize);
-    }
-
-    private void addButton(final List<Button> btnList, final Integer size) {
-        for (int i = 0; i < size; i++) {
-            final Button button = new Button();
-            button.setPrefSize(SIZE_BUTTON, SIZE_BUTTON / 3);
-            btnList.add(button);
-            this.vBoxId.getChildren().add(button);
         }
     }
 
@@ -170,13 +178,6 @@ public class TrueColorFxImpl extends AbstractMiniGameControllerFx implements Tru
     @Override
     public void stopTimer() {
         this.trueColorController.stopTimer();
-    }
-
-    private void animation() {
-        final Timeline timeline = new Timeline();
-        final KeyFrame kf = new KeyFrame(Duration.millis(300), event);
-        timeline.getKeyFrames().add(kf);
-        timeline.play();
     }
 
     /**
