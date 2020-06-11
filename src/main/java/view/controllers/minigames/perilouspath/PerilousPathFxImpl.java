@@ -2,11 +2,9 @@ package view.controllers.minigames.perilouspath;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Map.Entry;
 import java.util.Objects;
 import java.util.Set;
 import java.util.function.Function;
-import java.util.stream.Stream;
 
 import controller.minigames.perilouspath.PerilousPathController;
 import controller.minigames.perilouspath.PerilousPathControllerImpl;
@@ -69,7 +67,6 @@ public class PerilousPathFxImpl extends AbstractMiniGameControllerFx implements 
 
     private PerilousPathController controller;
     private Map<Button, Pair<Integer, Integer>> buttons;
-    private Stream<Entry<Button, Pair<Integer, Integer>>> streamButtons;
 
     private final EventHandler<MouseEvent> eventHit = (e) -> {
         final Button bt = (Button) e.getSource();
@@ -122,7 +119,6 @@ public class PerilousPathFxImpl extends AbstractMiniGameControllerFx implements 
                 this.buttons.put(bt, new Pair<>(i, j));
             }
         }
-        this.streamButtons = this.buttons.entrySet().stream();
         this.vBox.setAlignment(Pos.CENTER);
     }
 
@@ -150,8 +146,9 @@ public class PerilousPathFxImpl extends AbstractMiniGameControllerFx implements 
     @Override
     public void showStart(final Pair<Integer, Integer> start) {
         Objects.requireNonNull(start);
-        this.streamButtons.filter(bt -> bt.getValue().equals(start))
-                          .forEach(bt -> bt.getKey().setGraphic(image.apply("start")));
+        this.buttons.entrySet().stream()
+                               .filter(bt -> bt.getValue().equals(start))
+                               .forEach(bt -> bt.getKey().setGraphic(image.apply("start")));
     }
 
     /**
@@ -160,8 +157,9 @@ public class PerilousPathFxImpl extends AbstractMiniGameControllerFx implements 
     @Override
     public void showFinish(final Pair<Integer, Integer> finish) {
         Objects.requireNonNull(finish);
-        this.streamButtons.filter(bt -> bt.getValue().equals(finish))
-                          .forEach(bt -> bt.getKey().setGraphic(image.apply("finish")));
+        this.buttons.entrySet().stream()
+                               .filter(bt -> bt.getValue().equals(finish))
+                               .forEach(bt -> bt.getKey().setGraphic(image.apply("finish")));
     }
 
     /**
@@ -171,10 +169,11 @@ public class PerilousPathFxImpl extends AbstractMiniGameControllerFx implements 
     public void showMines(final Set<Mine> mines) {
         Objects.requireNonNull(mines);
         mines.stream()
-             .forEach(m -> this.streamButtons.filter(bt -> bt.getValue().equals(m.getMinePosition()))
-                                             .forEach(bt -> bt.getKey().setGraphic(image.apply("mine"))));
-        this.streamButtons.forEach(bt -> bt.getKey().setDisable(true));
-        this.streamButtons.forEach(bt -> bt.getKey().setStyle("-fx-opacity: 1"));
+             .forEach(m -> this.buttons.entrySet().stream()
+                                                  .filter(bt -> bt.getValue().equals(m.getMinePosition()))
+                                                  .forEach(bt -> bt.getKey().setGraphic(image.apply("mine"))));
+        this.buttons.entrySet().stream().forEach(bt -> bt.getKey().setDisable(true));
+        this.buttons.entrySet().stream().forEach(bt -> bt.getKey().setStyle("-fx-opacity: 1"));
     }
 
     /**
@@ -182,8 +181,8 @@ public class PerilousPathFxImpl extends AbstractMiniGameControllerFx implements 
      */
     @Override
     public void showStep(final int row, final int col) {
-        this.streamButtons.filter(bt -> bt.getValue().equals(new Pair<>(row, col)))
-                          .forEach(bt -> bt.getKey().setStyle("-fx-background-color: rgb(158,61,100); -fx-border-color: darkred;"));
+        this.buttons.entrySet().stream().filter(bt -> bt.getValue().equals(new Pair<>(row, col))).forEach(
+                bt -> bt.getKey().setStyle("-fx-background-color: rgb(158,61,100); -fx-border-color: darkred;"));
     }
 
     /**
@@ -191,10 +190,11 @@ public class PerilousPathFxImpl extends AbstractMiniGameControllerFx implements 
      */
     @Override
     public void showExplosion(final int row, final int col) {
-        this.streamButtons.filter(bt -> bt.getValue().equals(new Pair<>(row, col)))
+        this.buttons.entrySet().stream()
+                          .filter(bt -> bt.getValue().equals(new Pair<>(row, col)))
                           .forEach(bt -> bt.getKey().setGraphic(image.apply("bang")));
-        this.streamButtons.forEach(bt -> bt.getKey().setDisable(true));
-        this.streamButtons.forEach(bt -> bt.getKey().setStyle("-fx-opacity: 1"));
+        this.buttons.entrySet().stream().forEach(bt -> bt.getKey().setDisable(true));
+        this.buttons.entrySet().stream().forEach(bt -> bt.getKey().setStyle("-fx-opacity: 1"));
     }
 
     /**
@@ -202,8 +202,8 @@ public class PerilousPathFxImpl extends AbstractMiniGameControllerFx implements 
      */
     @Override
     public void restore() {
-        this.streamButtons.forEach(bt -> bt.getKey().setGraphic(null));
-        this.streamButtons.forEach(bt -> bt.getKey().setDisable(false));
+        this.buttons.entrySet().stream().forEach(bt -> bt.getKey().setGraphic(null));
+        this.buttons.entrySet().stream().forEach(bt -> bt.getKey().setDisable(false));
     }
 
     /**
