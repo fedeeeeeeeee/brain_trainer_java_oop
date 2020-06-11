@@ -11,7 +11,7 @@ import view.controllers.minigames.sizecount.SizeCountFxImpl;
 
 /**
  * 
- * The implementation of {@link SizeCountController}
+ * The implementation of {@link SizeCountController}.
  *
  */
 public class SizeCountControllerImpl implements SizeCountController {
@@ -75,6 +75,7 @@ public class SizeCountControllerImpl implements SizeCountController {
      */
     @Override
     public void timeFinish() {
+        this.timer.cancel();
         this.view.showEndGame(this.model.getScore());
     }
 
@@ -93,7 +94,7 @@ public class SizeCountControllerImpl implements SizeCountController {
     @Override
     public void startTimer() {
         this.timer.schedule(this.gameTimer, 0, 1000);
-        this.view.setInitialSeconds(SECONDS);
+        this.view.setInitialSeconds(this.gameTimer.getInitialSeconds());
     }
 
 }

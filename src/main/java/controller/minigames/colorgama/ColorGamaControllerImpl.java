@@ -47,7 +47,7 @@ public final class ColorGamaControllerImpl implements ColorGamaController {
     @Override
     public void startTimer() {
         this.timer.schedule(this.gameTimer, DELAY, PERIOD);
-        this.view.setInitialSeconds(this.model.getDifficultyValue().getSeconds());
+        this.view.setInitialSeconds(this.gameTimer.getInitialSeconds());
     }
 
     @Override
@@ -57,6 +57,7 @@ public final class ColorGamaControllerImpl implements ColorGamaController {
 
     @Override
     public void timeFinish() {
+        this.timer.cancel();
         this.view.showEndGame(this.model.getFinalScore());
     }
 

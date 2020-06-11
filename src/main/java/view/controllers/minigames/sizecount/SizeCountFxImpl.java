@@ -22,7 +22,7 @@ import view.controllers.minigames.AbstractMiniGameControllerFx;
 
 /**
  * 
- * The implementation of {@link SizeCountFx}
+ * The implementation of {@link SizeCountFx}.
  *
  */
 public class SizeCountFxImpl extends AbstractMiniGameControllerFx implements SizeCountFx {

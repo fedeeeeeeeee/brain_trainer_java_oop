@@ -94,6 +94,7 @@ public class OneWayControllerImpl implements OneWayController {
      */
     @Override
     public void timeFinish() {
+        this.timer.cancel();
         this.view.showEndGame(this.model.getFinalScore());
     }
 
@@ -103,7 +104,7 @@ public class OneWayControllerImpl implements OneWayController {
     @Override
     public void startTimer() {
         this.timer.schedule(this.gameTimer, 0, 1000);
-        this.view.setInitialSeconds(this.model.getSeconds());
+        this.view.setInitialSeconds(this.gameTimer.getInitialSeconds());
     }
 
     /**

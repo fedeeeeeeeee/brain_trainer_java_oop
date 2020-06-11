@@ -40,5 +40,7 @@ public abstract class AbstractMiniGameControllerFx extends AbstractSceneControll
         });
     }
 
+    @Override 
+    public abstract void initGame();
 
 }

@@ -131,7 +131,7 @@ public class PerilousPathControllerImpl implements PerilousPathController {
     @Override
     public void startTimer() {
         this.timer.schedule(this.gameTimer, DELAY, PERIOD);
-        this.view.setInitialSeconds(SECONDS);
+        this.view.setInitialSeconds(this.gameTimer.getInitialSeconds());
     }
 
     /**

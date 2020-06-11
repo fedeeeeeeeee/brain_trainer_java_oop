@@ -17,7 +17,7 @@ import utility.Pair;
 
 /**
  * 
- * The implementation of {@link SizeCountModel}
+ * The implementation of {@link SizeCountModel}.
  *
  */
 public class SizeCountModelImpl implements SizeCountModel {
@@ -144,9 +144,9 @@ public class SizeCountModelImpl implements SizeCountModel {
         Objects.requireNonNull(answer, "answer can't be null");
         return answer.equals(SAME_ANSWER) && this.same
                || this.maxOperation.isPresent() && answer.equals(this.maxOperation.get().toString());
-           
+
     }
-    
+
     /**
      * {@inheritDoc}
      */
