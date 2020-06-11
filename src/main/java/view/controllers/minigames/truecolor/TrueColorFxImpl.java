@@ -69,8 +69,8 @@ public class TrueColorFxImpl extends AbstractMiniGameControllerFx implements Tru
     @Override
     public void initGame() {
         this.trueColorController = new TrueColorControllerImpl(this.getController().getDifficultyLevel(), this);
-        this.addButtons();
         this.setDropShadow();
+        this.prepareButtons();
         this.trueColorController.startTimer();
         this.trueColorController.startGame();
     }
@@ -126,14 +126,14 @@ public class TrueColorFxImpl extends AbstractMiniGameControllerFx implements Tru
         }
     }
 
-    private void addButtons() {
+    private void prepareButtons() {
         this.meaningColorBtnList = new LinkedList<>();
         this.trueColorBtnList = new LinkedList<>();
-        this.addButtonGeneral(this.meaningColorBtnList, this.meanColorSize);
-        this.addButtonGeneral(this.trueColorBtnList, this.trueColorSize);
+        this.addButton(this.meaningColorBtnList, this.meanColorSize);
+        this.addButton(this.trueColorBtnList, this.trueColorSize);
     }
 
-    private void addButtonGeneral(final List<Button> btnList, final Integer size) {
+    private void addButton(final List<Button> btnList, final Integer size) {
         for (int i = 0; i < size; i++) {
             final Button button = new Button();
             button.setPrefSize(SIZE_BUTTON, SIZE_BUTTON / 3);
