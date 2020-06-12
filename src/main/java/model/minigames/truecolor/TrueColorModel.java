@@ -32,7 +32,7 @@ public interface TrueColorModel {
      * 
      * @return Map<String, Pair<String, String>> of random color
      */
-    Map<String, List<Pair<Colors, Colors>>> getRandomColorMap();
+    Map<StatusColor, List<Pair<Colors, Colors>>> getRandomColorMap();
 
     /**
      * Get the a boolean in order to call a specific method.

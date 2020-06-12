@@ -1,7 +1,7 @@
 package model.minigames.truecolor;
 
 /**
- * Enum for possible color
+ * Enumeration for possible color
  *
  */
 public enum Colors {

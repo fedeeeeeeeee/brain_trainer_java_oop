@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import model.minigames.truecolor.Colors;
+import model.minigames.truecolor.StatusColor;
 import utility.Pair;
 
 /**
@@ -24,14 +25,14 @@ public interface TrueColorFx {
      * 
      * @param colorMap map with lists of Colors pair
      */
-    void setButtons(Map<String, List<Pair<Colors, Colors>>> colorMap);
+    void setButtons(Map<StatusColor, List<Pair<Colors, Colors>>> colorMap);
 
     /**
      * Set the number of button.
      * 
      * @param colorMap map with lists of Colors pair
      */
-    void setSizeBtnList(Map<String, List<Pair<Colors, Colors>>> colorMap);
+    void setSizeBtnList(Map<StatusColor, List<Pair<Colors, Colors>>> colorMap);
 
     /**
      * Set a random color to the buttons background.

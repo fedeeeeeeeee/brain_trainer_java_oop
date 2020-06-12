@@ -26,11 +26,12 @@ public class TrueColorModelImpl implements TrueColorModel {
      */
     private static final int SECONDS = 30;
     private static final String POS_ANSWER = "YES";
-    private static final String MEANCOLOR = "randomMeaningColor";
-    private static final String TRUECOLOR = "randomTrueColor";
+//    private static final String MEANCOLOR = "randomMeaningColor";
+//    private static final String TRUECOLOR = "randomTrueColor";
     private final ScoreModel score;
     private final DifficultyStrategy difficultySpecific;
-    private Map<String, List<Pair<Colors, Colors>>> randomColorMap = new HashMap<>();
+//    private Map<String, List<Pair<Colors, Colors>>> randomColorMap = new HashMap<>();
+    private Map<StatusColor, List<Pair<Colors, Colors>>> randomColorMap = new HashMap<>();
     private Boolean bool = false;
 
     /**
@@ -71,19 +72,17 @@ public class TrueColorModelImpl implements TrueColorModel {
     @Override
     public boolean matchingMeaningAndInk(final String selectedAnswer) {
         Objects.requireNonNull(selectedAnswer);
-        final List<Pair<Colors, Colors>> randomMeaningColorBtn = this.randomColorMap.get(MEANCOLOR);
-        final List<Pair<Colors, Colors>> randomTrueColorBtn = this.randomColorMap.get(TRUECOLOR);
-        final boolean match = randomMeaningColorBtn.stream()
-                .anyMatch(mean -> randomTrueColorBtn.stream().anyMatch(trueC -> mean.getX().equals(trueC.getY())));
+        final boolean match = this.randomColorMap.get(StatusColor.MEANCOLOR).stream()
+                .anyMatch(mean -> this.randomColorMap.get(StatusColor.TRUECOLOR).stream().anyMatch(trueC -> mean.getX().equals(trueC.getY())));
         final boolean answer = selectedAnswer.contentEquals(POS_ANSWER);
-        return match && answer || !match && !answer ? true : false;
+        return match && answer || !match && !answer;
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public Map<String, List<Pair<Colors, Colors>>> getRandomColorMap() {
+    public Map<StatusColor, List<Pair<Colors, Colors>>> getRandomColorMap() {
         return this.randomColorMap;
     }
 

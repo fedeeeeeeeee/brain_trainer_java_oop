@@ -21,5 +21,6 @@ public interface DifficultyStrategy {
      * 
      * @return the created random color map
      */
-    Map<String, List<Pair<Colors, Colors>>> getRandomColorMap();
+//    Map<String, List<Pair<Colors, Colors>>> getRandomColorMap();
+    Map<StatusColor, List<Pair<Colors, Colors>>> getRandomColorMap();
 }

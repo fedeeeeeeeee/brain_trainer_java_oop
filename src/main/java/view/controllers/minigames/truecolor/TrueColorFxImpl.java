@@ -21,6 +21,7 @@ import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import javafx.util.Duration;
 import model.minigames.truecolor.Colors;
+import model.minigames.truecolor.StatusColor;
 import utility.Pair;
 import view.SceneType;
 import view.controllers.minigames.AbstractMiniGameControllerFx;
@@ -35,8 +36,8 @@ public class TrueColorFxImpl extends AbstractMiniGameControllerFx implements Tru
     private static final String BORDERC = "-fx-border-color: ";
     private static final String BORDERW = "-fx-border-width: ";
     private static final String RADIUS = "-fx-background-radius: ";
-    private static final String MEANCOLOR = "randomMeaningColor";
-    private static final String TRUECOLOR = "randomTrueColor";
+//    private static final String MEANCOLOR = "randomMeaningColor";
+//    private static final String TRUECOLOR = "randomTrueColor";
     private static final int SHADOWX = 4;
     private static final int SHADOWY = 6;
     private static final int FONT = 35;
@@ -130,10 +131,10 @@ public class TrueColorFxImpl extends AbstractMiniGameControllerFx implements Tru
      * {@inheritDoc}
      */
     @Override
-    public void setButtons(final Map<String, List<Pair<Colors, Colors>>> colorMap) {
+    public void setButtons(final Map<StatusColor, List<Pair<Colors, Colors>>> colorMap) {
         Objects.requireNonNull(colorMap, "Map of Random Color is null");
-        this.setStyleButton(colorMap.get(MEANCOLOR), this.meaningColorBtnList);
-        this.setStyleButton(colorMap.get(TRUECOLOR), this.trueColorBtnList);
+        this.setStyleButton(colorMap.get(StatusColor.MEANCOLOR), this.meaningColorBtnList);
+        this.setStyleButton(colorMap.get(StatusColor.TRUECOLOR), this.trueColorBtnList);
     }
 
     /**
@@ -153,9 +154,9 @@ public class TrueColorFxImpl extends AbstractMiniGameControllerFx implements Tru
      * {@inheritDoc}
      */
     @Override
-    public void setSizeBtnList(final Map<String, List<Pair<Colors, Colors>>> colorMap) {
-        this.meanColorSize = colorMap.get(MEANCOLOR).size();
-        this.trueColorSize = colorMap.get(TRUECOLOR).size();
+    public void setSizeBtnList(final Map<StatusColor, List<Pair<Colors, Colors>>> colorMap) {
+        this.meanColorSize = colorMap.get(StatusColor.MEANCOLOR).size();
+        this.trueColorSize = colorMap.get(StatusColor.TRUECOLOR).size();
     }
 
     /**

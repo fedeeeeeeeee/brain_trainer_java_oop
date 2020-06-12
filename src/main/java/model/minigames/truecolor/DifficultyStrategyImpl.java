@@ -15,13 +15,13 @@ import utility.Pair;
  */
 public class DifficultyStrategyImpl implements DifficultyStrategy {
 
-    private static final String MEANCOLOR = "randomMeaningColor";
-    private static final String TRUECOLOR = "randomTrueColor";
+//    private static final String MEANCOLOR = "randomMeaningColor";
+//    private static final String TRUECOLOR = "randomTrueColor";
     private List<Colors> colorList;
     private Integer numberMeaningColorButton;
     private Integer numberTrueColorButton;
-    private final Map<String, List<Pair<Colors, Colors>>> randomColorMap;
-
+    private final Map<StatusColor, List<Pair<Colors, Colors>>> randomColorMap;
+    
     /**
      * Constructor of {@link DifficultyStrategy}.
      * 
@@ -44,8 +44,8 @@ public class DifficultyStrategyImpl implements DifficultyStrategy {
     }
 
     private void createRandomColorMap() {
-        this.randomColorMap.put(MEANCOLOR, this.createRandomColorList(numberMeaningColorButton));
-        this.randomColorMap.put(TRUECOLOR, this.createRandomColorList(numberTrueColorButton));
+        this.randomColorMap.put(StatusColor.MEANCOLOR, this.createRandomColorList(numberMeaningColorButton));
+        this.randomColorMap.put(StatusColor.TRUECOLOR, this.createRandomColorList(numberTrueColorButton));
     }
 
     private List<Pair<Colors, Colors>> createRandomColorList(final Integer numberBtn) {
@@ -74,7 +74,7 @@ public class DifficultyStrategyImpl implements DifficultyStrategy {
      * {@inheritDoc}
      */
     @Override
-    public Map<String, List<Pair<Colors, Colors>>> getRandomColorMap() {
+    public Map<StatusColor, List<Pair<Colors, Colors>>> getRandomColorMap() {
         return this.randomColorMap;
     }
 }
