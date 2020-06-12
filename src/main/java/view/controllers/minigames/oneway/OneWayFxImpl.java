@@ -62,8 +62,8 @@ public class OneWayFxImpl extends AbstractMiniGameControllerFx implements OneWay
     @FXML
     private ProgressBar progressBar;
 
-    @FXML
-    private Button quitBn;
+//    @FXML
+//    private Button quitBn;
 
     private Button clickedBtn;
     private Button correctBtn;

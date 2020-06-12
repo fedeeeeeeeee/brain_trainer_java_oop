@@ -20,10 +20,10 @@ public class TrainingAreaFx extends AbstractSceneController {
 
     @FXML
     private Button backBtn;
-    
+
     @FXML
     private VBox areasBox;
-    
+
     @FXML
     private GridPane areasGrid;
 
@@ -50,12 +50,15 @@ public class TrainingAreaFx extends AbstractSceneController {
         this.getGameList().addAll(selectedArea.getMiniGameList());
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void init() {
         Stage stages = (Stage) backBtn.getScene().getWindow();
         stages.widthProperty().addListener((obs, oldVal, newVal) -> {
             this.areasGrid.getChildren().forEach(b -> {
-                ((Button)b).setStyle(String.format("-fx-font-size: %dpx;", (int) (0.10 * ((Button) b).getWidth())));
+                ((Button) b).setStyle(String.format("-fx-font-size: %dpx;", (int) (0.10 * ((Button) b).getWidth())));
             }); 
             this.backBtn.setStyle(String.format("-fx-font-size: %dpx;", (int) (0.08 * ((Button)this.areasGrid.getChildren().get(0)).getWidth())));
         }); 
