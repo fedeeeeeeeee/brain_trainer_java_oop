@@ -18,17 +18,4 @@ public interface User {
      */
     String getPassword();
 
-    /**
-     * 
-     * @param username 
-     *                 the submitted username.
-     */
-    void setUsername(String username);
-
-    /**
-     * 
-     * @param password 
-     *                 the submitted password.
-     */
-    void setPassword(String password);
 }

@@ -64,9 +64,10 @@ public class LoginFxImpl extends AbstractSceneController implements LoginFx {
     }
 
     private UserPlayer initPlayer() {
-        final UserPlayer player = new UserPlayerImpl();
-        player.setUsername(this.txtPlayer.getText());
-        player.setPassword(this.txtPassword.getText());
+        final UserPlayer player = new UserPlayerImpl.PlayerBuilder()
+                .username(this.txtPlayer.getText())
+                .password(this.txtPassword.getText())
+                .build();
         return player;
     }
 
