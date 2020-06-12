@@ -73,4 +73,10 @@ public class MinigameSelectorFx extends AbstractSceneController {
         this.getView().switchScene(SceneType.MAIN_MENU.getFilePath());
     }
 
+    @Override
+    public void init() {
+        // TODO Auto-generated method stub
+        
+    }
+
 }

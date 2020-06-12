@@ -7,7 +7,6 @@ import javafx.scene.Scene;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
 import view.controllers.FxController;
-import view.controllers.FxHandleDataScene;
 import view.controllers.minigames.FxMiniGameController;
 
 /**
@@ -34,6 +33,11 @@ public class ViewImpl extends Application implements View {
         this.sceneLoader = new SceneLoaderImpl();
     }
 
+    private void simpleSwitch(String path) {
+        this.currentSceneController = this.sceneLoader.loadScene(path).get();
+        this.initializeSceneController(this.currentSceneController);
+    }
+    
     private void initializeSceneController(final FxController currentController) {
         currentController.initialize(this, this.controller);
         if (this.stage.getScene() == null) {
@@ -49,20 +53,11 @@ public class ViewImpl extends Application implements View {
      */
     @Override
     public void switchScene(final String path) {
-        this.currentSceneController = this.sceneLoader.loadScene(path).get();
-        this.initializeSceneController(this.currentSceneController);
-    }
-
-    /**
-     * {@inheritDoc} 
-     */
-    @Override
-    public void setHandleDataScene(final String path) {
         if (this.inGame) {
             this.inGame = false;
-        }
-        this.switchScene(path);
-        ((FxHandleDataScene) currentSceneController).init();
+        }   
+        this.simpleSwitch(path);
+        this.currentSceneController.init();
     }
 
     /**
@@ -71,8 +66,8 @@ public class ViewImpl extends Application implements View {
     @Override
     public void setMiniGameScene(final String path) {
         this.inGame = true;
-        this.switchScene(path);
-        ((FxMiniGameController) currentSceneController).initGame();
+        this.simpleSwitch(path);
+        ((FxMiniGameController) currentSceneController).init();
     }
 
     /**
@@ -80,20 +75,21 @@ public class ViewImpl extends Application implements View {
      */
     @Override
     public void start(final Stage stage) throws Exception {
-        this.inGame = false;
         this.stage = stage;
-        stage.setWidth(WIDTH);
-        stage.setHeight(HEIGHT);
+        this.stage.setHeight(HEIGHT);
+        this.stage.setWidth(WIDTH);
+        this.stage.setMinHeight(HEIGHT/1.3);
+        this.stage.setMinWidth(WIDTH/1.3);
+        this.inGame = false;
         this.stage.setTitle("Brain Trainer");
         this.stage.setResizable(true);
         this.stage.show();
         this.controller.initializeView(this);
-
+        
         this.stage.setOnCloseRequest((e) -> {
             if (this.controller.getUserPlayer() != null) {
                 controller.saveData();
             }
-
             if (this.inGame) {
                 ((FxMiniGameController) currentSceneController).stopTimer();
             }

@@ -75,7 +75,7 @@ public class ColorGamaFxImpl extends AbstractMiniGameControllerFx implements Col
      * {@inheritDoc}
      */
     @Override
-    public void initGame() {
+    public void init() {
         this.colorGamaController = new ColorGamaControllerImpl(this, this.getController().getDifficultyLevel());
         this.colorGamaController.startTimer();
         this.colorGamaController.startGame();
@@ -137,7 +137,7 @@ public class ColorGamaFxImpl extends AbstractMiniGameControllerFx implements Col
     public void showEndGame(final int finalScore) {
         Platform.runLater(() -> {
             this.getController().updateProgress(finalScore);
-            this.getView().setHandleDataScene(SceneType.END_GAME.getFilePath());
+            this.getView().switchScene(SceneType.END_GAME.getFilePath());
         });
     }
 
@@ -159,4 +159,5 @@ public class ColorGamaFxImpl extends AbstractMiniGameControllerFx implements Col
         this.image.setImage(image);
         this.showAnimation(check);
     }
+
 }

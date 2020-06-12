@@ -120,4 +120,10 @@ public class LoginFxImpl extends AbstractSceneController implements LoginFx {
         this.errorLbl.setText(MessageError.INCORRECT_ENTRY.toString());
     }
 
+    @Override
+    public void init() {
+        // TODO Auto-generated method stub
+        
+    }
+
 }

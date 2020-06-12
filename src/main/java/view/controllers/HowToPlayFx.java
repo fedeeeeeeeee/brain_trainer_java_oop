@@ -56,4 +56,10 @@ public class HowToPlayFx extends AbstractSceneController {
             e.printStackTrace();
         }
     }
+
+    @Override
+    public void init() {
+        // TODO Auto-generated method stub
+        
+    }
 }

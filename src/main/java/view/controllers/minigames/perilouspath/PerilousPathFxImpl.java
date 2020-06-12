@@ -96,7 +96,7 @@ public class PerilousPathFxImpl extends AbstractMiniGameControllerFx implements 
      * {@inheritDoc}
      */
     @Override
-    public void initGame() {
+    public void init() {
         this.controller = new PerilousPathControllerImpl(this.getController().getDifficultyLevel(), this);
         this.buttons = new HashMap<>();
         this.progressBar.setStyle("-fx-accent: rgb(158,61,100)");
@@ -213,7 +213,7 @@ public class PerilousPathFxImpl extends AbstractMiniGameControllerFx implements 
     public void showEndGame(final int finalScore) {
         Platform.runLater(() -> {
             this.getController().updateProgress(finalScore);
-            this.getView().setHandleDataScene(SceneType.END_GAME.getFilePath());
+            this.getView().switchScene(SceneType.END_GAME.getFilePath());
         });
     }
 

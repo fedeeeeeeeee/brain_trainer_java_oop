@@ -15,13 +15,6 @@ public interface View {
 
     /**
      * 
-     * @param path
-     *             the statistics scene to show.
-     */
-    void setHandleDataScene(String path);
-
-    /**
-     * 
      * @param path 
      *             the minigame scene to show.
      */

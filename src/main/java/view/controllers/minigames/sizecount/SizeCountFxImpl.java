@@ -61,7 +61,7 @@ public class SizeCountFxImpl extends AbstractMiniGameControllerFx implements Siz
      * {@inheritDoc}
      */
     @Override
-    public void initGame() {
+    public void init() {
         this.buttons = new LinkedList<>();
         this.controller = new SizeCountControllerImpl(this);
         this.controller.startTimer();
@@ -136,7 +136,7 @@ public class SizeCountFxImpl extends AbstractMiniGameControllerFx implements Siz
     public void showEndGame(final int score) {
         Platform.runLater(() -> {
             this.getController().updateProgress(score);
-            this.getView().setHandleDataScene(SceneType.END_GAME.getFilePath());
+            this.getView().switchScene(SceneType.END_GAME.getFilePath());
         });
     }
 

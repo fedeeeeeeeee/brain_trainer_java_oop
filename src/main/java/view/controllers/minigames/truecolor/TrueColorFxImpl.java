@@ -36,8 +36,6 @@ public class TrueColorFxImpl extends AbstractMiniGameControllerFx implements Tru
     private static final String BORDERC = "-fx-border-color: ";
     private static final String BORDERW = "-fx-border-width: ";
     private static final String RADIUS = "-fx-background-radius: ";
-//    private static final String MEANCOLOR = "randomMeaningColor";
-//    private static final String TRUECOLOR = "randomTrueColor";
     private static final int SHADOWX = 4;
     private static final int SHADOWY = 6;
     private static final int FONT = 35;
@@ -110,7 +108,7 @@ public class TrueColorFxImpl extends AbstractMiniGameControllerFx implements Tru
      * {@inheritDoc}
      */
     @Override
-    public void initGame() {
+    public void init() {
         this.trueColorController = new TrueColorControllerImpl(this.getController().getDifficultyLevel(), this);
         this.setDropShadow();
         this.prepareButtons();
@@ -166,7 +164,7 @@ public class TrueColorFxImpl extends AbstractMiniGameControllerFx implements Tru
     public void showEndGame(final int finalScore) {
         Platform.runLater(() -> {
             this.getController().updateProgress(finalScore);
-            this.getView().setHandleDataScene(SceneType.END_GAME.getFilePath());
+            this.getView().switchScene(SceneType.END_GAME.getFilePath());
         });
     }
 

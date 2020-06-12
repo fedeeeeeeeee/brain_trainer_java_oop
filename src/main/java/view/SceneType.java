@@ -25,7 +25,7 @@ public enum SceneType {
     TRAINING_AREA("TrainingAreaSelector"),
 
     /**
-     * 
+     * The scene for visualize user progress.
      * 
      */
     STATISTICS("Statistics"),
@@ -43,6 +43,7 @@ public enum SceneType {
     HOW_TO_PLAY("HowToPlay"),
 
     /**
+     * The result scene of the minigame.
      * 
      */
     END_GAME("EndGame");
@@ -57,7 +58,6 @@ public enum SceneType {
 
     /**
      * Getter for the file path.
-     * 
      * @return the path of the xml file of the current scene
      */
     public String getFilePath() {

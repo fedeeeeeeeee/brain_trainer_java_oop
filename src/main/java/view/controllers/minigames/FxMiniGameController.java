@@ -17,12 +17,6 @@ public interface FxMiniGameController extends FxController {
     void showTimerSeconds(int second);
 
     /**
-     * Initialize the current minigame with specific settings.
-     * 
-     */
-    void initGame();
-
-    /**
      * Show the end game scene.
      * 
      * @param finalScore
