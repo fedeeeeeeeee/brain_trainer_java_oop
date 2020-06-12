@@ -88,6 +88,7 @@ public class TrueColorControllerImpl implements TrueColorController {
      */
     @Override
     public void timeFinish() {
+        this.timer.cancel();
         this.view.showEndGame(this.model.getFinalScore());
     }
 
