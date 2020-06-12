@@ -4,6 +4,8 @@ import java.io.IOException;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.GridPane;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import view.TrainingArea;
 import view.SceneType;
@@ -20,19 +22,10 @@ public class TrainingAreaFx extends AbstractSceneController {
     private Button backBtn;
     
     @FXML
-    private Button memoryBtn;
-
+    private VBox areasBox;
+    
     @FXML
-    private Button attentionBtn;
-
-    @FXML
-    private Button reasoningBtn;
-
-    @FXML
-    private Button brainSpeedBtn;
-
-    @FXML
-    private Button visualSkillBtn;
+    private GridPane areasGrid;
 
     @FXML
     private void areaClicked(final MouseEvent event) throws IOException { // NOPMD
@@ -60,30 +53,12 @@ public class TrainingAreaFx extends AbstractSceneController {
     @Override
     public void init() {
         Stage stages = (Stage) backBtn.getScene().getWindow();
-
         stages.widthProperty().addListener((obs, oldVal, newVal) -> {
-            visualSkillBtn.setStyle(String.format("-fx-font-size: %dpx;", (int) (0.10 * visualSkillBtn.getWidth())));
-        });
-
-        stages.widthProperty().addListener((obs, oldVal, newVal) -> {
-            memoryBtn.setStyle(String.format("-fx-font-size: %dpx;", (int) (0.10 * memoryBtn.getWidth())));
-        });
-
-        stages.widthProperty().addListener((obs, oldVal, newVal) -> {
-            attentionBtn.setStyle(String.format("-fx-font-size: %dpx;", (int) (0.10 * attentionBtn.getWidth())));
-        });
-
-        stages.widthProperty().addListener((obs, oldVal, newVal) -> {
-            reasoningBtn.setStyle(String.format("-fx-font-size: %dpx;", (int) (0.10 * reasoningBtn.getWidth())));
-        });
-
-        stages.widthProperty().addListener((obs, oldVal, newVal) -> {
-            brainSpeedBtn.setStyle(String.format("-fx-font-size: %dpx;", (int) (0.10 * brainSpeedBtn.getWidth())));
-        });
-
-        stages.widthProperty().addListener((obs, oldVal, newVal) -> {
-            backBtn.setStyle(String.format("-fx-font-size: %dpx;", (int) (0.40 * backBtn.getWidth())));
-        });
+            this.areasGrid.getChildren().forEach(b -> {
+                ((Button)b).setStyle(String.format("-fx-font-size: %dpx;", (int) (0.10 * ((Button) b).getWidth())));
+            }); 
+            this.backBtn.setStyle(String.format("-fx-font-size: %dpx;", (int) (0.08 * ((Button)this.areasGrid.getChildren().get(0)).getWidth())));
+        }); 
     }
 
 }
