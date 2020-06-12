@@ -19,6 +19,8 @@ import model.minigames.colorgama.QuestionType;
 
 class ColorValuesIteratorTest {
 
+    private static final int BAD_SIZE = -5;
+
     private ColorValuesIterator iterator;
     private int size;
 
@@ -45,7 +47,6 @@ class ColorValuesIteratorTest {
     public void testNoSuchElement() {
         this.intialize(DifficultyLevel.NORMAL);
         this.iterator.resetValues(QuestionType.DARKEST);
-
         for (int i = 0; i < this.size; i++) {
             this.iterator.next();
         }
@@ -55,7 +56,6 @@ class ColorValuesIteratorTest {
     @Test
     public void testIllegalStateException() {
         this.intialize(DifficultyLevel.HARD);
-
         assertThrows(IllegalStateException.class, () -> this.iterator.hasNext());
         assertThrows(IllegalStateException.class, () -> this.iterator.next());
     }
@@ -64,6 +64,6 @@ class ColorValuesIteratorTest {
     public void testIllegalArgumentException() {
         final ColorValuesCalculator calculator = new HSBColorValuesCalculator(new ComputeDifficultyValueImpl(DifficultyLevel.EASY));
         assertThrows(IllegalArgumentException.class, () -> new ColorValuesIteratorImpl(0, calculator));
-        assertThrows(IllegalArgumentException.class, () -> new ColorValuesIteratorImpl(-5, calculator));
+        assertThrows(IllegalArgumentException.class, () -> new ColorValuesIteratorImpl(BAD_SIZE, calculator)); 
     }
 }
