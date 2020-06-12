@@ -16,9 +16,9 @@
    </columnConstraints>
    <rowConstraints>
     <RowConstraints valignment="TOP" vgrow="SOMETIMES" />
-    <RowConstraints minHeight="31.0" vgrow="SOMETIMES" />
-    <RowConstraints maxHeight="1.7976931348623157E308" vgrow="ALWAYS" />
-            <RowConstraints maxHeight="43.0" minHeight="31.0" prefHeight="31.0" valignment="BOTTOM" vgrow="SOMETIMES" />
+    <RowConstraints maxHeight="57.0" minHeight="31.0" prefHeight="57.0" vgrow="SOMETIMES" />
+    <RowConstraints maxHeight="1.7976931348623157E308" minHeight="408.0" prefHeight="408.0" vgrow="ALWAYS" />
+            <RowConstraints minHeight="15.0" valignment="BOTTOM" vgrow="SOMETIMES" />
    </rowConstraints>
    <children>
     <GridPane fx:id="arrowRow" hgap="10.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" GridPane.rowIndex="1">
@@ -33,7 +33,7 @@
       <RowConstraints maxHeight="1.7976931348623157E308" prefHeight="70.0" vgrow="SOMETIMES" />
      </rowConstraints>
      <GridPane.margin>
-      <Insets bottom="10.0" left="5.0" right="100.0" top="5.0" />
+      <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
      </GridPane.margin>
     </GridPane>
     <GridPane prefHeight="115.0" prefWidth="500.0">
@@ -44,7 +44,7 @@
       <RowConstraints vgrow="SOMETIMES" />
      </rowConstraints>
     </GridPane>
-    <GridPane fx:id="grid" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="490.0" prefWidth="490.0" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="2" GridPane.vgrow="ALWAYS">
+    <GridPane fx:id="grid" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="490.0" prefWidth="490.0" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="2" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
      <columnConstraints>
       <ColumnConstraints hgrow="ALWAYS" maxWidth="1.7976931348623157E308" />
      </columnConstraints>
@@ -52,7 +52,7 @@
       <RowConstraints maxHeight="1.7976931348623157E308" vgrow="ALWAYS" />
      </rowConstraints>
      <GridPane.margin>
-      <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+      <Insets bottom="5.0" left="10.0" right="10.0" top="5.0" />
      </GridPane.margin>
     </GridPane>
     <GridPane hgap="10.0">
@@ -106,11 +106,11 @@
       </Label>
      </children>
     </GridPane>
-            <Button fx:id="quitBtn" mnemonicParsing="false" onMouseClicked="#quitGame" text="Quit" GridPane.halignment="RIGHT" GridPane.rowIndex="3">
+         <!--  <Button fx:id="quitBtn" mnemonicParsing="false" onMouseClicked="#quitGame" text="Quit" GridPane.halignment="RIGHT" GridPane.rowIndex="3">
                <GridPane.margin>
                   <Insets bottom="10.0" right="20.0" top="10.0" />
                </GridPane.margin>
-            </Button>
+            </Button> -->
    </children>
   </GridPane>
  </children>

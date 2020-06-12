@@ -42,7 +42,6 @@ public class OneWayFxImpl extends AbstractMiniGameControllerFx implements OneWay
     private static final String BLUE = "-fx-accent: #49618C";
     private static final double BUTTON_DIM = 300;
     private static final int IMG_DIM = 40;
-    private static final int ZERO = 0;
 
     private OneWayController controller;
     private Map<Button, Pair<Integer, Integer>> buttons;
@@ -141,6 +140,7 @@ public class OneWayFxImpl extends AbstractMiniGameControllerFx implements OneWay
         raiseException(steps.isEmpty(), ILLEGAL_ARGUMENT_EXCEPTION_SUPPLIER);
         IntStream.range(0, steps.size()).forEach(i -> {
             final Button btn = new Button();
+            btn.setPrefSize(BUTTON_DIM, BUTTON_DIM);
             btn.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
             this.arrowRow.add(btn, i, 0);
             this.arrows.add(btn);
@@ -220,11 +220,11 @@ public class OneWayFxImpl extends AbstractMiniGameControllerFx implements OneWay
         this.controller.stopTimer();
     }
 
-    @FXML
-    private void quitGame() { // NOPMD
-        this.scoreLbl.setText(String.valueOf(ZERO));
-        this.getController().updateProgress(ZERO);
-        this.getView().switchScene(SceneType.END_GAME.getFilePath());
-    }
+//    @FXML
+//    private void quitGame() { // NOPMD
+//        this.scoreLbl.setText(String.valueOf(ZERO));
+//        this.getController().updateProgress(ZERO);
+//        this.getView().switchScene(SceneType.END_GAME.getFilePath());
+//    }
 
 }

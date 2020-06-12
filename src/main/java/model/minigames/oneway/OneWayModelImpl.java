@@ -13,53 +13,23 @@ import utility.Pair;
  */
 public class OneWayModelImpl implements OneWayModel {
 
-    private static final int EASY_LEVEL_ARROW = 3;
-    private static final int NORMAL_LEVEL_ARROW = 4;
-    private static final int HARD_LEVEL_ARROW = 5;
-
-    private static final int EASY_LEVEL_SEC = 45;
-    private static final int NORMAL_LEVEL_SEC = 30;
-    private static final int HARD_LEVEL_SEC = 40;
-
     private static final int BASE_POINT = 10;
-    private static final int SIZE = 6;
 
     private final ScoreModel score;
     private final DifficultyLevel difficulty;
+    private final OneWaySettings settings;
     private final PathDrawer pathDrawer;
-    private int arrows;
-    private int duration;
 
     /**
      * OneWayModelImpl constructor.
      * 
-     * @param selectedDifficulty 
-     *                       the difficulty to set
+     * @param selectedDifficulty the difficulty to set
      */
     public OneWayModelImpl(final DifficultyLevel selectedDifficulty) {
         this.difficulty = selectedDifficulty;
-        this.setLevel();
+        this.settings = new OneWaySettingsImpl(this.difficulty);
         this.score = new ScoreModelImpl(this.difficulty, BASE_POINT);
-        this.pathDrawer = new OneWayPathDrawerImpl(SIZE, arrows);
-    }
-
-    private void setLevel() {
-        switch (this.difficulty) {
-        case EASY:
-            this.arrows = EASY_LEVEL_ARROW;
-            this.duration = EASY_LEVEL_SEC;
-            break;
-        case NORMAL:
-            this.arrows = NORMAL_LEVEL_ARROW;
-            this.duration = NORMAL_LEVEL_SEC;
-            break;
-        case HARD:
-            this.arrows = HARD_LEVEL_ARROW;
-            this.duration = HARD_LEVEL_SEC;
-            break;
-        default:
-            break;
-        }
+        this.pathDrawer = new OneWayPathDrawerImpl(this.settings.getSize(), this.settings.getArrows());
     }
 
     /**
@@ -100,7 +70,7 @@ public class OneWayModelImpl implements OneWayModel {
      */
     @Override
     public int getSeconds() {
-        return this.duration;
+        return this.settings.getSeconds();
     }
 
     /**
@@ -116,7 +86,7 @@ public class OneWayModelImpl implements OneWayModel {
      */
     @Override
     public int getArrowsCount() {
-        return this.arrows;
+        return this.settings.getArrows();
     }
 
     /**
@@ -148,7 +118,7 @@ public class OneWayModelImpl implements OneWayModel {
      */
     @Override
     public int getGridSize() {
-        return OneWayModelImpl.SIZE;
+        return this.settings.getSize();
     }
 
 }
