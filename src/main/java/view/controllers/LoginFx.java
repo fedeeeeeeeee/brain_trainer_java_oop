@@ -1,112 +1,32 @@
 package view.controllers;
 
 import java.io.File;
-import java.io.IOException;
-
-import controller.LoginController;
-import javafx.fxml.FXML;
-import javafx.scene.control.TextField;
-import model.UserPlayer;
-import model.UserPlayerImpl;
-import view.SceneType;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Alert.AlertType;
-import javafx.scene.layout.VBox;
-import javafx.scene.control.Button;
-import javafx.scene.control.ButtonType;
-import javafx.scene.control.Label;
 
 /**
- * The fx controller for the login scene.
+ * The interface for the Login scene.
  *
  */
-public class LoginFx extends AbstractSceneController {
+public interface LoginFx {
 
-    @FXML
-    private VBox box;
+    /**
+     * Set the user for the current game session.
+     * 
+     * @param userFileName 
+     *                  the file related to the user
+     */
+    void setUserPlayer(File userFileName);
 
-    @FXML
-    private Label errorLbl;
+    /**
+     * Show error message when user type incorrect password or non-existent
+     * username.
+     * 
+     */
+    void showError();
 
-    @FXML
-    private TextField txtPlayer;
+    /**
+     * Show an alert if a new user tries to insert an existing username.
+     * 
+     */
+    void showAlert();
 
-    @FXML
-    private TextField txtPassword;
-
-    @FXML
-    private Button loginBtn;
-
-    @FXML
-    private Button signUpBtn;
-
-    private final LoginController loginController = new LoginController();
-
-    private boolean checkEmptyFields() {
-        return this.txtPassword.getText().isBlank() || this.txtPlayer.getText().isBlank();
-    }
-
-    private UserPlayer initPlayer() {
-        final UserPlayer player = new UserPlayerImpl();
-        player.setUsername(this.txtPlayer.getText());
-        player.setPassword(this.txtPassword.getText());
-
-        return player;
-    }
-
-
-    private void switchToMenu() {
-        this.getView().switchScene(SceneType.MAIN_MENU.getFilePath());
-    }
-
-    private void setUserPlayer(final File userFileName) {
-        this.getController().initializePlayer(userFileName);
-    }
-
-    @FXML
-    private void loginPlayer() throws IOException { // NOPMD
-        if (!this.checkEmptyFields()) {
-            if (this.loginController.isLoggedIn(this.txtPlayer.getText(), this.txtPassword.getText())) {
-                this.setUserPlayer(this.loginController.getUserFile());
-                this.switchToMenu();
-            } else {
-                this.errorLbl.setText(MessageError.INCORRECT_ENTRY.toString());
-            }
-        } else {
-            this.errorLbl.setText(MessageError.EMPTY_FIELD.toString());
-        }
-    }
-
-    @FXML
-    private void signUpPlayer() { // NOPMD
-        if (!this.checkEmptyFields()) {
-            final UserPlayer player = this.initPlayer();
-            if (this.loginController.isRegistered(player)) {
-                this.setUserPlayer(this.loginController.getUserFile());
-                this.switchToMenu();
-            } else {
-                final Alert alert = new Alert(AlertType.ERROR, MessageError.EXISTING_USERNAME.toString(),
-                        ButtonType.OK);
-                alert.showAndWait();
-            }
-        } else {
-            this.errorLbl.setText(MessageError.EMPTY_FIELD.toString());
-        }
-    }
-
-    private enum MessageError {
-        EMPTY_FIELD("Fields cannot be empty!"), EXISTING_USERNAME("Username already exists!"),
-        INCORRECT_ENTRY("Incorrect password or non-existent user!");
-
-        private String message;
-
-        MessageError(final String message) {
-            this.message = message;
-        }
-
-        @Override
-        public String toString() {
-            return "*" + this.message;
-        }
-    }
 }

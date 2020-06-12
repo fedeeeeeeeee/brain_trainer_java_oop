@@ -28,7 +28,7 @@ public interface LoginModel {
      * @return 
      *         false if the registration is wrong, true otherwise.
      */
-    boolean registerPlayer(UserPlayer player);
+    boolean registerUser(UserPlayer player);
 
     /**
      *Get the current user's file.

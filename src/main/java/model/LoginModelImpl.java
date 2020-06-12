@@ -65,7 +65,7 @@ public class LoginModelImpl implements LoginModel {
      * {@inheritDoc}
      */
     @Override
-    public boolean registerPlayer(final UserPlayer player) {
+    public boolean registerUser(final UserPlayer player) {
         final ObjectMapper mapper = new ObjectMapper();
         mapper.configure(SerializationFeature.INDENT_OUTPUT, true);
         this.initializeDirectory();
