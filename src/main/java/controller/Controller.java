@@ -55,12 +55,6 @@ public interface Controller {
      */
     void setMiniGame(String minigame, DifficultyLevel difficultyLevel);
 
-    /**
-     * Getter for the selected minigame.
-     * 
-     * @return the selected minigame
-     */
-    String getMiniGame();
 
     /**
      * Getter for the selected difficultyLevel.
@@ -82,13 +76,7 @@ public interface Controller {
      */
     void updateProgress(Integer score);
 
-    /**
-     * Get the current user.
-     * 
-     * @return the current user
-     */
-    UserPlayer getUserPlayer();
-
+   
     /**
      * Get the score related to the current minigame.
      * 
@@ -102,5 +90,10 @@ public interface Controller {
      * @return the current best score
      */
     int getCurrentMiniGameBest();
+    
+    /**
+     * 
+     */
+    void initStatistics();
 
 }

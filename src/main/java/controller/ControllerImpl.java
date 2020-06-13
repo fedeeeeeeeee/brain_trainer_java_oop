@@ -18,6 +18,7 @@ public class ControllerImpl implements Controller {
 
     private final Model model;
     private final FileLoader loader;
+    private  View view;
 
     /**
      * Simple constructor of {@link Controller}.
@@ -32,7 +33,8 @@ public class ControllerImpl implements Controller {
      */
     @Override
     public void initializeView(final View view) {
-        view.switchScene(SceneType.LOGIN.getFilePath());
+        this.view = view;
+        this.view.switchScene(SceneType.LOGIN.getFilePath());
     }
 
     /**
@@ -67,13 +69,13 @@ public class ControllerImpl implements Controller {
         this.model.setMiniGame(minigame, difficultyLevel);
     }
 
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public String getMiniGame() {
-        return this.model.getMiniGame();
-    }
+//    /**
+//     * {@inheritDoc}
+//     */
+//    @Override
+//    public String getMiniGame() {
+//        return this.model.getMiniGame();
+//    }
 
     /**
      * {@inheritDoc}
@@ -82,21 +84,15 @@ public class ControllerImpl implements Controller {
     public DifficultyLevel getDifficultyLevel() {
         return this.model.getDifficultyLevel();
     }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public UserPlayer getUserPlayer() {
-        return this.model.getUser();
-    }
-
+   
     /**
      * {@inheritDoc}
      */
     @Override
     public void saveData() {
-       this.loader.saveData(this.model.getUser());
+       if(this.model.getUser() != null) {
+           this.loader.saveData(this.model.getUser());
+       } 
     }
 
     /**
@@ -122,5 +118,14 @@ public class ControllerImpl implements Controller {
     @Override
     public int getCurrentMiniGameBest() {
         return this.model.getCurrentMiniGameBest();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void initStatistics() {
+        this.view.loadProgress(this.model.getUser().getProgress());
+        
     }
 }
