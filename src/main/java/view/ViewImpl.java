@@ -6,7 +6,9 @@ import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
+import model.score.Progress;
 import view.controllers.FxController;
+import view.controllers.StatisticsFx;
 import view.controllers.minigames.FxMiniGameController;
 
 /**
@@ -87,12 +89,20 @@ public class ViewImpl extends Application implements View {
         this.controller.initializeView(this);
         
         this.stage.setOnCloseRequest((e) -> {
-            if (this.controller.getUserPlayer() != null) {
-                controller.saveData();
-            }
+            controller.saveData();
             if (this.inGame) {
                 ((FxMiniGameController) currentSceneController).stopTimer();
             }
         });
+    }
+
+    @Override
+    public void initStatistics() {
+        this.controller.initStatistics();
+    }
+
+    @Override
+    public void loadProgress(Progress progress) {
+        ((StatisticsFx) currentSceneController).setProgress(progress);    
     }
 }
