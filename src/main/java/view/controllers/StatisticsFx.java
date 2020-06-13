@@ -11,6 +11,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
+import model.score.Progress;
 import utility.Pair;
 import view.SceneType;
 import view.TrainingArea;
@@ -29,7 +30,7 @@ public class StatisticsFx extends AbstractSceneController implements FxControlle
     
     @FXML
     private VBox vBox;
-
+    
     @FXML
     private void goBack() throws IOException { // NOPMD
         this.getView().switchScene(SceneType.MAIN_MENU.getFilePath());
@@ -41,17 +42,19 @@ public class StatisticsFx extends AbstractSceneController implements FxControlle
      * Initialize and show the user's progress.
      */
     public void init() {
-        this.values = this.getController().getUserPlayer().getProgress().getAverageTrainingAreaScore().entrySet()
+        this.getView().initStatistics();
+    }
+
+    public void setProgress(Progress progress) {
+        this.values = progress.getAverageTrainingAreaScore().entrySet()
                 .stream()
                 .map(e-> new Pair<TrainingArea, Integer>(e.getKey(), e.getValue()))
                 .collect(Collectors.toList());
-        
         this.values.forEach(p->{
             Label l = new Label(p.getX().getName() + " " + p.getY());  
             l.setFont(Font.font(35));
             this.vBox.getChildren().add(l);
             this.vBox.setAlignment(Pos.CENTER);
         });
-       
     }
 }
