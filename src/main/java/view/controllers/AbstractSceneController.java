@@ -18,21 +18,13 @@ public abstract class AbstractSceneController implements FxController { // NOPMD
     private View view;
     private Parent root;
 
-    /**
-     * 
-     * {@inheritDoc}
-     */
-    @Override
-    public View getView() {
+   
+    protected View getView() {
         return this.view;
     }
 
-    /**
-     * 
-     * {@inheritDoc}
-     */
-    @Override
-    public Controller getController() {
+   
+    protected Controller getController() {
         return controller;
     }
 
