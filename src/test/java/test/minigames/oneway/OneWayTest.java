@@ -14,41 +14,63 @@ import model.minigames.oneway.OneWayModelImpl;
  *
  */
 public class OneWayTest {
+
+    /**
+     * Costants for the specific settings to test.
+     * 
+     */
     private static final int EASY_LEVEL_ARROW = 3;
     private static final int NORMAL_LEVEL_ARROW = 4;
     private static final int HARD_LEVEL_ARROW = 5;
-    private static final int EASY_LEVEL_SEC = 45;
-    private static final int NORMAL_LEVEL_SEC = 30;
-    private static final int HARD_LEVEL_SEC = 40;
+
+    private static final int EASY_LEVEL_SIZE = 6;
+    private static final int NORMAL_LEVEL_SIZE = 7;
+    private static final int HARD_LEVEL_SIZE = 8;
+
+    private static final int EASY_LEVEL_SEC = 40;
+    private static final int NORMAL_LEVEL_SEC = 35;
+    private static final int HARD_LEVEL_SEC = 30;
 
     private OneWayModel model;
 
+    /**
+     * Test for easy level settings.
+     */
     @Test
     public void easyLevelTest() {
         this.model = new OneWayModelImpl(DifficultyLevel.EASY);
         this.model.oneWayInit();
         assertEquals(EASY_LEVEL_ARROW, this.model.getArrowsCount());
+        assertEquals(EASY_LEVEL_SIZE, this.model.getGridSize());
         assertEquals(EASY_LEVEL_SEC, this.model.getSeconds());
     }
 
+    /**
+     * Test for normal level settings.
+     */
     @Test
     public void normalLevelyTest() {
         this.model = new OneWayModelImpl(DifficultyLevel.NORMAL);
         this.model.oneWayInit();
         assertEquals(NORMAL_LEVEL_ARROW, this.model.getArrowsCount());
+        assertEquals(NORMAL_LEVEL_SIZE, this.model.getGridSize());
         assertEquals(NORMAL_LEVEL_SEC, this.model.getSeconds());
     }
 
+    /**
+     * Test for hard level settings.
+     */
     @Test
     public void hardLevelTest() {
         this.model = new OneWayModelImpl(DifficultyLevel.HARD);
         this.model.oneWayInit();
         assertEquals(HARD_LEVEL_ARROW, this.model.getArrowsCount());
+        assertEquals(HARD_LEVEL_SIZE, this.model.getGridSize());
         assertEquals(HARD_LEVEL_SEC, this.model.getSeconds());
     }
 
     /**
-     * Test index bounds on initial and final positions
+     * Test index bounds on initial and final positions.
      * 
      */
     @Test
@@ -67,6 +89,9 @@ public class OneWayTest {
         assertTrue(model.getFinalPosition().getY() >= 0);
     }
 
+    /**
+     * Test inequalty between initial and final position.
+     */
     @Test
     public void testPositions() {
         OneWayModel model = new OneWayModelImpl(DifficultyLevel.EASY);

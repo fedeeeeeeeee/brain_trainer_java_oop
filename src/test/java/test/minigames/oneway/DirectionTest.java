@@ -21,7 +21,6 @@ public class DirectionTest {
      * Test if steps have the correct increments.
      * 
      */
-    @Test
     public void deltaTest() {
         this.steps.add(Direction.UP);
         this.checkPosition(-1, 0);
@@ -36,6 +35,7 @@ public class DirectionTest {
         this.checkPosition(0, 1);
     }
 
+    @Test
     private void checkPosition(final int x, final int y) {
         assertEquals(Direction.delta(steps.get(counter)).getX(), x);
         assertEquals(Direction.delta(steps.get(counter)).getY(), y);
