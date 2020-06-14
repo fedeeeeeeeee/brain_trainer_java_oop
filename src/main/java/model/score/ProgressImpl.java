@@ -14,6 +14,8 @@ public class ProgressImpl implements Progress {
 
     private Map<TrainingArea, Map<String, ScoreManagementImpl>> historyScore;
     private Map<TrainingArea, Integer> averageTrainingAreaScore;
+    private int currentScore;
+    private int currentBest;
 
     /**
      * Constructor for {@link Progress}.
@@ -62,8 +64,26 @@ public class ProgressImpl implements Progress {
      */
     @Override
     public void addMiniGameScore(final TrainingArea area, final String miniGame, final int score) {
+        this.currentScore = score;
         this.historyScore.get(area).get(miniGame).updateScore(score);
+        this.currentBest = this.historyScore.get(area).get(miniGame).getBest();
         this.averageTrainingAreaScore.replace(area, this.computeAverage(area));
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public int getCurrentScore() {
+        return this.currentScore;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public int getCurrentBest() {
+        return this.currentBest;
     }
 
 }
