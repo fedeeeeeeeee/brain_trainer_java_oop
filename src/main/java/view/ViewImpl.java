@@ -6,8 +6,11 @@ import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
+import model.DifficultyLevel;
 import model.score.Progress;
 import view.controllers.FxController;
+import view.controllers.FxHandleDataScene;
+import view.controllers.FxNormalScene;
 import view.controllers.StatisticsFx;
 import view.controllers.minigames.FxMiniGameController;
 
@@ -22,6 +25,7 @@ public class ViewImpl extends Application implements View {
 
     private final Controller controller;
     private final SceneLoader sceneLoader;
+    private final SceneInitializer sceneInitializer;
     private FxController currentSceneController;
     private Stage stage;
     private boolean inGame;
@@ -33,6 +37,7 @@ public class ViewImpl extends Application implements View {
     public ViewImpl() {
         this.controller = new ControllerImpl();
         this.sceneLoader = new SceneLoaderImpl();
+        this.sceneInitializer = new SceneInitializerImpl();
     }
 
     private void simpleSwitch(String path) {
@@ -59,7 +64,7 @@ public class ViewImpl extends Application implements View {
             this.inGame = false;
         }   
         this.simpleSwitch(path);
-        this.currentSceneController.init();
+        this.sceneInitializer.initializeNormalScene((FxNormalScene)this.currentSceneController);
     }
 
     /**
@@ -69,7 +74,7 @@ public class ViewImpl extends Application implements View {
     public void setMiniGameScene(final String path) {
         this.inGame = true;
         this.simpleSwitch(path);
-        ((FxMiniGameController) currentSceneController).init();
+        this.controller.selectedDifficultyLevel();
     }
 
     /**
@@ -96,13 +101,27 @@ public class ViewImpl extends Application implements View {
         });
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
-    public void initStatistics() {
+    public void loadProgress() {
         this.controller.initStatistics();
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
-    public void loadProgress(Progress progress) {
-        ((StatisticsFx) currentSceneController).setProgress(progress);    
+    public void initStatistics(Progress progress) {
+        this.sceneInitializer.initializeHandleDataScene((FxHandleDataScene)this.currentSceneController, progress);    
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void initGame(DifficultyLevel difficultyLevel) {
+        this.sceneInitializer.initializeMinigameScene((FxMiniGameController) this.currentSceneController, difficultyLevel);
     }
 }

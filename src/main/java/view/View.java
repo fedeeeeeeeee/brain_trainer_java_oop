@@ -1,5 +1,6 @@
 package view;
 
+import model.DifficultyLevel;
 import model.score.Progress;
 
 /**
@@ -25,12 +26,20 @@ public interface View {
     /**
      * Initialize the {@link Progress} of the User.
      */
-    void initStatistics();
+    void loadProgress();
+    
     
     /**
      * Load the {@link Progress} of the User.
      *  @param progress
      *          the  {@link Progress} of the User
      */
-    void loadProgress(Progress progress);
+    void initStatistics(Progress progress);
+
+    /**
+     * 
+     * @param difficultyLevel
+     *          the current {@link difficultyLevel}
+     */
+    void initGame(DifficultyLevel difficultyLevel);
 }

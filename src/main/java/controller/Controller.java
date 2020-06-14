@@ -57,11 +57,10 @@ public interface Controller {
 
 
     /**
-     * Getter for the selected difficultyLevel.
+     * The selected difficultyLevel.
      * 
-     * @return the selected {@link DifficultyLevel}.
      */
-    DifficultyLevel getDifficultyLevel();
+    void selectedDifficultyLevel();
 
     /**
      * Save the user's data.

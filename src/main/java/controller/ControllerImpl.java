@@ -81,8 +81,8 @@ public class ControllerImpl implements Controller {
      * {@inheritDoc}
      */
     @Override
-    public DifficultyLevel getDifficultyLevel() {
-        return this.model.getDifficultyLevel();
+    public void selectedDifficultyLevel() {
+        this.view.initGame(this.model.getDifficultyLevel());
     }
    
     /**
@@ -125,7 +125,7 @@ public class ControllerImpl implements Controller {
      */
     @Override
     public void initStatistics() {
-        this.view.loadProgress(this.model.getUser().getProgress());
+        this.view.initStatistics(this.model.getUser().getProgress());
         
     }
 }
