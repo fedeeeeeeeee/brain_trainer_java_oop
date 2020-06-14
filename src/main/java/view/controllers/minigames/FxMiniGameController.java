@@ -1,5 +1,6 @@
 package view.controllers.minigames;
 
+import model.DifficultyLevel;
 import view.controllers.FxController;
 
 /** 
@@ -36,4 +37,12 @@ public interface FxMiniGameController extends FxController {
      * Stop timer.
      */
     void stopTimer();
+    
+    /**
+     *  Initialize the current minigame.
+     *  
+     * @param difficulty
+     *          the {@link DifficultyLevel} selected
+     */
+    void initGame(DifficultyLevel difficulty);
 }
