@@ -16,6 +16,7 @@ import javafx.scene.control.Button;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
 import javafx.util.Duration;
+import model.DifficultyLevel;
 import model.minigames.sizecount.IntegerOperation;
 import view.SceneType;
 import view.controllers.minigames.AbstractMiniGameControllerFx;
@@ -61,9 +62,9 @@ public class SizeCountFxImpl extends AbstractMiniGameControllerFx implements Siz
      * {@inheritDoc}
      */
     @Override
-    public void init() {
+    public void initGame(DifficultyLevel difficultyLevel) {
         this.buttons = new LinkedList<>();
-        this.controller = new SizeCountControllerImpl(this);
+        this.controller = new SizeCountControllerImpl(this, difficultyLevel);
         this.controller.startTimer();
         this.controller.resetGame();
     }

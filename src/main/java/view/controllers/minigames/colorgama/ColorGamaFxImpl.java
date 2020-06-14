@@ -22,8 +22,10 @@ import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
 import javafx.util.Duration;
+import model.DifficultyLevel;
 import model.minigames.colorgama.ColorValuesIterator;
 import view.SceneType;
+import view.controllers.FxNormalScene;
 import view.controllers.minigames.AbstractMiniGameControllerFx;
 
 /**
@@ -75,8 +77,8 @@ public class ColorGamaFxImpl extends AbstractMiniGameControllerFx implements Col
      * {@inheritDoc}
      */
     @Override
-    public void init() {
-        this.colorGamaController = new ColorGamaControllerImpl(this, this.getController().getDifficultyLevel());
+    public void initGame(DifficultyLevel difficultyLevel) {
+        this.colorGamaController = new ColorGamaControllerImpl(this, difficultyLevel);
         this.colorGamaController.startTimer();
         this.colorGamaController.startGame();
     }

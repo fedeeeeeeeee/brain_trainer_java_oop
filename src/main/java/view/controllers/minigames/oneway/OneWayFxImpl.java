@@ -23,6 +23,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.util.Duration;
+import model.DifficultyLevel;
 import model.minigames.oneway.Direction;
 import utility.Pair;
 import view.SceneType;
@@ -123,9 +124,9 @@ public class OneWayFxImpl extends AbstractMiniGameControllerFx implements OneWay
      * {@inheritDoc}
      */
     @Override
-    public void init() {
+    public void initGame(DifficultyLevel difficultyLevel) {
         this.progressBar.setStyle(BLUE);
-        this.controller = new OneWayControllerImpl(this, this.getController().getDifficultyLevel());
+        this.controller = new OneWayControllerImpl(this, difficultyLevel);
         this.buttons = new HashMap<>();
         this.arrows = new ArrayList<>();
         this.controller.firstInit();

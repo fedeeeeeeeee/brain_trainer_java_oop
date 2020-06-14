@@ -4,6 +4,7 @@ import java.util.Objects;
 
 import java.util.Timer;
 
+import model.DifficultyLevel;
 import model.minigames.sizecount.SizeCountModel;
 import model.minigames.sizecount.SizeCountModelImpl;
 import timer.GameTimer;
@@ -31,11 +32,11 @@ public class SizeCountControllerImpl implements SizeCountController {
      *
      * @param view the view of the game
      */
-    public SizeCountControllerImpl(final SizeCountFxImpl view) {
+    public SizeCountControllerImpl(final SizeCountFxImpl view, DifficultyLevel difficultyLevel) {
         this.timer = new Timer();
         this.gameTimer = new GameTimer(SECONDS, this);
         this.view = view;
-        this.model = new SizeCountModelImpl(this.view.getController().getDifficultyLevel());
+        this.model = new SizeCountModelImpl(difficultyLevel);
         this.view.setOperations(this.model.getNumOfOperations());
     }
 

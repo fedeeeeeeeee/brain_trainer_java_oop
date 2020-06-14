@@ -23,6 +23,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 import javafx.util.Duration;
+import model.DifficultyLevel;
 import model.minigames.perilouspath.Mine;
 import utility.Pair;
 import view.SceneType;
@@ -96,8 +97,8 @@ public class PerilousPathFxImpl extends AbstractMiniGameControllerFx implements 
      * {@inheritDoc}
      */
     @Override
-    public void init() {
-        this.controller = new PerilousPathControllerImpl(this.getController().getDifficultyLevel(), this);
+    public void initGame(DifficultyLevel difficultyLevel) {
+        this.controller = new PerilousPathControllerImpl(difficultyLevel, this);
         this.buttons = new HashMap<>();
         this.progressBar.setStyle("-fx-accent: rgb(158,61,100)");
         this.controller.startGame();
