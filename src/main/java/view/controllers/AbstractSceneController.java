@@ -63,5 +63,6 @@ public abstract class AbstractSceneController implements FxController { // NOPMD
     protected List<String> getGameList() {
         return AbstractSceneController.gameList;
     }
+    
 
 }

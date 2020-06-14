@@ -32,10 +32,4 @@ public interface FxController {
      */
     void setRoot(Parent root);
     
-    /**
-     * Initialize the scene to show.
-     * 
-     */
-    void init();
-
 }
