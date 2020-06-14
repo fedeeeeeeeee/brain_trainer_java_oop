@@ -14,7 +14,7 @@ import view.SceneType;
  * The fx controller for the howToPlay scene.
  *
  */
-public class HowToPlayFx extends AbstractSceneController {
+public class HowToPlayFx extends AbstractSceneController implements FxNormalScene {
 
     @FXML
     private Button backBtn;

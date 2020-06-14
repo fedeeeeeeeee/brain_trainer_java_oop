@@ -20,7 +20,7 @@ import javafx.scene.control.Label;
  * The fx controller for the login scene.
  *
  */
-public class LoginFxImpl extends AbstractSceneController implements LoginFx {
+public class LoginFxImpl extends AbstractSceneController implements LoginFx, FxNormalScene {
 
     @FXML
     private VBox box;

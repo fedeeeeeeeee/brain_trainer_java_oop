@@ -10,7 +10,7 @@ import view.SceneType;
  * The fx controller for the main menu scene.
  *
  */
-public class MainMenuFx extends AbstractSceneController {
+public class MainMenuFx extends AbstractSceneController implements FxNormalScene{
 
     @FXML
     private Button trainingBtn;
