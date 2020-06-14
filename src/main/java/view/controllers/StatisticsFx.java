@@ -20,7 +20,7 @@ import view.TrainingArea;
  * The fx controller for Statistics scene.
  *
  */
-public class StatisticsFx extends AbstractSceneController implements FxController {
+public class StatisticsFx extends AbstractSceneController implements FxHandleDataScene {
 
     @FXML
     private Label statistics;
@@ -39,13 +39,10 @@ public class StatisticsFx extends AbstractSceneController implements FxControlle
     private List<Pair<TrainingArea, Integer>> values = new ArrayList<>();
     
     /**
-     * Initialize and show the user's progress.
+     * {@inheritDoc}
      */
-    public void init() {
-        this.getView().initStatistics();
-    }
-
-    public void setProgress(Progress progress) {
+    @Override
+    public void init(Progress progress) {
         this.values = progress.getAverageTrainingAreaScore().entrySet()
                 .stream()
                 .map(e-> new Pair<TrainingArea, Integer>(e.getKey(), e.getValue()))
@@ -56,5 +53,8 @@ public class StatisticsFx extends AbstractSceneController implements FxControlle
             this.vBox.getChildren().add(l);
             this.vBox.setAlignment(Pos.CENTER);
         });
+        
     }
+
+    
 }
