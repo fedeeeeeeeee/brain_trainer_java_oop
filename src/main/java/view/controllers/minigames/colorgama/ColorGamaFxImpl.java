@@ -59,7 +59,7 @@ public class ColorGamaFxImpl extends AbstractMiniGameControllerFx implements Col
 
     private final EventHandler<ActionEvent> rightEvent = (l) -> {
         this.image.setVisible(false);
-        this.colorGamaController.nextLevel();
+        this.colorGamaController.resetGame();
     };
 
     private final EventHandler<ActionEvent> wrongEvent = (l) -> this.image.setVisible(false);

@@ -15,9 +15,4 @@ public interface SizeCountController extends MiniGameController {
      *            the submitted answer
      */
     void newAttempt(String answer);
-
-    /**
-     * Resets the game for a new match.
-     */
-    void resetGame();
 }

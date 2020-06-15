@@ -20,9 +20,4 @@ public interface ColorGamaController extends MiniGameController {
      *          the button's index 
      */
     void checkAnswer(int index);
-
-    /**
-     * Reset the game for the next level.
-     */
-    void nextLevel();
 }

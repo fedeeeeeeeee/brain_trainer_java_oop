@@ -56,7 +56,7 @@ public class OneWayControllerImpl implements OneWayController {
      * {@inheritDoc}
      */
     @Override
-    public void nextLevel() {
+    public void resetGame() {
         this.model.oneWayInit();
         this.view.updateArrows(this.model.getSteps());
         this.view.updateView(this.model.getInitialPosition());

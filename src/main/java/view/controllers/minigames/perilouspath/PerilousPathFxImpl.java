@@ -84,7 +84,7 @@ public class PerilousPathFxImpl extends AbstractMiniGameControllerFx implements 
 
     private final EventHandler<ActionEvent> eventReset = (e) -> {
         this.restore();
-        this.controller.resetView();
+        this.controller.resetGame();
     };
 
     private final EventHandler<ActionEvent> eventUpdate = (e) -> {

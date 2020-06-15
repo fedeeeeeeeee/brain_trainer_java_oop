@@ -26,9 +26,4 @@ public interface PerilousPathController extends MiniGameController {
      * Update the view.
      */
     void updateView();
-
-    /**
-     * Reset the view at the initial state.
-     */
-    void resetView();
 }

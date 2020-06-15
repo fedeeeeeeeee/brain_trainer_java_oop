@@ -23,11 +23,6 @@ public interface OneWayController extends MiniGameController {
     void timeExpired();
 
     /**
-     * Initialize the next level.
-     */
-    void nextLevel();
-
-    /**
      * Initialize the game at its first initialization.
      */
     void firstInit();

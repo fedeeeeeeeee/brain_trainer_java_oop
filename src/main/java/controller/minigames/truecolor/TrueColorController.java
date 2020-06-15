@@ -15,13 +15,6 @@ public interface TrueColorController extends MiniGameController {
     void startGame();
 
     /**
-     * 
-     * Reload the map containing the random color for the button.
-     * 
-     */
-    void refresh();
-
-    /**
      * Check if is the right answer.
      * 
      * @param selectedAnswer answer to check

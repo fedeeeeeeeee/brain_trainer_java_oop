@@ -76,7 +76,7 @@ public class PerilousPathControllerImpl implements PerilousPathController {
      * {@inheritDoc}
      */
     @Override
-    public void resetView() {
+    public void resetGame() {
         if (!this.timeFinish) {
             this.gameTimer.pause();
             this.model.resetGame();
@@ -91,7 +91,7 @@ public class PerilousPathControllerImpl implements PerilousPathController {
     @Override
     public void startGame() {
         this.view.draw(this.model.getSize());
-        this.resetView();
+        this.resetGame();
     }
 
     /**
@@ -105,7 +105,7 @@ public class PerilousPathControllerImpl implements PerilousPathController {
         if (this.model.isDone()) {
             this.model.addPoint();
             this.view.restore();
-            this.resetView();
+            this.resetGame();
         }
         if (this.model.isFailed()) {
             this.view.showMines(this.model.getMines());

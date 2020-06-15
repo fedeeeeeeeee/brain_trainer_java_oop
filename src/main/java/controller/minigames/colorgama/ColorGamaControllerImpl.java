@@ -70,11 +70,11 @@ public final class ColorGamaControllerImpl implements ColorGamaController {
     @Override
     public void startGame() {
         this.view.initGrid(this.model.getDifficultyValue().getGridSize());
-        this.nextLevel();
+        this.resetGame();
     }
 
     @Override
-    public void nextLevel() {
+    public void resetGame() {
         final QuestionType currentQuestion = this.model.nextQuestion();
 
         this.view.renderNext(this.model.getColorIterator(), currentQuestion.getQuestionName());

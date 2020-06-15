@@ -86,7 +86,7 @@ public class OneWayFxImpl extends AbstractMiniGameControllerFx implements OneWay
         this.clickedBtn = (Button) e.getSource();
         this.controller.hit(buttons.get(clickedBtn).getX(), buttons.get(clickedBtn).getY());
         this.handlePauseTransitions();
-        this.controller.nextLevel();
+        this.controller.resetGame();
     };
 
     private void raiseException(final boolean condition, final Supplier<RuntimeException> supplier) {

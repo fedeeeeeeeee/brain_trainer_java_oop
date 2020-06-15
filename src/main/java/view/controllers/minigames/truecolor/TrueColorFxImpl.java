@@ -122,7 +122,7 @@ public class TrueColorFxImpl extends AbstractMiniGameControllerFx implements Tru
      */
     @Override
     public void next() {
-        this.trueColorController.refresh();
+        this.trueColorController.resetGame();
         this.trueColorController.startGame();
     }
 

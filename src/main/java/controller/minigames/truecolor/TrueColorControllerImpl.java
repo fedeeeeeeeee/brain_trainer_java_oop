@@ -35,7 +35,7 @@ public class TrueColorControllerImpl implements TrueColorController {
     public TrueColorControllerImpl(final TrueColorFxImpl trueColorFx, final DifficultyLevel difficultyLevel) {
         Objects.requireNonNull(trueColorFx, "TrueColorFx is null");
         Objects.requireNonNull(difficultyLevel, "DifficultyLevel is null");
-        this.difficultyLevel= difficultyLevel;
+        this.difficultyLevel = difficultyLevel;
         this.model = new TrueColorModelImpl(difficultyLevel,
                 DifficultyStrategyFactory.getSpecifiedDifficulty(difficultyLevel));
         this.timer = new Timer();
@@ -59,7 +59,7 @@ public class TrueColorControllerImpl implements TrueColorController {
      * {@inheritDoc}
      */
     @Override
-    public void refresh() {
+    public void resetGame() {
         this.model.reloadRandomColorMap();
     }
 
