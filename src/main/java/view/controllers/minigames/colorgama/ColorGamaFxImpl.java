@@ -25,7 +25,6 @@ import javafx.util.Duration;
 import model.DifficultyLevel;
 import model.minigames.colorgama.ColorValuesIterator;
 import view.SceneType;
-import view.controllers.FxNormalScene;
 import view.controllers.minigames.AbstractMiniGameControllerFx;
 
 /**
@@ -77,7 +76,7 @@ public class ColorGamaFxImpl extends AbstractMiniGameControllerFx implements Col
      * {@inheritDoc}
      */
     @Override
-    public void initGame(DifficultyLevel difficultyLevel) {
+    public void initGame(final DifficultyLevel difficultyLevel) {
         this.colorGamaController = new ColorGamaControllerImpl(this, difficultyLevel);
         this.colorGamaController.startTimer();
         this.colorGamaController.startGame();
@@ -139,7 +138,7 @@ public class ColorGamaFxImpl extends AbstractMiniGameControllerFx implements Col
     public void showEndGame(final int finalScore) {
         Platform.runLater(() -> {
             this.getController().updateProgress(finalScore);
-            this.getView().switchScene(SceneType.END_GAME.getFilePath());
+            this.getView().loadProgress(SceneType.END_GAME.getFilePath());
         });
     }
 

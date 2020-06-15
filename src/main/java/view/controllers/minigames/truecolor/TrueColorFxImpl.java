@@ -109,7 +109,7 @@ public class TrueColorFxImpl extends AbstractMiniGameControllerFx implements Tru
      * {@inheritDoc}
      */
     @Override
-    public void initGame(DifficultyLevel difficultyLevel) {
+    public void initGame(final DifficultyLevel difficultyLevel) {
         this.trueColorController = new TrueColorControllerImpl(this, difficultyLevel);
         this.setDropShadow();
         this.prepareButtons();
@@ -165,7 +165,7 @@ public class TrueColorFxImpl extends AbstractMiniGameControllerFx implements Tru
     public void showEndGame(final int finalScore) {
         Platform.runLater(() -> {
             this.getController().updateProgress(finalScore);
-            this.getView().switchScene(SceneType.END_GAME.getFilePath());
+            this.getView().loadProgress(SceneType.END_GAME.getFilePath());
         });
     }
 

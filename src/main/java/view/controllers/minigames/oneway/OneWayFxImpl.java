@@ -124,7 +124,7 @@ public class OneWayFxImpl extends AbstractMiniGameControllerFx implements OneWay
      * {@inheritDoc}
      */
     @Override
-    public void initGame(DifficultyLevel difficultyLevel) {
+    public void initGame(final DifficultyLevel difficultyLevel) {
         this.progressBar.setStyle(BLUE);
         this.controller = new OneWayControllerImpl(this, difficultyLevel);
         this.buttons = new HashMap<>();
@@ -209,7 +209,7 @@ public class OneWayFxImpl extends AbstractMiniGameControllerFx implements OneWay
         Platform.runLater(() -> {
             this.scoreLbl.setText(String.valueOf(finalScore));
             this.getController().updateProgress(finalScore);
-            this.getView().switchScene(SceneType.END_GAME.getFilePath());
+            this.getView().loadProgress(SceneType.END_GAME.getFilePath());
         });
     }
 
@@ -225,7 +225,7 @@ public class OneWayFxImpl extends AbstractMiniGameControllerFx implements OneWay
 //    private void quitGame() { // NOPMD
 //        this.scoreLbl.setText(String.valueOf(ZERO));
 //        this.getController().updateProgress(ZERO);
-//        this.getView().switchScene(SceneType.END_GAME.getFilePath());
+//        this.getView().loadProgress(SceneType.END_GAME.getFilePath());
 //    }
 
 }
