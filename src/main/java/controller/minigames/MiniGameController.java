@@ -15,7 +15,12 @@ public interface MiniGameController {
      * Stop the {@link GameTimer}.
      */
     void stopTimer();
-    
+
+    /**
+     * Reset the game for the next attempt.
+     */
+    void resetGame();
+
     /**
      * Update the seconds of the timer on the view.
      * 
