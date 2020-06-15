@@ -1,11 +1,13 @@
 package view.controllers.minigames.colorgama;
 
 import model.minigames.colorgama.ColorValuesIterator;
+import view.controllers.Area;
 
 /**
  * The view interface of ColorGama minigame.
  *
  */
+@Area(trainingArea = "Visual Skill")
 public interface ColorGamaFx {
 
     /**

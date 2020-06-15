@@ -4,10 +4,12 @@ import java.util.Set;
 
 import model.minigames.perilouspath.Mine;
 import utility.Pair;
+import view.controllers.Area;
 
 /**
  * Represents the game's view.
  */
+@Area(trainingArea = "Memory")
 public interface PerilousPathFx {
 
     /**

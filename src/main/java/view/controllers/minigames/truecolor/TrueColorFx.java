@@ -6,12 +6,14 @@ import java.util.Map;
 import model.minigames.truecolor.Colors;
 import model.minigames.truecolor.StatusColor;
 import utility.Pair;
+import view.controllers.Area;
 
 /**
  * 
  * Interface of TrueColorFx.
  *
  */
+@Area(trainingArea = "Attention")
 public interface TrueColorFx {
 
     /**

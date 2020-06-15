@@ -4,11 +4,13 @@ import java.util.List;
 
 import model.minigames.oneway.Direction;
 import utility.Pair;
+import view.controllers.Area;
 
 /**
  * The interface for the visual representation of One Way.
  * 
  */
+@Area(trainingArea = "Brain Speed")
 public interface OneWayFx {
 
     /**

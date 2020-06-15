@@ -3,12 +3,14 @@ package view.controllers.minigames.sizecount;
 import java.util.List;
 
 import model.minigames.sizecount.IntegerOperation;
+import view.controllers.Area;
 
 /**
  * 
  * A interface view for the game size count.
  *
  */
+@Area(trainingArea = "Reasoning")
 public interface SizeCountFx {
 
     /**
