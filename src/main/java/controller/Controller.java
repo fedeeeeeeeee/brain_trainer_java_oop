@@ -3,7 +3,6 @@ package controller;
 import java.io.File;
 
 import model.DifficultyLevel;
-import model.UserPlayer;
 import view.TrainingArea;
 import view.View;
 
@@ -38,13 +37,6 @@ public interface Controller {
     void setArea(TrainingArea area);
 
     /**
-     * Getter for the selected training area.
-     * 
-     * @return the selected {@link TrainingArea}.
-     */
-    TrainingArea getArea();
-
-    /**
      * Set the selected minigame and difficultyLevel.
      * 
      * @param minigame 
@@ -54,7 +46,6 @@ public interface Controller {
      *                        the selected {@link DifficultyLevel}.
      */
     void setMiniGame(String minigame, DifficultyLevel difficultyLevel);
-
 
     /**
      * The selected difficultyLevel.
@@ -75,24 +66,8 @@ public interface Controller {
      */
     void updateProgress(Integer score);
 
-   
     /**
-     * Get the score related to the current minigame.
-     * 
-     * @return the current score
-     */
-    int getCurrentScore();
-
-    /**
-     * Get the best score related to the current minigame.
-     * 
-     * @return the current best score
-     */
-    int getCurrentMiniGameBest();
-    
-    /**
-     * 
+     * Initialize the statistics data of the user.
      */
     void initStatistics();
-
 }

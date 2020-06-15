@@ -17,13 +17,6 @@ public interface Model {
     void setUserPlayer(UserPlayer player);
 
     /**
-     * Getter for the selected training area.
-     * 
-     * @return the selected {@link TrainingArea}.
-     */
-    TrainingArea getArea();
-
-    /**
      * Set the selected training area.
      * 
      * @param area 
@@ -37,13 +30,6 @@ public interface Model {
      * @return the selected {@link DifficultyLevel}.
      */
     DifficultyLevel getDifficultyLevel();
-
-    /**
-     * Getter for the selected minigame.
-     * 
-     * @return the selected minigame
-     */
-    String getMiniGame();
 
     /**
      * Set the selected minigame and difficulty.
@@ -71,18 +57,4 @@ public interface Model {
      *          the current user
      */
     UserPlayer getUser();
-
-    /**
-     * Get the score related to the current minigame.
-     * 
-     * @return the current score
-     */
-    int getCurrentScore();
-
-    /**
-     * Get the best score related to the current minigame.
-     * 
-     * @return the current best score
-     */
-    int getCurrentMiniGameBest();
 }

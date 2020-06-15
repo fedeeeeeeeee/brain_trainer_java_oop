@@ -19,16 +19,18 @@ public interface View {
     /**
      * 
      * @param path 
-     *             the minigame scene to show.
+     *             the minigame scene to show
      */
     void setMiniGameScene(String path);
-    
+
     /**
      * Initialize the {@link Progress} of the User.
+     * 
+     * @param path
+     *             the minigame handle data scene to show
      */
-    void loadProgress();
-    
-    
+    void loadProgress(String path);
+
     /**
      * Load the {@link Progress} of the User.
      *  @param progress

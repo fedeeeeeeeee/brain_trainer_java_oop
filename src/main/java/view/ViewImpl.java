@@ -11,7 +11,6 @@ import model.score.Progress;
 import view.controllers.FxController;
 import view.controllers.FxHandleDataScene;
 import view.controllers.FxNormalScene;
-import view.controllers.StatisticsFx;
 import view.controllers.minigames.FxMiniGameController;
 
 /**
@@ -40,11 +39,11 @@ public class ViewImpl extends Application implements View {
         this.sceneInitializer = new SceneInitializerImpl();
     }
 
-    private void simpleSwitch(String path) {
+    private void simpleSwitch(final String path) {
         this.currentSceneController = this.sceneLoader.loadScene(path).get();
         this.initializeSceneController(this.currentSceneController);
     }
-    
+
     private void initializeSceneController(final FxController currentController) {
         currentController.initialize(this, this.controller);
         if (this.stage.getScene() == null) {
@@ -60,11 +59,34 @@ public class ViewImpl extends Application implements View {
      */
     @Override
     public void switchScene(final String path) {
-        if (this.inGame) {
-            this.inGame = false;
-        }   
         this.simpleSwitch(path);
-        this.sceneInitializer.initializeNormalScene((FxNormalScene)this.currentSceneController);
+        this.sceneInitializer.initializeNormalScene((FxNormalScene) this.currentSceneController);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void loadProgress(final String path) {
+        this.inGame = false;
+        this.simpleSwitch(path);
+        this.controller.initStatistics();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void initStatistics(final Progress progress) {
+        this.sceneInitializer.initializeHandleDataScene((FxHandleDataScene) this.currentSceneController, progress);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void initGame(final DifficultyLevel difficultyLevel) {
+        this.sceneInitializer.initializeMinigameScene((FxMiniGameController) this.currentSceneController, difficultyLevel);
     }
 
     /**
@@ -85,43 +107,19 @@ public class ViewImpl extends Application implements View {
         this.stage = stage;
         this.stage.setHeight(HEIGHT);
         this.stage.setWidth(WIDTH);
-        this.stage.setMinHeight(HEIGHT/1.3);
-        this.stage.setMinWidth(WIDTH/1.3);
+        this.stage.setMinHeight(HEIGHT / 1.3);
+        this.stage.setMinWidth(WIDTH / 1.3);
         this.inGame = false;
         this.stage.setTitle("Brain Trainer");
         this.stage.setResizable(true);
         this.stage.show();
         this.controller.initializeView(this);
-        
+
         this.stage.setOnCloseRequest((e) -> {
             controller.saveData();
             if (this.inGame) {
                 ((FxMiniGameController) currentSceneController).stopTimer();
             }
         });
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public void loadProgress() {
-        this.controller.initStatistics();
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public void initStatistics(Progress progress) {
-        this.sceneInitializer.initializeHandleDataScene((FxHandleDataScene)this.currentSceneController, progress);    
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public void initGame(DifficultyLevel difficultyLevel) {
-        this.sceneInitializer.initializeMinigameScene((FxMiniGameController) this.currentSceneController, difficultyLevel);
     }
 }
