@@ -5,7 +5,17 @@ package controller.minigames;
  *
  */
 public interface MiniGameController {
+    
+    /**
+     * Start the {@link GameTimer}.
+     */
+    void startTimer();
 
+    /**
+     * Stop the {@link GameTimer}.
+     */
+    void stopTimer();
+    
     /**
      * Update the seconds of the timer on the view.
      * 
@@ -18,5 +28,4 @@ public interface MiniGameController {
      * Indicate that the time available is finished.
      */
     void timeFinish();
-
 }
