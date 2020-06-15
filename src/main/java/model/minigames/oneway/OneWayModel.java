@@ -2,13 +2,14 @@ package model.minigames.oneway;
 
 import java.util.List;
 import model.DifficultyLevel;
+import model.minigames.MiniGameModel;
 import utility.Pair;
 
 /**
  * The model interface of One Way minigame.
  * 
  */
-public interface OneWayModel {
+public interface OneWayModel extends MiniGameModel {
 
     /**
      * Check if the player guess the answer.
@@ -43,18 +44,6 @@ public interface OneWayModel {
      * @return the final position
      */
     Pair<Integer, Integer> getFinalPosition();
-
-    /**
-     * Add scored points. 
-     * 
-     */
-    void addPoint();
-
-    /**
-     * 
-     * @return the final score
-     */
-    int getFinalScore();
 
     /**
      * Initialize One Way.

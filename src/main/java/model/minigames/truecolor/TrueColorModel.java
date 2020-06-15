@@ -3,13 +3,14 @@ package model.minigames.truecolor;
 import java.util.List;
 import java.util.Map;
 
+import model.minigames.MiniGameModel;
 import utility.Pair;
 
 /**
  * The model interface of TrueColor minigame.
  *
  */
-public interface TrueColorModel {
+public interface TrueColorModel extends MiniGameModel {
 
     /**
      * Reload the map containing the random color for the button.
@@ -40,19 +41,6 @@ public interface TrueColorModel {
      * @return a random {@link boolean} value
      */
     Boolean getStatusMethod();
-
-    /**
-     * Add points when the user gave the right answer.
-     * 
-     */
-    void addPoint();
-
-    /**
-     * Get the final score.
-     * 
-     * @return score
-     */
-    int getFinalScore();
 
     /**
      * 

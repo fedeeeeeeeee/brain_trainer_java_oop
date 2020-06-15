@@ -2,12 +2,13 @@ package model.minigames.perilouspath;
 
 import java.util.Set;
 
+import model.minigames.MiniGameModel;
 import utility.Pair;
 
 /**
  * Represents the game's model.
  */
-public interface PerilousPathModel {
+public interface PerilousPathModel extends MiniGameModel {
 
     /**
      * Check if the user can hit this position.
@@ -48,18 +49,6 @@ public interface PerilousPathModel {
      * @return the mines
      */
     Set<Mine> getMines();
-
-    /**
-     * Add point when user finds the right path.
-     */
-    void addPoint();
-
-    /**
-     * Gets the game's final score.
-     * 
-     * @return the final score
-     */
-    int getFinalScore();
 
     /**
      * Check if the user finds a path correctly.

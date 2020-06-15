@@ -2,12 +2,14 @@ package model.minigames.sizecount;
 
 import java.util.List;
 
+import model.minigames.MiniGameModel;
+
 /**
  * 
  * A model interface for the game size count.
  *
  */
-public interface SizeCountModel {
+public interface SizeCountModel extends MiniGameModel {
 
     /**
      * Verify if the answer is correct.
@@ -16,11 +18,6 @@ public interface SizeCountModel {
      * @return true if the answer is correct false otherwise
      */
     boolean isCorrectAnswer(String answer);
-
-    /**
-     * Add points at the score of the game.
-     */
-    void addPoint();
 
     /**
      * Get the random operations that compose the game.
@@ -40,12 +37,4 @@ public interface SizeCountModel {
      * @return the number of operations of which the game is made up
      */
     Integer getNumOfOperations();
-
-    /**
-     * Get the score gained.
-     * 
-     * @return the score gained
-     */
-    int getScore();
-
 }

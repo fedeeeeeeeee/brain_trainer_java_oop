@@ -188,7 +188,7 @@ public class SizeCountModelImpl implements SizeCountModel {
      * {@inheritDoc}
      */
     @Override
-    public int getScore() {
+    public int getFinalScore() {
         return this.scoreModel.getScore();
     }
 
