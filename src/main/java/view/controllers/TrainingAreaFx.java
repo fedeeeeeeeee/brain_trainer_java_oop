@@ -62,6 +62,14 @@ public class TrainingAreaFx extends AbstractSceneController {
             }); 
             this.backBtn.setStyle(String.format("-fx-font-size: %dpx;", (int) (0.08 * ((Button)this.areasGrid.getChildren().get(0)).getWidth())));
         }); 
+        
+        Double sizeScene= backBtn.getScene().getWindow().getScene().getHeight();
+        //TODO
+        Double sizeBtn = sizeScene/12;
+        this.areasGrid.getChildren().forEach(b -> {
+          ((Button) b).setStyle(String.format("-fx-font-size: %dpx;",(int) (0.40 * sizeBtn)));
+      });  
+        this.backBtn.setStyle(String.format("-fx-font-size: %dpx;", (int) ((0.40 * sizeBtn))));
     }
 
 }

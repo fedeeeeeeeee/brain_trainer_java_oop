@@ -6,11 +6,14 @@ import java.util.Arrays;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.ToggleGroup;
+import javafx.scene.layout.GridPane;
+import javafx.stage.Stage;
 import model.DifficultyLevel;
 import view.SceneType;
 
@@ -34,6 +37,12 @@ public class MinigameSelectorFx extends AbstractSceneController {
 
     @FXML
     private ComboBox<String> gameComboBox;
+    
+    @FXML
+    private GridPane grid;
+    
+    @FXML
+    private GridPane gridToggle;
 
     @FXML
     private void initializeCombo() { // NOPMD
@@ -75,7 +84,30 @@ public class MinigameSelectorFx extends AbstractSceneController {
 
     @Override
     public void init() {
-        // TODO Auto-generated method stub
+        Stage stages = (Stage) backBtn.getScene().getWindow();  
+        stages.widthProperty().addListener((obs, oldVal, newVal) -> {
+            this.grid.getChildren().forEach(b -> {
+                ((Node) b).setStyle(String.format("-fx-font-size: %dpx;", (int) (0.15 * backBtn.getWidth())));
+            }); 
+        });
+        
+        stages.widthProperty().addListener((obs, oldVal, newVal) -> {
+            this.gridToggle.getChildren().forEach(b -> {
+                ((Node) b).setStyle(String.format("-fx-font-size: %dpx;", (int) (0.15 * backBtn.getWidth())));
+            }); 
+        });
+        
+        Double sizeScene = backBtn.getScene().getWindow().getScene().getHeight();
+        // TODO
+        Double sizeBtn = sizeScene / 10;
+        this.grid.getChildren().forEach(b -> {
+            ((Node) b).setStyle(String.format("-fx-font-size: %dpx;", (int) (0.30 * sizeBtn)));
+        });
+
+        // TODO è storto !!! 
+        this.gridToggle.getChildren().forEach(b -> {
+            ((Node) b).setStyle(String.format("-fx-font-size: %dpx;", (int) (0.40 * sizeBtn)));
+        });
         
     }
 
