@@ -10,7 +10,7 @@ import view.SceneType;
  * The fx controller for the main menu scene.
  *
  */
-public class MainMenuFx extends AbstractSceneController implements FxNormalScene{
+public class MainMenuFx extends AbstractSceneController implements FxNormalScene {
 
     @FXML
     private Button trainingBtn;
@@ -28,7 +28,7 @@ public class MainMenuFx extends AbstractSceneController implements FxNormalScene
 
     @FXML
     private void showStatistics() throws IOException { // NOPMD
-        this.getView().switchScene(SceneType.STATISTICS.getFilePath());
+        this.getView().loadProgress(SceneType.STATISTICS.getFilePath());
     }
 
     @FXML
@@ -39,6 +39,6 @@ public class MainMenuFx extends AbstractSceneController implements FxNormalScene
     @Override
     public void init() {
         // TODO Auto-generated method stub
-        
+
     }
 }
