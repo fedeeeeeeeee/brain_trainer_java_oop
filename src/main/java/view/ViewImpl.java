@@ -24,7 +24,6 @@ public class ViewImpl extends Application implements View {
 
     private final Controller controller;
     private final SceneLoader sceneLoader;
-    private final SceneInitializer sceneInitializer;
     private FxController currentSceneController;
     private Stage stage;
     private boolean inGame;
@@ -36,7 +35,6 @@ public class ViewImpl extends Application implements View {
     public ViewImpl() {
         this.controller = new ControllerImpl();
         this.sceneLoader = new SceneLoaderImpl();
-        this.sceneInitializer = new SceneInitializerImpl();
     }
 
     private void simpleSwitch(final String path) {
@@ -60,7 +58,7 @@ public class ViewImpl extends Application implements View {
     @Override
     public void switchScene(final String path) {
         this.simpleSwitch(path);
-        this.sceneInitializer.initializeNormalScene((FxNormalScene) this.currentSceneController);
+        ((FxNormalScene) this.currentSceneController).init();
     }
 
     /**
@@ -78,7 +76,7 @@ public class ViewImpl extends Application implements View {
      */
     @Override
     public void initStatistics(final Progress progress) {
-        this.sceneInitializer.initializeHandleDataScene((FxHandleDataScene) this.currentSceneController, progress);
+        ((FxHandleDataScene) this.currentSceneController).init(progress);
     }
 
     /**
@@ -86,7 +84,7 @@ public class ViewImpl extends Application implements View {
      */
     @Override
     public void initGame(final DifficultyLevel difficultyLevel) {
-        this.sceneInitializer.initializeMinigameScene((FxMiniGameController) this.currentSceneController, difficultyLevel);
+        ((FxMiniGameController) this.currentSceneController).initGame(difficultyLevel);
     }
 
     /**
