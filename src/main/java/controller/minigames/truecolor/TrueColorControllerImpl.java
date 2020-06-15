@@ -21,6 +21,7 @@ public class TrueColorControllerImpl implements TrueColorController {
     private final TrueColorFxImpl view;
     private final GameTimer gameTimer;
     private final Timer timer;
+    private final DifficultyLevel difficultyLevel;
 
     /**
      * Constructor of {@link TrueColorController}.
@@ -31,9 +32,10 @@ public class TrueColorControllerImpl implements TrueColorController {
      * 
      * @throws IllegalStateException if parameters are null
      */
-    public TrueColorControllerImpl(final DifficultyLevel difficultyLevel, final TrueColorFxImpl trueColorFx) {
+    public TrueColorControllerImpl(final TrueColorFxImpl trueColorFx, final DifficultyLevel difficultyLevel) {
         Objects.requireNonNull(trueColorFx, "TrueColorFx is null");
         Objects.requireNonNull(difficultyLevel, "DifficultyLevel is null");
+        this.difficultyLevel= difficultyLevel;
         this.model = new TrueColorModelImpl(difficultyLevel,
                 DifficultyStrategyFactory.getSpecifiedDifficulty(difficultyLevel));
         this.timer = new Timer();
@@ -48,7 +50,7 @@ public class TrueColorControllerImpl implements TrueColorController {
     @Override
     public void startGame() {
         this.view.setButtons(model.getRandomColorMap());
-        if (this.view.getController().getDifficultyLevel().equals(DifficultyLevel.HARD) && model.getStatusMethod()) {
+        if (this.difficultyLevel.equals(DifficultyLevel.HARD) && model.getStatusMethod()) {
             this.view.alternativeSetButton(model.getRandomColorMap().get(StatusColor.TRUECOLOR));
         }
     }

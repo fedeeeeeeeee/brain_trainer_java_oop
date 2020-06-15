@@ -20,6 +20,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import javafx.util.Duration;
+import model.DifficultyLevel;
 import model.minigames.truecolor.Colors;
 import model.minigames.truecolor.StatusColor;
 import utility.Pair;
@@ -108,8 +109,8 @@ public class TrueColorFxImpl extends AbstractMiniGameControllerFx implements Tru
      * {@inheritDoc}
      */
     @Override
-    public void init() {
-        this.trueColorController = new TrueColorControllerImpl(this.getController().getDifficultyLevel(), this);
+    public void initGame(DifficultyLevel difficultyLevel) {
+        this.trueColorController = new TrueColorControllerImpl(this, difficultyLevel);
         this.setDropShadow();
         this.prepareButtons();
         this.trueColorController.startTimer();
