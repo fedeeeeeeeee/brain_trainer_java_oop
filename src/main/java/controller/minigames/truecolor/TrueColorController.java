@@ -28,14 +28,4 @@ public interface TrueColorController extends MiniGameController {
      * 
      */
     void check(String selectedAnswer);
-
-    /**
-     * 
-     */
-    void stopTimer();
-
-    /**
-     * 
-     */
-    void startTimer();
 }

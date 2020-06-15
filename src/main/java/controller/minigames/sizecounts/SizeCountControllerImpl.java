@@ -30,9 +30,12 @@ public class SizeCountControllerImpl implements SizeCountController {
     /**
      * Constructor for {@link SizeCountController}.
      *
-     * @param view the view of the game
+     * @param view 
+     *          the view of the game
+     * @param difficultyLevel
+     *          the {@link DifficultyLevel} of the game
      */
-    public SizeCountControllerImpl(final SizeCountFxImpl view, DifficultyLevel difficultyLevel) {
+    public SizeCountControllerImpl(final SizeCountFxImpl view, final DifficultyLevel difficultyLevel) {
         this.timer = new Timer();
         this.gameTimer = new GameTimer(SECONDS, this);
         this.view = view;
@@ -77,7 +80,7 @@ public class SizeCountControllerImpl implements SizeCountController {
     @Override
     public void timeFinish() {
         this.timer.cancel();
-        this.view.showEndGame(this.model.getScore());
+        this.view.showEndGame(this.model.getFinalScore());
     }
 
     /**

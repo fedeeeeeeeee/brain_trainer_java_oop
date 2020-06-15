@@ -36,15 +36,4 @@ public interface OneWayController extends MiniGameController {
      * Show if the player guess the answer.
      */
     void showSolution();
-
-    /**
-     * Stop the timer of the game.
-     */
-    void stopTimer();
-
-    /**
-     * Start the timer of the game.
-     */
-    void startTimer();
-
 }

@@ -31,14 +31,4 @@ public interface PerilousPathController extends MiniGameController {
      * Reset the view at the initial state.
      */
     void resetView();
-
-    /**
-     * Start the timer of the game.
-     */
-    void startTimer();
-
-    /**
-     * Stop the timer of the game.
-     */
-    void stopTimer();
 }

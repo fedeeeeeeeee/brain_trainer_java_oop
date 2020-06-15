@@ -20,15 +20,4 @@ public interface SizeCountController extends MiniGameController {
      * Resets the game for a new match.
      */
     void resetGame();
-
-    /**
-     * Start the {@link GameTimer}.
-     */
-    void startTimer();
-
-    /**
-     * Stop the {@link GameTimer}.
-     */
-    void stopTimer();
-
 }
