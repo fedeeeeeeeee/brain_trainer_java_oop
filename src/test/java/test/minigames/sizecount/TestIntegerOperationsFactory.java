@@ -8,7 +8,10 @@ import model.minigames.sizecount.IntegerOperation;
 import model.minigames.sizecount.IntegerOperationsFactory;
 import model.minigames.sizecount.IntegerOperationsFactoryImpl;
 
-class TestIntegerOperationsFactory {
+/**
+ * 
+ */
+public class TestIntegerOperationsFactory {
 
     private final IntegerOperationsFactory factory = new IntegerOperationsFactoryImpl();
 
@@ -49,7 +52,7 @@ class TestIntegerOperationsFactory {
     }
 
     @Test
-    public void argumentsCanBeZero() throws IllegalStateException {
+    public void argumentsCanBeZero() {
         assertThrows(IllegalStateException.class, () ->  this.factory.addiction(0, 0));
     }
 }
