@@ -6,6 +6,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
+import view.DimensionCalculator;
 import view.SceneType;
 
 /**
@@ -26,6 +27,8 @@ public class MainMenuFx extends AbstractSceneController {
     @FXML
     private GridPane areasGrid;
 
+    private DimensionCalculator calculator;
+
     @FXML
     private void startTraining() throws IOException { // NOPMD
         this.getView().switchScene(SceneType.TRAINING_AREA.getFilePath());
@@ -41,23 +44,15 @@ public class MainMenuFx extends AbstractSceneController {
         this.getView().switchScene(SceneType.HOW_TO_PLAY.getFilePath());
     }
 
-//    private int calculateButton(numButton ) {
-//        numBtton *2 + 2; 
-//    }
     @Override
     public void init() {
-        Stage stages = (Stage) trainingBtn.getScene().getWindow();  
-        stages.widthProperty().addListener((obs, oldVal, newVal) -> {
-            this.areasGrid.getChildren().forEach(b -> {
-                ((Button) b).setStyle(String.format("-fx-font-size: %dpx;", (int) (0.10 * ((Button) b).getWidth())));
-            }); 
-        }); 
+        this.calculator = new DimensionCalculator();
+        int buttonSize = calculator.getButtonDimension(calculator.getNumberOfButton(areasGrid), trainingBtn);
+        Stage stages = (Stage) trainingBtn.getScene().getWindow();
         
-        Double sizeScene= trainingBtn.getScene().getWindow().getScene().getHeight();
-        //TODO
-        Double sizeBtn = sizeScene/10;
-        this.areasGrid.getChildren().forEach(b -> {
-            ((Button) b).setStyle(String.format("-fx-font-size: %dpx;",(int) (0.40 * sizeBtn)));
-        });  
+        stages.widthProperty().addListener((obs, oldVal, newVal) -> {
+            this.calculator.setFontStyleOnAction(areasGrid, 0.10); 
+        }); 
+        this.calculator.setActualFontStyle(areasGrid, 0.35, buttonSize); 
     }
 }

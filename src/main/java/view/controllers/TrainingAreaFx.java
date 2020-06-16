@@ -8,6 +8,7 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import view.TrainingArea;
+import view.DimensionCalculator;
 import view.SceneType;
 
 import java.util.Arrays;
@@ -26,6 +27,8 @@ public class TrainingAreaFx extends AbstractSceneController {
 
     @FXML
     private GridPane areasGrid;
+    
+    private DimensionCalculator calculator;
 
     @FXML
     private void areaClicked(final MouseEvent event) throws IOException { // NOPMD
@@ -55,21 +58,15 @@ public class TrainingAreaFx extends AbstractSceneController {
      */
     @Override
     public void init() {
+        this.calculator = new DimensionCalculator();
+        int buttonSize = calculator.getButtonDimension(calculator.getNumberOfButton(areasGrid), backBtn);
         Stage stages = (Stage) backBtn.getScene().getWindow();
-        stages.widthProperty().addListener((obs, oldVal, newVal) -> {
-            this.areasGrid.getChildren().forEach(b -> {
-                ((Button) b).setStyle(String.format("-fx-font-size: %dpx;", (int) (0.10 * ((Button) b).getWidth())));
-            }); 
-            this.backBtn.setStyle(String.format("-fx-font-size: %dpx;", (int) (0.08 * ((Button)this.areasGrid.getChildren().get(0)).getWidth())));
-        }); 
         
-        Double sizeScene= backBtn.getScene().getWindow().getScene().getHeight();
-        //TODO
-        Double sizeBtn = sizeScene/12;
-        this.areasGrid.getChildren().forEach(b -> {
-          ((Button) b).setStyle(String.format("-fx-font-size: %dpx;",(int) (0.40 * sizeBtn)));
-      });  
-        this.backBtn.setStyle(String.format("-fx-font-size: %dpx;", (int) ((0.40 * sizeBtn))));
+        stages.widthProperty().addListener((obs, oldVal, newVal) -> {
+            this.calculator.setFontStyleOnAction(areasGrid, 0.10);
+                   
+        }); 
+        this.calculator.setActualFontStyle(areasGrid, 0.50, buttonSize);       
     }
 
 }
