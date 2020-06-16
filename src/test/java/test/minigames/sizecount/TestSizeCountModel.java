@@ -17,7 +17,7 @@ class TestSizeCountModel {
     private SizeCountModel model;
 
     @Test
-    void testEasy() {
+    public void testEasy() {
         this.model = new SizeCountModelImpl(DifficultyLevel.EASY);
         final List<IntegerOperation> operations = this.model.getOperations();
         final int max = operations.stream().mapToInt(e -> e.getResult()).max().getAsInt();
@@ -37,7 +37,7 @@ class TestSizeCountModel {
     }
 
     @Test
-    void testNormal() {
+    public void testNormal() {
         this.model = new SizeCountModelImpl(DifficultyLevel.NORMAL);
         final List<IntegerOperation> operations = this.model.getOperations();
         final int max = operations.stream().mapToInt(e -> e.getResult()).max().getAsInt();
@@ -57,7 +57,7 @@ class TestSizeCountModel {
     }
 
     @Test
-    void testHard() {
+    public void testHard() {
         this.model = new SizeCountModelImpl(DifficultyLevel.HARD);
         final List<IntegerOperation> operations = this.model.getOperations();
         final int max = operations.stream().mapToInt(e -> e.getResult()).max().getAsInt();
