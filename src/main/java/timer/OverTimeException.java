@@ -18,6 +18,6 @@ public class OverTimeException extends Exception {
     * 
     */
     public OverTimeException() {
-        super();
+        super("The available time is over.");
     }
 }

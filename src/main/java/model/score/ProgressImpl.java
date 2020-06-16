@@ -12,8 +12,8 @@ import view.TrainingArea;
  */
 public class ProgressImpl implements Progress {
 
-    private Map<TrainingArea, Map<String, ScoreManagementImpl>> historyScore;
-    private Map<TrainingArea, Integer> averageTrainingAreaScore;
+    private final Map<TrainingArea, Map<String, ScoreManagementImpl>> historyScore;
+    private final Map<TrainingArea, Integer> averageTrainingAreaScore;
     private int currentScore;
     private int currentBest;
 
@@ -27,10 +27,10 @@ public class ProgressImpl implements Progress {
     }
 
     private void initialize() {
-        for (TrainingArea area : TrainingArea.values()) {
+        for (final TrainingArea area : TrainingArea.values()) {
             this.historyScore.put(area, new HashMap<>());
             this.averageTrainingAreaScore.put(area, 0);
-            for (String miniGame : area.getMiniGameList()) {
+            for (final String miniGame : area.getMiniGameList()) {
                 this.historyScore.get(area).put(miniGame, new ScoreManagementImpl());
             }
         }

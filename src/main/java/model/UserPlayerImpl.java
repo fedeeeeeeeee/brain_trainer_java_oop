@@ -13,12 +13,17 @@ public class UserPlayerImpl implements UserPlayer {
     private String username;
     private String password;
     private ProgressImpl progress;
-    
-    public UserPlayerImpl() {}
-    
-    private UserPlayerImpl(PlayerBuilder builder) {
+
+    /**
+     * Creates instance of {@link UserPlayer}.
+     */
+    public UserPlayerImpl() {
+        // this is intentionally empty, nothing needed here.
+    }
+
+    private UserPlayerImpl(final PlayerBuilder builder) {
         this.username = builder.username;
-        this.password = builder.password;   
+        this.password = builder.password;
     }
 
     /**
@@ -52,25 +57,42 @@ public class UserPlayerImpl implements UserPlayer {
     public void setProgress(final ProgressImpl progress) {
         this.progress = progress;
     }
-    
+
     /**
-     * Builder for User 
+     * Builder for User. 
      * 
      */
     public static class PlayerBuilder {
         private String username;
         private String password; 
-        
-        public PlayerBuilder username(String username) {
+
+        /**
+         * Constructs a player builder with a specified name.
+         * 
+         * @param username the name of the player.
+         * @return playerBuilder
+         */
+        public PlayerBuilder username(final String username) {
             this.username = username;
             return this;
         }
-        
-        public PlayerBuilder password(String password) {
+
+        /**
+         * Constructs a player builder with a specified password.
+         * 
+         * @param password the password of the player.
+         * @return playerBuilder
+         */
+        public PlayerBuilder password(final String password) {
             this.password = password;
             return this;
         }
-        
+
+        /**
+         * Builds the UserPlayer.
+         * 
+         * @return userPlayer
+         */
         public UserPlayer build() {
             return new UserPlayerImpl(this);
         }
