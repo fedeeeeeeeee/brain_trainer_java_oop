@@ -32,6 +32,7 @@ public enum DifficultyLevel {
      * @return the name of the difficulty level
      * 
      */
+    @Override
     public String toString() {
         return this.name;
     }

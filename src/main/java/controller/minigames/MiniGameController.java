@@ -5,7 +5,7 @@ package controller.minigames;
  *
  */
 public interface MiniGameController {
-    
+
     /**
      * Start the {@link GameTimer}.
      */
@@ -24,8 +24,7 @@ public interface MiniGameController {
     /**
      * Update the seconds of the timer on the view.
      * 
-     * @param second 
-     *              the seconds of the timer
+     * @param second the seconds of the timer
      */
     void updateTimerView(int second);
 

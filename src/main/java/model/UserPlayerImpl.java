@@ -3,7 +3,6 @@ package model;
 import model.score.Progress;
 import model.score.ProgressImpl;
 
-
 /**
  * The implementation of the {@link UserPlayer}.
  *
@@ -13,12 +12,13 @@ public class UserPlayerImpl implements UserPlayer {
     private String username;
     private String password;
     private ProgressImpl progress;
-    
-    public UserPlayerImpl() {}
-    
-    private UserPlayerImpl(PlayerBuilder builder) {
+
+    public UserPlayerImpl() {
+    }
+
+    private UserPlayerImpl(final PlayerBuilder builder) {
         this.username = builder.username;
-        this.password = builder.password;   
+        this.password = builder.password;
     }
 
     /**
@@ -52,25 +52,42 @@ public class UserPlayerImpl implements UserPlayer {
     public void setProgress(final ProgressImpl progress) {
         this.progress = progress;
     }
-    
+
     /**
-     * Builder for User 
+     * Builder for User.
      * 
      */
     public static class PlayerBuilder {
         private String username;
-        private String password; 
-        
-        public PlayerBuilder username(String username) {
+        private String password;
+
+        /**
+         * Set the username of the user.
+         * 
+         * @param username the username of the user.
+         * @return {@link PlayerBuilder}
+         */
+        public PlayerBuilder username(final String username) {
             this.username = username;
             return this;
         }
-        
-        public PlayerBuilder password(String password) {
+
+        /**
+         * Set the password for the user.
+         * 
+         * @param password the password for the user
+         * @return {@link PlayerBuilder}
+         */
+        public PlayerBuilder password(final String password) {
             this.password = password;
             return this;
         }
-        
+
+        /**
+         * build the {@link UserPlayer}.
+         * @return
+         *      {@link UserPlayer}
+         */
         public UserPlayer build() {
             return new UserPlayerImpl(this);
         }

@@ -6,6 +6,7 @@ import java.util.Comparator;
 
 import java.util.Date;
 import java.util.HashMap;
+import java.util.Locale;
 import java.util.Map;
 
 /**
@@ -39,7 +40,7 @@ public class ScoreManagementImpl implements ScoreManagement {
 
     private String createDate() {
         final Date date = new Date();
-        final SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yy");
+        final SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yy", Locale.ITALIAN);
         return dateFormat.format(date);
     }
 
@@ -58,7 +59,7 @@ public class ScoreManagementImpl implements ScoreManagement {
     }
 
     private void checkFullHistory() {
-        final SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yy");
+        final SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yy", Locale.ITALIAN);
 
         while (this.miniGameHistory.size() >= HISTORY_SIZE) {
 
@@ -166,7 +167,7 @@ public class ScoreManagementImpl implements ScoreManagement {
     public void setSum(final int sum) {
         this.sum = sum;
     }
-    
+
     /**
      * {@inheritDoc}
      */
