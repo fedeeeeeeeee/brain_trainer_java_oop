@@ -8,10 +8,14 @@ import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
 import model.UserPlayer;
 import model.UserPlayerImpl;
+import utility.Pair;
+import view.DimensionCalculator;
 import view.SceneType;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
+import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
@@ -39,6 +43,11 @@ public class LoginFxImpl extends AbstractSceneController implements LoginFx {
 
     @FXML
     private Button signUpBtn;
+    
+    @FXML
+    private GridPane grid;
+    
+    private DimensionCalculator calculator;
 
     private final LoginControllerImpl loginController = new LoginControllerImpl(this);
 
@@ -122,8 +131,15 @@ public class LoginFxImpl extends AbstractSceneController implements LoginFx {
 
     @Override
     public void init() {
-        // TODO Auto-generated method stub
+       this.calculator = new DimensionCalculator();
+        Stage stages = (Stage) loginBtn.getScene().getWindow();
+        Pair<Integer, Integer> sizeBtn = new Pair<>(calculator.getButtonWidthDimension(calculator.getNumberOfButton(grid), stages),
+                calculator.getButtonHeightDimension(calculator.getNumberOfButton(grid), stages));
         
+        stages.widthProperty().addListener((obs, oldVal, newVal) -> {
+            this.calculator.setFontStyleOnAction(grid, 0.10); 
+        }); 
+        this.calculator.setActualFontStyle(grid, 0.35, sizeBtn); 
     }
 
 }

@@ -7,6 +7,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import utility.Pair;
 import view.TrainingArea;
 import view.DimensionCalculator;
 import view.SceneType;
@@ -59,14 +60,16 @@ public class TrainingAreaFx extends AbstractSceneController {
     @Override
     public void init() {
         this.calculator = new DimensionCalculator();
-        int buttonSize = calculator.getButtonDimension(calculator.getNumberOfButton(areasGrid), backBtn);
         Stage stages = (Stage) backBtn.getScene().getWindow();
+        Pair<Integer, Integer> sizeBtn = new Pair<>(calculator.getButtonWidthDimension(calculator.getNumberOfButton(areasGrid), stages),
+                calculator.getButtonHeightDimension(calculator.getNumberOfButton(areasGrid), stages));
         
         stages.widthProperty().addListener((obs, oldVal, newVal) -> {
-            this.calculator.setFontStyleOnAction(areasGrid, 0.10);
-                   
-        }); 
-        this.calculator.setActualFontStyle(areasGrid, 0.50, buttonSize);       
+            this.calculator.setFontStyleOnAction(areasGrid, 0.15);
+            this.calculator.setBackBtnSize(backBtn, 0.25);
+        });
+        
+        this.calculator.setActualFontStyle(areasGrid, 0.50, sizeBtn);
     }
 
 }
