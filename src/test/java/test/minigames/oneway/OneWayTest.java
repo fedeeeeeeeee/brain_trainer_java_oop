@@ -75,7 +75,7 @@ public class OneWayTest {
      */
     @Test
     public void testInitialAndFinalPosValidity() {
-        OneWayModel model = new OneWayModelImpl(DifficultyLevel.EASY);
+        final OneWayModel model = new OneWayModelImpl(DifficultyLevel.EASY);
         model.oneWayInit();
 
         assertTrue(model.getInitialPosition().getX() < model.getGridSize());
@@ -94,10 +94,9 @@ public class OneWayTest {
      */
     @Test
     public void testPositions() {
-        OneWayModel model = new OneWayModelImpl(DifficultyLevel.EASY);
+        final OneWayModel model = new OneWayModelImpl(DifficultyLevel.EASY);
         model.oneWayInit();
         assertFalse(model.getInitialPosition().getX() == model.getFinalPosition().getX()
                 && model.getInitialPosition().getY() == model.getFinalPosition().getY());
     }
-
 }
