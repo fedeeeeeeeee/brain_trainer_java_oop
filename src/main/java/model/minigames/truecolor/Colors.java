@@ -1,7 +1,7 @@
 package model.minigames.truecolor;
 
 /**
- * Enumeration for possible color
+ * Enumeration for possible color.
  *
  */
 public enum Colors {
@@ -39,7 +39,7 @@ public enum Colors {
     /**
      * Brown color for text button.
      */
-    BROWN("brown"), 
+    BROWN("brown"),
 
     /**
      * Orange color for text button.

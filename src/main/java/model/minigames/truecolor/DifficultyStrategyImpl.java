@@ -18,10 +18,10 @@ public class DifficultyStrategyImpl implements DifficultyStrategy {
 //    private static final String MEANCOLOR = "randomMeaningColor";
 //    private static final String TRUECOLOR = "randomTrueColor";
     private List<Colors> colorList;
-    private Integer numberMeaningColorButton;
-    private Integer numberTrueColorButton;
+    private final Integer numberMeaningColorButton;
+    private final Integer numberTrueColorButton;
     private final Map<StatusColor, List<Pair<Colors, Colors>>> randomColorMap;
-    
+
     /**
      * Constructor of {@link DifficultyStrategy}.
      * 

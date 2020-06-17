@@ -3,9 +3,6 @@ package controller;
 import java.io.File;
 import java.io.IOException;
 
-import com.fasterxml.jackson.core.JsonGenerationException;
-import com.fasterxml.jackson.core.JsonParseException;
-import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 
@@ -28,14 +25,9 @@ public final class FileLoaderImpl implements FileLoader {
 
         try {
             mapper.writeValue(this.userFileName, player);
-        } catch (JsonGenerationException e) {
-            e.printStackTrace();
-        } catch (JsonMappingException e) {
-            e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
         }
-
 
     }
 
@@ -48,13 +40,10 @@ public final class FileLoaderImpl implements FileLoader {
 
         try {
             player = mapper.readValue(this.userFileName, UserPlayerImpl.class);
-        } catch (JsonParseException e) {
-            e.printStackTrace();
-        } catch (JsonMappingException e) {
-            e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
         }
+
         return player;
     }
 

@@ -3,7 +3,6 @@ package model;
 import model.score.Progress;
 import model.score.ProgressImpl;
 
-
 /**
  * The implementation of the {@link UserPlayer}.
  *
@@ -99,3 +98,4 @@ public class UserPlayerImpl implements UserPlayer {
     }
 
 }
+

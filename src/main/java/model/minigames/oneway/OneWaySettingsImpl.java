@@ -15,8 +15,8 @@ public class OneWaySettingsImpl implements OneWaySettings {
     private static final int BASE_SEC = 40;
     private static final int NEGATIVE_OFFSET = -5;
 
-    private DifficultyLevel difficulty;
-    private BiFunction<Integer, Integer, Integer> calculator = (i1, i2) -> i1 + i2;
+    private final DifficultyLevel difficulty;
+    private final BiFunction<Integer, Integer, Integer> calculator = (i1, i2) -> i1 + i2;
 
     /**
      * Constructor of {@link OneWaySettings}.
