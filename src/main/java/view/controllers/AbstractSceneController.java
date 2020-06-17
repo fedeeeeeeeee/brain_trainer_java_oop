@@ -22,7 +22,6 @@ public abstract class AbstractSceneController implements FxController { // NOPMD
      * Gets the {@link View}.
      * 
      * @return the {@link View}
-     *
      */
     protected View getView() {
         return this.view;
