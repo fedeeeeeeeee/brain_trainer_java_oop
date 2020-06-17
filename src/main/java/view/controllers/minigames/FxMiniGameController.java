@@ -37,10 +37,10 @@ public interface FxMiniGameController extends FxController {
      * Stop timer.
      */
     void stopTimer();
-    
+
     /**
      *  Initialize the current minigame.
-     *  
+     *
      * @param difficulty
      *          the {@link DifficultyLevel} selected
      */

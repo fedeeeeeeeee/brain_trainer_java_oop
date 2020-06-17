@@ -31,9 +31,9 @@ public class ProgressTest {
         this.progress.addMiniGameScore(TrainingArea.ATTENTION, "True Color", 80);
         this.progress.addMiniGameScore(TrainingArea.BRAIN_SPEED, "One Way", 100);
         this.progress.addMiniGameScore(TrainingArea.BRAIN_SPEED, "One Way", 60);
-        int avarageAttention = (int) this.progress.getHistoryScore().get(TrainingArea.ATTENTION).entrySet().stream()
+        final int avarageAttention = (int) this.progress.getHistoryScore().get(TrainingArea.ATTENTION).entrySet().stream()
                 .mapToInt(s -> s.getValue().getAverage()).average().getAsDouble();
-        int avarageBrainSpeed = (int) this.progress.getHistoryScore().get(TrainingArea.BRAIN_SPEED).entrySet().stream()
+        final int avarageBrainSpeed = (int) this.progress.getHistoryScore().get(TrainingArea.BRAIN_SPEED).entrySet().stream()
                 .mapToInt(s -> s.getValue().getAverage()).average().getAsDouble();
         assertEquals(avarageAttention, this.progress.getAverageTrainingAreaScore().get(TrainingArea.ATTENTION));
         assertEquals(avarageBrainSpeed, this.progress.getAverageTrainingAreaScore().get(TrainingArea.BRAIN_SPEED));

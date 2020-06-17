@@ -21,6 +21,7 @@ public class ViewImpl extends Application implements View {
 
     private static final double WIDTH = Screen.getPrimary().getBounds().getWidth() / 2;
     private static final double HEIGHT = Screen.getPrimary().getBounds().getHeight() / 1.2;
+    private static final double PERCENTAGE = 1.3;
 
     private final Controller controller;
     private final SceneLoader sceneLoader;
@@ -105,12 +106,12 @@ public class ViewImpl extends Application implements View {
         this.stage = stage;
         this.stage.setHeight(HEIGHT);
         this.stage.setWidth(WIDTH);
-        this.stage.setMinHeight(HEIGHT / 1.3);
-        this.stage.setMinWidth(WIDTH / 1.3);
-        this.inGame = false;
+        this.stage.setMinHeight(HEIGHT / PERCENTAGE);
+        this.stage.setMinWidth(WIDTH / PERCENTAGE);
         this.stage.setTitle("Brain Trainer");
         this.stage.setResizable(true);
         this.stage.show();
+        this.inGame = false;
         this.controller.initializeView(this);
 
         this.stage.setOnCloseRequest((e) -> {

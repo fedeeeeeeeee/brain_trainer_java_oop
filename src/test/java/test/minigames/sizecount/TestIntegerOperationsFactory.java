@@ -8,48 +8,48 @@ import model.minigames.sizecount.IntegerOperation;
 import model.minigames.sizecount.IntegerOperationsFactory;
 import model.minigames.sizecount.IntegerOperationsFactoryImpl;
 
-class TestIntegerOperationsFactory {
+public class TestIntegerOperationsFactory {
 
     private final IntegerOperationsFactory factory = new IntegerOperationsFactoryImpl();
 
     @Test
-    void addiction() {
+    public void addiction() {
         final IntegerOperation op = this.factory.addiction(2, 10);
         System.out.println("result " + "toString " + op.getResult() + " " + op.toString());
     }
 
     @Test
-    void subtraction() {
+    public void subtraction() {
         final IntegerOperation op = this.factory.subtraction(2, 10);
         System.out.println("result " + "toString " + op.getResult() + " " + op.toString());
     }
 
     @Test
-    void multiplication() {
+    public void multiplication() {
         final IntegerOperation op = this.factory.multiplication(2, 10);
         System.out.println("result " + "toString " + op.getResult() + " " + op.toString());
     }
 
     @Test
-    void division() {
+    public void division() {
         final IntegerOperation op = this.factory.division(2, 100);
         System.out.println("division " + "toString " + op.getResult() + " " + op.toString());
     }
 
     @Test
-    void sumExpression() {
+    public void sumExpression() {
         final IntegerOperation op = this.factory.sumExpression(2, 2, 10);
         System.out.println("division " + "toString " + op.getResult() + " " + op.toString());
     }
 
     @Test
-    void subExpression() {
+    public void subExpression() {
         final IntegerOperation op = this.factory.subExpression(2, 2, 10);
         System.out.println("division " + "toString " + op.getResult() + " " + op.toString());
     }
 
     @Test
-    public void argumentsCanBeZero() throws IllegalStateException {
+    public void argumentsCanBeZero() {
         assertThrows(IllegalStateException.class, () ->  this.factory.addiction(0, 0));
     }
 }

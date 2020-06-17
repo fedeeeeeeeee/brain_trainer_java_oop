@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 import model.minigames.oneway.Direction;
@@ -14,13 +15,19 @@ import model.minigames.oneway.Direction;
  *
  */
 public class DirectionTest {
-    private List<Direction> steps = new ArrayList<>();
-    private int counter = 0;
-
+    private List<Direction> steps;
+    private int counter;
+    
+    @BeforeAll
+    public void init() {
+        this.steps = new ArrayList<>();
+        this.counter = 0;
+    }
+    
     /**
      * Test if steps have the correct increments.
-     * 
      */
+    @Test
     public void deltaTest() {
         this.steps.add(Direction.UP);
         this.checkPosition(-1, 0);

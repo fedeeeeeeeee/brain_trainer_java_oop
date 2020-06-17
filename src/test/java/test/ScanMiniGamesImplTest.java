@@ -19,5 +19,4 @@ class ScanMiniGamesImplTest {
         assertTrue(scanMiniGames.getMiniGames(TrainingArea.REASONING).contains("Size Count"));
         assertTrue(scanMiniGames.getMiniGames(TrainingArea.VISUAL_SKILL).contains("Color Gama"));
     }
-
 }
