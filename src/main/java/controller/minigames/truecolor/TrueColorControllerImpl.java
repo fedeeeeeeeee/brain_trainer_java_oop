@@ -4,7 +4,7 @@ import java.util.Objects;
 import java.util.Timer;
 
 import model.DifficultyLevel;
-import model.minigames.truecolor.DifficultyStrategyFactory;
+import model.minigames.truecolor.DifficultyConfiguration;
 import model.minigames.truecolor.StatusColor;
 import model.minigames.truecolor.TrueColorModel;
 import model.minigames.truecolor.TrueColorModelImpl;
@@ -16,7 +16,6 @@ import view.controllers.minigames.truecolor.TrueColorFxImpl;
  */
 public class TrueColorControllerImpl implements TrueColorController {
 
-//    private static final String TRUECOLOR = "randomTrueColor";
     private final TrueColorModel model;
     private final TrueColorFxImpl view;
     private final GameTimer gameTimer;
@@ -35,9 +34,10 @@ public class TrueColorControllerImpl implements TrueColorController {
     public TrueColorControllerImpl(final TrueColorFxImpl trueColorFx, final DifficultyLevel difficultyLevel) {
         Objects.requireNonNull(trueColorFx, "TrueColorFx is null");
         Objects.requireNonNull(difficultyLevel, "DifficultyLevel is null");
+        final DifficultyConfiguration configuration = DifficultyConfiguration.getConfiguration(difficultyLevel)
+                .orElseGet(() -> DifficultyConfiguration.EASY);
+        this.model = new TrueColorModelImpl(difficultyLevel, configuration.getStrategy());
         this.difficultyLevel = difficultyLevel;
-        this.model = new TrueColorModelImpl(difficultyLevel,
-                DifficultyStrategyFactory.getSpecifiedDifficulty(difficultyLevel));
         this.timer = new Timer();
         this.gameTimer = new GameTimer(model.getSecondsGame(), this);
         this.view = trueColorFx;

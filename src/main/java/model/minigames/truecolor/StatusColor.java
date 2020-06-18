@@ -1,7 +1,6 @@
 package model.minigames.truecolor;
 
 /**
- * 
  * Enumeration for the possible uses of color.
  *
  */
