@@ -11,21 +11,21 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="580.0" prefWidth="500.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.controllers.MinigameSelectorFx">
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.controllers.MinigameSelectorFx">
 	<children>
-		<GridPane fx:id="grid" prefHeight="487.0" prefWidth="500.0" GridPane.hgrow="ALWAYS" GridPane.vgrow="ALWAYS" VBox.vgrow="ALWAYS">
+		<GridPane fx:id="grid" GridPane.hgrow="ALWAYS" GridPane.vgrow="ALWAYS" VBox.vgrow="ALWAYS">
 			<columnConstraints>
             <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
 				<ColumnConstraints hgrow="SOMETIMES" />
             <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
 			</columnConstraints>
 			<rowConstraints>
-				<RowConstraints maxHeight="103.0" minHeight="-Infinity" prefHeight="69.0" vgrow="SOMETIMES" />
-				<RowConstraints maxHeight="113.0" minHeight="-Infinity" prefHeight="84.0" vgrow="SOMETIMES" />
-				<RowConstraints maxHeight="177.0" minHeight="-Infinity" prefHeight="177.0" valignment="CENTER" vgrow="SOMETIMES" />
-            <RowConstraints maxHeight="139.0" minHeight="10.0" prefHeight="36.0" valignment="CENTER" vgrow="SOMETIMES" />
-            <RowConstraints maxHeight="153.0" minHeight="10.0" prefHeight="99.0" valignment="CENTER" vgrow="SOMETIMES" />
-				<RowConstraints maxHeight="160.0" minHeight="-Infinity" prefHeight="79.0" vgrow="SOMETIMES" />
+				<RowConstraints valignment="CENTER" vgrow="SOMETIMES" />
+				<RowConstraints valignment="CENTER" vgrow="SOMETIMES" />
+				<RowConstraints valignment="CENTER" vgrow="SOMETIMES" />
+            <RowConstraints valignment="CENTER" vgrow="SOMETIMES" />
+            <RowConstraints valignment="CENTER" vgrow="SOMETIMES" />
+				<RowConstraints valignment="CENTER" vgrow="SOMETIMES" />
 			</rowConstraints>
 			<children>
 				<Button maxHeight="100.0" maxWidth="300.0" mnemonicParsing="false" onMouseClicked="#startMiniGame" prefHeight="40.0" prefWidth="99.0" text="PLAY" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="4">
@@ -36,7 +36,7 @@
                   <Insets bottom="30.0" left="40.0" right="40.0" top="40.0" />
                </GridPane.margin>
 				</Button>
-				<ComboBox fx:id="gameComboBox" maxHeight="380.0" maxWidth="380.0" onMouseClicked="#initializeCombo" prefHeight="30.0" prefWidth="210.0" visibleRowCount="5" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1">
+				<ComboBox fx:id="gameComboBox" maxHeight="60.0" maxWidth="380.0" onMouseClicked="#initializeCombo" prefHeight="30.0" prefWidth="210.0" visibleRowCount="5" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1">
 					<GridPane.margin>
 						<Insets bottom="30.0" top="30.0" />
 					</GridPane.margin>

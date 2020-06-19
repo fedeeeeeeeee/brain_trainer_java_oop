@@ -13,8 +13,11 @@ import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.GridPane;
+import javafx.scene.text.Font;
 import javafx.stage.Stage;
 import model.DifficultyLevel;
+import utility.Pair;
+import view.DimensionCalculator;
 import view.SceneType;
 
 /**
@@ -43,6 +46,8 @@ public class MinigameSelectorFx extends AbstractSceneController {
     
     @FXML
     private GridPane gridToggle;
+    
+    private DimensionCalculator calculator;
 
     @FXML
     private void initializeCombo() { // NOPMD
@@ -64,7 +69,7 @@ public class MinigameSelectorFx extends AbstractSceneController {
             this.getController().setMiniGame(gameComboBox.getValue(), difficulty);
             this.getView().setMiniGameScene("/layouts/minigames/" + gameComboBox.getValue().replace(" ", "") + ".fxml");
         } else {
-            this.errorLbl.setText("* Please, select all fields to start playing!");
+            this.errorLbl.setText("* Select all fields to start playing!");
         }
     }
 
@@ -84,31 +89,23 @@ public class MinigameSelectorFx extends AbstractSceneController {
 
     @Override
     public void init() {
-        Stage stages = (Stage) backBtn.getScene().getWindow();  
+        this.calculator = new DimensionCalculator();
+        Stage stages = (Stage) backBtn.getScene().getWindow();
         stages.widthProperty().addListener((obs, oldVal, newVal) -> {
-            this.grid.getChildren().forEach(b -> {
-                ((Node) b).setStyle(String.format("-fx-font-size: %dpx;", (int) (0.15 * backBtn.getWidth())));
-            }); 
+            calculator.setActualFontStyle2(grid, 0.15, backBtn.getWidth());
         });
         
         stages.widthProperty().addListener((obs, oldVal, newVal) -> {
-            this.gridToggle.getChildren().forEach(b -> {
-                ((Node) b).setStyle(String.format("-fx-font-size: %dpx;", (int) (0.15 * backBtn.getWidth())));
-            }); 
+            calculator.setActualFontStyle2(gridToggle, 0.15, backBtn.getWidth());
         });
         
-        Double sizeScene = backBtn.getScene().getWindow().getScene().getHeight();
-        // TODO
-        Double sizeBtn = sizeScene / 10;
         this.grid.getChildren().forEach(b -> {
-            ((Node) b).setStyle(String.format("-fx-font-size: %dpx;", (int) (0.30 * sizeBtn)));
+            ((Node) b).setStyle(String.format("-fx-font-size: %dpx;", (int) (0.25 * calculator.getButtonWidthDimension(calculator.getNumberOfButton(grid), stages))));
         });
 
-        // TODO è storto !!! 
         this.gridToggle.getChildren().forEach(b -> {
-            ((Node) b).setStyle(String.format("-fx-font-size: %dpx;", (int) (0.40 * sizeBtn)));
+            ((Node) b).setStyle(String.format("-fx-font-size: %dpx;", (int) (0.08 * calculator.getButtonWidthDimension(calculator.getNumberOfButton(gridToggle), stages))));
         });
-        
     }
 
 }

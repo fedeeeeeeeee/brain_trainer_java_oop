@@ -21,8 +21,20 @@ public class DimensionCalculator {
         grid.getChildren().forEach(b -> {
             if (b instanceof Button) {
                 b.setStyle(String.format("-fx-font-size: %dpx;", (int) (percent * btnSize.getX())));
-                b.setStyle(String.format("-fx-font-size: %dpx;", (int) (percent * btnSize.getY())));
             }
+        });
+    }
+    
+    public void setActualFontStyle2(GridPane grid, Double percent, Double size) {
+        grid.getChildren().forEach(b -> {
+            ((Node) b).setStyle(String.format("-fx-font-size: %dpx;", (int) (0.15 * size)));
+        }); 
+    }
+    
+    public void setAllChildrenFontStyle(GridPane grid, Double percent, Pair<Integer, Integer> btnSize) {
+        grid.getChildren().forEach(b -> {
+                b.setStyle(String.format("-fx-font-size: %dpx;", (int) (percent * btnSize.getX())));
+                b.setStyle(String.format("-fx-font-size: %dpx;", (int) (percent * btnSize.getY())));
         });
     }
     
