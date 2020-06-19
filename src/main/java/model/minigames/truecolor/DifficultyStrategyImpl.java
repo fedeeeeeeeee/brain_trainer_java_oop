@@ -23,9 +23,10 @@ public class DifficultyStrategyImpl implements DifficultyStrategy {
     public DifficultyStrategyImpl(final DifficultyConfiguration difficulty) {
         this.randomColorMap = new HashMap<>();
         if (difficulty.getNumColor() < 4) {
-            this.colorRandom = new SimpleRandomColor(difficulty); // no template method RandomColor
+            this.colorRandom = new SimpleRandomColor(difficulty);
         } else {
-            this.colorRandom = new ImprovedRandomColor(difficulty);// no template method RandomColor
+//            this.colorRandom = new ImprovedRandomColor(difficulty);
+            this.colorRandom = new AdvanceRandomColor(difficulty);
             this.createRandomColorMap();
         }
     }
