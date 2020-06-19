@@ -10,10 +10,10 @@ import model.minigames.truecolor.TrueColorModel;
 import model.minigames.truecolor.TrueColorModelImpl;
 
 /**
- * Class to test if {@link UserPlayer} works correctly.
+ * Class to test if {@link DifficultyConfiguration} works correctly.
  *
  */
-public class LenghtColorListModel {
+public class LenghtColorListModelTest {
 
     @Test
     public void testNumberButtonEasyDifficulty() {
@@ -21,8 +21,8 @@ public class LenghtColorListModel {
                 .orElseGet(() -> DifficultyConfiguration.EASY);
         final TrueColorModel modelGame = new TrueColorModelImpl(DifficultyLevel.EASY, configuration.getStrategy());
 
-        assertEquals(1, modelGame.getRandomColorMap().get(StatusColor.MEANCOLOR).size());
-        assertEquals(1, modelGame.getRandomColorMap().get(StatusColor.TRUECOLOR).size());
+        assertEquals(configuration.getMeanButton(), modelGame.getRandomColorMap().get(StatusColor.MEANCOLOR).size());
+        assertEquals(configuration.getTrueButton(), modelGame.getRandomColorMap().get(StatusColor.TRUECOLOR).size());
     }
 
     @Test
@@ -33,6 +33,8 @@ public class LenghtColorListModel {
 
         assertEquals(1, modelGame.getRandomColorMap().get(StatusColor.MEANCOLOR).size());
         assertEquals(2, modelGame.getRandomColorMap().get(StatusColor.TRUECOLOR).size());
+        assertEquals(configuration.getMeanButton(), modelGame.getRandomColorMap().get(StatusColor.MEANCOLOR).size());
+        assertEquals(configuration.getTrueButton(), modelGame.getRandomColorMap().get(StatusColor.TRUECOLOR).size());
     }
 
     @Test
@@ -43,6 +45,7 @@ public class LenghtColorListModel {
 
         assertEquals(1, modelGame.getRandomColorMap().get(StatusColor.MEANCOLOR).size());
         assertEquals(2, modelGame.getRandomColorMap().get(StatusColor.TRUECOLOR).size());
+        assertEquals(configuration.getMeanButton(), modelGame.getRandomColorMap().get(StatusColor.MEANCOLOR).size());
+        assertEquals(configuration.getTrueButton(), modelGame.getRandomColorMap().get(StatusColor.TRUECOLOR).size());
     }
-
 }
