@@ -30,8 +30,6 @@ public class TrueColorModelImpl implements TrueColorModel {
     private final DifficultyStrategy difficultySpecific;
     private Map<StatusColor, List<Pair<Colors, Colors>>> randomColorMap = new HashMap<>();
     private Boolean bool = false;
-    private int countYES = 0;
-    private int countNO = 0 ;
 
     /**
      * Constructor of {@link TrueColorModel}.
@@ -74,11 +72,6 @@ public class TrueColorModelImpl implements TrueColorModel {
         final boolean match = this.randomColorMap.get(StatusColor.MEANCOLOR).stream()
                 .anyMatch(mean -> this.randomColorMap.get(StatusColor.TRUECOLOR).stream().anyMatch(trueC -> mean.getX().equals(trueC.getY())));
         final boolean answer = selectedAnswer.contentEquals(POS_ANSWER);
-        if (answer) {
-            this.countYES = this.countYES+1;
-        }else {
-            this.countNO = this.countNO+ 1 ;
-        }
         return match && answer || !match && !answer;
     }
 
@@ -111,9 +104,6 @@ public class TrueColorModelImpl implements TrueColorModel {
      */
     @Override
     public int getFinalScore() {
-        int tot = this.countNO +  this.countYES;
-        int per = this.countNO * 100 / tot;
-        System.out.println("Percentuale di no"+ per + "%");
         return this.score.getScore();
     }
 

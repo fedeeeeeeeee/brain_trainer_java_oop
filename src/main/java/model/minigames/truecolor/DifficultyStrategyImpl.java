@@ -25,8 +25,7 @@ public class DifficultyStrategyImpl implements DifficultyStrategy {
         if (difficulty.getNumColor() < 4) {
             this.colorRandom = new SimpleRandomColor(difficulty);
         } else {
-//            this.colorRandom = new ImprovedRandomColor(difficulty);
-            this.colorRandom = new AdvanceRandomColor(difficulty);
+            this.colorRandom = new ImprovedRandomColor(difficulty);
             this.createRandomColorMap();
         }
     }

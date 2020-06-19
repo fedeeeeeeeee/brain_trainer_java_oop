@@ -21,7 +21,7 @@ public abstract class RandomColor {
         return randomColorMap;
     }
     
-    public <T> Colors getRandomColor(final List<T> list) {
+    public Colors getRandomColor(final List<Colors> list) {
         return (Colors) list.get(new Random().nextInt(list.size()));
     }
     
