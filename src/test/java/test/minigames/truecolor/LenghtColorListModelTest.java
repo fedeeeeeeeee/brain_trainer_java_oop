@@ -5,6 +5,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import model.DifficultyLevel;
 import model.minigames.truecolor.DifficultyConfiguration;
+import model.minigames.truecolor.DifficultyStrategy;
+import model.minigames.truecolor.DifficultyStrategyImpl;
 import model.minigames.truecolor.StatusColor;
 import model.minigames.truecolor.TrueColorModel;
 import model.minigames.truecolor.TrueColorModelImpl;
@@ -19,8 +21,9 @@ public class LenghtColorListModelTest {
     public void testNumberButtonEasyDifficulty() {
         final DifficultyConfiguration configuration = DifficultyConfiguration.getConfiguration(DifficultyLevel.EASY)
                 .orElseGet(() -> DifficultyConfiguration.EASY);
-        final TrueColorModel modelGame = new TrueColorModelImpl(DifficultyLevel.EASY, configuration.getStrategy());
-
+        DifficultyStrategy strategy = new DifficultyStrategyImpl(configuration);
+        final TrueColorModel modelGame = new TrueColorModelImpl(DifficultyLevel.EASY, strategy);
+        
         assertEquals(configuration.getMeanButton(), modelGame.getRandomColorMap().get(StatusColor.MEANCOLOR).size());
         assertEquals(configuration.getTrueButton(), modelGame.getRandomColorMap().get(StatusColor.TRUECOLOR).size());
     }
@@ -29,8 +32,9 @@ public class LenghtColorListModelTest {
     public void testNumberButtonNormalDifficulty() {
         final DifficultyConfiguration configuration = DifficultyConfiguration.getConfiguration(DifficultyLevel.NORMAL)
                 .orElseGet(() -> DifficultyConfiguration.EASY);
-        final TrueColorModel modelGame = new TrueColorModelImpl(DifficultyLevel.NORMAL, configuration.getStrategy());
-
+        DifficultyStrategy strategy = new DifficultyStrategyImpl(configuration);
+        final TrueColorModel modelGame = new TrueColorModelImpl(DifficultyLevel.NORMAL, strategy);
+        
         assertEquals(1, modelGame.getRandomColorMap().get(StatusColor.MEANCOLOR).size());
         assertEquals(2, modelGame.getRandomColorMap().get(StatusColor.TRUECOLOR).size());
         assertEquals(configuration.getMeanButton(), modelGame.getRandomColorMap().get(StatusColor.MEANCOLOR).size());
@@ -41,7 +45,8 @@ public class LenghtColorListModelTest {
     public void testNumberButtonHardDifficulty() {
         final DifficultyConfiguration configuration = DifficultyConfiguration.getConfiguration(DifficultyLevel.HARD)
                 .orElseGet(() -> DifficultyConfiguration.EASY);
-        final TrueColorModel modelGame = new TrueColorModelImpl(DifficultyLevel.HARD, configuration.getStrategy());
+        DifficultyStrategy strategy = new DifficultyStrategyImpl(configuration);
+        final TrueColorModel modelGame = new TrueColorModelImpl(DifficultyLevel.HARD, strategy);
 
         assertEquals(1, modelGame.getRandomColorMap().get(StatusColor.MEANCOLOR).size());
         assertEquals(2, modelGame.getRandomColorMap().get(StatusColor.TRUECOLOR).size());

@@ -1,9 +1,14 @@
 package model.minigames.truecolor;
 
+import java.util.Objects;
 import java.util.Optional;
 
 import model.DifficultyLevel;
 
+/**
+ * Enumeration that convert DifficultyLevel adding configuration fields.
+ *
+ */
 public enum DifficultyConfiguration {
 
     EASY(4, 1, 1),
@@ -34,11 +39,12 @@ public enum DifficultyConfiguration {
         return trueButton;
     }
 
-    public DifficultyStrategy getStrategy() {
-        return new DifficultyStrategyImpl(this);
-    }
+//    public DifficultyStrategy getStrategy() {
+//        return new DifficultyStrategyImpl(this);
+//    }
 
-    public static Optional<DifficultyConfiguration> getConfiguration(final DifficultyLevel difficulty) {
+    public static Optional<DifficultyConfiguration> getConfiguration(DifficultyLevel difficulty) {
+        Objects.requireNonNull(difficulty, "DifficultyLevel is null in DifficultyConfiguration ");
         switch (difficulty) {
         case EASY:
             return Optional.of(DifficultyConfiguration.EASY);

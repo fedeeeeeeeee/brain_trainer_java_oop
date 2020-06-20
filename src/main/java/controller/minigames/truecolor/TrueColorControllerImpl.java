@@ -5,6 +5,7 @@ import java.util.Timer;
 
 import model.DifficultyLevel;
 import model.minigames.truecolor.DifficultyConfiguration;
+import model.minigames.truecolor.DifficultyStrategyImpl;
 import model.minigames.truecolor.StatusColor;
 import model.minigames.truecolor.TrueColorModel;
 import model.minigames.truecolor.TrueColorModelImpl;
@@ -36,7 +37,7 @@ public class TrueColorControllerImpl implements TrueColorController {
         Objects.requireNonNull(difficultyLevel, "DifficultyLevel is null");
         final DifficultyConfiguration configuration = DifficultyConfiguration.getConfiguration(difficultyLevel)
                 .orElseGet(() -> DifficultyConfiguration.EASY);
-        this.model = new TrueColorModelImpl(difficultyLevel, configuration.getStrategy());
+        this.model = new TrueColorModelImpl(difficultyLevel, new DifficultyStrategyImpl(configuration));
         this.difficultyLevel = difficultyLevel;
         this.timer = new Timer();
         this.gameTimer = new GameTimer(model.getSecondsGame(), this);
