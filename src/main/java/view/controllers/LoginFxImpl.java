@@ -11,6 +11,7 @@ import model.UserPlayerImpl;
 import utility.Pair;
 import view.DimensionCalculator;
 import view.SceneType;
+import javafx.scene.Node;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.layout.GridPane;
@@ -46,6 +47,15 @@ public class LoginFxImpl extends AbstractSceneController implements LoginFx {
     
     @FXML
     private GridPane grid;
+    
+    @FXML
+    private GridPane gridFields;
+    
+    @FXML
+    private GridPane gridBtn;
+    
+    @FXML
+    private GridPane gridLbl;
     
     private DimensionCalculator calculator;
 
@@ -131,15 +141,35 @@ public class LoginFxImpl extends AbstractSceneController implements LoginFx {
 
     @Override
     public void init() {
-       this.calculator = new DimensionCalculator();
-        Stage stages = (Stage) loginBtn.getScene().getWindow();
-        Pair<Integer, Integer> sizeBtn = new Pair<>(calculator.getButtonWidthDimension(calculator.getNumberOfButton(grid), stages),
-                calculator.getButtonHeightDimension(calculator.getNumberOfButton(grid), stages));
+        Stage stage = (Stage) loginBtn.getScene().getWindow();
+        this.calculator = new DimensionCalculator(stage);
+        double size = calculator.getButtonWidthDimension(calculator.getNumberOfButton(grid));
+        double fieldsSize =calculator.getButtonWidthDimension(calculator.getNumberOfButton(gridFields)); 
+        double btnSize =calculator.getButtonWidthDimension(calculator.getNumberOfButton(gridBtn)); 
         
-        stages.widthProperty().addListener((obs, oldVal, newVal) -> {
-            this.calculator.setFontStyleOnAction(grid, 0.10); 
-        }); 
-        this.calculator.setActualFontStyle(grid, 0.35, sizeBtn); 
-    }
+//        stage.widthProperty().addListener((obs, oldVal, newVal) -> {
+//            calculator.setNodeFontStyle(grid, 0.10, size); // il titolo e immagini e errore
+//        });
+//        
+//        stage.widthProperty().addListener((obs, oldVal, newVal) -> {
+//            calculator.setNodeFontStyle(gridFields, 0.06, fieldsSize); // FIELDS
+//        });
+//        
+//        stage.widthProperty().addListener((obs, oldVal, newVal) -> {
+//            calculator.setNodeFontStyle(gridBtn, 0.20, btnSize); // bottoni
+//        });
+//        
+//        stage.widthProperty().addListener((obs, oldVal, newVal) -> {
+//            calculator.setNodeFontStyle(gridLbl, 0.06, size); // label
+//        });
+        calculator.setNodeFontStyle(grid, 0.10, size);
+        calculator.setNodeFontStyle(gridFields, 0.06, fieldsSize);
+        calculator.setNodeFontStyle(gridBtn, 0.20, btnSize);
+        calculator.setNodeFontStyle(gridLbl, 0.06, size);
+        
+//        stage.widthProperty().addListener((obs, oldVal, newVal) -> {
+//            calculator.setFontStyleOnAction(gridBtn, 0.2); // bottoni
+//        });
 
+    }
 }

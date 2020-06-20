@@ -89,23 +89,21 @@ public class MinigameSelectorFx extends AbstractSceneController {
 
     @Override
     public void init() {
-        this.calculator = new DimensionCalculator();
-        Stage stages = (Stage) backBtn.getScene().getWindow();
-        stages.widthProperty().addListener((obs, oldVal, newVal) -> {
-            calculator.setActualFontStyle2(grid, 0.15, backBtn.getWidth());
+        Stage stage = (Stage) backBtn.getScene().getWindow();
+        this.calculator = new DimensionCalculator(stage);
+        double size =calculator.getButtonWidthDimension(calculator.getNumberOfButton(grid)); 
+        double toggleSize =calculator.getButtonWidthDimension(calculator.getNumberOfButton(gridToggle)); 
+        
+        stage.widthProperty().addListener((obs, oldVal, newVal) -> {
+            calculator.setNodeFontStyle(grid, 0.15, backBtn.getWidth());
         });
         
-        stages.widthProperty().addListener((obs, oldVal, newVal) -> {
-            calculator.setActualFontStyle2(gridToggle, 0.15, backBtn.getWidth());
+        stage.widthProperty().addListener((obs, oldVal, newVal) -> {
+            calculator.setNodeFontStyle(gridToggle, 0.15, backBtn.getWidth());
         });
         
-        this.grid.getChildren().forEach(b -> {
-            ((Node) b).setStyle(String.format("-fx-font-size: %dpx;", (int) (0.25 * calculator.getButtonWidthDimension(calculator.getNumberOfButton(grid), stages))));
-        });
-
-        this.gridToggle.getChildren().forEach(b -> {
-            ((Node) b).setStyle(String.format("-fx-font-size: %dpx;", (int) (0.08 * calculator.getButtonWidthDimension(calculator.getNumberOfButton(gridToggle), stages))));
-        });
+        calculator.setNodeFontStyle(grid, 0.25, size);
+        calculator.setNodeFontStyle(gridToggle, 0.08, toggleSize);
     }
 
 }

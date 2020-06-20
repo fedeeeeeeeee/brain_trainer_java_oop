@@ -59,17 +59,17 @@ public class TrainingAreaFx extends AbstractSceneController {
      */
     @Override
     public void init() {
-        this.calculator = new DimensionCalculator();
-        Stage stages = (Stage) backBtn.getScene().getWindow();
-        Pair<Integer, Integer> sizeBtn = new Pair<>(calculator.getButtonWidthDimension(calculator.getNumberOfButton(areasGrid), stages),
-                calculator.getButtonHeightDimension(calculator.getNumberOfButton(areasGrid), stages));
+        Stage stage = (Stage) backBtn.getScene().getWindow();
+        this.calculator = new DimensionCalculator(stage);
+        Pair<Integer, Integer> sizeBtn = new Pair<>(calculator.getButtonWidthDimension(calculator.getNumberOfButton(areasGrid)),
+                calculator.getButtonHeightDimension(calculator.getNumberOfButton(areasGrid)));
         
-        stages.widthProperty().addListener((obs, oldVal, newVal) -> {
+        stage.widthProperty().addListener((obs, oldVal, newVal) -> {
             this.calculator.setFontStyleOnAction(areasGrid, 0.15);
             this.calculator.setBackBtnSize(backBtn, 0.25);
         });
         
-        this.calculator.setActualFontStyle(areasGrid, 0.50, sizeBtn);
+        this.calculator.setActualButtonFontStyle(areasGrid, 0.50, sizeBtn);
     }
 
 }

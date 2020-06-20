@@ -47,14 +47,15 @@ public class MainMenuFx extends AbstractSceneController {
 
     @Override
     public void init() {
-        this.calculator = new DimensionCalculator();
-        Stage stages = (Stage) trainingBtn.getScene().getWindow();
-        Pair<Integer, Integer> sizeBtn = new Pair<>(calculator.getButtonWidthDimension(calculator.getNumberOfButton(areasGrid), stages),
-                calculator.getButtonHeightDimension(calculator.getNumberOfButton(areasGrid), stages));
+        Stage stage = (Stage) trainingBtn.getScene().getWindow();
+        this.calculator = new DimensionCalculator(stage);
+       
+        Pair<Integer, Integer> sizeBtn = new Pair<>(calculator.getButtonWidthDimension(calculator.getNumberOfButton(areasGrid)),
+                calculator.getButtonHeightDimension(calculator.getNumberOfButton(areasGrid)));
 
-        stages.widthProperty().addListener((obs, oldVal, newVal) -> {
+        stage.widthProperty().addListener((obs, oldVal, newVal) -> {
             this.calculator.setFontStyleOnAction(areasGrid, 0.15); 
         }); 
-        this.calculator.setActualFontStyle(areasGrid, 0.35, sizeBtn); 
+        this.calculator.setActualButtonFontStyle(areasGrid, 0.35, sizeBtn); 
     }
 }
