@@ -147,29 +147,18 @@ public class LoginFxImpl extends AbstractSceneController implements LoginFx {
         double fieldsSize =calculator.getButtonWidthDimension(calculator.getNumberOfButton(gridFields)); 
         double btnSize =calculator.getButtonWidthDimension(calculator.getNumberOfButton(gridBtn)); 
         
-//        stage.widthProperty().addListener((obs, oldVal, newVal) -> {
-//            calculator.setNodeFontStyle(grid, 0.10, size); // il titolo e immagini e errore
-//        });
-//        
-//        stage.widthProperty().addListener((obs, oldVal, newVal) -> {
-//            calculator.setNodeFontStyle(gridFields, 0.06, fieldsSize); // FIELDS
-//        });
-//        
-//        stage.widthProperty().addListener((obs, oldVal, newVal) -> {
-//            calculator.setNodeFontStyle(gridBtn, 0.20, btnSize); // bottoni
-//        });
-//        
-//        stage.widthProperty().addListener((obs, oldVal, newVal) -> {
-//            calculator.setNodeFontStyle(gridLbl, 0.06, size); // label
-//        });
-        calculator.setNodeFontStyle(grid, 0.10, size);
+        calculator.setNodeFontStyle(grid, 0.15, size);
         calculator.setNodeFontStyle(gridFields, 0.06, fieldsSize);
         calculator.setNodeFontStyle(gridBtn, 0.20, btnSize);
         calculator.setNodeFontStyle(gridLbl, 0.06, size);
         
-//        stage.widthProperty().addListener((obs, oldVal, newVal) -> {
-//            calculator.setFontStyleOnAction(gridBtn, 0.2); // bottoni
-//        });
+        stage.widthProperty().addListener((obs, oldVal, newVal) -> {
+            calculator.setNodeFontStyle(grid, 0.15, ((double)newVal /2));
+            calculator.setNodeFontStyle(gridFields, 0.06, ((double)newVal /2));
+            calculator.setNodeFontStyle(gridBtn, 0.07, ((double)newVal /calculator.getNumberOfButton(gridBtn)));
+            calculator.setNodeFontStyle(gridLbl, 0.07, ((double)newVal /2));
+            
+        });
 
     }
 }
