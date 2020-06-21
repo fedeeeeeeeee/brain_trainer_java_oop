@@ -41,7 +41,7 @@
             </Label>
          </children>
 		</GridPane>
-		<GridPane fx:id="homeGrid">
+		<GridPane fx:id="bottomGrid">
 			<columnConstraints>
 				<ColumnConstraints hgrow="SOMETIMES" />
 			</columnConstraints>

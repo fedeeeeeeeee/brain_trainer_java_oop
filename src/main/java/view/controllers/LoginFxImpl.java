@@ -8,7 +8,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
 import model.UserPlayer;
 import model.UserPlayerImpl;
-import view.DimensionCalculator;
+import view.DimensionCalculatorImpl;
 import view.SceneType;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
@@ -55,7 +55,7 @@ public class LoginFxImpl extends AbstractSceneController implements LoginFx {
     @FXML
     private GridPane gridLbl;
     
-    private DimensionCalculator calculator;
+    private DimensionCalculatorImpl calculator;
     private final LoginControllerImpl loginController = new LoginControllerImpl(this);
 
     private enum MessageError {
@@ -139,7 +139,7 @@ public class LoginFxImpl extends AbstractSceneController implements LoginFx {
     @Override
     public void init() {
         Stage stage = (Stage) loginBtn.getScene().getWindow();
-        this.calculator = new DimensionCalculator(stage); 
+        this.calculator = new DimensionCalculatorImpl(stage); 
         
         calculator.setActualNodeFontStyle(grid, 0.15);
         calculator.setActualNodeFontStyle(gridFields, 0.06); 

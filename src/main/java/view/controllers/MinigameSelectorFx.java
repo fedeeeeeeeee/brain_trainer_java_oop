@@ -14,7 +14,7 @@ import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 import model.DifficultyLevel;
-import view.DimensionCalculator;
+import view.DimensionCalculatorImpl;
 import view.SceneType;
 
 /**
@@ -44,7 +44,10 @@ public class MinigameSelectorFx extends AbstractSceneController {
     @FXML
     private GridPane gridToggle;
     
-    private DimensionCalculator calculator;
+    @FXML
+    private GridPane bottomGrid;
+    
+    private DimensionCalculatorImpl calculator;
 
     @FXML
     private void initializeCombo() { // NOPMD
@@ -87,15 +90,17 @@ public class MinigameSelectorFx extends AbstractSceneController {
     @Override
     public void init() {
         Stage stage = (Stage) backBtn.getScene().getWindow();
-        this.calculator = new DimensionCalculator(stage); 
+        this.calculator = new DimensionCalculatorImpl(stage); 
         
         stage.widthProperty().addListener((obs, oldVal, newVal) -> {
             calculator.setNodeFontStyle(grid, 0.08, ((double)newVal / 2));
             calculator.setNodeFontStyle(gridToggle, 0.08, ((double)newVal / 2));
+            calculator.setNodeFontStyle(bottomGrid, 0.08, ((double)newVal / 2));
         });
 
-        calculator.setActualNodeFontStyle(grid, 0.25);
+        calculator.setActualNodeFontStyle(grid, 0.15);
         calculator.setActualNodeFontStyle(gridToggle, 0.08);
+        calculator.setActualNodeFontStyle(bottomGrid, 0.20);
     }
 
 }

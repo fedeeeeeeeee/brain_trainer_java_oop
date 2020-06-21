@@ -8,7 +8,7 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import view.TrainingArea;
-import view.DimensionCalculator;
+import view.DimensionCalculatorImpl;
 import view.SceneType;
 
 import java.util.Arrays;
@@ -28,7 +28,10 @@ public class TrainingAreaFx extends AbstractSceneController {
     @FXML
     private GridPane areasGrid;
     
-    private DimensionCalculator calculator;
+    @FXML
+    private GridPane bottomGrid;
+    
+    private DimensionCalculatorImpl calculator;
 
     @FXML
     private void areaClicked(final MouseEvent event) throws IOException { // NOPMD
@@ -37,7 +40,6 @@ public class TrainingAreaFx extends AbstractSceneController {
                             .filter(e -> e.getName().equals(selectedArea))
                             .findAny()
                             .get();
-
         this.getController().setArea(area);
         populateList(area);
         this.getView().switchScene(SceneType.GAME_SELECTOR.getFilePath());
@@ -59,13 +61,13 @@ public class TrainingAreaFx extends AbstractSceneController {
     @Override
     public void init() {
         Stage stage = (Stage) backBtn.getScene().getWindow();
-        this.calculator = new DimensionCalculator(stage);    
+        this.calculator = new DimensionCalculatorImpl(stage);    
         stage.widthProperty().addListener((obs, oldVal, newVal) -> {
             this.calculator.setNodeFontStyle(areasGrid, 0.07, (double)newVal/2);
-            this.calculator.setBackBtnSize(backBtn, 0.07 * (double)newVal/2);
+            this.calculator.setNodeFontStyle(bottomGrid, 0.07, (double)newVal/2);
         });        
         this.calculator.setActualNodeFontStyle(areasGrid, 0.50);
-        this.calculator.setBackBtnSize(backBtn, 0.20);
+        this.calculator.setActualNodeFontStyle(bottomGrid, 0.13);
     }
 
 }

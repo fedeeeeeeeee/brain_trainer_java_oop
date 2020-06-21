@@ -5,7 +5,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
-import view.DimensionCalculator;
+import view.DimensionCalculatorImpl;
 import view.SceneType;
 
 /**
@@ -17,7 +17,7 @@ public class EndGameFx extends AbstractSceneController implements FxController {
     private GridPane grid;
     
     @FXML
-    private GridPane homeGrid;
+    private GridPane bottomGrid;
     
     @FXML
     private Label score;
@@ -28,7 +28,7 @@ public class EndGameFx extends AbstractSceneController implements FxController {
     @FXML
     private Label messageLabel;   
     
-    private DimensionCalculator calculator;
+    private DimensionCalculatorImpl calculator;
     
     @Override
     public void init() {
@@ -41,14 +41,13 @@ public class EndGameFx extends AbstractSceneController implements FxController {
     
     private void resizeNode() {
         Stage stage = (Stage) homeBtn.getScene().getWindow();
-        this.calculator = new DimensionCalculator(stage);              
+        this.calculator = new DimensionCalculatorImpl(stage);              
         stage.widthProperty().addListener((obs, oldVal, newVal) -> {
             this.calculator.setNodeFontStyle(grid, 0.08, ((double)newVal / 2));
-            this.calculator.setNodeFontStyle(homeGrid, 0.07, (double)newVal/2);
-        });     
-        
+            this.calculator.setNodeFontStyle(bottomGrid, 0.07, (double)newVal/2);
+        });           
         this.calculator.setActualNodeFontStyle(grid, 0.10);      
-        this.calculator.setActualNodeFontStyle(homeGrid, 0.20);
+        this.calculator.setActualNodeFontStyle(bottomGrid, 0.20);
     }
     
     @FXML
