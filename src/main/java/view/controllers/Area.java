@@ -1,7 +1,7 @@
 package view.controllers;
 
 /**
- * An annotation that represent an {@link TrainingArea}.
+ * An annotation that represents a {@link TrainingArea}.
  *
  */
 public @interface Area {

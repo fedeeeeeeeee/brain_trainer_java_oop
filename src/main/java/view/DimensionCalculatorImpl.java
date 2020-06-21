@@ -19,7 +19,7 @@ public class DimensionCalculatorImpl implements DimensionCalculator {
     };  
     
     /**
-     * Costructor of {@link DimensionCalculatorImpl}.
+     * Constructor of {@link DimensionCalculatorImpl}.
      * @param stage
      *            the main stage of the current game session
      */
@@ -55,16 +55,9 @@ public class DimensionCalculatorImpl implements DimensionCalculator {
      * {@inheritDoc}
      */
     public void setActualNodeFontStyle(GridPane grid, Double percent) {
-        final int size = this.getFunction().apply(grid);
+        final int size = this.function.apply(grid);
         grid.getChildren().forEach(b -> {
             ((Node) b).setStyle(String.format("-fx-font-size: %dpx;", (int) (percent * size)));
         }); 
-    }   
-    
-    /**
-     * {@inheritDoc}
-     */
-    public Function<GridPane, Integer> getFunction(){
-        return this.function;
-    }    
+    }       
 }
