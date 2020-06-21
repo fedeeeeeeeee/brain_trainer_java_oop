@@ -12,16 +12,16 @@ public class SimpleRandomColor extends RandomColor {
 
     private final DifficultyConfiguration difficultyLevel;
     private List<Colors> colorList;
-    
+
     public SimpleRandomColor(final DifficultyConfiguration difficulty) {
         this.difficultyLevel = difficulty;
         this.createListColorDifficulty(difficulty.getNumColor());
     }
 
     private void createListColorDifficulty(final int numberColor) {
-        this.colorList = Stream.of(Colors.values()).limit(numberColor).collect(Collectors.toList());//NOPMD
+        this.colorList = Stream.of(Colors.values()).limit(numberColor).collect(Collectors.toList());
     }
-    
+
     private List<Pair<Colors, Colors>> createRandomColorList(final Integer numberBtn) {
         final List<Pair<Colors, Colors>> list = new LinkedList<>();
         for (int i = 0; i < numberBtn; i++) {
@@ -34,19 +34,18 @@ public class SimpleRandomColor extends RandomColor {
         final Random rand = new Random();
         return this.colorList.get(rand.nextInt(this.colorList.size()));
     }
-    
+
     @Override
-    public List<Pair<Colors, Colors>> getMeanColorList() {
+    public final List<Pair<Colors, Colors>> getMeanColorList() {
        return createRandomColorList(difficultyLevel.getMeanButton());
     }
 
     @Override
-    public List<Pair<Colors, Colors>> getTrueColorList() {
+    public final List<Pair<Colors, Colors>> getTrueColorList() {
         return createRandomColorList(difficultyLevel.getTrueButton());
     }
 
     @Override
     public void initialize() {
     }
-
 }

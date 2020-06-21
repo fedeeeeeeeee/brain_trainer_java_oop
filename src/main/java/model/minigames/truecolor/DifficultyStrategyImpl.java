@@ -31,8 +31,8 @@ public class DifficultyStrategyImpl implements DifficultyStrategy {
     }
 
     private void createRandomColorMap() {
-        this.randomColorMap.put(StatusColor.MEANCOLOR, this.colorRandom.getMeanColorList());//NOPMD
-        this.randomColorMap.put(StatusColor.TRUECOLOR, this.colorRandom.getTrueColorList());//NOPMD
+        this.randomColorMap.put(StatusColor.MEANCOLOR, this.colorRandom.getMeanColorList());
+        this.randomColorMap.put(StatusColor.TRUECOLOR, this.colorRandom.getTrueColorList());
     }
 
     /**

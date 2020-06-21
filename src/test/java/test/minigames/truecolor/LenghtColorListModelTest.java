@@ -23,7 +23,7 @@ public class LenghtColorListModelTest {
                 .orElseGet(() -> DifficultyConfiguration.EASY);
         DifficultyStrategy strategy = new DifficultyStrategyImpl(configuration);
         final TrueColorModel modelGame = new TrueColorModelImpl(DifficultyLevel.EASY, strategy);
-        
+
         assertEquals(configuration.getMeanButton(), modelGame.getRandomColorMap().get(StatusColor.MEANCOLOR).size());
         assertEquals(configuration.getTrueButton(), modelGame.getRandomColorMap().get(StatusColor.TRUECOLOR).size());
     }
@@ -34,7 +34,7 @@ public class LenghtColorListModelTest {
                 .orElseGet(() -> DifficultyConfiguration.EASY);
         DifficultyStrategy strategy = new DifficultyStrategyImpl(configuration);
         final TrueColorModel modelGame = new TrueColorModelImpl(DifficultyLevel.NORMAL, strategy);
-        
+
         assertEquals(1, modelGame.getRandomColorMap().get(StatusColor.MEANCOLOR).size());
         assertEquals(2, modelGame.getRandomColorMap().get(StatusColor.TRUECOLOR).size());
         assertEquals(configuration.getMeanButton(), modelGame.getRandomColorMap().get(StatusColor.MEANCOLOR).size());

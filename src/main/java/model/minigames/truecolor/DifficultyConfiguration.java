@@ -11,10 +11,19 @@ import model.DifficultyLevel;
  */
 public enum DifficultyConfiguration {
 
+    /**
+     * Represent the easy level configuration.
+     */
     EASY(4, 1, 1),
 
+    /**
+     * Represent the normal level configuration.
+     */
     NORMAL(6, 1, 2),
 
+    /**
+     * Represent the hard level configuration.
+     */
     HARD(8, 1, 2);
 
     private final int numColor;
@@ -27,14 +36,26 @@ public enum DifficultyConfiguration {
         this.trueButton = trueButton;
     }
 
+    /**
+     * @return the number of color of the specific difficulty level
+     * 
+     */
     public int getNumColor() {
         return numColor;
     }
 
+    /**
+     * @return the number of meaning color of the specific difficulty level
+     * 
+     */
     public int getMeanButton() {
         return meanButton;
     }
 
+    /**
+     * @return the number of true color of the specific difficulty level
+     * 
+     */
     public int getTrueButton() {
         return trueButton;
     }
@@ -43,7 +64,7 @@ public enum DifficultyConfiguration {
 //        return new DifficultyStrategyImpl(this);
 //    }
 
-    public static Optional<DifficultyConfiguration> getConfiguration(DifficultyLevel difficulty) {
+    public static Optional<DifficultyConfiguration> getConfiguration(final DifficultyLevel difficulty) {
         Objects.requireNonNull(difficulty, "DifficultyLevel is null in DifficultyConfiguration ");
         switch (difficulty) {
         case EASY:

@@ -81,19 +81,19 @@ public class ImprovedRandomColor extends RandomColor {
     }
 
     @Override
-    public void initialize() {
+    public final void initialize() {
         this.changeProbabilityOfMatching();
         this.copyTempList();
         this.meanColorList.clear();
     }
 
     @Override
-    public List<Pair<Colors, Colors>> getMeanColorList() {
+    public final List<Pair<Colors, Colors>> getMeanColorList() {
         return createRandomColorListMeanAndTrue(StatusColor.MEANCOLOR);
     }
 
     @Override
-    public List<Pair<Colors, Colors>> getTrueColorList() {
+    public final List<Pair<Colors, Colors>> getTrueColorList() {
         return createRandomColorListMeanAndTrue(StatusColor.TRUECOLOR);
     }
 
