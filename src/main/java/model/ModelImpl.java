@@ -58,7 +58,7 @@ public class ModelImpl implements Model { // NOPMD
      * {@inheritDoc}
      */
     @Override
-    public UserPlayer getUser() {
+    public UserPlayer getUserPlayer() {
         return this.player;
     }
 }

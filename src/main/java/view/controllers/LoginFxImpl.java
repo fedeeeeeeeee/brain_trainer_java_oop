@@ -13,7 +13,6 @@ import view.SceneType;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.layout.GridPane;
-import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
@@ -24,9 +23,6 @@ import javafx.scene.control.Label;
  *
  */
 public class LoginFxImpl extends AbstractSceneController implements LoginFx, FxNormalScene {
-
-    @FXML
-    private VBox box;
 
     @FXML
     private Label errorLbl;
@@ -42,25 +38,40 @@ public class LoginFxImpl extends AbstractSceneController implements LoginFx, FxN
 
     @FXML
     private Button signUpBtn;
-    
+
     @FXML
     private GridPane grid;
-    
+
     @FXML
     private GridPane gridFields;
-    
+
     @FXML
     private GridPane gridBtn;
-    
+
     @FXML
     private GridPane gridLbl;
-    
+
     private DimensionCalculatorImpl calculator;
     private final LoginControllerImpl loginController = new LoginControllerImpl(this);
 
+    /**
+     * Enumeration for error message in the login scene.
+     *
+     */
     private enum MessageError {
+        /**
+         * String to show when fields are empty.
+         */
         EMPTY_FIELD("Fields cannot be empty!"), 
+
+        /**
+         * String to show when user insert an existing username.
+         */
         EXISTING_USERNAME("Username already exists!"),
+
+        /**
+         * String to show when password is wrong or the username doesn't exist.
+         */
         INCORRECT_ENTRY("Incorrect password or non-existent user!");
 
         private String message;
@@ -82,7 +93,7 @@ public class LoginFxImpl extends AbstractSceneController implements LoginFx, FxN
                 .build();
         return player;
     }
-    
+
     private boolean checkEmptyFields() {
         return this.txtPassword.getText().isBlank() || this.txtPlayer.getText().isBlank();
     }
@@ -94,7 +105,8 @@ public class LoginFxImpl extends AbstractSceneController implements LoginFx, FxN
     @FXML
     private void loginPlayer() throws IOException { // NOPMD
         if (!this.checkEmptyFields()) {
-            this.loginController.loginUser(this.txtPlayer.getText(), this.txtPassword.getText());
+            final UserPlayer player = this.initPlayer();
+            this.loginController.loginUser(player);
         } else {
             this.errorLbl.setText(MessageError.EMPTY_FIELD.toString());
         }
@@ -136,21 +148,24 @@ public class LoginFxImpl extends AbstractSceneController implements LoginFx, FxN
         this.errorLbl.setText(MessageError.INCORRECT_ENTRY.toString());
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void init() {
         Stage stage = (Stage) loginBtn.getScene().getWindow();
-        this.calculator = new DimensionCalculatorImpl(stage); 
-        
+        this.calculator = new DimensionCalculatorImpl(stage);
+
         calculator.setActualNodeFontStyle(grid, 0.15);
-        calculator.setActualNodeFontStyle(gridFields, 0.06); 
+        calculator.setActualNodeFontStyle(gridFields, 0.06);
         calculator.setActualNodeFontStyle(gridBtn, 0.20);
-        calculator.setActualNodeFontStyle(gridLbl, 0.06);  
-        
+        calculator.setActualNodeFontStyle(gridLbl, 0.06);
+
         stage.widthProperty().addListener((obs, oldVal, newVal) -> {
-            calculator.setNodeFontStyle(grid, 0.15, ((double)newVal / 2));
-            calculator.setNodeFontStyle(gridFields, 0.06, ((double)newVal / 2));
-            calculator.setNodeFontStyle(gridBtn, 0.07, ((double)newVal / 2));
-            calculator.setNodeFontStyle(gridLbl, 0.07, ((double)newVal / 2));           
+            calculator.setNodeFontStyle(grid, 0.15, ((double) newVal / 2));
+            calculator.setNodeFontStyle(gridFields, 0.06, ((double) newVal / 2));
+            calculator.setNodeFontStyle(gridBtn, 0.07, ((double) newVal / 2));
+            calculator.setNodeFontStyle(gridLbl, 0.07, ((double) newVal / 2));
         });
 
     }
