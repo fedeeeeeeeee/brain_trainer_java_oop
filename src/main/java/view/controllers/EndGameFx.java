@@ -1,9 +1,15 @@
 package view.controllers;
 
+
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.layout.Border;
+import javafx.scene.layout.BorderStroke;
+import javafx.scene.layout.BorderStrokeStyle;
+import javafx.scene.layout.BorderWidths;
 import javafx.scene.layout.GridPane;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import view.DimensionCalculatorImpl;
 import view.SceneType;
@@ -34,7 +40,8 @@ public class EndGameFx extends AbstractSceneController implements FxController {
     public void init() {
         final int currentScore = this.getController().getCurrentScore();
         final int bestScore = this.getController().getCurrentMiniGameBest();    
-        this.score.setText("Score: " + String.valueOf(currentScore) + "\nBest: " + String.valueOf(bestScore));        
+        this.score.setText("Score: " + String.valueOf(currentScore) + "\nBest: " + String.valueOf(bestScore));
+        score.setBorder(new Border(new BorderStroke(Color.valueOf("#49618c"), BorderStrokeStyle.DASHED, null, new BorderWidths(5))));
         this.messageLabel.setText(currentScore < bestScore ? "You can do better!" : "Keep it going!");  
         this.resizeNode();       
     }
