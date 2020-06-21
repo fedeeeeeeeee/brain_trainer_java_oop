@@ -4,6 +4,9 @@ import java.io.IOException;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.layout.GridPane;
+import javafx.stage.Stage;
+import view.DimensionCalculatorImpl;
 import view.SceneType;
 
 /**
@@ -20,6 +23,11 @@ public class MainMenuFx extends AbstractSceneController implements FxNormalScene
 
     @FXML
     private Button howToPlayBtn;
+    
+    @FXML
+    private GridPane menuGrid;
+
+    private DimensionCalculatorImpl calculator;
 
     @FXML
     private void startTraining() throws IOException { // NOPMD
@@ -38,7 +46,11 @@ public class MainMenuFx extends AbstractSceneController implements FxNormalScene
 
     @Override
     public void init() {
-        // TODO Auto-generated method stub
-
+        Stage stage = (Stage) trainingBtn.getScene().getWindow();
+        this.calculator = new DimensionCalculatorImpl(stage);      
+        stage.widthProperty().addListener((obs, oldVal, newVal) -> {
+            this.calculator.setNodeFontStyle(menuGrid, 0.08, ((double)newVal / 2)); 
+        });        
+        this.calculator.setActualNodeFontStyle(menuGrid, 0.30);
     }
 }

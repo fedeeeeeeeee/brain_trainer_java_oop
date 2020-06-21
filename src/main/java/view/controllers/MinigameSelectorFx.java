@@ -11,7 +11,10 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.ToggleGroup;
+import javafx.scene.layout.GridPane;
+import javafx.stage.Stage;
 import model.DifficultyLevel;
+import view.DimensionCalculatorImpl;
 import view.SceneType;
 
 /**
@@ -34,6 +37,17 @@ public class MinigameSelectorFx extends AbstractSceneController implements FxNor
 
     @FXML
     private ComboBox<String> gameComboBox;
+    
+    @FXML
+    private GridPane grid;
+    
+    @FXML
+    private GridPane gridToggle;
+    
+    @FXML
+    private GridPane bottomGrid;
+    
+    private DimensionCalculatorImpl calculator;
 
     @FXML
     private void initializeCombo() { // NOPMD
@@ -55,7 +69,7 @@ public class MinigameSelectorFx extends AbstractSceneController implements FxNor
             this.getController().setMiniGame(gameComboBox.getValue(), difficulty);
             this.getView().setMiniGameScene("/layouts/minigames/" + gameComboBox.getValue().replace(" ", "") + ".fxml");
         } else {
-            this.errorLbl.setText("* Please, select all fields to start playing!");
+            this.errorLbl.setText("* Select all fields to start playing!");
         }
     }
 
@@ -75,8 +89,18 @@ public class MinigameSelectorFx extends AbstractSceneController implements FxNor
 
     @Override
     public void init() {
-        // TODO Auto-generated method stub
+        Stage stage = (Stage) backBtn.getScene().getWindow();
+        this.calculator = new DimensionCalculatorImpl(stage); 
         
+        stage.widthProperty().addListener((obs, oldVal, newVal) -> {
+            calculator.setNodeFontStyle(grid, 0.08, ((double)newVal / 2));
+            calculator.setNodeFontStyle(gridToggle, 0.08, ((double)newVal / 2));
+            calculator.setNodeFontStyle(bottomGrid, 0.08, ((double)newVal / 2));
+        });
+
+        calculator.setActualNodeFontStyle(grid, 0.15);
+        calculator.setActualNodeFontStyle(gridToggle, 0.08);
+        calculator.setActualNodeFontStyle(bottomGrid, 0.20);
     }
 
 }

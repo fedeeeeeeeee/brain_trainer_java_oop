@@ -8,6 +8,7 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import view.TrainingArea;
+import view.DimensionCalculatorImpl;
 import view.SceneType;
 
 import java.util.Arrays;
@@ -26,6 +27,11 @@ public class TrainingAreaFx extends AbstractSceneController implements FxNormalS
 
     @FXML
     private GridPane areasGrid;
+    
+    @FXML
+    private GridPane bottomGrid;
+    
+    private DimensionCalculatorImpl calculator;
 
     @FXML
     private void areaClicked(final MouseEvent event) throws IOException { // NOPMD
@@ -34,7 +40,6 @@ public class TrainingAreaFx extends AbstractSceneController implements FxNormalS
                             .filter(e -> e.getName().equals(selectedArea))
                             .findAny()
                             .get();
-
         this.getController().setArea(area);
         populateList(area);
         this.getView().switchScene(SceneType.GAME_SELECTOR.getFilePath());
@@ -55,13 +60,14 @@ public class TrainingAreaFx extends AbstractSceneController implements FxNormalS
      */
     @Override
     public void init() {
-        Stage stages = (Stage) backBtn.getScene().getWindow();
-        stages.widthProperty().addListener((obs, oldVal, newVal) -> {
-            this.areasGrid.getChildren().forEach(b -> {
-                ((Button) b).setStyle(String.format("-fx-font-size: %dpx;", (int) (0.10 * ((Button) b).getWidth())));
-            }); 
-            this.backBtn.setStyle(String.format("-fx-font-size: %dpx;", (int) (0.08 * ((Button)this.areasGrid.getChildren().get(0)).getWidth())));
-        }); 
+        Stage stage = (Stage) backBtn.getScene().getWindow();
+        this.calculator = new DimensionCalculatorImpl(stage);    
+        stage.widthProperty().addListener((obs, oldVal, newVal) -> {
+            this.calculator.setNodeFontStyle(areasGrid, 0.07, (double)newVal/2);
+            this.calculator.setNodeFontStyle(bottomGrid, 0.07, (double)newVal/2);
+        });        
+        this.calculator.setActualNodeFontStyle(areasGrid, 0.50);
+        this.calculator.setActualNodeFontStyle(bottomGrid, 0.13);
     }
 
 }

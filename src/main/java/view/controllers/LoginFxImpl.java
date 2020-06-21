@@ -8,10 +8,13 @@ import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
 import model.UserPlayer;
 import model.UserPlayerImpl;
+import view.DimensionCalculatorImpl;
 import view.SceneType;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
+import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
@@ -39,7 +42,20 @@ public class LoginFxImpl extends AbstractSceneController implements LoginFx, FxN
 
     @FXML
     private Button signUpBtn;
-
+    
+    @FXML
+    private GridPane grid;
+    
+    @FXML
+    private GridPane gridFields;
+    
+    @FXML
+    private GridPane gridBtn;
+    
+    @FXML
+    private GridPane gridLbl;
+    
+    private DimensionCalculatorImpl calculator;
     private final LoginControllerImpl loginController = new LoginControllerImpl(this);
 
     private enum MessageError {
@@ -59,16 +75,16 @@ public class LoginFxImpl extends AbstractSceneController implements LoginFx, FxN
         }
     }
 
-    private boolean checkEmptyFields() {
-        return this.txtPassword.getText().isBlank() || this.txtPlayer.getText().isBlank();
-    }
-
     private UserPlayer initPlayer() {
         final UserPlayer player = new UserPlayerImpl.PlayerBuilder()
                 .username(this.txtPlayer.getText())
                 .password(this.txtPassword.getText())
                 .build();
         return player;
+    }
+    
+    private boolean checkEmptyFields() {
+        return this.txtPassword.getText().isBlank() || this.txtPlayer.getText().isBlank();
     }
 
     private void switchToMenu() {
@@ -122,8 +138,20 @@ public class LoginFxImpl extends AbstractSceneController implements LoginFx, FxN
 
     @Override
     public void init() {
-        // TODO Auto-generated method stub
+        Stage stage = (Stage) loginBtn.getScene().getWindow();
+        this.calculator = new DimensionCalculatorImpl(stage); 
         
-    }
+        calculator.setActualNodeFontStyle(grid, 0.15);
+        calculator.setActualNodeFontStyle(gridFields, 0.06); 
+        calculator.setActualNodeFontStyle(gridBtn, 0.20);
+        calculator.setActualNodeFontStyle(gridLbl, 0.06);  
+        
+        stage.widthProperty().addListener((obs, oldVal, newVal) -> {
+            calculator.setNodeFontStyle(grid, 0.15, ((double)newVal / 2));
+            calculator.setNodeFontStyle(gridFields, 0.06, ((double)newVal / 2));
+            calculator.setNodeFontStyle(gridBtn, 0.07, ((double)newVal / 2));
+            calculator.setNodeFontStyle(gridLbl, 0.07, ((double)newVal / 2));           
+        });
 
+    }
 }

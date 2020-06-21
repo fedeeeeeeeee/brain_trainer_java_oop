@@ -1,9 +1,18 @@
 package view.controllers;
 
+
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.layout.Border;
+import javafx.scene.layout.BorderStroke;
+import javafx.scene.layout.BorderStrokeStyle;
+import javafx.scene.layout.BorderWidths;
+import javafx.scene.layout.GridPane;
+import javafx.scene.paint.Color;
+import javafx.stage.Stage;
 import model.score.Progress;
+import view.DimensionCalculatorImpl;
 import view.SceneType;
 
 /**
@@ -12,24 +21,46 @@ import view.SceneType;
 public class EndGameFx extends AbstractSceneController implements FxHandleDataScene {
 
     @FXML
-    private Label score;
-
+    private GridPane grid;
+    
     @FXML
-    private Button backBtn;
-
+    private GridPane bottomGrid;
+    
+    @FXML
+    private Label score;
+    
+    @FXML
+    private Button homeBtn;
+    
+    @FXML
+    private Label messageLabel;   
+    
+    private DimensionCalculatorImpl calculator;
+    
+    @Override
+    public void init(Progress progress) {
+        final int currentScore = progress.getCurrentScore();
+        final int bestScore = progress.getCurrentBest();    
+        this.score.setText("Score: " + String.valueOf(currentScore) + "\nBest: " + String.valueOf(bestScore));
+        score.setBorder(new Border(new BorderStroke(Color.valueOf("#49618c"), BorderStrokeStyle.DASHED, null, new BorderWidths(5))));
+        this.messageLabel.setText(currentScore < bestScore ? "You can do better!" : "Keep it going!");  
+        this.resizeNode();       
+    }
+    
+    private void resizeNode() {
+        Stage stage = (Stage) homeBtn.getScene().getWindow();
+        this.calculator = new DimensionCalculatorImpl(stage);              
+        stage.widthProperty().addListener((obs, oldVal, newVal) -> {
+            this.calculator.setNodeFontStyle(grid, 0.08, ((double)newVal / 2));
+            this.calculator.setNodeFontStyle(bottomGrid, 0.07, (double)newVal/2);
+        });           
+        this.calculator.setActualNodeFontStyle(grid, 0.10);      
+        this.calculator.setActualNodeFontStyle(bottomGrid, 0.20);
+    }
+    
     @FXML
     private void backHome() {
         this.getView().switchScene(SceneType.MAIN_MENU.getFilePath());
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public void init(Progress progress) {
-        this.score.setText("Score: " + Integer.toString(progress.getCurrentScore()) + "\nBest: "
-                + Integer.toString(progress.getCurrentBest()));
-
     }
 
 }
