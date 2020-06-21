@@ -1,26 +1,32 @@
 package model.minigames.colorgama;
 
 /**
- * This interface represents the color values.
+ * This interface represents an aggregate to create an Iterator.
  *
- * @param <X>
- *          the type to represent values of the color.
  */
-public interface ColorValues<X> {
+public interface ColorValues {
 
     /**
-     * Get the value of a color.
+     * Getter for a color values iterator.
      * 
-     * @return value
-     *          the color value
+     * @return iterator
+     *          a color values iterator
      */
-    X getValue();
+    ColorValuesIterator getIterator();
 
     /**
-     * Get the String representation of the color values.
+     * Get the method of color value representations.
      * 
-     * @return colorString
-     *          the color in String
+     * @return method
+     *          the method of representations
      */
-    String getColorString();
+    ColorMethod getColorMethod();
+
+    /**
+     * Reset all values.
+     * 
+     * @param question
+     *          the current question type.
+     */
+    void resetValues(QuestionType question);
 }
