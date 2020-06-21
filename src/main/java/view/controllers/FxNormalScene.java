@@ -1,7 +1,7 @@
 package view.controllers;
 
-public interface FxNormalScene extends FxController{
-    
+public interface FxNormalScene extends FxController {
+
     /**
      * Initialize the scene.
      */
