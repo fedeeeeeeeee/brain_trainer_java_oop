@@ -6,7 +6,6 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
-import utility.Pair;
 import view.DimensionCalculator;
 import view.SceneType;
 
@@ -26,7 +25,7 @@ public class MainMenuFx extends AbstractSceneController {
     private Button howToPlayBtn;
     
     @FXML
-    private GridPane areasGrid;
+    private GridPane menuGrid;
 
     private DimensionCalculator calculator;
 
@@ -48,14 +47,10 @@ public class MainMenuFx extends AbstractSceneController {
     @Override
     public void init() {
         Stage stage = (Stage) trainingBtn.getScene().getWindow();
-        this.calculator = new DimensionCalculator(stage);
-       
-        Pair<Integer, Integer> sizeBtn = new Pair<>(calculator.getButtonWidthDimension(calculator.getNumberOfButton(areasGrid)),
-                calculator.getButtonHeightDimension(calculator.getNumberOfButton(areasGrid)));
-
+        this.calculator = new DimensionCalculator(stage);      
         stage.widthProperty().addListener((obs, oldVal, newVal) -> {
-            this.calculator.setFontStyleOnAction(areasGrid, 0.15); 
-        }); 
-        this.calculator.setActualButtonFontStyle(areasGrid, 0.35, sizeBtn); 
+            this.calculator.setNodeFontStyle(menuGrid, 0.08, ((double)newVal / 2)); 
+        });        
+        this.calculator.setActualNodeFontStyle(menuGrid, 0.30);
     }
 }

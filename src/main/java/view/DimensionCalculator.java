@@ -1,14 +1,18 @@
 package view;
 
+import java.util.function.Function;
+
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
-import utility.Pair;
 
 public class DimensionCalculator {
     
     private final Stage stage; 
+    private final Function<GridPane, Integer> function = (grid) -> {
+        return this.getButtonWidthDimension(this.getNumberOfButton(grid));
+    };
     
     public DimensionCalculator(Stage stage) {
         this.stage = stage;
@@ -23,10 +27,11 @@ public class DimensionCalculator {
         });
     }
 
-    public void setActualButtonFontStyle(GridPane grid, Double percent, Pair<Integer, Integer> btnSize) {
+    public void setActualButtonFontStyle(GridPane grid, Double percent) {
+        final int size = this.getFunction().apply(grid);
         grid.getChildren().forEach(b -> {
             if (b instanceof Button) {
-                b.setStyle(String.format("-fx-font-size: %dpx;", (int) (percent * btnSize.getX())));
+                b.setStyle(String.format("-fx-font-size: %dpx;", (int) (percent * size)));
             }
         });
     }
@@ -37,18 +42,19 @@ public class DimensionCalculator {
         }); 
     }
     
-//    public void setAllChildrenFontStyle(GridPane grid, Double percent, Pair<Integer, Integer> btnSize) {
-//        grid.getChildren().forEach(b -> {
-//                b.setStyle(String.format("-fx-font-size: %dpx;", (int) (percent * btnSize.getX())));
-//                b.setStyle(String.format("-fx-font-size: %dpx;", (int) (percent * btnSize.getY())));
-//        });
-//    }
-    
-    public void setBackBtnSize(Button button, Double percent) {
-        button.setStyle(String.format("-fx-font-size: %dpx;", (int) (percent * button.getWidth())));
+    public void setActualNodeFontStyle(GridPane grid, Double percent) {
+        final int size = this.getFunction().apply(grid);
+        grid.getChildren().forEach(b -> {
+            ((Node) b).setStyle(String.format("-fx-font-size: %dpx;", (int) (percent * size)));
+        }); 
     }
     
-    public int getNumberOfButton(GridPane grid) {
+    
+    public void setBackBtnSize(Button button, double percent) {
+        button.setStyle(String.format("-fx-font-size: %dpx;", (int)percent));
+    }
+    
+    private int getNumberOfButton(GridPane grid) {
         int count=0;
         for(Node node : grid.getChildren()) {
             if(node instanceof Button) {
@@ -57,15 +63,13 @@ public class DimensionCalculator {
         }
         return count;
     }
-    public int getButtonWidthDimension(int numBtn) {
+    
+    private int getButtonWidthDimension(int numBtn) {
         Double sizeScene = this.stage.getScene().getWidth();
         return (int) (sizeScene/(numBtn * 2 + 2));
     }
     
-    public int getButtonHeightDimension(int numBtn) {
-        Double sizeScene = this.stage.getScene().getHeight();
-        return (int) (sizeScene/(numBtn * 2 + 2));
-    }
-    
-    
+    public Function<GridPane, Integer> getFunction(){
+        return this.function;
+    }    
 }

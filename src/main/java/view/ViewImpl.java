@@ -80,8 +80,6 @@ public class ViewImpl extends Application implements View {
         this.stage.setWidth(WIDTH);
         this.stage.setMinHeight(HEIGHT/1.3);
         this.stage.setMinWidth(WIDTH/1.3);
-        this.stage.setMaxWidth(WIDTH * 1.3);
-        this.stage.setMaxHeight(HEIGHT * 1.3);
         this.inGame = false;
         this.stage.setTitle("Brain Trainer");
         this.stage.setResizable(true);

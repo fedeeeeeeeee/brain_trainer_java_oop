@@ -8,10 +8,8 @@ import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
 import model.UserPlayer;
 import model.UserPlayerImpl;
-import utility.Pair;
 import view.DimensionCalculator;
 import view.SceneType;
-import javafx.scene.Node;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.layout.GridPane;
@@ -58,7 +56,6 @@ public class LoginFxImpl extends AbstractSceneController implements LoginFx {
     private GridPane gridLbl;
     
     private DimensionCalculator calculator;
-
     private final LoginControllerImpl loginController = new LoginControllerImpl(this);
 
     private enum MessageError {
@@ -78,16 +75,16 @@ public class LoginFxImpl extends AbstractSceneController implements LoginFx {
         }
     }
 
-    private boolean checkEmptyFields() {
-        return this.txtPassword.getText().isBlank() || this.txtPlayer.getText().isBlank();
-    }
-
     private UserPlayer initPlayer() {
         final UserPlayer player = new UserPlayerImpl.PlayerBuilder()
                 .username(this.txtPlayer.getText())
                 .password(this.txtPassword.getText())
                 .build();
         return player;
+    }
+    
+    private boolean checkEmptyFields() {
+        return this.txtPassword.getText().isBlank() || this.txtPlayer.getText().isBlank();
     }
 
     private void switchToMenu() {
@@ -142,22 +139,18 @@ public class LoginFxImpl extends AbstractSceneController implements LoginFx {
     @Override
     public void init() {
         Stage stage = (Stage) loginBtn.getScene().getWindow();
-        this.calculator = new DimensionCalculator(stage);
-        double size = calculator.getButtonWidthDimension(calculator.getNumberOfButton(grid));
-        double fieldsSize =calculator.getButtonWidthDimension(calculator.getNumberOfButton(gridFields)); 
-        double btnSize =calculator.getButtonWidthDimension(calculator.getNumberOfButton(gridBtn)); 
+        this.calculator = new DimensionCalculator(stage); 
         
-        calculator.setNodeFontStyle(grid, 0.15, size);
-        calculator.setNodeFontStyle(gridFields, 0.06, fieldsSize);
-        calculator.setNodeFontStyle(gridBtn, 0.20, btnSize);
-        calculator.setNodeFontStyle(gridLbl, 0.06, size);
+        calculator.setActualNodeFontStyle(grid, 0.15);
+        calculator.setActualNodeFontStyle(gridFields, 0.06); 
+        calculator.setActualNodeFontStyle(gridBtn, 0.20);
+        calculator.setActualNodeFontStyle(gridLbl, 0.06);  
         
         stage.widthProperty().addListener((obs, oldVal, newVal) -> {
-            calculator.setNodeFontStyle(grid, 0.15, ((double)newVal /2));
-            calculator.setNodeFontStyle(gridFields, 0.06, ((double)newVal /2));
-            calculator.setNodeFontStyle(gridBtn, 0.07, ((double)newVal /calculator.getNumberOfButton(gridBtn)));
-            calculator.setNodeFontStyle(gridLbl, 0.07, ((double)newVal /2));
-            
+            calculator.setNodeFontStyle(grid, 0.15, ((double)newVal / 2));
+            calculator.setNodeFontStyle(gridFields, 0.06, ((double)newVal / 2));
+            calculator.setNodeFontStyle(gridBtn, 0.07, ((double)newVal / 2));
+            calculator.setNodeFontStyle(gridLbl, 0.07, ((double)newVal / 2));           
         });
 
     }

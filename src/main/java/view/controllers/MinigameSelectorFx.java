@@ -6,17 +6,14 @@ import java.util.Arrays;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.GridPane;
-import javafx.scene.text.Font;
 import javafx.stage.Stage;
 import model.DifficultyLevel;
-import utility.Pair;
 import view.DimensionCalculator;
 import view.SceneType;
 
@@ -90,20 +87,15 @@ public class MinigameSelectorFx extends AbstractSceneController {
     @Override
     public void init() {
         Stage stage = (Stage) backBtn.getScene().getWindow();
-        this.calculator = new DimensionCalculator(stage);
-        double size =calculator.getButtonWidthDimension(calculator.getNumberOfButton(grid)); 
-        double toggleSize =calculator.getButtonWidthDimension(calculator.getNumberOfButton(gridToggle)); 
+        this.calculator = new DimensionCalculator(stage); 
         
         stage.widthProperty().addListener((obs, oldVal, newVal) -> {
-            calculator.setNodeFontStyle(grid, 0.15, backBtn.getWidth());
+            calculator.setNodeFontStyle(grid, 0.08, ((double)newVal / 2));
+            calculator.setNodeFontStyle(gridToggle, 0.08, ((double)newVal / 2));
         });
-        
-        stage.widthProperty().addListener((obs, oldVal, newVal) -> {
-            calculator.setNodeFontStyle(gridToggle, 0.15, backBtn.getWidth());
-        });
-        
-        calculator.setNodeFontStyle(grid, 0.25, size);
-        calculator.setNodeFontStyle(gridToggle, 0.08, toggleSize);
+
+        calculator.setActualNodeFontStyle(grid, 0.25);
+        calculator.setActualNodeFontStyle(gridToggle, 0.08);
     }
 
 }
