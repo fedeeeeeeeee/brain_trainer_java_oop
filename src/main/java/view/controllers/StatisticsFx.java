@@ -1,6 +1,9 @@
 package view.controllers;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.List;
 import java.util.stream.Collectors;
 
 import javafx.collections.FXCollections;
@@ -14,6 +17,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TabPane;
 import javafx.scene.control.Tooltip;
 import model.score.Progress;
+import utility.Pair;
 import view.SceneType;
 import view.TrainingArea;
 
@@ -50,6 +54,21 @@ public class StatisticsFx extends AbstractSceneController implements FxHandleDat
     @FXML
     private TabPane graphPane;
 
+    @FXML
+    private Label bestAttentionLbl;
+
+    @FXML
+    private Label bestBrainSpeedLbl;
+
+    @FXML
+    private Label bestReasoningLbl;
+
+    @FXML
+    private Label bestMemoryLbl;
+
+    @FXML
+    private Label bestVisualSkillLbl;
+
     private Progress progress;
 
     @FXML
@@ -73,22 +92,37 @@ public class StatisticsFx extends AbstractSceneController implements FxHandleDat
             Tooltip.install(data.getNode(), toolTip);
         });
         // System.out.println(this.graphPane.getTabs().get(0).get);
-        this.createGraph(attentionGraph, TrainingArea.ATTENTION);
-        this.createGraph(brainSpeedGraph, TrainingArea.BRAIN_SPEED);
-        this.createGraph(reasoningGraph, TrainingArea.REASONING);
-        this.createGraph(visualSkillGraph, TrainingArea.VISUAL_SKILL);
-        this.createGraph(memoryGraph, TrainingArea.MEMORY);
+        this.createGraph(attentionGraph, bestAttentionLbl, TrainingArea.ATTENTION);
+        this.createGraph(brainSpeedGraph, bestBrainSpeedLbl, TrainingArea.BRAIN_SPEED);
+        this.createGraph(reasoningGraph, bestReasoningLbl, TrainingArea.REASONING);
+        this.createGraph(memoryGraph, bestMemoryLbl, TrainingArea.MEMORY);
+        this.createGraph(visualSkillGraph, bestVisualSkillLbl, TrainingArea.VISUAL_SKILL);
+
     }
 
-    private void createGraph(final LineChart<String, Integer> graph, final TrainingArea area) {
+    private void createGraph(final LineChart<String, Integer> graph, final Label bestLbl, final TrainingArea area) {
 
-        for (String minigame : progress.getHistoryScore().get(area).keySet()) {
+        final List<Pair<String, Integer>> best = new ArrayList<>();
+
+        for (final String minigame : progress.getHistoryScore().get(area).keySet()) {
             final ObservableList<LineChart.Data<String, Integer>> values = FXCollections.observableArrayList(
                     this.progress.getHistoryScore().get(area).get(minigame).getMiniGameHistory().entrySet().stream()
                             .map(e -> new XYChart.Data<>(e.getKey(), e.getValue())).collect(Collectors.toList()));
-            XYChart.Series<String, Integer> series = new XYChart.Series<String, Integer>(values);
-            graph.getData().addAll(series);
+            final XYChart.Series<String, Integer> series = new XYChart.Series<>(values);
+            series.setName(minigame);
+            graph.getData().add(series);
+
+            best.add(new Pair<>(minigame, this.progress.getHistoryScore().get(area).get(minigame).getBest()));
         }
+        best.stream().sorted(new Comparator<>() {
+
+            @Override
+            public int compare(final Pair<String, Integer> o1, final Pair<String, Integer> o2) {
+                return o2.getY() - o1.getY();
+            }
+        });
+        bestLbl.setText("Best:");
+        best.stream().forEach(i -> bestLbl.setText(bestLbl.getText() + "\n" + i.getX() + " " + Integer.toString(i.getY())));
 
     }
 }
