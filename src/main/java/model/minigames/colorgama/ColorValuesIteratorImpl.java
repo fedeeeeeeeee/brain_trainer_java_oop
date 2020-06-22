@@ -38,7 +38,6 @@ public class ColorValuesIteratorImpl implements ColorValuesIterator {
         this.colorValuesSet = colorValuesSet;
         this.size = size;
         this.rightIndex = new Random().nextInt(this.size);
-
     }
 
     private void checkArgument(final int size, final Set<Triple<Number, Number, Number>> colorValuesSet) {

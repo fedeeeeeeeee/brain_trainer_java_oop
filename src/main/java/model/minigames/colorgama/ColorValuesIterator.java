@@ -5,7 +5,7 @@ import java.util.Iterator;
 import org.apache.commons.lang3.tuple.Triple;
 
 /**
- * This interface represents aspects of the color values of the minigame.
+ * This interface represents color values of the minigame to iterate.
  *
  */
 public interface ColorValuesIterator extends Iterator<Triple<Number, Number, Number>> {

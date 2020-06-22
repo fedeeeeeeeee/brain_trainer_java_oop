@@ -62,5 +62,4 @@ public class ColorGamaSettings implements ComputeDifficultyValue {
     public int getNumColor() {
         return this.numColors;
     }
-
 }

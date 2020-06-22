@@ -1,7 +1,7 @@
 package model.minigames.colorgama;
 
 /**
- * This interface represents an aggregate to create an Iterator.
+ * This interface represents the color values of the minigame.
  *
  */
 public interface ColorValues {

@@ -21,7 +21,7 @@ public class HSBColorValuesCalculator implements ColorValuesCalculator {
     private static final String BAD_SIZE = "size must be greater than 0";
     private static final int DEGREE = 361;
 
-    private final HSBValuesSettings valueSettings;
+    private final HSBValuesSetting valueSettings;
     private final OfDouble values;
     private Number hue;
 
@@ -33,8 +33,16 @@ public class HSBColorValuesCalculator implements ColorValuesCalculator {
      */
     public HSBColorValuesCalculator(final DifficultyLevel difficulty) {
         Objects.requireNonNull(difficulty, "DifficultyLevel" + NULL_ARG);
-        this.valueSettings = new HSBValueSettingsImpl(difficulty);
+        this.valueSettings = new HSBValuesSettingImpl(difficulty);
         this.values = new Random().doubles(this.valueSettings.getRandomColorOrigin().doubleValue(), this.valueSettings.getRandomColorBound().doubleValue()).iterator();
+    }
+
+    private void check(final QuestionType question, final Set<Triple<Number, Number, Number>> colorValuesSet) {
+        Objects.requireNonNull(question, "QuestionType" + NULL_ARG);
+        Objects.requireNonNull(colorValuesSet, "Set<Triple<Number, Number, Number>>" + NULL_ARG);
+        if (colorValuesSet.isEmpty()) {
+            throw new IllegalArgumentException(BAD_SIZE);
+        }
     }
 
     private double calulateRandomValue() {
@@ -84,14 +92,6 @@ public class HSBColorValuesCalculator implements ColorValuesCalculator {
                                              this.calulateRandomValue()));
         default:
             return Optional.empty();
-        }
-    }
-
-    private void check(final QuestionType question, final Set<Triple<Number, Number, Number>> colorValuesSet) {
-        Objects.requireNonNull(question, "QuestionType" + NULL_ARG);
-        Objects.requireNonNull(colorValuesSet, "Set<Triple<Number, Number, Number>>" + NULL_ARG);
-        if (colorValuesSet.isEmpty()) {
-            throw new IllegalArgumentException(BAD_SIZE);
         }
     }
 

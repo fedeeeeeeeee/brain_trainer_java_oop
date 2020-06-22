@@ -6,7 +6,7 @@ import java.util.function.BiFunction;
 import model.DifficultyLevel;
 
 /**
- * This class implements {@link HSBValuesSettings}.
+ * This class implements {@link HSBValuesSettings} and extends {@link ColorGamaSettings}.
  *
  */
 public class HSBValuesSettingImpl extends ColorGamaSettings implements HSBValuesSetting {
