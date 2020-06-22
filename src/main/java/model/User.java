@@ -18,4 +18,17 @@ public interface User {
      */
     String getPassword();
 
+    /**
+     * Setter for UserPlayer's username.
+     * @param username
+     *              the username to set
+     */
+    void setUsername(String username);
+
+    /**
+     * Setter for UserPlayer's password.
+     * @param password
+     *               the password to set
+     */
+    void setPassword(String password);
 }

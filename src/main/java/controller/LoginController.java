@@ -7,12 +7,10 @@ public interface LoginController {
     /**
      * If user exists in data storage, simulate login.
      * 
-     * @param username 
-     *             the username of the player to check
-     * @param password 
-     *             the password of the player to check
+     * @param player
+     *          the player to check
      */
-    void loginUser(String username, String password);
+    void loginUser(UserPlayer player);
 
     /**
      * If the player is correctly registered, set the player.

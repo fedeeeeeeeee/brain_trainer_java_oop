@@ -28,8 +28,8 @@ public class LoginControllerImpl implements LoginController {
      * {@inheritDoc}
      */
     @Override
-    public void loginUser(final String username, final String password) {
-        if (this.model.loginUser(username, password)) {
+    public void loginUser(final UserPlayer player) {
+        if (this.model.loginUser(player)) {
             this.view.setUserPlayer(this.model.getUserFile());
         } else {
             this.view.showError();

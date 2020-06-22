@@ -73,8 +73,8 @@ public class ControllerImpl implements Controller {
      */
     @Override
     public void saveData() {
-        if (this.model.getUser() != null) {
-            this.loader.saveData(this.model.getUser());
+        if (this.model.getUserPlayer() != null) {
+            this.loader.saveData(this.model.getUserPlayer());
         }
     }
 
@@ -92,6 +92,6 @@ public class ControllerImpl implements Controller {
      */
     @Override
     public void initStatistics() {
-        this.view.initStatistics(this.model.getUser().getProgress());
+        this.view.initStatistics(this.model.getUserPlayer().getProgress());
     }
 }

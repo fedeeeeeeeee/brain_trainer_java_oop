@@ -1,33 +1,36 @@
 package view;
 
-import java.util.function.Function;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
 
 /**
- * 
- * 
+ * Interface for view components' resizing logic.
  *
  */
 public interface DimensionCalculator {
-    
+
     /**
-     * 
-     * @param grid
-     * @param percent
-     * @param size
+     * Set the nodes' dimension when resizing scene.
+     * @param grid 
+     *           the grid that contains components to resize
+     * @param percent 
+     *           the resizing percentage
+     * @param size 
+     *           new size value
      */
     void setNodeFontStyle(GridPane grid, Double percent, Double size);
-    
+
     /**
-     * 
-     * @param grid
-     * @param percent
+     * Set the nodes' dimension when the scene is show.
+     * @param grid 
+     *          the grid that contains components to resize
+     * @param percent 
+     *          the resizing percentage
      */
     void setActualNodeFontStyle(GridPane grid, Double percent);
+
+    void setActualImageViewDimension(final ImageView img, final Double percent);
     
-    /**
-     * 
-     * @return
-     */
-    Function<GridPane, Integer> getFunction();
+    void setImageViewDimension(final ImageView img, final Double percent, final Double size);
+    
 }

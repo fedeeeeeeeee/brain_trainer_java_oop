@@ -6,11 +6,11 @@ import java.util.Arrays;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.ToggleGroup;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 import model.DifficultyLevel;
@@ -27,10 +27,10 @@ public class MinigameSelectorFx extends AbstractSceneController implements FxNor
     private ToggleGroup difficulty;
 
     @FXML
-    private Button homeBtn;
+    private ImageView homeImg;
 
     @FXML
-    private Button backBtn;
+    private ImageView backImg;
 
     @FXML
     private Label errorLbl;
@@ -43,9 +43,6 @@ public class MinigameSelectorFx extends AbstractSceneController implements FxNor
     
     @FXML
     private GridPane gridToggle;
-    
-    @FXML
-    private GridPane bottomGrid;
     
     private DimensionCalculatorImpl calculator;
 
@@ -61,7 +58,7 @@ public class MinigameSelectorFx extends AbstractSceneController implements FxNor
     private void startMiniGame() { // NOPMD
         if (checkFieldsNotNull()) {
             final RadioButton selectedRadioBtn = (RadioButton) difficulty.getSelectedToggle();
-            DifficultyLevel difficulty = Arrays.asList(DifficultyLevel.values()).stream()
+            final DifficultyLevel difficulty = Arrays.asList(DifficultyLevel.values()).stream()
                                                .filter(e -> e.name().equals(selectedRadioBtn.getText()))
                                                .findAny()
                                                .get();
@@ -89,18 +86,20 @@ public class MinigameSelectorFx extends AbstractSceneController implements FxNor
 
     @Override
     public void init() {
-        Stage stage = (Stage) backBtn.getScene().getWindow();
+        final Stage stage = (Stage) this.getRoot().getScene().getWindow();
         this.calculator = new DimensionCalculatorImpl(stage); 
         
         stage.widthProperty().addListener((obs, oldVal, newVal) -> {
-            calculator.setNodeFontStyle(grid, 0.08, ((double)newVal / 2));
-            calculator.setNodeFontStyle(gridToggle, 0.08, ((double)newVal / 2));
-            calculator.setNodeFontStyle(bottomGrid, 0.08, ((double)newVal / 2));
+            this.calculator.setNodeFontStyle(grid, 0.08, (double)newVal / 2);
+            this.calculator.setNodeFontStyle(gridToggle, 0.08, (double)newVal / 2);
+            this.calculator.setImageViewDimension(backImg, 0.005, (double) newVal/4);
+            this.calculator.setImageViewDimension(homeImg, 0.005, (double) newVal/4);
         });
 
-        calculator.setActualNodeFontStyle(grid, 0.15);
-        calculator.setActualNodeFontStyle(gridToggle, 0.08);
-        calculator.setActualNodeFontStyle(bottomGrid, 0.20);
+        this.calculator.setActualNodeFontStyle(grid, 0.15);
+        this.calculator.setActualNodeFontStyle(gridToggle, 0.08);
+        this.calculator.setActualImageViewDimension(backImg, 0.005);
+        this.calculator.setActualImageViewDimension(homeImg, 0.005);
     }
 
 }

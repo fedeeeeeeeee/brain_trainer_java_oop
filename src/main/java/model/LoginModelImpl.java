@@ -56,9 +56,9 @@ public class LoginModelImpl implements LoginModel {
      * {@inheritDoc}
      */
     @Override
-    public boolean loginUser(final String username, final String password) {
-        final String userFileName = username + ".txt";
-        return this.checkIfUserExist(userFileName) && this.checkPassword(password);
+    public boolean loginUser(final UserPlayer player) {
+        final String userFileName = player.getUsername() + ".txt";
+        return this.checkIfUserExist(userFileName) && this.checkPassword(player.getPassword());
     }
 
     /**

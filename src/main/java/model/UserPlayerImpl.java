@@ -7,22 +7,21 @@ import model.score.ProgressImpl;
  * The implementation of the {@link UserPlayer}.
  *
  */
-public class UserPlayerImpl implements UserPlayer {
+public final class UserPlayerImpl implements UserPlayer {
 
     private String username;
     private String password;
     private ProgressImpl progress;
 
-    /**
-     * Creates instance of {@link UserPlayer}.
-     */
-    public UserPlayerImpl() {
-        // this is intentionally empty, nothing needed here.
-    }
-
     private UserPlayerImpl(final PlayerBuilder builder) {
         this.username = builder.username;
         this.password = builder.password;
+    }
+
+    /**
+     * Default constructor for {@link UserPlayerImpl}.
+     */
+    public UserPlayerImpl() {
     }
 
     /**
@@ -58,7 +57,21 @@ public class UserPlayerImpl implements UserPlayer {
     }
 
     /**
-     * Builder for User. 
+     * {@inheritDoc}
+     */
+    public void setUsername(final String username) {
+        this.username = username;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public void setPassword(final String password) {
+        this.password = password;
+    }
+
+    /**
+     * Builder for UserPlayer. 
      * 
      */
     public static class PlayerBuilder {
@@ -98,4 +111,3 @@ public class UserPlayerImpl implements UserPlayer {
     }
 
 }
-

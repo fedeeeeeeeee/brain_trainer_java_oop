@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.image.*?>
 <?import javafx.scene.effect.*?>
 <?import javafx.scene.text.*?>
 <?import javafx.geometry.*?>
@@ -16,9 +17,10 @@
 	<children>
 		<GridPane fx:id="menuGrid" VBox.vgrow="ALWAYS">
 			<columnConstraints>
-				<ColumnConstraints hgrow="SOMETIMES" maxWidth="1.7976931348623157E308" prefWidth="170.0" />
-				<ColumnConstraints />
-				<ColumnConstraints hgrow="SOMETIMES" maxWidth="1.7976931348623157E308" prefWidth="170.0" />
+            <ColumnConstraints maxWidth="1.7976931348623157E308" />
+				<ColumnConstraints maxWidth="1.7976931348623157E308" />
+            <ColumnConstraints />
+            <ColumnConstraints />
 			</columnConstraints>
 			<rowConstraints>
 				<RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
@@ -28,7 +30,7 @@
 				<RowConstraints minHeight="10.0" prefHeight="30.0" valignment="CENTER" vgrow="SOMETIMES" />
 			</rowConstraints>
 			<children>
-				<Button fx:id="trainingBtn" alignment="CENTER" maxHeight="150.0" maxWidth="450.0" mnemonicParsing="false" onMouseClicked="#startTraining" prefHeight="30.0" prefWidth="250.0" text="Daily Training" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" GridPane.valignment="CENTER">
+				<Button fx:id="trainingBtn" alignment="CENTER" maxHeight="150.0" maxWidth="450.0" mnemonicParsing="false" onMouseClicked="#startTraining" text="Daily Training" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
 					<font>
 						<Font size="20.0" />
 					</font>
@@ -36,7 +38,7 @@
 						<Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
 					</GridPane.margin>
 				</Button>
-				<Button fx:id="statisticsBtn" alignment="CENTER" maxHeight="150.0" maxWidth="450.0" mnemonicParsing="false" onMouseClicked="#showStatistics" prefHeight="30.0" prefWidth="250.0" text="Statistics" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="2" GridPane.valignment="CENTER">
+				<Button fx:id="statisticsBtn" alignment="CENTER" maxHeight="150.0" maxWidth="450.0" mnemonicParsing="false" onMouseClicked="#showStatistics" text="Statistics" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="2" GridPane.valignment="CENTER">
 					<font>
 						<Font size="20.0" />
 					</font>
@@ -44,7 +46,7 @@
 						<Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
 					</GridPane.margin>
 				</Button>
-				<Button fx:id="howToPlayBtn" alignment="CENTER" maxHeight="150.0" maxWidth="450.0" mnemonicParsing="false" onMouseClicked="#showInfo" prefHeight="30.0" prefWidth="250.0" text="How To Play" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="3" GridPane.valignment="CENTER">
+				<Button fx:id="howToPlayBtn" alignment="CENTER" maxHeight="150.0" maxWidth="450.0" mnemonicParsing="false" onMouseClicked="#showInfo" text="How To Play" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="3" GridPane.valignment="CENTER">
 					<font>
 						<Font size="20.0" />
 					</font>
@@ -52,6 +54,35 @@
 						<Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
 					</GridPane.margin>
 				</Button>
+            <ImageView fx:id="dailytImg" GridPane.halignment="RIGHT" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" GridPane.valignment="CENTER">
+               <image>
+                  <Image url="@../images/event.png" />
+               </image>
+               <GridPane.margin>
+                  <Insets left="20.0" right="20.0" />
+               </GridPane.margin>
+            </ImageView>
+            <ImageView fx:id="infoImg" GridPane.halignment="RIGHT" GridPane.hgrow="ALWAYS" GridPane.rowIndex="3" GridPane.valignment="CENTER">
+               <image>
+                  <Image url="@../images/info.png" />
+               </image>
+               <GridPane.margin>
+                  <Insets left="20.0" right="20.0" />
+               </GridPane.margin>
+            </ImageView>
+            <ImageView fx:id="statisticImg" GridPane.halignment="RIGHT" GridPane.hgrow="ALWAYS" GridPane.rowIndex="2" GridPane.valignment="CENTER">
+               <image>
+                  <Image url="@../images/graphic.png" />
+               </image>
+               <GridPane.margin>
+                  <Insets left="20.0" right="20.0" />
+               </GridPane.margin>
+            </ImageView>
+            <ImageView fx:id="statisticImg1" disable="true" visible="false" GridPane.columnIndex="2" GridPane.rowIndex="2">
+               <image>
+                  <Image url="@../images/graphic.png" />
+               </image>
+            </ImageView>
 			</children>
 		</GridPane>
 	</children>

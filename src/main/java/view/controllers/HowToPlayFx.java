@@ -8,6 +8,10 @@ import java.util.Scanner;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.GridPane;
+import javafx.stage.Stage;
+import view.DimensionCalculatorImpl;
 import view.SceneType;
 
 /**
@@ -17,7 +21,7 @@ import view.SceneType;
 public class HowToPlayFx extends AbstractSceneController implements FxNormalScene {
 
     @FXML
-    private Button backBtn;
+    private ImageView backImg;
 
     @FXML
     private Button gameInfoBtn;
@@ -26,7 +30,9 @@ public class HowToPlayFx extends AbstractSceneController implements FxNormalScen
     private TextArea infoTxt;
 
     @FXML
-    private Button brnTrnInfoBtn;
+    private GridPane topGrid;
+
+    private DimensionCalculatorImpl calculator;
 
     @FXML
     private void showGameInfo() throws IOException { // NOPMD
@@ -47,7 +53,7 @@ public class HowToPlayFx extends AbstractSceneController implements FxNormalScen
         infoTxt.clear();
         final String filePath = "src/main/resources/info/" + fileTxt + ".txt";
         try {
-            final Scanner scanner = new Scanner(new File(filePath));
+            final Scanner scanner = new Scanner(new File(filePath));//NOPMD
             while (scanner.hasNext()) {
                 infoTxt.appendText(scanner.nextLine() + "\n");
             }
@@ -59,7 +65,15 @@ public class HowToPlayFx extends AbstractSceneController implements FxNormalScen
 
     @Override
     public void init() {
-        // TODO Auto-generated method stub
-        
+        final Stage stage = (Stage) this.getRoot().getScene().getWindow();
+        this.calculator = new DimensionCalculatorImpl(stage);
+        stage.widthProperty().addListener((obs, oldVal, newVal) -> {
+            this.calculator.setNodeFontStyle(topGrid, 0.07, (double) newVal / 2);
+            this.infoTxt.setStyle("-fx-font-size: " + 0.05 * (double) newVal / 2);
+            this.calculator.setImageViewDimension(backImg, 0.005, (double) newVal/4);
+        });
+        this.calculator.setActualNodeFontStyle(topGrid, 0.20);
+        this.infoTxt.setStyle("-fx-font-size: " + this.gameInfoBtn.getFont().getSize());
+        this.calculator.setActualImageViewDimension(backImg, 0.005);
     }
 }

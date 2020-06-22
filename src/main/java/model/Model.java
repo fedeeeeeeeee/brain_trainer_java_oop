@@ -56,5 +56,5 @@ public interface Model {
      * @return
      *          the current user
      */
-    UserPlayer getUser();
+    UserPlayer getUserPlayer();
 }

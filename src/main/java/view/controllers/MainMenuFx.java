@@ -4,6 +4,10 @@ import java.io.IOException;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundImage;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 import view.DimensionCalculatorImpl;
@@ -26,6 +30,15 @@ public class MainMenuFx extends AbstractSceneController implements FxNormalScene
     
     @FXML
     private GridPane menuGrid;
+    
+    @FXML
+    private ImageView dailyImg;
+    
+    @FXML
+    private ImageView statisticImg;
+    
+    @FXML
+    private ImageView infoImg;
 
     private DimensionCalculatorImpl calculator;
 
@@ -46,11 +59,21 @@ public class MainMenuFx extends AbstractSceneController implements FxNormalScene
 
     @Override
     public void init() {
-        Stage stage = (Stage) trainingBtn.getScene().getWindow();
+        final Stage stage = (Stage) this.getRoot().getScene().getWindow();
         this.calculator = new DimensionCalculatorImpl(stage);      
         stage.widthProperty().addListener((obs, oldVal, newVal) -> {
-            this.calculator.setNodeFontStyle(menuGrid, 0.08, ((double)newVal / 2)); 
+            this.calculator.setNodeFontStyle(menuGrid, 0.08, (double)newVal / 2); 
+            menuGrid.getChildren().forEach(c -> {
+                if(c instanceof ImageView) {
+                    this.calculator.setImageViewDimension((ImageView)c, 0.005, (double) newVal/4);
+                }
+            });
         });        
         this.calculator.setActualNodeFontStyle(menuGrid, 0.30);
+        menuGrid.getChildren().forEach(c -> {
+            if(c instanceof ImageView) {
+                this.calculator.setActualImageViewDimension((ImageView)c, 0.005);
+            }
+        });
     }
 }

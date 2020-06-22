@@ -10,15 +10,12 @@ public interface LoginModel {
 
     /**
      * Check if user exists in data storage.
-     * 
-     * @param username
-     *          the username of the player to check
-     * @param password
-     *          the password of the player to check
+     * @param player
+     *            the player to check
      * @return
      *         false if the user isn't already registered, true otherwise.
      */
-    boolean loginUser(String username, String password);
+    boolean loginUser(UserPlayer player);
 
     /**
      * Register the new user and create the related file.
