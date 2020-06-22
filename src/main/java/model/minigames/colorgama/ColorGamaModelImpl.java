@@ -17,7 +17,7 @@ public class ColorGamaModelImpl implements ColorGamaModel {
 
     private final ScoreModel score;
     private final ComputeDifficultyValue computeValue;
-    private final ColorValuesIterator colorIterator;
+    private final ColorValues colorValues;
     private QuestionType question;
 
     /**
@@ -28,11 +28,9 @@ public class ColorGamaModelImpl implements ColorGamaModel {
      */
     public ColorGamaModelImpl(final DifficultyLevel difficulty) {
         Objects.requireNonNull(difficulty, "DifficultyLevel" + NULL_ARG);
-        this.computeValue = new ComputeDifficultyValueImpl(difficulty);
+        this.computeValue = new ColorGamaSettings(difficulty);
         this.score = new ScoreModelImpl(difficulty, this.computeValue.getBasePoint());
-        this.colorIterator = new ColorValuesIteratorImpl(
-                this.computeValue.getGridSize() * this.computeValue.getGridSize(),
-                new HSBColorValuesCalculator(this.computeValue));
+        this.colorValues = new ColorValuesImpl(this.computeValue.getGridSize() * this.computeValue.getGridSize(), this.computeValue.getNumColor(), new HSBColorValuesCalculator(difficulty));
     }
 
     /**
@@ -64,7 +62,7 @@ public class ColorGamaModelImpl implements ColorGamaModel {
      */
     @Override
     public ColorValuesIterator getColorIterator() {
-        return this.colorIterator;
+        return this.colorValues.getIterator();
     }
 
     /**
@@ -81,7 +79,15 @@ public class ColorGamaModelImpl implements ColorGamaModel {
     @Override
     public QuestionType nextQuestion() {
         this.question = QuestionType.values()[new Random().nextInt(QuestionType.values().length)];
-        this.colorIterator.resetValues(this.question);
+        this.colorValues.resetValues(this.question);
         return this.question;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public ColorMethod getColorMethod() {
+        return this.colorValues.getColorMethod();
     }
 }

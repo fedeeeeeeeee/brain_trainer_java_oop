@@ -76,10 +76,10 @@ public final class ColorGamaControllerImpl implements ColorGamaController {
     @Override
     public void resetGame() {
         final QuestionType currentQuestion = this.model.nextQuestion();
-
-        this.view.renderNext(this.model.getColorIterator(), currentQuestion.getQuestionName());
+        this.view.setColorIterator(this.model.getColorIterator(), this.model.getColorMethod());
+        this.view.renderNext(currentQuestion.getQuestionName());
         if (currentQuestion.equals(QuestionType.COLOR)) {
-            this.view.showQuestionColor(this.model.getColorIterator());
+            this.view.showQuestionColor();
         } else {
             this.view.hideQuestionColor();
         }

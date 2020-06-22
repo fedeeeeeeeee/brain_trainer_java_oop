@@ -2,11 +2,13 @@ package model.minigames.colorgama;
 
 import java.util.Iterator;
 
+import org.apache.commons.lang3.tuple.Triple;
+
 /**
- * This interface represents aspects of the color values of the minigame.
+ * This interface represents color values of the minigame to iterate.
  *
  */
-public interface ColorValuesIterator extends Iterator<ColorValues<?>> {
+public interface ColorValuesIterator extends Iterator<Triple<Number, Number, Number>> {
 
     /**
      * Get a index of the right color.
@@ -22,13 +24,13 @@ public interface ColorValuesIterator extends Iterator<ColorValues<?>> {
      * @return values
      *          the component of the right color
      */
-    ColorValues<?> getRightColor();
+    Triple<Number, Number, Number> getRightColorValues();
 
     /**
-     * Reset all values according to the question.
+     * Set the right color values.
      * 
-     * @param question
-     *          the current question.
+     * @param rightValues
+     *          a right color values
      */
-    void resetValues(QuestionType question);
+    void setRightColorValues(Triple<Number, Number, Number> rightValues);
 }

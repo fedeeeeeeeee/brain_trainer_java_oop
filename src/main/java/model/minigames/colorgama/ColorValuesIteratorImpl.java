@@ -4,6 +4,10 @@ import java.util.NoSuchElementException;
 import java.util.Objects;
 import java.util.Optional;
 import java.util.Random;
+import java.util.Set;
+import java.util.stream.Collectors;
+
+import org.apache.commons.lang3.tuple.Triple;
 
 /**
  * This class implements {@link ColorValuesIterator}.
@@ -13,36 +17,40 @@ public class ColorValuesIteratorImpl implements ColorValuesIterator {
 
     private static final String NULL_ARG = "passed is null";
     private static final String BAD_SIZE = "size must be greater than 0";
-    private static final String VALUE_NOT_SET = "values not yet set, call setValues() method first";
 
-    private final ColorValuesCalculator colorCalculator;
+    private final Set<Triple<Number, Number, Number>> colorValuesSet;
+    private Optional<Triple<Number, Number, Number>> rightValues;
+    private final int rightIndex;
     private final int size;
     private int counter;
-    private int rightIndex;
-    private ColorValues<?> rightValues;
-    private Optional<QuestionType> currentQuestion;
 
     /**
      * Constructor of {@link ColorValuesIterator}.
      * 
      * @param size
      *          the size of the iterator
-     * 
-     * @param colorCalculator
-     *          the color value calculator
+     *
+     * @param colorValuesSet
+     *          the set to iterate
      */
-    public ColorValuesIteratorImpl(final int size, final ColorValuesCalculator colorCalculator) {
-        this.checkArgument(size, colorCalculator);
+    public ColorValuesIteratorImpl(final int size, final Set<Triple<Number, Number, Number>> colorValuesSet) {
+        this.checkArgument(size, colorValuesSet);
+        this.colorValuesSet = colorValuesSet;
         this.size = size;
-        this.colorCalculator = colorCalculator;
-        this.currentQuestion = Optional.empty();
+        this.rightIndex = new Random().nextInt(this.size);
     }
 
-    private void checkArgument(final int size, final ColorValuesCalculator colorCalculator) {
-        Objects.requireNonNull(colorCalculator, "ColorValuesCalculator " + NULL_ARG);
+    private void checkArgument(final int size, final Set<Triple<Number, Number, Number>> colorValuesSet) {
         if (size <= 0) {
             throw new IllegalArgumentException(BAD_SIZE);
         }
+        Objects.requireNonNull(colorValuesSet, "Set<Triple<Number, Number, Number>>" + NULL_ARG);
+    }
+
+    private Triple<Number, Number, Number> getRandomColorValues() {
+        return this.colorValuesSet.stream()
+                                  .collect(Collectors.toList())
+                                  .get(new Random().nextInt(this.colorValuesSet.size()));
     }
 
     /**
@@ -50,9 +58,6 @@ public class ColorValuesIteratorImpl implements ColorValuesIterator {
      */
     @Override
     public boolean hasNext() {
-        if (this.currentQuestion.isEmpty()) {
-            throw new IllegalStateException(VALUE_NOT_SET);
-        }
         return this.counter < this.size;
     }
 
@@ -60,11 +65,11 @@ public class ColorValuesIteratorImpl implements ColorValuesIterator {
      * {@inheritDoc}
      */
     @Override
-    public ColorValues<?> next() {
+    public Triple<Number, Number, Number> next() {
         if (!this.hasNext()) {
             throw new NoSuchElementException();
         }
-        return (this.counter++ == this.rightIndex) ? this.rightValues : this.colorCalculator.getRandomColorValues();
+        return (this.counter++ == this.rightIndex) ? this.rightValues.orElseThrow() : this.getRandomColorValues();
     }
 
     /**
@@ -79,20 +84,15 @@ public class ColorValuesIteratorImpl implements ColorValuesIterator {
      * {@inheritDoc}
      */
     @Override
-    public ColorValues<?> getRightColor() {
-        return this.rightValues;
+    public Triple<Number, Number, Number> getRightColorValues() {
+        return this.rightValues.orElseThrow();
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public void resetValues(final QuestionType question) {
-        Objects.requireNonNull(question, "QuestionType " + NULL_ARG);
-        this.counter = 0;
-        this.currentQuestion = Optional.of(question);
-        this.colorCalculator.reset();
-        this.rightIndex = new Random().nextInt(this.size);
-        this.rightValues = this.colorCalculator.calculateRightColor(this.currentQuestion.get()).get();
+    public void setRightColorValues(final Triple<Number, Number, Number> rightValues) {
+        this.rightValues = Optional.of(rightValues);
     }
 }

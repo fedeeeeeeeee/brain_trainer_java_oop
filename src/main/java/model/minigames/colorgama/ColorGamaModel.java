@@ -39,4 +39,12 @@ public interface ColorGamaModel extends MiniGameModel {
      *          the next question set
      */
     QuestionType nextQuestion();
+
+    /**
+     * Get the method of color value representations.
+     * 
+     * @return method
+     *          the method of representations
+     */
+    ColorMethod getColorMethod();
 }
