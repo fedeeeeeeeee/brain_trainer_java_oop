@@ -33,7 +33,7 @@
 						<Font size="35.0" />
 					</font>
 				</Label>
-				<ImageView fitHeight="255.0" fitWidth="277.0" nodeOrientation="INHERIT" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1">
+				<ImageView fx:id="logo" fitHeight="255.0" fitWidth="277.0" nodeOrientation="INHERIT" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1">
 					<image>
 						<Image url="@../images/brain_training.png" />
 					</image>

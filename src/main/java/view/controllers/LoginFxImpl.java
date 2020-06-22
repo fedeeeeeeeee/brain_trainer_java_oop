@@ -6,6 +6,7 @@ import java.io.IOException;
 import controller.LoginControllerImpl;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
+import javafx.scene.image.ImageView;
 import model.UserPlayer;
 import model.UserPlayerImpl;
 import view.DimensionCalculatorImpl;
@@ -51,6 +52,9 @@ public class LoginFxImpl extends AbstractSceneController implements LoginFx, FxN
     @FXML
     private GridPane gridLbl;
 
+    @FXML
+    private ImageView logo;
+
     private DimensionCalculatorImpl calculator;
     private final LoginControllerImpl loginController = new LoginControllerImpl(this);
 
@@ -62,7 +66,7 @@ public class LoginFxImpl extends AbstractSceneController implements LoginFx, FxN
         /**
          * String to show when fields are empty.
          */
-        EMPTY_FIELD("Fields cannot be empty!"), 
+        EMPTY_FIELD("Fields cannot be empty!"),
 
         /**
          * String to show when user insert an existing username.
@@ -87,11 +91,8 @@ public class LoginFxImpl extends AbstractSceneController implements LoginFx, FxN
     }
 
     private UserPlayer initPlayer() {
-        final UserPlayer player = new UserPlayerImpl.PlayerBuilder()
-                .username(this.txtPlayer.getText())
-                .password(this.txtPassword.getText())
-                .build();
-        return player;
+        return new UserPlayerImpl.PlayerBuilder().username(this.txtPlayer.getText())
+                .password(this.txtPassword.getText()).build();
     }
 
     private boolean checkEmptyFields() {
@@ -153,7 +154,7 @@ public class LoginFxImpl extends AbstractSceneController implements LoginFx, FxN
      */
     @Override
     public void init() {
-        Stage stage = (Stage) loginBtn.getScene().getWindow();
+        final Stage stage = (Stage) loginBtn.getScene().getWindow();
         this.calculator = new DimensionCalculatorImpl(stage);
 
         calculator.setActualNodeFontStyle(grid, 0.15);
@@ -162,11 +163,12 @@ public class LoginFxImpl extends AbstractSceneController implements LoginFx, FxN
         calculator.setActualNodeFontStyle(gridLbl, 0.06);
 
         stage.widthProperty().addListener((obs, oldVal, newVal) -> {
-            calculator.setNodeFontStyle(grid, 0.15, ((double) newVal / 2));
-            calculator.setNodeFontStyle(gridFields, 0.06, ((double) newVal / 2));
-            calculator.setNodeFontStyle(gridBtn, 0.07, ((double) newVal / 2));
-            calculator.setNodeFontStyle(gridLbl, 0.07, ((double) newVal / 2));
+            calculator.setNodeFontStyle(grid, 0.15, (double) newVal / 2);
+            calculator.setNodeFontStyle(gridFields, 0.05, (double) newVal / 2);
+            calculator.setNodeFontStyle(gridBtn, 0.06, (double) newVal / 2);
+            calculator.setNodeFontStyle(gridLbl, 0.07, (double) newVal / 2);
+            logo.setStyle("-fx-scale-x : " + 0.005 * (double) newVal / 4 + 
+                            ";-fx-scale-y : "+ 0.005 * (double) newVal / 4);
         });
-
     }
 }

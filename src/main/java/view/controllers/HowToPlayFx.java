@@ -8,6 +8,9 @@ import java.util.Scanner;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
+import javafx.scene.layout.GridPane;
+import javafx.stage.Stage;
+import view.DimensionCalculatorImpl;
 import view.SceneType;
 
 /**
@@ -23,10 +26,18 @@ public class HowToPlayFx extends AbstractSceneController implements FxNormalScen
     private Button gameInfoBtn;
 
     @FXML
+    private Button brnTrnInfoBtn;
+
+    @FXML
     private TextArea infoTxt;
 
     @FXML
-    private Button brnTrnInfoBtn;
+    private GridPane topGrid;
+
+    @FXML
+    private GridPane bottomGrid;
+
+    private DimensionCalculatorImpl calculator;
 
     @FXML
     private void showGameInfo() throws IOException { // NOPMD
@@ -47,7 +58,7 @@ public class HowToPlayFx extends AbstractSceneController implements FxNormalScen
         infoTxt.clear();
         final String filePath = "src/main/resources/info/" + fileTxt + ".txt";
         try {
-            final Scanner scanner = new Scanner(new File(filePath));
+            final Scanner scanner = new Scanner(new File(filePath));//NOPMD
             while (scanner.hasNext()) {
                 infoTxt.appendText(scanner.nextLine() + "\n");
             }
@@ -59,7 +70,17 @@ public class HowToPlayFx extends AbstractSceneController implements FxNormalScen
 
     @Override
     public void init() {
-        // TODO Auto-generated method stub
+        final Stage stage = (Stage) backBtn.getScene().getWindow();
+        this.calculator = new DimensionCalculatorImpl(stage);
+        stage.widthProperty().addListener((obs, oldVal, newVal) -> {
+            this.calculator.setNodeFontStyle(topGrid, 0.07, (double) newVal / 2);
+            this.calculator.setNodeFontStyle(bottomGrid, 0.07, (double) newVal / 2);
+            this.infoTxt.setStyle("-fx-font-size: " + 0.05 * (double) newVal / 2);
+        });
+        this.calculator.setActualNodeFontStyle(topGrid, 0.20);
+        this.calculator.setActualNodeFontStyle(bottomGrid, 0.13);
+        this.infoTxt.setStyle("-fx-font-size: " + this.backBtn.getFont().getSize());
+
         
     }
 }
