@@ -61,7 +61,7 @@ public class MinigameSelectorFx extends AbstractSceneController implements FxNor
     private void startMiniGame() { // NOPMD
         if (checkFieldsNotNull()) {
             final RadioButton selectedRadioBtn = (RadioButton) difficulty.getSelectedToggle();
-            DifficultyLevel difficulty = Arrays.asList(DifficultyLevel.values()).stream()
+            final DifficultyLevel difficulty = Arrays.asList(DifficultyLevel.values()).stream()
                                                .filter(e -> e.name().equals(selectedRadioBtn.getText()))
                                                .findAny()
                                                .get();
@@ -89,13 +89,13 @@ public class MinigameSelectorFx extends AbstractSceneController implements FxNor
 
     @Override
     public void init() {
-        Stage stage = (Stage) backBtn.getScene().getWindow();
+        final Stage stage = (Stage) backBtn.getScene().getWindow();
         this.calculator = new DimensionCalculatorImpl(stage); 
         
         stage.widthProperty().addListener((obs, oldVal, newVal) -> {
-            calculator.setNodeFontStyle(grid, 0.08, ((double)newVal / 2));
-            calculator.setNodeFontStyle(gridToggle, 0.08, ((double)newVal / 2));
-            calculator.setNodeFontStyle(bottomGrid, 0.08, ((double)newVal / 2));
+            calculator.setNodeFontStyle(grid, 0.08, (double)newVal / 2);
+            calculator.setNodeFontStyle(gridToggle, 0.08, (double)newVal / 2);
+            calculator.setNodeFontStyle(bottomGrid, 0.08, (double)newVal / 2);
         });
 
         calculator.setActualNodeFontStyle(grid, 0.15);

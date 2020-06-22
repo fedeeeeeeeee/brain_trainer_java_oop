@@ -38,13 +38,14 @@ public class DimensionCalculatorImpl implements DimensionCalculator {
     }
 
     private int getButtonWidthDimension(final int numBtn) {
-        Double sizeScene = this.stage.getScene().getWidth();
+        final Double sizeScene = this.stage.getScene().getWidth();
         return (int) (sizeScene / (numBtn * 2 + 2));
     }
 
     /**
      * {@inheritDoc}
      */
+    @Override
     public void setNodeFontStyle(final GridPane grid, final Double percent, final Double size) {
         grid.getChildren().forEach(b -> {
             ((Node) b).setStyle(String.format("-fx-font-size: %dpx;", (int) (percent * size)));
@@ -54,6 +55,7 @@ public class DimensionCalculatorImpl implements DimensionCalculator {
     /**
      * {@inheritDoc}
      */
+    @Override
     public void setActualNodeFontStyle(final GridPane grid, final Double percent) {
         final int size = this.function.apply(grid);
         grid.getChildren().forEach(b -> {

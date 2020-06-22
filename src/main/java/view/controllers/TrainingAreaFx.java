@@ -58,7 +58,7 @@ public class TrainingAreaFx extends AbstractSceneController implements FxNormalS
      */
     @Override
     public void init() {
-        Stage stage = (Stage) backBtn.getScene().getWindow();
+        final Stage stage = (Stage) backBtn.getScene().getWindow();
         this.calculator = new DimensionCalculatorImpl(stage);
         stage.widthProperty().addListener((obs, oldVal, newVal) -> {
             this.calculator.setNodeFontStyle(areasGrid, 0.07, (double) newVal / 2);
