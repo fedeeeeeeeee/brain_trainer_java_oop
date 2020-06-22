@@ -91,7 +91,6 @@ public class StatisticsFx extends AbstractSceneController implements FxHandleDat
             final Tooltip toolTip = new Tooltip(Integer.toString((int) data.getPieValue()));
             Tooltip.install(data.getNode(), toolTip);
         });
-        // System.out.println(this.graphPane.getTabs().get(0).get);
         this.createGraph(attentionGraph, bestAttentionLbl, TrainingArea.ATTENTION);
         this.createGraph(brainSpeedGraph, bestBrainSpeedLbl, TrainingArea.BRAIN_SPEED);
         this.createGraph(reasoningGraph, bestReasoningLbl, TrainingArea.REASONING);
