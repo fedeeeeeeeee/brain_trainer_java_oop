@@ -2,10 +2,11 @@ package model;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.Objects;
+import java.util.Optional;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
-
 import model.score.ProgressImpl;
 
 /**
@@ -19,8 +20,10 @@ public class LoginModelImpl implements LoginModel {
     private File userFile;
 
     private boolean checkIfUserExist(final String userFileName) {
-        if (this.brainTrainer.listFiles() != null) {
-            for (final File file : brainTrainer.listFiles()) {
+        Objects.requireNonNull(userFileName);
+        final Optional<File[]> files = Optional.of(this.brainTrainer.listFiles());
+        if (files.isPresent()) {
+            for (final File file : files.orElseThrow()) {
                 if (userFileName.equals(file.getName())) {
                     this.userFile = file;
                     return true;

@@ -9,7 +9,6 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import view.TrainingArea;
-import view.DimensionCalculator;
 import view.DimensionCalculatorImpl;
 import view.SceneType;
 
@@ -20,6 +19,9 @@ import java.util.Arrays;
  * 
  */
 public class TrainingAreaFx extends AbstractSceneController implements FxNormalScene {
+
+    private static final double IMG_PERCENT = 0.003;
+    private static final double AREAS_PERCENT = 0.07;
 
     @FXML
     private ImageView backImg;
@@ -32,8 +34,6 @@ public class TrainingAreaFx extends AbstractSceneController implements FxNormalS
 
     @FXML
     private GridPane bottomGrid;
-
-    private DimensionCalculator calculator;
 
     @FXML
     private void areaClicked(final MouseEvent event) throws IOException { // NOPMD
@@ -61,13 +61,15 @@ public class TrainingAreaFx extends AbstractSceneController implements FxNormalS
     @Override
     public void init() {
         final Stage stage = (Stage) this.getRoot().getScene().getWindow();
-        this.calculator = new DimensionCalculatorImpl(stage);
+        final DimensionCalculatorImpl calculator = new DimensionCalculatorImpl();
+
         stage.widthProperty().addListener((obs, oldVal, newVal) -> {
-            this.calculator.setNodeFontStyle(areasGrid, 0.07, (double) newVal / 2);
-            this.calculator.setImageViewDimension(backImg, 0.005, (double) newVal/4);
+            calculator.setNodeFontStyle(areasGrid, AREAS_PERCENT, (double) newVal / 2);
+            calculator.setImageViewDimension(backImg, IMG_PERCENT, (double) newVal / 2);
         });
-        this.calculator.setActualNodeFontStyle(areasGrid, 0.50);
-//        this.calculator.setActualNodeFontStyle(bottomGrid, 0.13);
-        this.calculator.setActualImageViewDimension(backImg, 0.005);
+
+        final double halfStageSize = stage.getWidth() / 2;
+        calculator.setNodeFontStyle(areasGrid, AREAS_PERCENT, halfStageSize);
+        calculator.setImageViewDimension(backImg, IMG_PERCENT, halfStageSize);
     }
 }

@@ -23,6 +23,10 @@ import view.SceneType;
  */
 public class MinigameSelectorFx extends AbstractSceneController implements FxNormalScene {
 
+    private static final double IMG_PERCENTAGE = 0.003;
+    private static final double DIFFICULTY_PERCENTAGE = 0.08;
+    private static final double TEXT_PERCENTAGE = 0.08;
+
     @FXML
     private ToggleGroup difficulty;
 
@@ -37,14 +41,12 @@ public class MinigameSelectorFx extends AbstractSceneController implements FxNor
 
     @FXML
     private ComboBox<String> gameComboBox;
-    
+
     @FXML
     private GridPane grid;
-    
+
     @FXML
     private GridPane gridToggle;
-    
-    private DimensionCalculatorImpl calculator;
 
     @FXML
     private void initializeCombo() { // NOPMD
@@ -59,9 +61,7 @@ public class MinigameSelectorFx extends AbstractSceneController implements FxNor
         if (checkFieldsNotNull()) {
             final RadioButton selectedRadioBtn = (RadioButton) difficulty.getSelectedToggle();
             final DifficultyLevel difficulty = Arrays.asList(DifficultyLevel.values()).stream()
-                                               .filter(e -> e.name().equals(selectedRadioBtn.getText()))
-                                               .findAny()
-                                               .get();
+                    .filter(e -> e.name().equals(selectedRadioBtn.getText())).findAny().get();
 
             this.getController().setMiniGame(gameComboBox.getValue(), difficulty);
             this.getView().setMiniGameScene("/layouts/minigames/" + gameComboBox.getValue().replace(" ", "") + ".fxml");
@@ -84,22 +84,26 @@ public class MinigameSelectorFx extends AbstractSceneController implements FxNor
         this.getView().switchScene(SceneType.MAIN_MENU.getFilePath());
     }
 
+    /**
+     * {inheritDoc}.
+     */
     @Override
     public void init() {
         final Stage stage = (Stage) this.getRoot().getScene().getWindow();
-        this.calculator = new DimensionCalculatorImpl(stage); 
-        
+        final DimensionCalculatorImpl calculator = new DimensionCalculatorImpl();
+
         stage.widthProperty().addListener((obs, oldVal, newVal) -> {
-            this.calculator.setNodeFontStyle(grid, 0.08, (double)newVal / 2);
-            this.calculator.setNodeFontStyle(gridToggle, 0.08, (double)newVal / 2);
-            this.calculator.setImageViewDimension(backImg, 0.005, (double) newVal/4);
-            this.calculator.setImageViewDimension(homeImg, 0.005, (double) newVal/4);
+            calculator.setNodeFontStyle(grid, TEXT_PERCENTAGE, (double) newVal / 2);
+            calculator.setNodeFontStyle(gridToggle, DIFFICULTY_PERCENTAGE, (double) newVal / 2);
+            calculator.setImageViewDimension(backImg, IMG_PERCENTAGE, (double) newVal / 2);
+            calculator.setImageViewDimension(homeImg, IMG_PERCENTAGE, (double) newVal / 2);
         });
 
-        this.calculator.setActualNodeFontStyle(grid, 0.15);
-        this.calculator.setActualNodeFontStyle(gridToggle, 0.08);
-        this.calculator.setActualImageViewDimension(backImg, 0.005);
-        this.calculator.setActualImageViewDimension(homeImg, 0.005);
+        final double halfStageSize = stage.getWidth() / 2;
+        calculator.setNodeFontStyle(grid, TEXT_PERCENTAGE, halfStageSize);
+        calculator.setNodeFontStyle(gridToggle, DIFFICULTY_PERCENTAGE, halfStageSize);
+        calculator.setImageViewDimension(backImg, IMG_PERCENTAGE, halfStageSize);
+        calculator.setImageViewDimension(homeImg, IMG_PERCENTAGE, halfStageSize);
     }
 
 }

@@ -22,6 +22,7 @@ public final class UserPlayerImpl implements UserPlayer {
      * Default constructor for {@link UserPlayerImpl}.
      */
     public UserPlayerImpl() {
+        // This is intentionally empty, nothing needed here
     }
 
     /**
@@ -59,6 +60,7 @@ public final class UserPlayerImpl implements UserPlayer {
     /**
      * {@inheritDoc}
      */
+    @Override
     public void setUsername(final String username) {
         this.username = username;
     }
@@ -66,6 +68,7 @@ public final class UserPlayerImpl implements UserPlayer {
     /**
      * {@inheritDoc}
      */
+    @Override
     public void setPassword(final String password) {
         this.password = password;
     }

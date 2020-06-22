@@ -16,21 +16,19 @@ public interface DimensionCalculator {
      * @param percent 
      *           the resizing percentage
      * @param size 
-     *           new size value
+     *           the new size value
      */
     void setNodeFontStyle(GridPane grid, Double percent, Double size);
 
     /**
-     * Set the nodes' dimension when the scene is show.
-     * @param grid 
-     *          the grid that contains components to resize
-     * @param percent 
-     *          the resizing percentage
+     * Set the imageView dimension.
+     * @param img
+     *         the image to set
+     * @param percent
+     *         the resizing percentage
+     * @param size
+     *         the new size value
      */
-    void setActualNodeFontStyle(GridPane grid, Double percent);
+    void setImageViewDimension(ImageView img, Double percent, Double size);
 
-    void setActualImageViewDimension(final ImageView img, final Double percent);
-    
-    void setImageViewDimension(final ImageView img, final Double percent, final Double size);
-    
 }

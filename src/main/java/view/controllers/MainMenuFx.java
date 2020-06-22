@@ -4,10 +4,7 @@ import java.io.IOException;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.Background;
-import javafx.scene.layout.BackgroundImage;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 import view.DimensionCalculatorImpl;
@@ -19,6 +16,10 @@ import view.SceneType;
  */
 public class MainMenuFx extends AbstractSceneController implements FxNormalScene {
 
+    private static final double IMG_PERCENTAGE = 0.003;
+    private static final double BUTTON_PERCENTAGE = 0.08;
+    private DimensionCalculatorImpl calculator;
+
     @FXML
     private Button trainingBtn;
 
@@ -27,20 +28,18 @@ public class MainMenuFx extends AbstractSceneController implements FxNormalScene
 
     @FXML
     private Button howToPlayBtn;
-    
+
     @FXML
     private GridPane menuGrid;
-    
+
     @FXML
     private ImageView dailyImg;
-    
+
     @FXML
     private ImageView statisticImg;
-    
+
     @FXML
     private ImageView infoImg;
-
-    private DimensionCalculatorImpl calculator;
 
     @FXML
     private void startTraining() throws IOException { // NOPMD
@@ -57,23 +56,30 @@ public class MainMenuFx extends AbstractSceneController implements FxNormalScene
         this.getView().switchScene(SceneType.HOW_TO_PLAY.getFilePath());
     }
 
+    /**
+     * {inheritDoc}.
+     */
     @Override
     public void init() {
         final Stage stage = (Stage) this.getRoot().getScene().getWindow();
-        this.calculator = new DimensionCalculatorImpl(stage);      
+        this.calculator = new DimensionCalculatorImpl();
+
         stage.widthProperty().addListener((obs, oldVal, newVal) -> {
-            this.calculator.setNodeFontStyle(menuGrid, 0.08, (double)newVal / 2); 
+            this.calculator.setNodeFontStyle(menuGrid, BUTTON_PERCENTAGE, (double) newVal / 2);
             menuGrid.getChildren().forEach(c -> {
-                if(c instanceof ImageView) {
-                    this.calculator.setImageViewDimension((ImageView)c, 0.005, (double) newVal/4);
+                if (c instanceof ImageView) {
+                    this.calculator.setImageViewDimension((ImageView) c, IMG_PERCENTAGE, (double) newVal / 2);
                 }
             });
-        });        
-        this.calculator.setActualNodeFontStyle(menuGrid, 0.30);
+        });
+
+        final double halfStageSize = stage.getWidth() / 2;
+        this.calculator.setNodeFontStyle(menuGrid, BUTTON_PERCENTAGE, halfStageSize);
         menuGrid.getChildren().forEach(c -> {
-            if(c instanceof ImageView) {
-                this.calculator.setActualImageViewDimension((ImageView)c, 0.005);
+            if (c instanceof ImageView) {
+                this.calculator.setImageViewDimension((ImageView) c, IMG_PERCENTAGE, halfStageSize);
             }
         });
     }
 }
+

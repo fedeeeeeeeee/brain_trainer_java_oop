@@ -47,7 +47,7 @@ public class ViewImpl extends Application implements View {
         }
         currentController.getRoot().requestFocus();
     }
-    
+
     private void simpleSwitch(final String path) {
         this.currentSceneController = this.sceneLoader.loadScene(path).get();
         this.initializeSceneController(this.currentSceneController);
@@ -98,7 +98,6 @@ public class ViewImpl extends Application implements View {
         ((FxMiniGameController) this.currentSceneController).initGame(difficultyLevel);
     }
 
-    
     /**
      * {@inheritDoc}
      */

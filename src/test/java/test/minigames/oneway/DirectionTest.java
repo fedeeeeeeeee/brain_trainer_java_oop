@@ -17,13 +17,13 @@ import model.minigames.oneway.Direction;
 public class DirectionTest {
     private List<Direction> steps;
     private int counter;
-    
+
     @BeforeAll
-    public void init() {
+    public final void init() {
         this.steps = new ArrayList<>();
         this.counter = 0;
     }
-    
+
     /**
      * Test if steps have the correct increments.
      */

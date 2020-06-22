@@ -1,8 +1,6 @@
 package view.controllers;
 
-
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -22,51 +20,59 @@ import view.SceneType;
  */
 public class EndGameFx extends AbstractSceneController implements FxHandleDataScene {
 
+    private static final double IMG_PERCENTAGE = 0.003;
+    private static final double TEXT_PERCENTAGE = 0.08;
+    private static final double BORDER = 5;
+
     @FXML
     private GridPane grid;
-    
+
     @FXML
     private Label score;
-    
+
     @FXML
     private ImageView homeImg;
-    
+
     @FXML
-    private Label messageLabel;   
-    
+    private Label messageLabel;
+
     @FXML
     private ImageView resultImg;
-    
-    private DimensionCalculatorImpl calculator;
-    
-    private static final double IMG_PERCENT = 0.005;
-    
+
+    private void resizeNode() {
+        final Stage stage = (Stage) this.getRoot().getScene().getWindow();
+        final DimensionCalculatorImpl calculator = new DimensionCalculatorImpl();
+
+        stage.widthProperty().addListener((obs, oldVal, newVal) -> {
+            calculator.setNodeFontStyle(grid, TEXT_PERCENTAGE, (double) newVal / 2);
+            calculator.setImageViewDimension(homeImg, IMG_PERCENTAGE, (double) newVal / 2);
+            calculator.setImageViewDimension(resultImg, IMG_PERCENTAGE, (double) newVal / 2);
+        });
+
+        final double halfStageSize = stage.getWidth() / 2;
+        calculator.setNodeFontStyle(grid, TEXT_PERCENTAGE, halfStageSize);
+        calculator.setImageViewDimension(homeImg, IMG_PERCENTAGE, halfStageSize);
+        calculator.setImageViewDimension(resultImg, IMG_PERCENTAGE, halfStageSize);
+    }
+
     @FXML
     private void backHome() { // NOPMD
         this.getView().switchScene(SceneType.MAIN_MENU.getFilePath());
     }
-    
+
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void init(final Progress progress) {
         final int currentScore = progress.getCurrentScore();
-        final int bestScore = progress.getCurrentBest();  
+        final int bestScore = progress.getCurrentBest();
         this.score.setText("Score: " + currentScore + "\nBest: " + bestScore);
-        score.setBorder(new Border(new BorderStroke(Color.valueOf("#49618c"), BorderStrokeStyle.DASHED, null, new BorderWidths(5))));
+        score.setBorder(new Border(
+                new BorderStroke(Color.valueOf("#49618c"), BorderStrokeStyle.DASHED, null, new BorderWidths(BORDER))));
         this.messageLabel.setText(currentScore < bestScore ? "You can do better!" : "Keep it going!");
-        this.resultImg.setImage(currentScore < bestScore ? new Image("/images/hard-work.png") : new Image("/images/award.png") );
-        this.resizeNode();       
-    }
-    
-    private void resizeNode() {
-        final Stage stage = (Stage) this.getRoot().getScene().getWindow();
-        this.calculator = new DimensionCalculatorImpl(stage);              
-        stage.widthProperty().addListener((obs, oldVal, newVal) -> {
-            this.calculator.setNodeFontStyle(grid, 0.08, (double)newVal / 2);
-            this.calculator.setImageViewDimension(homeImg, IMG_PERCENT, (double) newVal/4);
-            this.calculator.setImageViewDimension(resultImg, IMG_PERCENT, (double) newVal/4);
-        });           
-        this.calculator.setActualNodeFontStyle(grid, 0.10);      
-        this.calculator.setActualImageViewDimension(homeImg, IMG_PERCENT);
-        this.calculator.setActualImageViewDimension(resultImg, IMG_PERCENT);
+        this.resultImg.setImage(
+                currentScore < bestScore ? new Image("/images/hard-work.png") : new Image("/images/award.png"));
+        this.resizeNode();
     }
 }

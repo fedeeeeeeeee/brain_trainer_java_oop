@@ -25,6 +25,14 @@ import javafx.scene.control.Label;
  */
 public class LoginFxImpl extends AbstractSceneController implements LoginFx, FxNormalScene {
 
+    private static final double IMG_PERCENTAGE = 0.003;
+    private static final double TITLE_PERCENTAGE = 0.1;
+    private static final double FIELDS_PERCENTAGE = 0.06;
+    private static final double BUTTON_PERCENTAGE = 0.07;
+    private static final double ERROR_PERCENTAGE = 0.05;
+
+    private final LoginControllerImpl loginController = new LoginControllerImpl(this);
+
     @FXML
     private Label errorLbl;
 
@@ -54,9 +62,6 @@ public class LoginFxImpl extends AbstractSceneController implements LoginFx, FxN
 
     @FXML
     private ImageView logo;
-
-    private DimensionCalculatorImpl calculator;
-    private final LoginControllerImpl loginController = new LoginControllerImpl(this);
 
     /**
      * Enumeration for error message in the login scene.
@@ -155,19 +160,21 @@ public class LoginFxImpl extends AbstractSceneController implements LoginFx, FxN
     @Override
     public void init() {
         final Stage stage = (Stage) this.getRoot().getScene().getWindow();
-        this.calculator = new DimensionCalculatorImpl(stage);
-        calculator.setActualNodeFontStyle(grid, 0.13);
-        calculator.setActualNodeFontStyle(gridFields, 0.06);
-        calculator.setActualNodeFontStyle(gridBtn, 0.20);
-        calculator.setActualNodeFontStyle(gridLbl, 0.05);
+        final DimensionCalculatorImpl calculator = new DimensionCalculatorImpl();
 
-        stage.widthProperty().addListener((obs, oldVal, newVal) -> {
-            calculator.setNodeFontStyle(grid, 0.10, (double) newVal / 2);
-            calculator.setNodeFontStyle(gridFields, 0.06, (double) newVal / 2);
-            calculator.setNodeFontStyle(gridBtn, 0.07, (double) newVal / 2);
-            calculator.setNodeFontStyle(gridLbl, 0.05, (double) newVal / 2);
-            logo.setStyle("-fx-scale-x : " + 0.005 * (double) newVal / 4 + 
-                            ";-fx-scale-y : "+ 0.005 * (double) newVal / 4);
+        this.getRoot().getScene().getWindow().widthProperty().addListener((obs, oldVal, newVal) -> {
+            calculator.setNodeFontStyle(grid, TITLE_PERCENTAGE, (double) newVal / 2);
+            calculator.setNodeFontStyle(gridFields, FIELDS_PERCENTAGE, (double) newVal / 2);
+            calculator.setNodeFontStyle(gridBtn, BUTTON_PERCENTAGE, (double) newVal / 2);
+            calculator.setNodeFontStyle(gridLbl, ERROR_PERCENTAGE, (double) newVal / 2);
+            calculator.setImageViewDimension(logo, IMG_PERCENTAGE, (double) newVal / 2);
         });
+
+        final double halfStageSize = stage.getWidth() / 2;
+        calculator.setNodeFontStyle(grid, TITLE_PERCENTAGE, halfStageSize);
+        calculator.setNodeFontStyle(gridFields, FIELDS_PERCENTAGE, halfStageSize);
+        calculator.setNodeFontStyle(gridBtn, BUTTON_PERCENTAGE, halfStageSize);
+        calculator.setNodeFontStyle(gridLbl, (double) ERROR_PERCENTAGE, halfStageSize);
+        calculator.setImageViewDimension(logo, IMG_PERCENTAGE, halfStageSize);
     }
 }

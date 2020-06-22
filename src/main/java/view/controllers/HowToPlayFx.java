@@ -20,6 +20,10 @@ import view.SceneType;
  */
 public class HowToPlayFx extends AbstractSceneController implements FxNormalScene {
 
+    private static final double IMG_PERCENTAGE = 0.003;
+    private static final double BUTTON_PERCENTAGE = 0.07;
+    private static final double FONT_PERCENTAGE = 0.05; 
+
     @FXML
     private ImageView backImg;
 
@@ -31,8 +35,6 @@ public class HowToPlayFx extends AbstractSceneController implements FxNormalScen
 
     @FXML
     private GridPane topGrid;
-
-    private DimensionCalculatorImpl calculator;
 
     @FXML
     private void showGameInfo() throws IOException { // NOPMD
@@ -53,7 +55,7 @@ public class HowToPlayFx extends AbstractSceneController implements FxNormalScen
         infoTxt.clear();
         final String filePath = "src/main/resources/info/" + fileTxt + ".txt";
         try {
-            final Scanner scanner = new Scanner(new File(filePath));//NOPMD
+            final Scanner scanner = new Scanner(new File(filePath)); // NOPMD
             while (scanner.hasNext()) {
                 infoTxt.appendText(scanner.nextLine() + "\n");
             }
@@ -63,17 +65,23 @@ public class HowToPlayFx extends AbstractSceneController implements FxNormalScen
         }
     }
 
+    /**
+     * {inheritDoc}.
+     */
     @Override
     public void init() {
         final Stage stage = (Stage) this.getRoot().getScene().getWindow();
-        this.calculator = new DimensionCalculatorImpl(stage);
+        final DimensionCalculatorImpl calculator = new DimensionCalculatorImpl();
+
         stage.widthProperty().addListener((obs, oldVal, newVal) -> {
-            this.calculator.setNodeFontStyle(topGrid, 0.07, (double) newVal / 2);
-            this.infoTxt.setStyle("-fx-font-size: " + 0.05 * (double) newVal / 2);
-            this.calculator.setImageViewDimension(backImg, 0.005, (double) newVal/4);
+            this.infoTxt.setStyle("-fx-font-size: " + FONT_PERCENTAGE * (double) newVal / 2);
+            calculator.setNodeFontStyle(topGrid, BUTTON_PERCENTAGE, (double) newVal / 2);
+            calculator.setImageViewDimension(backImg, IMG_PERCENTAGE, (double) newVal / 2);
         });
-        this.calculator.setActualNodeFontStyle(topGrid, 0.20);
+
+        final double halfStageSize = stage.getWidth() / 2;
         this.infoTxt.setStyle("-fx-font-size: " + this.gameInfoBtn.getFont().getSize());
-        this.calculator.setActualImageViewDimension(backImg, 0.005);
+        calculator.setNodeFontStyle(topGrid, BUTTON_PERCENTAGE, halfStageSize);
+        calculator.setImageViewDimension(backImg, IMG_PERCENTAGE, halfStageSize);
     }
 }

@@ -15,8 +15,9 @@ public interface FxController {
      * Setter for the {@link View} and {@link Controller}.
      * 
      * @param view
+     *           the view to set
      * @param controller
-     * 
+     *           the controller to set
      */
     void initialize(View view, Controller controller);
 
@@ -31,5 +32,5 @@ public interface FxController {
      * @param root Set the Parent Root.
      */
     void setRoot(Parent root);
-    
+
 }
