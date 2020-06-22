@@ -1,5 +1,6 @@
 package view;
 
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
 
 /**
@@ -28,4 +29,8 @@ public interface DimensionCalculator {
      */
     void setActualNodeFontStyle(GridPane grid, Double percent);
 
+    void setActualImageViewDimension(final ImageView img, final Double percent);
+    
+    void setImageViewDimension(final ImageView img, final Double percent, final Double size);
+    
 }

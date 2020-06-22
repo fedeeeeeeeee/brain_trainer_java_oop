@@ -8,6 +8,7 @@ import java.util.Scanner;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 import view.DimensionCalculatorImpl;
@@ -20,22 +21,16 @@ import view.SceneType;
 public class HowToPlayFx extends AbstractSceneController implements FxNormalScene {
 
     @FXML
-    private Button backBtn;
+    private ImageView backImg;
 
     @FXML
     private Button gameInfoBtn;
-
-    @FXML
-    private Button brnTrnInfoBtn;
 
     @FXML
     private TextArea infoTxt;
 
     @FXML
     private GridPane topGrid;
-
-    @FXML
-    private GridPane bottomGrid;
 
     private DimensionCalculatorImpl calculator;
 
@@ -74,13 +69,11 @@ public class HowToPlayFx extends AbstractSceneController implements FxNormalScen
         this.calculator = new DimensionCalculatorImpl(stage);
         stage.widthProperty().addListener((obs, oldVal, newVal) -> {
             this.calculator.setNodeFontStyle(topGrid, 0.07, (double) newVal / 2);
-            this.calculator.setNodeFontStyle(bottomGrid, 0.07, (double) newVal / 2);
             this.infoTxt.setStyle("-fx-font-size: " + 0.05 * (double) newVal / 2);
+            this.calculator.setImageViewDimension(backImg, 0.005, (double) newVal/4);
         });
         this.calculator.setActualNodeFontStyle(topGrid, 0.20);
-        this.calculator.setActualNodeFontStyle(bottomGrid, 0.13);
-        this.infoTxt.setStyle("-fx-font-size: " + this.backBtn.getFont().getSize());
-
-        
+        this.infoTxt.setStyle("-fx-font-size: " + this.gameInfoBtn.getFont().getSize());
+        this.calculator.setActualImageViewDimension(backImg, 0.005);
     }
 }

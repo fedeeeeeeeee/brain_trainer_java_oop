@@ -51,20 +51,19 @@
 			<rowConstraints>
 				<RowConstraints vgrow="SOMETIMES" />
 			</rowConstraints>
-			<children>
-				<Button fx:id="homeBtn" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onMouseClicked="#backHome" text="Home" GridPane.halignment="LEFT" GridPane.valignment="CENTER">
-					<font>
-						<Font size="18.0" />
-					</font>
-
-					<GridPane.margin>
-						<Insets bottom="20.0" left="20.0" />
-					</GridPane.margin>
-				</Button>
-			</children>
          <VBox.margin>
             <Insets top="10.0" />
          </VBox.margin>
+         <children>
+            <ImageView fx:id="homeImg" fitHeight="60.0" fitWidth="50.0" onMouseClicked="#backHome" pickOnBounds="true" preserveRatio="true">
+               <GridPane.margin>
+                  <Insets bottom="20.0" left="20.0" />
+               </GridPane.margin>
+               <image>
+                  <Image url="@../images/home.png" />
+               </image>
+            </ImageView>
+         </children>
 		</GridPane>
 	</children>
 </VBox>

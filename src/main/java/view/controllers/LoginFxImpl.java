@@ -156,16 +156,16 @@ public class LoginFxImpl extends AbstractSceneController implements LoginFx, FxN
     public void init() {
         final Stage stage = (Stage) this.getRoot().getScene().getWindow();
         this.calculator = new DimensionCalculatorImpl(stage);
-        calculator.setActualNodeFontStyle(grid, 0.15);
+        calculator.setActualNodeFontStyle(grid, 0.13);
         calculator.setActualNodeFontStyle(gridFields, 0.06);
         calculator.setActualNodeFontStyle(gridBtn, 0.20);
-        calculator.setActualNodeFontStyle(gridLbl, 0.06);
+        calculator.setActualNodeFontStyle(gridLbl, 0.05);
 
         stage.widthProperty().addListener((obs, oldVal, newVal) -> {
-            calculator.setNodeFontStyle(grid, 0.15, (double) newVal / 2);
-            calculator.setNodeFontStyle(gridFields, 0.05, (double) newVal / 2);
-            calculator.setNodeFontStyle(gridBtn, 0.06, (double) newVal / 2);
-            calculator.setNodeFontStyle(gridLbl, 0.07, (double) newVal / 2);
+            calculator.setNodeFontStyle(grid, 0.10, (double) newVal / 2);
+            calculator.setNodeFontStyle(gridFields, 0.06, (double) newVal / 2);
+            calculator.setNodeFontStyle(gridBtn, 0.07, (double) newVal / 2);
+            calculator.setNodeFontStyle(gridLbl, 0.05, (double) newVal / 2);
             logo.setStyle("-fx-scale-x : " + 0.005 * (double) newVal / 4 + 
                             ";-fx-scale-y : "+ 0.005 * (double) newVal / 4);
         });

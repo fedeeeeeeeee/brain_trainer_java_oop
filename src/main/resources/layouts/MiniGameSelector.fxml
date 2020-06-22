@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.image.*?>
 <?import javafx.scene.text.*?>
 <?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
@@ -85,7 +86,7 @@
             </GridPane>
 			</children>
 		</GridPane>
-      <GridPane fx:id="bottomGrid">
+      <GridPane>
         <columnConstraints>
           <ColumnConstraints hgrow="SOMETIMES" />
           <ColumnConstraints hgrow="SOMETIMES" />
@@ -94,22 +95,22 @@
           <RowConstraints vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-				<Button fx:id="homeBtn" alignment="CENTER" contentDisplay="CENTER" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onMouseClicked="#backHome" text="Home" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.valignment="CENTER">
-					<font>
-						<Font size="18.0" />
-					</font>
-					<GridPane.margin>
-						<Insets bottom="20.0" right="20.0" />
-					</GridPane.margin>
-				</Button>
-				<Button fx:id="backBtn" contentDisplay="CENTER" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onMouseClicked="#goBack" text="Back" GridPane.halignment="LEFT" GridPane.valignment="CENTER">
-					<font>
-						<Font size="18.0" />
-					</font>
-					<GridPane.margin>
-						<Insets bottom="20.0" left="20.0" />
-					</GridPane.margin>
-				</Button>
+            <ImageView fx:id="backImg" fitHeight="60.0" fitWidth="50.0" onMouseClicked="#goBack" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../images/back.png" />
+               </image>
+               <GridPane.margin>
+                  <Insets bottom="20.0" left="20.0" />
+               </GridPane.margin>
+            </ImageView>
+            <ImageView fx:id="homeImg" fitHeight="60.0" fitWidth="50.0" onMouseClicked="#backHome" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.halignment="RIGHT">
+               <image>
+                  <Image url="@../images/home.png" />
+               </image>
+               <GridPane.margin>
+                  <Insets bottom="20.0" right="20.0" />
+               </GridPane.margin>
+            </ImageView>
          </children>
       </GridPane>
 	</children>

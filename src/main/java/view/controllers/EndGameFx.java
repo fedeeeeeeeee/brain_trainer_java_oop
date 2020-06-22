@@ -26,13 +26,10 @@ public class EndGameFx extends AbstractSceneController implements FxHandleDataSc
     private GridPane grid;
     
     @FXML
-    private GridPane bottomGrid;
-    
-    @FXML
     private Label score;
     
     @FXML
-    private Button homeBtn;
+    private ImageView homeImg;
     
     @FXML
     private Label messageLabel;   
@@ -42,7 +39,7 @@ public class EndGameFx extends AbstractSceneController implements FxHandleDataSc
     
     private DimensionCalculatorImpl calculator;
     
-    
+    private static final double IMG_PERCENT = 0.005;
     
     @FXML
     private void backHome() { // NOPMD
@@ -65,11 +62,11 @@ public class EndGameFx extends AbstractSceneController implements FxHandleDataSc
         this.calculator = new DimensionCalculatorImpl(stage);              
         stage.widthProperty().addListener((obs, oldVal, newVal) -> {
             this.calculator.setNodeFontStyle(grid, 0.08, (double)newVal / 2);
-            this.calculator.setNodeFontStyle(bottomGrid, 0.07, (double)newVal/2);
-            resultImg.setStyle("-fx-scale-x : " + 0.005 * (double) newVal / 4 + 
-                    ";-fx-scale-y : "+ 0.005 * (double) newVal / 4);
+            this.calculator.setImageViewDimension(homeImg, IMG_PERCENT, (double) newVal/4);
+            this.calculator.setImageViewDimension(resultImg, IMG_PERCENT, (double) newVal/4);
         });           
         this.calculator.setActualNodeFontStyle(grid, 0.10);      
-        this.calculator.setActualNodeFontStyle(bottomGrid, 0.20);
+        this.calculator.setActualImageViewDimension(homeImg, IMG_PERCENT);
+        this.calculator.setActualImageViewDimension(resultImg, IMG_PERCENT);
     }
 }

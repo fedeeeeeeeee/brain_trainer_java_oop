@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.*?>
+<?import javafx.scene.image.*?>
 <?import javafx.scene.effect.*?>
 <?import javafx.scene.text.*?>
 <?import javafx.geometry.*?>
@@ -29,7 +31,7 @@
             <RowConstraints vgrow="SOMETIMES" />
 			</rowConstraints>
 			<children>
-				<Button alignment="CENTER" maxHeight="150.0" maxWidth="350.0" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onMouseClicked="#areaClicked" text="Memory" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="2">
+				<Button alignment="CENTER" maxHeight="150.0" maxWidth="350.0" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onMouseClicked="#areaClicked" style="-fx-border-color: #9e3d64; -fx-border-width: 4;" text="Memory" textFill="#9e3d64" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="2">
 					<font>
 						<Font size="20.0" />
 					</font>
@@ -37,7 +39,7 @@
                   <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
                </GridPane.margin>
 				</Button>
-				<Button alignment="CENTER" maxHeight="150.0" maxWidth="350.0" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onMouseClicked="#areaClicked" text="Visual Skill" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="4">
+				<Button alignment="CENTER" maxHeight="150.0" maxWidth="350.0" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onMouseClicked="#areaClicked" style="-fx-border-color: #1897f6; -fx-border-width: 4;" text="Visual Skill" textFill="#135c90" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="4">
 					<font>
 						<Font size="20.0" />
 					</font>
@@ -45,7 +47,7 @@
                   <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
                </GridPane.margin>
 				</Button>
-				<Button alignment="CENTER" maxHeight="150.0" maxWidth="350.0" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onMouseClicked="#areaClicked" text="Attention" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS">
+				<Button alignment="CENTER" maxHeight="150.0" maxWidth="350.0" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onMouseClicked="#areaClicked" style="-fx-border-color: #0e9021; -fx-border-width: 4;" text="Attention" textFill="#098015" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS">
 					<font>
 						<Font size="20.0" />
 					</font>
@@ -53,7 +55,7 @@
                   <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
                </GridPane.margin>
 				</Button>
-				<Button alignment="CENTER" maxHeight="150.0" maxWidth="350.0" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onMouseClicked="#areaClicked" text="Brain Speed" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1">
+				<Button alignment="CENTER" maxHeight="150.0" maxWidth="350.0" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onMouseClicked="#areaClicked" style="-fx-border-color: #f5b8c5; -fx-border-width: 4;" text="Brain Speed" textFill="#94606b" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1">
 					<font>
 						<Font size="20.0" />
 					</font>
@@ -61,7 +63,7 @@
                   <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
                </GridPane.margin>
 				</Button>
-				<Button alignment="CENTER" maxHeight="150.0" maxWidth="350.0" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onMouseClicked="#areaClicked" text="Reasoning" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="3">
+				<Button alignment="CENTER" maxHeight="150.0" maxWidth="350.0" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onMouseClicked="#areaClicked" style="-fx-border-width: 4; -fx-border-color: #fbe407;" text="Reasoning" textFill="#a1920d" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="3">
 					<font>
 						<Font size="20.0" />
 					</font>
@@ -71,23 +73,25 @@
 				</Button>
 			</children>
 		</GridPane>
-      <GridPane fx:id="bottomGrid">
+      <GridPane>
         <columnConstraints>
           <ColumnConstraints hgrow="SOMETIMES" />
         </columnConstraints>
         <rowConstraints>
-          <RowConstraints vgrow="SOMETIMES" />
+          <RowConstraints />
         </rowConstraints>
          <children>
-      				<Button fx:id="backBtn" alignment="CENTER" contentDisplay="CENTER" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onMouseClicked="#goBack" text="Back" GridPane.halignment="LEFT">
-      					<font>
-      						<Font size="18.0" />
-      					</font>
-
-					<GridPane.margin>
-						<Insets bottom="20.0" left="20.0" top="10.0" />
-					</GridPane.margin>
-      				</Button>
+            <ImageView fx:id="backImg" fitHeight="60.0" fitWidth="50.0" onMouseClicked="#goBack" pickOnBounds="true" preserveRatio="true" GridPane.halignment="LEFT">
+               <image>
+                  <Image url="@../images/back.png" />
+               </image>
+               <GridPane.margin>
+                  <Insets bottom="20.0" left="20.0" />
+               </GridPane.margin>
+               <cursor>
+                  <Cursor fx:constant="DEFAULT" />
+               </cursor>
+            </ImageView>
          </children>
       </GridPane>
 	</children>
