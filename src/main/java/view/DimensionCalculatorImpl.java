@@ -63,4 +63,3 @@ public class DimensionCalculatorImpl implements DimensionCalculator {
         }); 
     }
 }
-

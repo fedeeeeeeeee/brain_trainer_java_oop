@@ -61,7 +61,7 @@ public class EndGameFx extends AbstractSceneController implements FxHandleDataSc
     }
     
     private void resizeNode() {
-        final Stage stage = (Stage) homeBtn.getScene().getWindow();
+        final Stage stage = (Stage) this.getRoot().getScene().getWindow();
         this.calculator = new DimensionCalculatorImpl(stage);              
         stage.widthProperty().addListener((obs, oldVal, newVal) -> {
             this.calculator.setNodeFontStyle(grid, 0.08, (double)newVal / 2);

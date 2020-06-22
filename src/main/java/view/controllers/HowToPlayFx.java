@@ -70,7 +70,7 @@ public class HowToPlayFx extends AbstractSceneController implements FxNormalScen
 
     @Override
     public void init() {
-        final Stage stage = (Stage) backBtn.getScene().getWindow();
+        final Stage stage = (Stage) this.getRoot().getScene().getWindow();
         this.calculator = new DimensionCalculatorImpl(stage);
         stage.widthProperty().addListener((obs, oldVal, newVal) -> {
             this.calculator.setNodeFontStyle(topGrid, 0.07, (double) newVal / 2);

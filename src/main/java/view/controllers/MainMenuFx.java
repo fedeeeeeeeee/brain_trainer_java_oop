@@ -46,7 +46,7 @@ public class MainMenuFx extends AbstractSceneController implements FxNormalScene
 
     @Override
     public void init() {
-        final Stage stage = (Stage) trainingBtn.getScene().getWindow();
+        final Stage stage = (Stage) this.getRoot().getScene().getWindow();
         this.calculator = new DimensionCalculatorImpl(stage);      
         stage.widthProperty().addListener((obs, oldVal, newVal) -> {
             this.calculator.setNodeFontStyle(menuGrid, 0.08, (double)newVal / 2); 

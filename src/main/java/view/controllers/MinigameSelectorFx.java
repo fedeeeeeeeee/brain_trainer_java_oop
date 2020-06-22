@@ -89,7 +89,7 @@ public class MinigameSelectorFx extends AbstractSceneController implements FxNor
 
     @Override
     public void init() {
-        final Stage stage = (Stage) backBtn.getScene().getWindow();
+        final Stage stage = (Stage) this.getRoot().getScene().getWindow();
         this.calculator = new DimensionCalculatorImpl(stage); 
         
         stage.widthProperty().addListener((obs, oldVal, newVal) -> {

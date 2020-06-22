@@ -38,11 +38,6 @@ public class ViewImpl extends Application implements View {
         this.sceneLoader = new SceneLoaderImpl();
     }
 
-    private void simpleSwitch(final String path) {
-        this.currentSceneController = this.sceneLoader.loadScene(path).get();
-        this.initializeSceneController(this.currentSceneController);
-    }
-
     private void initializeSceneController(final FxController currentController) {
         currentController.initialize(this, this.controller);
         if (this.stage.getScene() == null) {
@@ -51,6 +46,11 @@ public class ViewImpl extends Application implements View {
             this.stage.getScene().setRoot(currentController.getRoot());
         }
         currentController.getRoot().requestFocus();
+    }
+    
+    private void simpleSwitch(final String path) {
+        this.currentSceneController = this.sceneLoader.loadScene(path).get();
+        this.initializeSceneController(this.currentSceneController);
     }
 
     /**
@@ -76,6 +76,16 @@ public class ViewImpl extends Application implements View {
      * {@inheritDoc}
      */
     @Override
+    public void setMiniGameScene(final String path) {
+        this.inGame = true;
+        this.simpleSwitch(path);
+        this.controller.selectedDifficultyLevel();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
     public void initStatistics(final Progress progress) {
         ((FxHandleDataScene) this.currentSceneController).init(progress);
     }
@@ -88,16 +98,7 @@ public class ViewImpl extends Application implements View {
         ((FxMiniGameController) this.currentSceneController).initGame(difficultyLevel);
     }
 
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public void setMiniGameScene(final String path) {
-        this.inGame = true;
-        this.simpleSwitch(path);
-        this.controller.selectedDifficultyLevel();
-    }
-
+    
     /**
      * {@inheritDoc}
      */

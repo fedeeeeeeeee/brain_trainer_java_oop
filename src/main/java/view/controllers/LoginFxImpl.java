@@ -154,9 +154,8 @@ public class LoginFxImpl extends AbstractSceneController implements LoginFx, FxN
      */
     @Override
     public void init() {
-        final Stage stage = (Stage) loginBtn.getScene().getWindow();
+        final Stage stage = (Stage) this.getRoot().getScene().getWindow();
         this.calculator = new DimensionCalculatorImpl(stage);
-
         calculator.setActualNodeFontStyle(grid, 0.15);
         calculator.setActualNodeFontStyle(gridFields, 0.06);
         calculator.setActualNodeFontStyle(gridBtn, 0.20);
