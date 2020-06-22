@@ -63,38 +63,6 @@ public class LoginFxImpl extends AbstractSceneController implements LoginFx, FxN
     @FXML
     private ImageView logo;
 
-    /**
-     * Enumeration for error message in the login scene.
-     *
-     */
-    private enum MessageError {
-        /**
-         * String to show when fields are empty.
-         */
-        EMPTY_FIELD("Fields cannot be empty!"),
-
-        /**
-         * String to show when user insert an existing username.
-         */
-        EXISTING_USERNAME("Username already exists!"),
-
-        /**
-         * String to show when password is wrong or the username doesn't exist.
-         */
-        INCORRECT_ENTRY("Incorrect password or non-existent user!");
-
-        private String message;
-
-        MessageError(final String message) {
-            this.message = message;
-        }
-
-        @Override
-        public String toString() {
-            return "*" + this.message;
-        }
-    }
-
     private UserPlayer initPlayer() {
         return new UserPlayerImpl.PlayerBuilder().username(this.txtPlayer.getText())
                 .password(this.txtPassword.getText()).build();
