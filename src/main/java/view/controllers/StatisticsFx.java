@@ -70,7 +70,7 @@ public class StatisticsFx extends AbstractSceneController implements FxHandleDat
     private Label bestVisualSkillLbl;
 
     private Progress progress;
-    
+
     @FXML
     private void goBack() throws IOException { // NOPMD
         this.getView().switchScene(SceneType.MAIN_MENU.getFilePath());
