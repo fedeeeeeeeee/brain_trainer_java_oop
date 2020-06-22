@@ -12,7 +12,7 @@ import model.minigames.colorgama.ColorValuesIterator;
 import model.minigames.colorgama.ComputeDifficultyValue;
 import model.minigames.colorgama.ColorValuesImpl;
 import model.minigames.colorgama.HSBColorValuesCalculator;
-import model.minigames.colorgama.HSBValueSettingsImpl;
+import model.minigames.colorgama.ColorGamaSettings;
 import model.minigames.colorgama.ColorValues;
 import model.minigames.colorgama.QuestionType;
 
@@ -25,7 +25,7 @@ class ColorValuesIteratorTest {
     private int numColors;
 
     private void setIterator(final DifficultyLevel difficulty, final QuestionType color) {
-        final ComputeDifficultyValue difficultyValue = new HSBValueSettingsImpl(difficulty);
+        final ComputeDifficultyValue difficultyValue = new ColorGamaSettings(difficulty);
         this.size = difficultyValue.getGridSize() * difficultyValue.getGridSize();
         this.numColors = difficultyValue.getNumColor();
         final ColorValues iteratorAggregate = new ColorValuesImpl(size, this.numColors, new HSBColorValuesCalculator(difficulty));
