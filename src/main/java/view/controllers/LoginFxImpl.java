@@ -142,7 +142,7 @@ public class LoginFxImpl extends AbstractSceneController implements LoginFx, FxN
         calculator.setNodeFontStyle(grid, TITLE_PERCENTAGE, halfStageSize);
         calculator.setNodeFontStyle(gridFields, FIELDS_PERCENTAGE, halfStageSize);
         calculator.setNodeFontStyle(gridBtn, BUTTON_PERCENTAGE, halfStageSize);
-        calculator.setNodeFontStyle(gridLbl, (double) ERROR_PERCENTAGE, halfStageSize);
+        calculator.setNodeFontStyle(gridLbl, ERROR_PERCENTAGE, halfStageSize);
         calculator.setImageViewDimension(logo, IMG_PERCENTAGE, halfStageSize);
     }
 }
