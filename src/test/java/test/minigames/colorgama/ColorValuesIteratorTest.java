@@ -5,36 +5,37 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.NoSuchElementException;
-
 import org.junit.jupiter.api.Test;
 
 import model.DifficultyLevel;
-import model.minigames.colorgama.ColorValuesCalculator;
 import model.minigames.colorgama.ColorValuesIterator;
-import model.minigames.colorgama.ColorValuesIteratorImpl;
 import model.minigames.colorgama.ComputeDifficultyValue;
-import model.minigames.colorgama.ComputeDifficultyValueImpl;
+import model.minigames.colorgama.ColorValuesImpl;
 import model.minigames.colorgama.HSBColorValuesCalculator;
+import model.minigames.colorgama.HSBValueSettingsImpl;
+import model.minigames.colorgama.ColorValues;
 import model.minigames.colorgama.QuestionType;
 
 class ColorValuesIteratorTest {
 
-    private static final int BAD_SIZE = -5;
-
+    private static final int NEGATIVE_SIZE = -5;
+    private static final int ZERO_SIZE = -5;
     private ColorValuesIterator iterator;
     private int size;
+    private int numColors;
 
-    private void intialize(final DifficultyLevel difficulty) {
-        final ComputeDifficultyValue difficultyValue = new ComputeDifficultyValueImpl(difficulty);
-        final ColorValuesCalculator calculator = new HSBColorValuesCalculator(difficultyValue);
+    private void setIterator(final DifficultyLevel difficulty, final QuestionType color) {
+        final ComputeDifficultyValue difficultyValue = new HSBValueSettingsImpl(difficulty);
         this.size = difficultyValue.getGridSize() * difficultyValue.getGridSize();
-        this.iterator = new ColorValuesIteratorImpl(this.size, calculator);
+        this.numColors = difficultyValue.getNumColor();
+        final ColorValues iteratorAggregate = new ColorValuesImpl(size, this.numColors, new HSBColorValuesCalculator(difficulty));
+        iteratorAggregate.resetValues(color);
+        this.iterator = iteratorAggregate.getIterator();
     }
 
     @Test
     public void testStandardBehaviour() {
-        this.intialize(DifficultyLevel.EASY);
-        this.iterator.resetValues(QuestionType.COLOR);
+        this.setIterator(DifficultyLevel.EASY, QuestionType.COLOR);
         for (int i = 0; i < this.size; i++) {
             assertTrue(this.iterator.hasNext());
             this.iterator.next();
@@ -45,8 +46,7 @@ class ColorValuesIteratorTest {
 
     @Test
     public void testNoSuchElement() {
-        this.intialize(DifficultyLevel.NORMAL);
-        this.iterator.resetValues(QuestionType.DARKEST);
+        this.setIterator(DifficultyLevel.NORMAL, QuestionType.DARKEST);
         for (int i = 0; i < this.size; i++) {
             this.iterator.next();
         }
@@ -54,16 +54,10 @@ class ColorValuesIteratorTest {
     }
 
     @Test
-    public void testIllegalStateException() {
-        this.intialize(DifficultyLevel.HARD);
-        assertThrows(IllegalStateException.class, () -> this.iterator.hasNext());
-        assertThrows(IllegalStateException.class, () -> this.iterator.next());
-    }
-
-    @Test
     public void testIllegalArgumentException() {
-        final ColorValuesCalculator calculator = new HSBColorValuesCalculator(new ComputeDifficultyValueImpl(DifficultyLevel.EASY));
-        assertThrows(IllegalArgumentException.class, () -> new ColorValuesIteratorImpl(0, calculator));
-        assertThrows(IllegalArgumentException.class, () -> new ColorValuesIteratorImpl(BAD_SIZE, calculator)); 
+        assertThrows(IllegalArgumentException.class, () -> new ColorValuesImpl(NEGATIVE_SIZE, this.numColors, new HSBColorValuesCalculator(DifficultyLevel.EASY)));
+        assertThrows(IllegalArgumentException.class, () -> new ColorValuesImpl(ZERO_SIZE, this.numColors, new HSBColorValuesCalculator(DifficultyLevel.EASY))); 
+        assertThrows(IllegalArgumentException.class, () -> new ColorValuesImpl(this.size, NEGATIVE_SIZE, new HSBColorValuesCalculator(DifficultyLevel.EASY)));
+        assertThrows(IllegalArgumentException.class, () -> new ColorValuesImpl(this.size, ZERO_SIZE, new HSBColorValuesCalculator(DifficultyLevel.EASY))); 
     }
 }
