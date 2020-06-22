@@ -29,7 +29,7 @@ public class OneWayModelImpl implements OneWayModel {
         this.difficulty = selectedDifficulty;
         this.settings = new OneWaySettingsImpl(this.difficulty);
         this.score = new ScoreModelImpl(this.difficulty, BASE_POINT);
-        this.pathDrawer = new OneWayPathDrawerImpl(this.settings.getSize(), this.settings.getArrows());
+        this.pathDrawer = new OneWayPathDrawerImpl(this.settings.getGridSize(), this.settings.getArrows());
     }
 
     /**
@@ -118,7 +118,7 @@ public class OneWayModelImpl implements OneWayModel {
      */
     @Override
     public int getGridSize() {
-        return this.settings.getSize();
+        return this.settings.getGridSize();
     }
 
 }

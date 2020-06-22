@@ -39,7 +39,7 @@ public class OneWaySettingsImpl implements OneWaySettings {
      * {@inheritDoc}
      */
     @Override
-    public int getSize() {
+    public int getGridSize() {
         return this.calculator.apply(BASE_SIZE, this.difficulty.ordinal());
     }
 

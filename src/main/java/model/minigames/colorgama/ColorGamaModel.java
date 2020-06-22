@@ -14,7 +14,7 @@ public interface ColorGamaModel extends MiniGameModel {
      * @return difficultyValues
      *          values of the minigame
      */
-    ComputeDifficultyValue getDifficultyValue();
+    ColorGamaSettings getDifficultyValue();
 
     /**
      * Get the color iterator.

@@ -16,7 +16,7 @@ public class ColorGamaModelImpl implements ColorGamaModel {
     private static final String NULL_ARG = " passed is null";
 
     private final ScoreModel score;
-    private final ComputeDifficultyValue computeValue;
+    private final ColorGamaSettings computeValue;
     private final ColorValues colorValues;
     private QuestionType question;
 
@@ -28,7 +28,7 @@ public class ColorGamaModelImpl implements ColorGamaModel {
      */
     public ColorGamaModelImpl(final DifficultyLevel difficulty) {
         Objects.requireNonNull(difficulty, "DifficultyLevel" + NULL_ARG);
-        this.computeValue = new ColorGamaSettings(difficulty);
+        this.computeValue = new ColorGamaSettingsImpl(difficulty);
         this.score = new ScoreModelImpl(difficulty, this.computeValue.getBasePoint());
         this.colorValues = new ColorValuesImpl(this.computeValue.getGridSize() * this.computeValue.getGridSize(), this.computeValue.getNumColor(), new HSBColorValuesCalculator(difficulty));
     }
@@ -53,7 +53,7 @@ public class ColorGamaModelImpl implements ColorGamaModel {
      * {@inheritDoc}
      */
     @Override
-    public ComputeDifficultyValue getDifficultyValue() {
+    public ColorGamaSettings getDifficultyValue() {
         return this.computeValue;
     }
 

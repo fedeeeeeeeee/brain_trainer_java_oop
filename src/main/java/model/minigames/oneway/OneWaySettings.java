@@ -1,26 +1,16 @@
 package model.minigames.oneway;
 
+import model.minigames.MiniGameSettings;
+
 /**
  * The interface to change One Way settings.
  *
  */
-public interface OneWaySettings {
+public interface OneWaySettings extends MiniGameSettings {
 
     /**
      * 
      * @return the arrows count
      */
     int getArrows();
-
-    /**
-     * 
-     * @return the grid size
-     */
-    int getSize();
-
-    /**
-     * 
-     * @return the timer duration
-     */
-    int getSeconds();
 }
