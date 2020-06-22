@@ -1,13 +1,15 @@
 package model.minigames.colorgama;
 
 import java.util.Comparator;
-import java.util.HashSet;
 import java.util.Objects;
 import java.util.Optional;
-import java.util.PrimitiveIterator.OfInt;
+import java.util.PrimitiveIterator.OfDouble;
 import java.util.Random;
 import java.util.Set;
-import java.util.stream.Collectors;
+
+import org.apache.commons.lang3.tuple.Triple;
+
+import model.DifficultyLevel;
 
 /**
  * This class implements {@link ColorValuesCalculator}.
@@ -16,72 +18,68 @@ import java.util.stream.Collectors;
 public class HSBColorValuesCalculator implements ColorValuesCalculator {
 
     private static final String NULL_ARG = " passed is null";
+    private static final String BAD_SIZE = "size must be greater than 0";
     private static final int DEGREE = 361;
 
-    private final ComputeDifficultyValue difficultyValue;
-    private final Set<HSBValues> colorValuesSet;
-    private final OfInt values;
-    private int hue;
+    private final HSBValuesSettings valueSettings;
+    private final OfDouble values;
+    private Number hue;
 
     /**
      * Constructor of {@link ColorValuesCalculator}.
-     * s
-     * @param difficultyValue 
+     * 
+     * @param difficulty 
      *          constants according to the difficulty.
      */
-    public HSBColorValuesCalculator(final ComputeDifficultyValue difficultyValue) {
-        Objects.requireNonNull(difficultyValue, "ComputeDifficultyValue" + NULL_ARG);
-        this.difficultyValue = difficultyValue;
-        this.colorValuesSet = new HashSet<>();
-        this.values = new Random().ints(this.difficultyValue.getRandomColorOrigin(), this.difficultyValue.getRandomColorBound()).iterator();
+    public HSBColorValuesCalculator(final DifficultyLevel difficulty) {
+        Objects.requireNonNull(difficulty, "DifficultyLevel" + NULL_ARG);
+        this.valueSettings = new HSBValueSettingsImpl(difficulty);
+        this.values = new Random().doubles(this.valueSettings.getRandomColorOrigin().doubleValue(), this.valueSettings.getRandomColorBound().doubleValue()).iterator();
     }
 
-    private Integer calulateRandomValue() {
+    private double calulateRandomValue() {
         return this.values.next();
-    }
-
-    private void generateColors() {
-        while (this.colorValuesSet.size() < this.difficultyValue.getNumColor()) {
-            final HSBValues triple = new HSBValues(this.hue, this.calulateRandomValue(), this.calulateRandomValue());
-            this.colorValuesSet.add(triple);
-        }
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public Optional<ColorValues<?>> calculateRightColor(final QuestionType question) {
-        Objects.requireNonNull(question, "QuestionType" + NULL_ARG);
-        final Comparator<HSBValues> bComparator = (c1, c2) -> c1.getValue().getRight() - c2.getValue().getRight();
-        final Comparator<HSBValues> sComparator = (c1, c2) -> c1.getValue().getMiddle() - c2.getValue().getMiddle();
+    public ColorMethod getColorMethod() {
+        return ColorMethod.HSB_VALUE;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public Optional<Triple<Number, Number, Number>> calculateRightColor(final QuestionType question, final Set<Triple<Number, Number, Number>> colorValuesSet) {
+        this.check(question, colorValuesSet);
+        final Comparator<Triple<Number, Number, Number>> bComparator = (c1, c2) -> Double.compare(c1.getRight().doubleValue(), c2.getRight().doubleValue());
+        final Comparator<Triple<Number, Number, Number>> sComparator = (c1, c2) -> Double.compare(c1.getMiddle().doubleValue(), c2.getMiddle().doubleValue());
         switch (question) {
         case DARKEST:
-            return Optional.of(new HSBValues(this.hue,
-                    this.colorValuesSet.stream()
+            return Optional.of(Triple.of(this.hue,
+                    colorValuesSet.stream()
                                        .max(sComparator)
                                        .get()
-                                       .getValue()
-                                       .getMiddle() + this.difficultyValue.getValueRange(),
-                    this.colorValuesSet.stream()
+                                       .getMiddle().doubleValue() + this.valueSettings.getValueRange().doubleValue(),
+                    colorValuesSet.stream()
                                        .min(bComparator)
                                        .get()
-                                       .getValue()
-                                       .getRight() - this.difficultyValue.getValueRange()));
+                                       .getRight().doubleValue() - this.valueSettings.getValueRange().doubleValue()));
         case LIGHTEST:
-            return Optional.of(new HSBValues(this.hue,
-                    this.colorValuesSet.stream()
+            return Optional.of(Triple.of(this.hue,
+                    colorValuesSet.stream()
                                        .min(sComparator)
                                        .get()
-                                       .getValue()
-                                       .getMiddle() - this.difficultyValue.getValueRange(),
-                    this.colorValuesSet.stream()
+                                       .getMiddle().doubleValue() - this.valueSettings.getValueRange().doubleValue(),
+                    colorValuesSet.stream()
                                         .max(bComparator)
                                         .get()
-                                        .getValue()
-                                        .getRight() + this.difficultyValue.getValueRange()));
+                                        .getRight().doubleValue() + this.valueSettings.getValueRange().doubleValue()));
         case COLOR:
-            return Optional.of(new HSBValues(this.hue + this.difficultyValue.getHueRange(), 
+            return Optional.of(Triple.of(this.hue.doubleValue() + this.valueSettings.getHueRange().doubleValue(), 
                                              this.calulateRandomValue(),
                                              this.calulateRandomValue()));
         default:
@@ -89,14 +87,12 @@ public class HSBColorValuesCalculator implements ColorValuesCalculator {
         }
     }
 
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public ColorValues<?> getRandomColorValues() {
-        return this.colorValuesSet.stream()
-                                  .collect(Collectors.toList())
-                                  .get(new Random().nextInt(this.colorValuesSet.size()));
+    private void check(final QuestionType question, final Set<Triple<Number, Number, Number>> colorValuesSet) {
+        Objects.requireNonNull(question, "QuestionType" + NULL_ARG);
+        Objects.requireNonNull(colorValuesSet, "Set<Triple<Number, Number, Number>>" + NULL_ARG);
+        if (colorValuesSet.isEmpty()) {
+            throw new IllegalArgumentException(BAD_SIZE);
+        }
     }
 
     /**
@@ -104,8 +100,14 @@ public class HSBColorValuesCalculator implements ColorValuesCalculator {
      */
     @Override
     public void reset() {
-        this.colorValuesSet.clear();
-        this.hue = new Random().nextInt(DEGREE - this.difficultyValue.getHueRange());
-        this.generateColors();
+        this.hue = new Random().nextInt(DEGREE - this.valueSettings.getHueRange().intValue());
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public Triple<Number, Number, Number> calculateRandomColorValue() {
+        return Triple.of(this.hue, this.calulateRandomValue(), this.calulateRandomValue());
     }
 }

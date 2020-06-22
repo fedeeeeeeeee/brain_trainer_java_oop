@@ -1,6 +1,9 @@
 package model.minigames.colorgama;
 
 import java.util.Optional;
+import java.util.Set;
+
+import org.apache.commons.lang3.tuple.Triple;
 
 /**
  * This interface calculates the values of the colors for the minigame.
@@ -9,27 +12,37 @@ import java.util.Optional;
 public interface ColorValuesCalculator {
 
     /**
-     * Get a the random color values.
+     * Get the method of color value representations.
      * 
-     * @return colorValues
-     *          the color values of a random color
+     * @return method
+     *           the method of representations
      */
-    ColorValues<?> getRandomColorValues();
+    ColorMethod getColorMethod();
 
     /**
-     * Calculates the right color values.
+     * Calculate the right color values according to the question type from the set.
      *
      * @param question
      *          the current question.
      *
-     * @return colorValues
-     *          the color values of the right color
+     * @param colorValuesSet
+     *          the set to calculate
+     *
+     * @return values
+     *          the right color value
      */
-    Optional<ColorValues<?>> calculateRightColor(QuestionType question);
+    Optional<Triple<Number, Number, Number>> calculateRightColor(QuestionType question, Set<Triple<Number, Number, Number>> colorValuesSet);
+
+    /**
+     * Calculate a random color value.
+     * 
+     * @return values
+     *          the color values
+     */
+    Triple<Number, Number, Number> calculateRandomColorValue();
 
     /**
      * Reset all values.
-     * 
      */
     void reset();
 }
