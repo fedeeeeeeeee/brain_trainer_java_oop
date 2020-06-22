@@ -1,5 +1,6 @@
 package view.controllers.minigames.colorgama;
 
+import model.minigames.colorgama.ColorMethod;
 import model.minigames.colorgama.ColorValuesIterator;
 import view.controllers.Area;
 
@@ -19,23 +20,27 @@ public interface ColorGamaFx {
     void initGrid(int size);
 
     /**
-     * Render the next level.
+     * Set the iterator of color values.
      * 
-     * @param colorIterator
-     *          the colors of buttons
+     * @param iterator 
+     *          the color iterator
+     * @param method
+     *          the method to represent colors
+     */
+    void setColorIterator(ColorValuesIterator iterator, ColorMethod method);
+
+    /**
+     * Render the next level.
      *
      * @param questionSentence
      *          the sentence of the question to show
      */
-    void renderNext(ColorValuesIterator colorIterator, String questionSentence);
+    void renderNext(String questionSentence);
  
     /**
      * Shows the color indicated in the question. 
-     * 
-     * @param colorIterator
-     *          the colors of buttons
      */
-    void showQuestionColor(ColorValuesIterator colorIterator);
+    void showQuestionColor();
 
     /**
      * Hide the color indicated in the question. 

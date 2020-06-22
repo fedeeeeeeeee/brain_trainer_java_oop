@@ -23,6 +23,7 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
 import javafx.util.Duration;
 import model.DifficultyLevel;
+import model.minigames.colorgama.ColorMethod;
 import model.minigames.colorgama.ColorValuesIterator;
 import view.SceneType;
 import view.controllers.minigames.AbstractMiniGameControllerFx;
@@ -51,6 +52,8 @@ public class ColorGamaFxImpl extends AbstractMiniGameControllerFx implements Col
     private Label questionColor;
 
     private ColorGamaController colorGamaController;
+    private ColorConverter converter;
+    private ColorValuesIterator iterator;
 
     private final EventHandler<MouseEvent> bntClicked = (l) -> {
         final Button answer = (Button) l.getSource();
@@ -77,6 +80,7 @@ public class ColorGamaFxImpl extends AbstractMiniGameControllerFx implements Col
      */
     @Override
     public void initGame(final DifficultyLevel difficultyLevel) {
+        Objects.requireNonNull(difficultyLevel, "DifficultyLevel" + NULL_ARG);
         this.colorGamaController = new ColorGamaControllerImpl(this, difficultyLevel);
         this.colorGamaController.startTimer();
         this.colorGamaController.startGame();
@@ -103,12 +107,24 @@ public class ColorGamaFxImpl extends AbstractMiniGameControllerFx implements Col
      * 
      */
     @Override
-    public void renderNext(final ColorValuesIterator colorIterator, final String questionSentence) {
-        Objects.requireNonNull(colorIterator, "ColorValuesIterator" + NULL_ARG);
+    public void setColorIterator(final ColorValuesIterator iterator, final ColorMethod method) {
+        Objects.requireNonNull(iterator, "ColorValuesIterator" + NULL_ARG);
+        Objects.requireNonNull(method, "ColorMethod" + NULL_ARG);
+        this.iterator = iterator;
+        this.converter = new ColorConverterImpl(method);
+    }
+
+    /**
+     * {@inheritDoc}
+     * 
+     */
+    @Override
+    public void renderNext(final String questionSentence) {
         Objects.requireNonNull(questionSentence, "QuestionSentence" + NULL_ARG);
-        this.buttonsGrid.getChildren().forEach((b) -> ((Button) b)
-                .setBackground(new Background(new BackgroundFill(Color.web(colorIterator.next().getColorString()),
-                                              new CornerRadii(2), new Insets(2)))));
+        this.buttonsGrid.getChildren().forEach((b) -> {
+                final Color color = this.converter.convertToColor(this.iterator.next()).get();
+                ((Button) b).setBackground(new Background(new BackgroundFill(color, new CornerRadii(2), new Insets(2))));
+        });
         this.questionTitle.setText(questionSentence);
     }
 
@@ -116,11 +132,10 @@ public class ColorGamaFxImpl extends AbstractMiniGameControllerFx implements Col
      * {@inheritDoc}
      */
     @Override
-    public void showQuestionColor(final ColorValuesIterator colorIterator) {
-        Objects.requireNonNull(colorIterator, "ColorValuesIterator" + NULL_ARG);
+    public void showQuestionColor() {
+        final Color color = this.converter.convertToColor(this.iterator.getRightColorValues()).get();
+        this.questionColor.setBackground(new Background(new BackgroundFill(color, new CornerRadii(2), new Insets(2))));
         this.questionColor.setVisible(true);
-        this.questionColor.setBackground(new Background(new BackgroundFill(
-                Color.web(colorIterator.getRightColor().getColorString()), new CornerRadii(2), new Insets(2))));
     }
 
     /**
@@ -160,5 +175,4 @@ public class ColorGamaFxImpl extends AbstractMiniGameControllerFx implements Col
         this.image.setImage(image);
         this.showAnimation(check);
     }
-
 }
