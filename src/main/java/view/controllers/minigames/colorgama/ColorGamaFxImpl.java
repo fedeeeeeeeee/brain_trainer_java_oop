@@ -13,6 +13,7 @@ import javafx.fxml.FXML;
 import javafx.geometry.Insets;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.ProgressBar;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
@@ -51,6 +52,9 @@ public class ColorGamaFxImpl extends AbstractMiniGameControllerFx implements Col
     @FXML
     private Label questionColor;
 
+    @FXML
+    private ProgressBar progressBar;
+
     private ColorGamaController colorGamaController;
     private ColorConverter converter;
     private ColorValuesIterator iterator;
@@ -81,6 +85,7 @@ public class ColorGamaFxImpl extends AbstractMiniGameControllerFx implements Col
     @Override
     public void initGame(final DifficultyLevel difficultyLevel) {
         Objects.requireNonNull(difficultyLevel, "DifficultyLevel" + NULL_ARG);
+        this.progressBar.setStyle("-fx-accent: #1897f6");
         this.colorGamaController = new ColorGamaControllerImpl(this, difficultyLevel);
         this.colorGamaController.startTimer();
         this.colorGamaController.startGame();
