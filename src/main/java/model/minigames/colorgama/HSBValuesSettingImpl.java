@@ -9,7 +9,7 @@ import model.DifficultyLevel;
  * This class implements {@link HSBValuesSettings} and extends {@link ColorGamaSettings}.
  *
  */
-public class HSBValuesSettingImpl extends ColorGamaSettings implements HSBValuesSetting {
+public class HSBValuesSettingImpl implements HSBValuesSetting {
 
     private static final String NULL_ARG = " passed is null";
     private static final int ORIGIN = 30;
@@ -28,12 +28,10 @@ public class HSBValuesSettingImpl extends ColorGamaSettings implements HSBValues
      *          the difficulty level of the game
      */
     public HSBValuesSettingImpl(final DifficultyLevel difficulty) {
-        super(difficulty);
         Objects.requireNonNull(difficulty, "DifficultyLevel" + NULL_ARG);
         final BiFunction<Integer, Integer, Integer> operation = (i1, i2) -> i1 * difficulty.ordinal() + i2;
         this.hueRange = operation.apply(-BOUND, ORIGIN_VALUE);
         this.valueRange = (double) operation.apply(-BOUND, OFFSET) / HUNDRED;
-
     }
 
     /**

@@ -4,7 +4,7 @@ package model.minigames.colorgama;
  * This interface represents the settings of the hsb color values.
  *
  */
-public interface HSBValuesSetting extends ComputeDifficultyValue {
+public interface HSBValuesSetting {
 
     /**
      * Get of the random origin of the color value.
