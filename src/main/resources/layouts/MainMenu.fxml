@@ -30,7 +30,7 @@
 				<RowConstraints minHeight="10.0" prefHeight="30.0" valignment="CENTER" vgrow="SOMETIMES" />
 			</rowConstraints>
 			<children>
-				<Button fx:id="trainingBtn" alignment="CENTER" maxHeight="150.0" maxWidth="450.0" mnemonicParsing="false" onMouseClicked="#startTraining" text="Daily Training" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
+				<Button fx:id="trainingBtn" alignment="CENTER" maxHeight="150.0" maxWidth="450.0" mnemonicParsing="false" onMouseClicked="#startTraining" text="Daily Training" textFill="#49618c" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
 					<font>
 						<Font size="20.0" />
 					</font>
@@ -38,7 +38,7 @@
 						<Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
 					</GridPane.margin>
 				</Button>
-				<Button fx:id="statisticsBtn" alignment="CENTER" maxHeight="150.0" maxWidth="450.0" mnemonicParsing="false" onMouseClicked="#showStatistics" text="Statistics" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="2" GridPane.valignment="CENTER">
+				<Button fx:id="statisticsBtn" alignment="CENTER" maxHeight="150.0" maxWidth="450.0" mnemonicParsing="false" onMouseClicked="#showStatistics" text="Statistics" textFill="#49618c" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="2" GridPane.valignment="CENTER">
 					<font>
 						<Font size="20.0" />
 					</font>
@@ -46,7 +46,7 @@
 						<Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
 					</GridPane.margin>
 				</Button>
-				<Button fx:id="howToPlayBtn" alignment="CENTER" maxHeight="150.0" maxWidth="450.0" mnemonicParsing="false" onMouseClicked="#showInfo" text="How To Play" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="3" GridPane.valignment="CENTER">
+				<Button fx:id="howToPlayBtn" alignment="CENTER" maxHeight="150.0" maxWidth="450.0" mnemonicParsing="false" onMouseClicked="#showInfo" text="How To Play" textFill="#49618c" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="3" GridPane.valignment="CENTER">
 					<font>
 						<Font size="20.0" />
 					</font>

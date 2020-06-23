@@ -41,6 +41,8 @@ public class OneWayFxImpl extends AbstractMiniGameControllerFx implements OneWay
     private static final String GREEN = "-fx-border-color: #56b72d; -fx-border-width: 5px;";
     private static final String RED = "-fx-border-color: #ff0000; -fx-border-width: 5px;";
     private static final String BLUE = "-fx-accent: #49618C";
+    private static final String START = "/images/start.png";
+    private static final String FINISH = "/images/finish.png";
     private static final double BUTTON_DIM = 300;
     private static final int IMG_DIM = 40;
 
@@ -103,7 +105,7 @@ public class OneWayFxImpl extends AbstractMiniGameControllerFx implements OneWay
         this.controller.showSolution();
 
         finish.setOnFinished(event -> {
-            this.correctBtn.setGraphic(image.apply("/images/finish.png"));
+            this.correctBtn.setGraphic(image.apply(FINISH));
         });
         finish.playFromStart();
 
@@ -142,7 +144,6 @@ public class OneWayFxImpl extends AbstractMiniGameControllerFx implements OneWay
         IntStream.range(0, steps.size()).forEach(i -> {
             final Button btn = new Button();
             btn.setPrefSize(BUTTON_DIM, BUTTON_DIM);
-            btn.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
             this.arrowRow.add(btn, i, 0);
             this.arrows.add(btn);
             this.loadImage(i, steps.get(i));
@@ -155,7 +156,7 @@ public class OneWayFxImpl extends AbstractMiniGameControllerFx implements OneWay
     @Override
     public void updateArrows(final List<Direction> steps) {
         raiseException(steps.isEmpty(), ILLEGAL_ARGUMENT_EXCEPTION_SUPPLIER);
-        IntStream.range(0, steps.size()).boxed().forEach(i -> this.loadImage(i, steps.get(i)));
+        IntStream.range(0, steps.size()).forEach(i -> this.loadImage(i, steps.get(i)));
     }
 
     /**
@@ -167,7 +168,6 @@ public class OneWayFxImpl extends AbstractMiniGameControllerFx implements OneWay
             for (int j = 0; j < size; j++) {
                 final Button btn = new Button();
                 btn.setPrefSize(BUTTON_DIM, BUTTON_DIM);
-                btn.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
                 btn.setPadding(new Insets(-1, -1, -1, -1));
                 btn.addEventHandler(MouseEvent.MOUSE_CLICKED, gridEventHandler);
                 this.grid.add(btn, j, i);
@@ -184,7 +184,7 @@ public class OneWayFxImpl extends AbstractMiniGameControllerFx implements OneWay
         raiseException(initialPosition == null, ILLEGAL_ARGUMENT_EXCEPTION_SUPPLIER);
         this.buttons.entrySet().stream().peek(e -> e.getKey().setGraphic(null))
                 .filter(bt -> bt.getValue().equals(initialPosition)).forEach(bt -> {
-                    bt.getKey().setGraphic(this.image.apply("/images/start.png"));
+                    bt.getKey().setGraphic(this.image.apply(START));
                 });
     }
 
