@@ -20,7 +20,7 @@ public class SizeCountControllerImpl implements SizeCountController {
     /**
      * The seconds of the {@link GameTimer}.
      */
-    private static final int SECONDS = 50;
+    private static final int SECONDS = 10;
 
     private final SizeCountModel model;
     private final SizeCountFxImpl view;

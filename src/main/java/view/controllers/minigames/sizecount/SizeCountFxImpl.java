@@ -63,6 +63,7 @@ public class SizeCountFxImpl extends AbstractMiniGameControllerFx implements Siz
      */
     @Override
     public void initGame(final DifficultyLevel difficultyLevel) {
+        this.getProgressBar().setStyle("-fx-accent:  #fbe407");
         this.buttons = new LinkedList<>();
         this.controller = new SizeCountControllerImpl(this, difficultyLevel);
         this.controller.startTimer();

@@ -65,9 +65,6 @@ public class OneWayFxImpl extends AbstractMiniGameControllerFx implements OneWay
     @FXML
     private Label scoreLbl;
 
-    @FXML
-    private ProgressBar progressBar;
-
 //    @FXML
 //    private Button quitBn;
 
@@ -140,7 +137,7 @@ public class OneWayFxImpl extends AbstractMiniGameControllerFx implements OneWay
      */
     @Override
     public void initGame(final DifficultyLevel difficultyLevel) {
-        this.progressBar.setStyle(BLUE);
+        this.getProgressBar().setStyle(BLUE);
         this.controller = new OneWayControllerImpl(this, difficultyLevel);
         this.buttons = new HashMap<>();
         this.arrows = new ArrayList<>();

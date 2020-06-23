@@ -84,6 +84,7 @@ public class PerilousPathFxImpl extends AbstractMiniGameControllerFx implements 
      */
     @Override
     public void initGame(final DifficultyLevel difficultyLevel) {
+        this.getProgressBar().setStyle("-fx-accent: #9e3d64");
         this.controller = new PerilousPathControllerImpl(difficultyLevel, this);
         this.buttons = new HashMap<>();
         this.controller.startGame();
