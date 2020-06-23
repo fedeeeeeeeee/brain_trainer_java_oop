@@ -1,11 +1,13 @@
 package model.minigames.perilouspath;
 
+import java.util.Random;
+
 import utility.Pair;
 
 /**
- * Implementation of {@link Mine}.
+ * This abstract class implements the common aspect of {@link Mine}.
  */
-public class MineImpl implements Mine {
+public abstract class AbstractMine implements Mine {
 
     private final Pair<Integer, Integer> mine;
     private MineState mineState;
@@ -13,11 +15,12 @@ public class MineImpl implements Mine {
     /**
      * Constructor of {@link Mine}.
      * 
-     * @param mine
-     *          the mine's position
+     * @param size
+     *          the upper bound's size
      */
-    public MineImpl(final Pair<Integer, Integer> mine) {
-        this.mine = mine;
+    public AbstractMine(final int size) {
+        final Random random = new Random();
+        this.mine = new Pair<>(random.nextInt(size), random.nextInt(size));
         this.mineState = MineState.UNDETONATED;
     }
 
