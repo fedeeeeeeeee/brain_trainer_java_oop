@@ -9,7 +9,7 @@ import utility.Pair;
  * Represents a fragmentation {@link Mine}.
  */
 public interface FragmentationMine extends Mine {
-    
+
     /**
      * Gets the fragments position.
      * 

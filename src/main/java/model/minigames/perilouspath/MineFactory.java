@@ -4,7 +4,7 @@ package model.minigames.perilouspath;
  * Represents the factory of various type of {@link Mine}.
  */
 public interface MineFactory {
-    
+
     /**
      * Create a simple {@link Mine}.
      * 
@@ -14,7 +14,7 @@ public interface MineFactory {
      *      the {@link Mine}
      */
     Mine createSimpleMine(int size);
-    
+
     /**
      * Create a {@link FragmentationMine}.
      * 

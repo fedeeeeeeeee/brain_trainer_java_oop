@@ -20,7 +20,7 @@ public class FragmentationMineImpl extends AbstractMine implements Fragmentation
         super(size);
         this.size = size;
     }
-    
+
     private boolean checkReachLimit(final Pair<Integer, Integer> lastPosition) {
         Objects.requireNonNull(lastPosition);
         return lastPosition.getX() < 0 || lastPosition.getY() < 0 || lastPosition.getX() >= this.size || lastPosition.getY() >= this.size;
