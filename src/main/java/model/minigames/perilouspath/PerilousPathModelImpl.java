@@ -3,7 +3,6 @@ package model.minigames.perilouspath;
 import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.Objects;
-import java.util.Random;
 import java.util.Set;
 import java.util.function.Predicate;
 
@@ -25,11 +24,12 @@ public class PerilousPathModelImpl implements PerilousPathModel {
     private final int size;
     private final int numMines;
     private final ScoreModel score;
+    private final MineFactory mineFactory;
+    private final LinkedList<Pair<Integer, Integer>> selected; //NOPMD
     private Pair<Integer, Integer> start;
     private Pair<Integer, Integer> finish;
     private Set<Mine> mines;
     private LinkedList<Pair<Integer, Integer>> path; //NOPMD
-    private final LinkedList<Pair<Integer, Integer>> selected; //NOPMD
 
     /**
      * Constructor of {@link PerilousPathModel}.
@@ -47,6 +47,7 @@ public class PerilousPathModelImpl implements PerilousPathModel {
         this.check(this.size);
         this.numMines = difficulty.getNumMines();
         this.check(this.numMines);
+        this.mineFactory = new MineFactoryImpl();
     }
 
     private void check(final int value) {
@@ -57,7 +58,7 @@ public class PerilousPathModelImpl implements PerilousPathModel {
     }
 
     private Mine getRandomMines() {
-        final Mine mine = new MineImpl(new Pair<>(new Random().nextInt(this.size), new Random().nextInt(this.size)));
+        final Mine mine = this.mineFactory.createSimpleMine(this.size);
         final Pair<Integer, Integer> minePosition = mine.getMinePosition();
         return this.path.contains(minePosition) || this.start.equals(minePosition) || this.finish.equals(minePosition)
                 || this.mines.stream().anyMatch(m -> m.getMinePosition().equals(mine.getMinePosition())) ? this.getRandomMines() : mine;
