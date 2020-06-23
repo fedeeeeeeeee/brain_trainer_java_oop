@@ -29,7 +29,7 @@
 				<RowConstraints valignment="CENTER" vgrow="SOMETIMES" />
 			</rowConstraints>
 			<children>
-				<Button mnemonicParsing="false" onMouseClicked="#startMiniGame" text="PLAY" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="4">
+				<Button mnemonicParsing="false" onMouseClicked="#startMiniGame" text="PLAY" textFill="#49618c" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="4">
 					<font>
 						<Font size="20.0" />
 					</font>
@@ -42,7 +42,7 @@
 						<Insets bottom="10.0" top="10.0" />
 					</GridPane.margin>
 				</ComboBox>
-            <Label fx:id="label" alignment="CENTER" contentDisplay="CENTER" text="Select minigame" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="BOTTOM">
+            <Label fx:id="label" alignment="CENTER" contentDisplay="CENTER" text="Select minigame" textFill="#49618c" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="BOTTOM">
                <font>
                   <Font size="20.0" />
                </font>
@@ -64,7 +64,7 @@
                 <RowConstraints vgrow="SOMETIMES" />
               </rowConstraints>
                <children>
-      						<RadioButton mnemonicParsing="false" text="HARD" GridPane.columnIndex="1" GridPane.rowIndex="2">
+      						<RadioButton mnemonicParsing="false" text="HARD" textFill="#49618c" GridPane.columnIndex="1" GridPane.rowIndex="2">
       					<toggleGroup>
       						<ToggleGroup fx:id="difficulty" />
       					</toggleGroup>
@@ -72,12 +72,12 @@
       								<Font size="20.0" />
       							</font>
       						</RadioButton>
-      				<RadioButton mnemonicParsing="false" text="NORMAL" toggleGroup="$difficulty" GridPane.columnIndex="1" GridPane.rowIndex="1">
+      				<RadioButton mnemonicParsing="false" text="NORMAL" textFill="#49618c" toggleGroup="$difficulty" GridPane.columnIndex="1" GridPane.rowIndex="1">
       					<font>
       						<Font size="20.0" />
       					</font>
       				</RadioButton>
-      				<RadioButton mnemonicParsing="false" text="EASY" toggleGroup="$difficulty" GridPane.columnIndex="1">
+      				<RadioButton mnemonicParsing="false" text="EASY" textFill="#49618c" toggleGroup="$difficulty" GridPane.columnIndex="1">
       					<font>
       						<Font size="20.0" />
       					</font>
