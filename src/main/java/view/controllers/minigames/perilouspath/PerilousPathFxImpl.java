@@ -66,18 +66,18 @@ public class PerilousPathFxImpl extends AbstractMiniGameControllerFx implements 
         this.instructions.setText(Instructions.FIND_SAFE_PATH.toString());
         this.controller.updateView();
     };
-    
-    private void setProperty(Button bt) {
-        bt.setPrefSize(BUTTON_SIZE, BUTTON_SIZE);
-        bt.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
-    }
-    
+
     private final Function<String, ImageView> image = (imageName) -> {
         final ImageView image = new ImageView("/images/" + imageName + ".png");
         image.setFitHeight(IMAGE_SIZE);
         image.setFitWidth(IMAGE_SIZE);
         return image;
     };
+
+    private void setProperty(final Button bt) {
+        bt.setPrefSize(BUTTON_SIZE, BUTTON_SIZE);
+        bt.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
+    }
 
     /**
      * {@inheritDoc}
