@@ -29,6 +29,7 @@ dependencies {
     implementation("com.fasterxml.jackson.core:jackson-annotations:2.11.0.rc1")
     implementation("org.apache.commons:commons-lang3:3.10")
     implementation("io.github.classgraph:classgraph:4.8.86")
+    testCompile("org.testfx:testfx-junit5:4.0.16-alpha")
 
     // Example library: Guava. Add what you need (and remove Guava if you don't use it)
     implementation("com.google.guava:guava:28.1-jre")
