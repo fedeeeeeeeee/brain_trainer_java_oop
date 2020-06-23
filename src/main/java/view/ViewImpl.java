@@ -4,6 +4,7 @@ import controller.Controller;
 import controller.ControllerImpl;
 import javafx.application.Application;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
 import model.DifficultyLevel;
@@ -36,6 +37,15 @@ public class ViewImpl extends Application implements View {
     public ViewImpl() {
         this.controller = new ControllerImpl();
         this.sceneLoader = new SceneLoaderImpl();
+    }
+
+    private void setStageSize() {
+        this.stage.setHeight(HEIGHT);
+        this.stage.setWidth(WIDTH);
+        this.stage.setMinHeight(HEIGHT / PERCENTAGE);
+        this.stage.setMinWidth(WIDTH / PERCENTAGE);
+        this.stage.setMaxHeight(HEIGHT * PERCENTAGE);
+        this.stage.setMaxWidth(WIDTH * PERCENTAGE);
     }
 
     private void initializeSceneController(final FxController currentController) {
@@ -104,13 +114,9 @@ public class ViewImpl extends Application implements View {
     @Override
     public void start(final Stage stage) throws Exception {
         this.stage = stage;
-        this.stage.setHeight(HEIGHT);
-        this.stage.setWidth(WIDTH);
-        this.stage.setMinHeight(HEIGHT / PERCENTAGE);
-        this.stage.setMinWidth(WIDTH / PERCENTAGE);
-        this.stage.setMaxHeight(HEIGHT * PERCENTAGE);
-        this.stage.setMaxWidth(WIDTH * PERCENTAGE);
+        this.setStageSize();
         this.stage.setTitle("Brain Trainer");
+        this.stage.getIcons().add(new Image("images/brain_training.png"));
         this.stage.setResizable(true);
         this.stage.show();
         this.inGame = false;
