@@ -45,35 +45,6 @@ public class PerilousPathFxImpl extends AbstractMiniGameControllerFx implements 
     private PerilousPathController controller;
     private Map<Button, Pair<Integer, Integer>> buttons;
 
-    private enum Instruction {
-
-        /**
-         * Mines memorization instruction.
-         */
-        MINES_MEMORIZATION("Memorize the position of the mines"),
-
-        /**
-         * The instruction for the search of a safe path from start to finish.
-         */
-        FIND_SAFE_PATH("Find a safe path from start to finish"),
-
-        /**
-         * The instruction to show the perilous path chosen by the user.
-         */
-        PERILOUS_PATH("Perilous Path");
-
-        private String instruction;
-
-        Instruction(final String instruction) {
-            this.instruction = instruction;
-        }
-
-        @Override
-        public String toString() {
-            return this.instruction;
-        }
-    }
-
     private final EventHandler<MouseEvent> eventHit = (e) -> {
         final Button bt = (Button) e.getSource();
         final Pair<Integer, Integer> position = this.buttons.get(bt);
@@ -94,7 +65,7 @@ public class PerilousPathFxImpl extends AbstractMiniGameControllerFx implements 
 
     private final EventHandler<ActionEvent> eventUpdate = (e) -> {
         this.restore();
-        this.instructions.setText(Instruction.FIND_SAFE_PATH.toString());
+        this.instructions.setText(Instructions.FIND_SAFE_PATH.toString());
         this.controller.updateView();
     };
 
@@ -134,10 +105,10 @@ public class PerilousPathFxImpl extends AbstractMiniGameControllerFx implements 
         final Timeline timeline = new Timeline();
         KeyFrame keyFrame;
         if (mineExplosion) {
-            this.instructions.setText(Instruction.PERILOUS_PATH.toString());
+            this.instructions.setText(Instructions.PERILOUS_PATH.toString());
             keyFrame = new KeyFrame(Duration.millis(millis), eventReset);
         } else {
-            this.instructions.setText(Instruction.MINES_MEMORIZATION.toString());
+            this.instructions.setText(Instructions.MINES_MEMORIZATION.toString());
             keyFrame = new KeyFrame(Duration.millis(millis), eventUpdate);
         }
         timeline.getKeyFrames().add(keyFrame);
