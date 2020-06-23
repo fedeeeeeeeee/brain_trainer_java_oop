@@ -1,5 +1,6 @@
 package model.minigames.perilouspath;
 
+import java.util.Optional;
 import java.util.Set;
 
 import utility.Pair;
@@ -10,10 +11,10 @@ import utility.Pair;
 public interface FragmentationMine extends Mine {
     
     /**
-     * Gets the fragments position when the mine exploded.
+     * Gets the fragments position.
      * 
      * @return
-     *      a set of positions of the scraps
+     *      a set of positions of the scraps if the mine is exploded
      */
-    Set<Pair<Integer, Integer>> getScraps();
+    Optional<Set<Pair<Integer, Integer>>> getScraps();
 }
