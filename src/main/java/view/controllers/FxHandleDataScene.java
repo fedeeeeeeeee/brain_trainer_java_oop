@@ -2,6 +2,10 @@ package view.controllers;
 
 import model.score.Progress;
 
+/** 
+ * This interface represents the common parts of the handle data scene.
+ *
+ */
 public interface FxHandleDataScene extends FxController {
 
     /**

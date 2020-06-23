@@ -2,7 +2,6 @@ package model.score;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Comparator;
 
 import java.util.Date;
 import java.util.HashMap;
@@ -39,9 +38,8 @@ public class ScoreManagementImpl implements ScoreManagement {
     }
 
     private String createDate() {
-        final Date date = new Date();
         final SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yy", Locale.ITALY);
-        return dateFormat.format(date);
+        return dateFormat.format(new Date());
     }
 
     private void checkBest(final int score) {
@@ -63,17 +61,13 @@ public class ScoreManagementImpl implements ScoreManagement {
 
         while (this.miniGameHistory.size() >= HISTORY_SIZE) {
 
-            this.miniGameHistory.remove(this.miniGameHistory.keySet().stream().min(new Comparator<>() {
-
-                @Override
-                public int compare(final String o1, final String o2) {
-                    try {
-                        return dateFormat.parse(o1).compareTo(dateFormat.parse(o2));
-                    } catch (ParseException e) {
-                        e.printStackTrace();
-                    }
-                    return 0;
+            this.miniGameHistory.remove(this.miniGameHistory.keySet().stream().min((o1, o2) -> {
+                try {
+                    return dateFormat.parse(o1).compareTo(dateFormat.parse(o2));
+                } catch (ParseException e) {
+                    e.printStackTrace();
                 }
+                return 0;
             }).get());
         }
     }
