@@ -2,7 +2,7 @@
 package model;
 
 /**
- * This enum represents the difficulty of the minigame.
+ * This enumeration represents the difficulty of the minigames.
  *
  */
 public enum DifficultyLevel {
@@ -10,30 +10,15 @@ public enum DifficultyLevel {
     /**
      * Represent the easy level.
      */
-    EASY("Easy"),
+    EASY,
 
     /**
      * Represent the normal level.
      */
-    NORMAL("Normal"),
+    NORMAL,
 
     /**
      * Represent the hard level.
      */
-    HARD("Hard");
-
-    private String name;
-
-    DifficultyLevel(final String name) {
-        this.name = name;
-    }
-
-    /**
-     * @return the name of the difficulty level
-     * 
-     */
-    @Override
-    public String toString() {
-        return this.name;
-    }
+    HARD;
 }
