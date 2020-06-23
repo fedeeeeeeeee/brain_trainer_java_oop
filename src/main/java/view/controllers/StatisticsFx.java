@@ -12,12 +12,14 @@ import javafx.fxml.FXML;
 import javafx.scene.chart.LineChart;
 import javafx.scene.chart.PieChart;
 import javafx.scene.chart.XYChart;
-import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TabPane;
 import javafx.scene.control.Tooltip;
+import javafx.scene.image.ImageView;
+import javafx.stage.Stage;
 import model.score.Progress;
 import utility.Pair;
+import view.DimensionCalculatorImpl;
 import view.SceneType;
 import view.TrainingArea;
 
@@ -27,11 +29,13 @@ import view.TrainingArea;
  */
 public class StatisticsFx extends AbstractSceneController implements FxHandleDataScene {
 
+    private static final double IMG_PERCENTAGE = 0.003;
+
     @FXML
     private Label statistics;
 
     @FXML
-    private Button backBtn;
+    private ImageView backImg;
 
     @FXML
     private PieChart areaChart;
@@ -76,6 +80,18 @@ public class StatisticsFx extends AbstractSceneController implements FxHandleDat
         this.getView().switchScene(SceneType.MAIN_MENU.getFilePath());
     }
 
+    private void resizeNode() {
+        final Stage stage = (Stage) this.getRoot().getScene().getWindow();
+        final DimensionCalculatorImpl calculator = new DimensionCalculatorImpl();
+
+        stage.widthProperty().addListener((obs, oldVal, newVal) -> {
+            calculator.setImageViewDimension(backImg, IMG_PERCENTAGE, (double) newVal / 2);
+        });
+
+        final double halfStageSize = stage.getWidth() / 2;
+        calculator.setImageViewDimension(backImg, IMG_PERCENTAGE, halfStageSize);
+    }
+
     /**
      * {@inheritDoc}
      */
@@ -96,6 +112,7 @@ public class StatisticsFx extends AbstractSceneController implements FxHandleDat
         this.createGraph(reasoningGraph, bestReasoningLbl, TrainingArea.REASONING);
         this.createGraph(memoryGraph, bestMemoryLbl, TrainingArea.MEMORY);
         this.createGraph(visualSkillGraph, bestVisualSkillLbl, TrainingArea.VISUAL_SKILL);
+        this.resizeNode();
 
     }
 
@@ -122,6 +139,5 @@ public class StatisticsFx extends AbstractSceneController implements FxHandleDat
         });
         bestLbl.setText("Best:");
         best.stream().forEach(i -> bestLbl.setText(bestLbl.getText() + "\n" + i.getX() + " " + Integer.toString(i.getY())));
-
     }
 }
