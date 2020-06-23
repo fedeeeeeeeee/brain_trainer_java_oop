@@ -26,11 +26,8 @@ public class TrueColorModelImpl implements TrueColorModel {
      */
     private static final int SECONDS = 30;
     private static final String POS_ANSWER = "YES";
-//    private static final String MEANCOLOR = "randomMeaningColor";
-//    private static final String TRUECOLOR = "randomTrueColor";
     private final ScoreModel score;
     private final DifficultyStrategy difficultySpecific;
-//    private Map<String, List<Pair<Colors, Colors>>> randomColorMap = new HashMap<>();
     private Map<StatusColor, List<Pair<Colors, Colors>>> randomColorMap = new HashMap<>();
     private Boolean bool = false;
 
