@@ -94,8 +94,6 @@ public class OneWayModelImpl implements OneWayModel {
      */
     @Override
     public List<Direction> getSteps() {
-        System.out.println("fine:" + this.getFinalPosition());
-        System.out.println("inizio: " + this.getInitialPosition());
         return this.pathDrawer.getSteps();
     }
 
