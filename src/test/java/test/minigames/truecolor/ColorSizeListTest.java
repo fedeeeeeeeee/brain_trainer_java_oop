@@ -15,13 +15,13 @@ import model.minigames.truecolor.TrueColorModelImpl;
  * Class to test if {@link DifficultyConfiguration} works correctly.
  *
  */
-public class LenghtColorListModelTest {
+public class ColorSizeListTest {
 
     @Test
     public void testNumberButtonEasyDifficulty() {
         final DifficultyConfiguration configuration = DifficultyConfiguration.getConfiguration(DifficultyLevel.EASY)
                 .orElseGet(() -> DifficultyConfiguration.EASY);
-        DifficultyStrategy strategy = new DifficultyStrategyImpl(configuration);
+        final DifficultyStrategy strategy = new DifficultyStrategyImpl(configuration);
         final TrueColorModel modelGame = new TrueColorModelImpl(DifficultyLevel.EASY, strategy);
 
         assertEquals(configuration.getMeanButton(), modelGame.getRandomColorMap().get(StatusColor.MEANCOLOR).size());
@@ -32,7 +32,7 @@ public class LenghtColorListModelTest {
     public void testNumberButtonNormalDifficulty() {
         final DifficultyConfiguration configuration = DifficultyConfiguration.getConfiguration(DifficultyLevel.NORMAL)
                 .orElseGet(() -> DifficultyConfiguration.EASY);
-        DifficultyStrategy strategy = new DifficultyStrategyImpl(configuration);
+        final DifficultyStrategy strategy = new DifficultyStrategyImpl(configuration);
         final TrueColorModel modelGame = new TrueColorModelImpl(DifficultyLevel.NORMAL, strategy);
 
         assertEquals(1, modelGame.getRandomColorMap().get(StatusColor.MEANCOLOR).size());
@@ -45,7 +45,7 @@ public class LenghtColorListModelTest {
     public void testNumberButtonHardDifficulty() {
         final DifficultyConfiguration configuration = DifficultyConfiguration.getConfiguration(DifficultyLevel.HARD)
                 .orElseGet(() -> DifficultyConfiguration.EASY);
-        DifficultyStrategy strategy = new DifficultyStrategyImpl(configuration);
+        final DifficultyStrategy strategy = new DifficultyStrategyImpl(configuration);
         final TrueColorModel modelGame = new TrueColorModelImpl(DifficultyLevel.HARD, strategy);
 
         assertEquals(1, modelGame.getRandomColorMap().get(StatusColor.MEANCOLOR).size());

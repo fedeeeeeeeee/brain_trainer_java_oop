@@ -3,8 +3,9 @@ package model.minigames.truecolor;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Random;
-import java.util.function.Consumer;
+import java.util.function.Function;
 import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
 import utility.Pair;
@@ -13,16 +14,20 @@ public class ImprovedRandomColor extends RandomColor {
 
     private final DifficultyConfiguration difficultyConfig;
     private final List<Colors> colorList;
-    private final List<Colors> colorListTmp;
-    private final List<Pair<Colors, Colors>> meanColorList;
+    private final List<Colors> colorListTmp = new LinkedList<>();
+    private final List<Pair<Colors, Colors>> meanColorList = new LinkedList<>();
     private boolean statusMatchingColor;
 
+    private final Function<List<Colors>, Colors> getAndRemoveColor = (list) -> {
+        final Colors randomColor = super.getRandomColor(list);
+        this.colorListTmp.remove(randomColor);
+        return randomColor;
+    };
+    
     public ImprovedRandomColor(final DifficultyConfiguration difficulty) {
         this.changeProbabilityOfMatching();
         this.difficultyConfig = difficulty;
         this.colorList = Stream.of(Colors.values()).limit(difficultyConfig.getNumColor()).collect(Collectors.toList());
-        this.meanColorList = new LinkedList<>();
-        this.colorListTmp = new LinkedList<>();
         this.copyTempList();
     }
 
@@ -33,40 +38,24 @@ public class ImprovedRandomColor extends RandomColor {
 
     private List<Pair<Colors, Colors>> createRandomColorListMeanAndTrue(final StatusColor status) {
         final List<Pair<Colors, Colors>> list = status.equals(StatusColor.MEANCOLOR) ? this.meanColorList
-                : new LinkedList<>();
+                                                                                     : new LinkedList<>();
         final int numberOfColor = status.equals(StatusColor.MEANCOLOR) ? difficultyConfig.getMeanButton()
-                : difficultyConfig.getTrueButton();
-        for (int i = 0; i < numberOfColor; i++) {
-            list.add(new Pair<Colors, Colors>(this.getRandomColorForMeanAndTrueX(status),
-                    getRandomColorForMeanAndTrueY(status)));
-        }
+                                                                       : difficultyConfig.getTrueButton();
+        IntStream.range(0, numberOfColor).forEach(
+                i -> list.add(new Pair<Colors, Colors>(this.getXRandomColor(status), getYRandomColor(status))));
         return list;
     }
 
-    private Colors getRandomColorForMeanAndTrueX(final StatusColor status) {
-        if (status.equals(StatusColor.MEANCOLOR)) {
-            if (this.colorListTmp.isEmpty()) {
-                this.initialize();
-            }
-            final Colors randomColor = super.getRandomColor(this.colorList);
-            this.colorListTmp.remove(randomColor);
-            return randomColor;
-        } else {
-            return super.getRandomColor(this.colorList);
-        }
+    private Colors getXRandomColor(final StatusColor status) {
+        return status.equals(StatusColor.MEANCOLOR) ? this.getAndRemoveColor.apply(this.colorList)
+                                                    : super.getRandomColor(this.colorList);
     }
 
-    private Colors getRandomColorForMeanAndTrueY(final StatusColor status) {
+    private Colors getYRandomColor(final StatusColor status) {
         if (status.equals(StatusColor.TRUECOLOR)) {
-            final List<Colors> listTmp = new LinkedList<>();
-            this.meanColorList.forEach((Consumer<? super Pair<Colors, Colors>>) pairColor -> {
-                listTmp.add(pairColor.getX());
-            });
             if (this.statusMatchingColor) {
                 this.statusMatchingColor = false;
-                final Colors randomColor = super.getRandomColor(listTmp);
-                this.colorListTmp.remove(randomColor);
-                return randomColor;
+                return this.getAndRemoveColor.apply(tempMeanColorList());
             } else {
                 return super.getRandomColor(this.colorListTmp);
             }
@@ -75,6 +64,11 @@ public class ImprovedRandomColor extends RandomColor {
         }
     }
 
+    private List<Colors> tempMeanColorList() {
+        return this.meanColorList.stream().map(p -> p.getX()).collect(Collectors.toList());
+        
+    }
+    
     private void copyTempList() {
         this.colorListTmp.clear();
         this.colorList.forEach((Colors color) -> this.colorListTmp.add(color));
@@ -96,5 +90,4 @@ public class ImprovedRandomColor extends RandomColor {
     public final List<Pair<Colors, Colors>> getTrueColorList() {
         return createRandomColorListMeanAndTrue(StatusColor.TRUECOLOR);
     }
-
 }
