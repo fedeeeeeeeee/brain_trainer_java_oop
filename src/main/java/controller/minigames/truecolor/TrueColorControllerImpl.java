@@ -3,13 +3,13 @@ package controller.minigames.truecolor;
 import java.util.Objects;
 import java.util.Timer;
 
+import controller.timer.GameTimer;
 import model.DifficultyLevel;
 import model.minigames.truecolor.DifficultyConfiguration;
 import model.minigames.truecolor.DifficultyStrategyImpl;
 import model.minigames.truecolor.StatusColor;
 import model.minigames.truecolor.TrueColorModel;
 import model.minigames.truecolor.TrueColorModelImpl;
-import timer.GameTimer;
 import view.controllers.minigames.truecolor.TrueColorFxImpl;
 
 /**

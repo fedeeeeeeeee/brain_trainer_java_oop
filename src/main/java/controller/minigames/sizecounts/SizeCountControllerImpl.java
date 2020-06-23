@@ -4,10 +4,10 @@ import java.util.Objects;
 
 import java.util.Timer;
 
+import controller.timer.GameTimer;
 import model.DifficultyLevel;
 import model.minigames.sizecount.SizeCountModel;
 import model.minigames.sizecount.SizeCountModelImpl;
-import timer.GameTimer;
 import view.controllers.minigames.sizecount.SizeCountFxImpl;
 
 /**
