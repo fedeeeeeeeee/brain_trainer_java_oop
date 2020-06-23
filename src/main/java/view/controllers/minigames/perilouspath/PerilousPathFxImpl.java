@@ -34,7 +34,12 @@ public class PerilousPathFxImpl extends AbstractMiniGameControllerFx implements 
     /**
      * The size of the button.
      */
-    private static final int BUTTON_SIZE = 100;
+    private static final int BUTTON_SIZE = 200;
+
+    /**
+     * The size of the image.
+     */
+    private static final int IMAGE_SIZE = BUTTON_SIZE / 3;
 
     @FXML
     private GridPane grid;
@@ -51,13 +56,6 @@ public class PerilousPathFxImpl extends AbstractMiniGameControllerFx implements 
         this.controller.hitAttempt(position.getX(), position.getY());
     };
 
-    private final Function<String, ImageView> image = (imageName) -> {
-        final ImageView image = new ImageView("/images/" + imageName + ".png");
-        image.setFitHeight(BUTTON_SIZE / 2);
-        image.setFitWidth(BUTTON_SIZE / 2);
-        return image;
-    };
-
     private final EventHandler<ActionEvent> eventReset = (e) -> {
         this.restore();
         this.controller.resetGame();
@@ -67,6 +65,18 @@ public class PerilousPathFxImpl extends AbstractMiniGameControllerFx implements 
         this.restore();
         this.instructions.setText(Instructions.FIND_SAFE_PATH.toString());
         this.controller.updateView();
+    };
+    
+    private void setProperty(Button bt) {
+        bt.setPrefSize(BUTTON_SIZE, BUTTON_SIZE);
+        bt.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
+    }
+    
+    private final Function<String, ImageView> image = (imageName) -> {
+        final ImageView image = new ImageView("/images/" + imageName + ".png");
+        image.setFitHeight(IMAGE_SIZE);
+        image.setFitWidth(IMAGE_SIZE);
+        return image;
     };
 
     /**
@@ -88,9 +98,8 @@ public class PerilousPathFxImpl extends AbstractMiniGameControllerFx implements 
         for (int i = 0; i < size; i++) {
             for (int j = 0; j < size; j++) {
                 final Button bt = new Button();
+                this.setProperty(bt);
                 bt.addEventHandler(MouseEvent.MOUSE_CLICKED, eventHit);
-                bt.setPrefSize(BUTTON_SIZE, BUTTON_SIZE);
-                bt.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
                 this.grid.add(bt, j, i);
                 this.buttons.put(bt, new Pair<>(i, j));
             }
