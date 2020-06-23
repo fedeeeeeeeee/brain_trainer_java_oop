@@ -22,10 +22,12 @@ import javafx.scene.control.ProgressBar;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
+import javafx.stage.Stage;
 import javafx.util.Duration;
 import model.DifficultyLevel;
 import model.minigames.oneway.Direction;
 import utility.Pair;
+import view.DimensionCalculatorImpl;
 import view.SceneType;
 import view.controllers.minigames.AbstractMiniGameControllerFx;
 
@@ -44,7 +46,8 @@ public class OneWayFxImpl extends AbstractMiniGameControllerFx implements OneWay
     private static final String START = "/images/start.png";
     private static final String FINISH = "/images/finish.png";
     private static final double BUTTON_DIM = 300;
-    private static final int IMG_DIM = 40;
+    private static final double IMG_DIM = 40;
+    private static final double IMG_PERCENTAGE = 0.003;
 
     private OneWayController controller;
     private Map<Button, Pair<Integer, Integer>> buttons;
@@ -78,6 +81,7 @@ public class OneWayFxImpl extends AbstractMiniGameControllerFx implements OneWay
         final ImageView image = new ImageView(path);
         image.setFitHeight(IMG_DIM);
         image.setFitWidth(IMG_DIM);
+        this.resizeImage(image);
         return image;
     };
 
@@ -95,6 +99,15 @@ public class OneWayFxImpl extends AbstractMiniGameControllerFx implements OneWay
         if (condition) {
             throw supplier.get();
         }
+    }
+
+    private void resizeImage(final ImageView image) {
+        final Stage stage = (Stage) this.getRoot().getScene().getWindow();
+        final DimensionCalculatorImpl calculator = new DimensionCalculatorImpl();
+
+        stage.widthProperty().addListener((obs, oldVal, newVal) -> {
+            calculator.setImageViewDimension(image, IMG_PERCENTAGE, (double) newVal / 2);
+        });
     }
 
     private void handlePauseTransitions() {
