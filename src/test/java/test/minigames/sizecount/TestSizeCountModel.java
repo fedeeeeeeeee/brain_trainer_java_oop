@@ -75,4 +75,5 @@ class TestSizeCountModel {
             assertTrue(this.model.isCorrectAnswer(op.get().toString()));
         }
     }
+
 }
