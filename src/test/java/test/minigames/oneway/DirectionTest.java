@@ -15,13 +15,13 @@ import model.minigames.oneway.Direction;
  *
  */
 public class DirectionTest {
-    private List<Direction> steps;
-    private int counter;
+    private static List<Direction> steps;
+    private static int counter;
 
     @BeforeAll
-    public final void init() {
-        this.steps = new ArrayList<>();
-        this.counter = 0;
+    public static final void init() {
+        steps = new ArrayList<>();
+        counter = 0;
     }
 
     /**
@@ -29,16 +29,16 @@ public class DirectionTest {
      */
     @Test
     public void deltaTest() {
-        this.steps.add(Direction.UP);
+        steps.add(Direction.UP);
         this.checkPosition(-1, 0);
 
-        this.steps.add(Direction.DOWN);
+        steps.add(Direction.DOWN);
         this.checkPosition(1, 0);
 
-        this.steps.add(Direction.LEFT);
+        steps.add(Direction.LEFT);
         this.checkPosition(0, -1);
 
-        this.steps.add(Direction.RIGHT);
+        steps.add(Direction.RIGHT);
         this.checkPosition(0, 1);
     }
 
