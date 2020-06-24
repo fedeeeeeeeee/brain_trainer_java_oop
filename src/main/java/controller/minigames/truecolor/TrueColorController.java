@@ -3,7 +3,6 @@ package controller.minigames.truecolor;
 import controller.minigames.MiniGameController;
 
 /**
- * 
  * A interface controller for the game True Color.
  *
  */
