@@ -40,11 +40,9 @@ public enum TrainingArea {
     VISUAL_SKILL("Visual Skill");
 
     private String name;
-    private ScanMiniGames scanMiniGames; 
 
     TrainingArea(final String name) {
        this.name = name;
-       this.scanMiniGames = new ScanMiniGamesImpl();
    }
 
     /**
@@ -60,7 +58,7 @@ public enum TrainingArea {
      * @return the minigame list
      */
     public Set<String> getMiniGameList() {
-        return this.scanMiniGames.getMiniGames(this);
+        return ScanMiniGames.getMiniGames(this);
     }
 
 }

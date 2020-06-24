@@ -3,11 +3,11 @@ package controller.minigames.colorgama;
 import java.util.Objects;
 import java.util.Timer;
 
+import controller.timer.GameTimer;
 import model.DifficultyLevel;
 import model.minigames.colorgama.ColorGamaModel;
 import model.minigames.colorgama.ColorGamaModelImpl;
 import model.minigames.colorgama.QuestionType;
-import timer.GameTimer;
 import view.controllers.minigames.colorgama.ColorGamaFxImpl;
 
 /**

@@ -2,10 +2,10 @@ package controller.minigames.oneway;
 
 import java.util.Timer;
 
+import controller.timer.GameTimer;
 import model.DifficultyLevel;
 import model.minigames.oneway.OneWayModel;
 import model.minigames.oneway.OneWayModelImpl;
-import timer.GameTimer;
 import view.controllers.minigames.oneway.OneWayFxImpl;
 
 /**

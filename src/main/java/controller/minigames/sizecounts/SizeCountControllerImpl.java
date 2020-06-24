@@ -4,10 +4,10 @@ import java.util.Objects;
 
 import java.util.Timer;
 
+import controller.timer.GameTimer;
 import model.DifficultyLevel;
 import model.minigames.sizecount.SizeCountModel;
 import model.minigames.sizecount.SizeCountModelImpl;
-import timer.GameTimer;
 import view.controllers.minigames.sizecount.SizeCountFxImpl;
 
 /**
@@ -20,7 +20,7 @@ public class SizeCountControllerImpl implements SizeCountController {
     /**
      * The seconds of the {@link GameTimer}.
      */
-    private static final int SECONDS = 50;
+    private static final int SECONDS = 40;
 
     private final SizeCountModel model;
     private final SizeCountFxImpl view;

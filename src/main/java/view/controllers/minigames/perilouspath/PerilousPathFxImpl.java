@@ -34,7 +34,12 @@ public class PerilousPathFxImpl extends AbstractMiniGameControllerFx implements 
     /**
      * The size of the button.
      */
-    private static final int BUTTON_SIZE = 100;
+    private static final int BUTTON_SIZE = 200;
+
+    /**
+     * The size of the image.
+     */
+    private static final int IMAGE_SIZE = BUTTON_SIZE / 3;
 
     @FXML
     private GridPane grid;
@@ -45,46 +50,10 @@ public class PerilousPathFxImpl extends AbstractMiniGameControllerFx implements 
     private PerilousPathController controller;
     private Map<Button, Pair<Integer, Integer>> buttons;
 
-    private enum Instruction {
-
-        /**
-         * Mines memorization instruction.
-         */
-        MINES_MEMORIZATION("Memorize the position of the mines"),
-
-        /**
-         * The instruction for the search of a safe path from start to finish.
-         */
-        FIND_SAFE_PATH("Find a safe path from start to finish"),
-
-        /**
-         * The instruction to show the perilous path chosen by the user.
-         */
-        PERILOUS_PATH("Perilous Path");
-
-        private String instruction;
-
-        Instruction(final String instruction) {
-            this.instruction = instruction;
-        }
-
-        @Override
-        public String toString() {
-            return this.instruction;
-        }
-    }
-
     private final EventHandler<MouseEvent> eventHit = (e) -> {
         final Button bt = (Button) e.getSource();
         final Pair<Integer, Integer> position = this.buttons.get(bt);
         this.controller.hitAttempt(position.getX(), position.getY());
-    };
-
-    private final Function<String, ImageView> image = (imageName) -> {
-        final ImageView image = new ImageView("/images/" + imageName + ".png");
-        image.setFitHeight(BUTTON_SIZE / 2);
-        image.setFitWidth(BUTTON_SIZE / 2);
-        return image;
     };
 
     private final EventHandler<ActionEvent> eventReset = (e) -> {
@@ -94,15 +63,28 @@ public class PerilousPathFxImpl extends AbstractMiniGameControllerFx implements 
 
     private final EventHandler<ActionEvent> eventUpdate = (e) -> {
         this.restore();
-        this.instructions.setText(Instruction.FIND_SAFE_PATH.toString());
+        this.instructions.setText(Instructions.FIND_SAFE_PATH.toString());
         this.controller.updateView();
     };
+
+    private final Function<String, ImageView> image = (imageName) -> {
+        final ImageView image = new ImageView("/images/" + imageName + ".png");
+        image.setFitHeight(IMAGE_SIZE);
+        image.setFitWidth(IMAGE_SIZE);
+        return image;
+    };
+
+    private void setProperty(final Button bt) {
+        bt.setPrefSize(BUTTON_SIZE, BUTTON_SIZE);
+        bt.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
+    }
 
     /**
      * {@inheritDoc}
      */
     @Override
     public void initGame(final DifficultyLevel difficultyLevel) {
+        this.getProgressBar().setStyle("-fx-accent: #9e3d64");
         this.controller = new PerilousPathControllerImpl(difficultyLevel, this);
         this.buttons = new HashMap<>();
         this.controller.startGame();
@@ -117,9 +99,8 @@ public class PerilousPathFxImpl extends AbstractMiniGameControllerFx implements 
         for (int i = 0; i < size; i++) {
             for (int j = 0; j < size; j++) {
                 final Button bt = new Button();
+                this.setProperty(bt);
                 bt.addEventHandler(MouseEvent.MOUSE_CLICKED, eventHit);
-                bt.setPrefSize(BUTTON_SIZE, BUTTON_SIZE);
-                bt.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
                 this.grid.add(bt, j, i);
                 this.buttons.put(bt, new Pair<>(i, j));
             }
@@ -134,10 +115,10 @@ public class PerilousPathFxImpl extends AbstractMiniGameControllerFx implements 
         final Timeline timeline = new Timeline();
         KeyFrame keyFrame;
         if (mineExplosion) {
-            this.instructions.setText(Instruction.PERILOUS_PATH.toString());
+            this.instructions.setText(Instructions.PERILOUS_PATH.toString());
             keyFrame = new KeyFrame(Duration.millis(millis), eventReset);
         } else {
-            this.instructions.setText(Instruction.MINES_MEMORIZATION.toString());
+            this.instructions.setText(Instructions.MINES_MEMORIZATION.toString());
             keyFrame = new KeyFrame(Duration.millis(millis), eventUpdate);
         }
         timeline.getKeyFrames().add(keyFrame);

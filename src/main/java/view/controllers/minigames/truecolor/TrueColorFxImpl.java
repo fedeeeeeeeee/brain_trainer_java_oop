@@ -110,6 +110,7 @@ public class TrueColorFxImpl extends AbstractMiniGameControllerFx implements Tru
      */
     @Override
     public void initGame(final DifficultyLevel difficultyLevel) {
+        this.getProgressBar().setStyle("-fx-accent: #49618C");
         this.trueColorController = new TrueColorControllerImpl(this, difficultyLevel);
         this.setDropShadow();
         this.prepareButtons();

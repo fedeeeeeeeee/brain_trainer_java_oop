@@ -26,10 +26,22 @@ public class Pair<X, Y> {
         this.y = y;
     }
 
+    /**
+     * Get the x element.
+     * 
+     * @return X
+     *          the X element
+     */
     public final X getX() {
         return x;
     }
 
+    /**
+     * Get the y element.
+     * 
+     * @return Y
+     *          the Y element
+     */
     public final Y getY() {
         return y;
     }

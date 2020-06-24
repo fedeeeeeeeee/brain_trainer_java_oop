@@ -2,11 +2,12 @@ package controller.minigames.perilouspath;
 
 import java.util.Objects;
 import java.util.Timer;
+
+import controller.timer.GameTimer;
 import model.DifficultyLevel;
 import model.minigames.perilouspath.PerilousPathModel;
 import model.minigames.perilouspath.PerilousPathModelImpl;
 import view.controllers.minigames.perilouspath.PerilousPathFxImpl;
-import timer.GameTimer;
 
 /**
  * Implementation of {@link PerilousPathController}.

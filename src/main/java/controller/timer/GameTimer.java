@@ -1,5 +1,5 @@
 
-package timer;
+package controller.timer;
 
 import java.util.TimerTask;
 import java.util.function.Function;

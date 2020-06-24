@@ -13,7 +13,6 @@ import javafx.fxml.FXML;
 import javafx.geometry.Insets;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.control.ProgressBar;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
@@ -52,9 +51,6 @@ public class ColorGamaFxImpl extends AbstractMiniGameControllerFx implements Col
     @FXML
     private Label questionColor;
 
-    @FXML
-    private ProgressBar progressBar;
-
     private ColorGamaController colorGamaController;
     private ColorConverter converter;
     private ColorValuesIterator iterator;
@@ -74,7 +70,7 @@ public class ColorGamaFxImpl extends AbstractMiniGameControllerFx implements Col
     private void showAnimation(final boolean isRight) {
         final Timeline timeline = new Timeline();
         final KeyFrame frame = isRight ? new KeyFrame(Duration.millis(VALUE), rightEvent)
-                                       : new KeyFrame(Duration.millis(VALUE), wrongEvent);
+                : new KeyFrame(Duration.millis(VALUE), wrongEvent);
         timeline.getKeyFrames().add(frame);
         timeline.play();
     }
@@ -85,7 +81,7 @@ public class ColorGamaFxImpl extends AbstractMiniGameControllerFx implements Col
     @Override
     public void initGame(final DifficultyLevel difficultyLevel) {
         Objects.requireNonNull(difficultyLevel, "DifficultyLevel" + NULL_ARG);
-        this.progressBar.setStyle("-fx-accent: #1897f6");
+        this.getProgressBar().setStyle("-fx-accent:  #1897f6");
         this.colorGamaController = new ColorGamaControllerImpl(this, difficultyLevel);
         this.colorGamaController.startTimer();
         this.colorGamaController.startGame();
@@ -127,8 +123,8 @@ public class ColorGamaFxImpl extends AbstractMiniGameControllerFx implements Col
     public void renderNext(final String questionSentence) {
         Objects.requireNonNull(questionSentence, "QuestionSentence" + NULL_ARG);
         this.buttonsGrid.getChildren().forEach((b) -> {
-                final Color color = this.converter.convertToColor(this.iterator.next()).get();
-                ((Button) b).setBackground(new Background(new BackgroundFill(color, new CornerRadii(2), new Insets(2))));
+            final Color color = this.converter.convertToColor(this.iterator.next()).get();
+            ((Button) b).setBackground(new Background(new BackgroundFill(color, new CornerRadii(2), new Insets(2))));
         });
         this.questionTitle.setText(questionSentence);
     }
