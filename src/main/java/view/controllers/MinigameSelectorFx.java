@@ -25,7 +25,7 @@ public class MinigameSelectorFx extends AbstractSceneController implements FxNor
 
     private static final double IMG_PERCENTAGE = 0.003;
     private static final double DIFFICULTY_PERCENTAGE = 0.08;
-    private static final double TEXT_PERCENTAGE = 0.08;
+    private static final double TEXT_PERCENTAGE = 0.07;
 
     @FXML
     private ToggleGroup difficulty;

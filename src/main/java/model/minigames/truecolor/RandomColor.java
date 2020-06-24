@@ -35,6 +35,7 @@ public abstract class RandomColor {
      * Get the random color from the list passed. 
      * 
      * @param list
+     *          the list of Colors from which get Colors
      * @return
      *          the random color
      */

@@ -26,13 +26,20 @@ import model.minigames.truecolor.DifficultyConfiguration;
 import view.controllers.FxController;
 import view.controllers.minigames.FxMiniGameController;
 
+/**
+ * Class to test if {@link TrueColorFxImpl} works correctly.
+ *
+ */
 class TrueColorTestFx extends ApplicationTest {
 
     private static final String TRUE_COLOR_PATH = "/layouts/minigames/TrueColor.fxml";
     private static final int NUM_BTN = 2;
-    private Parent root; 
+    private Parent root;
     private DifficultyConfiguration configuration;
 
+    /**
+     * {@inheritDoc}.
+     */
     @Override
     public void start(final Stage stage) {
         final FXMLLoader loader = new FXMLLoader(getClass().getResource(TRUE_COLOR_PATH));
@@ -50,6 +57,9 @@ class TrueColorTestFx extends ApplicationTest {
                 .orElseGet(() -> DifficultyConfiguration.EASY);
     }
 
+    /**
+     * Test for the number of Button in the VBox.
+     */
     @Test
     public void testButtons() {
         final VBox vbox = from(this.root).lookup("#vBoxId").query();
@@ -62,7 +72,9 @@ class TrueColorTestFx extends ApplicationTest {
         assertEquals(button.size(), configuration.getMeanButton() + configuration.getTrueButton());
     }
 
-
+    /**
+     * Test for the number of Button in the GridPane.
+     */
     @Test
     public void testComponents() {
         final GridPane bottomGrid = from(this.root).lookup("#bottomGrid").query();

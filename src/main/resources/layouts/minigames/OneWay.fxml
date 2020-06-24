@@ -57,9 +57,8 @@
     </GridPane>
     <GridPane hgap="10.0">
      <columnConstraints>
-      <ColumnConstraints halignment="LEFT" hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="200.0" prefWidth="200.0" />
-      <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="-Infinity" />
-      <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" maxWidth="-Infinity" prefWidth="188.0" />
+      <ColumnConstraints halignment="LEFT" hgrow="SOMETIMES" />
+      <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" maxWidth="-Infinity" />
      </columnConstraints>
      <rowConstraints>
       <RowConstraints maxHeight="1.7976931348623157E308" minHeight="24.0" prefHeight="27.0" valignment="TOP" vgrow="SOMETIMES" />
@@ -72,17 +71,9 @@
         <Insets left="20.0" />
        </GridPane.margin>
       </ProgressBar>
-      <Label fx:id="timerLbl" GridPane.halignment="RIGHT" GridPane.rowIndex="1" GridPane.valignment="BOTTOM">
+      <Label fx:id="timerLbl" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="BOTTOM">
        <font>
         <Font size="19.0" />
-       </font>
-       <GridPane.margin>
-        <Insets right="10.0" />
-       </GridPane.margin>
-      </Label>
-      <Label fx:id="scoreLbl" GridPane.columnIndex="2" GridPane.halignment="RIGHT" GridPane.rowIndex="1">
-       <font>
-        <Font size="18.0" />
        </font>
        <GridPane.margin>
         <Insets right="10.0" />
@@ -96,7 +87,7 @@
         <Insets left="20.0" />
        </GridPane.margin>
       </Label>
-      <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="18.0" prefWidth="98.0" text="One Way" textFill="#49618c" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="BOTTOM">
+      <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="18.0" prefWidth="98.0" text="One Way" textFill="#49618c" GridPane.halignment="CENTER" GridPane.valignment="BOTTOM">
        <font>
         <Font size="21.0" />
        </font>

@@ -40,7 +40,7 @@
 						<RowConstraints valignment="CENTER" vgrow="SOMETIMES" />
 					</rowConstraints>
 					<children>
-						<Button fx:id="brainTrainerInfoBtn" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onMouseClicked="#showIntroduction" text="Brain Trainer Info" GridPane.halignment="LEFT">
+						<Button fx:id="brainTrainerInfoBtn" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onMouseClicked="#showIntroduction" text="Brain Trainer Info" textFill="#49618c" GridPane.halignment="LEFT">
 							<font>
 								<Font size="18.0" />
 							</font>
@@ -48,7 +48,7 @@
 								<Insets left="20.0" />
 							</GridPane.margin>
 						</Button>
-						<Button fx:id="gameInfoBtn" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onMouseClicked="#showGameInfo" text="Minigame info" GridPane.columnIndex="1" GridPane.halignment="RIGHT">
+						<Button fx:id="gameInfoBtn" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onMouseClicked="#showGameInfo" text="Minigame info" textFill="#49618c" GridPane.columnIndex="1" GridPane.halignment="RIGHT">
 							<font>
 								<Font size="18.0" />
 							</font>
