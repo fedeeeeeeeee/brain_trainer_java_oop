@@ -5,6 +5,7 @@ doc/
 *.jar 
 !/lib/*.jar
 /.gradle/
+/.settings/
 /.checkstyle
 /.classpath
 /.gitignore
