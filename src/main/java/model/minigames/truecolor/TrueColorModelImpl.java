@@ -19,7 +19,7 @@ public class TrueColorModelImpl implements TrueColorModel {
     /**
      * TrueColor's base point.
      */
-    private static final int BASE_POINT = 5;
+    private static final int BASE_POINT = 4;
 
     /**
      * TrueColor minigame's duration.
