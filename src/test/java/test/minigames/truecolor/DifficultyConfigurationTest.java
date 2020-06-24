@@ -16,7 +16,7 @@ public class DifficultyConfigurationTest {
 
     @Test
     public void testDifficultyConfigurationNull() {
-        assertThrows(NullPointerException.class, () -> DifficultyConfiguration.getConfiguration(null));
+        assertThrows(IllegalArgumentException.class, () -> DifficultyConfiguration.getConfiguration(null));
     }
 
     @Test
