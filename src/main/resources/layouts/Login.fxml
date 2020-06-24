@@ -28,7 +28,7 @@
 			</rowConstraints>
 
 			<children>
-				<Label contentDisplay="TEXT_ONLY" text="Brain Trainer" textOverrun="CENTER_ELLIPSIS" GridPane.columnIndex="1" GridPane.halignment="CENTER">
+				<Label contentDisplay="TEXT_ONLY" text="Brain Trainer" textFill="#49618c" textOverrun="CENTER_ELLIPSIS" GridPane.columnIndex="1" GridPane.halignment="CENTER">
 					<font>
 						<Font size="35.0" />
 					</font>
@@ -55,7 +55,7 @@
                 <RowConstraints minHeight="-Infinity" vgrow="SOMETIMES" />
               </rowConstraints>
                <children>
-      						<Button fx:id="signUpBtn" alignment="CENTER" maxHeight="70.0" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onMouseClicked="#signUpPlayer" text="Sign Up" GridPane.columnIndex="1">
+      						<Button fx:id="signUpBtn" alignment="CENTER" maxHeight="70.0" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onMouseClicked="#signUpPlayer" text="Sign Up" textFill="#49618c" GridPane.columnIndex="1">
       							<font>
       								<Font size="18.0" />
       							</font>
@@ -63,7 +63,7 @@
       								<Insets bottom="20.0" right="10.0" />
       							</GridPane.margin>
       						</Button>
-      						<Button fx:id="loginBtn" maxHeight="70.0" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onMouseClicked="#loginPlayer" text="Login" GridPane.columnIndex="2">
+      						<Button fx:id="loginBtn" maxHeight="70.0" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onMouseClicked="#loginPlayer" text="Login" textFill="#49618c" GridPane.columnIndex="2">
       							<font>
       								<Font size="18.0" />
       							</font>
@@ -83,7 +83,7 @@
 						<RowConstraints vgrow="SOMETIMES" />
 					</rowConstraints>
 					<children>
-						<Label nodeOrientation="LEFT_TO_RIGHT" text="Username" GridPane.halignment="RIGHT" GridPane.hgrow="ALWAYS" GridPane.valignment="CENTER">
+						<Label nodeOrientation="LEFT_TO_RIGHT" text="Username" textFill="#49618c" GridPane.halignment="RIGHT" GridPane.hgrow="ALWAYS" GridPane.valignment="CENTER">
 							<font>
 								<Font size="18.0" />
 							</font>
@@ -92,7 +92,7 @@
 							</GridPane.margin>
 						</Label>
 						<PasswordField fx:id="txtPassword" maxHeight="40.0" maxWidth="300.0" GridPane.columnIndex="1" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
-						<Label text="Password" GridPane.halignment="RIGHT" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" GridPane.valignment="CENTER">
+						<Label text="Password" textFill="#49618c" GridPane.halignment="RIGHT" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" GridPane.valignment="CENTER">
 							<font>
 								<Font size="18.0" />
 							</font>
