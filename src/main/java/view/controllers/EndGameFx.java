@@ -22,6 +22,8 @@ public class EndGameFx extends AbstractSceneController implements FxHandleDataSc
 
     private static final double IMG_PERCENTAGE = 0.003;
     private static final double TEXT_PERCENTAGE = 0.08;
+    private static final String WELL_DONE = "/images/award.png";
+    private static final String WORK_HARD = "/images/hard-work.png";
     private static final double BORDER = 5;
 
     @FXML
@@ -72,7 +74,7 @@ public class EndGameFx extends AbstractSceneController implements FxHandleDataSc
                 new BorderStroke(Color.valueOf("#49618c"), BorderStrokeStyle.DASHED, null, new BorderWidths(BORDER))));
         this.messageLabel.setText(currentScore < bestScore ? "You can do better!" : "Keep it going!");
         this.resultImg.setImage(
-                currentScore < bestScore ? new Image("/images/hard-work.png") : new Image("/images/award.png"));
+                currentScore < bestScore ? new Image(WORK_HARD) : new Image(WELL_DONE));
         this.resizeNode();
     }
 }
