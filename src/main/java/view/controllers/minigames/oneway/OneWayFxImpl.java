@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.function.Function;
+import java.util.function.BiFunction;
 import java.util.function.Predicate;
 import java.util.function.Supplier;
 import java.util.stream.IntStream;
@@ -44,7 +44,8 @@ public class OneWayFxImpl extends AbstractMiniGameControllerFx implements OneWay
     private static final String START = "/images/start.png";
     private static final String FINISH = "/images/finish.png";
     private static final double BUTTON_DIM = 300;
-    private static final double IMG_DIM = 40;
+    private static final double IMG_DIM = 50;
+    private static final double ARROW_DIM = 30;
     private static final double IMG_PERCENTAGE = 0.003;
 
     private OneWayController controller;
@@ -69,10 +70,10 @@ public class OneWayFxImpl extends AbstractMiniGameControllerFx implements OneWay
     private final PauseTransition pause = new PauseTransition(Duration.seconds(0.5));
     private final PauseTransition finish = new PauseTransition(Duration.seconds(0.1));
 
-    private final Function<String, ImageView> image = (path) -> {
+    private final BiFunction<String, Double, ImageView> image = (path, size) -> {
         final ImageView image = new ImageView(path);
-        image.setFitHeight(IMG_DIM);
-        image.setFitWidth(IMG_DIM);
+        image.setFitHeight(size);
+        image.setFitWidth(size);
         this.resizeImage(image);
         return image;
     };
@@ -110,7 +111,7 @@ public class OneWayFxImpl extends AbstractMiniGameControllerFx implements OneWay
         this.controller.showSolution();
 
         finish.setOnFinished(event -> {
-            this.correctBtn.setGraphic(image.apply(FINISH));
+            this.correctBtn.setGraphic(image.apply(FINISH, IMG_DIM));
         });
         finish.playFromStart();
 
@@ -123,7 +124,7 @@ public class OneWayFxImpl extends AbstractMiniGameControllerFx implements OneWay
     }
 
     private void loadImage(final int idx, final Direction step) {
-        this.arrows.get(idx).setGraphic(this.image.apply(step.getPath()));
+        this.arrows.get(idx).setGraphic(this.image.apply(step.getPath(), ARROW_DIM));
     }
 
     /**
@@ -148,7 +149,7 @@ public class OneWayFxImpl extends AbstractMiniGameControllerFx implements OneWay
         raiseException(steps.isEmpty(), ILLEGAL_ARGUMENT_EXCEPTION_SUPPLIER);
         IntStream.range(0, steps.size()).forEach(i -> {
             final Button btn = new Button();
-            btn.setPrefSize(BUTTON_DIM, BUTTON_DIM);
+            btn.setPrefSize(Double.MAX_VALUE, Double.MAX_VALUE);
             this.arrowRow.add(btn, i, 0);
             this.arrows.add(btn);
             this.loadImage(i, steps.get(i));
@@ -189,7 +190,7 @@ public class OneWayFxImpl extends AbstractMiniGameControllerFx implements OneWay
         raiseException(initialPosition == null, ILLEGAL_ARGUMENT_EXCEPTION_SUPPLIER);
         this.buttons.entrySet().stream().peek(e -> e.getKey().setGraphic(null))
                 .filter(bt -> bt.getValue().equals(initialPosition)).forEach(bt -> {
-                    bt.getKey().setGraphic(this.image.apply(START));
+                    bt.getKey().setGraphic(this.image.apply(START, IMG_DIM));
                 });
     }
 
