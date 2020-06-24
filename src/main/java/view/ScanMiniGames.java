@@ -12,7 +12,6 @@ import org.apache.commons.lang3.StringUtils;
 import io.github.classgraph.ClassGraph;
 import io.github.classgraph.ClassInfo;
 import io.github.classgraph.ClassInfoList;
-import io.github.classgraph.ScanResult;
 import view.controllers.Area;
 
 
@@ -25,20 +24,20 @@ public final class ScanMiniGames {
     private static final Map<String, Set<String>> MINIGAMES = new HashMap<>();
 
     static {
-        try (ScanResult scanResult = new ClassGraph().enableAllInfo().acceptPackages("view.controllers.minigames").scan()) {
-            final ClassInfoList annotationList = scanResult.getClassesWithAnnotation(Area.class.getName());
-
-            for (final ClassInfo classes : annotationList) {
-                final String area = classes.getAnnotationInfo(Area.class.getName()).getParameterValues().getValue("trainingArea").toString();
-                final List<String> s = Arrays.asList(StringUtils.splitByCharacterTypeCamelCase(classes.getSimpleName().replace("Fx", "")));
-                final String minigame = StringUtils.join(s, StringUtils.SPACE);
-                if (MINIGAMES.containsKey(area)) {
-                    MINIGAMES.get(area).add(minigame);
-                } else {
-                    final Set<String> set = new HashSet<>();
-                    set.add(minigame);
-                    MINIGAMES.put(area, set);
-                }
+        final ClassInfoList annotationList = new ClassGraph().enableAllInfo()
+                                                             .acceptPackages("view.controllers.minigames")
+                                                             .scan()
+                                                             .getClassesWithAnnotation(Area.class.getName());
+        for (final ClassInfo classes : annotationList) {
+            final String area = classes.getAnnotationInfo(Area.class.getName()).getParameterValues().getValue("trainingArea").toString();
+            final List<String> string = Arrays.asList(StringUtils.splitByCharacterTypeCamelCase(classes.getSimpleName().replace("Fx", "")));
+            final String minigame = StringUtils.join(string, StringUtils.SPACE);
+            if (MINIGAMES.containsKey(area)) {
+                MINIGAMES.get(area).add(minigame);
+            } else {
+                final Set<String> set = new HashSet<>();
+                set.add(minigame);
+                MINIGAMES.put(area, set);
             }
         }
     }

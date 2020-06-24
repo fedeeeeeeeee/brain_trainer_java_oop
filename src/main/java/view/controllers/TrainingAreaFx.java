@@ -52,7 +52,7 @@ public class TrainingAreaFx extends AbstractSceneController implements FxNormalS
 
     private void populateList(final TrainingArea selectedArea) {
         this.getGameList().clear();
-        this.getGameList().addAll(selectedArea.getMiniGameList());
+        this.getGameList().addAll(selectedArea.getMiniGameSet());
     }
 
     /**

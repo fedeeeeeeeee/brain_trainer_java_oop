@@ -57,7 +57,7 @@ public enum TrainingArea {
      * 
      * @return the minigame list
      */
-    public Set<String> getMiniGameList() {
+    public Set<String> getMiniGameSet() {
         return ScanMiniGames.getMiniGames(this);
     }
 

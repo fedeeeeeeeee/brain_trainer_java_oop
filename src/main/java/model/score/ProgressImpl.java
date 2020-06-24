@@ -30,7 +30,7 @@ public class ProgressImpl implements Progress {
         for (final TrainingArea area : TrainingArea.values()) {
             this.historyScore.put(area, new HashMap<>());
             this.averageTrainingAreaScore.put(area, 0);
-            for (final String miniGame : area.getMiniGameList()) {
+            for (final String miniGame : area.getMiniGameSet()) {
                 this.historyScore.get(area).put(miniGame, new ScoreManagementImpl());
             }
         }
