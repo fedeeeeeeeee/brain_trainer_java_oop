@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 import java.util.function.Predicate;
+import java.util.stream.IntStream;
 
 import utility.Pair;
 
@@ -21,6 +22,7 @@ public class OneWayPathDrawerImpl implements PathDrawer {
     private Pair<Integer, Integer> currentPosition;
     private Pair<Integer, Integer> initialPosition;
     private Pair<Integer, Integer> finalPosition;
+    private Pair<Integer, Integer> prevFinishPosition;
 
     private final Predicate<Pair<Integer, Integer>> isClosedPath = currentPosition -> 
                                     currentPosition.getX() == this.initialPosition.getX()
@@ -45,6 +47,12 @@ public class OneWayPathDrawerImpl implements PathDrawer {
         this.initialPosition = this.currentPosition;
     }
 
+    private void ensureValidStart() {
+        do {
+            this.setInitialPosition();
+        } while (this.initialPosition == this.prevFinishPosition);
+    }
+
     private boolean checkX(final int x) {
         return x + this.currentPosition.getX() < 0 || x + this.currentPosition.getX() >= size;
     }
@@ -58,9 +66,9 @@ public class OneWayPathDrawerImpl implements PathDrawer {
      */
     @Override
     public void drawPath() {
-        this.setInitialPosition();
+        this.ensureValidStart();
         this.steps.clear();
-        for (int i = 0; i < this.arrows; i++) {
+        IntStream.range(0, this.arrows).forEach(i -> {
             Direction dir = Direction.generateStep();
             Pair<Integer, Integer> increment = Direction.delta(dir);
             while (checkX(increment.getX()) || checkY(increment.getY())) {
@@ -71,11 +79,13 @@ public class OneWayPathDrawerImpl implements PathDrawer {
             final int y = increment.getY() + this.currentPosition.getY();
             this.currentPosition = new Pair<>(x, y);
             this.steps.add(dir);
-        }
+        });
+
         if (this.isClosedPath.test(currentPosition)) {
             this.drawPath();
         } else {
             this.finalPosition = this.currentPosition;
+            this.prevFinishPosition = this.currentPosition;
         }
     }
 

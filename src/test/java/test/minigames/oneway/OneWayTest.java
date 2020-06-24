@@ -99,4 +99,5 @@ public class OneWayTest {
         assertFalse(model.getInitialPosition().getX() == model.getFinalPosition().getX()
                 && model.getInitialPosition().getY() == model.getFinalPosition().getY());
     }
+
 }
