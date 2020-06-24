@@ -47,7 +47,6 @@
                                   <NumberAxis side="LEFT" />
                                 </yAxis>
                               </LineChart>
-                              <Label fx:id="bestAttentionLbl" layoutX="368.0" layoutY="14.0" prefHeight="78.0" prefWidth="118.0" />
                            </children>
                         </AnchorPane>
                   </content>
@@ -64,7 +63,6 @@
                                   <NumberAxis side="LEFT" />
                                 </yAxis>
                               </LineChart>
-                              <Label fx:id="bestBrainSpeedLbl" layoutX="368.0" layoutY="14.0" prefHeight="78.0" prefWidth="118.0" />
                            </children>
                         </AnchorPane>
                      </content>
@@ -81,7 +79,6 @@
                                   <NumberAxis side="LEFT" />
                                 </yAxis>
                               </LineChart>
-                              <Label fx:id="bestMemoryLbl" layoutX="368.0" layoutY="14.0" prefHeight="78.0" prefWidth="118.0" />
                            </children>
                         </AnchorPane>
                      </content>
@@ -98,7 +95,6 @@
                                   <NumberAxis side="LEFT" />
                                 </yAxis>
                               </LineChart>
-                              <Label fx:id="bestReasoningLbl" layoutX="368.0" layoutY="14.0" prefHeight="78.0" prefWidth="118.0" />
                            </children>
                         </AnchorPane>
                      </content>
@@ -115,7 +111,6 @@
                                   <NumberAxis side="LEFT" />
                                 </yAxis>
                               </LineChart>
-                              <Label fx:id="bestVisualSkillLbl" layoutX="368.0" layoutY="14.0" prefHeight="78.0" prefWidth="118.0" />
                            </children>
                         </AnchorPane>
                      </content>
