@@ -19,10 +19,11 @@ import utility.Pair;
  */
 public class PathGameTest {
 
+    private final PerilousPathDifficulty difficulty;
     private LinkedList<Pair<Integer, Integer>> path; //NOPMD
 
-    private PerilousPathDifficulty difficulty(final DifficultyLevel difficulty) {
-        return new PerilousPathDifficultyBuilderImpl().setDifficultyLevel(difficulty).build();
+    public PathGameTest() {
+        this.difficulty = new PerilousPathDifficultyBuilderImpl().setDifficultyLevel(DifficultyLevel.EASY).build();
     }
 
     /**
@@ -30,7 +31,6 @@ public class PathGameTest {
      */
     @Test
     public void pathGameLengthTest() {
-        final PerilousPathDifficulty difficulty = this.difficulty(DifficultyLevel.EASY);
         this.path = PathGameImpl.createRandomDirectionPath(difficulty.getSize(), difficulty.getNumMines()).getPathList();
         assertTrue(this.path.size() <= (difficulty.getSize() * difficulty.getSize()) - difficulty.getNumMines());
     }
@@ -40,7 +40,6 @@ public class PathGameTest {
      */
     @Test
     public void pathGameDefaultStartTest() {
-        final PerilousPathDifficulty difficulty = this.difficulty(DifficultyLevel.EASY);
         this.path = PathGameImpl.createRandomDirectionPathDefaultStartFinish(difficulty.getSize(), difficulty.getNumMines()).getPathList();
         assertEquals(new Pair<>(0, 0), this.path.getFirst());
     }
@@ -50,7 +49,6 @@ public class PathGameTest {
      */
     @Test
     public void pathGameDefaultFinishTest() {
-        final PerilousPathDifficulty difficulty = this.difficulty(DifficultyLevel.EASY);
         this.path = PathGameImpl.createRandomDirectionPathDefaultStartFinish(difficulty.getSize(), difficulty.getNumMines()).getPathList();
         assertEquals(new Pair<>(4, 4), this.path.getLast());
     }
@@ -60,7 +58,6 @@ public class PathGameTest {
      */
     @Test
     public void pathGameDefaultStartFinishTest() {
-        final PerilousPathDifficulty difficulty = this.difficulty(DifficultyLevel.EASY);
         this.path = PathGameImpl.createRandomDirectionPathDefaultStartFinish(difficulty.getSize(), difficulty.getNumMines()).getPathList();
         assertEquals(new Pair<>(0, 0), this.path.getFirst());
         assertEquals(new Pair<>(4, 4), this.path.getLast());
