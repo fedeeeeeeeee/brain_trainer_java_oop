@@ -3,6 +3,8 @@ package view.controllers;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.util.Scanner;
 
 import javafx.fxml.FXML;
@@ -53,13 +55,16 @@ public class HowToPlayFx extends AbstractSceneController implements FxNormalScen
 
     private void scanner(final String fileTxt) {
         infoTxt.clear();
-        final String filePath = "src/main/resources/info/" + fileTxt + ".txt";
+        final URI filePath;
         try {
+            filePath = Thread.currentThread().getContextClassLoader().getResource("info/" + fileTxt + ".txt").toURI();
             final Scanner scanner = new Scanner(new File(filePath)); // NOPMD
             while (scanner.hasNext()) {
                 infoTxt.appendText(scanner.nextLine() + "\n");
             }
             scanner.close();
+        } catch (URISyntaxException e1) {
+            e1.printStackTrace();
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
