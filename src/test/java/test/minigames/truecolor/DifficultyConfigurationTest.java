@@ -1,7 +1,6 @@
 package test.minigames.truecolor;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import java.util.Optional;
 
@@ -10,15 +9,17 @@ import org.junit.jupiter.api.Test;
 import model.DifficultyLevel;
 import model.minigames.truecolor.DifficultyConfiguration;
 
+/**
+ * Class to test if {@DifficultyConfiguration} works correctly.
+ *
+ */
 public class DifficultyConfigurationTest {
 
     private static final int NUM_COLOR = 6;
 
-    @Test
-    public void testDifficultyConfigurationNull() {
-        assertThrows(NullPointerException.class, () -> DifficultyConfiguration.getConfiguration(null));
-    }
-
+    /**
+     * Test Easy level configuration.
+     */
     @Test
     public void testDifficultyConfigurationEasy() {
         final Optional<DifficultyConfiguration> configuration = DifficultyConfiguration
@@ -28,6 +29,9 @@ public class DifficultyConfigurationTest {
         assertEquals(configuration.get().getTrueButton(), 1);
     }
 
+    /**
+     * Test Normal level configuration.
+     */
     @Test
     public void testDifficultyConfigurationNormal() {
         final Optional<DifficultyConfiguration> configuration = DifficultyConfiguration
@@ -37,6 +41,9 @@ public class DifficultyConfigurationTest {
         assertEquals(configuration.get().getTrueButton(), 2);
     }
 
+    /**
+     * Test Hard level configuration.
+     */
     @Test
     public void testDifficultyConfigurationHard() {
         final Optional<DifficultyConfiguration> configuration = DifficultyConfiguration

@@ -40,7 +40,7 @@ public abstract class AbstractMiniGameControllerFx extends AbstractSceneControll
         });
     }
 
-    protected ProgressBar getProgressBar() {
+    protected final ProgressBar getProgressBar() {
         return this.progressBar;
     }
 

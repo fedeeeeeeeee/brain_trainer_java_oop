@@ -12,7 +12,7 @@ import model.minigames.truecolor.TrueColorModel;
 import model.minigames.truecolor.TrueColorModelImpl;
 
 /**
- * Class to test if {@link DifficultyConfiguration} works correctly.
+ * Class to test if the model receive the correct configurations.
  *
  */
 public class ColorSizeListTest {

@@ -18,7 +18,7 @@
 
 <VBox alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="580.0" prefWidth="500.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.controllers.minigames.truecolor.TrueColorFxImpl">
    <children>
-      <GridPane prefHeight="123.0" prefWidth="500.0" VBox.vgrow="SOMETIMES">
+      <GridPane fx:id="topGrid" prefHeight="123.0" prefWidth="500.0" VBox.vgrow="SOMETIMES">
         <columnConstraints>
           <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
             <ColumnConstraints hgrow="SOMETIMES" minWidth="70.0" prefWidth="150.0" />
@@ -30,7 +30,7 @@
           <RowConstraints maxHeight="1.7976931348623157E308" minHeight="10.0" prefHeight="21.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <Label fx:id="timerLbl" alignment="CENTER_LEFT" prefHeight="59.0" prefWidth="42.0" text="Time" textAlignment="CENTER" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+            <Label fx:id="timerLbl" alignment="CENTER_LEFT" prefHeight="59.0" prefWidth="42.0" text="Time" textAlignment="CENTER" textFill="#49618c" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
                <font>
                   <Font size="18.0" />
                </font>
@@ -38,7 +38,7 @@
                   <Insets bottom="5.0" />
                </GridPane.margin>
             </Label>
-            <Label contentDisplay="CENTER" prefWidth="70.0" text="meaning" textOverrun="CENTER_ELLIPSIS" underline="true" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER">
+            <Label contentDisplay="CENTER" prefWidth="70.0" text="meaning" textFill="#49618c" textOverrun="CENTER_ELLIPSIS" underline="true" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER">
                <font>
                   <Font size="18.0" />
                </font>
@@ -46,7 +46,7 @@
                   <Insets bottom="5.0" />
                </padding>
             </Label>
-            <ProgressBar fx:id="progressBar" minWidth="70.0" prefWidth="200.0" progress="0.0" style="-fx-background-color: green;" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
+            <ProgressBar fx:id="progressBar" minWidth="70.0" prefWidth="200.0" progress="0.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
          </children>
       </GridPane>
       <VBox fx:id="vBoxId" alignment="CENTER" prefHeight="319.0" prefWidth="500.0" spacing="35.0" VBox.vgrow="SOMETIMES">
@@ -62,22 +62,22 @@
           <RowConstraints vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <Label text="Does the meaning of shaded match the ink color of remaning?" GridPane.halignment="CENTER" GridPane.hgrow="NEVER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
+            <Label text="Does the meaning of shaded button match the ink color of remaning?" textFill="#49618c" GridPane.halignment="CENTER" GridPane.hgrow="NEVER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
                <font>
-                  <Font size="18.0" />
+                  <Font size="17.0" />
                </font>
                <GridPane.margin>
                   <Insets bottom="5.0" />
                </GridPane.margin>
             </Label>
-            <Label text="ink color" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+            <Label text="ink color" textFill="#49618c" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
                <font>
                   <Font size="18.0" />
                </font>
             </Label>
          </children>
       </GridPane>
-      <GridPane prefHeight="83.0" prefWidth="500.0">
+      <GridPane fx:id="bottomGrid" prefHeight="83.0" prefWidth="500.0">
         <columnConstraints>
           <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
           <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />

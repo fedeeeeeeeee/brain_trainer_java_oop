@@ -61,9 +61,6 @@ public class OneWayFxImpl extends AbstractMiniGameControllerFx implements OneWay
     @FXML
     private GridPane outerGrid;
 
-    @FXML
-    private Label scoreLbl;
-
 //    @FXML
 //    private Button quitBn;
 
@@ -216,7 +213,6 @@ public class OneWayFxImpl extends AbstractMiniGameControllerFx implements OneWay
     @Override
     public void showEndGame(final int finalScore) {
         Platform.runLater(() -> {
-            this.scoreLbl.setText(String.valueOf(finalScore));
             this.getController().updateProgress(finalScore);
             this.getView().loadProgress(SceneType.END_GAME.getFilePath());
         });
@@ -232,7 +228,6 @@ public class OneWayFxImpl extends AbstractMiniGameControllerFx implements OneWay
 
 //    @FXML
 //    private void quitGame() { // NOPMD
-//        this.scoreLbl.setText(String.valueOf(ZERO));
 //        this.getController().updateProgress(ZERO);
 //        this.getView().loadProgress(SceneType.END_GAME.getFilePath());
 //    }

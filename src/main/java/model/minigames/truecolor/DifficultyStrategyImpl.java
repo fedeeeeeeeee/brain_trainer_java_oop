@@ -12,6 +12,7 @@ import utility.Pair;
 public class DifficultyStrategyImpl implements DifficultyStrategy {
 
     private final Map<StatusColor, List<Pair<Colors, Colors>>> randomColorMap;
+    private static final int NUM_COLOR = 4;
     private RandomColor colorRandom;
 
     /**
@@ -22,7 +23,7 @@ public class DifficultyStrategyImpl implements DifficultyStrategy {
      */
     public DifficultyStrategyImpl(final DifficultyConfiguration difficulty) {
         this.randomColorMap = new HashMap<>();
-        if (difficulty.getNumColor() < 4) {
+        if (difficulty.getNumColor() < NUM_COLOR) {
             this.colorRandom = new SimpleRandomColor(difficulty);
         } else {
             this.colorRandom = new ImprovedRandomColor(difficulty);

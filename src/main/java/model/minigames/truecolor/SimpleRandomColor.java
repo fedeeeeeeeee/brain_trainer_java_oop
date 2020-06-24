@@ -8,11 +8,21 @@ import java.util.stream.Stream;
 
 import utility.Pair;
 
+/**
+ * The simple random color algorithms.
+ *
+ */
 public class SimpleRandomColor extends RandomColor {
 
     private final DifficultyConfiguration difficultyLevel;
     private List<Colors> colorList;
 
+    /**
+     * Constructor for {SimpleRandomColor}.
+     * 
+     * @param difficulty
+     *          the {@DifficultyConfiguration} selected
+     */
     public SimpleRandomColor(final DifficultyConfiguration difficulty) {
         this.difficultyLevel = difficulty;
         this.createListColorDifficulty(difficulty.getNumColor());
