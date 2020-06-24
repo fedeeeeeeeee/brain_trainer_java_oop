@@ -7,6 +7,10 @@ import java.util.Random;
 
 import utility.Pair;
 
+/**
+ * This represent the Abstract Class for random color algorithms.
+ *
+ */
 public abstract class RandomColor {
 
     private final Map<StatusColor, List<Pair<Colors, Colors>>> randomColorMap;

@@ -29,6 +29,7 @@ import view.controllers.minigames.FxMiniGameController;
 class TrueColorTestFx extends ApplicationTest {
 
     private static final String TRUE_COLOR_PATH = "/layouts/minigames/TrueColor.fxml";
+    private static final int NUM_BTN = 2;
     private Parent root; 
     private DifficultyConfiguration configuration;
 
@@ -58,7 +59,7 @@ class TrueColorTestFx extends ApplicationTest {
             assertFalse(((Button) b).accessibleTextProperty().isNotNull().get());
         }
         assertFalse(button.isEmpty());
-        assertEquals(button.size(), configuration.getMeanButton() + configuration.getTrueButton() );             
+        assertEquals(button.size(), configuration.getMeanButton() + configuration.getTrueButton());
     }
 
 
@@ -71,6 +72,6 @@ class TrueColorTestFx extends ApplicationTest {
             assertFalse(((Button) b).accessibleTextProperty().isNotNull().get());
         }
         assertFalse(button.isEmpty());
-        assertEquals(button.size() , 2);     
+        assertEquals(button.size(), NUM_BTN);
     }
 }

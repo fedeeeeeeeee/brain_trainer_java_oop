@@ -10,6 +10,10 @@ import java.util.stream.Stream;
 
 import utility.Pair;
 
+/**
+ * The improved random color algorithms.
+ *
+ */
 public class ImprovedRandomColor extends RandomColor {
 
     private final DifficultyConfiguration difficultyConfig;
@@ -24,6 +28,12 @@ public class ImprovedRandomColor extends RandomColor {
         return randomColor;
     };
 
+    /**
+     * Constructor for {@ImprovedRandomColor}.
+     * 
+     * @param difficulty
+     *          the {@DifficultyConfiguration} selected
+     */
     public ImprovedRandomColor(final DifficultyConfiguration difficulty) {
         this.changeProbabilityOfMatching();
         this.difficultyConfig = difficulty;
@@ -66,7 +76,6 @@ public class ImprovedRandomColor extends RandomColor {
 
     private List<Colors> tempMeanColorList() {
         return this.meanColorList.stream().map(p -> p.getX()).collect(Collectors.toList());
-
     }
 
     private void copyTempList() {

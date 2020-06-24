@@ -64,6 +64,15 @@ public enum DifficultyConfiguration {
 //        return new DifficultyStrategyImpl(this);
 //    }
 
+    /**
+     * Get the right DifficultyConfiguration.
+     * 
+     * @param difficulty
+     *          the difficulty selected
+     * @return DifficultyConfiguration
+     *          the configuration with useful fields
+     * 
+     */
     public static Optional<DifficultyConfiguration> getConfiguration(final DifficultyLevel difficulty) {
         Objects.requireNonNull(difficulty, "DifficultyLevel is null in DifficultyConfiguration ");
         switch (difficulty) {
