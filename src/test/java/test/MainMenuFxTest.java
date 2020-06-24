@@ -24,7 +24,7 @@ import view.SceneType;
  * Test for the correct initialization of MainMenu Scene components.
  *
  */
-public class MainMenuTest extends ApplicationTest {
+public class MainMenuFxTest extends ApplicationTest {
 
     private static final int COMPONENT_COUNT = 7;
     private Parent root; 
