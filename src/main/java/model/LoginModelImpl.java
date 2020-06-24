@@ -44,17 +44,6 @@ public class LoginModelImpl implements LoginModel {
         }
         return false;
     }
-
-    private void initializeDirectory() {
-        if (!brainTrainer.exists()) {
-            try {
-                brainTrainer.mkdir();
-            } catch (SecurityException se) {
-                se.printStackTrace();
-            }
-        }
-    }
-
     /**
      * {@inheritDoc}
      */
@@ -71,7 +60,6 @@ public class LoginModelImpl implements LoginModel {
     public boolean registerUser(final UserPlayer player) {
         final ObjectMapper mapper = new ObjectMapper();
         mapper.configure(SerializationFeature.INDENT_OUTPUT, true);
-        this.initializeDirectory();
         final String userFileName = player.getUsername() + ".txt";
 
         if (!this.checkIfUserExist(userFileName)) {
