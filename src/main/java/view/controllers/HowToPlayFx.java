@@ -1,8 +1,10 @@
 package view.controllers;
 
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.Scanner;
@@ -24,7 +26,7 @@ public class HowToPlayFx extends AbstractSceneController implements FxNormalScen
 
     private static final double IMG_PERCENTAGE = 0.003;
     private static final double BUTTON_PERCENTAGE = 0.07;
-    private static final double FONT_PERCENTAGE = 0.05; 
+    private static final double FONT_PERCENTAGE = 0.05;
 
     @FXML
     private ImageView backImg;
@@ -49,24 +51,22 @@ public class HowToPlayFx extends AbstractSceneController implements FxNormalScen
     }
 
     @FXML
-    private void goBack() throws IOException { // NOPMD
+    private void goBack() { // NOPMD
         this.getView().switchScene(SceneType.MAIN_MENU.getFilePath());
     }
 
-    private void scanner(final String fileTxt) {
+    private void scanner(final String fileTxt) throws IOException {
         infoTxt.clear();
-        final URI filePath;
+        final BufferedReader input = new BufferedReader(new InputStreamReader(getClass().getResourceAsStream("/info/" + fileTxt + ".txt")));
         try {
-            filePath = Thread.currentThread().getContextClassLoader().getResource("info/" + fileTxt + ".txt").toURI();
-            final Scanner scanner = new Scanner(new File(filePath)); // NOPMD
-            while (scanner.hasNext()) {
-                infoTxt.appendText(scanner.nextLine() + "\n");
+            String line;
+            while ((line = input.readLine()) != null) { // NOPMD
+                infoTxt.appendText(line + "\n");
             }
-            scanner.close();
-        } catch (URISyntaxException e1) {
-            e1.printStackTrace();
-        } catch (FileNotFoundException e) {
+        } catch (IOException e) {
             e.printStackTrace();
+        } finally {
+            input.close();
         }
     }
 
