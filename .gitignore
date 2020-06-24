@@ -1,0 +1,15 @@
+bin/ 
+doc/
+*.log
+*.pdf
+*.jar 
+!/lib/*.jar
+/.gradle/
+/.checkstyle
+/.classpath
+/.gitignore
+/.pmd
+/.project
+/.ruleset
+/build/
+!Relazione_BrainTrainer.pdf
