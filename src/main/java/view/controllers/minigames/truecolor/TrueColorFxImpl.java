@@ -17,13 +17,16 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.effect.DropShadow;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
+import javafx.stage.Stage;
 import javafx.util.Duration;
 import model.DifficultyLevel;
 import model.minigames.truecolor.Colors;
 import model.minigames.truecolor.StatusColor;
 import utility.Pair;
+import view.DimensionCalculatorImpl;
 import view.SceneType;
 import view.controllers.minigames.AbstractMiniGameControllerFx;
 
@@ -37,23 +40,37 @@ public class TrueColorFxImpl extends AbstractMiniGameControllerFx implements Tru
     private static final String BORDERC = "-fx-border-color: ";
     private static final String BORDERW = "-fx-border-width: ";
     private static final String RADIUS = "-fx-background-radius: ";
+    private static final String FONT = "-fx-font-size: %dpx;";
+    private static final double TEXT_PERCENTAGE = 0.07;
+    private static final double PERCENTAGE = 0.05;
+    private static final double BTN_WIDTH = 0.4;
+    private static final double BTN_HEIGHT = 0.15;
     private static final int SHADOWX = 4;
     private static final int SHADOWY = 6;
-    private static final int FONT = 35;
-    private static final int SIZE_BUTTON = 300;
+    private final DropShadow shadow = new DropShadow();
     private TrueColorController trueColorController;
     private List<Button> meaningColorBtnList;
     private List<Button> trueColorBtnList;
     private int meanColorSize;
     private int trueColorSize;
     private Button currentAnswer;
-    private final DropShadow shadow = new DropShadow();
+    
+    private Stage stage;
 
+    @FXML
+    private GridPane topGrid;
+    @FXML
+    private GridPane grid;
+    @FXML
+    private GridPane gridLbl;
+    @FXML
+    private GridPane bottomGrid;
     @FXML
     private VBox vBoxId;
 
     private final EventHandler<ActionEvent> event = (e) -> {
-        this.currentAnswer.setStyle(BORDERC + "#000000;" + BORDERW + "0.3px;");
+        this.currentAnswer.setStyle(BORDERC + "#000000;" + BORDERW + "0.1px;"
+                + String.format(FONT, (int) (TEXT_PERCENTAGE * this.stage.getWidth() / 2)));
     };
 
     @FXML
@@ -74,8 +91,9 @@ public class TrueColorFxImpl extends AbstractMiniGameControllerFx implements Tru
         final int size = listBtn.size();
         for (int i = 0; i < size; i++) {
             listBtn.get(i).setText(listColor.get(i).getX().toString());
-            listBtn.get(i).setStyle(TXTFILL + listColor.get(i).getY().getName() + ";" + RADIUS + "5em");
-            listBtn.get(i).setFont(Font.font(FONT));
+            listBtn.get(i).setStyle(TXTFILL + listColor.get(i).getY().getName() + ";" + RADIUS + "5em;"
+                    + String.format(FONT, (int) (PERCENTAGE * this.stage.getWidth())));
+            listBtn.get(i).setPrefSize(stage.getWidth() * BTN_WIDTH, stage.getHeight() * BTN_HEIGHT);
             if (this.meaningColorBtnList == listBtn) {
                 listBtn.get(i).setEffect(this.shadow);
             }
@@ -92,7 +110,6 @@ public class TrueColorFxImpl extends AbstractMiniGameControllerFx implements Tru
     private void addButton(final List<Button> btnList, final Integer size) {
         for (int i = 0; i < size; i++) {
             final Button button = new Button();
-            button.setPrefSize(SIZE_BUTTON, SIZE_BUTTON / 3);
             btnList.add(button);
             this.vBoxId.getChildren().add(button);
         }
@@ -105,12 +122,27 @@ public class TrueColorFxImpl extends AbstractMiniGameControllerFx implements Tru
         timeline.play();
     }
 
+    private void resizeNode() {
+        this.stage = (Stage) this.getRoot().getScene().getWindow();
+        final DimensionCalculatorImpl calculator = new DimensionCalculatorImpl();
+        stage.widthProperty().addListener((obs, oldVal, newVal) -> {
+            calculator.setNodeFontStyle(topGrid, TEXT_PERCENTAGE, (double) newVal / 2);
+            calculator.setNodeFontStyle(gridLbl, TEXT_PERCENTAGE, (double) newVal / 2);
+            calculator.setNodeFontStyle(bottomGrid, TEXT_PERCENTAGE, (double) newVal / 2);
+        });
+        final double halfStageSize = stage.getWidth() / 2;
+        calculator.setNodeFontStyle(topGrid, PERCENTAGE, halfStageSize);
+        calculator.setNodeFontStyle(gridLbl, PERCENTAGE, halfStageSize);
+        calculator.setNodeFontStyle(bottomGrid, TEXT_PERCENTAGE, halfStageSize);
+    }
+    
     /**
      * {@inheritDoc}
      */
     @Override
     public void initGame(final DifficultyLevel difficultyLevel) {
         this.getProgressBar().setStyle("-fx-accent: #49618C");
+        this.resizeNode();
         this.trueColorController = new TrueColorControllerImpl(this, difficultyLevel);
         this.setDropShadow();
         this.prepareButtons();
@@ -146,7 +178,8 @@ public class TrueColorFxImpl extends AbstractMiniGameControllerFx implements Tru
         final int size = this.trueColorBtnList.size();
         for (int i = 0; i < size; i++) {
             this.trueColorBtnList.get(i).setText("");
-            this.trueColorBtnList.get(i).setStyle(BACKGROUND + list.get(i).getY().getName());
+            this.trueColorBtnList.get(i).setStyle(BACKGROUND + list.get(i).getY().getName() + ";" + 
+                    String.format(FONT, (int) (PERCENTAGE * this.stage.getWidth())));
         }
     }
 
@@ -183,7 +216,7 @@ public class TrueColorFxImpl extends AbstractMiniGameControllerFx implements Tru
      */
     @Override
     public void showAnswer(final boolean bool) {
-        this.currentAnswer.setStyle(BORDERW + "2px;" + BORDERC + (bool ? "#66FF66" : "#FF0000"));
+        this.currentAnswer.setStyle(BORDERW + "1.2px;" + String.format(FONT, (int) (TEXT_PERCENTAGE * this.stage.getWidth()/2)) + BORDERC + (bool ? "#66FF66" : "#FF0000"));
         this.animation();
     }
 }
