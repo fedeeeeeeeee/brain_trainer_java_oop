@@ -53,7 +53,7 @@
          </opaqueInsets></VBox>
       <GridPane fx:id="gridLbl" VBox.vgrow="SOMETIMES">
         <columnConstraints>
-          <ColumnConstraints />
+          <ColumnConstraints hgrow="SOMETIMES" />
         </columnConstraints>
         <rowConstraints>
             <RowConstraints />
