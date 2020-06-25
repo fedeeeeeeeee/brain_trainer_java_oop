@@ -62,7 +62,7 @@
                         </Pane>
                      </graphic>
                      <content>
-                        <LineChart fx:id="brainSpeedGraph" title="Attention">
+                        <LineChart fx:id="brainSpeedGraph" title="Brain Speed">
                           <xAxis>
                             <CategoryAxis side="BOTTOM" />
                           </xAxis>
