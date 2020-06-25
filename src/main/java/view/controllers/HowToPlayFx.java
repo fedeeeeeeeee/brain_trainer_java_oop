@@ -80,7 +80,7 @@ public class HowToPlayFx extends AbstractSceneController implements FxNormalScen
         });
 
         final double halfStageSize = stage.getWidth() / 2;
-        this.infoTxt.setStyle("-fx-font-size: " + this.gameInfoBtn.getFont().getSize());
+        this.infoTxt.setStyle("-fx-font-size: " + FONT_PERCENTAGE * halfStageSize);
         calculator.setNodeFontStyle(topGrid, BUTTON_PERCENTAGE, halfStageSize);
         calculator.setImageViewDimension(backImg, IMG_PERCENTAGE, halfStageSize);
     }
