@@ -191,11 +191,7 @@ public class OneWayFxImpl extends AbstractMiniGameControllerFx implements OneWay
         raiseException(initialPosition == null, ILLEGAL_ARGUMENT_EXCEPTION_SUPPLIER);
         this.buttons.entrySet().stream().peek(e -> e.getKey().setGraphic(null))
                 .filter(bt -> bt.getValue().equals(initialPosition)).forEach(bt -> {
-                    if (this.firstInit) {
-                        bt.getKey().setGraphic(this.image.apply(START, IMG_DIM));
-                    } else {
-                        bt.getKey().setGraphic(this.image.apply(START, bt.getKey().getWidth() / 2));
-                    }
+                    bt.getKey().setGraphic(this.firstInit ? this.image.apply(START, IMG_DIM) : this.image.apply(START, bt.getKey().getWidth() / 2));
                 });
         this.firstInit = false;
     }
