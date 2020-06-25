@@ -39,7 +39,7 @@ public class PerilousPathFxImpl extends AbstractMiniGameControllerFx implements 
     /**
      * The size of the image.
      */
-    private static final int IMAGE_SIZE = BUTTON_SIZE / 3;
+    private static final double IMAGE_SIZE = BUTTON_SIZE / 3.5;
 
     @FXML
     private GridPane grid;
