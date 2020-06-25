@@ -35,7 +35,7 @@
 						<Font size="20.0" />
 					</font>
 					<GridPane.margin>
-						<Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+						<Insets bottom="30.0" left="20.0" right="20.0" top="30.0" />
 					</GridPane.margin>
 				</Button>
 				<Button fx:id="statisticsBtn" alignment="CENTER" maxHeight="150.0" maxWidth="450.0" mnemonicParsing="false" onMouseClicked="#showStatistics" text="Statistics" textFill="#49618c" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="2" GridPane.valignment="CENTER">
@@ -43,7 +43,7 @@
 						<Font size="20.0" />
 					</font>
 					<GridPane.margin>
-						<Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+						<Insets bottom="30.0" left="20.0" right="20.0" top="30.0" />
 					</GridPane.margin>
 				</Button>
 				<Button fx:id="howToPlayBtn" alignment="CENTER" maxHeight="150.0" maxWidth="450.0" mnemonicParsing="false" onMouseClicked="#showInfo" text="How To Play" textFill="#49618c" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="3" GridPane.valignment="CENTER">
@@ -51,7 +51,7 @@
 						<Font size="20.0" />
 					</font>
 					<GridPane.margin>
-						<Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+						<Insets bottom="30.0" left="20.0" right="20.0" top="30.0" />
 					</GridPane.margin>
 				</Button>
             <ImageView fx:id="dailytImg" GridPane.halignment="RIGHT" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" GridPane.valignment="CENTER">

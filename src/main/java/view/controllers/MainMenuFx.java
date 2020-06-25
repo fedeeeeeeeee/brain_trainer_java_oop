@@ -16,7 +16,7 @@ import view.SceneType;
  */
 public class MainMenuFx extends AbstractSceneController implements FxNormalScene {
 
-    private static final double IMG_PERCENTAGE = 0.003;
+    private static final double IMG_PERCENTAGE = 0.0023;
     private static final double BUTTON_PERCENTAGE = 0.08;
     private DimensionCalculatorImpl calculator;
 
