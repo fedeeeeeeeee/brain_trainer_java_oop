@@ -19,7 +19,6 @@ import javafx.scene.effect.DropShadow;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
-import javafx.scene.text.Font;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 import model.DifficultyLevel;
@@ -54,7 +53,7 @@ public class TrueColorFxImpl extends AbstractMiniGameControllerFx implements Tru
     private int meanColorSize;
     private int trueColorSize;
     private Button currentAnswer;
-    
+
     private Stage stage;
 
     @FXML
@@ -135,7 +134,7 @@ public class TrueColorFxImpl extends AbstractMiniGameControllerFx implements Tru
         calculator.setNodeFontStyle(gridLbl, LBL_PERCENTAGE, halfStageSize);
         calculator.setNodeFontStyle(bottomGrid, TEXT_PERCENTAGE, halfStageSize);
     }
-    
+
     /**
      * {@inheritDoc}
      */
@@ -178,8 +177,8 @@ public class TrueColorFxImpl extends AbstractMiniGameControllerFx implements Tru
         final int size = this.trueColorBtnList.size();
         for (int i = 0; i < size; i++) {
             this.trueColorBtnList.get(i).setText("");
-            this.trueColorBtnList.get(i).setStyle(BACKGROUND + list.get(i).getY().getName() + ";" + 
-                    String.format(FONT, (int) (PERCENTAGE * this.stage.getWidth())));
+            this.trueColorBtnList.get(i).setStyle(BACKGROUND + list.get(i).getY().getName() + ";" 
+                + String.format(FONT, (int) (PERCENTAGE * this.stage.getWidth())));
         }
     }
 
@@ -216,7 +215,7 @@ public class TrueColorFxImpl extends AbstractMiniGameControllerFx implements Tru
      */
     @Override
     public void showAnswer(final boolean bool) {
-        this.currentAnswer.setStyle(String.format(FONT, (int) (TEXT_PERCENTAGE * this.stage.getWidth()/2)) + TEXT_COLOR + (bool ? "#66FF66" : "#FF0000"));
+        this.currentAnswer.setStyle(String.format(FONT, (int) (TEXT_PERCENTAGE * this.stage.getWidth() / 2)) + TEXT_COLOR + (bool ? "#66FF66" : "#FF0000"));
         this.animation();
     }
 }
