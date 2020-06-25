@@ -11,20 +11,20 @@
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-<VBox alignment="TOP_CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="580.0" prefWidth="500.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.controllers.LoginFxImpl">
+<VBox alignment="TOP_CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.controllers.LoginFxImpl">
 	<children>
 		<GridPane fx:id="grid" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="2" GridPane.vgrow="ALWAYS" VBox.vgrow="ALWAYS">
 			<columnConstraints>
-				<ColumnConstraints hgrow="SOMETIMES" maxWidth="1.7976931348623157E308" prefWidth="50.0" />
+				<ColumnConstraints hgrow="SOMETIMES" />
 				<ColumnConstraints />
-				<ColumnConstraints hgrow="SOMETIMES" maxWidth="1.7976931348623157E308" prefWidth="50.0" />
+				<ColumnConstraints hgrow="SOMETIMES" />
 			</columnConstraints>
 			<rowConstraints>
-				<RowConstraints minHeight="-Infinity" vgrow="SOMETIMES" />
-				<RowConstraints minHeight="-Infinity" vgrow="SOMETIMES" />
-				<RowConstraints minHeight="-Infinity" vgrow="SOMETIMES" />
-				<RowConstraints minHeight="-Infinity" vgrow="SOMETIMES" />
-				<RowConstraints minHeight="-Infinity" vgrow="SOMETIMES" />
+				<RowConstraints vgrow="SOMETIMES" />
+				<RowConstraints vgrow="SOMETIMES" />
+				<RowConstraints vgrow="SOMETIMES" />
+				<RowConstraints vgrow="SOMETIMES" />
+				<RowConstraints vgrow="SOMETIMES" />
 			</rowConstraints>
 
 			<children>
@@ -55,7 +55,7 @@
                 <RowConstraints minHeight="-Infinity" vgrow="SOMETIMES" />
               </rowConstraints>
                <children>
-      						<Button fx:id="signUpBtn" alignment="CENTER" maxHeight="70.0" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onMouseClicked="#signUpPlayer" text="Sign Up" textFill="#49618c" GridPane.columnIndex="1">
+      						<Button fx:id="signUpBtn" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onMouseClicked="#signUpPlayer" text="Sign Up" textFill="#49618c" GridPane.columnIndex="1">
       							<font>
       								<Font size="18.0" />
       							</font>
@@ -63,7 +63,7 @@
       								<Insets bottom="20.0" right="10.0" />
       							</GridPane.margin>
       						</Button>
-      						<Button fx:id="loginBtn" maxHeight="70.0" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onMouseClicked="#loginPlayer" text="Login" textFill="#49618c" GridPane.columnIndex="2">
+      						<Button fx:id="loginBtn" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onMouseClicked="#loginPlayer" text="Login" textFill="#49618c" GridPane.columnIndex="2">
       							<font>
       								<Font size="18.0" />
       							</font>
