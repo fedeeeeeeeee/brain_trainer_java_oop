@@ -44,13 +44,14 @@ public class OneWayFxImpl extends AbstractMiniGameControllerFx implements OneWay
     private static final String START = "/images/start.png";
     private static final String FINISH = "/images/finish.png";
     private static final double BUTTON_DIM = 300;
-    private static final double IMG_DIM = 50;
+    private static final double IMG_DIM = 40;
     private static final double ARROW_DIM = 30;
     private static final double IMG_PERCENTAGE = 0.003;
 
     private OneWayController controller;
     private Map<Button, Pair<Integer, Integer>> buttons;
     private List<Button> arrows;
+    private boolean firstInit = true;
 
     @FXML
     private GridPane grid;
@@ -70,14 +71,6 @@ public class OneWayFxImpl extends AbstractMiniGameControllerFx implements OneWay
     private final PauseTransition pause = new PauseTransition(Duration.seconds(0.5));
     private final PauseTransition finish = new PauseTransition(Duration.seconds(0.1));
 
-    private final BiFunction<String, Double, ImageView> image = (path, size) -> {
-        final ImageView image = new ImageView(path);
-        image.setFitHeight(size);
-        image.setFitWidth(size);
-        this.resizeImage(image);
-        return image;
-    };
-
     private final Predicate<Pair<Integer, Integer>> predicate = finalPosition -> this.buttons.get(clickedBtn)
             .getX() == finalPosition.getX() && this.buttons.get(clickedBtn).getY() == finalPosition.getY();
 
@@ -88,19 +81,26 @@ public class OneWayFxImpl extends AbstractMiniGameControllerFx implements OneWay
         this.controller.resetGame();
     };
 
-    private void raiseException(final boolean condition, final Supplier<RuntimeException> supplier) {
-        if (condition) {
-            throw supplier.get();
-        }
-    }
+    private final BiFunction<String, Double, ImageView> image = (path, size) -> {
+        final ImageView image = new ImageView(path);
+        image.setFitHeight(size);
+        image.setFitWidth(size);
+        this.resizeImage(image);
+        return image;
+    };
 
     private void resizeImage(final ImageView image) {
         final Stage stage = (Stage) this.getRoot().getScene().getWindow();
         final DimensionCalculatorImpl calculator = new DimensionCalculatorImpl();
-
         stage.widthProperty().addListener((obs, oldVal, newVal) -> {
             calculator.setImageViewDimension(image, IMG_PERCENTAGE, (double) newVal / 2);
         });
+    }
+
+    private void raiseException(final boolean condition, final Supplier<RuntimeException> supplier) {
+        if (condition) {
+            throw supplier.get();
+        }
     }
 
     private void handlePauseTransitions() {
@@ -111,7 +111,7 @@ public class OneWayFxImpl extends AbstractMiniGameControllerFx implements OneWay
         this.controller.showSolution();
 
         finish.setOnFinished(event -> {
-            this.correctBtn.setGraphic(image.apply(FINISH, IMG_DIM));
+            this.correctBtn.setGraphic(image.apply(FINISH, this.correctBtn.getWidth() / 2));
         });
         finish.playFromStart();
 
@@ -180,6 +180,7 @@ public class OneWayFxImpl extends AbstractMiniGameControllerFx implements OneWay
                 this.buttons.put(btn, new Pair<>(i, j));
             }
         }
+
     }
 
     /**
@@ -190,8 +191,13 @@ public class OneWayFxImpl extends AbstractMiniGameControllerFx implements OneWay
         raiseException(initialPosition == null, ILLEGAL_ARGUMENT_EXCEPTION_SUPPLIER);
         this.buttons.entrySet().stream().peek(e -> e.getKey().setGraphic(null))
                 .filter(bt -> bt.getValue().equals(initialPosition)).forEach(bt -> {
-                    bt.getKey().setGraphic(this.image.apply(START, IMG_DIM));
+                    if (this.firstInit) {
+                        bt.getKey().setGraphic(this.image.apply(START, IMG_DIM));
+                    } else {
+                        bt.getKey().setGraphic(this.image.apply(START, bt.getKey().getWidth() / 2));
+                    }
                 });
+        this.firstInit = false;
     }
 
     /**
