@@ -26,7 +26,7 @@ import view.SceneType;
  */
 public class MainMenuFxTest extends ApplicationTest {
 
-    private static final int COMPONENT_COUNT = 7;
+    private static final int COMPONENT_COUNT = 6;
     private Parent root; 
 
     /**
