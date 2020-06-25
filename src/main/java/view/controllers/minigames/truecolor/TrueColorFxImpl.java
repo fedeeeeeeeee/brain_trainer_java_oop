@@ -37,11 +37,11 @@ public class TrueColorFxImpl extends AbstractMiniGameControllerFx implements Tru
 
     private static final String TXTFILL = "-fx-text-fill: ";
     private static final String BACKGROUND = "-fx-background-color: ";
-    private static final String BORDERC = "-fx-border-color: ";
-    private static final String BORDERW = "-fx-border-width: ";
+    private static final String TEXT_COLOR = "-fx-text-fill: ";
     private static final String RADIUS = "-fx-background-radius: ";
     private static final String FONT = "-fx-font-size: %dpx;";
     private static final double TEXT_PERCENTAGE = 0.07;
+    private static final double LBL_PERCENTAGE = 0.06;
     private static final double PERCENTAGE = 0.05;
     private static final double BTN_WIDTH = 0.4;
     private static final double BTN_HEIGHT = 0.15;
@@ -69,7 +69,7 @@ public class TrueColorFxImpl extends AbstractMiniGameControllerFx implements Tru
     private VBox vBoxId;
 
     private final EventHandler<ActionEvent> event = (e) -> {
-        this.currentAnswer.setStyle(BORDERC + "#000000;" + BORDERW + "0.1px;"
+        this.currentAnswer.setStyle(TEXT_COLOR  + "#000000;"
                 + String.format(FONT, (int) (TEXT_PERCENTAGE * this.stage.getWidth() / 2)));
     };
 
@@ -126,13 +126,13 @@ public class TrueColorFxImpl extends AbstractMiniGameControllerFx implements Tru
         this.stage = (Stage) this.getRoot().getScene().getWindow();
         final DimensionCalculatorImpl calculator = new DimensionCalculatorImpl();
         stage.widthProperty().addListener((obs, oldVal, newVal) -> {
-            calculator.setNodeFontStyle(topGrid, TEXT_PERCENTAGE, (double) newVal / 2);
-            calculator.setNodeFontStyle(gridLbl, TEXT_PERCENTAGE, (double) newVal / 2);
+            calculator.setNodeFontStyle(topGrid, LBL_PERCENTAGE, (double) newVal / 2);
+            calculator.setNodeFontStyle(gridLbl, LBL_PERCENTAGE, (double) newVal / 2);
             calculator.setNodeFontStyle(bottomGrid, TEXT_PERCENTAGE, (double) newVal / 2);
         });
         final double halfStageSize = stage.getWidth() / 2;
-        calculator.setNodeFontStyle(topGrid, PERCENTAGE, halfStageSize);
-        calculator.setNodeFontStyle(gridLbl, PERCENTAGE, halfStageSize);
+        calculator.setNodeFontStyle(topGrid, LBL_PERCENTAGE, halfStageSize);
+        calculator.setNodeFontStyle(gridLbl, LBL_PERCENTAGE, halfStageSize);
         calculator.setNodeFontStyle(bottomGrid, TEXT_PERCENTAGE, halfStageSize);
     }
     
@@ -216,7 +216,7 @@ public class TrueColorFxImpl extends AbstractMiniGameControllerFx implements Tru
      */
     @Override
     public void showAnswer(final boolean bool) {
-        this.currentAnswer.setStyle(BORDERW + "1.2px;" + String.format(FONT, (int) (TEXT_PERCENTAGE * this.stage.getWidth()/2)) + BORDERC + (bool ? "#66FF66" : "#FF0000"));
+        this.currentAnswer.setStyle(String.format(FONT, (int) (TEXT_PERCENTAGE * this.stage.getWidth()/2)) + TEXT_COLOR + (bool ? "#66FF66" : "#FF0000"));
         this.animation();
     }
 }
